@@ -142,7 +142,7 @@
         <tr style="margin-bottom: 4px" (mousedown)="onMouseDown($event)" (cdkDragStarted)="onDragStart($event)" (cdkDragEnded)="onDragEnd($event)" cdkDrag
           [cdkDragData]="quickToDo" *ngFor="let quickToDo  of myQuickToDos" class="draggable trOptimization">
 
-          <td style="float:left" cdkDragHandle class="pr-2 "
+          <td style=" width: 5%;" cdkDragHandle class="pr-2 "
             [ngStyle]="{'background-color': editQuickToDoPanelOpen && quickToDoModelEdit?.TaskId == quickToDo?.TaskId ? 'rgb(230, 231, 231)' : ''}">
             <a class="p-0 m-0" *ngIf="quickToDo?.Completedby == null && quickToDo?.TaskId != undefined" placement="top"
               (click)="completeQT(quickToDo)"><img src="../../../assets/squareUnCheck.png"
@@ -163,7 +163,7 @@
 
             <!-- <img class="moveHead" src="../../../assets/moveHeadX.svg"> -->
           </td>
-          <td style=" float:left;  width: 100%; cursor: text;         " cdkDragHandle class="pr-2"
+          <td style=" width: 40%; cursor: text;       " cdkDragHandle class="pr-2"
             (click)="toggleEditQuickToDoPanel(quickToDo?.TaskId); "
             *ngIf="quickToDoModelEdit?.TaskId != quickToDo?.TaskId">
             
@@ -204,7 +204,7 @@
 
 
 
-          <td style=" float: right;" cdkDragHandle class="pr-2 mobileDate "
+          <td style=" width: 30%" cdkDragHandle class="pr-2 mobileDate "
             *ngIf="quickToDoModelEdit?.TaskId != quickToDo?.TaskId">
 
             <div class="mt-1 mobileDate  ">
@@ -232,19 +232,22 @@
                 </span>
               </ng-template>
 
-              <a *ngIf=(quickToDo?.TaskId) class="btn filter-cnote pl-0 pt-0 pb-0 ml-1 mr-1 text-nowrap"
-                style="cursor: pointer!important" (click)="showCommentsDialog(quickToDo?.TaskId,quickToDo?.TaskTitle)">
-                <img src="../../../assets/comment-note.svg" style="height: 1.5rem; cursor: pointer;" />
-                <span>
-                  {{getQTCommentsForCount(quickToDo?.TaskId)?.CommentsCount}}
-                </span>
-              </a>
+            
               
 
             </div>
 
           </td>
-          <td style=" float: right;" cdkDragHandle class="pr-2" *ngIf="quickToDoModelEdit?.TaskId != quickToDo?.TaskId">
+          <td style=" float: left; width: 5%" cdkDragHandle class="pr-2  " *ngIf="quickToDoModelEdit?.TaskId != quickToDo?.TaskId">
+            <a *ngIf=(quickToDo?.TaskId) class="btn filter-cnote pl-0 pt-0 pb-0 ml-1 mr-1 text-nowrap"
+            style="cursor: pointer!important" (click)="showCommentsDialog(quickToDo?.TaskId,quickToDo?.TaskTitle)">
+            <img src="../../../assets/comment-note.svg" style="height: 1.5rem; cursor: pointer;" />
+            <span>
+              {{getQTCommentsForCount(quickToDo?.TaskId)?.CommentsCount}}
+            </span>
+          </a>
+          </td>
+          <td style=" float: right; width: 15%" cdkDragHandle class="pr-2" *ngIf="quickToDoModelEdit?.TaskId != quickToDo?.TaskId">
             <div class="wrapOrNot" style="color: rgb(90, 90, 90); text-align: center; "
               *ngIf="quickToDo?.AssignedTo && memberShared.Username == quickToDo?.AssignedTo">
               <img *ngIf="memberShared?.account?.getValue()?.Avatar" alt="Avatar"
@@ -267,7 +270,7 @@
             <!-- {{quickToDo?.AssignedTo}}{{ quickToDo?.AssignedTo!=undefined ? '\'a atandı': ''}} -->
 
           </td>
-          <td cdkDragHandleDisabled  style=" float: right;"  *ngIf="quickToDoModelEdit?.TaskId != quickToDo?.TaskId"
+          <td cdkDragHandleDisabled  style=" float: right; width: 5%"  *ngIf="quickToDoModelEdit?.TaskId != quickToDo?.TaskId"
             class="toggleClose">
 
 
@@ -484,29 +487,26 @@
 
         <tr style="margin-bottom: 4px" class="exclude" role="button" *ngFor="let quickToDo  of assignedToMeUnComplete"
           style="width: 100%;">
-          <td *ngIf="quickToDo?.Completedby == null && quickToDo?.TaskId != undefined">
-            <a ngbTooltip="Tamamlandı" (click)="completeQT(quickToDo)"><img src="../../../assets/squareUnCheck.png"
+          <td style="width: 5%;   "  >
+            <a *ngIf="quickToDo?.Completedby == null && quickToDo?.TaskId != undefined" ngbTooltip="Tamamlandı" (click)="completeQT(quickToDo)"><img src="../../../assets/squareUnCheck.png"
                 style="width: 1.3rem; height: 1.3rem; cursor: pointer; " />
             </a>
-          </td>
-          <td class="w-100" *ngIf="quickToDo?.Completedby != null && quickToDo?.TaskId != undefined">
-            <a ngbTooltip="İptal et" (click)="completeQT(quickToDo)"><img src="../../../assets/squareCheck.png"
-                style="width: 1.3rem; height: 1.3rem; cursor: pointer; " />
-            </a>
-          </td>
 
-          <td style="width: 100%;">
-            <!-- <span  ngbTooltip="Yüksek öncelikli görev" tooltipClass="tooltipSpecial" placement="bottom" (click)="$event.stopPropagation();"
-            class="time-pipe-design p-1 bg-light ml-1 mr-1 text-nowrap" style="cursor: pointer; font-size: 13px; display: inline; ">
-             <img src="../../../assets/flagRed.png"  style="height: 25px;">
-           </span> -->
+            <a  *ngIf="quickToDo?.Completedby != null && quickToDo?.TaskId != undefined" ngbTooltip="İptal et" (click)="completeQT(quickToDo)"><img src="../../../assets/squareCheck.png"
+              style="width: 1.3rem; height: 1.3rem; cursor: pointer; " />
+          </a>
+          </td>
+       
+
+          <td style="width: 41%;   ">
+      
           <span [ngClass]="{'shineYapiliyor': quickToDo?.Status == 'Yapılıyor',
             'shineBitmekuzere': quickToDo?.Status == 'Tamamlanmak Üzere' }">{{quickToDo?.TaskTitle}}</span>
             <a *ngIf="quickToDo" class="modernUnderlined ml-2 w-100" (click)="setStatus(quickToDo?.TaskId,'assigned');"
               style="cursor: pointer; font-size: 13px">{{(quickToDo?.Status ? quickToDo?.Status  : 'Bekliyor')}}</a>
           </td>
 
-          <td>
+          <td style="width: 31%;">
             <div class="mt-1 mobileDate  ">
 
                 <ng-container *ngIf="(quickToDo?.Start | humanizer) != (quickToDo?.Date | humanizer); else sameStartDate">
@@ -533,17 +533,26 @@
 
 
 
-              <a *ngIf=(quickToDo?.TaskId) class="btn filter-cnote pl-0 pt-0 pb-0 ml-1 mr-1 text-nowrap"
-                style="cursor: pointer!important" (click)="showCommentsDialog(quickToDo?.TaskId,quickToDo?.TaskTitle)">
-                <img src="../../../assets/comment-note.svg" style="height: 1.5rem; cursor: pointer;" />
-                <span>
-                  {{getQTCommentsForCount(quickToDo?.TaskId)?.CommentsCount}}
-                </span>
-              </a>
+            
             </div>
           </td>
 
+          <td style="width: 5%;">
+            <a *ngIf=(quickToDo?.TaskId) class="btn filter-cnote pl-0 pt-0 pb-0 ml-1 mr-1 text-nowrap"
+            style="cursor: pointer!important" (click)="showCommentsDialog(quickToDo?.TaskId,quickToDo?.TaskTitle)">
+            <img src="../../../assets/comment-note.svg" style="height: 1.5rem; cursor: pointer;" />
+            <span>
+              {{getQTCommentsForCount(quickToDo?.TaskId)?.CommentsCount}}
+            </span>
+          </a>
+          </td>
+          <td  style="width: 15%;">
 
+          </td>
+          <td  style="width: 5%;">
+          </td>
+
+        
 
         </tr>
 

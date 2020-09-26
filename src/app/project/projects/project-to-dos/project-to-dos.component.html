@@ -89,7 +89,7 @@
 </nav>
 <div class="container-fluid  pt-2 pb-3 bg-white"
     [ngStyle]="{'padding': this.innerWidth <= 600 ? '3px!important': '30px', 'pointer-events':this?.repository?.reOrdering ? 'none':'unset'}">
-    
+
     <!-- cdkDropListGroup -->
 
     <div class="row pl-1 pr-1">
@@ -115,14 +115,23 @@
                     cdkDrag [cdkDragData]="projectToDo" *ngFor="let projectToDo  of projectToDos(); index as i"
                     class="draggable trOptimization" [ngClass]="{'hideSubTask': !isProjectTaskShown(projectToDo)}">
 
-                    <ng-container *ngIf="projectToDo?.Zindex == 1;">
-                        &nbsp;&nbsp;&nbsp;
-                    </ng-container>
+
+                    <td style="width:4%" cdkDragHandle class="pr-2"
+                        *ngIf="projectToDoModelEdit?.TaskId != projectToDo?.TaskId">
 
 
+                        <img *ngIf="isSubTaskFounded(projectToDo)" class="mr-2" [hidden]="projectToDo?.ShowSubTasks"
+                            ngbTooltip="Alt görevleri göster" tooltipClass="tooltipSpecial" placement="bottom"
+                            (click)="showSubTasks(projectToDo); $event.stopPropagation();"
+                            src="../../../../assets/down.png"
+                            style="width: 17px;object-fit: cover; cursor: pointer; " />
+                        <img *ngIf="isSubTaskFounded(projectToDo)" class="mr-2" [hidden]="!projectToDo?.ShowSubTasks"
+                            ngbTooltip="Alt görevleri gizle" tooltipClass="tooltipSpecial" placement="bottom"
+                            (click)="hideSubTasks(projectToDo); $event.stopPropagation();"
+                            src="../../../../assets/up.png" style="width: 17px;object-fit: cover; cursor: pointer; " />
+                    </td>
 
-
-                    <td cdkDragHandle class="pr-2"
+                    <td style="width:5%" cdkDragHandle class="pr-2"
                         [ngStyle]="{'background-color': editProjectToDoPanelOpen && projectToDo?.TaskId == projectToDoModelEdit?.TaskId ? 'rgb(230, 231, 231)' : ''}">
                         <div>
                             <a role="button" (click)="deCompletePT(projectToDo)" *ngIf="projectToDo?.IsCompleted"
@@ -140,24 +149,16 @@
                                 {{projectToDo?.IsCompleted && projectToDo?.Finish ? (projectToDo?.Finish | humanizer) : ''}}</span>
                         </small>
                     </td>
-                    <td [ngStyle]="{'font-weight': isSubTaskFounded(projectToDo) ? '500' : '400'}"
+
+                    <td style="width:45%" [ngStyle]="{'font-weight': isSubTaskFounded(projectToDo) ? '500' : '400'}"
                         (click)="toggleEditProjectToDoPanel(projectToDo?.TaskId); " cdkDragHandle class="pr-2 "
                         *ngIf="projectToDoModelEdit?.TaskId != projectToDo?.TaskId">
 
+
+
                         <div class="w-100" *ngIf="projectToDo?.IsCompleted; else ptaskToDo">
                             <span class="w-100" style="text-decoration: line-through">
-                                <img *ngIf="isSubTaskFounded(projectToDo)" class="mr-2"
-                                    [hidden]="projectToDo?.ShowSubTasks" ngbTooltip="Alt görevleri göster"
-                                    tooltipClass="tooltipSpecial" placement="bottom"
-                                    (click)="showSubTasks(projectToDo); $event.stopPropagation();"
-                                    src="../../../../assets/down.png"
-                                    style="width: 17px;object-fit: cover; cursor: pointer; " />
-                                <img *ngIf="isSubTaskFounded(projectToDo)" class="mr-2"
-                                    [hidden]="!projectToDo?.ShowSubTasks" ngbTooltip="Alt görevleri gizle"
-                                    tooltipClass="tooltipSpecial" placement="bottom"
-                                    (click)="hideSubTasks(projectToDo); $event.stopPropagation();"
-                                    src="../../../../assets/up.png"
-                                    style="width: 17px;object-fit: cover; cursor: pointer; " />
+
 
                                 {{projectToDo?.TaskTitle}}
 
@@ -171,17 +172,7 @@
                         </div>
                         <ng-template #ptaskToDo class="w-100">
 
-                            <img *ngIf="isSubTaskFounded(projectToDo)" class="mr-2" [hidden]="projectToDo?.ShowSubTasks"
-                                ngbTooltip="Alt görevleri göster" tooltipClass="tooltipSpecial" placement="bottom"
-                                (click)="showSubTasks(projectToDo); $event.stopPropagation();"
-                                src="../../../../assets/down.png"
-                                style="width: 17px;object-fit: cover; cursor: pointer; " />
-                            <img *ngIf="isSubTaskFounded(projectToDo)" class="mr-2"
-                                [hidden]="!projectToDo?.ShowSubTasks" ngbTooltip="Alt görevleri gizle"
-                                tooltipClass="tooltipSpecial" placement="bottom"
-                                (click)="hideSubTasks(projectToDo); $event.stopPropagation();"
-                                src="../../../../assets/up.png"
-                                style="width: 17px;object-fit: cover; cursor: pointer; " />
+
 
                             <span class="w-100"
                                 [ngClass]="{'shineYapiliyor': projectToDo?.Status == 'Yapılıyor',
@@ -196,21 +187,10 @@
 
                         </ng-template>
 
-                        <div class="float-right text-nowrap">
-                            <a *ngIf="projectToDo?.Zindex > 0" ngbTooltip="Üst görev yap" tooltipClass="tooltipSpecial"
-                                placement="bottom" (click)="decreaseTaskIndent(projectToDo); $event.stopPropagation();"
-                                class="btn btn-light btn-sm rounded-1 border-0" style="margin-right: 3px">
-                                <img src="../../../../assets/arrow-3.png"
-                                    style="width: 16px;object-fit: cover; cursor: pointer; " /></a>
-                            <a *ngIf="projectToDo?.Zindex < 1" ngbTooltip="Alt görev yap" tooltipClass="tooltipSpecial"
-                                placement="bottom" (click)="increaseTaskIndent(projectToDo); $event.stopPropagation();"
-                                class="btn btn-light btn-sm rounded-1 border-0">
-                                <img src="../../../../assets/arrow-2.png"
-                                    style="width: 16px;object-fit: cover; cursor: pointer; " /></a>
-                        </div>
 
                     </td>
-                    <td cdkDragHandle class="pr-2" *ngIf="projectToDoModelEdit?.TaskId != projectToDo?.TaskId">
+                    <td style="width:30%" cdkDragHandle class="pr-2"
+                        *ngIf="projectToDoModelEdit?.TaskId != projectToDo?.TaskId">
                         <div class="mobileDate">
                             <ng-container
                                 *ngIf="(projectToDo?.Start | humanizer) != (projectToDo?.Deadline | humanizer); else sameStartDate">
@@ -239,18 +219,21 @@
                             </ng-template>
 
 
-                            <a *ngIf=(projectToDo?.TaskId) class="btn filter-cnote pl-0 pt-0 pb-0 ml-1 mr-1 text-nowrap"
-                                style="cursor: pointer!important"
-                                (click)="showCommentsDialog(projectToDo?.TaskId,projectToDo?.TaskTitle)">
-                                <img src="../../../../assets/comment-note.svg"
-                                    style="height: 1.5rem; cursor: pointer;" />
-                                <span>
-                                    {{getPTCommentsForCount(projectToDo?.TaskId)?.CommentsCount}}
-                                </span>
-                            </a>
                         </div>
                     </td>
-                    <td cdkDragHandle class="pr-2" *ngIf="projectToDoModelEdit?.TaskId != projectToDo?.TaskId">
+                    <td style="width:5%">
+
+                        <a *ngIf=(projectToDo?.TaskId) class="btn filter-cnote pl-0 pt-0 pb-0 ml-1 mr-1 text-nowrap"
+                            style="cursor: pointer!important"
+                            (click)="showCommentsDialog(projectToDo?.TaskId,projectToDo?.TaskTitle)">
+                            <img src="../../../../assets/comment-note.svg" style="height: 1.5rem; cursor: pointer;" />
+                            <span>
+                                {{getPTCommentsForCount(projectToDo?.TaskId)?.CommentsCount}}
+                            </span>
+                        </a>
+                    </td>
+                    <td style="width:10%" cdkDragHandle class="pr-2"
+                        *ngIf="projectToDoModelEdit?.TaskId != projectToDo?.TaskId">
                         <div class="wrapOrNot" style="color: rgb(90, 90, 90); text-align: center;"
                             *ngIf="projectToDo?.AssignedTo && memberShared.Username == projectToDo?.AssignedTo">
                             <img alt="Avatar" *ngIf="memberShared?.account?.getValue()"
@@ -267,9 +250,34 @@
                                 class="md-avatar size-1 rounded-circle ">
                             <span> {{getMember(projectToDo?.AssignedTo)?.Name}}
                             </span></div>
+
+
+
+
+
+
+
+
+                    </td>
+                    <td style="width:5%" cdkDragHandle class="pr-2"
+                        *ngIf="projectToDoModelEdit?.TaskId != projectToDo?.TaskId">
+                        <div class=" text-nowrap">
+                            <a *ngIf="projectToDo?.Zindex > 0" ngbTooltip="Üst görev yap" tooltipClass="tooltipSpecial"
+                                placement="bottom" (click)="decreaseTaskIndent(projectToDo); $event.stopPropagation();"
+                                class="btn btn-light btn-sm rounded-1 border-0" style="margin-right: 3px">
+                                <img src="../../../../assets/arrow-3.png"
+                                    style="width: 16px;object-fit: cover; cursor: pointer; " /></a>
+                            <a *ngIf="projectToDo?.Zindex < 1" ngbTooltip="Alt görev yap" tooltipClass="tooltipSpecial"
+                                placement="bottom" (click)="increaseTaskIndent(projectToDo); $event.stopPropagation();"
+                                class="btn btn-light btn-sm rounded-1 border-0">
+                                <img src="../../../../assets/arrow-2.png"
+                                    style="width: 16px;object-fit: cover; cursor: pointer; " /></a>
+                        </div>
+
                     </td>
 
-                    <td cdkDragHandleDisabled *ngIf="projectToDoModelEdit?.TaskId != projectToDo?.TaskId">
+                    <td style="width:5%" cdkDragHandleDisabled
+                        *ngIf="projectToDoModelEdit?.TaskId != projectToDo?.TaskId">
                         <div ngbDropdown class="d-inline-block" style="margin-left:2px!important" placement="left"
                             *ngIf="projectToDo?.TaskId!=undefined">
                             <a class="btn filter-grey pl-0 pt-0 pb-0 mb-0" style="border:0px solid !important"

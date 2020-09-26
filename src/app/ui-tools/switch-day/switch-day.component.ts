@@ -331,15 +331,15 @@ export class SwitchDayComponent implements OnInit, AfterViewInit {
   toggleLedType() { // Order: led-green(start) > led-red(deadline) > led-yellow(both)
     if (this.dataService.ledTypeClassShared == 'led-green') {
       this.dataService.ledTypeClassShared = 'led-red'
-      this.dataService.ledToolTipMessage = 'Kırmızı ışık: sürükle bırak işlevi teslim için atama yapar.'
+      this.dataService.ledToolTipMessage = 'Kırmızı ışık\'ta sürükle bırak işlevi teslim tarihi/zamanı için atama yapar.'
     }
     else if (this.dataService.ledTypeClassShared == 'led-red') {
       this.dataService.ledTypeClassShared = 'led-yellow'
-      this.dataService.ledToolTipMessage = 'Sarı ışık: sürükle bırak işlevi hem başlangıç hem de teslim için atama yapar.'
+      this.dataService.ledToolTipMessage = 'Sarı ışık\'ta sürükle bırak işlevi hem başlangıç hem de teslim tarihi/zamanı için atama yapar.'
     }
     else { // yellow
       this.dataService.ledTypeClassShared = 'led-green'// turnover
-      this.dataService.ledToolTipMessage = 'Yeşil ışık: sürükle bırak işlevi başlangıç için atama yapar.'
+      this.dataService.ledToolTipMessage = 'Yeşil ışık\'ta sürükle bırak işlevi başlangıç tarihi/zamanı için atama yapar.'
     }
   }
 
