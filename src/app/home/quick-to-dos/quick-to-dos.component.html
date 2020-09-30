@@ -142,7 +142,7 @@
         <tr style="margin-bottom: 4px" (mousedown)="onMouseDown($event)" (cdkDragStarted)="onDragStart($event)" (cdkDragEnded)="onDragEnd($event)" cdkDrag
           [cdkDragData]="quickToDo" *ngFor="let quickToDo  of myQuickToDos" class="draggable trOptimization">
 
-          <td style=" width: 5%;" cdkDragHandle class="pr-2 "
+          <td style=" width: 5%;" cdkDragHandle 
             [ngStyle]="{'background-color': editQuickToDoPanelOpen && quickToDoModelEdit?.TaskId == quickToDo?.TaskId ? 'rgb(230, 231, 231)' : ''}">
             <a class="p-0 m-0" *ngIf="quickToDo?.Completedby == null && quickToDo?.TaskId != undefined" placement="top"
               (click)="completeQT(quickToDo)"><img src="../../../assets/squareUnCheck.png"
@@ -163,7 +163,7 @@
 
             <!-- <img class="moveHead" src="../../../assets/moveHeadX.svg"> -->
           </td>
-          <td style=" width: 40%; cursor: text;       " cdkDragHandle class="pr-2"
+          <td style=" width: 45%; cursor: text;       " cdkDragHandle 
             (click)="toggleEditQuickToDoPanel(quickToDo?.TaskId); "
             *ngIf="quickToDoModelEdit?.TaskId != quickToDo?.TaskId">
             
@@ -186,7 +186,7 @@
                 <img src="../../../assets/flagRed.png"  style="height: 25px;">
               </span> -->
               <span [ngClass]="{'shineYapiliyor': quickToDo?.Status == 'Yapılıyor',
-                 'shineBitmekuzere': quickToDo?.Status == 'Tamamlanmak Üzere' }">
+                 'shineBitmekuzere': quickToDo?.Status == 'Test Ediliyor' }">
                 {{quickToDo?.TaskTitle}}  
               </span> 
              
@@ -202,43 +202,63 @@
            
           </td>
 
+         
 
 
-          <td style=" width: 30%" cdkDragHandle class="pr-2 mobileDate "
+          <td style=" width: 25%" cdkDragHandle class="text-center "
             *ngIf="quickToDoModelEdit?.TaskId != quickToDo?.TaskId">
 
-            <div class="mt-1 mobileDate  ">
+         
+
+              <ng-container
+              *ngIf="(quickToDo?.Start | humanizer) != (quickToDo?.Date | humanizer); else sameStartDate">
+              <div *ngIf="quickToDo?.Start || quickToDo?.Date"
+                  style="background-color:rgb(245, 241, 241); border-radius: 20px; padding:5px">
+
+                  <span
+                      style="color: #00a028; display:block; margin-bottom:5px; ">{{quickToDo?.Start | humanizer}}
+                      <span *ngIf="quickToDo?.Start |  date:'shortTime' "
+                          class="time-pipe-design">{{quickToDo?.Start |  date:'shortTime' }}</span>
+                      <span [hidden]="!quickToDo?.Start">&nbsp;başl.</span>
+                  </span>
+
+                  <span style="color: #b80000; display:block">{{quickToDo?.Date | humanizer}}
+                      <span *ngIf="quickToDo?.Date |  date:'shortTime' "
+                          class="time-pipe-design">{{quickToDo?.Date |  date:'shortTime' }} </span>
+                      <span [hidden]="!quickToDo?.Date">&nbsp;bit.</span>
+                  </span>
+
+              </div>
+          </ng-container>
+          <ng-template #sameStartDate>
+
+              <div *ngIf="quickToDo?.Start || quickToDo?.Date"
+                  style="background-color:rgb(245, 241, 241); border-radius: 20px; padding:5px">
 
 
-              <ng-container *ngIf="(quickToDo?.Start | humanizer) != (quickToDo?.Date | humanizer); else sameStartDate">
-                <span style="color: #00a028">{{quickToDo?.Start | humanizer}}
-                  <span *ngIf="quickToDo?.Start |  date:'shortTime' "
-                    class="time-pipe-design">{{quickToDo?.Start |  date:'shortTime' }}</span>
-                  <span *ngIf="quickToDo?.Start  && quickToDo?.Date"> - </span>
-                </span>
-                <div class="clearfix" *ngIf="this.innerWidth < 876"> </div>
-                <span  style="color: #b80000">{{quickToDo?.Date | humanizer}}
-                  <span *ngIf="quickToDo?.Date |  date:'shortTime'"
-                    class="time-pipe-design">{{quickToDo?.Date |  date:'shortTime' }}</span></span>
-                <div class="clearfix" *ngIf="this.innerWidth < 500"> </div>
-              </ng-container>
-              <ng-template #sameStartDate>
-                <span  style="color: rgb(196, 199, 23); ">{{quickToDo?.Start | humanizer}}
-                  <span *ngIf="quickToDo?.Start |  date:'shortTime' "
-                    class="time-pipe-design">{{quickToDo?.Start |  date:'shortTime' }}</span>
-                  <span *ngIf="quickToDo?.Start |  date:'shortTime'  && quickToDo?.Date |  date:'shortTime' "> - </span>
-                  <span class="time-pipe-design"
-                    *ngIf="quickToDo?.Date |  date:'shortTime' ">{{quickToDo?.Date |  date:'shortTime' }}</span>
-                </span>
-              </ng-template>
+                  <span style=" display:block; margin-bottom:5px;" style="color: rgb(196, 199, 23); ">{{quickToDo?.Start | humanizer}}
+                      <span *ngIf="quickToDo?.Start |  date:'shortTime' "
+                          class="time-pipe-design">{{quickToDo?.Start |  date:'shortTime' }}</span>
+                      <span
+                          *ngIf="quickToDo?.Start |  date:'shortTime'  && quickToDo?.Date |  date:'shortTime' ">
+                          - </span>
+                      <span class="time-pipe-design"
+                          *ngIf="quickToDo?.Date |  date:'shortTime' ">{{quickToDo?.Date |  date:'shortTime' }}</span>
 
+                      <span style=" display:block; ">başl. ve bit.</span>
+                  </span>
+
+
+
+              </div>
+
+
+
+          </ng-template>
             
-              
-
-            </div>
-
+         
           </td>
-          <td style=" float: left; width: 5%" cdkDragHandle class="pr-2  " *ngIf="quickToDoModelEdit?.TaskId != quickToDo?.TaskId">
+          <td style=" width: 5%" cdkDragHandle class="text-center " *ngIf="quickToDoModelEdit?.TaskId != quickToDo?.TaskId">
             <a *ngIf=(quickToDo?.TaskId) class="btn filter-cnote pl-0 pt-0 pb-0 ml-1 mr-1 text-nowrap"
             style="cursor: pointer!important" (click)="showCommentsDialog(quickToDo?.TaskId,quickToDo?.TaskTitle)">
             <img src="../../../assets/comment-note.svg" style="height: 1.5rem; cursor: pointer;" />
@@ -247,7 +267,7 @@
             </span>
           </a>
           </td>
-          <td style=" float: right; width: 15%" cdkDragHandle class="pr-2" *ngIf="quickToDoModelEdit?.TaskId != quickToDo?.TaskId">
+          <td style="  width: 15%"  cdkDragHandle class="text-center " *ngIf="quickToDoModelEdit?.TaskId != quickToDo?.TaskId">
             <div class="wrapOrNot" style="color: rgb(90, 90, 90); text-align: center; "
               *ngIf="quickToDo?.AssignedTo && memberShared.Username == quickToDo?.AssignedTo">
               <img *ngIf="memberShared?.account?.getValue()?.Avatar" alt="Avatar"
@@ -270,8 +290,8 @@
             <!-- {{quickToDo?.AssignedTo}}{{ quickToDo?.AssignedTo!=undefined ? '\'a atandı': ''}} -->
 
           </td>
-          <td cdkDragHandleDisabled  style=" float: right; width: 5%"  *ngIf="quickToDoModelEdit?.TaskId != quickToDo?.TaskId"
-            class="toggleClose">
+          <td cdkDragHandleDisabled  style=" width: 5%"  *ngIf="quickToDoModelEdit?.TaskId != quickToDo?.TaskId"
+            class="toggleClose text-center">
 
 
             <div ngbDropdown class="d-inline-block" placement="left">
@@ -496,48 +516,68 @@
               style="width: 1.3rem; height: 1.3rem; cursor: pointer; " />
           </a>
           </td>
-       
+      
 
-          <td style="width: 41%;   ">
+          <td style="width: 45%;   ">
       
           <span [ngClass]="{'shineYapiliyor': quickToDo?.Status == 'Yapılıyor',
-            'shineBitmekuzere': quickToDo?.Status == 'Tamamlanmak Üzere' }">{{quickToDo?.TaskTitle}}</span>
+            'shineBitmekuzere': quickToDo?.Status == 'Test Ediliyor' }">{{quickToDo?.TaskTitle}}</span>
             <a *ngIf="quickToDo" class="modernUnderlined ml-2 w-100" (click)="setStatus(quickToDo?.TaskId,'assigned');"
               style="cursor: pointer; font-size: 13px">{{(quickToDo?.Status ? quickToDo?.Status  : 'Bekliyor')}}</a>
           </td>
 
-          <td style="width: 31%;">
-            <div class="mt-1 mobileDate  ">
+          <td style="width: 25%;" class="text-center"> 
+          
+            <ng-container
+            *ngIf="(quickToDo?.Start | humanizer) != (quickToDo?.Date | humanizer); else sameStartDate">
+            <div *ngIf="quickToDo?.Start || quickToDo?.Date"
+                style="background-color:rgb(245, 241, 241); border-radius: 20px; padding:5px">
 
-                <ng-container *ngIf="(quickToDo?.Start | humanizer) != (quickToDo?.Date | humanizer); else sameStartDate">
-                    <span style="color: #00a028">{{quickToDo?.Start | humanizer}}
-                      <span *ngIf="quickToDo?.Start |  date:'shortTime' "
+                <span
+                    style="color: #00a028; display:block; margin-bottom:5px; ">{{quickToDo?.Start | humanizer}}
+                    <span *ngIf="quickToDo?.Start |  date:'shortTime' "
                         class="time-pipe-design">{{quickToDo?.Start |  date:'shortTime' }}</span>
-                      <span *ngIf="quickToDo?.Start  && quickToDo?.Date"> - </span>
-                    </span>
-                    <div class="clearfix" *ngIf="this.innerWidth < 876"> </div>
-                    <span style="color: #b80000">{{quickToDo?.Date | humanizer}}
-                      <span *ngIf="quickToDo?.Date |  date:'shortTime'"
-                        class="time-pipe-design">{{quickToDo?.Date |  date:'shortTime' }}</span></span>
-                    <div class="clearfix" *ngIf="this.innerWidth < 500"> </div>
-                  </ng-container>
-                  <ng-template #sameStartDate>
-                    <span style="color: rgb(196, 199, 23); ">{{quickToDo?.Start | humanizer}}
-                      <span *ngIf="quickToDo?.Start |  date:'shortTime' "
-                        class="time-pipe-design">{{quickToDo?.Start |  date:'shortTime' }}</span>
-                      <span *ngIf="quickToDo?.Start |  date:'shortTime'  && quickToDo?.Date |  date:'shortTime' "> - </span>
-                      <span class="time-pipe-design"
-                        *ngIf="quickToDo?.Date |  date:'shortTime' ">{{quickToDo?.Date |  date:'shortTime' }}</span>
-                    </span>
-                  </ng-template>
+                    <span [hidden]="!quickToDo?.Start">&nbsp;başl.</span>
+                </span>
 
+                <span style="color: #b80000; display:block">{{quickToDo?.Date | humanizer}}
+                    <span *ngIf="quickToDo?.Date |  date:'shortTime' "
+                        class="time-pipe-design">{{quickToDo?.Date |  date:'shortTime' }} </span>
+                    <span [hidden]="!quickToDo?.Date">&nbsp;bit.</span>
+                </span>
 
-
-            
             </div>
+        </ng-container>
+        <ng-template #sameStartDate>
+
+            <div *ngIf="quickToDo?.Start || quickToDo?.Date"
+                style="background-color:rgb(245, 241, 241); border-radius: 20px; padding:5px">
+
+
+                <span style=" display:block; margin-bottom:5px;" style="color: rgb(196, 199, 23); ">{{quickToDo?.Start | humanizer}}
+                    <span *ngIf="quickToDo?.Start |  date:'shortTime' "
+                        class="time-pipe-design">{{quickToDo?.Start |  date:'shortTime' }}</span>
+                    <span
+                        *ngIf="quickToDo?.Start |  date:'shortTime'  && quickToDo?.Date |  date:'shortTime' ">
+                        - </span>
+                    <span class="time-pipe-design"
+                        *ngIf="quickToDo?.Date |  date:'shortTime' ">{{quickToDo?.Date |  date:'shortTime' }}</span>
+
+                    <span style=" display:block; ">başl. ve bit.</span>
+                </span>
+
+
+
+            </div>
+
+
+
+        </ng-template>
+          
+
           </td>
 
-          <td style="width: 5%;">
+          <td style="width: 5%;" class="text-center">
             <a *ngIf=(quickToDo?.TaskId) class="btn filter-cnote pl-0 pt-0 pb-0 ml-1 mr-1 text-nowrap"
             style="cursor: pointer!important" (click)="showCommentsDialog(quickToDo?.TaskId,quickToDo?.TaskTitle)">
             <img src="../../../assets/comment-note.svg" style="height: 1.5rem; cursor: pointer;" />
@@ -546,7 +586,7 @@
             </span>
           </a>
           </td>
-          <td  style="width: 15%;">
+          <td  style="width: 15%;" class="text-center">
 
           </td>
           <td  style="width: 5%;">

@@ -320,7 +320,7 @@ export class QuickToDosComponent implements AfterViewInit, OnDestroy, OnInit {
     }
   }
 
-  public taskStatus: string[] = ['Bekliyor', 'Yapılıyor', 'Tamamlanmak Üzere', 'Tamamlandı'] // max allowed length is 20 in db column
+  public taskStatus: string[] = ['Bekliyor', 'Yapılıyor', 'Test Ediliyor', 'Tamamlandı'] // max allowed length is 20 in db column
   setStatus(taskId, type = 'my') {
     if (this.permissions.getAccessGranted()) {
       let qTask: QuickTask;
@@ -594,7 +594,7 @@ export class QuickToDosComponent implements AfterViewInit, OnDestroy, OnInit {
           || (diff2 > 0 && minutediff2 >= 1 && !qt.Completedby))
           return qt;
 
-        // ['Bekliyor', 'Yapılıyor', 'Tamamlanmak Üzere', 'Tamamlandı'] // max allowed length is 20 in db column
+        // ['Bekliyor', 'Yapılıyor', 'Test Ediliyor', 'Tamamlandı'] // max allowed length is 20 in db column
       } else if (qt.Start) { // başlangıç zamanı şu andan küçük ve de hala başlamamış olanları göster(sadece bekliyor olanları)
         let diff = ((now.getTime() - dateStart.getTime()) / 1000)
         let minutediff = Math.floor(Math.abs(diff) / 60); // -0.15  0'a yuvarlanmalı.
@@ -638,7 +638,7 @@ export class QuickToDosComponent implements AfterViewInit, OnDestroy, OnInit {
         || (diff2 > 0 && minutediff2 >= 1 && !qt.Completedby))
         return true;
 
-      // ['Bekliyor', 'Yapılıyor', 'Tamamlanmak Üzere', 'Tamamlandı'] // max allowed length is 20 in db column
+      // ['Bekliyor', 'Yapılıyor', 'Test Ediliyor', 'Tamamlandı'] // max allowed length is 20 in db column
     }
     return false;
   }

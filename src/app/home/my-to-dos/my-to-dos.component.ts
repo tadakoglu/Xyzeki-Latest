@@ -48,7 +48,7 @@ export class MyToDosComponent implements OnInit, AfterViewInit, OnDestroy {
   private searchSubscription: Subscription
   private switchDaySubscription: Subscription
 
-  public taskStatus: string[] = ['Bekliyor', 'Yapılıyor', 'Tamamlanmak Üzere', 'Tamamlandı'] // max allowed length is 20 in db column
+  public taskStatus: string[] = ['Bekliyor', 'Yapılıyor', 'Test Ediliyor', 'Tamamlandı'] // max allowed length is 20 in db column
   setStatus(taskId) {
     if (this.permissions.getAccessGranted()) {
       // let pTask: ProjectTask = Object.assign({}, this.repository.getProjectToDos().find((val, index, obj) => val.TaskId == taskId)) // object assign doesnt allow undefined values to be assigned, checking them.
@@ -356,7 +356,7 @@ export class MyToDosComponent implements OnInit, AfterViewInit, OnDestroy {
           || (diff2 > 0 && minutediff2 >= 1 && !pt.IsCompleted))
           return pt;
 
-        // ['Bekliyor', 'Yapılıyor', 'Tamamlanmak Üzere', 'Tamamlandı'] // max allowed length is 20 in db column
+        // ['Bekliyor', 'Yapılıyor', 'Test Ediliyor', 'Tamamlandı'] // max allowed length is 20 in db column
       } else if (pt.Start) { // başlangıç zamanı şu andan küçük ve de hala başlamamış olanları göster(sadece bekliyor olanları)
         let diff = ((now.getTime() - dateStart.getTime()) / 1000)
         let minutediff = Math.floor(Math.abs(diff) / 60); // -0.15  0'a yuvarlanmalı.
@@ -400,7 +400,7 @@ export class MyToDosComponent implements OnInit, AfterViewInit, OnDestroy {
         || (diff2 > 0 && minutediff2 >= 1 && !pt.IsCompleted))
         return true;
 
-      // ['Bekliyor', 'Yapılıyor', 'Tamamlanmak Üzere', 'Tamamlandı'] // max allowed length is 20 in db column
+      // ['Bekliyor', 'Yapılıyor', 'Test Ediliyor', 'Tamamlandı'] // max allowed length is 20 in db column
     }
     return false;
   }

@@ -93,13 +93,13 @@
 .time-pipe-design{
   background-color: rgb(221, 219, 217);
   color:black;
-  border-radius: 10px;
-  padding-left: 3px;
-  padding-right: 3px;
-  padding-top: 2px;
-  padding-bottom: 2px;
+  border-radius: 5px;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-top: 1px;
+  padding-bottom: 1px;
 
-  margin:1px;
+  margin:2px;
 }
 .mat-icon {
     vertical-align: middle;

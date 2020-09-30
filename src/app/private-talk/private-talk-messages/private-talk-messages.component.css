@@ -1,3 +1,6 @@
+.showDiv .xyz-ul{
+  display: block;
+}
 input{
 
   border-top: 0px;
@@ -217,9 +220,12 @@ input:focus{
 .xyz-ul{
   width: 100%;
   height: 100%;
+  display:none;
 
 }
+
 .xyz-ul ul {
+
   list-style-type: none;
   margin: 0!important;
   padding: 0!important;

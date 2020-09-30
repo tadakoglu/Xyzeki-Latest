@@ -24,7 +24,7 @@
     [infiniteScrollUpDistance]="1.5" [scrollWindow]="false" [infiniteScrollThrottle]="100" (scrolled)="onScrollDown()"
     (scrolledUp)="onScrollUp()" [ngStyle]="{'height.px': (innerWidth>=577) ? innerHeight-167: innerHeight-103}"
     class="container-fluid xyz-card-big xyz-card-default bg-light">
-    <div *ngIf="privateTalkId!=undefined && privateTalkId!=0" class="sticky-top pl-2 pr-1 xyz-card-primary pt-1 bg-dark"
+    <div show-dir *ngIf="privateTalkId!=undefined && privateTalkId!=0" class="sticky-top pl-2 pr-1 xyz-card-primary pt-1 bg-dark"
       style="z-index: 100!important">
       <div style="display: inline-block" *ngIf="privateTalk()?.Sender == memberShared?.Username && this.privateTalkId"
         class="text-white ">
@@ -32,7 +32,7 @@
           [setPrivateTalkId]="this.privateTalkId">
         </app-receivers> -->
 
-        <div class="xyz-ul">
+        <div class="xyz-ul" >
           <ul appLiAnimate>
             <!-- TEAM RECEIVERS-->
 

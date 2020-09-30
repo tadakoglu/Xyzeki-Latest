@@ -13,7 +13,7 @@
 <div class="card bg-light rounded-0 mt-0" *ngIf="dayDateStr != 'ArsivKutusu' && (this.dataService?.switchMode != 1)">
   <div class="card-header bg-secondary rounded-0 pt-2 pb-2 border-0 bg-white">
     <span class="font-weight-bolder">Proje Görevleriniz
-      <button class="btn btn-light btn-sm rounded-circle" id="previous" (click)="previousPage()"
+      <button class="btn btn-light btn-sm rounded-circle ml-2" id="previous" (click)="previousPage()"
         [hidden]="getNumberOfPages()==0" style="height: 40px!important; width:40px!important" [disabled]="pageNo == 1 ">
         <mat-icon>keyboard_arrow_left</mat-icon>
       </button>
@@ -33,26 +33,24 @@
         <thead>
         </thead>
       </thead>
+
+      <!-- class="trOptimization" -->
       <tbody class="shadowedTr">
-        <tr class="trOptimization" style="margin-bottom: 6px"
+        <tr  style="margin-bottom: 6px; width:100%" 
           *ngFor="let projectToDo  of projectToDosAssignedToMe; index as i">
-          <td style="float:left">
+          <td style="width:5%">
             <a *ngIf="!projectToDo?.IsCompleted" (click)="completePT(projectToDo)"><img
                 src="../../../assets/squareUnCheck.png" style="width: 1.3rem; height: 1.3rem; cursor: pointer;" />
             </a>
           </td>
-          <td style=" float:left;  width: 100%; cursor: text;">
-            <!-- <span  ngbTooltip="Düşük öncelikli görev" tooltipClass="tooltipSpecial" placement="bottom" (click)="$event.stopPropagation();"
-               class="time-pipe-design p-1 bg-light ml-1 mr-1 text-nowrap" style="cursor: pointer; font-size: 13px; display: inline; ">
-                <img src="../../../assets/flagBlue.png"  style="height: 25px;">
-              </span> -->
+          <td style="cursor: text; width:45%">
+            
             <span [ngClass]="{'shineYapiliyor': projectToDo?.Status == 'Yapılıyor',
-              'shineBitmekuzere': projectToDo?.Status == 'Tamamlanmak Üzere' }" class="bg-light">
+              'shineBitmekuzere': projectToDo?.Status == 'Test Ediliyor' }" >
               {{projectToDo?.TaskTitle}}{{ getProject(projectToDo?.ProjectId) ? ', ': '' }}
               {{getProject(projectToDo?.ProjectId)?.ProjectName}}</span>
 
-            <a *ngIf="projectToDo" class="modernUnderlined ml-2 w-100 bg-light" (click)="setStatus(projectToDo?.TaskId)"
-              style="cursor: pointer; font-size: 13px">{{(projectToDo?.Status ? projectToDo?.Status  : 'Bekliyor')}}</a>
+         
             &nbsp;
 
 
@@ -63,48 +61,76 @@
               class="btn btn-light btn-sm rounded-1 border-0">
               <img src="../../../assets/arrow-2.png" style="width: 16px;object-fit: cover; cursor: pointer; " /></a>
 
-
+ <a *ngIf="projectToDo" class="modernUnderlined ml-2  w-100" (click)="setStatus(projectToDo?.TaskId)"
+              style="cursor: pointer; font-size: 13px">{{(projectToDo?.Status ? projectToDo?.Status  : 'Bekliyor')}}</a>
           </td>
-          <td style="float:right">
-            <div class="mt-1 mobileDate  ">
-              <!-- {{projectToDo?.Deadline ? (projectToDo?.Deadline | humanizer) : 'Yok'}} -->
+          <td style="width:25%" class="text-center">
 
-              <ng-container
-                *ngIf="(projectToDo?.Start | humanizer) != (projectToDo?.Deadline | humanizer); else sameStartDate">
-                <span style="color: #00a028">{{projectToDo?.Start | humanizer}}
+
+            <ng-container *ngIf="(projectToDo?.Start | humanizer) != (projectToDo?.Deadline | humanizer); else sameStartDate">
+              <div *ngIf="projectToDo?.Start || projectToDo?.Deadline"
+                style="background-color:rgb(245, 241, 241); border-radius: 20px; padding:5px">
+
+                <span style="color: #00a028; display:block; margin-bottom:5px; ">{{projectToDo?.Start | humanizer}}
                   <span *ngIf="projectToDo?.Start |  date:'shortTime' "
                     class="time-pipe-design">{{projectToDo?.Start |  date:'shortTime' }}</span>
-                  <span *ngIf="projectToDo?.Start  && projectToDo?.Deadline"> - </span>
+                  <span [hidden]="!projectToDo?.Start">&nbsp;başl.</span>
                 </span>
-                <div class="clearfix" *ngIf="this.innerWidth < 876"> </div>
-                <span style="color: #b80000">{{projectToDo?.Deadline | humanizer}}
-                  <span *ngIf="projectToDo?.Deadline |  date:'shortTime'"
-                    class="time-pipe-design">{{projectToDo?.Deadline |  date:'shortTime' }}</span></span>
-                <div class="clearfix" *ngIf="this.innerWidth < 500"> </div>
-              </ng-container>
-              <ng-template #sameStartDate>
-                <span style="color: rgb(196, 199, 23); ">{{projectToDo?.Start | humanizer}}
+
+                <span style="color: #b80000; display:block">{{projectToDo?.Deadline | humanizer}}
+                  <span *ngIf="projectToDo?.Deadline |  date:'shortTime' "
+                    class="time-pipe-design">{{projectToDo?.Deadline |  date:'shortTime' }} </span>
+                  <span [hidden]="!projectToDo?.Deadline">&nbsp;bit.</span>
+                </span>
+
+              </div>
+            </ng-container>
+            <ng-template #sameStartDate>
+
+              <div *ngIf="projectToDo?.Start || projectToDo?.Deadline"
+                style="background-color:rgb(245, 241, 241); border-radius: 20px; padding:5px">
+
+
+                <span style=" display:block; margin-bottom:5px;"
+                  style="color: rgb(196, 199, 23); ">{{projectToDo?.Start | humanizer}}
                   <span *ngIf="projectToDo?.Start |  date:'shortTime' "
                     class="time-pipe-design">{{projectToDo?.Start |  date:'shortTime' }}</span>
-                  <span *ngIf="projectToDo?.Start |  date:'shortTime'  && projectToDo?.Deadline |  date:'shortTime' "> -
-                  </span>
+                  <span *ngIf="projectToDo?.Start |  date:'shortTime'  && projectToDo?.Deadline |  date:'shortTime' ">
+                    - </span>
                   <span class="time-pipe-design"
                     *ngIf="projectToDo?.Deadline |  date:'shortTime' ">{{projectToDo?.Deadline |  date:'shortTime' }}</span>
-                </span>
-              </ng-template>
 
-              <div class="clearfix" *ngIf="this.innerWidth < 500">
+                  <span style=" display:block; ">başl. ve bit.</span>
+                </span>
+
+
+
               </div>
-              <a *ngIf=(projectToDo?.TaskId) class="btn filter-cnote pl-0 pt-0 pb-0 ml-1 mr-1 text-nowrap"
-                style="cursor: pointer!important"
-                (click)="showCommentsDialog(projectToDo?.TaskId,projectToDo?.TaskTitle)">
-                <img src="../../../assets/comment-note.svg" style="height: 1.5rem; cursor: pointer;" />
-                <span>
-                  {{getPTAssignedCommentsForCount(projectToDo?.TaskId)?.CommentsCount}}
-                </span>
-              </a>
 
-            </div>
+
+
+            </ng-template>
+
+
+
+
+          </td>
+          <td style="width:5%" class="text-center">
+
+            <a *ngIf=(projectToDo?.TaskId) class="btn filter-cnote pl-0 pt-0 pb-0 ml-1 mr-1 text-nowrap"
+              style="cursor: pointer!important"
+              (click)="showCommentsDialog(projectToDo?.TaskId,projectToDo?.TaskTitle)">
+              <img src="../../../assets/comment-note.svg" style="height: 1.5rem; cursor: pointer;" />
+              <span>
+                {{getPTAssignedCommentsForCount(projectToDo?.TaskId)?.CommentsCount}}
+              </span>
+            </a>
+          </td>
+          <td style="width:15%" class="text-center">
+
+          </td>
+          <td style="width:5%">
+
           </td>
         </tr>
       </tbody>

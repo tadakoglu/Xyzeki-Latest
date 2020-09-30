@@ -29,7 +29,8 @@ import { CommentCountModel } from 'src/app/model/comment-count.model';
   selector: 'app-project-to-dos',
   templateUrl: './project-to-dos.component.html',
   styleUrls: ['./project-to-dos.component.css'],
-  changeDetection: ChangeDetectionStrategy.Default})
+  changeDetection: ChangeDetectionStrategy.Default
+})
 export class ProjectToDosComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // hourAreaDropList;
@@ -108,7 +109,7 @@ export class ProjectToDosComponent implements OnInit, OnDestroy, AfterViewInit {
     this.innerHeight = window.innerHeight;
     //this.toggleProjectToDoPanel();
   }
-  public taskStatus: string[] = ['Bekliyor', 'Yapılıyor', 'Tamamlanmak Üzere', 'Tamamlandı'] // max allowed length is 20 in db column
+  public taskStatus: string[] = ['Bekliyor', 'Yapılıyor', 'Test Ediliyor', 'Tamamlandı'] // max allowed length is 20 in db column
   setStatus(taskId) {
     if (this.permissions.getAccessGranted()) {
       let pTask: ProjectTask = Object.assign({}, this.repository.getProjectToDos().find((val, index, obj) => val.TaskId == taskId)) // object assign doesnt allow undefined values to be assigned, checking them.
@@ -204,7 +205,7 @@ export class ProjectToDosComponent implements OnInit, OnDestroy, AfterViewInit {
     // if(previousIndex < 0){
     //   return true;
     // }
-    
+
     while (0 <= previousIndex) {
       let upperTask: ProjectTask = this.repository.getProjectToDos()[previousIndex];
 
@@ -244,7 +245,7 @@ export class ProjectToDosComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(TaskCommentsComponent) commentsDialog;
   dialogRef: MatDialogRef<TaskCommentsComponent>
   showCommentsDialog(taskId, title) {
-    if(this.innerWidth < 600){
+    if (this.innerWidth < 600) {
       let element: HTMLElement = document.getElementsByTagName('html')[0]
       element.className = null;
     }
@@ -268,7 +269,7 @@ export class ProjectToDosComponent implements OnInit, OnDestroy, AfterViewInit {
     else {
       dialogConfig.maxWidth = '600px';
     }
-    if(this.innerWidth < 786){
+    if (this.innerWidth < 786) {
       dialogConfig.autoFocus = false;
     }
     dialogConfig.data = {
@@ -285,11 +286,11 @@ export class ProjectToDosComponent implements OnInit, OnDestroy, AfterViewInit {
       //console.log(`Dialog result: ${result}`);
       //this.changeDetection.reattach(); // for slow textinput problem in angular
 
-      if(this.innerWidth < 600){
+      if (this.innerWidth < 600) {
         let element: HTMLElement = document.getElementsByTagName('html')[0]
         element.classList.add('hizlandir');
       }
-    
+
 
     });
 
@@ -525,7 +526,7 @@ export class ProjectToDosComponent implements OnInit, OnDestroy, AfterViewInit {
           || (diff2 > 0 && minutediff2 >= 1 && !pt.IsCompleted))
           return pt;
 
-        // ['Bekliyor', 'Yapılıyor', 'Tamamlanmak Üzere', 'Tamamlandı'] // max allowed length is 20 in db column
+        // ['Bekliyor', 'Yapılıyor', 'Test Ediliyor', 'Tamamlandı'] // max allowed length is 20 in db column
       } else if (pt.Start) { // başlangıç zamanı şu andan küçük ve de hala başlamamış olanları göster(sadece bekliyor olanları)
         let diff = ((now.getTime() - dateStart.getTime()) / 1000)
         let minutediff = Math.floor(Math.abs(diff) / 60); // -0.15  0'a yuvarlanmalı.
@@ -569,7 +570,7 @@ export class ProjectToDosComponent implements OnInit, OnDestroy, AfterViewInit {
         || (diff2 > 0 && minutediff2 >= 1 && !pt.IsCompleted))
         return true;
 
-      // ['Bekliyor', 'Yapılıyor', 'Tamamlanmak Üzere', 'Tamamlandı'] // max allowed length is 20 in db column
+      // ['Bekliyor', 'Yapılıyor', 'Test Ediliyor', 'Tamamlandı'] // max allowed length is 20 in db column
     }
     return false;
   }
@@ -1183,14 +1184,30 @@ export class ProjectToDosComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  onDragStart(event: CdkDragStart) {
-    if(this.innerWidth < 600){
+  onDragStart(event: CdkDragStart, projectToDo: ProjectTask) {
+    // sürüklenen elementin zindexi 0 ise çocuklarını geçici olarak gizle
+    // if(projectToDo.Zindex == 0){
+    //  projectToDo.ShowSubTasks = false;
+    // }
+    //
+    if (this.innerWidth < 600) {
       let element: HTMLElement = document.getElementsByTagName('html')[0]
       element.className = null;
     }
     this.switchHourDataService.setupStyle.next({ isOpen: true, Visibility: 'visible', Left: this.left - 21 + 'px', Top: this.top + 'px' })
 
-  } 
+  }
+  onDragEnd(event: CdkDragEnd, projectToDo: ProjectTask) {
+    // sürüklenen elementin zindexi 0 ise çocuklarını geçici olarak gizlenen durumdan göstere geçir
+    //  if(projectToDo.Zindex == 0){
+    //   projectToDo.ShowSubTasks = true;
+    // }
+    if (this.innerWidth < 600) {
+      let element: HTMLElement = document.getElementsByTagName('html')[0]
+      element.classList.add('hizlandir');
+    }
+    this.switchHourDataService.setupStyle.next({ isOpen: true, Visibility: 'hidden', Left: this.left - 21 + 'px', Top: this.top + 'px' })
+  }
 
   getPosition(event) {
     let el = this.switchDayArea.nativeElement as HTMLDivElement
@@ -1230,16 +1247,21 @@ export class ProjectToDosComponent implements OnInit, OnDestroy, AfterViewInit {
     let top = real.top + el.clientHeight; // Bu değer sürüklenen öğenin
     return [left, top]
   }
-  onDragEnd(event: CdkDragEnd) {
-    if(this.innerWidth < 600){
-      let element: HTMLElement = document.getElementsByTagName('html')[0]
-      element.classList.add('hizlandir');
-    }
-    this.switchHourDataService.setupStyle.next({ isOpen: true, Visibility: 'hidden', Left: this.left - 21 + 'px', Top: this.top + 'px' })
-  }
+
+ 
+
+  oldProjectToDoShowSubTasksStatus
+
+  onMouseDown(event, projectToDo) {
+    // this.oldProjectToDoShowSubTasksStatus = projectToDo.ShowSubTasks
+
+    // //sürüklenen elementin zindexi 0 ise çocuklarını geçici olarak gizle
+    // if (projectToDo.Zindex == 0) {
+    //   projectToDo.ShowSubTasks = false;
+    // }
 
 
-  onMouseDown(event) {
+
     let [left, top] = this.getPosition(event);
     this.left = left;
     this.top = top;
