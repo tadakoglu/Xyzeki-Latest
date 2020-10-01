@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { MemberShared } from '../member-shared.model';
+import { XyzekiAuthService } from '../xyzeki-auth-service';
 
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -13,59 +13,35 @@ import { BackEndWebServer } from 'src/infrastructure/back-end-server';
 @Injectable()
 export class FilesService {
   baseURL: string;
-  auth_token: string;
-
-  constructor(private http: HttpClient, private memberShared: MemberShared) {
+  
+  constructor(private http: HttpClient) {
     this.baseURL = BackEndWebServer + '/'
   }
   showContainers(): Observable<CloudContainers> {
-    return this.memberShared.token.pipe(switchMap(token => {
-      if (token == '0') return of(null); else
-        return this.http.get<CloudContainers>(this.baseURL + 'api/Files/ListContainers', this.getOptions(token));
-    }));
+    return this.http.get<CloudContainers>(this.baseURL + 'api/Files/ListContainers');
   }
   createContainer(containerName: string): Observable<CloudContainer> {
-    return this.memberShared.token.pipe(switchMap(token => {
-      if (token == '0') return of(null); else
-        return this.http.get<CloudContainer>(this.baseURL + `api/Files/CreateContainer/${containerName}`, this.getOptions(token));
-    }));
+    return this.http.get<CloudContainer>(this.baseURL + `api/Files/CreateContainer/${containerName}`);
   }
   deleteContainer(containerName: string): Observable<boolean> {
-    return this.memberShared.token.pipe(switchMap(token => {
-      if (token == '0') return of(null); else
-        return this.http.delete<boolean>(this.baseURL + `api/Files/DeleteContainer/${containerName}`, this.getOptions(token))
-    }));
+    return this.http.delete<boolean>(this.baseURL + `api/Files/DeleteContainer/${containerName}`)
   }
 
   showBlobs(containerName): Observable<CloudFiles> {
-    return this.memberShared.token.pipe(switchMap(token => {
-      if (token == '0') return of(null); else
-        return this.http.get<CloudFiles>(this.baseURL + `api/Files/ListFiles/Container/${containerName}`, this.getOptions(token));
-    }));
+    return this.http.get<CloudFiles>(this.baseURL + `api/Files/ListFiles/Container/${containerName}`);
   }
   downloadFile(containerName: string, fileName: string): Observable<any> {
-    return this.memberShared.token.pipe(switchMap(token => {
-      if (token == '0') return of(null); else
-        return this.http.get(this.baseURL + `api/Files/DownloadFile/${fileName}/Container/${containerName}`,
-          { responseType: "blob", headers: { "Authorization": `Bearer ${token}` } })
-    }));
+    return this.http.get(this.baseURL + `api/Files/DownloadFile/${fileName}/Container/${containerName}`, { responseType: "blob" })
   }
 
   insertFile(containerName: string, fileToUpload: FormData): Observable<CloudFile> {
-    return this.memberShared.token.pipe(switchMap(token => {
-      if (token == '0') return of(null); else
-        return this.http.post<CloudFile>(this.baseURL + `api/Files/InsertFile/Container/${containerName}`, fileToUpload, this.getOptions(token));
-    }));
+    return this.http.post<CloudFile>(this.baseURL + `api/Files/InsertFile/Container/${containerName}`, fileToUpload);
   }
   deleteFile(containerName: string, fileName: string): Observable<boolean> {
-    return this.memberShared.token.pipe(switchMap(token => {
-      if (token == '0') return of(null); else
-        return this.http.delete<boolean>(this.baseURL + `api/Files/DeleteFile/${fileName}/Container/${containerName}`, this.getOptions(token))
-    }));
+    return this.http.delete<boolean>(this.baseURL + `api/Files/DeleteFile/${fileName}/Container/${containerName}`)
+
   }
 
-  getOptions(token) {
-    return { headers: new HttpHeaders({ "Authorization": `Bearer ${token}` }) }
-  }
+ 
 
 }

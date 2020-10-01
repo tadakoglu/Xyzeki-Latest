@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MemberShared } from '../member-shared.model';
+import { XyzekiAuthService } from '../xyzeki-auth-service';
 
 import { Observable, of } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
@@ -11,25 +11,16 @@ import { BackEndWebServer } from 'src/infrastructure/back-end-server';
 export class MemberSettingService {
 
   baseURL: string;
-  auth_token: string;
-  constructor(private http: HttpClient, private memberShared: MemberShared) {
+  constructor(private http: HttpClient) {
     this.baseURL = BackEndWebServer + '/'
   }
   mySetting(): Observable<MemberSetting> {
-    return this.memberShared.token.pipe(switchMap(token => {
-      if (token == '0') return of(null);
-      else return this.http.get<MemberSetting>(this.baseURL + `api/MemberSetting/MySetting`, this.getOptions(token))
-    }))
+    return this.http.get<MemberSetting>(this.baseURL + `api/MemberSetting/MySetting`)
   }
   updateMySetting(mSetting: MemberSetting): Observable<null> {
-    return this.memberShared.token.pipe(switchMap(token => {
-      if (token == '0') return of(null);
-      else return this.http.put<null>(this.baseURL + "api/MemberSetting/" + mSetting.Username, mSetting, this.getOptions(token))
-    }))
+    return this.http.put<null>(this.baseURL + "api/MemberSetting/" + mSetting.Username, mSetting)
   }
-  getOptions(token) {
-    return { headers: new HttpHeaders({ "Authorization": `Bearer ${token}` }) }
-  }
+
 
 
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MemberShared } from '../member-shared.model';
+import { XyzekiAuthService } from '../xyzeki-auth-service';
 
 import { Observable, of } from 'rxjs';
 import { MemberLicense } from '../member-license.model';
@@ -11,80 +11,34 @@ import { BackEndWebServer } from 'src/infrastructure/back-end-server';
 
 @Injectable()
 export class MemberLicenseService {
+
   baseURL: string;
-  auth_token: string;
-  constructor(private http: HttpClient, private memberShared: MemberShared) {
+  constructor(private http: HttpClient) {
     this.baseURL = BackEndWebServer + '/'
-    //this.auth_token = memberShared.Token;
-  }
-  // kurumsal(ekip) lisansı, ml.LicenseType=="kurumsal"
-  primaryAccessGranted(): Observable<boolean> {
-    return this.memberShared.token.pipe(switchMap(token => {
-      if (token == '0') return of(null); else
-        return this.http.get<boolean>(this.baseURL + `api/MemberLicense/PrimaryAccessGranted`, this.getOptions(token))
-    }))
-  }
-  // herhangi bir çeşit lisans var mı.
-  accessGranted(): Observable<boolean> {
-    return this.memberShared.token.pipe(switchMap(token => {
-      if (token == '0') return of(null); else
-        return this.http.get<boolean>(this.baseURL + `api/MemberLicense/AccessGranted`, this.getOptions(token))
-    }))
   }
 
+  primaryAccessGranted(): Observable<boolean> { // kurumsal(ekip) lisansı, ml.LicenseType=="kurumsal"
+    return this.http.get<boolean>(this.baseURL + `api/MemberLicense/PrimaryAccessGranted`)
+  }
+  accessGranted(): Observable<boolean> {  // herhangi bir çeşit lisans var mı.
+    return this.http.get<boolean>(this.baseURL + `api/MemberLicense/AccessGranted`)
+  }
   allLicenses(): Observable<MemberLicense[]> {
-    return this.memberShared.token.pipe(switchMap(token => {
-      if (token == '0') return of(null); else
-        return this.http.get<MemberLicense[]>(this.baseURL + `api/MemberLicense/AllLicenses`, this.getOptions(token))
-    }))
+    return this.http.get<MemberLicense[]>(this.baseURL + `api/MemberLicense/AllLicenses`)
   }
-
   newLicense(memberLicense: MemberLicense): Observable<string> {
-    return this.memberShared.token.pipe(switchMap(token => {
-      if (token == '0') return of(null);
-      else return this.http.post<string>(this.baseURL + "api/MemberLicense", memberLicense, this.getOptions(token))
-    }))
+    return this.http.post<string>(this.baseURL + "api/MemberLicense", memberLicense)
   }
   deleteLicense(licenseId: string): Observable<MemberLicense> {
-    return this.memberShared.token.pipe(switchMap(token => {
-      if (token == '0') return of(null);
-      else return this.http.delete<MemberLicense>(`${this.baseURL}api/MemberLicense/${licenseId}`, this.getOptions(token))
-    }));
+    return this.http.delete<MemberLicense>(`${this.baseURL}api/MemberLicense/${licenseId}`)
   }
-
   myLicense(): Observable<MemberLicense> {
-    return this.memberShared.token.pipe(switchMap(token => {
-      if (token == '0') return of(null); else
-        return this.http.get<MemberLicense>(this.baseURL + `api/MemberLicense/MyLicense`, this.getOptions(token))
-    }))
+    return this.http.get<MemberLicense>(this.baseURL + `api/MemberLicense/MyLicense`)
   }
   usedStorage(licenseId: string): Observable<MemberLicenseUsedStorage> {
-    return this.memberShared.token.pipe(switchMap(token => {
-      if (token == '0') return of(null); else
-        return this.http.get<MemberLicenseUsedStorage>(this.baseURL + `api/MemberLicense/${licenseId}/UsedStorage`, this.getOptions(token))
-    }))
+    return this.http.get<MemberLicenseUsedStorage>(this.baseURL + `api/MemberLicense/${licenseId}/UsedStorage`)
   }
 
 
-  getOptions(token) {
-    return { headers: new HttpHeaders({ "Authorization": `Bearer ${token}` }) }
-  }
-  getOptions2(memberLicenseSM: MemberLicenseSM) { // Special for delete method
-    return {
-      headers: new HttpHeaders({ "Authorization": `Bearer ${this.auth_token}` }),
-      params: { "licenseId": memberLicenseSM.LicenseId }
-    };
-  }
-  getOptions3() {
-    return { headers: new HttpHeaders({ "Authorization": `Bearer ${this.auth_token}` }) }
-  }
 }
 
-
-
-  // validateLicense(memberLicenseSM: MemberLicenseSM): Observable<MemberLicense> {
-  //   return this.memberShared.token.pipe(switchMap(token => {
-  //     if (token == '0') return of(null); else
-  //       return this.http.put<MemberLicense>(this.baseURL + "api/MemberLicenses", memberLicenseSM, this.getOptions(token))
-  //   }))
-  // }

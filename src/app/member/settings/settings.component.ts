@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, HostListener } from '@angular/core';
-import { MemberShared } from 'src/app/model/member-shared.model';
+import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
 import { MembersService } from 'src/app/model/services/members.service';
 import { Member } from 'src/app/model/member.model';
 import { MemberSettingService } from 'src/app/model/services/member-setting.service';
@@ -21,7 +21,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
       this.subscription.unsubscribe();
   }
 
-  constructor(private permissions: MemberLicenseRepository, public memberShared: MemberShared, private memberSettingService: MemberSettingService) {
+  constructor(private permissions: MemberLicenseRepository, public xyzekiAuthService: XyzekiAuthService, private memberSettingService: MemberSettingService) {
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
   }
@@ -42,7 +42,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   public subscription: Subscription
   selectTheme(selectedTheme: string) {
     if (this.permissions.getAccessGranted()) {
-      let mSetting: MemberSetting = new MemberSetting(this.memberShared.Username, selectedTheme, this.ownerReporting, this.assignedToReporting);
+      let mSetting: MemberSetting = new MemberSetting(this.xyzekiAuthService .Username, selectedTheme, this.ownerReporting, this.assignedToReporting);
       if (selectedTheme) {
         this.subscription = this.memberSettingService.updateMySetting(mSetting).subscribe(() => {
           this.selectedTheme = selectedTheme;
@@ -159,7 +159,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
       } else {
         this.assignedToReporting = value;
       }
-      let mSetting: MemberSetting = new MemberSetting(this.memberShared.Username, this.selectedTheme, this.ownerReporting, this.assignedToReporting);
+      let mSetting: MemberSetting = new MemberSetting(this.xyzekiAuthService .Username, this.selectedTheme, this.ownerReporting, this.assignedToReporting);
 
       this.subscription = this.memberSettingService.updateMySetting(mSetting).subscribe(() => {
         // this.ownerReporting = mSetting.OwnerReporting;

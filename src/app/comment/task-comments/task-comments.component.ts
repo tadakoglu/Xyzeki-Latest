@@ -7,7 +7,7 @@ import { ProjectToDoCommentsService } from 'src/app/model/services/project-to-do
 import { QuickTaskComment } from 'src/app/model/quick-task-comment.model';
 import { ProjectTaskComment } from 'src/app/model/project-task-comment.model';
 import { NgForm } from '@angular/forms';
-import { MemberShared } from 'src/app/model/member-shared.model';
+import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
 import { Member } from 'src/app/model/member.model';
 import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
 import { MemberLicenseRepository } from 'src/app/model/repository/member-license-repository';
@@ -87,25 +87,25 @@ export class TaskCommentsComponent implements AfterViewInit {
 
   constructor(public qtCommentRepository: QuickToDoCommentRepository, public ptCommentRepository: ProjectToDoCommentRepository, private repositoryTM: TeamMemberRepository, private permissions: MemberLicenseRepository, private dialogRef: MatDialogRef<TaskCommentsComponent>, @Inject(MAT_DIALOG_DATA) data: DialogData,
     private qtCommentsService: QuickToDoCommentsService, private ptCommentsService: ProjectToDoCommentsService,
-    public memberShared: MemberShared, private commentSignalService: XyzekiSignalrService, private timeService: TimeService
+    public xyzekiAuthService: XyzekiAuthService, private commentSignalService: XyzekiSignalrService, private timeService: TimeService
   ) {
     this.taskId = data.taskId;
     this.kind = data.kind;
     this.title = data.title;
     if (this.kind == 'qtComments') {
-      Object.assign(this.qtCommentModel, new QuickTaskComment(this.taskId, '', this.memberShared.Username))
+      Object.assign(this.qtCommentModel, new QuickTaskComment(this.taskId, '', this.xyzekiAuthService.Username))
       this.qtCommentRepository.loadComments(this.taskId);
       //this.qtCommentRepository = new QuickToDoCommentRepository(this.taskId, this.qtCommentsService, this.commentSignalService, this.timeService);
-      //this.qtCommentModel = new QuickTaskComment(this.taskId, '', this.memberShared.Username);
+      //this.qtCommentModel = new QuickTaskComment(this.taskId, '', this.xyzekiAuthService.Username);
       // this.fastTypingTextareaSubscription = this.fastTypingTextarea.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(event => {
       //   this.qtCommentModel.Message = event.target.value;
       //   this.onKeydownEvent(event)
       // })
     } else if (this.kind == 'ptComments') {
-      Object.assign(this.ptCommentModel, new ProjectTaskComment(this.taskId, '', this.memberShared.Username));
+      Object.assign(this.ptCommentModel, new ProjectTaskComment(this.taskId, '', this.xyzekiAuthService.Username));
       this.ptCommentRepository.loadComments(this.taskId);
       // this.ptCommentRepository = new ProjectToDoCommentRepository(this.taskId, this.ptCommentsService, this.commentSignalService, this.timeService);
-      // this.ptCommentModel = new ProjectTaskComment(this.taskId, '', this.memberShared.Username);
+      // this.ptCommentModel = new ProjectTaskComment(this.taskId, '', this.xyzekiAuthService.Username);
       // this.fastTypingTextareaSubscription = this.fastTypingTextarea.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(event => {
       //   this.ptCommentModel.Message = event.target.value;
       //   this.onKeydownEvent(event)
@@ -162,11 +162,11 @@ export class TaskCommentsComponent implements AfterViewInit {
         if (this.kind == 'qtComments') {
           this.qtCommentModel.DateTimeSent = new Date().toISOString(); // set date time when sent.
           this.qtCommentRepository.saveQuickToDoComment(this.qtCommentModel);
-          this.qtCommentModel = new QuickTaskComment(this.taskId, '', this.memberShared.Username);
+          this.qtCommentModel = new QuickTaskComment(this.taskId, '', this.xyzekiAuthService.Username);
         } else if (this.kind == 'ptComments') {
           this.ptCommentModel.DateTimeSent = new Date().toISOString(); // set date time when sent.
           this.ptCommentRepository.saveProjectToDoComment(this.ptCommentModel);
-          this.ptCommentModel = new ProjectTaskComment(this.taskId, '', this.memberShared.Username);
+          this.ptCommentModel = new ProjectTaskComment(this.taskId, '', this.xyzekiAuthService.Username);
         }
         this.modelSent = true;
         this.modelSubmitted = false;

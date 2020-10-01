@@ -9,14 +9,14 @@ import { IMemberRepository } from '../abstract/i-member-repository';
 import { Member } from '../member.model';
 import { MembersService } from '../services/members.service';
 import { isNullOrUndefined } from 'util';
-import { MemberShared } from '../member-shared.model';
+import { XyzekiAuthService } from  '../xyzeki-auth-service';
 import { RegisterModel } from '../register.model';
 import { ReturnModel } from '../return.model';
 
 @Injectable()
 export class MemberRepository implements IMemberRepository { 
     
-    constructor(private service: MembersService, private memberShared: MemberShared) { }
+    constructor(private service: MembersService, public xyzekiAuthService : XyzekiAuthService ) { }
 
     getMember(username: string): Observable<Member> {
         return this.service.getMember(username);

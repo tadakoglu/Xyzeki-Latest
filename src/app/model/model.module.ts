@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/guards/auth-guard.service';
-import { MemberShared } from './member-shared.model';
+import { XyzekiAuthData, XyzekiAuthService } from './xyzeki-auth-service';
 
 import { MemberLicenseRepository } from './repository/member-license-repository';
 import { MemberLicenseService } from './services/member-license.service';
@@ -62,16 +62,16 @@ import { ContainerFilesResolverService } from './resolvers/container-files-resol
   ],
   providers: [
     XyzekiDateTimeInfra,
-    MemberShared,
+    XyzekiAuthData,
+    XyzekiAuthService,
     DataService,
     SwitchHourDataService,
     PageSizes,
     CryptoHelpersService,
-
     XyzekiSignalrService,
     NotificationService,
     TimeService,
-    
+
     { provide: AuthService, useClass: AuthService },// This module's components/services and its tree of child components/services receive new AuthService "instance"
     { provide: AuthGuardService, useClass: AuthGuardService },
     { provide: AuthGuardAdminService, useClass: AuthGuardAdminService },
@@ -118,7 +118,7 @@ import { ContainerFilesResolverService } from './resolvers/container-files-resol
     ContainerRepository,
     FileRepository,
 
-   
+
   ]
 })
 export class ModelModule { } // This module will be used only for dependency injection, therefore doesn't include any components.

@@ -3,7 +3,7 @@ import { QuickTask } from '../quick-task.model';
 import { QuickToDosService } from '../services/quick-to-dos.service';
 import { Injectable } from '@angular/core';
 
-import { MemberShared } from '../member-shared.model';
+import { XyzekiAuthService } from  '../xyzeki-auth-service';
 import { CommentCountModel } from '../comment-count.model';
 import { PageSizes } from 'src/infrastructure/page-sizes';
 import { TaskOrderModel } from '../task-order.model';
@@ -17,7 +17,7 @@ import { concatMap } from 'rxjs/operators';
 export class QuickToDoRepository implements IQuickToDoRepository {
 
     constructor(private psz: PageSizes, private service: QuickToDosService,
-        private memberShared: MemberShared, private signalService: XyzekiSignalrService,
+        public xyzekiAuthService : XyzekiAuthService , private signalService: XyzekiSignalrService,
         private commentSignalService: XyzekiSignalrService, private dataService: DataService, private timeService: TimeService) {
 
         this.loadAll();
@@ -234,19 +234,19 @@ export class QuickToDoRepository implements IQuickToDoRepository {
                 return this.service.saveQuickTodo(quickToDo)
             })).subscribe((qtId) => {
                 quickToDo.TaskId = qtId;
-                quickToDo.Owner = this.memberShared.Username
+                quickToDo.Owner = this.xyzekiAuthService .Username
                 if (quickToDo.Archived)
                     this.myQuickToDos.unshift(quickToDo);
                 else
                     this.myQuickToDos.push(quickToDo);
 
-                if (quickToDo.AssignedTo == this.memberShared.Username)
+                if (quickToDo.AssignedTo == this.xyzekiAuthService .Username)
                     this.assignedToMe.push(quickToDo);
 
                 this.qtCommentsCount.push(new CommentCountModel(0, qtId))
 
                 //Signalling via SignalR
-                if (quickToDo.AssignedTo != null && quickToDo.AssignedTo != this.memberShared.Username) // disable signalr for free members, or take information from memberShared.
+                if (quickToDo.AssignedTo != null && quickToDo.AssignedTo != this.xyzekiAuthService .Username) // disable signalr for free members, or take information from xyzekiAuthService
                     this.signalService.notifyNewQuickToDo(quickToDo, quickToDo.AssignedTo); // that doesnt send messages to this member. only newCommments send...
 
             });
@@ -289,7 +289,7 @@ export class QuickToDoRepository implements IQuickToDoRepository {
                 if (-1 != index2) // index --> assignedToMe
                     this.assignedToMe.splice(index2, 1, quickToDo);
 
-                let me = this.memberShared.Username;
+                let me = this.xyzekiAuthService .Username;
                 let other = (assigned): boolean => { // other = null ve de ben olmayan
                     if (assigned != null && assigned != me)
                         return true;
@@ -358,7 +358,7 @@ export class QuickToDoRepository implements IQuickToDoRepository {
         let index = this.assignedToMe.findIndex(val => val.TaskId == quickToDo.TaskId)
         if (-1 == index) // Assigned task is not founded on repository
         {
-            if (this.memberShared.Username == quickToDo.AssignedTo) {
+            if (this.xyzekiAuthService .Username == quickToDo.AssignedTo) {
                 this.assignedToMe.push(quickToDo);
 
                 //comment count 

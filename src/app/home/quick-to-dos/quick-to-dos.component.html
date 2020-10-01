@@ -131,7 +131,7 @@
   <div *ngIf="myQuickToDos.length != 0 && (this.dataService?.switchMode == 0 || this.dataService?.switchMode == 1 || dayDateStr == 'ArsivKutusu')" class="card-footer bg-white p-2"
     style="background-color:rgb(255, 255, 255) !important; ">
 
-    <table *ngIf="memberShared.LoggedIn" class="table table-hover table-sm ">
+    <table *ngIf="xyzekiAuthService?.LoggedIn" class="table table-hover table-sm ">
       <thead>
       </thead>
       <tbody style=" height: 100%; 
@@ -269,22 +269,22 @@
           </td>
           <td style="  width: 15%"  cdkDragHandle class="text-center " *ngIf="quickToDoModelEdit?.TaskId != quickToDo?.TaskId">
             <div class="wrapOrNot" style="color: rgb(90, 90, 90); text-align: center; "
-              *ngIf="quickToDo?.AssignedTo && memberShared.Username == quickToDo?.AssignedTo">
-              <img *ngIf="memberShared?.account?.getValue()?.Avatar" alt="Avatar"
-                [src]="memberShared?.account?.getValue()?.Avatar" class="md-avatar size-1 rounded-circle ">
+              *ngIf="quickToDo?.AssignedTo && xyzekiAuthService?.Username == quickToDo?.AssignedTo">
+              <img *ngIf="xyzekiAuthService?.Member?.Avatar" alt="Avatar"
+                [src]="xyzekiAuthService?.Member?.Avatar" class="md-avatar size-1 rounded-circle ">
               <span> Ben</span>
               <!-- <span style="white-space: nowrap;"> Ben, @{{quickToDo?.AssignedTo}}</span> -->
             </div>
 
 
             <div class="wrapOrNot" style="color: rgb(94, 94, 94); text-align: center;"
-              *ngIf="quickToDo?.AssignedTo &&  memberShared.Username != quickToDo?.AssignedTo">
+              *ngIf="quickToDo?.AssignedTo &&  xyzekiAuthService?.Username != quickToDo?.AssignedTo">
               <img *ngIf="getMember(quickToDo?.AssignedTo)?.Avatar" [src]="getMember(quickToDo?.AssignedTo)?.Avatar"
                 alt="Avatar" class="md-avatar size-1 rounded-circle ">
               <span> {{getMember(quickToDo?.AssignedTo)?.Name}}</span></div>
             <!-- <span style="white-space: nowrap;"> {{getMember(quickToDo?.AssignedTo)?.Name}},
                   @{{quickToDo?.AssignedTo}}</span></span> -->
-            <!-- <p style="color: rgb(165, 165, 165)" *ngIf="memberShared.Username != quickToDo?.AssignedTo">{{getMember(uye?.Username)?.Name}}
+            <!-- <p style="color: rgb(165, 165, 165)" *ngIf="xyzekiAuthService?.Username != quickToDo?.AssignedTo">{{getMember(uye?.Username)?.Name}}
                 {{getMember(uye?.Username)?.Surname}}</p> -->
 
             <!-- {{quickToDo?.AssignedTo}}{{ quickToDo?.AssignedTo!=undefined ? '\'a atandı': ''}} -->
@@ -497,7 +497,7 @@
   <div class="card-body bg-white p-2 " *ngIf="assignedToMeUnComplete?.length != 0"
     style="max-height: 500px; overflow-y: scroll; overflow-y : auto; overflow-x:hidden;">
 
-    <table *ngIf="memberShared.LoggedIn" class="table table-hover table-sm gizliHeader2">
+    <table *ngIf="xyzekiAuthService?.LoggedIn" class="table table-hover table-sm gizliHeader2">
       <thead>
         <th scope="col"></th>
         <th scope="col">Görev</th>

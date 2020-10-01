@@ -20,7 +20,7 @@ import { QuickToDosService } from '../services/quick-to-dos.service';
 import { ProjectToDosService } from '../services/project-to-dos.service';
 import { ProjectsService } from '../services/projects.service';
 import { SwPush, SwUpdate } from '@angular/service-worker';
-import { MemberShared } from '../member-shared.model';
+import { XyzekiAuthData } from '../xyzeki-auth-service';
 
 @Injectable()
 export class NotificationService {
@@ -33,7 +33,8 @@ export class NotificationService {
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
   }
-  constructor(private memberShared: MemberShared, @Optional() private swUpdate: SwUpdate, @Optional() private swPush: SwPush, private teamService: TeamsService, private privateTalkService: PrivateTalksService, private quickToDoService: QuickToDosService, private projectToDoService: ProjectToDosService, private projectService: ProjectsService) {
+  constructor(public xyzekiAuthData: XyzekiAuthData, @Optional() private swUpdate: SwUpdate, @Optional() private swPush: SwPush,
+  private teamService: TeamsService, private privateTalkService: PrivateTalksService, private quickToDoService: QuickToDosService, private projectToDoService: ProjectToDosService, private projectService: ProjectsService) {
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
     // Notification.requestPermission().then(() => {
@@ -126,7 +127,7 @@ export class NotificationService {
 
 
     let titleX = "1 Yeni Göreviniz Var";
-    if (quickTask.Owner == this.memberShared.Username) {
+    if (quickTask.Owner == this.xyzekiAuthData.Username) {
       if (isNullOrUndefined(quickTask.Status)) {
         quickTask.Status = 'Bekliyor';
       }
@@ -197,7 +198,7 @@ export class NotificationService {
     if (!this.swPush.isEnabled)
       return;
 
-    if(project.Owner == this.memberShared.Username){ // only single way signal
+    if (project.Owner == this.xyzekiAuthData.Username) { // only single way signal
       return;
     }
 
@@ -258,7 +259,7 @@ export class NotificationService {
 
   //Yorumlar 
   pushNotifyNewPTComment(projectTaskComment: ProjectTaskComment) {
-    if (projectTaskComment.Sender == this.memberShared.Username) // it sends itself too
+    if (projectTaskComment.Sender == this.xyzekiAuthData.Username) // it sends itself too
       return;
 
     if (!this.isNotificationGranted)
@@ -298,7 +299,7 @@ export class NotificationService {
 
   // #todo
   pushNotifyNewQTComment(quickTaskComment: QuickTaskComment) {
-    if (quickTaskComment.Sender == this.memberShared.Username)  // it sends itself too
+    if (quickTaskComment.Sender == this.xyzekiAuthData.Username)  // it sends itself too
       return;
 
     if (!this.isNotificationGranted)

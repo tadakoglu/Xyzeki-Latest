@@ -6,7 +6,7 @@ import { MemberLicense } from 'src/app/model/member-license.model';
 import { CloudFile } from 'src/app/model/azure-models/cloud-file.model';
 import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MemberShared } from 'src/app/model/member-shared.model';
+import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
 import { Member } from 'src/app/model/member.model';
 import { ContainerRepository } from 'src/app/model/repository/container-repository';
 import { CloudContainer } from 'src/app/model/azure-models/cloud-container.model';
@@ -25,7 +25,7 @@ import { CloudFiles } from 'src/app/model/azure-models/cloud-files.model';
 export class FilesComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(public repository: FileRepository, public _location: Location, private repositoryTM: TeamMemberRepository, private dataService: DataService, private containerExistingRepo: ContainerRepository, private fileService: FilesService, public mLicenseRepository: MemberLicenseRepository,
     private permissions: MemberLicenseRepository, private router: Router, private route: ActivatedRoute,
-    public memberShared: MemberShared,
+    public xyzekiAuthService: XyzekiAuthService,
     private signalService: XyzekiSignalrService) {
 
   }

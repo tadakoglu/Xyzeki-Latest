@@ -2,7 +2,7 @@ import { Component, OnInit, NgZone, OnDestroy, AfterViewInit, ChangeDetectionStr
 import { NgModel } from '@angular/forms';
 import { LoginModel } from 'src/app/model/login.model';
 import { IAuthRepository } from 'src/app/model/abstract/i-auth-repository';
-import { MemberShared } from 'src/app/model/member-shared.model';
+import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
 import { Router } from '@angular/router';
 import { JsonPipe } from '@angular/common';
 import { TeamRepository } from 'src/app/model/repository/team-repository';
@@ -17,6 +17,7 @@ import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { GoogleReCaptcha_LoginAction } from 'src/infrastructure/google-captcha';
 import { concatMap } from 'rxjs/operators';
 import { DataService } from 'src/app/model/services/shared/data.service';
+import { XyzekiSignalrService } from 'src/app/model/signalr-services/xyzeki-signalr.service';
 
 
 @Component({
@@ -52,7 +53,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   constructor(private recaptchaV3Service: ReCaptchaV3Service, private router: Router, private repository: AuthRepository,
-    public loginModel: LoginModel, public memberShared: MemberShared, private memberSettingService: MemberSettingService, private dataService: DataService) {
+    public loginModel: LoginModel, public xyzekiAuthService: XyzekiAuthService, public xyzekiSignalService: XyzekiSignalrService, private memberSettingService: MemberSettingService, private dataService: DataService) {
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
   }
@@ -71,7 +72,9 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
       this.isLoading = true;
       this.subscription = this.recaptchaV3Service.execute(GoogleReCaptcha_LoginAction).pipe(concatMap(
         recaptchaToken => { return this.repository.authenticate(Object.assign({}, this.loginModel), recaptchaToken) })).subscribe((tokenAndMember: ReturnModel<Tuple<string, Member>>) => {
-          this.memberShared.Auth(tokenAndMember);
+          this.xyzekiAuthService .Auth(tokenAndMember);
+          this.xyzekiSignalService.startListening(tokenAndMember.Model.Item1);
+
           this.setUpMySetting();
           this.informUser = "Başarıyla giriş yaptınız."
           this.router.navigate(['/isler'])
@@ -104,7 +107,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
   logOut() {
-    this.memberShared.LogOut();
+    this.xyzekiAuthService.LogOut();
   }
   informUser: string;
   ngOnInit() { }

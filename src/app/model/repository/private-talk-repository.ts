@@ -2,7 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { PrivateTalksService } from '../services/private-talks.service';
 import { PrivateTalk } from '../private-talk.model';
 import { IPrivateTalkRepository } from '../abstract/i-private-talk-repository';
-import { MemberShared } from '../member-shared.model';
+import { XyzekiAuthService } from  '../xyzeki-auth-service';
 import { PrivateTalkReceiversService } from '../services/private-talk-receivers.service';
 import { PrivateTalkReceiver } from '../private-talk-receiver.model';
 import { PrivateTalkTeamReceiver } from '../private-talk-team-receiver.model';
@@ -19,7 +19,7 @@ import { concatMap } from 'rxjs/operators';
 @Injectable()
 export class PrivateTalkRepository implements IPrivateTalkRepository {
 
-    constructor(private psz: PageSizes, private receiverRepo: PrivateTalkReceiverRepository, private dataService: DataService, private service: PrivateTalksService, public signalService: XyzekiSignalrService, public signalMessageService: XyzekiSignalrService, private serviceReceivers: PrivateTalkReceiversService, private serviceTeamReceivers: PrivateTalkTeamReceiversService, private memberShared: MemberShared,
+    constructor(private psz: PageSizes, private receiverRepo: PrivateTalkReceiverRepository, private dataService: DataService, private service: PrivateTalksService, public signalService: XyzekiSignalrService, public signalMessageService: XyzekiSignalrService, private serviceReceivers: PrivateTalkReceiversService, private serviceTeamReceivers: PrivateTalkTeamReceiversService, public xyzekiAuthService : XyzekiAuthService ,
         private memberLicenseRepo: MemberLicenseRepository, private timeService: TimeService) {
 
         this.loadAll();

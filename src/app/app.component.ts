@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, HostListener, ChangeDetectionStrategy, ChangeDetectorRef, Input } from '@angular/core';
-import { MemberShared } from './model/member-shared.model';
+import { XyzekiAuthService } from  './model/xyzeki-auth-service';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { CustomNgbDateParserFormatter } from 'src/infrastructure/custom-NgbDate-parser-formatter';
 import { MembersService } from './model/services/members.service';
@@ -25,14 +25,14 @@ export const customNgbPFProvider = () => { return new CustomNgbDateParserFormatt
 })
 
 export class AppComponent implements OnInit, AfterViewInit {
-  constructor(private cdr: ChangeDetectorRef, public memberShared: MemberShared, private router: Router, private switchHourDataService: SwitchHourDataService, public dataService: DataService) { // Initialize our member.
+  constructor(public xyzekiAuthService: XyzekiAuthService, private router: Router, private switchHourDataService: SwitchHourDataService, public dataService: DataService) { // Initialize our member.
 
-    //this.memberShared.retrieveAuthMember();
+    this.xyzekiAuthService.AuthAutoIfPossible();
     this.loading = true;
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
   }
-  title = 'Xyzeki';
+  title = 'Xyzeki İş Yönetimi Çözümleri';
   public innerWidth: any;
   public innerHeight: any;
 

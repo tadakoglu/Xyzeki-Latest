@@ -2,38 +2,32 @@ import { Injectable, } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, timer, of } from 'rxjs';
-import { MemberShared } from '../member-shared.model';
+import { XyzekiAuthService } from '../xyzeki-auth-service';
 import { map, retryWhen, delayWhen, switchMap } from 'rxjs/operators';
 import { QuickTaskComment } from '../quick-task-comment.model';
 import { BackEndWebServer } from 'src/infrastructure/back-end-server';
 @Injectable()
 export class QuickToDoCommentsService {
+
   baseURL: string;
-  constructor(private http: HttpClient, private memberShared: MemberShared) {
+  constructor(private http: HttpClient) {
     this.baseURL = BackEndWebServer + '/'
   }
   quickTaskComments(taskId: number): Observable<QuickTaskComment[]> {
-    return this.memberShared.token.pipe(switchMap(token => { if (token == '0') return of(null); 
-    else return this.http.get<QuickTaskComment[]>(this.baseURL + `api/QuickToDoComments/QuickToDo/${taskId}`, this.getOptions(token)) }));
+    return this.http.get<QuickTaskComment[]>(this.baseURL + `api/QuickToDoComments/QuickToDo/${taskId}`)
   }
   findQuickTaskComment(messageId: number): Observable<QuickTaskComment> {
-    return this.memberShared.token.pipe(switchMap(token => { if (token == '0') return of(null); 
-    else return this.http.get<QuickTaskComment>(this.baseURL + `api/QuickToDoComments/${messageId}`, this.getOptions(token)) }));
+    return this.http.get<QuickTaskComment>(this.baseURL + `api/QuickToDoComments/${messageId}`)
   }
   saveQuickTaskComment(quickTaskComment: QuickTaskComment): Observable<number> {
-    return this.memberShared.token.pipe(switchMap(token => { if (token == '0') return of(null); 
-    else return this.http.post<number>(this.baseURL + "api/QuickToDoComments", quickTaskComment, this.getOptions(token)) }));
+    return this.http.post<number>(this.baseURL + "api/QuickToDoComments", quickTaskComment)
   }
   updateQuickTaskComment(quickTaskComment: QuickTaskComment): Observable<null> {
-    return this.memberShared.token.pipe(switchMap(token => { if (token == '0') return of(null);
-     else return this.http.put<null>(`${this.baseURL}api/QuickToDoComments/${quickTaskComment.MessageId}`, quickTaskComment, this.getOptions(token)) }));
+    return this.http.put<null>(`${this.baseURL}api/QuickToDoComments/${quickTaskComment.MessageId}`, quickTaskComment)
   }
   deleteQuickTaskComment(messageId: number): Observable<QuickTaskComment> {
-    return this.memberShared.token.pipe(switchMap(token => { if (token == '0') return of(null); 
-    else return this.http.delete<QuickTaskComment>(`${this.baseURL}api/QuickToDoComments/${messageId}`, this.getOptions(token)) }));
+    return this.http.delete<QuickTaskComment>(`${this.baseURL}api/QuickToDoComments/${messageId}`,)
   }
-  getOptions(token) {
-    return { headers: new HttpHeaders({ "Authorization": `Bearer ${token}` }) }
-  }
+
 
 }

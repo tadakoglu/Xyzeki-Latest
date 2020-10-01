@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit, ChangeDetectionStrategy, HostListener } from '@angular/core';
-import { MemberShared } from 'src/app/model/member-shared.model';
+import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
 import { ProjectRepository } from 'src/app/model/repository/project-repository';
 import { Project } from 'src/app/model/project.model';
 import { NgForm } from '@angular/forms';
@@ -38,7 +38,7 @@ export class MyProjectsComponent implements OnDestroy, OnInit, AfterViewInit {
 
   }
 
-  constructor(private route: ActivatedRoute, private repositoryTM: TeamMemberRepository, private permissions: MemberLicenseRepository, public repository: ProjectRepository, private dataService: DataService, public memberShared: MemberShared) 
+  constructor(private route: ActivatedRoute, private repositoryTM: TeamMemberRepository, private permissions: MemberLicenseRepository, public repository: ProjectRepository, private dataService: DataService, public xyzekiAuthService: XyzekiAuthService) 
   {
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
@@ -245,7 +245,7 @@ export class MyProjectsComponent implements OnDestroy, OnInit, AfterViewInit {
     if (this.permissions.getAccessGranted()) {
       this.modelSubmitted = true;
       if (projectForm.valid) {
-        this.projectModel.Owner = this.memberShared.Username;
+        this.projectModel.Owner = this.xyzekiAuthService .Username;
         this.repository.saveProject(this.projectModel);
         this.modelSent = true;
         this.modelSubmitted = false;

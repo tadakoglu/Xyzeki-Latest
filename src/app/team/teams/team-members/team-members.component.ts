@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router'
 import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
 import { TeamMember } from 'src/app/model/team-member.model.';
 import { NgForm } from '@angular/forms';
-import { MemberShared } from 'src/app/model/member-shared.model';
+import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
 import { DataService } from 'src/app/model/services/shared/data.service';
 import { TeamRepository } from 'src/app/model/repository/team-repository';
 import { MemberRepository } from 'src/app/model/repository/member-repository';
@@ -66,7 +66,7 @@ export class TeamMembersComponent implements OnInit, OnDestroy {
   constructor(private repository: TeamMemberRepository, private permissions: MemberLicenseRepository,
     public memberRepository: MemberRepository, private teamExistingRepo: TeamRepository, private dataService: DataService,
     private router: Router, private route: ActivatedRoute,
-    public memberShared: MemberShared,
+    public xyzekiAuthService: XyzekiAuthService,
   ) {
 
 

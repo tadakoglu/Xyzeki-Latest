@@ -3,80 +3,47 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Project } from '../project.model';
 import { Observable, of } from 'rxjs';
-import { MemberShared } from '../member-shared.model';
+import { XyzekiAuthService } from '../xyzeki-auth-service';
 import { switchMap } from 'rxjs/operators';
 import { ProjectOrderModel } from '../project-order.model';
 import { BackEndWebServer } from 'src/infrastructure/back-end-server';
 @Injectable()
 export class ProjectsService {
   baseURL: string;
-  auth_token: string;
 
-  constructor(private http: HttpClient, private memberShared: MemberShared) {
+  constructor(private http: HttpClient) {
     this.baseURL = BackEndWebServer + '/'
-    //this.auth_token = memberShared.Token;
   }
   saveAllPOMs(POMs: ProjectOrderModel[]): Observable<boolean> {
-    return this.memberShared.token.pipe(switchMap(token => {
-      if (token == '0') return of(null);
-      else return this.http.post<boolean>(this.baseURL + "api/Projects/POMs", POMs, { headers: new HttpHeaders({ "Authorization": `Bearer ${token}` }) })
-    }))
+    return this.http.post<boolean>(this.baseURL + "api/Projects/POMs", POMs)
   }
-  // GET Projects/5343/isShareholder
-
-  //Am I Shareholder ??
   isShareholder(projectId: number): Observable<boolean> { //That's auto-binding, also works in Angular 6+(as far as I have tested)
-    return this.memberShared.token.pipe(switchMap(token => {
-      if (token == '0')
-        return of(null); else return this.http.get<boolean>(this.baseURL + `api/Projects/isShareholder/${projectId}`, this.getOptions(token))
-    }))
+    return this.http.get<boolean>(this.baseURL + `api/Projects/isShareholder/${projectId}`)
   }
-
   isMyProject(projectId: number): Observable<boolean> { //That's auto-binding, also works in Angular 6+(as far as I have tested)
-    return this.memberShared.token.pipe(switchMap(token => {
-      if (token == '0')
-        return of(null); else return this.http.get<boolean>(this.baseURL + `api/Projects/isMyProject/${projectId}`, this.getOptions(token))
-    }))
+    return this.http.get<boolean>(this.baseURL + `api/Projects/isMyProject/${projectId}`)
   }
   isProjectAssigned(projectId: number): Observable<boolean> { //That's auto-binding, also works in Angular 6+(as far as I have tested)
-    return this.memberShared.token.pipe(switchMap(token => {
-      if (token == '0')
-        return of(null); else return this.http.get<boolean>(this.baseURL + `api/Projects/isProjectAssigned/${projectId}`, this.getOptions(token))
-    }))
+    return this.http.get<boolean>(this.baseURL + `api/Projects/isProjectAssigned/${projectId}`)
   }
-
   myProjects(): Observable<Project[]> {
-    return this.memberShared.token.pipe(switchMap(token => {
-      if (token == '0') return of(null);
-      else return this.http.get<Project[]>(this.baseURL + "api/Projects/MyProjects", this.getOptions(token))
-    }))
+    return this.http.get<Project[]>(this.baseURL + "api/Projects/MyProjects")
   }
   myProjectsAssigned(): Observable<Project[]> {
-    return this.memberShared.token.pipe(switchMap(token => {
-      if (token == '0') return of(null);
-      else return this.http.get<Project[]>(this.baseURL + "api/Projects/MyProjects/Assigned", this.getOptions(token))
-    }))
+    return this.http.get<Project[]>(this.baseURL + "api/Projects/MyProjects/Assigned")
   }
   findProject(projectId: number): Observable<Project> {
-    return this.memberShared.token.pipe(switchMap(token => { if (token == '0') return of(null); else return this.http.get<Project>(this.baseURL + "api/Projects/" + projectId, this.getOptions(token)) }));
+    return this.http.get<Project>(this.baseURL + "api/Projects/" + projectId)
   }
   saveProject(project: Project): Observable<number> {
-    return this.memberShared.token.pipe(switchMap(token => {
-      if (token == '0') return of(null);
-      else return this.http.post<number>(this.baseURL + "api/Projects", project, this.getOptions(token))
-    }));
+    return this.http.post<number>(this.baseURL + "api/Projects", project)
   }
   updateProject(project: Project): Observable<null> {
-    return this.memberShared.token.pipe(switchMap(token => { if (token == '0') return of(null); else return this.http.put<null>(`${this.baseURL}api/Projects/${project.ProjectId}`, project, this.getOptions(token)) }));
+    return this.http.put<null>(`${this.baseURL}api/Projects/${project.ProjectId}`, project)
   }
   deleteProject(projectId: number): Observable<Project> {
-    return this.memberShared.token.pipe(switchMap(token => { if (token == '0') return of(null); else return this.http.delete<Project>(`${this.baseURL}api/Projects/${projectId}`, this.getOptions(token)) }));
+    return this.http.delete<Project>(`${this.baseURL}api/Projects/${projectId}`)
   }
-  getOptions(token) {
-    return { headers: new HttpHeaders({ "Authorization": `Bearer ${token}` }) }
-  }
-  getOptions2() {
-    return { headers: new HttpHeaders({ "Authorization": `Bearer ${this.auth_token}` }) }
-  }
+
 
 }

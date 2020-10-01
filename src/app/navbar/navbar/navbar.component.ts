@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { MemberShared } from 'src/app/model/member-shared.model';
+import { XyzekiAuthService } from 'src/app/model/xyzeki-auth-service';
 import { Router } from '@angular/router';
 import { PrivateTalkRepository } from 'src/app/model/repository/private-talk-repository';
 
@@ -11,7 +11,7 @@ import { PrivateTalkRepository } from 'src/app/model/repository/private-talk-rep
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private router: Router, public memberShared: MemberShared, public repositoryPT:PrivateTalkRepository) { }
+  constructor(private router: Router, public xyzekiAuthService: XyzekiAuthService, public repositoryPT:PrivateTalkRepository) { }
 
   ngOnInit() {
   }

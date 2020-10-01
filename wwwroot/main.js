@@ -104,7 +104,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_model_repository_admin_repository__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/repository/admin-repository */ "./src/app/model/repository/admin-repository.ts");
-/* harmony import */ var src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var src_app_model_member_license_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/member-license.model */ "./src/app/model/member-license.model.ts");
 
 
@@ -112,9 +112,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var LicenseManagementComponent = /** @class */ (function () {
-    function LicenseManagementComponent(repository, memberShared) {
+    function LicenseManagementComponent(repository, xyzekiAuthService) {
         this.repository = repository;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.modelSent = false;
         this.modelSubmitted = false; // That's for validation method
         this.licenseModel = new src_app_model_member_license_model__WEBPACK_IMPORTED_MODULE_4__["MemberLicense"](null, null, null, null, null, null, null, null, null, null, null, null);
@@ -173,7 +173,7 @@ var LicenseManagementComponent = /** @class */ (function () {
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./license-management.component.css */ "./src/app/admin/license-management/license-management.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_admin_repository__WEBPACK_IMPORTED_MODULE_2__["AdminRepository"], src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_3__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_admin_repository__WEBPACK_IMPORTED_MODULE_2__["AdminRepository"], src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"]])
     ], LicenseManagementComponent);
     return LicenseManagementComponent;
 }());
@@ -356,7 +356,7 @@ module.exports = "\n.switchHourArea {\n    z-index: 999; \n    position: absolut
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--<app-login></app-login>\n<app-register></app-register>\n<app-teams></app-teams>\n<app-projects></app-projects>\n<p> Hello, this is AppComponent</p>-->\n\n\n<!-- <h1>\n  Welcome to {{ title }}! Service worker is <u *ngIf=\"!swPush.isEnabled\">not</u> enabled.\n</h1>\nWelcome to {{title}}! to Bienvenue à {{title}}!. -->\n\n<div [hidden]=\"!secondsLeft\" class=\"centered pt-1 pb-1 pl-3 pr-3 sticky-top \"\n  style=\"border-radius: 3px; position: absolute; opacity: 1; z-index: 10000; border-bottom: 1px solid rgb(229, 233, 236); background-color: rgba(238, 237, 237, 0.959);\">\n  <img src=\"../assets/logo.svg\">\n  <span class=\"ml-1\" style=\"font-size:15px\">Hay aksi... <b>Bağlı değilsiniz.</b> {{secondsLeft}} sn içinde\n    bağlanıyor…</span>\n  <!-- <a (click)=\"startConnectionNow()\" style=\"cursor:pointer\"\n    class=\"btn btn-light btn-sm border-0 ml-1 mr-2 rounded-pill\"><span class=\"specialUnderlined\">Şimdi dene</span></a> -->\n\n  <button (click)=\"startConnectionNow()\" class=\"btn btn-light btn-sm border-0 ml-1 mr-2 rounded-pill\">\n    <span class=\"specialUnderlined\">Şimdi dene</span>\n  </button>\n</div>\n\n\n\n\n<div [hidden]=\"!loading\" style=\" position: absolute;  top: 25%; padding-left: 35%; padding-right:35%;  z-index: 10000;\">\n  <img src=\"../assets/rolling.png\" style=\"opacity: 0.9\">\n  <img src=\"../assets/logo.svg\" style=\"height: 3rem; width: auto\">\n</div>\n\n<div class=\"container\" cdkDropListGroup>\n  <div class=\"row justify-content-center\">\n    <!-- col-xl-11 col-lg-12 col-md-12 col-sm-12 col-12 -->\n    <div class=\"col-xl-11 col-lg-10 col-md-11 col-sm-12 col-12\">\n      <!-- >1200PX(xl), >992PX(lg), >768PX(md), >576PX(sm) >-->\n      <router-outlet></router-outlet>\n    </div>\n\n    <div #switchHourArea *ngIf=\"this.innerWidth > 500 && this?.memberShared?.LoggedIn\"\n      [hidden]=\"!switchHourStyle.isOpen\" class=\"switchHourArea\"\n      [ngStyle]=\"{'left': switchHourStyle?.Left, 'top': switchHourStyle?.Top, 'visibility': switchHourStyle?.Visibility}\">\n      <app-switch-hour></app-switch-hour>\n    </div>\n\n\n\n  </div>\n</div>"
+module.exports = "<!--<app-login></app-login>\n<app-register></app-register>\n<app-teams></app-teams>\n<app-projects></app-projects>\n<p> Hello, this is AppComponent</p>-->\n\n\n<!-- <h1>\n  Welcome to {{ title }}! Service worker is <u *ngIf=\"!swPush.isEnabled\">not</u> enabled.\n</h1>\nWelcome to {{title}}! to Bienvenue à {{title}}!. -->\n\n<div [hidden]=\"!secondsLeft\" class=\"centered pt-1 pb-1 pl-3 pr-3 sticky-top \"\n  style=\"border-radius: 3px; position: absolute; opacity: 1; z-index: 10000; border-bottom: 1px solid rgb(229, 233, 236); background-color: rgba(238, 237, 237, 0.959);\">\n  <img src=\"../assets/logo.svg\">\n  <span class=\"ml-1\" style=\"font-size:15px\">Hay aksi... <b>Bağlı değilsiniz.</b> {{secondsLeft}} sn içinde\n    bağlanıyor…</span>\n  <!-- <a (click)=\"startConnectionNow()\" style=\"cursor:pointer\"\n    class=\"btn btn-light btn-sm border-0 ml-1 mr-2 rounded-pill\"><span class=\"specialUnderlined\">Şimdi dene</span></a> -->\n\n  <button (click)=\"startConnectionNow()\" class=\"btn btn-light btn-sm border-0 ml-1 mr-2 rounded-pill\">\n    <span class=\"specialUnderlined\">Şimdi dene</span>\n  </button>\n</div>\n\n\n\n\n<div [hidden]=\"!loading\" style=\" position: absolute;  top: 25%; padding-left: 35%; padding-right:35%;  z-index: 10000;\">\n  <img src=\"../assets/rolling.png\" style=\"opacity: 0.9\">\n  <img src=\"../assets/logo.svg\" style=\"height: 3rem; width: auto\">\n</div>\n\n<div class=\"container\" cdkDropListGroup>\n  <div class=\"row justify-content-center\">\n    <!-- col-xl-11 col-lg-12 col-md-12 col-sm-12 col-12 -->\n    <div class=\"col-xl-12 col-lg-11 col-md-12 col-sm-12 col-12\">\n      <!-- >1200PX(xl), >992PX(lg), >768PX(md), >576PX(sm) >-->\n      <router-outlet></router-outlet>\n    </div>\n\n    <div #switchHourArea *ngIf=\"this.innerWidth > 500 && this?.xyzekiAuthService?.LoggedIn\"\n      [hidden]=\"!switchHourStyle.isOpen\" class=\"switchHourArea\"\n      [ngStyle]=\"{'left': switchHourStyle?.Left, 'top': switchHourStyle?.Top, 'visibility': switchHourStyle?.Visibility}\">\n      <app-switch-hour></app-switch-hour>\n    </div>\n\n\n\n  </div>\n</div>"
 
 /***/ }),
 
@@ -373,7 +373,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _model_member_shared_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./model/member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var _model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./model/xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
 /* harmony import */ var src_infrastructure_custom_NgbDate_parser_formatter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/infrastructure/custom-NgbDate-parser-formatter */ "./src/infrastructure/custom-NgbDate-parser-formatter.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
@@ -392,16 +392,15 @@ __webpack_require__.r(__webpack_exports__);
 
 var customNgbPFProvider = function () { return new src_infrastructure_custom_NgbDate_parser_formatter__WEBPACK_IMPORTED_MODULE_4__["CustomNgbDateParserFormatter"](); };
 var AppComponent = /** @class */ (function () {
-    function AppComponent(cdr, memberShared, router, switchHourDataService, dataService) {
-        this.cdr = cdr;
-        this.memberShared = memberShared;
+    function AppComponent(xyzekiAuthService, router, switchHourDataService, dataService) {
+        this.xyzekiAuthService = xyzekiAuthService;
         this.router = router;
         this.switchHourDataService = switchHourDataService;
         this.dataService = dataService;
-        this.title = 'Xyzeki';
+        this.title = 'Xyzeki İş Yönetimi Çözümleri';
         this.switchHourStyle = { Left: '0px', Top: '0px', Visibility: 'hidden', isOpen: false };
         this.loading = true;
-        //this.memberShared.retrieveAuthMember();
+        this.xyzekiAuthService.AuthAutoIfPossible();
         this.loading = true;
         this.innerWidth = window.innerWidth;
         this.innerHeight = window.innerHeight;
@@ -493,7 +492,7 @@ var AppComponent = /** @class */ (function () {
                 }],
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"], _model_member_shared_model__WEBPACK_IMPORTED_MODULE_2__["MemberShared"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"], _model_services_shared_switch_hour_data_service__WEBPACK_IMPORTED_MODULE_6__["SwitchHourDataService"], _model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_7__["DataService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiAuthService"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"], _model_services_shared_switch_hour_data_service__WEBPACK_IMPORTED_MODULE_6__["SwitchHourDataService"], _model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_7__["DataService"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -534,6 +533,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
 /* harmony import */ var _angular_service_worker__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @angular/service-worker */ "./node_modules/@angular/service-worker/fesm5/service-worker.js");
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _model_interceptors_token_inceptor__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./model/interceptors/token-inceptor */ "./src/app/model/interceptors/token-inceptor.ts");
 
 
 
@@ -543,6 +544,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
  // Inject repositories(with services)
+
+
 
 
 
@@ -572,7 +575,13 @@ var AppModule = /** @class */ (function () {
                 _admin_admin_module__WEBPACK_IMPORTED_MODULE_15__["AdminModule"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_17__["DragDropModule"],
                 _angular_service_worker__WEBPACK_IMPORTED_MODULE_19__["ServiceWorkerModule"].register('ngsw-worker.js', { enabled: _environments_environment__WEBPACK_IMPORTED_MODULE_20__["environment"].production }),
             ],
-            providers: [{ provide: _angular_core__WEBPACK_IMPORTED_MODULE_1__["LOCALE_ID"], useValue: 'tr-TR' },
+            providers: [
+                { provide: _angular_core__WEBPACK_IMPORTED_MODULE_1__["LOCALE_ID"], useValue: 'tr-TR' },
+                {
+                    provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_21__["HTTP_INTERCEPTORS"],
+                    useClass: _model_interceptors_token_inceptor__WEBPACK_IMPORTED_MODULE_22__["TokenInterceptor"],
+                    multi: true
+                }
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]],
         })
@@ -685,10 +694,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/infrastructure/error-codes.enum */ "./src/infrastructure/error-codes.enum.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var ng_recaptcha__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ng-recaptcha */ "./node_modules/ng-recaptcha/fesm5/ng-recaptcha.js");
-/* harmony import */ var src_infrastructure_google_captcha__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/infrastructure/google-captcha */ "./src/infrastructure/google-captcha.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-
-
 
 
 
@@ -723,7 +728,7 @@ var ChangePasswordComponent = /** @class */ (function () {
             return;
         if (secureCodeModelForm.valid) {
             this.isLoading = true;
-            this.subscription = this.recaptchaV3Service.execute(src_infrastructure_google_captcha__WEBPACK_IMPORTED_MODULE_7__["GoogleReCaptcha_LoginAction"]).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["concatMap"])(function (recaptchaToken) { return _this.repository.setUpNewPassword(Object.assign({}, _this.securityCodeModel), recaptchaToken); })).subscribe(function (r) {
+            this.subscription = this.repository.setUpNewPassword(Object.assign({}, this.securityCodeModel), 'recaptchaCode').subscribe(function (r) {
                 if (r.ErrorCode == src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_4__["ErrorCodes"].OK) {
                     _this.informUser = "Tebrikler, şifreniz başarıyla değiştirildi. Artık giriş yapabilirsiniz.";
                     _this.succeeded = true;
@@ -747,6 +752,36 @@ var ChangePasswordComponent = /** @class */ (function () {
             });
         }
     };
+    // changePassword(secureCodeModelForm: NgModel) {
+    //   this.modelSubmitted = true;
+    //   if (this.securityCodeModel.NewPassword != this.passwordRepeatUpdate)
+    //     return;
+    //   if (secureCodeModelForm.valid) {
+    //     this.isLoading = true;
+    //     this.subscription = this.recaptchaV3Service.execute(GoogleReCaptcha_LoginAction).pipe(concatMap(
+    //       recaptchaToken => { return this.repository.setUpNewPassword(Object.assign({},this.securityCodeModel), recaptchaToken) })).subscribe(r => {
+    //         if (r.ErrorCode == ErrorCodes.OK) {
+    //           this.informUser = "Tebrikler, şifreniz başarıyla değiştirildi. Artık giriş yapabilirsiniz."
+    //           this.succeeded = true;
+    //         }
+    //         this.modelSent = true;
+    //         this.modelSubmitted = false;
+    //         this.isLoading = false;
+    //       }, (error: HttpErrorResponse) => {
+    //         switch (error.status) { // This is the TRUE option to get 404 answers.
+    //           case 404:
+    //             this.informUser = "Üzgünüz, işleminizi gerçekleştiremiyoruz. Bu bağlantının geçerliliği dolmuş gözüküyor."
+    //             break;
+    //           case 503: ; case 0:
+    //             this.informUser = "Servis şu anda ulaşılabilir değildir. "
+    //             break; // 0 status code = ERR_CONNECTION_REFUSED
+    //         }
+    //         this.isLoading = false;
+    //         this.modelSent = true;
+    //         this.modelSubmitted = false;
+    //       })
+    //   }
+    // }
     ChangePasswordComponent.prototype.ngOnInit = function () {
     };
     ChangePasswordComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -918,7 +953,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_model_login_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/login.model */ "./src/app/model/login.model.ts");
-/* harmony import */ var src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var src_app_model_repository_auth_repository__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/repository/auth-repository */ "./src/app/model/repository/auth-repository.ts");
 /* harmony import */ var src_app_model_services_member_setting_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/model/services/member-setting.service */ "./src/app/model/services/member-setting.service.ts");
@@ -926,6 +961,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_infrastructure_google_captcha__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/infrastructure/google-captcha */ "./src/infrastructure/google-captcha.ts");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! src/app/model/signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
+
 
 
 
@@ -938,12 +975,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(recaptchaV3Service, router, repository, loginModel, memberShared, memberSettingService, dataService) {
+    function LoginComponent(recaptchaV3Service, router, repository, loginModel, xyzekiAuthService, xyzekiSignalService, memberSettingService, dataService) {
         this.recaptchaV3Service = recaptchaV3Service;
         this.router = router;
         this.repository = repository;
         this.loginModel = loginModel;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
+        this.xyzekiSignalService = xyzekiSignalService;
         this.memberSettingService = memberSettingService;
         this.dataService = dataService;
         this.isLoading = false;
@@ -979,7 +1017,8 @@ var LoginComponent = /** @class */ (function () {
         if (loginForm.valid) {
             this.isLoading = true;
             this.subscription = this.recaptchaV3Service.execute(src_infrastructure_google_captcha__WEBPACK_IMPORTED_MODULE_8__["GoogleReCaptcha_LoginAction"]).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["concatMap"])(function (recaptchaToken) { return _this.repository.authenticate(Object.assign({}, _this.loginModel), recaptchaToken); })).subscribe(function (tokenAndMember) {
-                _this.memberShared.Auth(tokenAndMember);
+                _this.xyzekiAuthService.Auth(tokenAndMember);
+                _this.xyzekiSignalService.startListening(tokenAndMember.Model.Item1);
                 _this.setUpMySetting();
                 _this.informUser = "Başarıyla giriş yaptınız.";
                 _this.router.navigate(['/isler']);
@@ -1005,7 +1044,7 @@ var LoginComponent = /** @class */ (function () {
         }
     };
     LoginComponent.prototype.logOut = function () {
-        this.memberShared.LogOut();
+        this.xyzekiAuthService.LogOut();
     };
     LoginComponent.prototype.ngOnInit = function () { };
     LoginComponent.prototype.setUpMySetting = function () {
@@ -1116,7 +1155,7 @@ var LoginComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./login.component.css */ "./src/app/auth/login/login.component.css")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [ng_recaptcha__WEBPACK_IMPORTED_MODULE_7__["ReCaptchaV3Service"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], src_app_model_repository_auth_repository__WEBPACK_IMPORTED_MODULE_5__["AuthRepository"],
-            src_app_model_login_model__WEBPACK_IMPORTED_MODULE_2__["LoginModel"], src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_3__["MemberShared"], src_app_model_services_member_setting_service__WEBPACK_IMPORTED_MODULE_6__["MemberSettingService"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_10__["DataService"]])
+            src_app_model_login_model__WEBPACK_IMPORTED_MODULE_2__["LoginModel"], src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"], src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_11__["XyzekiSignalrService"], src_app_model_services_member_setting_service__WEBPACK_IMPORTED_MODULE_6__["MemberSettingService"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_10__["DataService"]])
     ], LoginComponent);
     return LoginComponent;
 }());
@@ -1161,7 +1200,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_model_register_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/register.model */ "./src/app/model/register.model.ts");
 /* harmony import */ var src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/error-codes.enum */ "./src/infrastructure/error-codes.enum.ts");
-/* harmony import */ var src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var src_app_model_repository_auth_repository__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/repository/auth-repository */ "./src/app/model/repository/auth-repository.ts");
 /* harmony import */ var util__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! util */ "./node_modules/util/util.js");
 /* harmony import */ var util__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_6__);
@@ -1169,10 +1208,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_model_services_members_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/services/members.service */ "./src/app/model/services/members.service.ts");
 /* harmony import */ var src_app_model_member_model__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/model/member.model */ "./src/app/model/member.model.ts");
 /* harmony import */ var ng_recaptcha__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ng-recaptcha */ "./node_modules/ng-recaptcha/fesm5/ng-recaptcha.js");
-/* harmony import */ var src_infrastructure_google_captcha__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! src/infrastructure/google-captcha */ "./src/infrastructure/google-captcha.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-
-
 
 
 
@@ -1185,13 +1220,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var RegisterComponent = /** @class */ (function () {
-    function RegisterComponent(route, router, repository, registerModel, memberShared, membersService, recaptchaV3Service) {
+    function RegisterComponent(route, router, repository, registerModel, xyzekiAuthService, membersService, recaptchaV3Service) {
         var _this = this;
         this.route = route;
         this.router = router;
         this.repository = repository;
         this.registerModel = registerModel;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.membersService = membersService;
         this.recaptchaV3Service = recaptchaV3Service;
         this.isUpdateMode = false;
@@ -1262,12 +1297,9 @@ var RegisterComponent = /** @class */ (function () {
         request.send();
     };
     RegisterComponent.prototype.loadAvatarBack = function () {
-        var _this = this;
-        this.subscription = this.memberShared.account.subscribe(function (myAccount) {
-            _this.registerModel.Avatar = myAccount.Avatar;
-            _this.avatar = myAccount.Avatar;
-            _this.avatarStatus = 'back';
-        });
+        this.registerModel.Avatar = this.xyzekiAuthService.Member.Avatar;
+        this.avatar = this.xyzekiAuthService.Member.Avatar;
+        this.avatarStatus = 'back';
     };
     RegisterComponent.prototype.onSelectAvatar = function ($event) {
         var _this = this;
@@ -1284,6 +1316,43 @@ var RegisterComponent = /** @class */ (function () {
             };
         }
     };
+    // register(registerForm: NgForm) {
+    //   if (this.isUpdateMode)
+    //     this.update(registerForm);
+    //   else {
+    //     this.modelSubmitted = true;
+    //     if (this.passwordRepeat != this.registerModel.Password)
+    //       return;
+    //     if (registerForm.valid) {
+    //       this.isLoading = true;
+    //       this.subscription2 = this.recaptchaV3Service.execute(GoogleReCaptcha_LoginAction).pipe(concatMap(
+    //         recaptchaToken => { return this.repository.register(Object.assign({}, this.registerModel), recaptchaToken) })).subscribe(r => {
+    //           if (r.ErrorCode == ErrorCodes.OK) {
+    //             this.isLoading = true;
+    //             this.informUser = "Tebrikler, üyeliğinizi tamamladık. Lütfen bekleyiniz..."
+    //             setTimeout(() => {
+    //               this.router.navigate(['/giris']);
+    //             }, 2000);
+    //           }
+    //           else if (r.ErrorCode == ErrorCodes.MemberAlreadyExistsError) {
+    //             this.informUser = "Üzgünüz, bu kullanıcı adı veya email'i kullanan başka bir üye bulunmaktadır."
+    //           }
+    //           this.modelSent = true;
+    //           this.modelSubmitted = false;
+    //           this.isLoading = false;
+    //         }, (error: HttpErrorResponse) => {
+    //           switch (error.status) {
+    //             case 503: ; case 0:
+    //               this.informUser = "Servis şu anda ulaşılabilir değildir. "
+    //               break; // 0 status code = ERR_CONNECTION_REFUSED
+    //           }
+    //           this.modelSent = true;
+    //           this.modelSubmitted = false;
+    //           this.isLoading = false;
+    //         })
+    //     }
+    //   }
+    // }
     RegisterComponent.prototype.register = function (registerForm) {
         var _this = this;
         if (this.isUpdateMode)
@@ -1294,7 +1363,7 @@ var RegisterComponent = /** @class */ (function () {
                 return;
             if (registerForm.valid) {
                 this.isLoading = true;
-                this.subscription2 = this.recaptchaV3Service.execute(src_infrastructure_google_captcha__WEBPACK_IMPORTED_MODULE_11__["GoogleReCaptcha_LoginAction"]).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_12__["concatMap"])(function (recaptchaToken) { return _this.repository.register(Object.assign({}, _this.registerModel), recaptchaToken); })).subscribe(function (r) {
+                this.subscription2 = this.repository.register(Object.assign({}, this.registerModel), 'recaptchaToken').subscribe(function (r) {
                     if (r.ErrorCode == src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_3__["ErrorCodes"].OK) {
                         _this.isLoading = true;
                         _this.informUser = "Tebrikler, üyeliğinizi tamamladık. Lütfen bekleyiniz...";
@@ -1336,7 +1405,7 @@ var RegisterComponent = /** @class */ (function () {
                     }, 1500);
                     var member = new src_app_model_member_model__WEBPACK_IMPORTED_MODULE_9__["Member"](null, null, null, null, null, null, null, 0, 0);
                     Object.assign(member, _this.registerModel);
-                    _this.memberShared.account.next(member);
+                    _this.xyzekiAuthService.SaveMember(member);
                 }
                 else if (r.ErrorCode == src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_3__["ErrorCodes"].MemberAlreadyExistsError) {
                     setTimeout(function () {
@@ -1380,17 +1449,15 @@ var RegisterComponent = /** @class */ (function () {
         });
     };
     RegisterComponent.prototype.loadAccount = function () {
-        var _this = this;
-        this.subscription5 = this.memberShared.account.subscribe(function (myAccount) {
-            _this.registerModel.Username = myAccount.Username;
-            _this.registerModel.Name = myAccount.Name;
-            _this.registerModel.Surname = myAccount.Surname;
-            _this.registerModel.Email = myAccount.Email;
-            _this.registerModel.CellCountry = myAccount.CellCountry;
-            _this.registerModel.Cell = myAccount.Cell;
-            _this.registerModel.Avatar = myAccount.Avatar;
-            _this.avatar = myAccount.Avatar;
-        });
+        var myAccount = this.xyzekiAuthService.Member;
+        this.registerModel.Username = myAccount.Username;
+        this.registerModel.Name = myAccount.Name;
+        this.registerModel.Surname = myAccount.Surname;
+        this.registerModel.Email = myAccount.Email;
+        this.registerModel.CellCountry = myAccount.CellCountry;
+        this.registerModel.Cell = myAccount.Cell;
+        this.registerModel.Avatar = myAccount.Avatar;
+        this.avatar = myAccount.Avatar;
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])("grantAccessPass"),
@@ -1405,7 +1472,7 @@ var RegisterComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./register.component.css */ "./src/app/auth/register/register.component.css")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"], src_app_model_repository_auth_repository__WEBPACK_IMPORTED_MODULE_5__["AuthRepository"],
-            src_app_model_register_model__WEBPACK_IMPORTED_MODULE_2__["RegisterModel"], src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_4__["MemberShared"], src_app_model_services_members_service__WEBPACK_IMPORTED_MODULE_8__["MembersService"], ng_recaptcha__WEBPACK_IMPORTED_MODULE_10__["ReCaptchaV3Service"]])
+            src_app_model_register_model__WEBPACK_IMPORTED_MODULE_2__["RegisterModel"], src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_4__["XyzekiAuthService"], src_app_model_services_members_service__WEBPACK_IMPORTED_MODULE_8__["MembersService"], ng_recaptcha__WEBPACK_IMPORTED_MODULE_10__["ReCaptchaV3Service"]])
     ], RegisterComponent);
     return RegisterComponent;
 }());
@@ -1488,7 +1555,7 @@ module.exports = "@-webkit-keyframes noktayiZiplat {\n    100% {\n      -webkit-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"h-100 w-100\">\n  <div style=\"position: relative\" [hidden]=\"!invalidLicensePanelOpen\">\n    <div\n      style=\"border-bottom: 1px solid #CED4DA;  position: absolute; top: 0; left:0; right: 0; \n z-index: 10000; background-color: rgb(243, 242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n      <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\" style=\"font-size:15px\">Özür\n        dileriz;\n        fakat herhangi bir\n        kurumsal, bireysel\n        veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>\n    </div>\n  </div>\n  <div style=\"height: 50px\">\n    <nav cdkDrag cdkDragRootElement=\".cdk-overlay-pane\" cdkDragHandle\n      class=\"sticky-top container-fluid xyz-card-dark draggable\">\n      <a mat-dialog-close (click)=\"closeComments()\" class=\"btn btn-dark text-white rounded-0\"\n        style=\"cursor: pointer\">Kapat</a>\n      <button class=\"btn btn-dark text-white rounded-0 float-right\" style=\"cursor: pointer\"\n        disabled>Yorumlar/Notlar</button>\n    </nav>\n    <div class=\"bg-white h-100\">\n      &nbsp;\n    </div>\n  </div>\n\n\n  <div [ngStyle]=\"{'height.px': innerHeight-250}\" class=\"container-fluid xyz-card-big xyz-card-default bg-light\">\n\n    <div *ngIf=\"taskId\" class=\"sticky-top pl-4 d-flex pr-4 pl-3 pr-3 pb-2 pt-2\"\n      style=\"opacity: 0.97; background-color: rgb(231, 231, 224); border-radius: 50px ; z-index: 100!important\">\n      <span class=\"lead\"\n        style=\"font-size: 16.6px; font-family: Arial, Helvetica, sans-serif; color: rgb(26, 26, 26)!important\">{{title}}</span>\n    </div>\n    <div *ngFor=\" let comment of comments\">\n      <div *ngIf=\"comment?.Sender == memberShared.Username\" class=\"ben text-right d-flex justify-content-end pr-3\">\n        <div class=\"xyz-card xyz-card-primary\" (click)=\"setColor(comment?.MessageId)\"\n          [ngStyle]=\"{'background-color': (comment?.Color) ? comment?.Color : '#E9F6FE', 'border-radius':'2px'}\">\n          <p [ngStyle]=\"{'color': (comment?.Color == '#E9F6FE' || comment?.Color == null) ? '#000000' : '#ffffff'}\">\n            <!-- {{comment?.Message}} -->\n            <a [innerHTML]=\"comment?.Message | replaceEmojis\"></a>\n            <small class=\"form-text text-muted  font-italic\">Siz</small>\n            <small class=\"form-text text-muted\">{{comment?.DateTimeSent | humanizer}},\n              {{comment?.DateTimeSent | date: 'hh:mm aa' }}\n\n            </small>\n            <a *ngIf=(comment?.MessageId) style=\"cursor: pointer!important;\" class=\"mt-1\"\n              (click)=\"deleteComment(comment?.MessageId); $event.stopPropagation()\">\n              <img src=\"../../../assets/cancel.svg\" style=\"height: 1rem; cursor: pointer;\" />\n            </a>\n          </p>\n\n\n        </div>\n\n        <img *ngIf=\"memberShared?.account?.getValue()?.Avatar\" class=\"avatarim\"\n          [src]=\"memberShared?.account?.getValue()?.Avatar\">\n      </div>\n\n      <div *ngIf=\"comment?.Sender != memberShared.Username\"\n        class=\"karsiTaraf text-right d-flex justify-content-end pr-3\">\n        <div class=\"xyz-card\"\n          [ngStyle]=\"{'background-color': (comment?.Color) ? comment?.Color : '#E9F6FE', 'border-radius':'2px', 'box-shadow': '0 5px 15px rgba(0, 0, 0, .08)'}\">\n          <p [ngStyle]=\"{'color': (comment?.Color == '#E9F6FE' || comment?.Color == null) ? '#000000' : '#ffffff'}\">\n            <!-- {{comment?.Message}} -->\n            <a [innerHTML]=\"comment?.Message | replaceEmojis\"></a>\n            \n            <small class=\"form-text text-muted font-italic text-white\">{{getMember(comment?.Sender)?.Name}}\n              {{getMember(comment?.Sender)?.Surname}}</small>\n            <small class=\"form-text text-muted text-white\">{{comment?.DateTimeSent | humanizer}},\n              {{comment?.DateTimeSent | date: 'hh:mm aa' }}\n            </small>\n\n          </p>\n        </div>\n        <img *ngIf=\"getMember(comment?.Sender)?.Avatar\" class=\"avatarim\" [src]=\"getMember(comment?.Sender)?.Avatar\">\n      </div>\n\n    </div>\n    <div *ngIf=\"comments?.length == 0\" class=\"p-4\">\n      <br>\n      <span class=\"lead\" style=\"font-size:16px\"><b>Bu iş için henüz bir yorum veya not bulunmuyor.</b></span><br>\n      <span class=\"lead\" style=\"font-size:16px\"><b>İlk yorum yapan ya da not bırakan siz olun :)</b></span>\n    </div>\n  </div>\n\n  <div class=\"xyz-card-footer xyz-card-default\" style=\"height: 100px;\">\n\n    <form #messageForm=\"ngForm\" (ngSubmit)=\"addComment(messageForm)\" novalidate>\n\n      <textarea [(ngModel)]=\"this.qtCommentModel.Message\" #message=\"ngModel\" autocomplete=\"off\" autocorrect=\"off\"\n        autocapitalize=\"off\" spellcheck=\"false\" #textAreaX *ngIf=\"kind=='qtComments'\" (keydown)=\"onKeydownEvent($event)\"\n        name=\"message\" required class=\"xyz-textarea border-0\" rows=\"2\" placeholder=\"Yorumunuz ya da notunuz\"></textarea>\n\n      <textarea [(ngModel)]=\"this.ptCommentModel.Message\"   #message=\"ngModel\" autocomplete=\"off\" autocorrect=\"off\"\n        autocapitalize=\"off\" spellcheck=\"false\" #textAreaX *ngIf=\"kind=='ptComments'\" (keydown)=\"onKeydownEvent($event)\"\n        name=\"message\" required class=\"xyz-textarea border-0\" rows=\"2\" placeholder=\"Yorumunuz ya da notunuz\"></textarea>\n\n      <div #emojiDP=\"ngbDropdown\" style=\"width:15%; float: right\" class=\"d-inline-block\" ngbDropdown\n        placement=\"left-bottom\">\n        <a ngbTooltip=\"Bir emoji seçiniz.\" placement=\"top\" tooltipClass=\"tooltipSpecial\"\n          class=\"btn btn-light rounded-circle p-1 text-center\"\n          style=\"border:0px solid !important; display: inline-block; ; cursor: pointer\" id=\"emojiDP\" ngbDropdownToggle>\n          <img src=\"../../../assets/emoji/dizzy.png\" style=\"height: 32px; width: 32px;\">\n        </a>\n\n        <div ngbDropdownMenu aria-labelledby=\"emojiDP\" class=\"rounded-4 bg-white ml-0 mr-0 border-0 p-0\">\n          <emoji-mart [perLine]=\"this.innerWidth < 786 ? 7 : 10\" [showPreview]=\"true\" [showSingleCategory]=\"true\"\n            [ngClass]=\"{'hide-emoji-mart-search' : true}\" [set]=\"sheet === '' ? null : sheet\"\n            [emojiSize]=\"(this.innerWidth < 786) ? 24 : 32\" [i18n]=\"{ search: 'Arama yapın', emojilist:'Emoji listesi', notfound: 'Emoji bulunamadı', clear:'Temizle',\n          \n         categories: { search: 'Arama sonuçları', recent: 'Son kullandıklarınız',people:'Gülücükler & İnsanlar',\n         nature:'Hayvanlar & Doğa', foods: 'Yiyecekler & İçecekler', activity:'Rutin', \n        places:'Seyahat & Gezilecek Yerler',objects:'Nesneler', symbols:'Semboller', flags:'Bayraklar', custom:'Özel'\n},skintones: { '1': 'Varsayılan','2': 'Işık tonlu', '3': 'Orta-ışık tonlu','4': 'Orta tonlu',\n'5': 'Hafif koyu tonlu','6': 'Koyu tonlu'} }\" [title]=\"'Duygu durumunuz ?'\"\n            (emojiClick)=\"addEmoji($event); emojiDP.close();\" [backgroundImageFn]=\"backgroundImageFn\"\n            [isNative]=\"sheet === ''\">\n          </emoji-mart>\n        </div>\n        <!-- https://www.npmjs.com/package/@ctrl/ngx-emoji-mart -->\n      </div>\n      <button type=\"submit\" class=\"btn btn-light btn-send text-uppercase text-white\">Gönder [+]</button>\n    </form>\n\n  </div>\n</div>"
+module.exports = "<div class=\"h-100 w-100\">\n  <div style=\"position: relative\" [hidden]=\"!invalidLicensePanelOpen\">\n    <div\n      style=\"border-bottom: 1px solid #CED4DA;  position: absolute; top: 0; left:0; right: 0; \n z-index: 10000; background-color: rgb(243, 242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n      <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\" style=\"font-size:15px\">Özür\n        dileriz;\n        fakat herhangi bir\n        kurumsal, bireysel\n        veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>\n    </div>\n  </div>\n  <div style=\"height: 50px\">\n    <nav cdkDrag cdkDragRootElement=\".cdk-overlay-pane\" cdkDragHandle\n      class=\"sticky-top container-fluid xyz-card-dark draggable\">\n      <a mat-dialog-close (click)=\"closeComments()\" class=\"btn btn-dark text-white rounded-0\"\n        style=\"cursor: pointer\">Kapat</a>\n      <button class=\"btn btn-dark text-white rounded-0 float-right\" style=\"cursor: pointer\"\n        disabled>Yorumlar/Notlar</button>\n    </nav>\n    <div class=\"bg-white h-100\">\n      &nbsp;\n    </div>\n  </div>\n\n\n  <div [ngStyle]=\"{'height.px': innerHeight-250}\" class=\"container-fluid xyz-card-big xyz-card-default bg-light\">\n\n    <div *ngIf=\"taskId\" class=\"sticky-top pl-4 d-flex pr-4 pl-3 pr-3 pb-2 pt-2\"\n      style=\"opacity: 0.97; background-color: rgb(231, 231, 224); border-radius: 50px ; z-index: 100!important\">\n      <span class=\"lead\"\n        style=\"font-size: 16.6px; font-family: Arial, Helvetica, sans-serif; color: rgb(26, 26, 26)!important\">{{title}}</span>\n    </div>\n    <div *ngFor=\" let comment of comments\">\n      <div *ngIf=\"comment?.Sender == xyzekiAuthService?.Username\" class=\"ben text-right d-flex justify-content-end pr-3\">\n        <div class=\"xyz-card xyz-card-primary\" (click)=\"setColor(comment?.MessageId)\"\n          [ngStyle]=\"{'background-color': (comment?.Color) ? comment?.Color : '#E9F6FE', 'border-radius':'2px'}\">\n          <p [ngStyle]=\"{'color': (comment?.Color == '#E9F6FE' || comment?.Color == null) ? '#000000' : '#ffffff'}\">\n            <!-- {{comment?.Message}} -->\n            <a [innerHTML]=\"comment?.Message | replaceEmojis\"></a>\n            <small class=\"form-text text-muted  font-italic\">Siz</small>\n            <small class=\"form-text text-muted\">{{comment?.DateTimeSent | humanizer}},\n              {{comment?.DateTimeSent | date: 'hh:mm aa' }}\n\n            </small>\n            <a *ngIf=(comment?.MessageId) style=\"cursor: pointer!important;\" class=\"mt-1\"\n              (click)=\"deleteComment(comment?.MessageId); $event.stopPropagation()\">\n              <img src=\"../../../assets/cancel.svg\" style=\"height: 1rem; cursor: pointer;\" />\n            </a>\n          </p>\n\n\n        </div>\n\n        <img *ngIf=\"xyzekiAuthService?.Member?.Avatar\" class=\"avatarim\"\n          [src]=\"xyzekiAuthService?.Member?.Avatar\">\n      </div>\n\n      <div *ngIf=\"comment?.Sender != xyzekiAuthService?.Username\"\n        class=\"karsiTaraf text-right d-flex justify-content-end pr-3\">\n        <div class=\"xyz-card\"\n          [ngStyle]=\"{'background-color': (comment?.Color) ? comment?.Color : '#E9F6FE', 'border-radius':'2px', 'box-shadow': '0 5px 15px rgba(0, 0, 0, .08)'}\">\n          <p [ngStyle]=\"{'color': (comment?.Color == '#E9F6FE' || comment?.Color == null) ? '#000000' : '#ffffff'}\">\n            <!-- {{comment?.Message}} -->\n            <a [innerHTML]=\"comment?.Message | replaceEmojis\"></a>\n            \n            <small class=\"form-text text-muted font-italic text-white\">{{getMember(comment?.Sender)?.Name}}\n              {{getMember(comment?.Sender)?.Surname}}</small>\n            <small class=\"form-text text-muted text-white\">{{comment?.DateTimeSent | humanizer}},\n              {{comment?.DateTimeSent | date: 'hh:mm aa' }}\n            </small>\n\n          </p>\n        </div>\n        <img *ngIf=\"getMember(comment?.Sender)?.Avatar\" class=\"avatarim\" [src]=\"getMember(comment?.Sender)?.Avatar\">\n      </div>\n\n    </div>\n    <div *ngIf=\"comments?.length == 0\" class=\"p-4\">\n      <br>\n      <span class=\"lead\" style=\"font-size:16px\"><b>Bu iş için henüz bir yorum veya not bulunmuyor.</b></span><br>\n      <span class=\"lead\" style=\"font-size:16px\"><b>İlk yorum yapan ya da not bırakan siz olun :)</b></span>\n    </div>\n  </div>\n\n  <div class=\"xyz-card-footer xyz-card-default\" style=\"height: 100px;\">\n\n    <form #messageForm=\"ngForm\" (ngSubmit)=\"addComment(messageForm)\" novalidate>\n\n      <textarea [(ngModel)]=\"this.qtCommentModel.Message\" #message=\"ngModel\" autocomplete=\"off\" autocorrect=\"off\"\n        autocapitalize=\"off\" spellcheck=\"false\" #textAreaX *ngIf=\"kind=='qtComments'\" (keydown)=\"onKeydownEvent($event)\"\n        name=\"message\" required class=\"xyz-textarea border-0\" rows=\"2\" placeholder=\"Yorumunuz ya da notunuz\"></textarea>\n\n      <textarea [(ngModel)]=\"this.ptCommentModel.Message\"   #message=\"ngModel\" autocomplete=\"off\" autocorrect=\"off\"\n        autocapitalize=\"off\" spellcheck=\"false\" #textAreaX *ngIf=\"kind=='ptComments'\" (keydown)=\"onKeydownEvent($event)\"\n        name=\"message\" required class=\"xyz-textarea border-0\" rows=\"2\" placeholder=\"Yorumunuz ya da notunuz\"></textarea>\n\n      <div #emojiDP=\"ngbDropdown\" style=\"width:15%; float: right\" class=\"d-inline-block\" ngbDropdown\n        placement=\"left-bottom\">\n        <a ngbTooltip=\"Bir emoji seçiniz.\" placement=\"top\" tooltipClass=\"tooltipSpecial\"\n          class=\"btn btn-light rounded-circle p-1 text-center\"\n          style=\"border:0px solid !important; display: inline-block; ; cursor: pointer\" id=\"emojiDP\" ngbDropdownToggle>\n          <img src=\"../../../assets/emoji/dizzy.png\" style=\"height: 32px; width: 32px;\">\n        </a>\n\n        <div ngbDropdownMenu aria-labelledby=\"emojiDP\" class=\"rounded-4 bg-white ml-0 mr-0 border-0 p-0\">\n          <emoji-mart [perLine]=\"this.innerWidth < 786 ? 7 : 10\" [showPreview]=\"true\" [showSingleCategory]=\"true\"\n            [ngClass]=\"{'hide-emoji-mart-search' : true}\" [set]=\"sheet === '' ? null : sheet\"\n            [emojiSize]=\"(this.innerWidth < 786) ? 24 : 32\" [i18n]=\"{ search: 'Arama yapın', emojilist:'Emoji listesi', notfound: 'Emoji bulunamadı', clear:'Temizle',\n          \n         categories: { search: 'Arama sonuçları', recent: 'Son kullandıklarınız',people:'Gülücükler & İnsanlar',\n         nature:'Hayvanlar & Doğa', foods: 'Yiyecekler & İçecekler', activity:'Rutin', \n        places:'Seyahat & Gezilecek Yerler',objects:'Nesneler', symbols:'Semboller', flags:'Bayraklar', custom:'Özel'\n},skintones: { '1': 'Varsayılan','2': 'Işık tonlu', '3': 'Orta-ışık tonlu','4': 'Orta tonlu',\n'5': 'Hafif koyu tonlu','6': 'Koyu tonlu'} }\" [title]=\"'Duygu durumunuz ?'\"\n            (emojiClick)=\"addEmoji($event); emojiDP.close();\" [backgroundImageFn]=\"backgroundImageFn\"\n            [isNative]=\"sheet === ''\">\n          </emoji-mart>\n        </div>\n        <!-- https://www.npmjs.com/package/@ctrl/ngx-emoji-mart -->\n      </div>\n      <button type=\"submit\" class=\"btn btn-light btn-send text-uppercase text-white\">Gönder [+]</button>\n    </form>\n\n  </div>\n</div>"
 
 /***/ }),
 
@@ -1512,7 +1579,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_model_quick_task_comment_model__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/model/quick-task-comment.model */ "./src/app/model/quick-task-comment.model.ts");
 /* harmony import */ var src_app_model_project_task_comment_model__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/project-task-comment.model */ "./src/app/model/project-task-comment.model.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/model/member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/model/xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
 /* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
 /* harmony import */ var src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! src/app/model/signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
@@ -1533,7 +1600,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var TaskCommentsComponent = /** @class */ (function () {
-    function TaskCommentsComponent(qtCommentRepository, ptCommentRepository, repositoryTM, permissions, dialogRef, data, qtCommentsService, ptCommentsService, memberShared, commentSignalService, timeService) {
+    function TaskCommentsComponent(qtCommentRepository, ptCommentRepository, repositoryTM, permissions, dialogRef, data, qtCommentsService, ptCommentsService, xyzekiAuthService, commentSignalService, timeService) {
         this.qtCommentRepository = qtCommentRepository;
         this.ptCommentRepository = ptCommentRepository;
         this.repositoryTM = repositoryTM;
@@ -1541,7 +1608,7 @@ var TaskCommentsComponent = /** @class */ (function () {
         this.dialogRef = dialogRef;
         this.qtCommentsService = qtCommentsService;
         this.ptCommentsService = ptCommentsService;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.commentSignalService = commentSignalService;
         this.timeService = timeService;
         this.colors = ['#E9F6FE', '#E3E651', '#EA6E4F', '#80C76B', '#84D3E2', '#D0E185', '#292930'];
@@ -1558,20 +1625,20 @@ var TaskCommentsComponent = /** @class */ (function () {
         this.kind = data.kind;
         this.title = data.title;
         if (this.kind == 'qtComments') {
-            Object.assign(this.qtCommentModel, new src_app_model_quick_task_comment_model__WEBPACK_IMPORTED_MODULE_7__["QuickTaskComment"](this.taskId, '', this.memberShared.Username));
+            Object.assign(this.qtCommentModel, new src_app_model_quick_task_comment_model__WEBPACK_IMPORTED_MODULE_7__["QuickTaskComment"](this.taskId, '', this.xyzekiAuthService.Username));
             this.qtCommentRepository.loadComments(this.taskId);
             //this.qtCommentRepository = new QuickToDoCommentRepository(this.taskId, this.qtCommentsService, this.commentSignalService, this.timeService);
-            //this.qtCommentModel = new QuickTaskComment(this.taskId, '', this.memberShared.Username);
+            //this.qtCommentModel = new QuickTaskComment(this.taskId, '', this.xyzekiAuthService.Username);
             // this.fastTypingTextareaSubscription = this.fastTypingTextarea.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(event => {
             //   this.qtCommentModel.Message = event.target.value;
             //   this.onKeydownEvent(event)
             // })
         }
         else if (this.kind == 'ptComments') {
-            Object.assign(this.ptCommentModel, new src_app_model_project_task_comment_model__WEBPACK_IMPORTED_MODULE_8__["ProjectTaskComment"](this.taskId, '', this.memberShared.Username));
+            Object.assign(this.ptCommentModel, new src_app_model_project_task_comment_model__WEBPACK_IMPORTED_MODULE_8__["ProjectTaskComment"](this.taskId, '', this.xyzekiAuthService.Username));
             this.ptCommentRepository.loadComments(this.taskId);
             // this.ptCommentRepository = new ProjectToDoCommentRepository(this.taskId, this.ptCommentsService, this.commentSignalService, this.timeService);
-            // this.ptCommentModel = new ProjectTaskComment(this.taskId, '', this.memberShared.Username);
+            // this.ptCommentModel = new ProjectTaskComment(this.taskId, '', this.xyzekiAuthService.Username);
             // this.fastTypingTextareaSubscription = this.fastTypingTextarea.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(event => {
             //   this.ptCommentModel.Message = event.target.value;
             //   this.onKeydownEvent(event)
@@ -1658,12 +1725,12 @@ var TaskCommentsComponent = /** @class */ (function () {
                 if (this.kind == 'qtComments') {
                     this.qtCommentModel.DateTimeSent = new Date().toISOString(); // set date time when sent.
                     this.qtCommentRepository.saveQuickToDoComment(this.qtCommentModel);
-                    this.qtCommentModel = new src_app_model_quick_task_comment_model__WEBPACK_IMPORTED_MODULE_7__["QuickTaskComment"](this.taskId, '', this.memberShared.Username);
+                    this.qtCommentModel = new src_app_model_quick_task_comment_model__WEBPACK_IMPORTED_MODULE_7__["QuickTaskComment"](this.taskId, '', this.xyzekiAuthService.Username);
                 }
                 else if (this.kind == 'ptComments') {
                     this.ptCommentModel.DateTimeSent = new Date().toISOString(); // set date time when sent.
                     this.ptCommentRepository.saveProjectToDoComment(this.ptCommentModel);
-                    this.ptCommentModel = new src_app_model_project_task_comment_model__WEBPACK_IMPORTED_MODULE_8__["ProjectTaskComment"](this.taskId, '', this.memberShared.Username);
+                    this.ptCommentModel = new src_app_model_project_task_comment_model__WEBPACK_IMPORTED_MODULE_8__["ProjectTaskComment"](this.taskId, '', this.xyzekiAuthService.Username);
                 }
                 this.modelSent = true;
                 this.modelSubmitted = false;
@@ -1778,7 +1845,7 @@ var TaskCommentsComponent = /** @class */ (function () {
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](5, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"])),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_quick_to_do_comment_repository__WEBPACK_IMPORTED_MODULE_3__["QuickToDoCommentRepository"], src_app_model_repository_project_to_do_comment_repository__WEBPACK_IMPORTED_MODULE_4__["ProjectToDoCommentRepository"], src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_11__["TeamMemberRepository"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_12__["MemberLicenseRepository"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MatDialogRef"], Object, src_app_model_services_quick_to_do_comments_service__WEBPACK_IMPORTED_MODULE_5__["QuickToDoCommentsService"], src_app_model_services_project_to_do_comments_service__WEBPACK_IMPORTED_MODULE_6__["ProjectToDoCommentsService"],
-            src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_10__["MemberShared"], src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_13__["XyzekiSignalrService"], src_app_model_services_time_service__WEBPACK_IMPORTED_MODULE_14__["TimeService"]])
+            src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_10__["XyzekiAuthService"], src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_13__["XyzekiSignalrService"], src_app_model_services_time_service__WEBPACK_IMPORTED_MODULE_14__["TimeService"]])
     ], TaskCommentsComponent);
     return TaskCommentsComponent;
 }());
@@ -1805,7 +1872,7 @@ module.exports = ".circleBtnSquareSearchBar{ \n  transition: background-color 0.
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div [hidden]=\"!invalidLicensePanelOpen\"\n  style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\n z-index: 10000; background-color: rgb(243, 242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n  <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\" style=\"font-size:15px\">Özür\n    dileriz;\n    fakat herhangi bir\n    kurumsal, bireysel\n    veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>\n</div>\n\n\n<nav class=\"container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0 xyz-card-dark\"\n  style=\"height:3rem\">\n  <div>\n    <a class=\"btn btn-light rounded-0 border-0 xyz-nav-btn \" [routerLink]=\"[ '/isler' ]\">Geri</a>\n\n    <a *ngIf=\"this?.mLicenseRepository?.getPrimaryAccessGranted() && !newContainerPanelOpen\"\n      ngbTooltip=\"Yeni dosya konteynırı oluşturun\" tooltipClass=\"tooltipSpecial\" placement=\"bottom\"\n      (click)=\"toggleContainerPanel();\" class=\"btn btn-dark border-0 text-white rounded-0 ml-1 \"\n      style=\"cursor:pointer !important;\">Yeni +</a>\n    <a *ngIf=\"this.innerWidth > 786\" class=\"btn btn-light rounded-0 border-0 xyz-nav-btn ml-1\" [routerLink]=\"[ '/dosyalar/istatistikler' ]\">Bilgi</a>\n\n    <div class=\"circleBtnSquareSearchBar pl-1\">\n      <span class=\"disable-select\">\n        <mat-search-bar [isContainerSearch]=\"true\" (onOpen)=\"this.searchBarOpen=true\"\n          (onClose)=\"this.searchBarOpen=false\" [searchText]=\"'Xyzeki Konteynır Arama'\" [isDarkMode]=\"true\">\n        </mat-search-bar>\n      </span>\n    </div>\n  </div>\n\n\n\n  <a class=\"navbar-brand\" [routerLink]=\"[ '/isler' ]\">\n    <img style=\"height: 25px; width:auto;padding-bottom: 3px;\" src=\"../../../assets/logo.svg\">\n    <ng-container *ngIf=\"this.innerWidth > 763\">&nbsp;Dosyalar</ng-container>\n  </a>\n\n  <div class=\"float-right\">\n\n    <app-nav-profile [hidden]=\"this.searchBarOpen && this.innerWidth <= 763\"></app-nav-profile>\n\n  </div>\n</nav>\n\n\n\n<div class=\"container-fluid bg-white\">\n  <div class=\"row pt-2 pb-2\">\n    <div #containersPanel class=\"col-xs-4 col-lg-4\">\n      <ul class=\"w-100\" style=\"margin-bottom: 5px!important\">\n        <a class=\"company lead text-center w-100\">{{myLicense?.Company}}</a>&nbsp;\n        <!-- <span class=\"lead mt-1\">Şirket İçi</span><br> -->\n\n        <div [hidden]=\"loaded\">\n          Bulutunuzdan dosyalar getiriliyor...<br>\n          <img src=\"../../../assets/loading.gif\" style=\"opacity: 0.9; height: 2rem; width: 2rem \">\n        </div>\n\n        <p [hidden]=\"!loaded\" *ngIf=\"containers()?.length==0 && !searchBarOpen\" class=\"mt-1\">Henüz bir dosya konteynırınız bulunmuyor.\n          <p *ngIf=\"containers()?.length==0 && searchBarOpen\" class=\"mt-1\">\n            Üzgünüz, aradığınız kriterlerde bir dosya konteynırı bulamadık.\n          </p>\n\n          <li *ngIf=\"newContainerPanelOpen\" class=\"container-fluid pt-2 pb-2 pl-2 pr-2\"\n            style=\"background-color: rgb(250, 253, 255); width: 100% !important\">\n\n            <form class=\"w-100\" #containerForm=\"ngForm\" (ngSubmit)=\"addContainer(containerForm)\" novalidate>\n              <div class=\"input-group p-0 m-0 w-100\">\n                <div class=\"input-group-prepend\">\n                  <input pattern=\"^(?=.{3,63}$)[a-z0-9]+(-[a-z0-9]+)*$\" id=\"inputToFocusCT\" type=\"text\"\n                    name=\"containerNameInput\" [(ngModel)]=\"containerModel.ContainerName\" #containerNameInput=\"ngModel\"\n                    required class=\"form-control w-100\" placeholder=\"Konteynır Adı\" />\n                </div>\n                <div class=\"input-group-append linedButton\">\n                  <button type=\"submit\" class=\"btn rounded-0  btn-dark  text-uppercase text-white \">+</button>\n                  <a (click)=\"toggleContainerPanel()\" class=\"btn rounded-0  btn-light  text-uppercase \" style=\"cursor:pointer !important; \n                            overflow: hidden;\n                            perspective: 1px; \">X</a>\n                </div>\n              </div>\n              <span *ngIf=\"modelSubmitted && containerNameInput?.errors?.pattern\" class=\"text-danger row\">\n                En az 3, en fazla 63 karakterli sadece alfabetik, sayısal ve - ile ayrılmış, TR karakter içermeyen küçük\n                harfli metinler geçerlidir. ornek-konteynir, xyzeki-projesi, genel, satis-ekibi gibi\n              </span>\n\n            </form>\n\n          </li>\n      </ul>\n      <div #scrollMe infiniteScroll [infiniteScrollDistance]=\"2\" [infiniteScrollUpDistance]=\"1.5\" [scrollWindow]=\"false\"\n        [infiniteScrollThrottle]=\"100\" (scrolled)=\"onScrollDown()\" class=\"row xyz-card-big pl-2 pr-2 mb-1 \"\n        [ngStyle]=\"{'height.px': (innerWidth>=577) ? this.innerHeight-105: this.innerHeight-65}\">\n        <ul *ngIf=\"containers()?.length > 0\">\n          <li *ngFor=\"let container of containers() | sortByDateTime: 'CreatedAt':'desc'\" style=\" \n            overflow: hidden;\n            perspective: 1px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; float:left;  \">\n            <div [class.buton-secili]=\"this.containerName == container?.ContainerName\"\n              (click)=\"onSelectContainer(container?.ContainerName)\" class=\"btn btn-light rounded-0 border-0  w-100\"\n              style=\"cursor:pointer !important; justify-content: left; justify-items: left\">\n              <div class=\"clear-fix\"></div>\n              <span *ngIf=\"container?.ContainerName\" class=\"w-100 float-left text-left\"\n                style=\"font-family: Arial, Helvetica, sans-serif; font-size: 14px\"><b>{{container?.ContainerName}}</b>\n              </span>\n              <div class=\"w-100 float-left text-left\">\n                <ng-template [ngIf]=\"this?.memberShared?.Username == container?.CreatedBy\" [ngIfElse]=\"others\">\n                  <div style=\"display: inline-block;  white-space: nowrap;\">\n                    <img *ngIf=\"this?.memberShared?.account?.getValue()?.Avatar\"\n                      [src]=\"this?.memberShared?.account?.getValue()?.Avatar\" alt=\"Avatar\" class=\"avatarim\">\n                    <span>&nbsp;\n                      {{this?.memberShared?.account?.getValue()?.Name}}\n                      {{this?.memberShared?.account?.getValue()?.Surname}}</span>\n                  </div>\n                </ng-template>\n\n                <ng-template #others>\n                  <div style=\"display: inline-block;  white-space: nowrap;\">\n                    <img *ngIf=\"getMember(container?.CreatedBy)?.Avatar\" [src]=\"getMember(container?.CreatedBy)?.Avatar\"\n                      alt=\"Avatar\" class=\"avatarim\">\n                    <span>&nbsp;\n                      {{getMember(container?.CreatedBy)?.Name}}\n                      {{getMember(container?.CreatedBy)?.Surname}}</span>\n                  </div>\n\n                </ng-template>\n              </div>\n            </div>\n          </li>\n\n\n\n\n        </ul>\n\n      </div>\n\n    </div>\n\n    <div class=\"col-8 responsiveBT\">\n      <router-outlet></router-outlet>\n    </div>\n  </div>\n</div>"
+module.exports = "<div [hidden]=\"!invalidLicensePanelOpen\"\n  style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\n z-index: 10000; background-color: rgb(243, 242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n  <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\" style=\"font-size:15px\">Özür\n    dileriz;\n    fakat herhangi bir\n    kurumsal, bireysel\n    veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>\n</div>\n\n\n<nav class=\"container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0 xyz-card-dark\"\n  style=\"height:3rem\">\n  <div>\n    <a class=\"btn btn-light rounded-0 border-0 xyz-nav-btn \" [routerLink]=\"[ '/isler' ]\">Geri</a>\n\n    <a *ngIf=\"this?.mLicenseRepository?.getPrimaryAccessGranted() && !newContainerPanelOpen\"\n      ngbTooltip=\"Yeni dosya konteynırı oluşturun\" tooltipClass=\"tooltipSpecial\" placement=\"bottom\"\n      (click)=\"toggleContainerPanel();\" class=\"btn btn-dark border-0 text-white rounded-0 ml-1 \"\n      style=\"cursor:pointer !important;\">Yeni +</a>\n    <a *ngIf=\"this.innerWidth > 786\" class=\"btn btn-light rounded-0 border-0 xyz-nav-btn ml-1\" [routerLink]=\"[ '/dosyalar/istatistikler' ]\">Bilgi</a>\n\n    <div class=\"circleBtnSquareSearchBar pl-1\">\n      <span class=\"disable-select\">\n        <mat-search-bar [isContainerSearch]=\"true\" (onOpen)=\"this.searchBarOpen=true\"\n          (onClose)=\"this.searchBarOpen=false\" [searchText]=\"'Xyzeki Konteynır Arama'\" [isDarkMode]=\"true\">\n        </mat-search-bar>\n      </span>\n    </div>\n  </div>\n\n\n\n  <a class=\"navbar-brand\" [routerLink]=\"[ '/isler' ]\">\n    <img style=\"height: 25px; width:auto;padding-bottom: 3px;\" src=\"../../../assets/logo.svg\">\n    <ng-container *ngIf=\"this.innerWidth > 763\">&nbsp;Dosyalar</ng-container>\n  </a>\n\n  <div class=\"float-right\">\n\n    <app-nav-profile [hidden]=\"this.searchBarOpen && this.innerWidth <= 763\"></app-nav-profile>\n\n  </div>\n</nav>\n\n\n\n<div class=\"container-fluid bg-white\">\n  <div class=\"row pt-2 pb-2\">\n    <div #containersPanel class=\"col-xs-4 col-lg-4\">\n      <ul class=\"w-100\" style=\"margin-bottom: 5px!important\">\n        <a class=\"company lead text-center w-100\">{{myLicense?.Company}}</a>&nbsp;\n        <!-- <span class=\"lead mt-1\">Şirket İçi</span><br> -->\n\n        <div [hidden]=\"loaded\">\n          Bulutunuzdan dosyalar getiriliyor...<br>\n          <img src=\"../../../assets/loading.gif\" style=\"opacity: 0.9; height: 2rem; width: 2rem \">\n        </div>\n\n        <p [hidden]=\"!loaded\" *ngIf=\"containers()?.length==0 && !searchBarOpen\" class=\"mt-1\">Henüz bir dosya konteynırınız bulunmuyor.\n          <p *ngIf=\"containers()?.length==0 && searchBarOpen\" class=\"mt-1\">\n            Üzgünüz, aradığınız kriterlerde bir dosya konteynırı bulamadık.\n          </p>\n\n          <li *ngIf=\"newContainerPanelOpen\" class=\"container-fluid pt-2 pb-2 pl-2 pr-2\"\n            style=\"background-color: rgb(250, 253, 255); width: 100% !important\">\n\n            <form class=\"w-100\" #containerForm=\"ngForm\" (ngSubmit)=\"addContainer(containerForm)\" novalidate>\n              <div class=\"input-group p-0 m-0 w-100\">\n                <div class=\"input-group-prepend\">\n                  <input pattern=\"^(?=.{3,63}$)[a-z0-9]+(-[a-z0-9]+)*$\" id=\"inputToFocusCT\" type=\"text\"\n                    name=\"containerNameInput\" [(ngModel)]=\"containerModel.ContainerName\" #containerNameInput=\"ngModel\"\n                    required class=\"form-control w-100\" placeholder=\"Konteynır Adı\" />\n                </div>\n                <div class=\"input-group-append linedButton\">\n                  <button type=\"submit\" class=\"btn rounded-0  btn-dark  text-uppercase text-white \">+</button>\n                  <a (click)=\"toggleContainerPanel()\" class=\"btn rounded-0  btn-light  text-uppercase \" style=\"cursor:pointer !important; \n                            overflow: hidden;\n                            perspective: 1px; \">X</a>\n                </div>\n              </div>\n              <span *ngIf=\"modelSubmitted && containerNameInput?.errors?.pattern\" class=\"text-danger row\">\n                En az 3, en fazla 63 karakterli sadece alfabetik, sayısal ve - ile ayrılmış, TR karakter içermeyen küçük\n                harfli metinler geçerlidir. ornek-konteynir, xyzeki-projesi, genel, satis-ekibi gibi\n              </span>\n\n            </form>\n\n          </li>\n      </ul>\n      <div #scrollMe infiniteScroll [infiniteScrollDistance]=\"2\" [infiniteScrollUpDistance]=\"1.5\" [scrollWindow]=\"false\"\n        [infiniteScrollThrottle]=\"100\" (scrolled)=\"onScrollDown()\" class=\"row xyz-card-big pl-2 pr-2 mb-1 \"\n        [ngStyle]=\"{'height.px': (innerWidth>=577) ? this.innerHeight-105: this.innerHeight-65}\">\n        <ul *ngIf=\"containers()?.length > 0\">\n          <li *ngFor=\"let container of containers() | sortByDateTime: 'CreatedAt':'desc'\" style=\" \n            overflow: hidden;\n            perspective: 1px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; float:left;  \">\n            <div [class.buton-secili]=\"this.containerName == container?.ContainerName\"\n              (click)=\"onSelectContainer(container?.ContainerName)\" class=\"btn btn-light rounded-0 border-0  w-100\"\n              style=\"cursor:pointer !important; justify-content: left; justify-items: left\">\n              <div class=\"clear-fix\"></div>\n              <span *ngIf=\"container?.ContainerName\" class=\"w-100 float-left text-left\"\n                style=\"font-family: Arial, Helvetica, sans-serif; font-size: 14px\"><b>{{container?.ContainerName}}</b>\n              </span>\n              <div class=\"w-100 float-left text-left\">\n                <ng-template [ngIf]=\"this?.xyzekiAuthService?.Username == container?.CreatedBy\" [ngIfElse]=\"others\">\n                  <div style=\"display: inline-block;  white-space: nowrap;\">\n                    <img *ngIf=\"this?.xyzekiAuthService?.Member?.Avatar\"\n                      [src]=\"this?.xyzekiAuthService?.Member?.Avatar\" alt=\"Avatar\" class=\"avatarim\">\n                    <span>&nbsp;\n                      {{this?.xyzekiAuthService?.Member?.Name}}\n                      {{this?.xyzekiAuthService?.Member?.Surname}}</span>\n                  </div>\n                </ng-template>\n\n                <ng-template #others>\n                  <div style=\"display: inline-block;  white-space: nowrap;\">\n                    <img *ngIf=\"getMember(container?.CreatedBy)?.Avatar\" [src]=\"getMember(container?.CreatedBy)?.Avatar\"\n                      alt=\"Avatar\" class=\"avatarim\">\n                    <span>&nbsp;\n                      {{getMember(container?.CreatedBy)?.Name}}\n                      {{getMember(container?.CreatedBy)?.Surname}}</span>\n                  </div>\n\n                </ng-template>\n              </div>\n            </div>\n          </li>\n\n\n\n\n        </ul>\n\n      </div>\n\n    </div>\n\n    <div class=\"col-8 responsiveBT\">\n      <router-outlet></router-outlet>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -1822,7 +1889,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_model_repository_container_repository__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/repository/container-repository */ "./src/app/model/repository/container-repository.ts");
-/* harmony import */ var src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
 /* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
@@ -1838,8 +1905,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ContainersComponent = /** @class */ (function () {
-    function ContainersComponent(memberShared, repositoryTM, dataService, mLicenseRepository, route, router, repository) {
-        this.memberShared = memberShared;
+    function ContainersComponent(xyzekiAuthService, repositoryTM, dataService, mLicenseRepository, route, router, repository) {
+        this.xyzekiAuthService = xyzekiAuthService;
         this.repositoryTM = repositoryTM;
         this.dataService = dataService;
         this.mLicenseRepository = mLicenseRepository;
@@ -1997,7 +2064,7 @@ var ContainersComponent = /** @class */ (function () {
             this.modelSubmitted = true;
             if (containerForm.valid) {
                 this.containerModel.CreatedAt = new Date().toISOString();
-                this.containerModel.CreatedBy = this.memberShared.Username;
+                this.containerModel.CreatedBy = this.xyzekiAuthService.Username;
                 this.repository.saveContainer(this.containerModel);
                 this.modelSent = true;
                 this.modelSubmitted = false;
@@ -2026,7 +2093,7 @@ var ContainersComponent = /** @class */ (function () {
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./containers.component.css */ "./src/app/files/containers/containers.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_3__["MemberShared"], src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_7__["TeamMemberRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_4__["DataService"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_5__["MemberLicenseRepository"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"], src_app_model_repository_container_repository__WEBPACK_IMPORTED_MODULE_2__["ContainerRepository"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"], src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_7__["TeamMemberRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_4__["DataService"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_5__["MemberLicenseRepository"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"], src_app_model_repository_container_repository__WEBPACK_IMPORTED_MODULE_2__["ContainerRepository"]])
     ], ContainersComponent);
     return ContainersComponent;
 }());
@@ -2231,7 +2298,7 @@ module.exports = ".circleBtnSquareSearchBar{ \n  transition: background-color 0.
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div [hidden]=\"!invalidLicensePanelOpen\"\n  style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\n z-index: 10000; background-color: rgb(243, 242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n  <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\" style=\"font-size:15px\">Özür\n    dileriz;\n    fakat herhangi bir\n    kurumsal, bireysel\n    veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>\n</div>\n<nav *ngIf=\"innerWidth < 992\" class=\"container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0\"\n  style=\"height:3rem!important\">\n\n  <a class=\"btn btn-light rounded-0 border-0 xyz-nav-btn \" [routerLink]=\"[ '/dosyalar' ]\">Geri</a>\n  <a class=\"navbar-brand\" [routerLink]=\"[ '/isler' ]\">\n    <img src=\"../../../assets/logo.svg\" style=\"height: 25px; font-family: Arial, Helvetica, sans-serif \"> Xyzeki\n  </a>\n  <div class=\"float-right\">\n    <app-nav-profile></app-nav-profile>\n  </div>\n</nav>\n\n<div #scrollMe infiniteScroll [infiniteScrollDistance]=\"2\" [infiniteScrollUpDistance]=\"1.5\" [scrollWindow]=\"false\"\n  [infiniteScrollThrottle]=\"100\" (scrolled)=\"onScrollDown()\"\n  [ngStyle]=\"{'height.px': (innerWidth>=992) ? this.innerHeight-65: this.innerHeight}\"\n  class=\"container-fluid xyz-card-big xyz-card-default bg-light\">\n\n  <div *ngIf=\"containerName!=undefined\" class=\"sticky-top pt-1 pl-1 xyz-card-primary\"\n    style=\"z-index: 100!important; background-color: rgb(40, 40, 41)!important; color: white !important; opacity: 0.9\">\n\n    <div class=\"text-white \" style=\"display: inline-block; white-space: nowrap;\">\n      <span class=\"text-left pt-2 \"\n        style=\"font-family: Arial, Helvetica, sans-serif; font-size: 14px;float:left; vertical-align:middle\"><b>{{containerName}}</b>\n      </span>\n      <div style=\"padding-left:10px;float:left; margin-bottom: 3px;\">\n        <button [disabled]=\"this?.repository?.fileUploadInitiated\" ngbTooltip=\"Karşıya dosya yükle\" placement=\"bottom\"\n          tooltipClass=\"tooltipSpecial\" (click)=\"selectedFile?.click();\" class=\"btn btn-light rounded-0 border-0\"><img\n            [hidden]=\"this?.repository?.fileUploadInitiated\" src=\"../../../assets/upload7.svg\"\n            style=\"width: 30px;object-fit: cover; cursor: pointer; margin-bottom: 3px;\" />\n          <img style=\"width: 30px;object-fit: cover; cursor: pointer; margin-bottom: 3px\"\n            [hidden]=\"!this?.repository?.fileUploadInitiated\" src=\"../assets/loading.gif\">\n        </button>\n        <input style=\"display: none;\" type=\"file\" #selectedFile (click)=\"selectedFile.value = null\" value=\"\"\n          (change)=\"uploadFile($event.target.files)\" />\n      </div>\n      <div *ngIf=\"this?.mLicenseRepository?.getPrimaryAccessGranted()\" class=\"d-inline-block\" ngbDropdown\n        placement=\"bottom\">\n        <a class=\"btn filter-grey\" style=\"border:0px solid !important; line-height: 15px; display: inline-block\"\n          id=\"dropdownMemberOptions\" ngbDropdownToggle>\n          <img class=\"moreHead mb-1\" src=\"../../../assets/more2.svg\" style=\"height: 5px;object-fit: cover;\" />\n        </a>\n        <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\" class=\"rounded-4 bg-white ml-0 mr-0\">\n          <button (click)=\"deleteContainer(containerName)\" ngbDropdownItem\n            class=\"btn btn-light rounded-0 border-0 xyz-nav-btn2\"><img src=\"../../../assets/cancel.svg\"\n              style=\"width: 15px;object-fit: cover; cursor: pointer;\" />&nbsp;Konteynırı sil</button>\n        </div>\n\n      </div>\n      <div class=\"circleBtnSquareSearchBar pl-1\">\n        <span class=\"disable-select\">\n          <mat-search-bar [isContainerBlobSearch]=\"true\" (onOpen)=\"this.searchBarOpen=true\"\n            (onClose)=\"this.searchBarOpen=false\" [searchText]=\"'Xyzeki Dosya Arama'\"></mat-search-bar>\n        </span>\n      </div>\n    </div>\n    <div class=\"clearfix\"></div>\n\n  </div>\n  <div class=\"clearfix\"></div>\n\n  <table *ngIf=\"files()?.length > 0\" class=\"table table-sm table-hover m-1\">\n    <thead>\n      <tr>\n        <th>Dosya Adı</th>\n        <th>Boyut</th>\n        <th *ngIf=\"this.innerWidth > 786\">Yükleyen</th>\n        <th *ngIf=\"this.innerWidth > 786\">Yüklenme Tarihi</th>\n        <th></th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr *ngFor=\"let file of files()\">\n\n        <td style=\"max-width:50%;\">\n          <a class=\"fileName\" placement=\"right\"\n            ngbTooltip=\"{{file?.FileName}} isimli dosyayı cihazınıza indirmek için tıklayın.\"\n            tooltipClass=\"tooltipSpecial\" (click)=\"downloadFile(file?.FileName)\">{{file?.FileName}}</a>\n          <div class=\"pt-1\" *ngIf=\"this.innerWidth <= 786\">\n            {{file?.CreatedAt | humanizer}}\n            <span *ngIf=\"file?.CreatedAt |  date:'shortTime'\"\n              class=\"time-pipe-design\">{{file?.CreatedAt |  date:'shortTime' }}</span>\n          </div>\n          \n          <div class=\"pt-1\"  *ngIf=\"this.innerWidth <= 786\">\n            <ng-template [ngIf]=\"this?.memberShared?.Username == file?.UploadedBy\" [ngIfElse]=\"others\">\n              <div style=\"display: inline-block;  white-space: nowrap;\">\n                <img *ngIf=\"this?.memberShared?.account?.getValue()?.Avatar\"\n                  [src]=\"this?.memberShared?.account?.getValue()?.Avatar\" alt=\"Avatar\" class=\"avatarim\">\n                <span style=\"color: rgb(68, 68, 68);\">&nbsp;\n                  {{this?.memberShared?.account?.getValue()?.Name}}\n                  {{this?.memberShared?.account?.getValue()?.Surname}}</span>\n              </div>\n            </ng-template>\n\n            <ng-template #others>\n              <div style=\"display: inline-block;  white-space: nowrap;\">\n                <img *ngIf=\"getMember(file?.UploadedBy)?.Avatar\" [src]=\"getMember(file?.UploadedBy)?.Avatar\"\n                  alt=\"Avatar\" class=\"avatarim\">\n                <span style=\"color: rgb(68, 68, 68); \">&nbsp;\n                  {{getMember(file?.UploadedBy)?.Name}}\n                  {{getMember(file?.UploadedBy)?.Surname}}\n                </span>\n              </div>\n\n            </ng-template>\n\n          </div>\n        </td>\n        <td>\n          {{(file?.Size / 1048576) | number: '1.1-1' }} MB\n        </td>\n        <td *ngIf=\"this.innerWidth > 786\">\n          <ng-template [ngIf]=\"this?.memberShared?.Username == file?.UploadedBy\" [ngIfElse]=\"others\">\n            <div style=\"display: inline-block;  white-space: nowrap;\">\n              <img *ngIf=\"this?.memberShared?.account?.getValue()?.Avatar\"\n                [src]=\"this?.memberShared?.account?.getValue()?.Avatar\" alt=\"Avatar\" class=\"avatarim\">\n              <span style=\"color: rgb(68, 68, 68);\">&nbsp;\n                {{this?.memberShared?.account?.getValue()?.Name}}\n                {{this?.memberShared?.account?.getValue()?.Surname}}</span>\n            </div>\n          </ng-template>\n\n          <ng-template #others>\n            <div style=\"display: inline-block;  white-space: nowrap;\">\n              <img *ngIf=\"getMember(file?.UploadedBy)?.Avatar\" [src]=\"getMember(file?.UploadedBy)?.Avatar\" alt=\"Avatar\"\n                class=\"avatarim\">\n              <span style=\"color: rgb(68, 68, 68); \">&nbsp;\n                {{getMember(file?.UploadedBy)?.Name}}\n                {{getMember(file?.UploadedBy)?.Surname}}\n              </span>\n            </div>\n\n          </ng-template>\n\n\n        </td>\n        <td *ngIf=\"this.innerWidth > 786\">\n          {{file?.CreatedAt | humanizer}}\n          <span *ngIf=\"file?.CreatedAt |  date:'shortTime'\"\n            class=\"time-pipe-design\">{{file?.CreatedAt |  date:'shortTime' }}</span>\n        </td>\n        <td>\n          <div\n            *ngIf=\"(file?.UploadedBy == this?.memberShared?.Username) || this?.mLicenseRepository?.getPrimaryAccessGranted()\"\n            ngbDropdown class=\"d-inline-block float-right mb-2 \" placement=\"left\">\n            <a class=\"btn filter-grey mb-0 \" style=\"z-index: 1000 !important; border: 0px !important\"\n              id=\"dropdownMemberOptions\" ngbDropdownToggle>\n              <img src=\"../../../assets/more2.svg\" style=\"height: 6px;object-fit: cover; cursor: pointer;\" />\n            </a>\n            <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\" class=\"rounded-4 bg-white ml-0 mr-0\">\n              <button (click)=\"deleteFile(file?.FileName)\" ngbDropdownItem\n                class=\"btn btn-light rounded-0 border-0 xyz-nav-btn2\"><img src=\"../../../assets/bin.png\"\n                  style=\"width: 18px;object-fit: cover; cursor: pointer; \" class=\"mr-2\" />Dosyayı sil</button>\n\n            </div>\n          </div>\n\n        </td>\n      </tr>\n    </tbody>\n  </table>\n\n  <div class=\"p-4\">\n    <div [hidden]=\"loaded\">\n      Getiriliyor...<br>\n      <img src=\"../../../assets/loading.gif\" style=\"opacity: 0.9; height: 2rem; width: 2rem \">\n    </div>\n    <p [hidden]=\"!loaded\" class=\"lead\" *ngIf=\"files()?.length == 0 && !searchBarOpen\" class=\"mt-1\">Henüz bu konteynırda\n      bir dosya bulunmuyor\n    </p>\n    <p [hidden]=\"!loaded\" class=\"lead\" *ngIf=\"files()?.length == 0 && searchBarOpen\" class=\"mt-1\">\n      Üzgünüz, aradığınız kriterlerde bir dosya bulamadık.\n    </p>\n  </div>\n</div>"
+module.exports = "<div [hidden]=\"!invalidLicensePanelOpen\"\n  style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\n z-index: 10000; background-color: rgb(243, 242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n  <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\" style=\"font-size:15px\">Özür\n    dileriz;\n    fakat herhangi bir\n    kurumsal, bireysel\n    veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>\n</div>\n<nav *ngIf=\"innerWidth < 992\" class=\"container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0\"\n  style=\"height:3rem!important\">\n\n  <a class=\"btn btn-light rounded-0 border-0 xyz-nav-btn \" [routerLink]=\"[ '/dosyalar' ]\">Geri</a>\n  <a class=\"navbar-brand\" [routerLink]=\"[ '/isler' ]\">\n    <img src=\"../../../assets/logo.svg\" style=\"height: 25px; font-family: Arial, Helvetica, sans-serif \"> Xyzeki\n  </a>\n  <div class=\"float-right\">\n    <app-nav-profile></app-nav-profile>\n  </div>\n</nav>\n\n<div #scrollMe infiniteScroll [infiniteScrollDistance]=\"2\" [infiniteScrollUpDistance]=\"1.5\" [scrollWindow]=\"false\"\n  [infiniteScrollThrottle]=\"100\" (scrolled)=\"onScrollDown()\"\n  [ngStyle]=\"{'height.px': (innerWidth>=992) ? this.innerHeight-65: this.innerHeight}\"\n  class=\"container-fluid xyz-card-big xyz-card-default bg-light\">\n\n  <div *ngIf=\"containerName!=undefined\" class=\"sticky-top pt-1 pl-1 xyz-card-primary\"\n    style=\"z-index: 100!important; background-color: rgb(40, 40, 41)!important; color: white !important; opacity: 0.9\">\n\n    <div class=\"text-white \" style=\"display: inline-block; white-space: nowrap;\">\n      <span class=\"text-left pt-2 \"\n        style=\"font-family: Arial, Helvetica, sans-serif; font-size: 14px;float:left; vertical-align:middle\"><b>{{containerName}}</b>\n      </span>\n      <div style=\"padding-left:10px;float:left; margin-bottom: 3px;\">\n        <button [disabled]=\"this?.repository?.fileUploadInitiated\" ngbTooltip=\"Karşıya dosya yükle\" placement=\"bottom\"\n          tooltipClass=\"tooltipSpecial\" (click)=\"selectedFile?.click();\" class=\"btn btn-light rounded-0 border-0\"><img\n            [hidden]=\"this?.repository?.fileUploadInitiated\" src=\"../../../assets/upload7.svg\"\n            style=\"width: 30px;object-fit: cover; cursor: pointer; margin-bottom: 3px;\" />\n          <img style=\"width: 30px;object-fit: cover; cursor: pointer; margin-bottom: 3px\"\n            [hidden]=\"!this?.repository?.fileUploadInitiated\" src=\"../assets/loading.gif\">\n        </button>\n        <input style=\"display: none;\" type=\"file\" #selectedFile (click)=\"selectedFile.value = null\" value=\"\"\n          (change)=\"uploadFile($event.target.files)\" />\n      </div>\n      <div *ngIf=\"this?.mLicenseRepository?.getPrimaryAccessGranted()\" class=\"d-inline-block\" ngbDropdown\n        placement=\"bottom\">\n        <a class=\"btn filter-grey\" style=\"border:0px solid !important; line-height: 15px; display: inline-block\"\n          id=\"dropdownMemberOptions\" ngbDropdownToggle>\n          <img class=\"moreHead mb-1\" src=\"../../../assets/more2.svg\" style=\"height: 5px;object-fit: cover;\" />\n        </a>\n        <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\" class=\"rounded-4 bg-white ml-0 mr-0\">\n          <button (click)=\"deleteContainer(containerName)\" ngbDropdownItem\n            class=\"btn btn-light rounded-0 border-0 xyz-nav-btn2\"><img src=\"../../../assets/cancel.svg\"\n              style=\"width: 15px;object-fit: cover; cursor: pointer;\" />&nbsp;Konteynırı sil</button>\n        </div>\n\n      </div>\n      <div class=\"circleBtnSquareSearchBar pl-1\">\n        <span class=\"disable-select\">\n          <mat-search-bar [isContainerBlobSearch]=\"true\" (onOpen)=\"this.searchBarOpen=true\"\n            (onClose)=\"this.searchBarOpen=false\" [searchText]=\"'Xyzeki Dosya Arama'\"></mat-search-bar>\n        </span>\n      </div>\n    </div>\n    <div class=\"clearfix\"></div>\n\n  </div>\n  <div class=\"clearfix\"></div>\n\n  <table *ngIf=\"files()?.length > 0\" class=\"table table-sm table-hover m-1\">\n    <thead>\n      <tr>\n        <th>Dosya Adı</th>\n        <th>Boyut</th>\n        <th *ngIf=\"this.innerWidth > 786\">Yükleyen</th>\n        <th *ngIf=\"this.innerWidth > 786\">Yüklenme Tarihi</th>\n        <th></th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr *ngFor=\"let file of files()\">\n\n        <td style=\"max-width:50%;\">\n          <a class=\"fileName\" placement=\"right\"\n            ngbTooltip=\"{{file?.FileName}} isimli dosyayı cihazınıza indirmek için tıklayın.\"\n            tooltipClass=\"tooltipSpecial\" (click)=\"downloadFile(file?.FileName)\">{{file?.FileName}}</a>\n          <div class=\"pt-1\" *ngIf=\"this.innerWidth <= 786\">\n            {{file?.CreatedAt | humanizer}}\n            <span *ngIf=\"file?.CreatedAt |  date:'shortTime'\"\n              class=\"time-pipe-design\">{{file?.CreatedAt |  date:'shortTime' }}</span>\n          </div>\n          \n          <div class=\"pt-1\"  *ngIf=\"this.innerWidth <= 786\">\n            <ng-template [ngIf]=\"this?.xyzekiAuthService?.Username == file?.UploadedBy\" [ngIfElse]=\"others\">\n              <div style=\"display: inline-block;  white-space: nowrap;\">\n                <img *ngIf=\"this?.xyzekiAuthService?.Member?.Avatar\"\n                  [src]=\"this?.xyzekiAuthService?.Member?.Avatar\" alt=\"Avatar\" class=\"avatarim\">\n                <span style=\"color: rgb(68, 68, 68);\">&nbsp;\n                  {{this?.xyzekiAuthService?.Member?.Name}}\n                  {{this?.xyzekiAuthService?.Member?.Surname}}</span>\n              </div>\n            </ng-template>\n\n            <ng-template #others>\n              <div style=\"display: inline-block;  white-space: nowrap;\">\n                <img *ngIf=\"getMember(file?.UploadedBy)?.Avatar\" [src]=\"getMember(file?.UploadedBy)?.Avatar\"\n                  alt=\"Avatar\" class=\"avatarim\">\n                <span style=\"color: rgb(68, 68, 68); \">&nbsp;\n                  {{getMember(file?.UploadedBy)?.Name}}\n                  {{getMember(file?.UploadedBy)?.Surname}}\n                </span>\n              </div>\n\n            </ng-template>\n\n          </div>\n        </td>\n        <td>\n          {{(file?.Size / 1048576) | number: '1.1-1' }} MB\n        </td>\n        <td *ngIf=\"this.innerWidth > 786\">\n          <ng-template [ngIf]=\"this?.xyzekiAuthService?.Username == file?.UploadedBy\" [ngIfElse]=\"others\">\n            <div style=\"display: inline-block;  white-space: nowrap;\">\n              <img *ngIf=\"this?.xyzekiAuthService?.Member?.Avatar\"\n                [src]=\"this?.xyzekiAuthService?.Member?.Avatar\" alt=\"Avatar\" class=\"avatarim\">\n              <span style=\"color: rgb(68, 68, 68);\">&nbsp;\n                {{this?.xyzekiAuthService?.Member?.Name}}\n                {{this?.xyzekiAuthService?.Member?.Surname}}</span>\n            </div>\n          </ng-template>\n\n          <ng-template #others>\n            <div style=\"display: inline-block;  white-space: nowrap;\">\n              <img *ngIf=\"getMember(file?.UploadedBy)?.Avatar\" [src]=\"getMember(file?.UploadedBy)?.Avatar\" alt=\"Avatar\"\n                class=\"avatarim\">\n              <span style=\"color: rgb(68, 68, 68); \">&nbsp;\n                {{getMember(file?.UploadedBy)?.Name}}\n                {{getMember(file?.UploadedBy)?.Surname}}\n              </span>\n            </div>\n\n          </ng-template>\n\n\n        </td>\n        <td *ngIf=\"this.innerWidth > 786\">\n          {{file?.CreatedAt | humanizer}}\n          <span *ngIf=\"file?.CreatedAt |  date:'shortTime'\"\n            class=\"time-pipe-design\">{{file?.CreatedAt |  date:'shortTime' }}</span>\n        </td>\n        <td>\n          <div\n            *ngIf=\"(file?.UploadedBy == this?.xyzekiAuthService?.Username) || this?.mLicenseRepository?.getPrimaryAccessGranted()\"\n            ngbDropdown class=\"d-inline-block float-right mb-2 \" placement=\"left\">\n            <a class=\"btn filter-grey mb-0 \" style=\"z-index: 1000 !important; border: 0px !important\"\n              id=\"dropdownMemberOptions\" ngbDropdownToggle>\n              <img src=\"../../../assets/more2.svg\" style=\"height: 6px;object-fit: cover; cursor: pointer;\" />\n            </a>\n            <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\" class=\"rounded-4 bg-white ml-0 mr-0\">\n              <button (click)=\"deleteFile(file?.FileName)\" ngbDropdownItem\n                class=\"btn btn-light rounded-0 border-0 xyz-nav-btn2\"><img src=\"../../../assets/bin.png\"\n                  style=\"width: 18px;object-fit: cover; cursor: pointer; \" class=\"mr-2\" />Dosyayı sil</button>\n\n            </div>\n          </div>\n\n        </td>\n      </tr>\n    </tbody>\n  </table>\n\n  <div class=\"p-4\">\n    <div [hidden]=\"loaded\">\n      Getiriliyor...<br>\n      <img src=\"../../../assets/loading.gif\" style=\"opacity: 0.9; height: 2rem; width: 2rem \">\n    </div>\n    <p [hidden]=\"!loaded\" class=\"lead\" *ngIf=\"files()?.length == 0 && !searchBarOpen\" class=\"mt-1\">Henüz bu konteynırda\n      bir dosya bulunmuyor\n    </p>\n    <p [hidden]=\"!loaded\" class=\"lead\" *ngIf=\"files()?.length == 0 && searchBarOpen\" class=\"mt-1\">\n      Üzgünüz, aradığınız kriterlerde bir dosya bulamadık.\n    </p>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -2252,7 +2319,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
 /* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/model/member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/model/xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var src_app_model_repository_container_repository__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/repository/container-repository */ "./src/app/model/repository/container-repository.ts");
 /* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
@@ -2270,7 +2337,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var FilesComponent = /** @class */ (function () {
-    function FilesComponent(repository, _location, repositoryTM, dataService, containerExistingRepo, fileService, mLicenseRepository, permissions, router, route, memberShared, signalService) {
+    function FilesComponent(repository, _location, repositoryTM, dataService, containerExistingRepo, fileService, mLicenseRepository, permissions, router, route, xyzekiAuthService, signalService) {
         this.repository = repository;
         this._location = _location;
         this.repositoryTM = repositoryTM;
@@ -2281,7 +2348,7 @@ var FilesComponent = /** @class */ (function () {
         this.permissions = permissions;
         this.router = router;
         this.route = route;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.signalService = signalService;
         // get loaded() {
         //   return this.repository.loaded;
@@ -2433,7 +2500,7 @@ var FilesComponent = /** @class */ (function () {
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_file_repository__WEBPACK_IMPORTED_MODULE_2__["FileRepository"], _angular_common__WEBPACK_IMPORTED_MODULE_10__["Location"], src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_5__["TeamMemberRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_9__["DataService"], src_app_model_repository_container_repository__WEBPACK_IMPORTED_MODULE_8__["ContainerRepository"], src_app_model_services_files_service__WEBPACK_IMPORTED_MODULE_3__["FilesService"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_4__["MemberLicenseRepository"],
             src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_4__["MemberLicenseRepository"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["ActivatedRoute"],
-            src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_7__["MemberShared"],
+            src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_7__["XyzekiAuthService"],
             src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_11__["XyzekiSignalrService"]])
     ], FilesComponent);
     return FilesComponent;
@@ -2597,7 +2664,7 @@ module.exports = "@font-face {\n  font-family: 'Material Icons';\n  font-style: 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\n<app-quick-to-dos></app-quick-to-dos>\n\n\n<div [hidden]=\"!invalidLicensePanelOpen\"\n  style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\n z-index: 10000; background-color: rgb(243, 242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n  <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\" style=\"font-size:15px\">Özür dileriz;\n    fakat herhangi bir\n    kurumsal, bireysel\n    veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>\n</div>\n<div class=\"card bg-light rounded-0 mt-0\" *ngIf=\"dayDateStr != 'ArsivKutusu' && (this.dataService?.switchMode != 1)\">\n  <div class=\"card-header bg-secondary rounded-0 pt-2 pb-2 border-0 bg-white\">\n    <span class=\"font-weight-bolder\">Proje Görevleriniz\n      <button class=\"btn btn-light btn-sm rounded-circle\" id=\"previous\" (click)=\"previousPage()\"\n        [hidden]=\"getNumberOfPages()==0\" style=\"height: 40px!important; width:40px!important\" [disabled]=\"pageNo == 1 \">\n        <mat-icon>keyboard_arrow_left</mat-icon>\n      </button>\n      <span [hidden]=\"getNumberOfPages()==0\" class=\"pr-1 pl-1\">{{pageNo}}/{{getNumberOfPages()}}</span>\n      <button id=\"next\" (click)=\"nextPage()\" [disabled]=\"pageNo == getNumberOfPages()\" [hidden]=\"getNumberOfPages()==0\"\n        class=\"btn btn-light btn-sm  rounded-circle\" style=\"height: 40px!important; width:40px!important\">\n        <mat-icon>keyboard_arrow_right</mat-icon>\n      </button>\n\n    </span>\n\n  </div>\n  <div class=\"card-body bg-white p-2\" *ngIf=\"projectToDosAssignedToMe.length != 0\">\n\n    <table *ngIf=\"memberShared.LoggedIn\" class=\"pt-4 pb-4 table table-hover  table-sm  gizliHeader\">\n      <thead>\n        <thead>\n        </thead>\n      </thead>\n      <tbody class=\"shadowedTr\">\n        <tr class=\"trOptimization\" style=\"margin-bottom: 6px\"\n          *ngFor=\"let projectToDo  of projectToDosAssignedToMe; index as i\">\n          <td style=\"float:left\">\n            <a *ngIf=\"!projectToDo?.IsCompleted\" (click)=\"completePT(projectToDo)\"><img\n                src=\"../../../assets/squareUnCheck.png\" style=\"width: 1.3rem; height: 1.3rem; cursor: pointer;\" />\n            </a>\n          </td>\n          <td style=\" float:left;  width: 100%; cursor: text;\">\n            <!-- <span  ngbTooltip=\"Düşük öncelikli görev\" tooltipClass=\"tooltipSpecial\" placement=\"bottom\" (click)=\"$event.stopPropagation();\"\n               class=\"time-pipe-design p-1 bg-light ml-1 mr-1 text-nowrap\" style=\"cursor: pointer; font-size: 13px; display: inline; \">\n                <img src=\"../../../assets/flagBlue.png\"  style=\"height: 25px;\">\n              </span> -->\n            <span [ngClass]=\"{'shineYapiliyor': projectToDo?.Status == 'Yapılıyor',\n              'shineBitmekuzere': projectToDo?.Status == 'Tamamlanmak Üzere' }\" class=\"bg-light\">\n              {{projectToDo?.TaskTitle}}{{ getProject(projectToDo?.ProjectId) ? ', ': '' }}\n              {{getProject(projectToDo?.ProjectId)?.ProjectName}}</span>\n\n            <a *ngIf=\"projectToDo\" class=\"modernUnderlined ml-2 w-100 bg-light\" (click)=\"setStatus(projectToDo?.TaskId)\"\n              style=\"cursor: pointer; font-size: 13px\">{{(projectToDo?.Status ? projectToDo?.Status  : 'Bekliyor')}}</a>\n            &nbsp;\n\n\n\n            <a *ngIf=\"this.getProject(projectToDo?.ProjectId)\" ngbTooltip=\"Projeye git\" tooltipClass=\"tooltipSpecial\"\n              [routerLink]=\"['/projeler', projectToDo?.ProjectId, 'yapilacaklar']\"\n              [fragment]=\"this.getProject(projectToDo?.ProjectId).Owner!=this.memberShared.Username ? 'shared': ''\"\n              class=\"btn btn-light btn-sm rounded-1 border-0\">\n              <img src=\"../../../assets/arrow-2.png\" style=\"width: 16px;object-fit: cover; cursor: pointer; \" /></a>\n\n\n          </td>\n          <td style=\"float:right\">\n            <div class=\"mt-1 mobileDate  \">\n              <!-- {{projectToDo?.Deadline ? (projectToDo?.Deadline | humanizer) : 'Yok'}} -->\n\n              <ng-container\n                *ngIf=\"(projectToDo?.Start | humanizer) != (projectToDo?.Deadline | humanizer); else sameStartDate\">\n                <span style=\"color: #00a028\">{{projectToDo?.Start | humanizer}}\n                  <span *ngIf=\"projectToDo?.Start |  date:'shortTime' \"\n                    class=\"time-pipe-design\">{{projectToDo?.Start |  date:'shortTime' }}</span>\n                  <span *ngIf=\"projectToDo?.Start  && projectToDo?.Deadline\"> - </span>\n                </span>\n                <div class=\"clearfix\" *ngIf=\"this.innerWidth < 876\"> </div>\n                <span style=\"color: #b80000\">{{projectToDo?.Deadline | humanizer}}\n                  <span *ngIf=\"projectToDo?.Deadline |  date:'shortTime'\"\n                    class=\"time-pipe-design\">{{projectToDo?.Deadline |  date:'shortTime' }}</span></span>\n                <div class=\"clearfix\" *ngIf=\"this.innerWidth < 500\"> </div>\n              </ng-container>\n              <ng-template #sameStartDate>\n                <span style=\"color: rgb(196, 199, 23); \">{{projectToDo?.Start | humanizer}}\n                  <span *ngIf=\"projectToDo?.Start |  date:'shortTime' \"\n                    class=\"time-pipe-design\">{{projectToDo?.Start |  date:'shortTime' }}</span>\n                  <span *ngIf=\"projectToDo?.Start |  date:'shortTime'  && projectToDo?.Deadline |  date:'shortTime' \"> -\n                  </span>\n                  <span class=\"time-pipe-design\"\n                    *ngIf=\"projectToDo?.Deadline |  date:'shortTime' \">{{projectToDo?.Deadline |  date:'shortTime' }}</span>\n                </span>\n              </ng-template>\n\n              <div class=\"clearfix\" *ngIf=\"this.innerWidth < 500\">\n              </div>\n              <a *ngIf=(projectToDo?.TaskId) class=\"btn filter-cnote pl-0 pt-0 pb-0 ml-1 mr-1 text-nowrap\"\n                style=\"cursor: pointer!important\"\n                (click)=\"showCommentsDialog(projectToDo?.TaskId,projectToDo?.TaskTitle)\">\n                <img src=\"../../../assets/comment-note.svg\" style=\"height: 1.5rem; cursor: pointer;\" />\n                <span>\n                  {{getPTAssignedCommentsForCount(projectToDo?.TaskId)?.CommentsCount}}\n                </span>\n              </a>\n\n            </div>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n\n\n  </div>\n  <div class=\"card-body bg-white\" *ngIf=\"projectToDosAssignedToMe?.length == 0\">\n    <p *ngIf=\"dayDateStr == 'Gecikmiş'\">\n      Şu an için henüz başlangıcı geçmiş ve hala başlamamış veya teslim tarihi geçmiş bir proje görevi bulamadık.\n    </p>\n    <p *ngIf=\"dayDateStr == 'Tümü'\">\n      Şu an için bir proje göreviniz bulunmamaktadır.\n    </p>\n    <p *ngIf=\"dayDateStr == 'Gün'\">\n      Şu an için bu gün yapılması gereken veya devam eden bir proje görevi bulamadık.\n    </p>\n  </div>\n</div>\n<div class=\"container-fluid\" style=\"height: 50px\">\n\n</div>"
+module.exports = "<app-navbar></app-navbar>\n<app-quick-to-dos></app-quick-to-dos>\n\n\n<div [hidden]=\"!invalidLicensePanelOpen\"\n  style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\n z-index: 10000; background-color: rgb(243, 242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n  <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\" style=\"font-size:15px\">Özür dileriz;\n    fakat herhangi bir\n    kurumsal, bireysel\n    veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>\n</div>\n<div class=\"card bg-light rounded-0 mt-0\" *ngIf=\"dayDateStr != 'ArsivKutusu' && (this.dataService?.switchMode != 1)\">\n  <div class=\"card-header bg-secondary rounded-0 pt-2 pb-2 border-0 bg-white\">\n    <span class=\"font-weight-bolder\">Proje Görevleriniz\n      <button class=\"btn btn-light btn-sm rounded-circle ml-2\" id=\"previous\" (click)=\"previousPage()\"\n        [hidden]=\"getNumberOfPages()==0\" style=\"height: 40px!important; width:40px!important\" [disabled]=\"pageNo == 1 \">\n        <mat-icon>keyboard_arrow_left</mat-icon>\n      </button>\n      <span [hidden]=\"getNumberOfPages()==0\" class=\"pr-1 pl-1\">{{pageNo}}/{{getNumberOfPages()}}</span>\n      <button id=\"next\" (click)=\"nextPage()\" [disabled]=\"pageNo == getNumberOfPages()\" [hidden]=\"getNumberOfPages()==0\"\n        class=\"btn btn-light btn-sm  rounded-circle\" style=\"height: 40px!important; width:40px!important\">\n        <mat-icon>keyboard_arrow_right</mat-icon>\n      </button>\n\n    </span>\n\n  </div>\n  <div class=\"card-body bg-white p-2\" *ngIf=\"projectToDosAssignedToMe.length != 0\">\n\n    <table *ngIf=\"xyzekiAuthService?.LoggedIn\" class=\"pt-4 pb-4 table table-hover  table-sm  gizliHeader\">\n      <thead>\n        <thead>\n        </thead>\n      </thead>\n\n      <!-- class=\"trOptimization\" -->\n      <tbody class=\"shadowedTr\">\n        <tr  style=\"margin-bottom: 6px; width:100%\" \n          *ngFor=\"let projectToDo  of projectToDosAssignedToMe; index as i\">\n          <td style=\"width:5%\">\n            <a *ngIf=\"!projectToDo?.IsCompleted\" (click)=\"completePT(projectToDo)\"><img\n                src=\"../../../assets/squareUnCheck.png\" style=\"width: 1.3rem; height: 1.3rem; cursor: pointer;\" />\n            </a>\n          </td>\n          <td style=\"cursor: text; width:45%\">\n            \n            <span [ngClass]=\"{'shineYapiliyor': projectToDo?.Status == 'Yapılıyor',\n              'shineBitmekuzere': projectToDo?.Status == 'Test Ediliyor' }\" >\n              {{projectToDo?.TaskTitle}}{{ getProject(projectToDo?.ProjectId) ? ', ': '' }}\n              {{getProject(projectToDo?.ProjectId)?.ProjectName}}</span>\n\n         \n            &nbsp;\n\n\n\n            <a *ngIf=\"this.getProject(projectToDo?.ProjectId)\" ngbTooltip=\"Projeye git\" tooltipClass=\"tooltipSpecial\"\n              [routerLink]=\"['/projeler', projectToDo?.ProjectId, 'yapilacaklar']\"\n              [fragment]=\"this.getProject(projectToDo?.ProjectId).Owner!=this.xyzekiAuthService .Username ? 'shared': ''\"\n              class=\"btn btn-light btn-sm rounded-1 border-0\">\n              <img src=\"../../../assets/arrow-2.png\" style=\"width: 16px;object-fit: cover; cursor: pointer; \" /></a>\n\n <a *ngIf=\"projectToDo\" class=\"modernUnderlined ml-2  w-100\" (click)=\"setStatus(projectToDo?.TaskId)\"\n              style=\"cursor: pointer; font-size: 13px\">{{(projectToDo?.Status ? projectToDo?.Status  : 'Bekliyor')}}</a>\n          </td>\n          <td style=\"width:25%\" class=\"text-center\">\n\n\n            <ng-container *ngIf=\"(projectToDo?.Start | humanizer) != (projectToDo?.Deadline | humanizer); else sameStartDate\">\n              <div *ngIf=\"projectToDo?.Start || projectToDo?.Deadline\"\n                style=\"background-color:rgb(245, 241, 241); border-radius: 20px; padding:5px\">\n\n                <span style=\"color: #00a028; display:block; margin-bottom:5px; \">{{projectToDo?.Start | humanizer}}\n                  <span *ngIf=\"projectToDo?.Start |  date:'shortTime' \"\n                    class=\"time-pipe-design\">{{projectToDo?.Start |  date:'shortTime' }}</span>\n                  <span [hidden]=\"!projectToDo?.Start\">&nbsp;başl.</span>\n                </span>\n\n                <span style=\"color: #b80000; display:block\">{{projectToDo?.Deadline | humanizer}}\n                  <span *ngIf=\"projectToDo?.Deadline |  date:'shortTime' \"\n                    class=\"time-pipe-design\">{{projectToDo?.Deadline |  date:'shortTime' }} </span>\n                  <span [hidden]=\"!projectToDo?.Deadline\">&nbsp;bit.</span>\n                </span>\n\n              </div>\n            </ng-container>\n            <ng-template #sameStartDate>\n\n              <div *ngIf=\"projectToDo?.Start || projectToDo?.Deadline\"\n                style=\"background-color:rgb(245, 241, 241); border-radius: 20px; padding:5px\">\n\n\n                <span style=\" display:block; margin-bottom:5px;\"\n                  style=\"color: rgb(196, 199, 23); \">{{projectToDo?.Start | humanizer}}\n                  <span *ngIf=\"projectToDo?.Start |  date:'shortTime' \"\n                    class=\"time-pipe-design\">{{projectToDo?.Start |  date:'shortTime' }}</span>\n                  <span *ngIf=\"projectToDo?.Start |  date:'shortTime'  && projectToDo?.Deadline |  date:'shortTime' \">\n                    - </span>\n                  <span class=\"time-pipe-design\"\n                    *ngIf=\"projectToDo?.Deadline |  date:'shortTime' \">{{projectToDo?.Deadline |  date:'shortTime' }}</span>\n\n                  <span style=\" display:block; \">başl. ve bit.</span>\n                </span>\n\n\n\n              </div>\n\n\n\n            </ng-template>\n\n\n\n\n          </td>\n          <td style=\"width:5%\" class=\"text-center\">\n\n            <a *ngIf=(projectToDo?.TaskId) class=\"btn filter-cnote pl-0 pt-0 pb-0 ml-1 mr-1 text-nowrap\"\n              style=\"cursor: pointer!important\"\n              (click)=\"showCommentsDialog(projectToDo?.TaskId,projectToDo?.TaskTitle)\">\n              <img src=\"../../../assets/comment-note.svg\" style=\"height: 1.5rem; cursor: pointer;\" />\n              <span>\n                {{getPTAssignedCommentsForCount(projectToDo?.TaskId)?.CommentsCount}}\n              </span>\n            </a>\n          </td>\n          <td style=\"width:15%\" class=\"text-center\">\n\n          </td>\n          <td style=\"width:5%\">\n\n          </td>\n        </tr>\n      </tbody>\n    </table>\n\n\n  </div>\n  <div class=\"card-body bg-white\" *ngIf=\"projectToDosAssignedToMe?.length == 0\">\n    <p *ngIf=\"dayDateStr == 'Gecikmiş'\">\n      Şu an için henüz başlangıcı geçmiş ve hala başlamamış veya teslim tarihi geçmiş bir proje görevi bulamadık.\n    </p>\n    <p *ngIf=\"dayDateStr == 'Tümü'\">\n      Şu an için bir proje göreviniz bulunmamaktadır.\n    </p>\n    <p *ngIf=\"dayDateStr == 'Gün'\">\n      Şu an için bu gün yapılması gereken veya devam eden bir proje görevi bulamadık.\n    </p>\n  </div>\n</div>\n<div class=\"container-fluid\" style=\"height: 50px\">\n\n</div>"
 
 /***/ }),
 
@@ -2614,7 +2681,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var src_app_model_services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/services/project-to-dos.service */ "./src/app/model/services/project-to-dos.service.ts");
 /* harmony import */ var src_app_model_repository_project_to_do_repository__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/repository/project-to-do-repository */ "./src/app/model/repository/project-to-do-repository.ts");
 /* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
@@ -2644,14 +2711,14 @@ __webpack_require__.r(__webpack_exports__);
 
 var MyToDosComponent = /** @class */ (function () {
     // private repository: ProjectToDoRepository
-    function MyToDosComponent(repository, switchHourDataService, projectRepo, permissions, dataService, router, memberShared, projectToDosService, projectToDoSignalrService, dialog, commentSignalService, projectSignalService, changeDetection, timeService) {
+    function MyToDosComponent(repository, switchHourDataService, projectRepo, permissions, dataService, router, xyzekiAuthService, projectToDosService, projectToDoSignalrService, dialog, commentSignalService, projectSignalService, changeDetection, timeService) {
         this.repository = repository;
         this.switchHourDataService = switchHourDataService;
         this.projectRepo = projectRepo;
         this.permissions = permissions;
         this.dataService = dataService;
         this.router = router;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.projectToDosService = projectToDosService;
         this.projectToDoSignalrService = projectToDoSignalrService;
         this.dialog = dialog;
@@ -2659,7 +2726,7 @@ var MyToDosComponent = /** @class */ (function () {
         this.projectSignalService = projectSignalService;
         this.changeDetection = changeDetection;
         this.timeService = timeService;
-        this.taskStatus = ['Bekliyor', 'Yapılıyor', 'Tamamlanmak Üzere', 'Tamamlandı']; // max allowed length is 20 in db column
+        this.taskStatus = ['Bekliyor', 'Yapılıyor', 'Test Ediliyor', 'Tamamlandı']; // max allowed length is 20 in db column
         // projectToDosAssignedToMe pager
         this.pageNo = 1;
         this.pageSize = 5;
@@ -2939,7 +3006,7 @@ var MyToDosComponent = /** @class */ (function () {
                 if ((diff > 0 && minutediff >= 1 && (pt.Status == 'Bekliyor' || pt.Status == null))
                     || (diff2 > 0 && minutediff2 >= 1 && !pt.IsCompleted))
                     return pt;
-                // ['Bekliyor', 'Yapılıyor', 'Tamamlanmak Üzere', 'Tamamlandı'] // max allowed length is 20 in db column
+                // ['Bekliyor', 'Yapılıyor', 'Test Ediliyor', 'Tamamlandı'] // max allowed length is 20 in db column
             }
             else if (pt.Start) { // başlangıç zamanı şu andan küçük ve de hala başlamamış olanları göster(sadece bekliyor olanları)
                 var diff = ((now.getTime() - dateStart.getTime()) / 1000);
@@ -2979,7 +3046,7 @@ var MyToDosComponent = /** @class */ (function () {
             if ((diff > 0 && minutediff >= 1 && (pt.Status == 'Bekliyor' || pt.Status == null))
                 || (diff2 > 0 && minutediff2 >= 1 && !pt.IsCompleted))
                 return true;
-            // ['Bekliyor', 'Yapılıyor', 'Tamamlanmak Üzere', 'Tamamlandı'] // max allowed length is 20 in db column
+            // ['Bekliyor', 'Yapılıyor', 'Test Ediliyor', 'Tamamlandı'] // max allowed length is 20 in db column
         }
         return false;
     };
@@ -3052,7 +3119,7 @@ var MyToDosComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./my-to-dos.component.css */ "./src/app/home/my-to-dos/my-to-dos.component.css")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_project_to_do_repository__WEBPACK_IMPORTED_MODULE_5__["ProjectToDoRepository"], src_app_model_services_shared_switch_hour_data_service__WEBPACK_IMPORTED_MODULE_12__["SwitchHourDataService"], src_app_model_repository_project_repository__WEBPACK_IMPORTED_MODULE_10__["ProjectRepository"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_9__["MemberLicenseRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
-            src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_3__["MemberShared"], src_app_model_services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_4__["ProjectToDosService"],
+            src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"], src_app_model_services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_4__["ProjectToDosService"],
             src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_13__["XyzekiSignalrService"], _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatDialog"],
             src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_13__["XyzekiSignalrService"],
             src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_13__["XyzekiSignalrService"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"], src_app_model_services_time_service__WEBPACK_IMPORTED_MODULE_14__["TimeService"]])
@@ -3094,7 +3161,7 @@ module.exports = "@font-face {\n  font-family: 'Material Icons';\n  font-style: 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div [hidden]=\"!invalidLicensePanelOpen\"\n  style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\n z-index: 10000; background-color: rgb(243, 242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n  <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\" style=\"font-size:15px\">Özür dileriz;\n    fakat herhangi bir\n    kurumsal, bireysel\n    veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>\n</div>\n\n<div class=\"card bg-info  corners-new-quick\" style=\"margin-bottom: 2px\">\n  <div class=\"card-body xyz-card-dark pl-1 pt-0 pb-1 pr-1\" style=\"z-index: 1.2; border-top-color: black; \">\n    <form #quickToDoForm=\"ngForm\" (ngSubmit)=\"saveQuickToDo(quickToDoForm)\" novalidate>\n      <div class=\"input-group w-100 general\">\n        <div class=\"input-group-prepend\">\n          <a ngbTooltip=\"Yenile\" placement=\"bottom\" tooltipClass=\"tooltipSpecial\"\n            class=\"btn btn-outline-secondary text-white rounded-0 gorevYazisi \" style=\"cursor: pointer\"\n            (click)=\"resetModel()\">Görev</a>\n          <a ngbTooltip=\"Yenile\" placement=\"bottom\" class=\"btn btn-outline-secondary text-white rounded-0 gYazisi\"\n            style=\"cursor: pointer\" tooltipClass=\"tooltipSpecial\" (click)=\"resetModel()\">G</a>\n        </div>\n\n        <div style=\"width: 0.01px; height: 0.01px;\">\n          <input (dateSelect)=\"onDateSelection($event)\" [startDate]=\"dateStart\" [autoClose]=\"'outside'\"\n            [dayTemplate]=\"customDay\" [footerTemplate]=\"footer\" [markDisabled]=\"isDisabled\"\n            [style]=\"'background-color:#fefefe'\" ngbDatepicker [showWeekNumbers]=\"true\" navigation=\"arrows\"\n            class=\"form-control\" name=\"datePicker\" #datePicker=\"ngbDatepicker\" />\n        </div>\n\n        <div class=\"input-group-append\">\n          <a ngbTooltip=\"Tarih seçiniz\" placement=\"bottom\" tooltipClass=\"tooltipSpecial\" class=\"btn btn-light calendar\"\n            style=\"cursor: pointer!important\" (click)=\"datePicker.toggle(); \">\n            <img src=\"../../../../assets/calender.png\" style=\"width: 1.3rem; height: 1.1rem; cursor: pointer;\" />\n          </a>\n          <ng-template #footer>\n            <div class=\"myCal\"\n              style=\"padding-top:0.1px; padding-bottom:0.5px; padding-left:0.1px;  padding-right:2.1px\">\n              <button disabled class=\"btn w-100 rounded-0 border-0\" style=\"display: none\">&nbsp;</button>\n              <input (keydown)=\" $event?.keyCode === 13 ? datePicker.close() : ' ' \" ngbDatepicker\n                placeholder=\"Başlangıç tarihi\" autocomplete=\"off\" [showWeekNumbers]=\"true\" navigation=\"arrows\"\n                class=\"form-control w-100\" style=\"margin-left: 1px; margin-bottom: 1px; text-align:center\"\n                name=\"datePickerXS\" [(ngModel)]=\"dateStart\" (ngModelChange)=\"onSelectDateStart($event)\"\n                #datePickerXS=\"ngbDatepicker\" />\n\n\n              <div class=\"timePickerXyz\" *ngIf=\"dateStart\">\n                <ngb-timepicker #timePickerStart name=\"timePickerStart\" [(ngModel)]=\"timeStart\"\n                  (ngModelChange)=\"onSelectTimeStart($event)\" [spinners]=\"false\">\n                </ngb-timepicker>\n              </div>\n\n              <button  type=\"button\" [hidden]=\"!dateStart\" (click)=\"calendarButtonSelect('noDate',true,false); \"\n                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px; margin-bottom: 4px;\">\n                <mat-icon class=\"mat-search_icon-close\" matRipple>close</mat-icon>\n              </button>\n              <input (keydown)=\" $event?.keyCode === 13 ? datePicker.close() : ' ' \" ngbDatepicker\n                placeholder=\"Teslim tarihi\" autocomplete=\"off\" [showWeekNumbers]=\"true\" navigation=\"arrows\"\n                class=\"form-control w-100\" style=\"margin-left: 1px; margin-bottom: 1px; text-align:center\"\n                name=\"datePickerX\" [(ngModel)]=\"date\" (ngModelChange)=\"onSelectDate($event)\"\n                #datePickerX=\"ngbDatepicker\" />\n\n              <div class=\"timePickerXyz\" *ngIf=\"date\">\n                <ngb-timepicker #timePickerDeadline name=\"timePickerDeadline\" [(ngModel)]=\"timeDeadline\"\n                  (ngModelChange)=\"onSelectTimeDeadline($event)\" [spinners]=\"false\"></ngb-timepicker>\n\n              </div>\n\n              <button type=\"button\" (click)=\"calendarButtonSelect('today'); \"\n                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Bugün</button>\n              <button type=\"button\" (click)=\"calendarButtonSelect('tomorrow'); \"\n                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Yarın</button>\n              <button type=\"button\" [hidden]=\"!date\" (click)=\"calendarButtonSelect('noDate'); \"\n                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px; margin-bottom: 4px;\">\n                <mat-icon class=\"mat-search_icon-close\" matRipple>close</mat-icon>\n              </button>\n\n\n              <!-- time select-->\n\n            </div>\n          </ng-template>\n\n          <ng-template #customDay let-date let-currentMonth=\"currentMonth\" let-focused=\"focused\"\n            let-disabled=\"disabled\">\n            <span [class.focused]=\"focused\" [class.range]=\"isRange(date)\"\n              [class.faded]=\"isHovered(date) || isInside(date)\" (mouseenter)=\"hoveredDate = date\"\n              (mouseleave)=\"hoveredDate = null\" [ngbTooltip]=\"isToday(date) ? 'Bugün' : ''\"\n              tooltipClass=\"tooltipSpecial\" placement=\"top\" class=\"custom-day\" [class.weekend]=\"isWeekend(date)\"\n              [class.today]=\"isToday(date)\" [class.hidden]=\"date.month !== currentMonth\" [class.text-muted]=\"disabled\">\n              {{ date.day }}\n            </span>\n          </ng-template>\n\n\n        </div>\n\n\n\n        <div class=\"input-group-append btn-group btn-group-toggle\" style=\"z-index:0.9\">\n          <app-assign-autocomplete [normalMode]=\"true\" (assignedToEvent)=\"onAssignedToEvent($event)\">\n          </app-assign-autocomplete>\n        </div>\n\n\n        <input   (keydown)=\" $event?.keyCode === 13 ? btnSubmit.click() : ' ' \" id=\"textForFocus\" type=\"text\" autocomplete=\"off\" name=\"quickTask\" [(ngModel)]=\"quickToDoModel.TaskTitle\"\n          #quickTask=\"ngModel\" required class=\"form-control\" placeholder=\"Görev ya da yapılacak iş\" />\n\n\n        <!-- <input type=\"text\" name=\"assignedTo\" [(ngModel)]=\"quickToDoModel.AssignedTo\" #assignedTo=\"ngModel\" class=\"form-control\" style=\"max-width:80px!important\"\n          placeholder=\"Kime?\" /> -->\n\n\n\n        <div class=\"input-group-append\">\n          <button #btnSubmit type=\"submit\" class=\"btn btn-primary text-uppercase rounded-0\">Gönder</button>\n        </div>\n\n\n      </div>\n      <!-- <div class=\"input-group w-100\">\n        <span *ngIf=\"modelSubmitted && quickTask?.errors?.required\" class=\"text-white\">\n          Üzgünüz, bir görev tanımı belirtmeniz gerekiyor.\n        </span>\n      </div> -->\n    </form>\n  </div>\n  <div #switchDayArea style=\"z-index: 999\">\n\n    <app-switch-day [quickTodoRepository]=\"quickTodoRepository\"></app-switch-day>\n\n  </div>\n  <div *ngIf=\"myQuickToDos.length != 0 && (this.dataService?.switchMode == 0 || this.dataService?.switchMode == 1 || dayDateStr == 'ArsivKutusu')\" class=\"card-footer bg-white p-2\"\n    style=\"background-color:rgb(255, 255, 255) !important; \">\n\n    <table *ngIf=\"memberShared.LoggedIn\" class=\"table table-hover table-sm \">\n      <thead>\n      </thead>\n      <tbody style=\" height: 100%; \n      overflow: scroll;\" infiniteScroll [infiniteScrollDistance]=\"1\" [infiniteScrollUpDistance]=\"1.5\"\n        [scrollWindow]=\"true\" [infiniteScrollThrottle]=\"100\" (scrolled)=\"onScrollDown()\" cdkDropList\n        id=\"QuickToDosContainer\" (cdkDropListDropped)=\"drop($event)\" class=\"shadowedTr\">\n\n        <tr style=\"margin-bottom: 4px\" (mousedown)=\"onMouseDown($event)\" (cdkDragStarted)=\"onDragStart($event)\" (cdkDragEnded)=\"onDragEnd($event)\" cdkDrag\n          [cdkDragData]=\"quickToDo\" *ngFor=\"let quickToDo  of myQuickToDos\" class=\"draggable trOptimization\">\n\n          <td style=\"float:left\" cdkDragHandle class=\"pr-2 \"\n            [ngStyle]=\"{'background-color': editQuickToDoPanelOpen && quickToDoModelEdit?.TaskId == quickToDo?.TaskId ? 'rgb(230, 231, 231)' : ''}\">\n            <a class=\"p-0 m-0\" *ngIf=\"quickToDo?.Completedby == null && quickToDo?.TaskId != undefined\" placement=\"top\"\n              (click)=\"completeQT(quickToDo)\"><img src=\"../../../assets/squareUnCheck.png\"\n                style=\"width: 1.3rem; height: 1.3rem; cursor: pointer; \" />\n            </a>\n            <a class=\"p-0 m-0\" *ngIf=\"quickToDo?.Completedby != null && quickToDo?.TaskId != undefined\" placement=\"top\"\n              (click)=\"deCompleteQT(quickToDo)\"><img src=\"../../../assets/squareCheck.png\"\n                style=\"width: 1.3rem; height: 1.3rem; cursor: pointer; \" />\n            </a><br>\n\n            <div class=\"mt-1 mobileDate  \">\n              <small ngbTooltip=\"{{quickToDo?.Finish  |  date:'shortTime' }} saatinde\" placement=\"bottom\" tooltipClass=\"tooltipSpecial\">\n                <span>\n                  {{quickToDo?.Completedby && quickToDo?.Finish ? (quickToDo?.Finish | humanizer) : ''}}\n                </span>\n              </small>\n            </div>\n\n            <!-- <img class=\"moveHead\" src=\"../../../assets/moveHeadX.svg\"> -->\n          </td>\n          <td style=\" float:left;  width: 100%; cursor: text;         \" cdkDragHandle class=\"pr-2\"\n            (click)=\"toggleEditQuickToDoPanel(quickToDo?.TaskId); \"\n            *ngIf=\"quickToDoModelEdit?.TaskId != quickToDo?.TaskId\">\n            \n            <div *ngIf=\"quickToDo?.Completedby != null && quickToDo?.TaskId != undefined; else taskToDo\">\n              <!-- <span ngbTooltip=\"Yüksek öncelikli görev\" tooltipClass=\"tooltipSpecial\" placement=\"bottom\" (click)=\"$event.stopPropagation();\" \n              class=\"time-pipe-design p-1 bg-light ml-1 mr-1 text-nowrap\" style=\"cursor: pointer; font-size: 13px; display: inline; \">\n                <img src=\"../../../assets/flagRed.png\"  style=\"height: 25px;\">\n              </span> -->\n              <span style=\"text-decoration: line-through\">{{quickToDo?.TaskTitle}} \n                <!-- <img src=\"../../../assets/flagRed.png\"  style=\"height: 25px; margin-right: 5px;\"> -->\n              </span>\n             \n              <a *ngIf=\"quickToDo?.TaskId\" class=\"modernUnderlined ml-2 w-100\"\n                (click)=\"setStatus(quickToDo?.TaskId);$event.stopPropagation();\"\n                style=\"cursor: pointer; font-size: 13px\">{{(quickToDo?.Status ? quickToDo?.Status  : 'Bekliyor')}}</a>\n            </div>\n            <ng-template #taskToDo>\n              <!-- <span  ngbTooltip=\"Yüksek öncelikli görev\" tooltipClass=\"tooltipSpecial\" placement=\"bottom\" (click)=\"$event.stopPropagation();\"\n               class=\"time-pipe-design p-1 bg-light ml-1 mr-1 text-nowrap\" style=\"cursor: pointer; font-size: 13px; display: inline; \">\n                <img src=\"../../../assets/flagRed.png\"  style=\"height: 25px;\">\n              </span> -->\n              <span [ngClass]=\"{'shineYapiliyor': quickToDo?.Status == 'Yapılıyor',\n                 'shineBitmekuzere': quickToDo?.Status == 'Tamamlanmak Üzere' }\">\n                {{quickToDo?.TaskTitle}}  \n              </span> \n             \n              <a *ngIf=\"quickToDo?.TaskId\" class=\"modernUnderlined ml-2 w-100\"\n                (click)=\"setStatus(quickToDo?.TaskId);$event.stopPropagation();\"\n                style=\"cursor: pointer; font-size: 13px\">{{(quickToDo?.Status ? quickToDo?.Status  : 'Bekliyor')}}</a>\n            </ng-template>\n\n           \n            <!-- <span (click)=\"$event.stopPropagation();\" class=\"time-pipe-design p-1 bg-light ml-2 mr-2 text-nowrap\" style=\"cursor: pointer; font-size: 13px; \">\n              <img src=\"../../../assets/flagRed.png\"  style=\"height: 25px;\">\n            </span> -->\n           \n          </td>\n\n\n\n          <td style=\" float: right;\" cdkDragHandle class=\"pr-2 mobileDate \"\n            *ngIf=\"quickToDoModelEdit?.TaskId != quickToDo?.TaskId\">\n\n            <div class=\"mt-1 mobileDate  \">\n\n\n              <ng-container *ngIf=\"(quickToDo?.Start | humanizer) != (quickToDo?.Date | humanizer); else sameStartDate\">\n                <span style=\"color: #00a028\">{{quickToDo?.Start | humanizer}}\n                  <span *ngIf=\"quickToDo?.Start |  date:'shortTime' \"\n                    class=\"time-pipe-design\">{{quickToDo?.Start |  date:'shortTime' }}</span>\n                  <span *ngIf=\"quickToDo?.Start  && quickToDo?.Date\"> - </span>\n                </span>\n                <div class=\"clearfix\" *ngIf=\"this.innerWidth < 876\"> </div>\n                <span  style=\"color: #b80000\">{{quickToDo?.Date | humanizer}}\n                  <span *ngIf=\"quickToDo?.Date |  date:'shortTime'\"\n                    class=\"time-pipe-design\">{{quickToDo?.Date |  date:'shortTime' }}</span></span>\n                <div class=\"clearfix\" *ngIf=\"this.innerWidth < 500\"> </div>\n              </ng-container>\n              <ng-template #sameStartDate>\n                <span  style=\"color: rgb(196, 199, 23); \">{{quickToDo?.Start | humanizer}}\n                  <span *ngIf=\"quickToDo?.Start |  date:'shortTime' \"\n                    class=\"time-pipe-design\">{{quickToDo?.Start |  date:'shortTime' }}</span>\n                  <span *ngIf=\"quickToDo?.Start |  date:'shortTime'  && quickToDo?.Date |  date:'shortTime' \"> - </span>\n                  <span class=\"time-pipe-design\"\n                    *ngIf=\"quickToDo?.Date |  date:'shortTime' \">{{quickToDo?.Date |  date:'shortTime' }}</span>\n                </span>\n              </ng-template>\n\n              <a *ngIf=(quickToDo?.TaskId) class=\"btn filter-cnote pl-0 pt-0 pb-0 ml-1 mr-1 text-nowrap\"\n                style=\"cursor: pointer!important\" (click)=\"showCommentsDialog(quickToDo?.TaskId,quickToDo?.TaskTitle)\">\n                <img src=\"../../../assets/comment-note.svg\" style=\"height: 1.5rem; cursor: pointer;\" />\n                <span>\n                  {{getQTCommentsForCount(quickToDo?.TaskId)?.CommentsCount}}\n                </span>\n              </a>\n              \n\n            </div>\n\n          </td>\n          <td style=\" float: right;\" cdkDragHandle class=\"pr-2\" *ngIf=\"quickToDoModelEdit?.TaskId != quickToDo?.TaskId\">\n            <div class=\"wrapOrNot\" style=\"color: rgb(90, 90, 90); text-align: center; \"\n              *ngIf=\"quickToDo?.AssignedTo && memberShared.Username == quickToDo?.AssignedTo\">\n              <img *ngIf=\"memberShared?.account?.getValue()?.Avatar\" alt=\"Avatar\"\n                [src]=\"memberShared?.account?.getValue()?.Avatar\" class=\"md-avatar size-1 rounded-circle \">\n              <span> Ben</span>\n              <!-- <span style=\"white-space: nowrap;\"> Ben, @{{quickToDo?.AssignedTo}}</span> -->\n            </div>\n\n\n            <div class=\"wrapOrNot\" style=\"color: rgb(94, 94, 94); text-align: center;\"\n              *ngIf=\"quickToDo?.AssignedTo &&  memberShared.Username != quickToDo?.AssignedTo\">\n              <img *ngIf=\"getMember(quickToDo?.AssignedTo)?.Avatar\" [src]=\"getMember(quickToDo?.AssignedTo)?.Avatar\"\n                alt=\"Avatar\" class=\"md-avatar size-1 rounded-circle \">\n              <span> {{getMember(quickToDo?.AssignedTo)?.Name}}</span></div>\n            <!-- <span style=\"white-space: nowrap;\"> {{getMember(quickToDo?.AssignedTo)?.Name}},\n                  @{{quickToDo?.AssignedTo}}</span></span> -->\n            <!-- <p style=\"color: rgb(165, 165, 165)\" *ngIf=\"memberShared.Username != quickToDo?.AssignedTo\">{{getMember(uye?.Username)?.Name}}\n                {{getMember(uye?.Username)?.Surname}}</p> -->\n\n            <!-- {{quickToDo?.AssignedTo}}{{ quickToDo?.AssignedTo!=undefined ? '\\'a atandı': ''}} -->\n\n          </td>\n          <td cdkDragHandleDisabled  style=\" float: right;\"  *ngIf=\"quickToDoModelEdit?.TaskId != quickToDo?.TaskId\"\n            class=\"toggleClose\">\n\n\n            <div ngbDropdown class=\"d-inline-block\" placement=\"left\">\n              <a class=\"btn filter-grey pl-0 pt-0 pb-0 \" style=\"border:0px solid !important\" id=\"dropdownMemberOptions\"\n                ngbDropdownToggle>\n                <img class=\"moreHead\" src=\"../../../assets/more2.svg\" style=\"height: 7px;object-fit: cover;\" />\n              </a>\n              <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\" class=\"rounded-4 bg-white ml-0 mr-0\">\n                <button *ngIf=\"quickToDo?.TaskId && quickToDoModel?.Archived\" (click)=\"archieve(quickToDo, false)\"\n                  ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\">\n                  <img src=\"../../../assets/arrow-3.png\" style=\"width: 20px;object-fit: cover; cursor: pointer; \"\n                    class=\"mr-2\" />Arşivden Çıkart</button>\n\n                <button *ngIf=\"quickToDo?.TaskId && !quickToDoModel?.Archived\" (click)=\"archieve(quickToDo, true)\"\n                  ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\">\n                  <img src=\"../../../assets/arrow-2.png\" style=\"width: 20px;object-fit: cover; cursor: pointer; \"\n                    class=\"mr-2\" />Arşivle </button>\n                <button (click)=\"toggleEditQuickToDoPanel(quickToDo?.TaskId);\" ngbDropdownItem\n                  class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\">\n                  <img src=\"../../../assets/pencil.png\" style=\"width: 20px;object-fit: cover; cursor: pointer; \"\n                    class=\"mr-2\" />Düzenle</button>\n                <hr>\n                <button *ngIf=\"quickToDo?.TaskId\" (click)=\"delete(quickToDo?.TaskId)\" ngbDropdownItem\n                  class=\"btn btn-light rounded-0 border-0 xyz-nav-btn2\"><img src=\"../../../assets/cancel.svg\"\n                    style=\"width: 18px;object-fit: cover; cursor: pointer; \" class=\"mr-2\" />Görevi Sil</button>\n\n              </div>\n            </div>\n          </td>\n\n          <td cdkDragHandleDisabled style=\"background-color: rgb(230, 231, 231); width: 100%\" colspan=\"4\"\n            *ngIf=\"editQuickToDoPanelOpen && quickToDoModelEdit?.TaskId == quickToDo?.TaskId\">\n            <form #quickToDoEditForm=\"ngForm\" (ngSubmit)=\"editQuickToDo(quickToDoEditForm)\" novalidate>\n              <div class=\"input-group w-100 others\">\n                <textarea (keydown)=\"onKeydownEvent($event)\" id=\"textForFocusEdit\" autofocus name=\"quickTaskEdit\"\n                  #quickTaskEdit=\"ngModel\" [(ngModel)]=\"quickToDoModelEdit.TaskTitle\" required\n                  class=\"xyz-textarea border-0\" placeholder=\"Görevi tanımlar mısınız?\" rows=\"2\"> </textarea>\n\n                <!-- Start of Start Date-->\n                <ng-template #footerEditStart>\n                  <div class=\"myCal\"\n                    style=\"padding-top:0.1px; padding-bottom:0.5px; padding-left:0.1px;  padding-right:2.1px\">\n                    <button disabled class=\"btn w-100 rounded-0 border-0\" style=\"display: none\">&nbsp;</button>\n                    <input (keydown)=\" $event?.keyCode === 13 ? datePickerEditStart.close() : ' ' \" ngbDatepicker\n                      placeholder=\"Başlangıç tarihi\" autocomplete=\"off\" [showWeekNumbers]=\"true\" navigation=\"arrows\"\n                      class=\"form-control w-100\" style=\"margin-left: 1px; margin-bottom: 1px; text-align:center\"\n                      name=\"datePickerEditStartX\" [(ngModel)]=\"dateEditStart\"\n                      (ngModelChange)=\"onSelectDateEditStart($event)\" #datePickerEditStartX=\"ngbDatepicker\" />\n\n                    <div class=\"timePickerXyz\" *ngIf=\"dateEditStart\">\n                      <ngb-timepicker #timePickerEditStart name=\"timePickerEditStart\" [(ngModel)]=\"timeEditStart\"\n                        (ngModelChange)=\"onSelectTimeEditStart($event)\" [spinners]=\"false\"></ngb-timepicker>\n                    </div>\n\n\n                    <button type=\"button\" (click)=\"calendarButtonSelect('today',false,false); \"\n                      class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Bugün</button>\n                    <button type=\"button\" (click)=\"calendarButtonSelect('tomorrow',false,false); \"\n                      class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Yarın</button>\n\n                    <button type=\"button\" [hidden]=\"!dateEditStart\"\n                      (click)=\"calendarButtonSelect('noDate',false,false); \"\n                      class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px; margin-bottom: 4px;\">\n                      <mat-icon class=\"mat-search_icon-close\" matRipple>close</mat-icon>\n                    </button>\n                    <!-- time select-->\n\n                  </div>\n                </ng-template>\n                <ng-template #customDayEditStart let-date let-currentMonth=\"currentMonth\" let-selected=\"selected\"\n                  let-disabled=\"disabled\">\n                  <span [ngbTooltip]=\"isToday(date) ? 'Bugün' : ''\" tooltipClass=\"tooltipSpecial\" placement=\"top\"\n                    class=\"custom-day\" [class.weekend]=\"isWeekend(date)\" [class.today]=\"isToday(date)\"\n                    [class.bg-primary]=\"selected\" [class.hidden]=\"date.month !== currentMonth\"\n                    [class.text-muted]=\"disabled\">\n                    {{ date.day }}\n                  </span>\n                </ng-template>\n\n                <a class=\"btn calendar rounded-0 tarihSeciciBtn\"\n                  style=\"cursor: pointer;  border-bottom:#CED4DA 0.5px solid; background-color: white  \"\n                  (click)=\"datePickerEditStart.toggle()\">\n                  <img src=\"../../../../assets/calender.png\" style=\"width: 1.3rem; height: 1.1rem; cursor: pointer;\" />\n                </a>\n\n                <input style=\"cursor: pointer\" (click)=\"datePickerEditStart.toggle()\" ngbDatepicker\n                  [dayTemplate]=\"customDayEditStart\" [autoClose]=\"'outside'\" [footerTemplate]=\"footerEditStart\"\n                  [markDisabled]=\"isDisabled\" placeholder=\"Başlangıç tarihi\" autocomplete=\"off\" [showWeekNumbers]=\"true\"\n                  placement=\"bottom\" navigation=\"arrows\" class=\"form-control tarihSecici\" name=\"datePickerEditStart\"\n                  [(ngModel)]=\"dateEditStart\" (ngModelChange)=\"onSelectDateEditStart($event)\"\n                  #datePickerEditStart=\"ngbDatepicker\" />\n                <!-- END OF START DATE-->\n\n\n\n\n                <ng-template #footerEdit>\n                  <div class=\"myCal\"\n                    style=\"padding-top:0.1px; padding-bottom:0.5px; padding-left:0.1px;  padding-right:2.1px\">\n                    <button disabled class=\"btn w-100 rounded-0 border-0\" style=\"display: none\">&nbsp;</button>\n                    <input (keydown)=\" $event?.keyCode === 13 ? datePickerEdit.close() : ' ' \" ngbDatepicker\n                      placeholder=\"Teslim tarihi\" autocomplete=\"off\" [showWeekNumbers]=\"true\" navigation=\"arrows\"\n                      class=\"form-control w-100\" style=\"margin-left: 1px; margin-bottom: 1px; text-align:center\"\n                      name=\"datePickerEditX\" [(ngModel)]=\"dateEdit\" (ngModelChange)=\"onSelectDateEdit($event)\"\n                      #datePickerEditX=\"ngbDatepicker\" />\n\n                    <div class=\"timePickerXyz\" *ngIf=\"dateEdit\">\n                      <ngb-timepicker #timePickerEdit name=\"timePickerEdit\" [(ngModel)]=\"timeEdit\"\n                        (ngModelChange)=\"onSelectTimeEdit($event)\" [spinners]=\"false\"></ngb-timepicker>\n                    </div>\n\n\n\n                    <button type=\"button\" (click)=\"calendarButtonSelect('today',false);\"\n                      class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Bugün</button>\n                    <button type=\"button\" (click)=\"calendarButtonSelect('tomorrow',false); \"\n                      class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Yarın</button>\n                    <button type=\"button\" [hidden]=\"!dateEdit\" (click)=\"calendarButtonSelect('noDate',false);\"\n                      class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px; margin-bottom: 4px;\">\n                      <mat-icon class=\"mat-search_icon-close\" matRipple>close</mat-icon>\n                    </button>\n                    <!-- time select-->\n\n                  </div>\n                </ng-template>\n\n                <ng-template #customDayEdit let-date let-currentMonth=\"currentMonth\" let-selected=\"selected\"\n                  let-disabled=\"disabled\">\n                  <span [ngbTooltip]=\"isToday(date) ? 'Bugün' : ''\" tooltipClass=\"tooltipSpecial\" placement=\"top\"\n                    class=\"custom-day\" [class.weekend]=\"isWeekend(date)\" [class.today]=\"isToday(date)\"\n                    [class.bg-primary]=\"selected\" [class.hidden]=\"date.month !== currentMonth\"\n                    [class.text-muted]=\"disabled\">\n                    {{ date.day }}\n                  </span>\n                </ng-template>\n\n                <a class=\"btn calendar rounded-0 tarihSeciciBtn\"\n                  style=\"cursor: pointer;  border-bottom:#CED4DA 0.5px solid; background-color: white  \"\n                  (click)=\"datePickerEdit.toggle()\">\n                  <img src=\"../../../../assets/calender.png\" style=\"width: 1.3rem; height: 1.1rem; cursor: pointer;\" />\n                </a>\n                <input style=\"cursor: pointer\" [dayTemplate]=\"customDayEdit\" (click)=\"datePickerEdit.toggle()\"\n                  [footerTemplate]=\"footerEdit\" [autoClose]=\"'outside'\" [markDisabled]=\"isDisabled\" ngbDatepicker\n                  placeholder=\"Teslim tarihi\" autocomplete=\"off\" [showWeekNumbers]=\"true\" navigation=\"arrows\"\n                  class=\"form-control tarihSecici\" size=\"16\" name=\"datePickerEdit\" [(ngModel)]=\"dateEdit\"\n                  (ngModelChange)=\"onSelectDateEdit($event)\" #datePickerEdit=\"ngbDatepicker\" />\n\n\n                <div class=\"input-group-append btn-group btn-group-toggle\" style=\"z-index: inherit 0.1;\">\n                  <app-assign-autocomplete #editChild [selectedItemOver]=\"this.quickToDoModelEdit?.AssignedTo\"\n                    [normalMode]='true' (assignedToEventEdit)=\"onAssignedToEventEdit($event)\">\n                  </app-assign-autocomplete>\n                </div>\n                <div class=\"input-group-append\" style=\"z-index: 0\">\n                  <button type=\"submit\" class=\"btn btn-secondary text-white rounded-0 degistirBtn\">Değiştir</button>\n                  <a (click)=\"toggleEditQuickToDoPanel(quickToDo?.TaskId)\"\n                    class=\"btn btn-danger rounded-0 text-white text-uppercase kapatBtn\" style=\"cursor: pointer\">X</a>\n                </div>\n              </div>\n\n            </form>\n\n\n          </td>\n          <!-- <td>\n              <img  class=\"moveHead\" width=\"15px\" src=\"../../../assets/moveHead1.svg\" />\n          </td> -->\n        </tr>\n      </tbody>\n    </table>\n    <div>\n      <div cdkDropList id=\"ArsivKutusu\" (cdkDropListDropped)=\"dropArc($event)\" #arsivSurukleAlani\n        class=\"arsivSurukleAlani grabbingArea\">\n        <span> <img style=\"height:32px; \" class=\"pl-0 mr-1 \" src=\"../../../assets/arc.svg\">Arşivlemek için buraya\n          bırakabilirsiniz</span>\n      </div>\n    </div>\n\n\n  </div>\n</div>\n\n\n<div class=\"card corners-new border-bottom-0\" *ngIf=\"dayDateStr != 'ArsivKutusu' && (this.dataService?.switchMode != 1)\">\n  <div class=\"card-header text-white pl-2 pr-2 pb-2\"\n    style=\"background-color:rgb(179, 179, 179) !important; padding-top: 13px\">\n    <span class=\"font-weight-bolder\" style=\"text-shadow: 1px 1px 2px cadetblue;\">Ekip Gelen Kutusu\n    </span>\n    <!-- <button class=\"close\" [routerLink]=\"[ '/isler' ]\"><span class=\"text-light\">&times;</span></button> -->\n  </div>\n  <div class=\"card-body  bg-white \" *ngIf=\"assignedToMeUnComplete?.length == 0\">\n    <p *ngIf=\"dayDateStr == 'Gecikmiş'\">\n      Şu an için henüz başlangıcı geçmiş ve hala başlamamış veya teslim tarihi geçmiş bir görev bulamadık.\n    </p>\n    <p *ngIf=\"dayDateStr == 'Tümü'\">\n      Şu an için bir göreviniz bulunmamaktadır.\n    </p>\n    <p *ngIf=\"dayDateStr == 'Gün'\">\n      Şu an için bu güne ait bir görev bulamadık.\n    </p>\n  </div>\n\n  <div class=\"card-body bg-white p-2 \" *ngIf=\"assignedToMeUnComplete?.length != 0\"\n    style=\"max-height: 500px; overflow-y: scroll; overflow-y : auto; overflow-x:hidden;\">\n\n    <table *ngIf=\"memberShared.LoggedIn\" class=\"table table-hover table-sm gizliHeader2\">\n      <thead>\n        <th scope=\"col\"></th>\n        <th scope=\"col\">Görev</th>\n    \n      </thead>\n      <tbody class=\"shadowedTr\">\n\n        <tr style=\"margin-bottom: 4px\" class=\"exclude\" role=\"button\" *ngFor=\"let quickToDo  of assignedToMeUnComplete\"\n          style=\"width: 100%;\">\n          <td *ngIf=\"quickToDo?.Completedby == null && quickToDo?.TaskId != undefined\">\n            <a ngbTooltip=\"Tamamlandı\" (click)=\"completeQT(quickToDo)\"><img src=\"../../../assets/squareUnCheck.png\"\n                style=\"width: 1.3rem; height: 1.3rem; cursor: pointer; \" />\n            </a>\n          </td>\n          <td class=\"w-100\" *ngIf=\"quickToDo?.Completedby != null && quickToDo?.TaskId != undefined\">\n            <a ngbTooltip=\"İptal et\" (click)=\"completeQT(quickToDo)\"><img src=\"../../../assets/squareCheck.png\"\n                style=\"width: 1.3rem; height: 1.3rem; cursor: pointer; \" />\n            </a>\n          </td>\n\n          <td style=\"width: 100%;\">\n            <!-- <span  ngbTooltip=\"Yüksek öncelikli görev\" tooltipClass=\"tooltipSpecial\" placement=\"bottom\" (click)=\"$event.stopPropagation();\"\n            class=\"time-pipe-design p-1 bg-light ml-1 mr-1 text-nowrap\" style=\"cursor: pointer; font-size: 13px; display: inline; \">\n             <img src=\"../../../assets/flagRed.png\"  style=\"height: 25px;\">\n           </span> -->\n          <span [ngClass]=\"{'shineYapiliyor': quickToDo?.Status == 'Yapılıyor',\n            'shineBitmekuzere': quickToDo?.Status == 'Tamamlanmak Üzere' }\">{{quickToDo?.TaskTitle}}</span>\n            <a *ngIf=\"quickToDo\" class=\"modernUnderlined ml-2 w-100\" (click)=\"setStatus(quickToDo?.TaskId,'assigned');\"\n              style=\"cursor: pointer; font-size: 13px\">{{(quickToDo?.Status ? quickToDo?.Status  : 'Bekliyor')}}</a>\n          </td>\n\n          <td>\n            <div class=\"mt-1 mobileDate  \">\n\n                <ng-container *ngIf=\"(quickToDo?.Start | humanizer) != (quickToDo?.Date | humanizer); else sameStartDate\">\n                    <span style=\"color: #00a028\">{{quickToDo?.Start | humanizer}}\n                      <span *ngIf=\"quickToDo?.Start |  date:'shortTime' \"\n                        class=\"time-pipe-design\">{{quickToDo?.Start |  date:'shortTime' }}</span>\n                      <span *ngIf=\"quickToDo?.Start  && quickToDo?.Date\"> - </span>\n                    </span>\n                    <div class=\"clearfix\" *ngIf=\"this.innerWidth < 876\"> </div>\n                    <span style=\"color: #b80000\">{{quickToDo?.Date | humanizer}}\n                      <span *ngIf=\"quickToDo?.Date |  date:'shortTime'\"\n                        class=\"time-pipe-design\">{{quickToDo?.Date |  date:'shortTime' }}</span></span>\n                    <div class=\"clearfix\" *ngIf=\"this.innerWidth < 500\"> </div>\n                  </ng-container>\n                  <ng-template #sameStartDate>\n                    <span style=\"color: rgb(196, 199, 23); \">{{quickToDo?.Start | humanizer}}\n                      <span *ngIf=\"quickToDo?.Start |  date:'shortTime' \"\n                        class=\"time-pipe-design\">{{quickToDo?.Start |  date:'shortTime' }}</span>\n                      <span *ngIf=\"quickToDo?.Start |  date:'shortTime'  && quickToDo?.Date |  date:'shortTime' \"> - </span>\n                      <span class=\"time-pipe-design\"\n                        *ngIf=\"quickToDo?.Date |  date:'shortTime' \">{{quickToDo?.Date |  date:'shortTime' }}</span>\n                    </span>\n                  </ng-template>\n\n\n\n              <a *ngIf=(quickToDo?.TaskId) class=\"btn filter-cnote pl-0 pt-0 pb-0 ml-1 mr-1 text-nowrap\"\n                style=\"cursor: pointer!important\" (click)=\"showCommentsDialog(quickToDo?.TaskId,quickToDo?.TaskTitle)\">\n                <img src=\"../../../assets/comment-note.svg\" style=\"height: 1.5rem; cursor: pointer;\" />\n                <span>\n                  {{getQTCommentsForCount(quickToDo?.TaskId)?.CommentsCount}}\n                </span>\n              </a>\n            </div>\n          </td>\n\n\n\n        </tr>\n\n      </tbody>\n    </table>\n\n  </div>\n</div>"
+module.exports = "<div [hidden]=\"!invalidLicensePanelOpen\"\r\n  style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\r\n z-index: 10000; background-color: rgb(243, 242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\r\n  <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\" style=\"font-size:15px\">Özür dileriz;\r\n    fakat herhangi bir\r\n    kurumsal, bireysel\r\n    veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>\r\n</div>\r\n\r\n<div class=\"card bg-info  corners-new-quick\" style=\"margin-bottom: 2px\">\r\n  <div class=\"card-body xyz-card-dark pl-1 pt-0 pb-1 pr-1\" style=\"z-index: 1.2; border-top-color: black; \">\r\n    <form #quickToDoForm=\"ngForm\" (ngSubmit)=\"saveQuickToDo(quickToDoForm)\" novalidate>\r\n      <div class=\"input-group w-100 general\">\r\n        <div class=\"input-group-prepend\">\r\n          <a ngbTooltip=\"Yenile\" placement=\"bottom\" tooltipClass=\"tooltipSpecial\"\r\n            class=\"btn btn-outline-secondary text-white rounded-0 gorevYazisi \" style=\"cursor: pointer\"\r\n            (click)=\"resetModel()\">Görev</a>\r\n          <a ngbTooltip=\"Yenile\" placement=\"bottom\" class=\"btn btn-outline-secondary text-white rounded-0 gYazisi\"\r\n            style=\"cursor: pointer\" tooltipClass=\"tooltipSpecial\" (click)=\"resetModel()\">G</a>\r\n        </div>\r\n\r\n        <div style=\"width: 0.01px; height: 0.01px;\">\r\n          <input (dateSelect)=\"onDateSelection($event)\" [startDate]=\"dateStart\" [autoClose]=\"'outside'\"\r\n            [dayTemplate]=\"customDay\" [footerTemplate]=\"footer\" [markDisabled]=\"isDisabled\"\r\n            [style]=\"'background-color:#fefefe'\" ngbDatepicker [showWeekNumbers]=\"true\" navigation=\"arrows\"\r\n            class=\"form-control\" name=\"datePicker\" #datePicker=\"ngbDatepicker\" />\r\n        </div>\r\n\r\n        <div class=\"input-group-append\">\r\n          <a ngbTooltip=\"Tarih seçiniz\" placement=\"bottom\" tooltipClass=\"tooltipSpecial\" class=\"btn btn-light calendar\"\r\n            style=\"cursor: pointer!important\" (click)=\"datePicker.toggle(); \">\r\n            <img src=\"../../../../assets/calender.png\" style=\"width: 1.3rem; height: 1.1rem; cursor: pointer;\" />\r\n          </a>\r\n          <ng-template #footer>\r\n            <div class=\"myCal\"\r\n              style=\"padding-top:0.1px; padding-bottom:0.5px; padding-left:0.1px;  padding-right:2.1px\">\r\n              <button disabled class=\"btn w-100 rounded-0 border-0\" style=\"display: none\">&nbsp;</button>\r\n              <input (keydown)=\" $event?.keyCode === 13 ? datePicker.close() : ' ' \" ngbDatepicker\r\n                placeholder=\"Başlangıç tarihi\" autocomplete=\"off\" [showWeekNumbers]=\"true\" navigation=\"arrows\"\r\n                class=\"form-control w-100\" style=\"margin-left: 1px; margin-bottom: 1px; text-align:center\"\r\n                name=\"datePickerXS\" [(ngModel)]=\"dateStart\" (ngModelChange)=\"onSelectDateStart($event)\"\r\n                #datePickerXS=\"ngbDatepicker\" />\r\n\r\n\r\n              <div class=\"timePickerXyz\" *ngIf=\"dateStart\">\r\n                <ngb-timepicker #timePickerStart name=\"timePickerStart\" [(ngModel)]=\"timeStart\"\r\n                  (ngModelChange)=\"onSelectTimeStart($event)\" [spinners]=\"false\">\r\n                </ngb-timepicker>\r\n              </div>\r\n\r\n              <button  type=\"button\" [hidden]=\"!dateStart\" (click)=\"calendarButtonSelect('noDate',true,false); \"\r\n                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px; margin-bottom: 4px;\">\r\n                <mat-icon class=\"mat-search_icon-close\" matRipple>close</mat-icon>\r\n              </button>\r\n              <input (keydown)=\" $event?.keyCode === 13 ? datePicker.close() : ' ' \" ngbDatepicker\r\n                placeholder=\"Teslim tarihi\" autocomplete=\"off\" [showWeekNumbers]=\"true\" navigation=\"arrows\"\r\n                class=\"form-control w-100\" style=\"margin-left: 1px; margin-bottom: 1px; text-align:center\"\r\n                name=\"datePickerX\" [(ngModel)]=\"date\" (ngModelChange)=\"onSelectDate($event)\"\r\n                #datePickerX=\"ngbDatepicker\" />\r\n\r\n              <div class=\"timePickerXyz\" *ngIf=\"date\">\r\n                <ngb-timepicker #timePickerDeadline name=\"timePickerDeadline\" [(ngModel)]=\"timeDeadline\"\r\n                  (ngModelChange)=\"onSelectTimeDeadline($event)\" [spinners]=\"false\"></ngb-timepicker>\r\n\r\n              </div>\r\n\r\n              <button type=\"button\" (click)=\"calendarButtonSelect('today'); \"\r\n                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Bugün</button>\r\n              <button type=\"button\" (click)=\"calendarButtonSelect('tomorrow'); \"\r\n                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Yarın</button>\r\n              <button type=\"button\" [hidden]=\"!date\" (click)=\"calendarButtonSelect('noDate'); \"\r\n                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px; margin-bottom: 4px;\">\r\n                <mat-icon class=\"mat-search_icon-close\" matRipple>close</mat-icon>\r\n              </button>\r\n\r\n\r\n              <!-- time select-->\r\n\r\n            </div>\r\n          </ng-template>\r\n\r\n          <ng-template #customDay let-date let-currentMonth=\"currentMonth\" let-focused=\"focused\"\r\n            let-disabled=\"disabled\">\r\n            <span [class.focused]=\"focused\" [class.range]=\"isRange(date)\"\r\n              [class.faded]=\"isHovered(date) || isInside(date)\" (mouseenter)=\"hoveredDate = date\"\r\n              (mouseleave)=\"hoveredDate = null\" [ngbTooltip]=\"isToday(date) ? 'Bugün' : ''\"\r\n              tooltipClass=\"tooltipSpecial\" placement=\"top\" class=\"custom-day\" [class.weekend]=\"isWeekend(date)\"\r\n              [class.today]=\"isToday(date)\" [class.hidden]=\"date.month !== currentMonth\" [class.text-muted]=\"disabled\">\r\n              {{ date.day }}\r\n            </span>\r\n          </ng-template>\r\n\r\n\r\n        </div>\r\n\r\n\r\n\r\n        <div class=\"input-group-append btn-group btn-group-toggle\" style=\"z-index:0.9\">\r\n          <app-assign-autocomplete [normalMode]=\"true\" (assignedToEvent)=\"onAssignedToEvent($event)\">\r\n          </app-assign-autocomplete>\r\n        </div>\r\n\r\n\r\n        <input   (keydown)=\" $event?.keyCode === 13 ? btnSubmit.click() : ' ' \" id=\"textForFocus\" type=\"text\" autocomplete=\"off\" name=\"quickTask\" [(ngModel)]=\"quickToDoModel.TaskTitle\"\r\n          #quickTask=\"ngModel\" required class=\"form-control\" placeholder=\"Görev ya da yapılacak iş\" />\r\n\r\n\r\n        <!-- <input type=\"text\" name=\"assignedTo\" [(ngModel)]=\"quickToDoModel.AssignedTo\" #assignedTo=\"ngModel\" class=\"form-control\" style=\"max-width:80px!important\"\r\n          placeholder=\"Kime?\" /> -->\r\n\r\n\r\n\r\n        <div class=\"input-group-append\">\r\n          <button #btnSubmit type=\"submit\" class=\"btn btn-primary text-uppercase rounded-0\">Gönder</button>\r\n        </div>\r\n\r\n\r\n      </div>\r\n      <!-- <div class=\"input-group w-100\">\r\n        <span *ngIf=\"modelSubmitted && quickTask?.errors?.required\" class=\"text-white\">\r\n          Üzgünüz, bir görev tanımı belirtmeniz gerekiyor.\r\n        </span>\r\n      </div> -->\r\n    </form>\r\n  </div>\r\n  <div #switchDayArea style=\"z-index: 999\">\r\n\r\n    <app-switch-day [quickTodoRepository]=\"quickTodoRepository\"></app-switch-day>\r\n\r\n  </div>\r\n  <div *ngIf=\"myQuickToDos.length != 0 && (this.dataService?.switchMode == 0 || this.dataService?.switchMode == 1 || dayDateStr == 'ArsivKutusu')\" class=\"card-footer bg-white p-2\"\r\n    style=\"background-color:rgb(255, 255, 255) !important; \">\r\n\r\n    <table *ngIf=\"xyzekiAuthService?.LoggedIn\" class=\"table table-hover table-sm \">\r\n      <thead>\r\n      </thead>\r\n      <tbody style=\" height: 100%; \r\n      overflow: scroll;\" infiniteScroll [infiniteScrollDistance]=\"1\" [infiniteScrollUpDistance]=\"1.5\"\r\n        [scrollWindow]=\"true\" [infiniteScrollThrottle]=\"100\" (scrolled)=\"onScrollDown()\" cdkDropList\r\n        id=\"QuickToDosContainer\" (cdkDropListDropped)=\"drop($event)\" class=\"shadowedTr\">\r\n\r\n        <tr style=\"margin-bottom: 4px\" (mousedown)=\"onMouseDown($event)\" (cdkDragStarted)=\"onDragStart($event)\" (cdkDragEnded)=\"onDragEnd($event)\" cdkDrag\r\n          [cdkDragData]=\"quickToDo\" *ngFor=\"let quickToDo  of myQuickToDos\" class=\"draggable trOptimization\">\r\n\r\n          <td style=\" width: 5%;\" cdkDragHandle \r\n            [ngStyle]=\"{'background-color': editQuickToDoPanelOpen && quickToDoModelEdit?.TaskId == quickToDo?.TaskId ? 'rgb(230, 231, 231)' : ''}\">\r\n            <a class=\"p-0 m-0\" *ngIf=\"quickToDo?.Completedby == null && quickToDo?.TaskId != undefined\" placement=\"top\"\r\n              (click)=\"completeQT(quickToDo)\"><img src=\"../../../assets/squareUnCheck.png\"\r\n                style=\"width: 1.3rem; height: 1.3rem; cursor: pointer; \" />\r\n            </a>\r\n            <a class=\"p-0 m-0\" *ngIf=\"quickToDo?.Completedby != null && quickToDo?.TaskId != undefined\" placement=\"top\"\r\n              (click)=\"deCompleteQT(quickToDo)\"><img src=\"../../../assets/squareCheck.png\"\r\n                style=\"width: 1.3rem; height: 1.3rem; cursor: pointer; \" />\r\n            </a><br>\r\n\r\n            <div class=\"mt-1 mobileDate  \">\r\n              <small ngbTooltip=\"{{quickToDo?.Finish  |  date:'shortTime' }} saatinde\" placement=\"bottom\" tooltipClass=\"tooltipSpecial\">\r\n                <span>\r\n                  {{quickToDo?.Completedby && quickToDo?.Finish ? (quickToDo?.Finish | humanizer) : ''}}\r\n                </span>\r\n              </small>\r\n            </div>\r\n\r\n            <!-- <img class=\"moveHead\" src=\"../../../assets/moveHeadX.svg\"> -->\r\n          </td>\r\n          <td style=\" width: 45%; cursor: text;       \" cdkDragHandle \r\n            (click)=\"toggleEditQuickToDoPanel(quickToDo?.TaskId); \"\r\n            *ngIf=\"quickToDoModelEdit?.TaskId != quickToDo?.TaskId\">\r\n            \r\n            <div *ngIf=\"quickToDo?.Completedby != null && quickToDo?.TaskId != undefined; else taskToDo\">\r\n              <!-- <span ngbTooltip=\"Yüksek öncelikli görev\" tooltipClass=\"tooltipSpecial\" placement=\"bottom\" (click)=\"$event.stopPropagation();\" \r\n              class=\"time-pipe-design p-1 bg-light ml-1 mr-1 text-nowrap\" style=\"cursor: pointer; font-size: 13px; display: inline; \">\r\n                <img src=\"../../../assets/flagRed.png\"  style=\"height: 25px;\">\r\n              </span> -->\r\n              <span style=\"text-decoration: line-through\">{{quickToDo?.TaskTitle}} \r\n                <!-- <img src=\"../../../assets/flagRed.png\"  style=\"height: 25px; margin-right: 5px;\"> -->\r\n              </span>\r\n             \r\n              <a *ngIf=\"quickToDo?.TaskId\" class=\"modernUnderlined ml-2 w-100\"\r\n                (click)=\"setStatus(quickToDo?.TaskId);$event.stopPropagation();\"\r\n                style=\"cursor: pointer; font-size: 13px\">{{(quickToDo?.Status ? quickToDo?.Status  : 'Bekliyor')}}</a>\r\n            </div>\r\n            <ng-template #taskToDo>\r\n              <!-- <span  ngbTooltip=\"Yüksek öncelikli görev\" tooltipClass=\"tooltipSpecial\" placement=\"bottom\" (click)=\"$event.stopPropagation();\"\r\n               class=\"time-pipe-design p-1 bg-light ml-1 mr-1 text-nowrap\" style=\"cursor: pointer; font-size: 13px; display: inline; \">\r\n                <img src=\"../../../assets/flagRed.png\"  style=\"height: 25px;\">\r\n              </span> -->\r\n              <span [ngClass]=\"{'shineYapiliyor': quickToDo?.Status == 'Yapılıyor',\r\n                 'shineBitmekuzere': quickToDo?.Status == 'Test Ediliyor' }\">\r\n                {{quickToDo?.TaskTitle}}  \r\n              </span> \r\n             \r\n              <a *ngIf=\"quickToDo?.TaskId\" class=\"modernUnderlined ml-2 w-100\"\r\n                (click)=\"setStatus(quickToDo?.TaskId);$event.stopPropagation();\"\r\n                style=\"cursor: pointer; font-size: 13px\">{{(quickToDo?.Status ? quickToDo?.Status  : 'Bekliyor')}}</a>\r\n            </ng-template>\r\n\r\n           \r\n            <!-- <span (click)=\"$event.stopPropagation();\" class=\"time-pipe-design p-1 bg-light ml-2 mr-2 text-nowrap\" style=\"cursor: pointer; font-size: 13px; \">\r\n              <img src=\"../../../assets/flagRed.png\"  style=\"height: 25px;\">\r\n            </span> -->\r\n           \r\n          </td>\r\n\r\n         \r\n\r\n\r\n          <td style=\" width: 25%\" cdkDragHandle class=\"text-center \"\r\n            *ngIf=\"quickToDoModelEdit?.TaskId != quickToDo?.TaskId\">\r\n\r\n         \r\n\r\n              <ng-container\r\n              *ngIf=\"(quickToDo?.Start | humanizer) != (quickToDo?.Date | humanizer); else sameStartDate\">\r\n              <div *ngIf=\"quickToDo?.Start || quickToDo?.Date\"\r\n                  style=\"background-color:rgb(245, 241, 241); border-radius: 20px; padding:5px\">\r\n\r\n                  <span\r\n                      style=\"color: #00a028; display:block; margin-bottom:5px; \">{{quickToDo?.Start | humanizer}}\r\n                      <span *ngIf=\"quickToDo?.Start |  date:'shortTime' \"\r\n                          class=\"time-pipe-design\">{{quickToDo?.Start |  date:'shortTime' }}</span>\r\n                      <span [hidden]=\"!quickToDo?.Start\">&nbsp;başl.</span>\r\n                  </span>\r\n\r\n                  <span style=\"color: #b80000; display:block\">{{quickToDo?.Date | humanizer}}\r\n                      <span *ngIf=\"quickToDo?.Date |  date:'shortTime' \"\r\n                          class=\"time-pipe-design\">{{quickToDo?.Date |  date:'shortTime' }} </span>\r\n                      <span [hidden]=\"!quickToDo?.Date\">&nbsp;bit.</span>\r\n                  </span>\r\n\r\n              </div>\r\n          </ng-container>\r\n          <ng-template #sameStartDate>\r\n\r\n              <div *ngIf=\"quickToDo?.Start || quickToDo?.Date\"\r\n                  style=\"background-color:rgb(245, 241, 241); border-radius: 20px; padding:5px\">\r\n\r\n\r\n                  <span style=\" display:block; margin-bottom:5px;\" style=\"color: rgb(196, 199, 23); \">{{quickToDo?.Start | humanizer}}\r\n                      <span *ngIf=\"quickToDo?.Start |  date:'shortTime' \"\r\n                          class=\"time-pipe-design\">{{quickToDo?.Start |  date:'shortTime' }}</span>\r\n                      <span\r\n                          *ngIf=\"quickToDo?.Start |  date:'shortTime'  && quickToDo?.Date |  date:'shortTime' \">\r\n                          - </span>\r\n                      <span class=\"time-pipe-design\"\r\n                          *ngIf=\"quickToDo?.Date |  date:'shortTime' \">{{quickToDo?.Date |  date:'shortTime' }}</span>\r\n\r\n                      <span style=\" display:block; \">başl. ve bit.</span>\r\n                  </span>\r\n\r\n\r\n\r\n              </div>\r\n\r\n\r\n\r\n          </ng-template>\r\n            \r\n         \r\n          </td>\r\n          <td style=\" width: 5%\" cdkDragHandle class=\"text-center \" *ngIf=\"quickToDoModelEdit?.TaskId != quickToDo?.TaskId\">\r\n            <a *ngIf=(quickToDo?.TaskId) class=\"btn filter-cnote pl-0 pt-0 pb-0 ml-1 mr-1 text-nowrap\"\r\n            style=\"cursor: pointer!important\" (click)=\"showCommentsDialog(quickToDo?.TaskId,quickToDo?.TaskTitle)\">\r\n            <img src=\"../../../assets/comment-note.svg\" style=\"height: 1.5rem; cursor: pointer;\" />\r\n            <span>\r\n              {{getQTCommentsForCount(quickToDo?.TaskId)?.CommentsCount}}\r\n            </span>\r\n          </a>\r\n          </td>\r\n          <td style=\"  width: 15%\"  cdkDragHandle class=\"text-center \" *ngIf=\"quickToDoModelEdit?.TaskId != quickToDo?.TaskId\">\r\n            <div class=\"wrapOrNot\" style=\"color: rgb(90, 90, 90); text-align: center; \"\r\n              *ngIf=\"quickToDo?.AssignedTo && xyzekiAuthService?.Username == quickToDo?.AssignedTo\">\r\n              <img *ngIf=\"xyzekiAuthService?.Member?.Avatar\" alt=\"Avatar\"\r\n                [src]=\"xyzekiAuthService?.Member?.Avatar\" class=\"md-avatar size-1 rounded-circle \">\r\n              <span> Ben</span>\r\n              <!-- <span style=\"white-space: nowrap;\"> Ben, @{{quickToDo?.AssignedTo}}</span> -->\r\n            </div>\r\n\r\n\r\n            <div class=\"wrapOrNot\" style=\"color: rgb(94, 94, 94); text-align: center;\"\r\n              *ngIf=\"quickToDo?.AssignedTo &&  xyzekiAuthService?.Username != quickToDo?.AssignedTo\">\r\n              <img *ngIf=\"getMember(quickToDo?.AssignedTo)?.Avatar\" [src]=\"getMember(quickToDo?.AssignedTo)?.Avatar\"\r\n                alt=\"Avatar\" class=\"md-avatar size-1 rounded-circle \">\r\n              <span> {{getMember(quickToDo?.AssignedTo)?.Name}}</span></div>\r\n            <!-- <span style=\"white-space: nowrap;\"> {{getMember(quickToDo?.AssignedTo)?.Name}},\r\n                  @{{quickToDo?.AssignedTo}}</span></span> -->\r\n            <!-- <p style=\"color: rgb(165, 165, 165)\" *ngIf=\"xyzekiAuthService?.Username != quickToDo?.AssignedTo\">{{getMember(uye?.Username)?.Name}}\r\n                {{getMember(uye?.Username)?.Surname}}</p> -->\r\n\r\n            <!-- {{quickToDo?.AssignedTo}}{{ quickToDo?.AssignedTo!=undefined ? '\\'a atandı': ''}} -->\r\n\r\n          </td>\r\n          <td cdkDragHandleDisabled  style=\" width: 5%\"  *ngIf=\"quickToDoModelEdit?.TaskId != quickToDo?.TaskId\"\r\n            class=\"toggleClose text-center\">\r\n\r\n\r\n            <div ngbDropdown class=\"d-inline-block\" placement=\"left\">\r\n              <a class=\"btn filter-grey pl-0 pt-0 pb-0 \" style=\"border:0px solid !important\" id=\"dropdownMemberOptions\"\r\n                ngbDropdownToggle>\r\n                <img class=\"moreHead\" src=\"../../../assets/more2.svg\" style=\"height: 7px;object-fit: cover;\" />\r\n              </a>\r\n              <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\" class=\"rounded-4 bg-white ml-0 mr-0\">\r\n                <button *ngIf=\"quickToDo?.TaskId && quickToDoModel?.Archived\" (click)=\"archieve(quickToDo, false)\"\r\n                  ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\">\r\n                  <img src=\"../../../assets/arrow-3.png\" style=\"width: 20px;object-fit: cover; cursor: pointer; \"\r\n                    class=\"mr-2\" />Arşivden Çıkart</button>\r\n\r\n                <button *ngIf=\"quickToDo?.TaskId && !quickToDoModel?.Archived\" (click)=\"archieve(quickToDo, true)\"\r\n                  ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\">\r\n                  <img src=\"../../../assets/arrow-2.png\" style=\"width: 20px;object-fit: cover; cursor: pointer; \"\r\n                    class=\"mr-2\" />Arşivle </button>\r\n                <button (click)=\"toggleEditQuickToDoPanel(quickToDo?.TaskId);\" ngbDropdownItem\r\n                  class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\">\r\n                  <img src=\"../../../assets/pencil.png\" style=\"width: 20px;object-fit: cover; cursor: pointer; \"\r\n                    class=\"mr-2\" />Düzenle</button>\r\n                <hr>\r\n                <button *ngIf=\"quickToDo?.TaskId\" (click)=\"delete(quickToDo?.TaskId)\" ngbDropdownItem\r\n                  class=\"btn btn-light rounded-0 border-0 xyz-nav-btn2\"><img src=\"../../../assets/cancel.svg\"\r\n                    style=\"width: 18px;object-fit: cover; cursor: pointer; \" class=\"mr-2\" />Görevi Sil</button>\r\n\r\n              </div>\r\n            </div>\r\n          </td>\r\n\r\n          <td cdkDragHandleDisabled style=\"background-color: rgb(230, 231, 231); width: 100%\" colspan=\"4\"\r\n            *ngIf=\"editQuickToDoPanelOpen && quickToDoModelEdit?.TaskId == quickToDo?.TaskId\">\r\n            <form #quickToDoEditForm=\"ngForm\" (ngSubmit)=\"editQuickToDo(quickToDoEditForm)\" novalidate>\r\n              <div class=\"input-group w-100 others\">\r\n                <textarea (keydown)=\"onKeydownEvent($event)\" id=\"textForFocusEdit\" autofocus name=\"quickTaskEdit\"\r\n                  #quickTaskEdit=\"ngModel\" [(ngModel)]=\"quickToDoModelEdit.TaskTitle\" required\r\n                  class=\"xyz-textarea border-0\" placeholder=\"Görevi tanımlar mısınız?\" rows=\"2\"> </textarea>\r\n\r\n                <!-- Start of Start Date-->\r\n                <ng-template #footerEditStart>\r\n                  <div class=\"myCal\"\r\n                    style=\"padding-top:0.1px; padding-bottom:0.5px; padding-left:0.1px;  padding-right:2.1px\">\r\n                    <button disabled class=\"btn w-100 rounded-0 border-0\" style=\"display: none\">&nbsp;</button>\r\n                    <input (keydown)=\" $event?.keyCode === 13 ? datePickerEditStart.close() : ' ' \" ngbDatepicker\r\n                      placeholder=\"Başlangıç tarihi\" autocomplete=\"off\" [showWeekNumbers]=\"true\" navigation=\"arrows\"\r\n                      class=\"form-control w-100\" style=\"margin-left: 1px; margin-bottom: 1px; text-align:center\"\r\n                      name=\"datePickerEditStartX\" [(ngModel)]=\"dateEditStart\"\r\n                      (ngModelChange)=\"onSelectDateEditStart($event)\" #datePickerEditStartX=\"ngbDatepicker\" />\r\n\r\n                    <div class=\"timePickerXyz\" *ngIf=\"dateEditStart\">\r\n                      <ngb-timepicker #timePickerEditStart name=\"timePickerEditStart\" [(ngModel)]=\"timeEditStart\"\r\n                        (ngModelChange)=\"onSelectTimeEditStart($event)\" [spinners]=\"false\"></ngb-timepicker>\r\n                    </div>\r\n\r\n\r\n                    <button type=\"button\" (click)=\"calendarButtonSelect('today',false,false); \"\r\n                      class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Bugün</button>\r\n                    <button type=\"button\" (click)=\"calendarButtonSelect('tomorrow',false,false); \"\r\n                      class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Yarın</button>\r\n\r\n                    <button type=\"button\" [hidden]=\"!dateEditStart\"\r\n                      (click)=\"calendarButtonSelect('noDate',false,false); \"\r\n                      class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px; margin-bottom: 4px;\">\r\n                      <mat-icon class=\"mat-search_icon-close\" matRipple>close</mat-icon>\r\n                    </button>\r\n                    <!-- time select-->\r\n\r\n                  </div>\r\n                </ng-template>\r\n                <ng-template #customDayEditStart let-date let-currentMonth=\"currentMonth\" let-selected=\"selected\"\r\n                  let-disabled=\"disabled\">\r\n                  <span [ngbTooltip]=\"isToday(date) ? 'Bugün' : ''\" tooltipClass=\"tooltipSpecial\" placement=\"top\"\r\n                    class=\"custom-day\" [class.weekend]=\"isWeekend(date)\" [class.today]=\"isToday(date)\"\r\n                    [class.bg-primary]=\"selected\" [class.hidden]=\"date.month !== currentMonth\"\r\n                    [class.text-muted]=\"disabled\">\r\n                    {{ date.day }}\r\n                  </span>\r\n                </ng-template>\r\n\r\n                <a class=\"btn calendar rounded-0 tarihSeciciBtn\"\r\n                  style=\"cursor: pointer;  border-bottom:#CED4DA 0.5px solid; background-color: white  \"\r\n                  (click)=\"datePickerEditStart.toggle()\">\r\n                  <img src=\"../../../../assets/calender.png\" style=\"width: 1.3rem; height: 1.1rem; cursor: pointer;\" />\r\n                </a>\r\n\r\n                <input style=\"cursor: pointer\" (click)=\"datePickerEditStart.toggle()\" ngbDatepicker\r\n                  [dayTemplate]=\"customDayEditStart\" [autoClose]=\"'outside'\" [footerTemplate]=\"footerEditStart\"\r\n                  [markDisabled]=\"isDisabled\" placeholder=\"Başlangıç tarihi\" autocomplete=\"off\" [showWeekNumbers]=\"true\"\r\n                  placement=\"bottom\" navigation=\"arrows\" class=\"form-control tarihSecici\" name=\"datePickerEditStart\"\r\n                  [(ngModel)]=\"dateEditStart\" (ngModelChange)=\"onSelectDateEditStart($event)\"\r\n                  #datePickerEditStart=\"ngbDatepicker\" />\r\n                <!-- END OF START DATE-->\r\n\r\n\r\n\r\n\r\n                <ng-template #footerEdit>\r\n                  <div class=\"myCal\"\r\n                    style=\"padding-top:0.1px; padding-bottom:0.5px; padding-left:0.1px;  padding-right:2.1px\">\r\n                    <button disabled class=\"btn w-100 rounded-0 border-0\" style=\"display: none\">&nbsp;</button>\r\n                    <input (keydown)=\" $event?.keyCode === 13 ? datePickerEdit.close() : ' ' \" ngbDatepicker\r\n                      placeholder=\"Teslim tarihi\" autocomplete=\"off\" [showWeekNumbers]=\"true\" navigation=\"arrows\"\r\n                      class=\"form-control w-100\" style=\"margin-left: 1px; margin-bottom: 1px; text-align:center\"\r\n                      name=\"datePickerEditX\" [(ngModel)]=\"dateEdit\" (ngModelChange)=\"onSelectDateEdit($event)\"\r\n                      #datePickerEditX=\"ngbDatepicker\" />\r\n\r\n                    <div class=\"timePickerXyz\" *ngIf=\"dateEdit\">\r\n                      <ngb-timepicker #timePickerEdit name=\"timePickerEdit\" [(ngModel)]=\"timeEdit\"\r\n                        (ngModelChange)=\"onSelectTimeEdit($event)\" [spinners]=\"false\"></ngb-timepicker>\r\n                    </div>\r\n\r\n\r\n\r\n                    <button type=\"button\" (click)=\"calendarButtonSelect('today',false);\"\r\n                      class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Bugün</button>\r\n                    <button type=\"button\" (click)=\"calendarButtonSelect('tomorrow',false); \"\r\n                      class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Yarın</button>\r\n                    <button type=\"button\" [hidden]=\"!dateEdit\" (click)=\"calendarButtonSelect('noDate',false);\"\r\n                      class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px; margin-bottom: 4px;\">\r\n                      <mat-icon class=\"mat-search_icon-close\" matRipple>close</mat-icon>\r\n                    </button>\r\n                    <!-- time select-->\r\n\r\n                  </div>\r\n                </ng-template>\r\n\r\n                <ng-template #customDayEdit let-date let-currentMonth=\"currentMonth\" let-selected=\"selected\"\r\n                  let-disabled=\"disabled\">\r\n                  <span [ngbTooltip]=\"isToday(date) ? 'Bugün' : ''\" tooltipClass=\"tooltipSpecial\" placement=\"top\"\r\n                    class=\"custom-day\" [class.weekend]=\"isWeekend(date)\" [class.today]=\"isToday(date)\"\r\n                    [class.bg-primary]=\"selected\" [class.hidden]=\"date.month !== currentMonth\"\r\n                    [class.text-muted]=\"disabled\">\r\n                    {{ date.day }}\r\n                  </span>\r\n                </ng-template>\r\n\r\n                <a class=\"btn calendar rounded-0 tarihSeciciBtn\"\r\n                  style=\"cursor: pointer;  border-bottom:#CED4DA 0.5px solid; background-color: white  \"\r\n                  (click)=\"datePickerEdit.toggle()\">\r\n                  <img src=\"../../../../assets/calender.png\" style=\"width: 1.3rem; height: 1.1rem; cursor: pointer;\" />\r\n                </a>\r\n                <input style=\"cursor: pointer\" [dayTemplate]=\"customDayEdit\" (click)=\"datePickerEdit.toggle()\"\r\n                  [footerTemplate]=\"footerEdit\" [autoClose]=\"'outside'\" [markDisabled]=\"isDisabled\" ngbDatepicker\r\n                  placeholder=\"Teslim tarihi\" autocomplete=\"off\" [showWeekNumbers]=\"true\" navigation=\"arrows\"\r\n                  class=\"form-control tarihSecici\" size=\"16\" name=\"datePickerEdit\" [(ngModel)]=\"dateEdit\"\r\n                  (ngModelChange)=\"onSelectDateEdit($event)\" #datePickerEdit=\"ngbDatepicker\" />\r\n\r\n\r\n                <div class=\"input-group-append btn-group btn-group-toggle\" style=\"z-index: inherit 0.1;\">\r\n                  <app-assign-autocomplete #editChild [selectedItemOver]=\"this.quickToDoModelEdit?.AssignedTo\"\r\n                    [normalMode]='true' (assignedToEventEdit)=\"onAssignedToEventEdit($event)\">\r\n                  </app-assign-autocomplete>\r\n                </div>\r\n                <div class=\"input-group-append\" style=\"z-index: 0\">\r\n                  <button type=\"submit\" class=\"btn btn-secondary text-white rounded-0 degistirBtn\">Değiştir</button>\r\n                  <a (click)=\"toggleEditQuickToDoPanel(quickToDo?.TaskId)\"\r\n                    class=\"btn btn-danger rounded-0 text-white text-uppercase kapatBtn\" style=\"cursor: pointer\">X</a>\r\n                </div>\r\n              </div>\r\n\r\n            </form>\r\n\r\n\r\n          </td>\r\n          <!-- <td>\r\n              <img  class=\"moveHead\" width=\"15px\" src=\"../../../assets/moveHead1.svg\" />\r\n          </td> -->\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <div>\r\n      <div cdkDropList id=\"ArsivKutusu\" (cdkDropListDropped)=\"dropArc($event)\" #arsivSurukleAlani\r\n        class=\"arsivSurukleAlani grabbingArea\">\r\n        <span> <img style=\"height:32px; \" class=\"pl-0 mr-1 \" src=\"../../../assets/arc.svg\">Arşivlemek için buraya\r\n          bırakabilirsiniz</span>\r\n      </div>\r\n    </div>\r\n\r\n\r\n  </div>\r\n</div>\r\n\r\n\r\n<div class=\"card corners-new border-bottom-0\" *ngIf=\"dayDateStr != 'ArsivKutusu' && (this.dataService?.switchMode != 1)\">\r\n  <div class=\"card-header text-white pl-2 pr-2 pb-2\"\r\n    style=\"background-color:rgb(179, 179, 179) !important; padding-top: 13px\">\r\n    <span class=\"font-weight-bolder\" style=\"text-shadow: 1px 1px 2px cadetblue;\">Ekip Gelen Kutusu\r\n    </span>\r\n    <!-- <button class=\"close\" [routerLink]=\"[ '/isler' ]\"><span class=\"text-light\">&times;</span></button> -->\r\n  </div>\r\n  <div class=\"card-body  bg-white \" *ngIf=\"assignedToMeUnComplete?.length == 0\">\r\n    <p *ngIf=\"dayDateStr == 'Gecikmiş'\">\r\n      Şu an için henüz başlangıcı geçmiş ve hala başlamamış veya teslim tarihi geçmiş bir görev bulamadık.\r\n    </p>\r\n    <p *ngIf=\"dayDateStr == 'Tümü'\">\r\n      Şu an için bir göreviniz bulunmamaktadır.\r\n    </p>\r\n    <p *ngIf=\"dayDateStr == 'Gün'\">\r\n      Şu an için bu güne ait bir görev bulamadık.\r\n    </p>\r\n  </div>\r\n\r\n  <div class=\"card-body bg-white p-2 \" *ngIf=\"assignedToMeUnComplete?.length != 0\"\r\n    style=\"max-height: 500px; overflow-y: scroll; overflow-y : auto; overflow-x:hidden;\">\r\n\r\n    <table *ngIf=\"xyzekiAuthService?.LoggedIn\" class=\"table table-hover table-sm gizliHeader2\">\r\n      <thead>\r\n        <th scope=\"col\"></th>\r\n        <th scope=\"col\">Görev</th>\r\n    \r\n      </thead>\r\n      <tbody class=\"shadowedTr\">\r\n\r\n        <tr style=\"margin-bottom: 4px\" class=\"exclude\" role=\"button\" *ngFor=\"let quickToDo  of assignedToMeUnComplete\"\r\n          style=\"width: 100%;\">\r\n          <td style=\"width: 5%;   \"  >\r\n            <a *ngIf=\"quickToDo?.Completedby == null && quickToDo?.TaskId != undefined\" ngbTooltip=\"Tamamlandı\" (click)=\"completeQT(quickToDo)\"><img src=\"../../../assets/squareUnCheck.png\"\r\n                style=\"width: 1.3rem; height: 1.3rem; cursor: pointer; \" />\r\n            </a>\r\n\r\n            <a  *ngIf=\"quickToDo?.Completedby != null && quickToDo?.TaskId != undefined\" ngbTooltip=\"İptal et\" (click)=\"completeQT(quickToDo)\"><img src=\"../../../assets/squareCheck.png\"\r\n              style=\"width: 1.3rem; height: 1.3rem; cursor: pointer; \" />\r\n          </a>\r\n          </td>\r\n      \r\n\r\n          <td style=\"width: 45%;   \">\r\n      \r\n          <span [ngClass]=\"{'shineYapiliyor': quickToDo?.Status == 'Yapılıyor',\r\n            'shineBitmekuzere': quickToDo?.Status == 'Test Ediliyor' }\">{{quickToDo?.TaskTitle}}</span>\r\n            <a *ngIf=\"quickToDo\" class=\"modernUnderlined ml-2 w-100\" (click)=\"setStatus(quickToDo?.TaskId,'assigned');\"\r\n              style=\"cursor: pointer; font-size: 13px\">{{(quickToDo?.Status ? quickToDo?.Status  : 'Bekliyor')}}</a>\r\n          </td>\r\n\r\n          <td style=\"width: 25%;\" class=\"text-center\"> \r\n          \r\n            <ng-container\r\n            *ngIf=\"(quickToDo?.Start | humanizer) != (quickToDo?.Date | humanizer); else sameStartDate\">\r\n            <div *ngIf=\"quickToDo?.Start || quickToDo?.Date\"\r\n                style=\"background-color:rgb(245, 241, 241); border-radius: 20px; padding:5px\">\r\n\r\n                <span\r\n                    style=\"color: #00a028; display:block; margin-bottom:5px; \">{{quickToDo?.Start | humanizer}}\r\n                    <span *ngIf=\"quickToDo?.Start |  date:'shortTime' \"\r\n                        class=\"time-pipe-design\">{{quickToDo?.Start |  date:'shortTime' }}</span>\r\n                    <span [hidden]=\"!quickToDo?.Start\">&nbsp;başl.</span>\r\n                </span>\r\n\r\n                <span style=\"color: #b80000; display:block\">{{quickToDo?.Date | humanizer}}\r\n                    <span *ngIf=\"quickToDo?.Date |  date:'shortTime' \"\r\n                        class=\"time-pipe-design\">{{quickToDo?.Date |  date:'shortTime' }} </span>\r\n                    <span [hidden]=\"!quickToDo?.Date\">&nbsp;bit.</span>\r\n                </span>\r\n\r\n            </div>\r\n        </ng-container>\r\n        <ng-template #sameStartDate>\r\n\r\n            <div *ngIf=\"quickToDo?.Start || quickToDo?.Date\"\r\n                style=\"background-color:rgb(245, 241, 241); border-radius: 20px; padding:5px\">\r\n\r\n\r\n                <span style=\" display:block; margin-bottom:5px;\" style=\"color: rgb(196, 199, 23); \">{{quickToDo?.Start | humanizer}}\r\n                    <span *ngIf=\"quickToDo?.Start |  date:'shortTime' \"\r\n                        class=\"time-pipe-design\">{{quickToDo?.Start |  date:'shortTime' }}</span>\r\n                    <span\r\n                        *ngIf=\"quickToDo?.Start |  date:'shortTime'  && quickToDo?.Date |  date:'shortTime' \">\r\n                        - </span>\r\n                    <span class=\"time-pipe-design\"\r\n                        *ngIf=\"quickToDo?.Date |  date:'shortTime' \">{{quickToDo?.Date |  date:'shortTime' }}</span>\r\n\r\n                    <span style=\" display:block; \">başl. ve bit.</span>\r\n                </span>\r\n\r\n\r\n\r\n            </div>\r\n\r\n\r\n\r\n        </ng-template>\r\n          \r\n\r\n          </td>\r\n\r\n          <td style=\"width: 5%;\" class=\"text-center\">\r\n            <a *ngIf=(quickToDo?.TaskId) class=\"btn filter-cnote pl-0 pt-0 pb-0 ml-1 mr-1 text-nowrap\"\r\n            style=\"cursor: pointer!important\" (click)=\"showCommentsDialog(quickToDo?.TaskId,quickToDo?.TaskTitle)\">\r\n            <img src=\"../../../assets/comment-note.svg\" style=\"height: 1.5rem; cursor: pointer;\" />\r\n            <span>\r\n              {{getQTCommentsForCount(quickToDo?.TaskId)?.CommentsCount}}\r\n            </span>\r\n          </a>\r\n          </td>\r\n          <td  style=\"width: 15%;\" class=\"text-center\">\r\n\r\n          </td>\r\n          <td  style=\"width: 5%;\">\r\n          </td>\r\n\r\n        \r\n\r\n        </tr>\r\n\r\n      </tbody>\r\n    </table>\r\n\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -3113,7 +3180,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_model_quick_task_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/quick-task.model */ "./src/app/model/quick-task.model.ts");
 /* harmony import */ var src_app_model_repository_quick_to_do_repository__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/repository/quick-to-do-repository */ "./src/app/model/repository/quick-to-do-repository.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var src_app_ui_tools_assign_autocomplete_assign_autocomplete_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/ui-tools/assign-autocomplete/assign-autocomplete.component */ "./src/app/ui-tools/assign-autocomplete/assign-autocomplete.component.ts");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 /* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
@@ -3142,18 +3209,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var QuickToDosComponent = /** @class */ (function () {
-    function QuickToDosComponent(switchHourDataService, dateTimeInfra, repositoryTM, permissions, memberShared, quickTodoRepository, dataService, dialog, changeDetection) {
+    function QuickToDosComponent(switchHourDataService, dateTimeInfra, repositoryTM, permissions, xyzekiAuthService, quickTodoRepository, dataService, dialog, changeDetection) {
         var _this = this;
         this.switchHourDataService = switchHourDataService;
         this.dateTimeInfra = dateTimeInfra;
         this.repositoryTM = repositoryTM;
         this.permissions = permissions;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.quickTodoRepository = quickTodoRepository;
         this.dataService = dataService;
         this.dialog = dialog;
         this.changeDetection = changeDetection;
-        this.taskStatus = ['Bekliyor', 'Yapılıyor', 'Tamamlanmak Üzere', 'Tamamlandı']; // max allowed length is 20 in db column
+        this.taskStatus = ['Bekliyor', 'Yapılıyor', 'Test Ediliyor', 'Tamamlandı']; // max allowed length is 20 in db column
         this.sortFilter = function (qt1, qt2) { return (qt1.Order - qt2.Order); };
         this.dayFilter = function (qt) { return qt; }; // closed at first.
         this.arcFilter = function (qt) { if (!qt.Archived == true)
@@ -3439,7 +3506,7 @@ var QuickToDosComponent = /** @class */ (function () {
                 var nextIndex = (++statusIndex % 4);
                 qTask.Status = this.taskStatus[nextIndex];
                 if (nextIndex == 3) {
-                    qTask.Completedby = this.memberShared.Username;
+                    qTask.Completedby = this.xyzekiAuthService.Username;
                     // let date = new Date();
                     // date.setHours(0, 0, 0, 0);
                     // qTask.Finish = date.toISOString();
@@ -3642,7 +3709,7 @@ var QuickToDosComponent = /** @class */ (function () {
                 if ((diff > 0 && minutediff >= 1 && (qt.Status == 'Bekliyor' || qt.Status == null))
                     || (diff2 > 0 && minutediff2 >= 1 && !qt.Completedby))
                     return qt;
-                // ['Bekliyor', 'Yapılıyor', 'Tamamlanmak Üzere', 'Tamamlandı'] // max allowed length is 20 in db column
+                // ['Bekliyor', 'Yapılıyor', 'Test Ediliyor', 'Tamamlandı'] // max allowed length is 20 in db column
             }
             else if (qt.Start) { // başlangıç zamanı şu andan küçük ve de hala başlamamış olanları göster(sadece bekliyor olanları)
                 var diff = ((now.getTime() - dateStart.getTime()) / 1000);
@@ -3682,7 +3749,7 @@ var QuickToDosComponent = /** @class */ (function () {
             if ((diff > 0 && minutediff >= 1 && (qt.Status == 'Bekliyor' || qt.Status == null))
                 || (diff2 > 0 && minutediff2 >= 1 && !qt.Completedby))
                 return true;
-            // ['Bekliyor', 'Yapılıyor', 'Tamamlanmak Üzere', 'Tamamlandı'] // max allowed length is 20 in db column
+            // ['Bekliyor', 'Yapılıyor', 'Test Ediliyor', 'Tamamlandı'] // max allowed length is 20 in db column
         }
         return false;
     };
@@ -3746,7 +3813,7 @@ var QuickToDosComponent = /** @class */ (function () {
         var _this = this;
         if (this.permissions.getAccessGranted()) {
             if (quickToDo) {
-                quickToDo.Completedby = this.memberShared.Username;
+                quickToDo.Completedby = this.xyzekiAuthService.Username;
                 // let finish: Date = new Date();
                 // finish.setHours(0, 0, 0, 0);
                 // quickToDo.Finish = finish.toISOString();
@@ -4191,7 +4258,7 @@ var QuickToDosComponent = /** @class */ (function () {
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_services_shared_switch_hour_data_service__WEBPACK_IMPORTED_MODULE_15__["SwitchHourDataService"], src_infrastructure_xyzeki_datetime_infra__WEBPACK_IMPORTED_MODULE_14__["XyzekiDateTimeInfra"],
             src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_9__["TeamMemberRepository"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_13__["MemberLicenseRepository"],
-            src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_5__["MemberShared"], src_app_model_repository_quick_to_do_repository__WEBPACK_IMPORTED_MODULE_3__["QuickToDoRepository"],
+            src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_5__["XyzekiAuthService"], src_app_model_repository_quick_to_do_repository__WEBPACK_IMPORTED_MODULE_3__["QuickToDoRepository"],
             src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_8__["DataService"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_11__["MatDialog"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"]])
     ], QuickToDosComponent);
     return QuickToDosComponent;
@@ -4391,7 +4458,7 @@ module.exports = "  .xyz-card-dark {\n      background: #222;\n      color: #fff
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n    <div class=\"row justify-content-center\">\n        <div class=\"col-md-10 col-lg-10 col-12 \">\n            <div class=\"card bg-white mt-3 mb-3 \">\n                <div class=\"card-header xyz-card-dark text-light rounded-0\">\n                    <a class=\"btn btn-dark text-white rounded-0\" [routerLink]=\"[ '/isler' ]\">Geri</a>\n                    <a *ngIf=\"this?.memberShared?.Username == 'tadakoglu'\" class=\"btn btn-dark text-white rounded-0\"\n                        [routerLink]=\"[ '/admin/license-management' ]\">Lisans Yönetimi</a>\n                    <a class=\"btn float-right\">Lisanslar</a>\n                </div>\n                <div class=\"card-body\">\n                    <div class=\"container-fluid\">\n                        <div class=\"col\">\n                            <div>\n                                <h5>Lisans Doğrulama</h5>\n                                <p>Ekibinizle iş paylaşımı yapabilmek için bir lisansınızın olması gerekir.\n                                </p>\n                            </div>\n                            <div>\n                                <!-- <form #licenseForm=\"ngForm\" novalidate>\n                                    <div class=\"input-group \">\n                                        <div class=\"input-group-prepend\">\n                                            <button disabled class=\"btn btn-dark rounded-0  \" style=\"  padding-left:4px !important;\n                                            padding-right:4px !important;\">&nbsp;</button>\n                                        </div>\n                                        <input type=\"text\" name=\"license\" #license=\"ngModel\"\n                                            [(ngModel)]=\"memberLicenseModel.LicenseId\" required class=\"form-control\"\n                                            placeholder=\"813f966c-94c2-4589-x80a...\" />\n                                        <div class=\"input-group-append\">\n                                            <button type=\"submit\" class=\"btn btn-secondary rounded-0\" style=\"  padding-left:4px !important;\n                                                padding-right:4px !important;\">Onayla</button>\n                                        </div>\n                                    </div>\n                                </form> -->\n                            </div>\n\n                            <div class=\"mt-2\">\n                                <table *ngIf=\"myLicense?.LicenseId\" class=\"table table-responsive table-hover  pl-1 pr-1 \">\n                                    <tbody>\n                                        <tr>\n                                            <td>{{(myLicense?.LicenseId).substr(0,10)}}...</td>\n                                            <td>{{(myLicense?.LicenseType).substr(0,1)?.toUpperCase()}}{{(myLicense?.LicenseType)?.substr(1)}}</td>\n                                            <td>{{myLicense?.StartDate  | date : 'dd/MM/yyyy'}} -\n                                                {{myLicense?.EndDate  | date : 'dd/MM/yyyy'}}</td>\n                                            <td>{{myLicense?.Company}} </td>\n                                            <td nowrap>{{myLicense?.NumberOfEmployees}} Kişi</td>\n                                            <td nowrap *ngIf=\"myLicense?.LicenseId\">\n                                                <app-azure-sa-occupancy [setLicenseId]=\"myLicense?.LicenseId\">\n                                                </app-azure-sa-occupancy>/{{myLicense?.AzureSaSizeInGb}} GB\n                                            </td>\n\n                                        </tr>\n                                    </tbody>\n                                </table>\n                                <div *ngIf=\"!myLicense?.LicenseId\">\n                                    <p>Şu anda bir yazılım lisansınız bulunmamaktadır. </p>\n                                    <p>Harika iş paylaşımı özelliklerimizden faydalanmak için bir lisans satın almanızı\n                                        öneriririz.</p>\n                                </div>\n                            </div>\n                            <div>\n                                <h5>Lisans Satın Al</h5>\n                                <p>KDV'siz lisans ücreti hesaplamak için aşağıdaki bilgileri doldurunuz. (19.90 TL/Kişi/Ay) </p>\n                                <div class=\"form-group calc\">\n                                    <!-- <label for=\"employees\">Sizinle birlikte toplam çalışan sayınız nedir?</label> -->\n                                    <input #employeeNumber [(ngModel)]=\"totalEmployee\" required type=\"number\"\n                                        class=\"form-control w-100\" id=\"employees\" max=\"50\" min=\"3\"\n                                        placeholder=\"Sizinle birlikte toplam çalışan sayınız nedir?\">\n\n                                </div>\n                                <div class=\"form-group calc\">\n                                    <!-- <label for=\"months\">Kaç aylık lisans istiyorsunuz?</label> -->\n                                    <input #monthNumber [(ngModel)]=\"totalMonths\" required type=\"number\"\n                                        class=\"form-control w-100\" id=\"months\" min=\"12\"\n                                        placeholder=\"Kaç aylık lisans istiyorsunuz? (En az 12)\">\n\n\n                                </div>\n                                <p>Xyzeki Uygulaması Lisans Bedeli =\n                                    {{ (totalEmployee * totalMonths * 19.90) ?  (totalEmployee * totalMonths * 19.90) : '0' }}\n                                    TL </p>\n                                <p>KDV = {{(totalEmployee * totalMonths * 19.90 * 18 / 100) ?  (totalEmployee * totalMonths * 19.90  * 18 / 100) : '0'}}TL</p>\n                                <p>Toplam Ücret = {{((totalEmployee * totalMonths * 19.90) + (totalEmployee * totalMonths * 19.90 * 18 / 100)) ? ((totalEmployee * totalMonths * 19.90) + (totalEmployee * totalMonths * 19.90 * 18 / 100)) : '0'}}TL</p>\n                                <hr>\n                                <p>Lütfen kurumsal satın alım için irtibata geçiniz.</p>\n                                <!-- <p><b>bilgi@xyzeki.com</b></p> -->\n\n                            </div>\n                        </div>\n\n                    </div>\n                </div>\n            </div>\n        </div>\n\n\n    </div>\n\n</div>"
+module.exports = "<div class=\"container\">\n    <div class=\"row justify-content-center\">\n        <div class=\"col-md-10 col-lg-10 col-12 \">\n            <div class=\"card bg-white mt-3 mb-3 \">\n                <div class=\"card-header xyz-card-dark text-light rounded-0\">\n                    <a class=\"btn btn-dark text-white rounded-0\" [routerLink]=\"[ '/isler' ]\">Geri</a>\n                    <a *ngIf=\"this?.xyzekiAuthService?.Username == 'tadakoglu'\" class=\"btn btn-dark text-white rounded-0\"\n                        [routerLink]=\"[ '/admin/license-management' ]\">Lisans Yönetimi</a>\n                    <a class=\"btn float-right\">Lisanslar</a>\n                </div>\n                <div class=\"card-body\">\n                    <div class=\"container-fluid\">\n                        <div class=\"col\">\n                            <div>\n                                <h5>Lisans Doğrulama</h5>\n                                <p>Ekibinizle iş paylaşımı yapabilmek için bir lisansınızın olması gerekir.\n                                </p>\n                            </div>\n                            <div>\n                                <!-- <form #licenseForm=\"ngForm\" novalidate>\n                                    <div class=\"input-group \">\n                                        <div class=\"input-group-prepend\">\n                                            <button disabled class=\"btn btn-dark rounded-0  \" style=\"  padding-left:4px !important;\n                                            padding-right:4px !important;\">&nbsp;</button>\n                                        </div>\n                                        <input type=\"text\" name=\"license\" #license=\"ngModel\"\n                                            [(ngModel)]=\"memberLicenseModel.LicenseId\" required class=\"form-control\"\n                                            placeholder=\"813f966c-94c2-4589-x80a...\" />\n                                        <div class=\"input-group-append\">\n                                            <button type=\"submit\" class=\"btn btn-secondary rounded-0\" style=\"  padding-left:4px !important;\n                                                padding-right:4px !important;\">Onayla</button>\n                                        </div>\n                                    </div>\n                                </form> -->\n                            </div>\n\n                            <div class=\"mt-2\">\n                                <table *ngIf=\"myLicense?.LicenseId\" class=\"table table-responsive table-hover  pl-1 pr-1 \">\n                                    <tbody>\n                                        <tr>\n                                            <td>{{(myLicense?.LicenseId).substr(0,10)}}...</td>\n                                            <td>{{(myLicense?.LicenseType).substr(0,1)?.toUpperCase()}}{{(myLicense?.LicenseType)?.substr(1)}}</td>\n                                            <td>{{myLicense?.StartDate  | date : 'dd/MM/yyyy'}} -\n                                                {{myLicense?.EndDate  | date : 'dd/MM/yyyy'}}</td>\n                                            <td>{{myLicense?.Company}} </td>\n                                            <td nowrap>{{myLicense?.NumberOfEmployees}} Kişi</td>\n                                            <td nowrap *ngIf=\"myLicense?.LicenseId\">\n                                                <app-azure-sa-occupancy [setLicenseId]=\"myLicense?.LicenseId\">\n                                                </app-azure-sa-occupancy>/{{myLicense?.AzureSaSizeInGb}} GB\n                                            </td>\n\n                                        </tr>\n                                    </tbody>\n                                </table>\n                                <div *ngIf=\"!myLicense?.LicenseId\">\n                                    <p>Şu anda bir yazılım lisansınız bulunmamaktadır. </p>\n                                    <p>Harika iş paylaşımı özelliklerimizden faydalanmak için bir lisans satın almanızı\n                                        öneriririz.</p>\n                                </div>\n                            </div>\n                            <div>\n                                <h5>Lisans Satın Al</h5>\n                                <p>KDV'siz lisans ücreti hesaplamak için aşağıdaki bilgileri doldurunuz. (19.90 TL/Kişi/Ay) </p>\n                                <div class=\"form-group calc\">\n                                    <!-- <label for=\"employees\">Sizinle birlikte toplam çalışan sayınız nedir?</label> -->\n                                    <input #employeeNumber [(ngModel)]=\"totalEmployee\" required type=\"number\"\n                                        class=\"form-control w-100\" id=\"employees\" max=\"50\" min=\"3\"\n                                        placeholder=\"Sizinle birlikte toplam çalışan sayınız nedir?\">\n\n                                </div>\n                                <div class=\"form-group calc\">\n                                    <!-- <label for=\"months\">Kaç aylık lisans istiyorsunuz?</label> -->\n                                    <input #monthNumber [(ngModel)]=\"totalMonths\" required type=\"number\"\n                                        class=\"form-control w-100\" id=\"months\" min=\"12\"\n                                        placeholder=\"Kaç aylık lisans istiyorsunuz? (En az 12)\">\n\n\n                                </div>\n                                <p>Xyzeki Uygulaması Lisans Bedeli =\n                                    {{ (totalEmployee * totalMonths * 19.90) ?  (totalEmployee * totalMonths * 19.90) : '0' }}\n                                    TL </p>\n                                <p>KDV = {{(totalEmployee * totalMonths * 19.90 * 18 / 100) ?  (totalEmployee * totalMonths * 19.90  * 18 / 100) : '0'}}TL</p>\n                                <p>Toplam Ücret = {{((totalEmployee * totalMonths * 19.90) + (totalEmployee * totalMonths * 19.90 * 18 / 100)) ? ((totalEmployee * totalMonths * 19.90) + (totalEmployee * totalMonths * 19.90 * 18 / 100)) : '0'}}TL</p>\n                                <hr>\n                                <p>Lütfen kurumsal satın alım için irtibata geçiniz.</p>\n                                <!-- <p><b>bilgi@xyzeki.com</b></p> -->\n\n                            </div>\n                        </div>\n\n                    </div>\n                </div>\n            </div>\n        </div>\n\n\n    </div>\n\n</div>"
 
 /***/ }),
 
@@ -4409,18 +4476,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
 /* harmony import */ var src_app_model_member_license_sm_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/member-license-sm.model */ "./src/app/model/member-license-sm.model.ts");
-/* harmony import */ var src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 
 
 
 
 
 var MemberLicensesComponent = /** @class */ (function () {
-    function MemberLicensesComponent(repository, memberShared) {
+    function MemberLicensesComponent(repository, xyzekiAuthService) {
         this.repository = repository;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.date = null;
-        this.memberLicenseModel = new src_app_model_member_license_sm_model__WEBPACK_IMPORTED_MODULE_3__["MemberLicenseSM"](this.memberShared.Username, ""); // Fill this form with ng form 
+        this.memberLicenseModel = new src_app_model_member_license_sm_model__WEBPACK_IMPORTED_MODULE_3__["MemberLicenseSM"](this.xyzekiAuthService.Username, ""); // Fill this form with ng form 
     }
     MemberLicensesComponent.prototype.onSelectDate = function (date) {
         if (date != null) {
@@ -4444,7 +4511,7 @@ var MemberLicensesComponent = /** @class */ (function () {
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./member-licenses.component.css */ "./src/app/member/member-licenses/member-licenses.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_2__["MemberLicenseRepository"], src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_4__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_2__["MemberLicenseRepository"], src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_4__["XyzekiAuthService"]])
     ], MemberLicensesComponent);
     return MemberLicensesComponent;
 }());
@@ -4539,7 +4606,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SettingsComponent", function() { return SettingsComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var src_app_model_services_member_setting_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/services/member-setting.service */ "./src/app/model/services/member-setting.service.ts");
 /* harmony import */ var src_app_model_member_setting_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/member-setting.model */ "./src/app/model/member-setting.model.ts");
 /* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
@@ -4550,9 +4617,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var SettingsComponent = /** @class */ (function () {
-    function SettingsComponent(permissions, memberShared, memberSettingService) {
+    function SettingsComponent(permissions, xyzekiAuthService, memberSettingService) {
         this.permissions = permissions;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.memberSettingService = memberSettingService;
         this.invalidLicensePanelOpen = false;
         this.ownerReporting = true;
@@ -4574,7 +4641,7 @@ var SettingsComponent = /** @class */ (function () {
     SettingsComponent.prototype.selectTheme = function (selectedTheme) {
         var _this = this;
         if (this.permissions.getAccessGranted()) {
-            var mSetting = new src_app_model_member_setting_model__WEBPACK_IMPORTED_MODULE_4__["MemberSetting"](this.memberShared.Username, selectedTheme, this.ownerReporting, this.assignedToReporting);
+            var mSetting = new src_app_model_member_setting_model__WEBPACK_IMPORTED_MODULE_4__["MemberSetting"](this.xyzekiAuthService.Username, selectedTheme, this.ownerReporting, this.assignedToReporting);
             if (selectedTheme) {
                 this.subscription = this.memberSettingService.updateMySetting(mSetting).subscribe(function () {
                     _this.selectedTheme = selectedTheme;
@@ -4687,7 +4754,7 @@ var SettingsComponent = /** @class */ (function () {
             else {
                 this.assignedToReporting = value;
             }
-            var mSetting = new src_app_model_member_setting_model__WEBPACK_IMPORTED_MODULE_4__["MemberSetting"](this.memberShared.Username, this.selectedTheme, this.ownerReporting, this.assignedToReporting);
+            var mSetting = new src_app_model_member_setting_model__WEBPACK_IMPORTED_MODULE_4__["MemberSetting"](this.xyzekiAuthService.Username, this.selectedTheme, this.ownerReporting, this.assignedToReporting);
             this.subscription = this.memberSettingService.updateMySetting(mSetting).subscribe(function () {
                 // this.ownerReporting = mSetting.OwnerReporting;
                 // this.assignedToReporting = mSetting.AssignedToReporting;
@@ -4714,7 +4781,7 @@ var SettingsComponent = /** @class */ (function () {
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./settings.component.css */ "./src/app/member/settings/settings.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_5__["MemberLicenseRepository"], src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_2__["MemberShared"], src_app_model_services_member_setting_service__WEBPACK_IMPORTED_MODULE_3__["MemberSettingService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_5__["MemberLicenseRepository"], src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiAuthService"], src_app_model_services_member_setting_service__WEBPACK_IMPORTED_MODULE_3__["MemberSettingService"]])
     ], SettingsComponent);
     return SettingsComponent;
 }());
@@ -4763,6 +4830,43 @@ var CommentCountModel = /** @class */ (function () {
         this.TaskId = TaskId;
     }
     return CommentCountModel;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/model/interceptors/token-inceptor.ts":
+/*!******************************************************!*\
+  !*** ./src/app/model/interceptors/token-inceptor.ts ***!
+  \******************************************************/
+/*! exports provided: TokenInterceptor */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TokenInterceptor", function() { return TokenInterceptor; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
+
+
+
+var TokenInterceptor = /** @class */ (function () {
+    function TokenInterceptor(xyzekiAuthService) {
+        this.xyzekiAuthService = xyzekiAuthService;
+    }
+    TokenInterceptor.prototype.intercept = function (request, next) {
+        request = request.clone({
+            setHeaders: { Authorization: "Bearer " + this.xyzekiAuthService.Token }
+        });
+        return next.handle(request);
+    };
+    TokenInterceptor = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiAuthService"]])
+    ], TokenInterceptor);
+    return TokenInterceptor;
 }());
 
 
@@ -4882,82 +4986,6 @@ var MemberSetting = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/model/member-shared.model.ts":
-/*!**********************************************!*\
-  !*** ./src/app/model/member-shared.model.ts ***!
-  \**********************************************/
-/*! exports provided: MemberShared */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MemberShared", function() { return MemberShared; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _member_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./member.model */ "./src/app/model/member.model.ts");
-/* harmony import */ var _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @auth0/angular-jwt */ "./node_modules/@auth0/angular-jwt/index.js");
-
-
-
-
-
-var jwtHelper = new _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_4__["JwtHelperService"]();
-// #todo Store tokens/userdata in sessions, local storage is insafe
-var MemberShared = /** @class */ (function () {
-    function MemberShared() {
-        this.empty = new _member_model__WEBPACK_IMPORTED_MODULE_3__["Member"](null, null, null, null, null, null, null);
-        this.token = new rxjs__WEBPACK_IMPORTED_MODULE_2__["ReplaySubject"](1); // behave like behavioursubject because of buffer=1, other values cached.
-        this.account = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](this.empty);
-    }
-    MemberShared.prototype.Auth = function (tokenAndMember) {
-        var token = tokenAndMember.Model.Item1;
-        var member = tokenAndMember.Model.Item2;
-        this.token.next(token);
-        this.tokenStr = token;
-        this.account.next(member);
-        this.Username = member.Username;
-        this.LoggedIn = true;
-        // localStorage.setItem("Xyzeki_Member", JSON.stringify(member)); // Persistance
-        // localStorage.setItem("Xyzeki_JWTToken", token); // Persistance
-    };
-    MemberShared.prototype.LogOut = function () {
-        // localStorage.removeItem("Xyzeki_Member");
-        // localStorage.removeItem("Xyzeki_JWTToken");
-        location.reload();
-        this.token.next('0');
-        this.LoggedIn = false;
-        this.token = undefined;
-        //this.loadDefaultSetting();
-        this.Username = null;
-    };
-    // loadDefaultSetting() {
-    //     let element: HTMLElement = document.getElementById('appBody');
-    //     element.className = null;
-    //     element.classList.add('KlasikBeyaz');
-    // }
-    MemberShared.prototype.isValidToken = function () {
-        //let member: Member = JSON.parse(localStorage.getItem("Xyzeki_Member")) as Member
-        // let token = localStorage.getItem("Xyzeki_JWTToken");
-        // console.log('token bitiş' + jwtHelper.getTokenExpirationDate(this.tokenStr));
-        if (this.tokenStr && !jwtHelper.isTokenExpired(this.tokenStr)) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    };
-    MemberShared = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
-    ], MemberShared);
-    return MemberShared;
-}());
-
-
-
-/***/ }),
-
 /***/ "./src/app/model/member.model.ts":
 /*!***************************************!*\
   !*** ./src/app/model/member.model.ts ***!
@@ -5028,7 +5056,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/auth.service */ "./src/app/model/services/auth.service.ts");
 /* harmony import */ var _services_guards_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/guards/auth-guard.service */ "./src/app/model/services/guards/auth-guard.service.ts");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var _repository_member_license_repository__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
 /* harmony import */ var _services_member_license_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./services/member-license.service */ "./src/app/model/services/member-license.service.ts");
 /* harmony import */ var _services_teams_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./services/teams.service */ "./src/app/model/services/teams.service.ts");
@@ -5140,7 +5168,8 @@ var ModelModule = /** @class */ (function () {
             ],
             providers: [
                 src_infrastructure_xyzeki_datetime_infra__WEBPACK_IMPORTED_MODULE_34__["XyzekiDateTimeInfra"],
-                _member_shared_model__WEBPACK_IMPORTED_MODULE_5__["MemberShared"],
+                _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_5__["XyzekiAuthData"],
+                _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_5__["XyzekiAuthService"],
                 _services_shared_data_service__WEBPACK_IMPORTED_MODULE_16__["DataService"],
                 _services_shared_switch_hour_data_service__WEBPACK_IMPORTED_MODULE_35__["SwitchHourDataService"],
                 src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_36__["PageSizes"],
@@ -5222,7 +5251,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../services/project-to-dos.service */ "./src/app/model/services/project-to-dos.service.ts");
 /* harmony import */ var _services_projects_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../services/projects.service */ "./src/app/model/services/projects.service.ts");
 /* harmony import */ var _angular_service_worker__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/service-worker */ "./node_modules/@angular/service-worker/fesm5/service-worker.js");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 
 
 
@@ -5237,9 +5266,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var NotificationService = /** @class */ (function () {
-    function NotificationService(memberShared, swUpdate, swPush, teamService, privateTalkService, quickToDoService, projectToDoService, projectService) {
+    function NotificationService(xyzekiAuthData, swUpdate, swPush, teamService, privateTalkService, quickToDoService, projectToDoService, projectService) {
         var _this = this;
-        this.memberShared = memberShared;
+        this.xyzekiAuthData = xyzekiAuthData;
         this.swUpdate = swUpdate;
         this.swPush = swPush;
         this.teamService = teamService;
@@ -5326,7 +5355,7 @@ var NotificationService = /** @class */ (function () {
             return;
         }
         var titleX = "1 Yeni Göreviniz Var";
-        if (quickTask.Owner == this.memberShared.Username) {
+        if (quickTask.Owner == this.xyzekiAuthData.Username) {
             if (Object(util__WEBPACK_IMPORTED_MODULE_2__["isNullOrUndefined"])(quickTask.Status)) {
                 quickTask.Status = 'Bekliyor';
             }
@@ -5381,7 +5410,7 @@ var NotificationService = /** @class */ (function () {
             return;
         if (!this.swPush.isEnabled)
             return;
-        if (project.Owner == this.memberShared.Username) { // only single way signal
+        if (project.Owner == this.xyzekiAuthData.Username) { // only single way signal
             return;
         }
         this.projectService.isProjectAssigned(project.ProjectId).subscribe(function (answer) {
@@ -5431,7 +5460,7 @@ var NotificationService = /** @class */ (function () {
     //Yorumlar 
     NotificationService.prototype.pushNotifyNewPTComment = function (projectTaskComment) {
         var _this = this;
-        if (projectTaskComment.Sender == this.memberShared.Username) // it sends itself too
+        if (projectTaskComment.Sender == this.xyzekiAuthData.Username) // it sends itself too
             return;
         if (!this.isNotificationGranted)
             return;
@@ -5463,7 +5492,7 @@ var NotificationService = /** @class */ (function () {
     };
     // #todo
     NotificationService.prototype.pushNotifyNewQTComment = function (quickTaskComment) {
-        if (quickTaskComment.Sender == this.memberShared.Username) // it sends itself too
+        if (quickTaskComment.Sender == this.xyzekiAuthData.Username) // it sends itself too
             return;
         if (!this.isNotificationGranted)
             return;
@@ -5505,7 +5534,8 @@ var NotificationService = /** @class */ (function () {
     NotificationService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Optional"])()), tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](2, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Optional"])()),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_member_shared_model__WEBPACK_IMPORTED_MODULE_12__["MemberShared"], _angular_service_worker__WEBPACK_IMPORTED_MODULE_11__["SwUpdate"], _angular_service_worker__WEBPACK_IMPORTED_MODULE_11__["SwPush"], _services_teams_service__WEBPACK_IMPORTED_MODULE_5__["TeamsService"], _services_private_talks_service__WEBPACK_IMPORTED_MODULE_6__["PrivateTalksService"], _services_quick_to_dos_service__WEBPACK_IMPORTED_MODULE_8__["QuickToDosService"], _services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_9__["ProjectToDosService"], _services_projects_service__WEBPACK_IMPORTED_MODULE_10__["ProjectsService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_12__["XyzekiAuthData"], _angular_service_worker__WEBPACK_IMPORTED_MODULE_11__["SwUpdate"], _angular_service_worker__WEBPACK_IMPORTED_MODULE_11__["SwPush"],
+            _services_teams_service__WEBPACK_IMPORTED_MODULE_5__["TeamsService"], _services_private_talks_service__WEBPACK_IMPORTED_MODULE_6__["PrivateTalksService"], _services_quick_to_dos_service__WEBPACK_IMPORTED_MODULE_8__["QuickToDosService"], _services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_9__["ProjectToDosService"], _services_projects_service__WEBPACK_IMPORTED_MODULE_10__["ProjectsService"]])
     ], NotificationService);
     return NotificationService;
 }());
@@ -6348,15 +6378,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_members_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/members.service */ "./src/app/model/services/members.service.ts");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 
 
 
 
 var MemberRepository = /** @class */ (function () {
-    function MemberRepository(service, memberShared) {
+    function MemberRepository(service, xyzekiAuthService) {
         this.service = service;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
     }
     MemberRepository.prototype.getMember = function (username) {
         return this.service.getMember(username);
@@ -6366,7 +6396,7 @@ var MemberRepository = /** @class */ (function () {
     };
     MemberRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_members_service__WEBPACK_IMPORTED_MODULE_2__["MembersService"], _member_shared_model__WEBPACK_IMPORTED_MODULE_3__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_members_service__WEBPACK_IMPORTED_MODULE_2__["MembersService"], _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"]])
     ], MemberRepository);
     return MemberRepository;
 }());
@@ -6666,7 +6696,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_private_talks_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/private-talks.service */ "./src/app/model/services/private-talks.service.ts");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var _services_private_talk_receivers_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/private-talk-receivers.service */ "./src/app/model/services/private-talk-receivers.service.ts");
 /* harmony import */ var _private_talk_receiver_model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../private-talk-receiver.model */ "./src/app/model/private-talk-receiver.model.ts");
 /* harmony import */ var _private_talk_team_receiver_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../private-talk-team-receiver.model */ "./src/app/model/private-talk-team-receiver.model.ts");
@@ -6696,7 +6726,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var PrivateTalkRepository = /** @class */ (function () {
-    function PrivateTalkRepository(psz, receiverRepo, dataService, service, signalService, signalMessageService, serviceReceivers, serviceTeamReceivers, memberShared, memberLicenseRepo, timeService) {
+    function PrivateTalkRepository(psz, receiverRepo, dataService, service, signalService, signalMessageService, serviceReceivers, serviceTeamReceivers, xyzekiAuthService, memberLicenseRepo, timeService) {
         var _this = this;
         this.psz = psz;
         this.receiverRepo = receiverRepo;
@@ -6706,7 +6736,7 @@ var PrivateTalkRepository = /** @class */ (function () {
         this.signalMessageService = signalMessageService;
         this.serviceReceivers = serviceReceivers;
         this.serviceTeamReceivers = serviceTeamReceivers;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.memberLicenseRepo = memberLicenseRepo;
         this.timeService = timeService;
         this.pageNo = 1;
@@ -7018,7 +7048,7 @@ var PrivateTalkRepository = /** @class */ (function () {
     };
     PrivateTalkRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_12__["PageSizes"], _private_talk_receiver_repository__WEBPACK_IMPORTED_MODULE_8__["PrivateTalkReceiverRepository"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_10__["DataService"], _services_private_talks_service__WEBPACK_IMPORTED_MODULE_2__["PrivateTalksService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_13__["XyzekiSignalrService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_13__["XyzekiSignalrService"], _services_private_talk_receivers_service__WEBPACK_IMPORTED_MODULE_4__["PrivateTalkReceiversService"], _services_private_talk_team_receivers_service__WEBPACK_IMPORTED_MODULE_7__["PrivateTalkTeamReceiversService"], _member_shared_model__WEBPACK_IMPORTED_MODULE_3__["MemberShared"],
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_12__["PageSizes"], _private_talk_receiver_repository__WEBPACK_IMPORTED_MODULE_8__["PrivateTalkReceiverRepository"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_10__["DataService"], _services_private_talks_service__WEBPACK_IMPORTED_MODULE_2__["PrivateTalksService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_13__["XyzekiSignalrService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_13__["XyzekiSignalrService"], _services_private_talk_receivers_service__WEBPACK_IMPORTED_MODULE_4__["PrivateTalkReceiversService"], _services_private_talk_team_receivers_service__WEBPACK_IMPORTED_MODULE_7__["PrivateTalkTeamReceiversService"], _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"],
             _member_license_repository__WEBPACK_IMPORTED_MODULE_11__["MemberLicenseRepository"], _services_time_service__WEBPACK_IMPORTED_MODULE_14__["TimeService"]])
     ], PrivateTalkRepository);
     return PrivateTalkRepository;
@@ -7053,7 +7083,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_projects_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/projects.service */ "./src/app/model/services/projects.service.ts");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var _project_order_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../project-order.model */ "./src/app/model/project-order.model.ts");
 /* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
 /* harmony import */ var _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
@@ -7065,11 +7095,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ProjectRepository = /** @class */ (function () {
-    function ProjectRepository(service, signalService, memberShared, dataService) {
+    function ProjectRepository(service, signalService, xyzekiAuthService, dataService) {
         var _this = this;
         this.service = service;
         this.signalService = signalService;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.dataService = dataService;
         this.myProjects = [];
         this.myProjectsAssigned = [];
@@ -7180,8 +7210,8 @@ var ProjectRepository = /** @class */ (function () {
     //     return this.myProjectsAssigned.filter(p => p.Privacy != PrivacyModes.onlyOwner && (
     //         p.Privacy == PrivacyModes.open // ve eğer içinde bulunuyorsa
     //         || p.Privacy == PrivacyModes.listMode // ve eğer içinde bulunuyorsa
-    //         || (p.Privacy == PrivacyModes.onlyOwnerAndPM && p.ProjectManager == this.memberShared.Username)
-    //         || (p.Privacy == PrivacyModes.openOnlyTasks && p.ProjectManager == this.memberShared.Username)))
+    //         || (p.Privacy == PrivacyModes.onlyOwnerAndPM && p.ProjectManager == this.xyzekiAuthService .Username)
+    //         || (p.Privacy == PrivacyModes.openOnlyTasks && p.ProjectManager == this.xyzekiAuthService .Username)))
     // }
     ProjectRepository.prototype.getMyProjectsAssigned = function () {
         return this.myProjectsAssigned;
@@ -7270,7 +7300,7 @@ var ProjectRepository = /** @class */ (function () {
     };
     ProjectRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_projects_service__WEBPACK_IMPORTED_MODULE_2__["ProjectsService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_6__["XyzekiSignalrService"], _member_shared_model__WEBPACK_IMPORTED_MODULE_3__["MemberShared"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_projects_service__WEBPACK_IMPORTED_MODULE_2__["ProjectsService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_6__["XyzekiSignalrService"], _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"]])
     ], ProjectRepository);
     return ProjectRepository;
 }());
@@ -7400,7 +7430,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProjectToDoRepository", function() { return ProjectToDoRepository; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/project-to-dos.service */ "./src/app/model/services/project-to-dos.service.ts");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var _comment_count_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../comment-count.model */ "./src/app/model/comment-count.model.ts");
 /* harmony import */ var _project_repository__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./project-repository */ "./src/app/model/repository/project-repository.ts");
 /* harmony import */ var src_infrastructure_project_privacy_modes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/infrastructure/project-privacy-modes */ "./src/infrastructure/project-privacy-modes.ts");
@@ -7423,11 +7453,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ProjectToDoRepository = /** @class */ (function () {
-    function ProjectToDoRepository(service, signalService, memberShared, commentSignalService, projectSignalService, projectRepository, dataService, timeService) {
+    function ProjectToDoRepository(service, signalService, xyzekiAuthService, commentSignalService, projectSignalService, projectRepository, dataService, timeService) {
         var _this = this;
         this.service = service;
         this.signalService = signalService;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.commentSignalService = commentSignalService;
         this.projectSignalService = projectSignalService;
         this.projectRepository = projectRepository;
@@ -7439,8 +7469,8 @@ var ProjectToDoRepository = /** @class */ (function () {
         this.ptCommentsCount = [];
         this.reOrdering = false;
         this.filterBasedOnProject = function (pt) {
-            if (_this.getProjectSpecial(pt.ProjectId) && _this.getProjectSpecial(pt.ProjectId).Privacy != src_infrastructure_project_privacy_modes__WEBPACK_IMPORTED_MODULE_5__["PrivacyModes"].listMode && ((_this.getProjectSpecial(pt.ProjectId).Privacy == src_infrastructure_project_privacy_modes__WEBPACK_IMPORTED_MODULE_5__["PrivacyModes"].onlyOwner && _this.getProjectSpecial(pt.ProjectId).Owner == _this.memberShared.Username) ||
-                (_this.getProjectSpecial(pt.ProjectId).Privacy == src_infrastructure_project_privacy_modes__WEBPACK_IMPORTED_MODULE_5__["PrivacyModes"].onlyOwnerAndPM && (_this.getProjectSpecial(pt.ProjectId).ProjectManager == _this.memberShared.Username || _this.getProjectSpecial(pt.ProjectId).Owner == _this.memberShared.Username))
+            if (_this.getProjectSpecial(pt.ProjectId) && _this.getProjectSpecial(pt.ProjectId).Privacy != src_infrastructure_project_privacy_modes__WEBPACK_IMPORTED_MODULE_5__["PrivacyModes"].listMode && ((_this.getProjectSpecial(pt.ProjectId).Privacy == src_infrastructure_project_privacy_modes__WEBPACK_IMPORTED_MODULE_5__["PrivacyModes"].onlyOwner && _this.getProjectSpecial(pt.ProjectId).Owner == _this.xyzekiAuthService.Username) ||
+                (_this.getProjectSpecial(pt.ProjectId).Privacy == src_infrastructure_project_privacy_modes__WEBPACK_IMPORTED_MODULE_5__["PrivacyModes"].onlyOwnerAndPM && (_this.getProjectSpecial(pt.ProjectId).ProjectManager == _this.xyzekiAuthService.Username || _this.getProjectSpecial(pt.ProjectId).Owner == _this.xyzekiAuthService.Username))
                 || (_this.getProjectSpecial(pt.ProjectId).Privacy == src_infrastructure_project_privacy_modes__WEBPACK_IMPORTED_MODULE_5__["PrivacyModes"].open) || (_this.getProjectSpecial(pt.ProjectId).Privacy == src_infrastructure_project_privacy_modes__WEBPACK_IMPORTED_MODULE_5__["PrivacyModes"].openOnlyTasks)))
                 return pt;
         };
@@ -7631,27 +7661,27 @@ var ProjectToDoRepository = /** @class */ (function () {
     };
     ProjectToDoRepository.prototype.checkOwnerOrProjectManager = function (taskId) {
         var pTask = this.projectToDos.find(function (val) { return val.TaskId == taskId; });
-        var isOwner = this.getProject(pTask.ProjectId).Owner == this.memberShared.Username;
+        var isOwner = this.getProject(pTask.ProjectId).Owner == this.xyzekiAuthService.Username;
         if (isOwner)
             return true;
         // proje yöneticisi izin ver
-        var isProjectManager = this.getProject(pTask.ProjectId).ProjectManager == this.memberShared.Username;
+        var isProjectManager = this.getProject(pTask.ProjectId).ProjectManager == this.xyzekiAuthService.Username;
         if (isProjectManager)
             return true;
         return false;
     };
     ProjectToDoRepository.prototype.checkPrivilege = function (pTask) {
         // sahip ise izin ver
-        var isOwner = this.getProject(pTask.ProjectId).Owner == this.memberShared.Username;
+        var isOwner = this.getProject(pTask.ProjectId).Owner == this.xyzekiAuthService.Username;
         if (isOwner)
             return true;
         // proje yöneticisi izin ver
-        var isProjectManager = this.getProject(pTask.ProjectId).ProjectManager == this.memberShared.Username;
+        var isProjectManager = this.getProject(pTask.ProjectId).ProjectManager == this.xyzekiAuthService.Username;
         if (isProjectManager)
             return true;
         // sahip değilse ve de proje yöneticisi değilse, eğer sadece state, isCompleted,finished değişmişsse ve de ona atanmış ise izin ver.
         var pTaskOld = Object.assign({}, this.projectToDos.find(function (val) { return val.TaskId == pTask.TaskId; }));
-        var assignedToMe = pTask.AssignedTo == this.memberShared.Username;
+        var assignedToMe = pTask.AssignedTo == this.xyzekiAuthService.Username;
         var isNotAndOnlyStateAndCompletedChanged = !isOwner && !isProjectManager && assignedToMe && (pTaskOld.Archived == pTask.Archived && pTaskOld.AssignedTo == pTask.AssignedTo
             && pTaskOld.Deadline == pTask.Deadline
             && pTaskOld.Order == pTask.Order && pTaskOld.ProjectId == pTask.ProjectId
@@ -7681,7 +7711,7 @@ var ProjectToDoRepository = /** @class */ (function () {
             })).subscribe(function (projectToDoId) {
                 projectTask.TaskId = projectToDoId;
                 _this.projectToDos.push(projectTask);
-                if (projectTask.AssignedTo == _this.memberShared.Username) // if assigned to me and not exists in assignedTo repo.
+                if (projectTask.AssignedTo == _this.xyzekiAuthService.Username) // if assigned to me and not exists in assignedTo repo.
                     _this.projectToDosAssignedToMe.push(projectTask);
                 _this.ptCommentsCount.push(new _comment_count_model__WEBPACK_IMPORTED_MODULE_3__["CommentCountModel"](0, projectToDoId));
                 // to owner, project manager, project insiders(signalR service will not send to this user.)
@@ -7715,7 +7745,7 @@ var ProjectToDoRepository = /** @class */ (function () {
         var index = this.projectToDosAssignedToMe.findIndex(function (val) { return val.TaskId == projectToDo.TaskId; });
         if (-1 == index) // Assigned task is not founded on repository
          {
-            if (this.memberShared.Username == projectToDo.AssignedTo) {
+            if (this.xyzekiAuthService.Username == projectToDo.AssignedTo) {
                 this.projectToDosAssignedToMe.push(projectToDo);
                 //comment count 
                 this.service.assignedToMePTCommentsCount().subscribe(function (ccm) {
@@ -7790,7 +7820,7 @@ var ProjectToDoRepository = /** @class */ (function () {
     ProjectToDoRepository.prototype.deleteProjectToDo = function (taskId) {
         var _this = this;
         var pTask = this.projectToDos.find(function (value) { return value.TaskId == taskId; });
-        if ((this.getProject(pTask.ProjectId).Owner != this.memberShared.Username) && (this.getProject(pTask.ProjectId).ProjectManager != this.memberShared.Username))
+        if ((this.getProject(pTask.ProjectId).Owner != this.xyzekiAuthService.Username) && (this.getProject(pTask.ProjectId).ProjectManager != this.xyzekiAuthService.Username))
             return;
         if (pTask)
             this.signalService.notifyDeletedProjectToDo(pTask);
@@ -7806,7 +7836,7 @@ var ProjectToDoRepository = /** @class */ (function () {
     };
     ProjectToDoRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_11__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_1__["ProjectToDosService"], src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_8__["XyzekiSignalrService"], _member_shared_model__WEBPACK_IMPORTED_MODULE_2__["MemberShared"],
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_1__["ProjectToDosService"], src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_8__["XyzekiSignalrService"], _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiAuthService"],
             src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_8__["XyzekiSignalrService"], src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_8__["XyzekiSignalrService"],
             _project_repository__WEBPACK_IMPORTED_MODULE_4__["ProjectRepository"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_7__["DataService"], _services_time_service__WEBPACK_IMPORTED_MODULE_9__["TimeService"]])
     ], ProjectToDoRepository);
@@ -7942,7 +7972,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _services_quick_to_dos_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/quick-to-dos.service */ "./src/app/model/services/quick-to-dos.service.ts");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var _comment_count_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../comment-count.model */ "./src/app/model/comment-count.model.ts");
 /* harmony import */ var src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/infrastructure/page-sizes */ "./src/infrastructure/page-sizes.ts");
 /* harmony import */ var _task_order_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../task-order.model */ "./src/app/model/task-order.model.ts");
@@ -7962,11 +7992,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var QuickToDoRepository = /** @class */ (function () {
-    function QuickToDoRepository(psz, service, memberShared, signalService, commentSignalService, dataService, timeService) {
+    function QuickToDoRepository(psz, service, xyzekiAuthService, signalService, commentSignalService, dataService, timeService) {
         var _this = this;
         this.psz = psz;
         this.service = service;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.signalService = signalService;
         this.commentSignalService = commentSignalService;
         this.dataService = dataService;
@@ -8174,16 +8204,16 @@ var QuickToDoRepository = /** @class */ (function () {
                 return _this.service.saveQuickTodo(quickToDo);
             })).subscribe(function (qtId) {
                 quickToDo.TaskId = qtId;
-                quickToDo.Owner = _this.memberShared.Username;
+                quickToDo.Owner = _this.xyzekiAuthService.Username;
                 if (quickToDo.Archived)
                     _this.myQuickToDos.unshift(quickToDo);
                 else
                     _this.myQuickToDos.push(quickToDo);
-                if (quickToDo.AssignedTo == _this.memberShared.Username)
+                if (quickToDo.AssignedTo == _this.xyzekiAuthService.Username)
                     _this.assignedToMe.push(quickToDo);
                 _this.qtCommentsCount.push(new _comment_count_model__WEBPACK_IMPORTED_MODULE_4__["CommentCountModel"](0, qtId));
                 //Signalling via SignalR
-                if (quickToDo.AssignedTo != null && quickToDo.AssignedTo != _this.memberShared.Username) // disable signalr for free members, or take information from memberShared.
+                if (quickToDo.AssignedTo != null && quickToDo.AssignedTo != _this.xyzekiAuthService.Username) // disable signalr for free members, or take information from xyzekiAuthService
                     _this.signalService.notifyNewQuickToDo(quickToDo, quickToDo.AssignedTo); // that doesnt send messages to this member. only newCommments send...
             });
         }
@@ -8218,7 +8248,7 @@ var QuickToDoRepository = /** @class */ (function () {
                 var index2 = _this.assignedToMe.findIndex(function (val) { return val.TaskId == quickToDo.TaskId; });
                 if (-1 != index2) // index --> assignedToMe
                     _this.assignedToMe.splice(index2, 1, quickToDo);
-                var me = _this.memberShared.Username;
+                var me = _this.xyzekiAuthService.Username;
                 var other = function (assigned) {
                     if (assigned != null && assigned != me)
                         return true;
@@ -8279,7 +8309,7 @@ var QuickToDoRepository = /** @class */ (function () {
         var index = this.assignedToMe.findIndex(function (val) { return val.TaskId == quickToDo.TaskId; });
         if (-1 == index) // Assigned task is not founded on repository
          {
-            if (this.memberShared.Username == quickToDo.AssignedTo) {
+            if (this.xyzekiAuthService.Username == quickToDo.AssignedTo) {
                 this.assignedToMe.push(quickToDo);
                 //comment count 
                 this.service.myAndAssignedToMeQTCommentsCount().subscribe(function (ccm) {
@@ -8327,7 +8357,7 @@ var QuickToDoRepository = /** @class */ (function () {
     QuickToDoRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_5__["PageSizes"], _services_quick_to_dos_service__WEBPACK_IMPORTED_MODULE_1__["QuickToDosService"],
-            _member_shared_model__WEBPACK_IMPORTED_MODULE_3__["MemberShared"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_8__["XyzekiSignalrService"],
+            _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_8__["XyzekiSignalrService"],
             _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_8__["XyzekiSignalrService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_7__["DataService"], _services_time_service__WEBPACK_IMPORTED_MODULE_9__["TimeService"]])
     ], QuickToDoRepository);
     return QuickToDoRepository;
@@ -8353,7 +8383,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/auth.service */ "./src/app/model/services/auth.service.ts");
 /* harmony import */ var _services_teams_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/teams.service */ "./src/app/model/services/teams.service.ts");
 /* harmony import */ var _services_members_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/members.service */ "./src/app/model/services/members.service.ts");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var _member_license_repository__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
 /* harmony import */ var _team_repository__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./team-repository */ "./src/app/model/repository/team-repository.ts");
 /* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
@@ -8370,7 +8400,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var TeamMemberRepository = /** @class */ (function () {
-    function TeamMemberRepository(teamRepo, mLicense, service, service2, serviceMember, signalService, membersService, memberShared, permissions, dataService) {
+    function TeamMemberRepository(teamRepo, mLicense, service, service2, serviceMember, signalService, membersService, xyzekiAuthService, permissions, dataService) {
         var _this = this;
         this.teamRepo = teamRepo;
         this.mLicense = mLicense;
@@ -8379,7 +8409,7 @@ var TeamMemberRepository = /** @class */ (function () {
         this.serviceMember = serviceMember;
         this.signalService = signalService;
         this.membersService = membersService;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.permissions = permissions;
         this.dataService = dataService;
         this.teamMembers = [];
@@ -8527,10 +8557,10 @@ var TeamMemberRepository = /** @class */ (function () {
         if (teamMember.TeamMemberId == 0 || teamMember.TeamMemberId == null) {
             this.service.saveTeamMember(teamMember).subscribe(function (id) {
                 teamMember.TeamMemberId = id;
-                if (_this.memberShared.Username == teamMember.Username)
+                if (_this.xyzekiAuthService.Username == teamMember.Username)
                     teamMember.Status = true;
                 _this.teamMembers.push(teamMember);
-                if (_this.memberShared.Username != teamMember.Username)
+                if (_this.xyzekiAuthService.Username != teamMember.Username)
                     _this.signalService.notifyNewTeamMember(teamMember, 'new');
                 var index = _this.teamMembersOwnedAsMembers.findIndex(function (m) { return m.Username == teamMember.Username; });
                 if (-1 == index) {
@@ -8622,7 +8652,7 @@ var TeamMemberRepository = /** @class */ (function () {
             if (status) {
                 if (this.teamMembersJoined.length == 0 && this.permissions) {
                     this.permissions.removeMemberLicenseForJoinedTeamMember();
-                    this.memberShared.LogOut();
+                    this.xyzekiAuthService.LogOut();
                 }
             }
         }
@@ -8671,7 +8701,7 @@ var TeamMemberRepository = /** @class */ (function () {
     };
     TeamMemberRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_team_repository__WEBPACK_IMPORTED_MODULE_8__["TeamRepository"], _member_license_repository__WEBPACK_IMPORTED_MODULE_7__["MemberLicenseRepository"], _services_team_members_service__WEBPACK_IMPORTED_MODULE_2__["TeamMembersService"], _services_teams_service__WEBPACK_IMPORTED_MODULE_4__["TeamsService"], _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_10__["XyzekiSignalrService"], _services_members_service__WEBPACK_IMPORTED_MODULE_5__["MembersService"], _member_shared_model__WEBPACK_IMPORTED_MODULE_6__["MemberShared"], _member_license_repository__WEBPACK_IMPORTED_MODULE_7__["MemberLicenseRepository"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_9__["DataService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_team_repository__WEBPACK_IMPORTED_MODULE_8__["TeamRepository"], _member_license_repository__WEBPACK_IMPORTED_MODULE_7__["MemberLicenseRepository"], _services_team_members_service__WEBPACK_IMPORTED_MODULE_2__["TeamMembersService"], _services_teams_service__WEBPACK_IMPORTED_MODULE_4__["TeamsService"], _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_10__["XyzekiSignalrService"], _services_members_service__WEBPACK_IMPORTED_MODULE_5__["MembersService"], _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_6__["XyzekiAuthService"], _member_license_repository__WEBPACK_IMPORTED_MODULE_7__["MemberLicenseRepository"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_9__["DataService"]])
     ], TeamMemberRepository);
     return TeamMemberRepository;
 }());
@@ -9209,7 +9239,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var _return_model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../return.model */ "./src/app/model/return.model.ts");
 /* harmony import */ var src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/infrastructure/error-codes.enum */ "./src/infrastructure/error-codes.enum.ts");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var src_infrastructure_google_captcha__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/infrastructure/google-captcha */ "./src/infrastructure/google-captcha.ts");
 /* harmony import */ var _crypto_helpers_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./crypto-helpers.service */ "./src/app/model/services/crypto-helpers.service.ts");
 /* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
@@ -9225,9 +9255,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var AuthService = /** @class */ (function () {
-    function AuthService(http, memberShared, cryptoHelpers) {
+    function AuthService(http, xyzekiAuthService, cryptoHelpers) {
         this.http = http;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.cryptoHelpers = cryptoHelpers;
         this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_10__["BackEndWebServer"] + '/';
     }
@@ -9282,6 +9312,7 @@ var AuthService = /** @class */ (function () {
     };
     AuthService.prototype.setUpNewPassword = function (securityCodeModel, recaptchaToken) {
         //securityCodeModel.NewPassword = this.cryptoHelpers.encryptWithAES(securityCodeModel.NewPassword); // Later will be decrypt in .NET 
+        if (recaptchaToken === void 0) { recaptchaToken = ''; }
         return this.http.post(this.baseURL + "api/Auth/SetUpNewPassword", securityCodeModel, { observe: "response", params: { 'recaptchaToken': recaptchaToken }, headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' }) }).
             pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (response) {
             switch (response.status) {
@@ -9317,7 +9348,7 @@ var AuthService = /** @class */ (function () {
     ;
     AuthService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _member_shared_model__WEBPACK_IMPORTED_MODULE_7__["MemberShared"], _crypto_helpers_service__WEBPACK_IMPORTED_MODULE_9__["CryptoHelpersService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_7__["XyzekiAuthService"], _crypto_helpers_service__WEBPACK_IMPORTED_MODULE_9__["CryptoHelpersService"]])
     ], AuthService);
     return AuthService;
 }());
@@ -9366,92 +9397,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
-
-
-
+/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
 
 
 
 
 var FilesService = /** @class */ (function () {
-    function FilesService(http, memberShared) {
+    function FilesService(http) {
         this.http = http;
-        this.memberShared = memberShared;
-        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__["BackEndWebServer"] + '/';
+        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__["BackEndWebServer"] + '/';
     }
     FilesService.prototype.showContainers = function () {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + 'api/Files/ListContainers', _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + 'api/Files/ListContainers');
     };
     FilesService.prototype.createContainer = function (containerName) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/Files/CreateContainer/" + containerName), _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + ("api/Files/CreateContainer/" + containerName));
     };
     FilesService.prototype.deleteContainer = function (containerName) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["of"])(null);
-            else
-                return _this.http.delete(_this.baseURL + ("api/Files/DeleteContainer/" + containerName), _this.getOptions(token));
-        }));
+        return this.http.delete(this.baseURL + ("api/Files/DeleteContainer/" + containerName));
     };
     FilesService.prototype.showBlobs = function (containerName) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/Files/ListFiles/Container/" + containerName), _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + ("api/Files/ListFiles/Container/" + containerName));
     };
     FilesService.prototype.downloadFile = function (containerName, fileName) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/Files/DownloadFile/" + fileName + "/Container/" + containerName), { responseType: "blob", headers: { "Authorization": "Bearer " + token } });
-        }));
+        return this.http.get(this.baseURL + ("api/Files/DownloadFile/" + fileName + "/Container/" + containerName), { responseType: "blob" });
     };
     FilesService.prototype.insertFile = function (containerName, fileToUpload) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["of"])(null);
-            else
-                return _this.http.post(_this.baseURL + ("api/Files/InsertFile/Container/" + containerName), fileToUpload, _this.getOptions(token));
-        }));
+        return this.http.post(this.baseURL + ("api/Files/InsertFile/Container/" + containerName), fileToUpload);
     };
     FilesService.prototype.deleteFile = function (containerName, fileName) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["of"])(null);
-            else
-                return _this.http.delete(_this.baseURL + ("api/Files/DeleteFile/" + fileName + "/Container/" + containerName), _this.getOptions(token));
-        }));
-    };
-    FilesService.prototype.getOptions = function (token) {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Authorization": "Bearer " + token }) };
+        return this.http.delete(this.baseURL + ("api/Files/DeleteFile/" + fileName + "/Container/" + containerName));
     };
     FilesService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _member_shared_model__WEBPACK_IMPORTED_MODULE_3__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], FilesService);
     return FilesService;
 }());
@@ -9473,26 +9452,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 
 
 
 
 var AuthGuardAdminService = /** @class */ (function () {
-    function AuthGuardAdminService(router, memberShared) {
+    function AuthGuardAdminService(router, xyzekiAuthService) {
         this.router = router;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
     }
     AuthGuardAdminService.prototype.canActivate = function (route, state) {
-        var url = route.url;
-        if (this.memberShared.Username == 'tadakoglu')
+        if (this.xyzekiAuthService.Username == 'tadakoglu') {
             return true;
-        this.router.navigateByUrl('/giris');
-        return false;
+        }
+        else {
+            this.router.navigateByUrl('/giris');
+            return false;
+        }
     };
     AuthGuardAdminService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _member_shared_model__WEBPACK_IMPORTED_MODULE_3__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"]])
     ], AuthGuardAdminService);
     return AuthGuardAdminService;
 }());
@@ -9514,38 +9495,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 
 
 
 
 var AuthGuardService = /** @class */ (function () {
-    function AuthGuardService(router, memberShared) {
+    function AuthGuardService(router, xyzekiAuthService) {
         this.router = router;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
     }
     AuthGuardService.prototype.canActivate = function (route, state) {
-        ///let url = route.url;
-        if (this.memberShared.isValidToken() && this.memberShared.LoggedIn) {
+        if (this.xyzekiAuthService.LoggedIn) {
             return true;
         }
         else {
-            // localStorage.removeItem("Xyzeki_JWTToken");
-            this.memberShared.LoggedIn = false;
-            this.memberShared.tokenStr = undefined;
             this.router.navigateByUrl('/giris');
             return false;
         }
-        // return new Promise((resolve) => {
-        //   if (this.memberShared.LoggedIn)
-        //     resolve(true);
-        //   else
-        //     resolve(false);
-        // })
     };
     AuthGuardService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _member_shared_model__WEBPACK_IMPORTED_MODULE_3__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"]])
     ], AuthGuardService);
     return AuthGuardService;
 }());
@@ -9566,7 +9537,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SaveLastSeenGuardService", function() { return SaveLastSeenGuardService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 
 
 
@@ -9574,15 +9545,15 @@ var SaveLastSeenGuardService = /** @class */ (function () {
     /**
      *
      */
-    function SaveLastSeenGuardService(memberShared) {
-        this.memberShared = memberShared;
+    function SaveLastSeenGuardService(xyzekiAuthService) {
+        this.xyzekiAuthService = xyzekiAuthService;
     }
     SaveLastSeenGuardService.prototype.canDeactivate = function (component, route, state) {
         return true;
     };
     SaveLastSeenGuardService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_member_shared_model__WEBPACK_IMPORTED_MODULE_2__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiAuthService"]])
     ], SaveLastSeenGuardService);
     return SaveLastSeenGuardService;
 }());
@@ -9603,115 +9574,45 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MemberLicenseService", function() { return MemberLicenseService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
-
-
-
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
 
 
 
 
 var MemberLicenseService = /** @class */ (function () {
-    function MemberLicenseService(http, memberShared) {
+    function MemberLicenseService(http) {
         this.http = http;
-        this.memberShared = memberShared;
-        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__["BackEndWebServer"] + '/';
-        //this.auth_token = memberShared.Token;
+        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__["BackEndWebServer"] + '/';
     }
-    // kurumsal(ekip) lisansı, ml.LicenseType=="kurumsal"
     MemberLicenseService.prototype.primaryAccessGranted = function () {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + "api/MemberLicense/PrimaryAccessGranted", _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + "api/MemberLicense/PrimaryAccessGranted");
     };
-    // herhangi bir çeşit lisans var mı.
     MemberLicenseService.prototype.accessGranted = function () {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + "api/MemberLicense/AccessGranted", _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + "api/MemberLicense/AccessGranted");
     };
     MemberLicenseService.prototype.allLicenses = function () {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + "api/MemberLicense/AllLicenses", _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + "api/MemberLicense/AllLicenses");
     };
     MemberLicenseService.prototype.newLicense = function (memberLicense) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.post(_this.baseURL + "api/MemberLicense", memberLicense, _this.getOptions(token));
-        }));
+        return this.http.post(this.baseURL + "api/MemberLicense", memberLicense);
     };
     MemberLicenseService.prototype.deleteLicense = function (licenseId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.delete(_this.baseURL + "api/MemberLicense/" + licenseId, _this.getOptions(token));
-        }));
+        return this.http.delete(this.baseURL + "api/MemberLicense/" + licenseId);
     };
     MemberLicenseService.prototype.myLicense = function () {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + "api/MemberLicense/MyLicense", _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + "api/MemberLicense/MyLicense");
     };
     MemberLicenseService.prototype.usedStorage = function (licenseId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/MemberLicense/" + licenseId + "/UsedStorage"), _this.getOptions(token));
-        }));
-    };
-    MemberLicenseService.prototype.getOptions = function (token) {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpHeaders"]({ "Authorization": "Bearer " + token }) };
-    };
-    MemberLicenseService.prototype.getOptions2 = function (memberLicenseSM) {
-        return {
-            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpHeaders"]({ "Authorization": "Bearer " + this.auth_token }),
-            params: { "licenseId": memberLicenseSM.LicenseId }
-        };
-    };
-    MemberLicenseService.prototype.getOptions3 = function () {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpHeaders"]({ "Authorization": "Bearer " + this.auth_token }) };
+        return this.http.get(this.baseURL + ("api/MemberLicense/" + licenseId + "/UsedStorage"));
     };
     MemberLicenseService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"], _member_shared_model__WEBPACK_IMPORTED_MODULE_2__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], MemberLicenseService);
     return MemberLicenseService;
 }());
 
-// validateLicense(memberLicenseSM: MemberLicenseSM): Observable<MemberLicense> {
-//   return this.memberShared.token.pipe(switchMap(token => {
-//     if (token == '0') return of(null); else
-//       return this.http.put<MemberLicense>(this.baseURL + "api/MemberLicenses", memberLicenseSM, this.getOptions(token))
-//   }))
-// }
 
 
 /***/ }),
@@ -9728,48 +9629,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MemberSettingService", function() { return MemberSettingService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
-
-
-
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
 
 
 
 
 var MemberSettingService = /** @class */ (function () {
-    function MemberSettingService(http, memberShared) {
+    function MemberSettingService(http) {
         this.http = http;
-        this.memberShared = memberShared;
-        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__["BackEndWebServer"] + '/';
+        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__["BackEndWebServer"] + '/';
     }
     MemberSettingService.prototype.mySetting = function () {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + "api/MemberSetting/MySetting", _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + "api/MemberSetting/MySetting");
     };
     MemberSettingService.prototype.updateMySetting = function (mSetting) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.put(_this.baseURL + "api/MemberSetting/" + mSetting.Username, mSetting, _this.getOptions(token));
-        }));
-    };
-    MemberSettingService.prototype.getOptions = function (token) {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpHeaders"]({ "Authorization": "Bearer " + token }) };
+        return this.http.put(this.baseURL + "api/MemberSetting/" + mSetting.Username, mSetting);
     };
     MemberSettingService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"], _member_shared_model__WEBPACK_IMPORTED_MODULE_2__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], MemberSettingService);
     return MemberSettingService;
 }());
@@ -9790,17 +9669,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MembersService", function() { return MembersService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var _return_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../return.model */ "./src/app/model/return.model.ts");
-/* harmony import */ var src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/infrastructure/error-codes.enum */ "./src/infrastructure/error-codes.enum.ts");
-/* harmony import */ var _crypto_helpers_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./crypto-helpers.service */ "./src/app/model/services/crypto-helpers.service.ts");
-/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
-
-
-
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _return_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../return.model */ "./src/app/model/return.model.ts");
+/* harmony import */ var src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/infrastructure/error-codes.enum */ "./src/infrastructure/error-codes.enum.ts");
+/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
 
 
 
@@ -9809,57 +9682,31 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var MembersService = /** @class */ (function () {
-    function MembersService(http, memberShared, cryptoHelpers) {
+    function MembersService(http) {
         this.http = http;
-        this.memberShared = memberShared;
-        this.cryptoHelpers = cryptoHelpers;
-        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_9__["BackEndWebServer"] + '/';
-        //this.auth_token = memberShared.Token;
+        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__["BackEndWebServer"] + '/';
     }
     MembersService.prototype.getMember = function (username) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) { if (token == '0')
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(null);
-        else
-            return _this.http.get(_this.baseURL + "api/Members/GetUser/" + username, _this.getOptions(token)); }));
+        return this.http.get(this.baseURL + "api/Members/GetUser/" + username);
     };
     MembersService.prototype.updateMember = function (registerModel) {
-        //registerModel.Password = this.cryptoHelpers.encryptWithAES(registerModel.Password); // Later will be decrypt in .NET 
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(null);
-            else
-                return _this.http.put(_this.baseURL + "api/Members/" + registerModel.Username, registerModel, { observe: "response", headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpHeaders"]({ 'Content-Type': 'application/json', "Authorization": "Bearer " + token }), responseType: 'text' });
-        })).
-            pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (response) {
+        return this.http.put(this.baseURL + "api/Members/" + registerModel.Username, registerModel, { observe: "response", headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' }), responseType: 'text' }).
+            pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (response) {
             switch (response.status) { // 200 OK, 200 OK but with error code, 503ServiceUnavailable.. 
                 case 200:
                     if (response.body == "#-1:ME")
-                        return new _return_model__WEBPACK_IMPORTED_MODULE_6__["ReturnModel"](src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_7__["ErrorCodes"].MemberAlreadyExistsError, null);
+                        return new _return_model__WEBPACK_IMPORTED_MODULE_4__["ReturnModel"](src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_5__["ErrorCodes"].MemberAlreadyExistsError, null);
                 case 204:
-                    return new _return_model__WEBPACK_IMPORTED_MODULE_6__["ReturnModel"](src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_7__["ErrorCodes"].OK, null);
+                    return new _return_model__WEBPACK_IMPORTED_MODULE_4__["ReturnModel"](src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_5__["ErrorCodes"].OK, null);
             }
         }));
     };
     MembersService.prototype.grantAccess = function (passwordTry) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + "api/Members/GrantAccess/" + passwordTry, _this.getOptions(token));
-        }));
-    };
-    MembersService.prototype.getOptions = function (token) {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpHeaders"]({ "Authorization": "Bearer " + token }) };
-    };
-    MembersService.prototype.getOptions2 = function () {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpHeaders"]({ "Authorization": "Bearer " + this.auth_token }) };
+        return this.http.get(this.baseURL + "api/Members/GrantAccess/" + passwordTry);
     };
     MembersService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"], _member_shared_model__WEBPACK_IMPORTED_MODULE_3__["MemberShared"], _crypto_helpers_service__WEBPACK_IMPORTED_MODULE_8__["CryptoHelpersService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], MembersService);
     return MembersService;
 }());
@@ -9881,69 +9728,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
-
-
-
+/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
 
 
 
 
 var PrivateTalkMessagesService = /** @class */ (function () {
-    function PrivateTalkMessagesService(http, memberShared) {
+    function PrivateTalkMessagesService(http) {
         this.http = http;
-        this.memberShared = memberShared;
-        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__["BackEndWebServer"] + '/';
+        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__["BackEndWebServer"] + '/';
     }
     PrivateTalkMessagesService.prototype.privateTalkMessages = function (privateTalkId, pageNo, pageSize) {
-        var _this = this;
         if (pageNo === void 0) { pageNo = 1; }
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/PrivateTalkMessages/PrivateTalk/" + privateTalkId + "/Page/" + pageNo + "/PageSize/" + pageSize), _this.getOptions(token));
-        })); ///api/PrivateTalkMessages/PrivateTalk/2
+        return this.http.get(this.baseURL + ("api/PrivateTalkMessages/PrivateTalk/" + privateTalkId + "/Page/" + pageNo + "/PageSize/" + pageSize));
     };
     PrivateTalkMessagesService.prototype.findPrivateTalkMessage = function (privateTalkMessageId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/PrivateTalkMessages/" + privateTalkMessageId), _this.getOptions(token));
-        })); //api/PrivateTalkMessages/1
+        return this.http.get(this.baseURL + ("api/PrivateTalkMessages/" + privateTalkMessageId));
     };
     PrivateTalkMessagesService.prototype.savePrivateTalkMessage = function (privateTalkMessage) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.post(_this.baseURL + "api/PrivateTalkMessages", privateTalkMessage, _this.getOptions(token));
-        }));
+        return this.http.post(this.baseURL + "api/PrivateTalkMessages", privateTalkMessage);
     };
     PrivateTalkMessagesService.prototype.deletePrivateTalkMessage = function (privateTalkMessageId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.delete(_this.baseURL + "api/PrivateTalkMessages/" + privateTalkMessageId, _this.getOptions(token));
-        }));
-    };
-    PrivateTalkMessagesService.prototype.getOptions = function (token) {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Authorization": "Bearer " + token }) };
-    };
-    PrivateTalkMessagesService.prototype.getOptions2 = function () {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Authorization": "Bearer " + this.auth_token }) };
+        return this.http.delete(this.baseURL + "api/PrivateTalkMessages/" + privateTalkMessageId);
     };
     PrivateTalkMessagesService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _member_shared_model__WEBPACK_IMPORTED_MODULE_4__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], PrivateTalkMessagesService);
     return PrivateTalkMessagesService;
 }());
@@ -9965,81 +9775,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
-
-
-
+/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
 
 
 
 
 var PrivateTalkReceiversService = /** @class */ (function () {
-    function PrivateTalkReceiversService(http, memberShared) {
+    function PrivateTalkReceiversService(http) {
         this.http = http;
-        this.memberShared = memberShared;
-        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__["BackEndWebServer"] + '/';
+        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__["BackEndWebServer"] + '/';
     }
     PrivateTalkReceiversService.prototype.myPrivateTalkReceivers = function (pageNo, searchValue, pageSize) {
-        var _this = this;
         if (pageNo === void 0) { pageNo = 1; }
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/PrivateTalkReceivers/PrivateTalk/MyAll/Page/" + pageNo + "/Search/" + searchValue + "/PageSize/" + pageSize), _this.getOptions(token));
-        })); //api/PrivateTalkReceivers/PrivateTalk/MyAll/Page/22
+        return this.http.get(this.baseURL + ("api/PrivateTalkReceivers/PrivateTalk/MyAll/Page/" + pageNo + "/Search/" + searchValue + "/PageSize/" + pageSize));
     };
     PrivateTalkReceiversService.prototype.privateTalkReceivers = function (privateTalkId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/PrivateTalkReceivers/PrivateTalk/" + privateTalkId), _this.getOptions(token));
-        })); ///api/PrivateTalkReceivers/PrivateTalk/2
+        return this.http.get(this.baseURL + ("api/PrivateTalkReceivers/PrivateTalk/" + privateTalkId));
     };
     PrivateTalkReceiversService.prototype.findPrivateTalkReceiver = function (privateTalkReceiverId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/PrivateTalkReceivers/" + privateTalkReceiverId), _this.getOptions(token));
-        })); //api/PrivateTalkReceivers/1
+        return this.http.get(this.baseURL + ("api/PrivateTalkReceivers/" + privateTalkReceiverId));
     };
     PrivateTalkReceiversService.prototype.savePrivateTalkReceiver = function (privateTalkReceiver) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            return _this.http.post(_this.baseURL + "api/PrivateTalkReceivers", privateTalkReceiver, _this.getOptions(token));
-        }));
+        return this.http.post(this.baseURL + "api/PrivateTalkReceivers", privateTalkReceiver);
     };
     PrivateTalkReceiversService.prototype.savePrivateTalkReceivers = function (privateTalkReceivers) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            return _this.http.post(_this.baseURL + "api/PrivateTalkReceivers", privateTalkReceivers, _this.getOptions(token));
-        }));
+        return this.http.post(this.baseURL + "api/PrivateTalkReceivers", privateTalkReceivers);
     };
     PrivateTalkReceiversService.prototype.deletePrivateTalkReceivers = function (privateTalkId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.delete(_this.baseURL + "api/PrivateTalkReceivers/PrivateTalk/" + privateTalkId, _this.getOptions(token));
-        }));
-    };
-    PrivateTalkReceiversService.prototype.getOptions = function (token) {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Authorization": "Bearer " + token }) };
-    };
-    PrivateTalkReceiversService.prototype.getOptions2 = function () {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Authorization": "Bearer " + this.auth_token }) };
+        return this.http.delete(this.baseURL + "api/PrivateTalkReceivers/PrivateTalk/" + privateTalkId);
     };
     PrivateTalkReceiversService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _member_shared_model__WEBPACK_IMPORTED_MODULE_4__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], PrivateTalkReceiversService);
     return PrivateTalkReceiversService;
 }());
@@ -10061,81 +9828,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
-
-
-
+/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
 
 
 
 
 var PrivateTalkTeamReceiversService = /** @class */ (function () {
-    function PrivateTalkTeamReceiversService(http, memberShared) {
+    function PrivateTalkTeamReceiversService(http) {
         this.http = http;
-        this.memberShared = memberShared;
-        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__["BackEndWebServer"] + '/';
+        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__["BackEndWebServer"] + '/';
     }
     PrivateTalkTeamReceiversService.prototype.myPrivateTalkTeamReceivers = function (pageNo, searchValue, pageSize) {
-        var _this = this;
         if (pageNo === void 0) { pageNo = 1; }
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/PrivateTalkTeamReceivers/PrivateTalk/MyAll/Page/" + pageNo + "/Search/" + searchValue + "/PageSize/" + pageSize), _this.getOptions(token));
-        })); //api/PrivateTalkTeamReceivers/PrivateTalk/MyAll/Page/
+        return this.http.get(this.baseURL + ("api/PrivateTalkTeamReceivers/PrivateTalk/MyAll/Page/" + pageNo + "/Search/" + searchValue + "/PageSize/" + pageSize));
     };
     PrivateTalkTeamReceiversService.prototype.privateTalkTeamReceivers = function (privateTalkId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/PrivateTalkTeamReceivers/PrivateTalk/" + privateTalkId), _this.getOptions(token));
-        })); ///api/PrivateTalkTeamReceivers/PrivateTalk/2
+        return this.http.get(this.baseURL + ("api/PrivateTalkTeamReceivers/PrivateTalk/" + privateTalkId));
     };
     PrivateTalkTeamReceiversService.prototype.findPrivateTalkTeamReceiver = function (privateTalkTeamReceiverId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/PrivateTalkTeamReceivers/" + privateTalkTeamReceiverId), _this.getOptions(token));
-        })); //api/PrivateTalkTeamReceivers/1
+        return this.http.get(this.baseURL + ("api/PrivateTalkTeamReceivers/" + privateTalkTeamReceiverId));
     };
     PrivateTalkTeamReceiversService.prototype.savePrivateTalkTeamReceiver = function (privateTalkTeamReceiver) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            return _this.http.post(_this.baseURL + "api/PrivateTalkTeamReceivers", privateTalkTeamReceiver, _this.getOptions(token));
-        }));
+        return this.http.post(this.baseURL + "api/PrivateTalkTeamReceivers", privateTalkTeamReceiver);
     };
     PrivateTalkTeamReceiversService.prototype.savePrivateTalkTeamReceivers = function (privateTalkTeamReceivers) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            return _this.http.post(_this.baseURL + "api/PrivateTalkTeamReceivers", privateTalkTeamReceivers, _this.getOptions(token));
-        }));
+        return this.http.post(this.baseURL + "api/PrivateTalkTeamReceivers", privateTalkTeamReceivers);
     };
     PrivateTalkTeamReceiversService.prototype.deletePrivateTalkTeamReceivers = function (privateTalkId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.delete(_this.baseURL + "api/PrivateTalkTeamReceivers/PrivateTalk/" + privateTalkId, _this.getOptions(token));
-        }));
-    };
-    PrivateTalkTeamReceiversService.prototype.getOptions = function (token) {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Authorization": "Bearer " + token }) };
-    };
-    PrivateTalkTeamReceiversService.prototype.getOptions2 = function () {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Authorization": "Bearer " + this.auth_token }) };
+        return this.http.delete(this.baseURL + "api/PrivateTalkTeamReceivers/PrivateTalk/" + privateTalkId);
     };
     PrivateTalkTeamReceiversService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _member_shared_model__WEBPACK_IMPORTED_MODULE_4__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], PrivateTalkTeamReceiversService);
     return PrivateTalkTeamReceiversService;
 }());
@@ -10157,166 +9881,65 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
-
-
-
+/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
 
 
 
 
 var PrivateTalksService = /** @class */ (function () {
-    function PrivateTalksService(http, memberShared) {
+    function PrivateTalksService(http) {
         this.http = http;
-        this.memberShared = memberShared;
-        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__["BackEndWebServer"] + '/';
+        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__["BackEndWebServer"] + '/';
     }
     PrivateTalksService.prototype.isMyPrivateTalk = function (privateTalkId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/PrivateTalks/isMyPrivateTalk/" + privateTalkId), _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + ("api/PrivateTalks/isMyPrivateTalk/" + privateTalkId));
     };
     PrivateTalksService.prototype.isPrivateTalkJoined = function (privateTalkId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/PrivateTalks/isPrivateTalkJoined/" + privateTalkId), _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + ("api/PrivateTalks/isPrivateTalkJoined/" + privateTalkId));
     };
     PrivateTalksService.prototype.myPrivateTalks = function (pageNo, searchValue, pageSize) {
-        var _this = this;
         if (pageNo === void 0) { pageNo = 1; }
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + "api/PrivateTalks/MyPrivateTalks/Page/" + pageNo + "/Search/" + searchValue + "/PageSize/" + pageSize, _this.getOptions(token));
-        })); //api/PrivateTalks/MyPrivateTalks
+        return this.http.get(this.baseURL + "api/PrivateTalks/MyPrivateTalks/Page/" + pageNo + "/Search/" + searchValue + "/PageSize/" + pageSize);
     };
     PrivateTalksService.prototype.privateTalksReceived = function (pageNo, searchValue, pageSize) {
-        var _this = this;
         if (pageNo === void 0) { pageNo = 1; }
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + "api/PrivateTalks/Received/Page/" + pageNo + "/Search/" + searchValue + "/PageSize/" + pageSize, _this.getOptions(token));
-        })); //api/PrivateTalks/Received
+        return this.http.get(this.baseURL + "api/PrivateTalks/Received/Page/" + pageNo + "/Search/" + searchValue + "/PageSize/" + pageSize);
     };
     PrivateTalksService.prototype.myPrivateTalkMessagesCount = function (pageNo, searchValue, pageSize) {
-        var _this = this;
         if (pageNo === void 0) { pageNo = 1; }
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/PrivateTalks/My/MessagesCount/Page/" + pageNo + "/Search/" + searchValue + "/PageSize/" + pageSize), _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + ("api/PrivateTalks/My/MessagesCount/Page/" + pageNo + "/Search/" + searchValue + "/PageSize/" + pageSize));
     };
     PrivateTalksService.prototype.receivedPrivateTalkMessagesCount = function (pageNo, searchValue, pageSize) {
-        var _this = this;
         if (pageNo === void 0) { pageNo = 1; }
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/PrivateTalks/Received/MessagesCount/Page/" + pageNo + "/Search/" + searchValue + "/PageSize/" + pageSize), _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + ("api/PrivateTalks/Received/MessagesCount/Page/" + pageNo + "/Search/" + searchValue + "/PageSize/" + pageSize));
     };
     PrivateTalksService.prototype.unreadMyPtCount = function () {
-        var _this = this;
-        // GET PrivateTalks/MyPTUnreadCount  
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + "api/PrivateTalks/MyPTUnreadCount", _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + "api/PrivateTalks/MyPTUnreadCount");
     };
     PrivateTalksService.prototype.unreadReceivedPtCount = function () {
-        var _this = this;
-        // GET   PrivateTalks/ReceivedPTUnreadCount  
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + "api/PrivateTalks/ReceivedPTUnreadCount", _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + "api/PrivateTalks/ReceivedPTUnreadCount");
     };
-    //[Type(MyOrReceived), PrivateTalk, MessageCountModel, Receivers, TeamReceivers]       
     PrivateTalksService.prototype.getNewUnreadPrivateTalk = function (privateTalkId) {
-        var _this = this;
-        // GET     PrivateTalks/GetNewUnreadPrivateTalk/{privateTalkId}
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/PrivateTalks/GetNewUnreadPrivateTalk/" + privateTalkId), _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + ("api/PrivateTalks/GetNewUnreadPrivateTalk/" + privateTalkId));
     };
     PrivateTalksService.prototype.saveOrUpdatePrivateTalkLastSeen = function (privateTalkLastSeen) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.post(_this.baseURL + "api/PrivateTalks/PrivateTalkLastSeen", privateTalkLastSeen, _this.getOptions(token));
-        })); // 
+        return this.http.post(this.baseURL + "api/PrivateTalks/PrivateTalkLastSeen", privateTalkLastSeen);
     };
     PrivateTalksService.prototype.findPrivateTalk = function (privateTalkId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + "api/PrivateTalks/" + privateTalkId, _this.getOptions(token));
-        })); // api/PrivateTalks/1
+        return this.http.get(this.baseURL + "api/PrivateTalks/" + privateTalkId);
     };
     PrivateTalksService.prototype.savePrivateTalk = function (privateTalk) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.post(_this.baseURL + "api/PrivateTalks", privateTalk, _this.getOptions(token));
-        }));
+        return this.http.post(this.baseURL + "api/PrivateTalks", privateTalk);
     };
     PrivateTalksService.prototype.updatePrivateTalk = function (privateTalk) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.put(_this.baseURL + "api/PrivateTalks/" + privateTalk.PrivateTalkId, privateTalk, _this.getOptions(token));
-        }));
+        return this.http.put(this.baseURL + "api/PrivateTalks/" + privateTalk.PrivateTalkId, privateTalk);
     };
     PrivateTalksService.prototype.deletePrivateTalk = function (privateTalkId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.delete(_this.baseURL + "api/PrivateTalks/" + privateTalkId, _this.getOptions(token));
-        }));
-    };
-    PrivateTalksService.prototype.getOptions = function (token) {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Authorization": "Bearer " + token }) };
-    };
-    PrivateTalksService.prototype.getOptions2 = function () {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Authorization": "Bearer " + this.auth_token }) };
+        return this.http.delete(this.baseURL + "api/PrivateTalks/" + privateTalkId);
     };
     PrivateTalksService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _member_shared_model__WEBPACK_IMPORTED_MODULE_4__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], PrivateTalksService);
     return PrivateTalksService;
 }());
@@ -10338,74 +9961,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
-
-
-
+/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
 
 
 
 
 var ProjectToDoCommentsService = /** @class */ (function () {
-    function ProjectToDoCommentsService(http, memberShared) {
+    function ProjectToDoCommentsService(http) {
         this.http = http;
-        this.memberShared = memberShared;
-        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__["BackEndWebServer"] + '/';
+        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__["BackEndWebServer"] + '/';
     }
     ProjectToDoCommentsService.prototype.projectTaskComments = function (taskId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/ProjectToDoComments/ProjectToDo/" + taskId), _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + ("api/ProjectToDoComments/ProjectToDo/" + taskId));
     };
     ProjectToDoCommentsService.prototype.findProjectTaskComment = function (messageId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/ProjectToDoComments/" + messageId), _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + ("api/ProjectToDoComments/" + messageId));
     };
     ProjectToDoCommentsService.prototype.saveProjectTaskComment = function (projectTaskComment) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.post(_this.baseURL + "api/ProjectToDoComments", projectTaskComment, _this.getOptions(token));
-        }));
+        return this.http.post(this.baseURL + "api/ProjectToDoComments", projectTaskComment);
     };
     ProjectToDoCommentsService.prototype.updateProjectTaskComment = function (projectTaskComment) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.put(_this.baseURL + "api/ProjectToDoComments/" + projectTaskComment.MessageId, projectTaskComment, _this.getOptions(token));
-        }));
+        return this.http.put(this.baseURL + "api/ProjectToDoComments/" + projectTaskComment.MessageId, projectTaskComment);
     };
     ProjectToDoCommentsService.prototype.deleteProjectTaskComment = function (messageId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.delete(_this.baseURL + "api/ProjectToDoComments/" + messageId, _this.getOptions(token));
-        }));
-    };
-    ProjectToDoCommentsService.prototype.getOptions = function (token) {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Authorization": "Bearer " + token }) };
+        return this.http.delete(this.baseURL + "api/ProjectToDoComments/" + messageId);
     };
     ProjectToDoCommentsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _member_shared_model__WEBPACK_IMPORTED_MODULE_4__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], ProjectToDoCommentsService);
     return ProjectToDoCommentsService;
 }());
@@ -10427,109 +10010,49 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
-
-
-
+/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
 
 
 
 
 var ProjectToDosService = /** @class */ (function () {
-    function ProjectToDosService(http, memberShared) {
+    function ProjectToDosService(http) {
         this.http = http;
-        this.memberShared = memberShared;
-        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__["BackEndWebServer"] + '/';
-        //this.auth_token = memberShared.Token;
+        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__["BackEndWebServer"] + '/';
     }
     ProjectToDosService.prototype.saveAllTOMs = function (TOMs, projectId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.post(_this.baseURL + "api/ProjectToDos/TOMs", TOMs, { params: { 'projectId': projectId.toString() }, headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Authorization": "Bearer " + token }) });
-        }));
+        return this.http.post(this.baseURL + "api/ProjectToDos/TOMs", TOMs, { params: { 'projectId': projectId.toString() } });
     };
     ProjectToDosService.prototype.projectToDos = function (projectId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) { if (token == '0')
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-        else
-            return _this.http.get(_this.baseURL + ("api/ProjectToDos/Project/" + projectId), _this.getOptions(token)); }));
+        return this.http.get(this.baseURL + ("api/ProjectToDos/Project/" + projectId));
     };
     ProjectToDosService.prototype.projectToDosAssignedToMe = function (searchValue) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) { if (token == '0')
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-        else
-            return _this.http.get(_this.baseURL + ("api/ProjectToDos/AssignedToMe/Search/" + searchValue), _this.getOptions(token)); }));
+        return this.http.get(this.baseURL + ("api/ProjectToDos/AssignedToMe/Search/" + searchValue));
     };
     ProjectToDosService.prototype.assignedToMePTCommentsCount = function (searchValue) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/ProjectToDos/AssignedToMe/CommentsCount/Search/" + searchValue), _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + ("api/ProjectToDos/AssignedToMe/CommentsCount/Search/" + searchValue));
     };
     ProjectToDosService.prototype.projectToDosCommentsCount = function (projectId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/ProjectToDos/Project/" + projectId + "/CommentsCount"), _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + ("api/ProjectToDos/Project/" + projectId + "/CommentsCount"));
     };
     ProjectToDosService.prototype.complete = function (projectTodoId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) { if (token == '0')
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-        else
-            return _this.http.put(_this.baseURL + "api/ProjectToDos/Complete/" + projectTodoId, null, _this.getOptions(token)); }));
+        return this.http.put(this.baseURL + "api/ProjectToDos/Complete/" + projectTodoId, null);
     };
     ProjectToDosService.prototype.projectToDo = function (projectToDoId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) { if (token == '0')
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-        else
-            return _this.http.get(_this.baseURL + ("api/ProjectToDos/" + projectToDoId), _this.getOptions(token)); }));
+        return this.http.get(this.baseURL + ("api/ProjectToDos/" + projectToDoId));
     };
     ProjectToDosService.prototype.saveProjectToDo = function (projectTask) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) { if (token == '0')
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-        else
-            return _this.http.post(_this.baseURL + "api/ProjectToDos", projectTask, _this.getOptions(token)); }));
+        return this.http.post(this.baseURL + "api/ProjectToDos", projectTask);
     };
     ProjectToDosService.prototype.updateProjectToDo = function (projectTask) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) { if (token == '0')
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-        else
-            return _this.http.put(_this.baseURL + "api/ProjectToDos/" + projectTask.TaskId, projectTask, _this.getOptions(token)); }));
+        return this.http.put(this.baseURL + "api/ProjectToDos/" + projectTask.TaskId, projectTask);
     };
     ProjectToDosService.prototype.deleteProjectToDo = function (taskId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) { if (token == '0')
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-        else
-            return _this.http.delete(_this.baseURL + "api/ProjectToDos/" + taskId, _this.getOptions(token)); }));
-    };
-    ProjectToDosService.prototype.getOptions = function (token) {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Authorization": "Bearer " + token }) };
-    };
-    ProjectToDosService.prototype.getOptions2 = function () {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Authorization": "Bearer " + this.auth_token }) };
+        return this.http.delete(this.baseURL + "api/ProjectToDos/" + taskId);
     };
     ProjectToDosService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _member_shared_model__WEBPACK_IMPORTED_MODULE_4__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], ProjectToDosService);
     return ProjectToDosService;
 }());
@@ -10551,119 +10074,49 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
-
-
-
+/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
 
 
 
 
 var ProjectsService = /** @class */ (function () {
-    function ProjectsService(http, memberShared) {
+    function ProjectsService(http) {
         this.http = http;
-        this.memberShared = memberShared;
-        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__["BackEndWebServer"] + '/';
-        //this.auth_token = memberShared.Token;
+        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__["BackEndWebServer"] + '/';
     }
     ProjectsService.prototype.saveAllPOMs = function (POMs) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.post(_this.baseURL + "api/Projects/POMs", POMs, { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Authorization": "Bearer " + token }) });
-        }));
+        return this.http.post(this.baseURL + "api/Projects/POMs", POMs);
     };
-    // GET Projects/5343/isShareholder
-    //Am I Shareholder ??
     ProjectsService.prototype.isShareholder = function (projectId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/Projects/isShareholder/" + projectId), _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + ("api/Projects/isShareholder/" + projectId));
     };
     ProjectsService.prototype.isMyProject = function (projectId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/Projects/isMyProject/" + projectId), _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + ("api/Projects/isMyProject/" + projectId));
     };
     ProjectsService.prototype.isProjectAssigned = function (projectId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/Projects/isProjectAssigned/" + projectId), _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + ("api/Projects/isProjectAssigned/" + projectId));
     };
     ProjectsService.prototype.myProjects = function () {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + "api/Projects/MyProjects", _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + "api/Projects/MyProjects");
     };
     ProjectsService.prototype.myProjectsAssigned = function () {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + "api/Projects/MyProjects/Assigned", _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + "api/Projects/MyProjects/Assigned");
     };
     ProjectsService.prototype.findProject = function (projectId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) { if (token == '0')
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-        else
-            return _this.http.get(_this.baseURL + "api/Projects/" + projectId, _this.getOptions(token)); }));
+        return this.http.get(this.baseURL + "api/Projects/" + projectId);
     };
     ProjectsService.prototype.saveProject = function (project) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.post(_this.baseURL + "api/Projects", project, _this.getOptions(token));
-        }));
+        return this.http.post(this.baseURL + "api/Projects", project);
     };
     ProjectsService.prototype.updateProject = function (project) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) { if (token == '0')
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-        else
-            return _this.http.put(_this.baseURL + "api/Projects/" + project.ProjectId, project, _this.getOptions(token)); }));
+        return this.http.put(this.baseURL + "api/Projects/" + project.ProjectId, project);
     };
     ProjectsService.prototype.deleteProject = function (projectId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) { if (token == '0')
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-        else
-            return _this.http.delete(_this.baseURL + "api/Projects/" + projectId, _this.getOptions(token)); }));
-    };
-    ProjectsService.prototype.getOptions = function (token) {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Authorization": "Bearer " + token }) };
-    };
-    ProjectsService.prototype.getOptions2 = function () {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Authorization": "Bearer " + this.auth_token }) };
+        return this.http.delete(this.baseURL + "api/Projects/" + projectId);
     };
     ProjectsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _member_shared_model__WEBPACK_IMPORTED_MODULE_4__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], ProjectsService);
     return ProjectsService;
 }());
@@ -10685,74 +10138,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
-
-
-
+/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
 
 
 
 
 var QuickToDoCommentsService = /** @class */ (function () {
-    function QuickToDoCommentsService(http, memberShared) {
+    function QuickToDoCommentsService(http) {
         this.http = http;
-        this.memberShared = memberShared;
-        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__["BackEndWebServer"] + '/';
+        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__["BackEndWebServer"] + '/';
     }
     QuickToDoCommentsService.prototype.quickTaskComments = function (taskId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/QuickToDoComments/QuickToDo/" + taskId), _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + ("api/QuickToDoComments/QuickToDo/" + taskId));
     };
     QuickToDoCommentsService.prototype.findQuickTaskComment = function (messageId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/QuickToDoComments/" + messageId), _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + ("api/QuickToDoComments/" + messageId));
     };
     QuickToDoCommentsService.prototype.saveQuickTaskComment = function (quickTaskComment) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.post(_this.baseURL + "api/QuickToDoComments", quickTaskComment, _this.getOptions(token));
-        }));
+        return this.http.post(this.baseURL + "api/QuickToDoComments", quickTaskComment);
     };
     QuickToDoCommentsService.prototype.updateQuickTaskComment = function (quickTaskComment) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.put(_this.baseURL + "api/QuickToDoComments/" + quickTaskComment.MessageId, quickTaskComment, _this.getOptions(token));
-        }));
+        return this.http.put(this.baseURL + "api/QuickToDoComments/" + quickTaskComment.MessageId, quickTaskComment);
     };
     QuickToDoCommentsService.prototype.deleteQuickTaskComment = function (messageId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.delete(_this.baseURL + "api/QuickToDoComments/" + messageId, _this.getOptions(token));
-        }));
-    };
-    QuickToDoCommentsService.prototype.getOptions = function (token) {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Authorization": "Bearer " + token }) };
+        return this.http.delete(this.baseURL + "api/QuickToDoComments/" + messageId);
     };
     QuickToDoCommentsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _member_shared_model__WEBPACK_IMPORTED_MODULE_4__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], QuickToDoCommentsService);
     return QuickToDoCommentsService;
 }());
@@ -10774,113 +10187,51 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
-
-
-
+/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
 
 
 
 
 var QuickToDosService = /** @class */ (function () {
-    function QuickToDosService(http, memberShared) {
+    function QuickToDosService(http) {
         this.http = http;
-        this.memberShared = memberShared;
-        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__["BackEndWebServer"] + '/';
-        //this.auth_token = memberShared.Token;
+        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__["BackEndWebServer"] + '/';
     }
     QuickToDosService.prototype.saveAllTOMs = function (TOMs) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.post(_this.baseURL + "api/QuickToDos/TOMs", TOMs, { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Authorization": "Bearer " + token }) });
-        }));
+        return this.http.post(this.baseURL + "api/QuickToDos/TOMs", TOMs);
     };
     QuickToDosService.prototype.myQuickToDos = function (pageNo, searchValue, pageSize) {
-        var _this = this;
         if (pageNo === void 0) { pageNo = 1; }
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/QuickToDos/My/Page/" + pageNo + "/Search/" + searchValue + "/PageSize/" + pageSize), _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + ("api/QuickToDos/My/Page/" + pageNo + "/Search/" + searchValue + "/PageSize/" + pageSize));
     };
     QuickToDosService.prototype.assignedToMe = function (searchValue) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/QuickToDos/AssignedToMe/Search/" + searchValue), _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + ("api/QuickToDos/AssignedToMe/Search/" + searchValue));
     };
     QuickToDosService.prototype.myAndAssignedToMeQTCommentsCount = function (pageNo, searchValue, pageSize) {
-        var _this = this;
         if (pageNo === void 0) { pageNo = 1; }
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/QuickToDos/MyAndAssignedToMe/CommentsCount/Page/" + pageNo + "/Search/" + searchValue + "/PageSize/" + pageSize), _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + ("api/QuickToDos/MyAndAssignedToMe/CommentsCount/Page/" + pageNo + "/Search/" + searchValue + "/PageSize/" + pageSize));
     };
     QuickToDosService.prototype.saveQuickTodo = function (quickToDo) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) { if (token == '0')
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-        else
-            return _this.http.post(_this.baseURL + "api/QuickToDos", quickToDo, _this.getOptions(token)); }));
+        return this.http.post(this.baseURL + "api/QuickToDos", quickToDo);
     };
     QuickToDosService.prototype.updateQuickTodo = function (quickToDo) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) { if (token == '0')
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-        else
-            return _this.http.put(_this.baseURL + "api/QuickToDos/" + quickToDo.TaskId, quickToDo, _this.getOptions(token)); }));
+        return this.http.put(this.baseURL + "api/QuickToDos/" + quickToDo.TaskId, quickToDo);
     };
     QuickToDosService.prototype.deleteQuickTodo = function (quickToDoId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) { if (token == '0')
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-        else
-            return _this.http.delete(_this.baseURL + "api/QuickToDos/" + quickToDoId, _this.getOptions(token)); }));
+        return this.http.delete(this.baseURL + "api/QuickToDos/" + quickToDoId);
     };
     QuickToDosService.prototype.findQuickToDo = function (taskId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) { if (token == '0')
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-        else
-            return _this.http.get(_this.baseURL + ("api/QuickToDos/" + taskId), _this.getOptions(token)); }));
+        return this.http.get(this.baseURL + ("api/QuickToDos/" + taskId));
     };
     QuickToDosService.prototype.complete = function (quickToDoId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) { if (token == '0')
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-        else
-            return _this.http.put(_this.baseURL + "api/QuickToDos/Complete/" + quickToDoId, null, _this.getOptions(token)); }));
+        return this.http.put(this.baseURL + "api/QuickToDos/Complete/" + quickToDoId, null);
     };
     QuickToDosService.prototype.deComplete = function (quickToDoId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) { if (token == '0')
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-        else
-            return _this.http.put(_this.baseURL + "api/QuickToDos/DeComplete/" + quickToDoId, null, _this.getOptions(token)); }));
-    };
-    QuickToDosService.prototype.getOptions = function (token) {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Authorization": "Bearer " + token }) };
-    };
-    QuickToDosService.prototype.getOptions2 = function () {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Authorization": "Bearer " + this.auth_token }) };
+        return this.http.put(this.baseURL + "api/QuickToDos/DeComplete/" + quickToDoId, null);
     };
     QuickToDosService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _member_shared_model__WEBPACK_IMPORTED_MODULE_4__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], QuickToDosService);
     return QuickToDosService;
 }());
@@ -10976,133 +10327,66 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
-
-
-
+/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
 
 
 
 
 var TeamMembersService = /** @class */ (function () {
-    function TeamMembersService(http, memberShared) {
+    function TeamMembersService(http) {
         this.http = http;
-        this.memberShared = memberShared;
-        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__["BackEndWebServer"] + '/';
-        //this.auth_token = memberShared.Token;
+        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__["BackEndWebServer"] + '/';
     }
     TeamMembersService.prototype.teamMembers = function (teamId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/TeamMembers/Team/" + teamId), _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + ("api/TeamMembers/Team/" + teamId));
     };
     TeamMembersService.prototype.teamMembersJoined = function () {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + "api/TeamMembers/Joined", _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + "api/TeamMembers/Joined");
     };
     TeamMembersService.prototype.teamMembersOwned = function () {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + "api/TeamMembers/Owned", _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + "api/TeamMembers/Owned");
     };
     TeamMembersService.prototype.teamMembersJoinedAsMembers = function () {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + "api/TeamMembers/Joined/AsMembers", _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + "api/TeamMembers/Joined/AsMembers");
     };
     TeamMembersService.prototype.teamMembersOwnedAsMembers = function () {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + "api/TeamMembers/Owned/AsMembers", _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + "api/TeamMembers/Owned/AsMembers");
     };
     TeamMembersService.prototype.allTeamMembersPT = function () {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + "api/TeamMembers/AllTeamMembersPT", _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + "api/TeamMembers/AllTeamMembersPT");
     };
     TeamMembersService.prototype.allTeamMembersPTAsMembers = function () {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + "api/TeamMembers/AllTeamMembersPTAsMembers", _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + "api/TeamMembers/AllTeamMembersPTAsMembers");
     };
     TeamMembersService.prototype.saveTeamMember = function (teamMember) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.post(_this.baseURL + "api/TeamMembers", teamMember, _this.getOptions(token));
-        }));
+        return this.http.post(this.baseURL + "api/TeamMembers", teamMember);
     };
     TeamMembersService.prototype.updateTeamMember = function (teamMember) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.put(_this.baseURL + "api/TeamMembers/" + teamMember.TeamMemberId, teamMember, _this.getOptions(token));
-        }));
+        return this.http.put(this.baseURL + "api/TeamMembers/" + teamMember.TeamMemberId, teamMember);
     };
     TeamMembersService.prototype.deleteTeamMember = function (teamMemberId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.delete(_this.baseURL + "api/TeamMembers/" + teamMemberId, _this.getOptions(token));
-        }));
-    };
-    TeamMembersService.prototype.getOptions = function (token) {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Authorization": "Bearer " + token }) };
-    };
-    TeamMembersService.prototype.getOptions2 = function (teamMember) {
-        return {
-            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Authorization": "Bearer " + this.auth_token }),
-            params: { "teamId": teamMember.TeamId.toString(), "username": teamMember.Username }
-        };
-    };
-    TeamMembersService.prototype.getOptions3 = function () {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Authorization": "Bearer " + this.auth_token }) };
+        return this.http.delete(this.baseURL + "api/TeamMembers/" + teamMemberId);
     };
     TeamMembersService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _member_shared_model__WEBPACK_IMPORTED_MODULE_4__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], TeamMembersService);
     return TeamMembersService;
 }());
 
+/* Code Help */
+// getOptions(token) {
+//   return { headers: new HttpHeaders({ "Authorization": `Bearer ${token}` }) }
+// }
+// getOptions2(teamMember: TeamMember) { // Special for delete methods.
+//   return {
+//     headers: new HttpHeaders({ "Authorization": `Bearer ${this.auth_token}` }),
+//     params: { "teamId": teamMember.TeamId.toString(), "username": teamMember.Username }
+//   };
+// }
+// getOptions3() {
+//   return { headers: new HttpHeaders({ "Authorization": `Bearer ${this.auth_token}` }) }
+// }
 
 
 /***/ }),
@@ -11119,112 +10403,47 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TeamsService", function() { return TeamsService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
-
-
-
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
 
 
 
 
 var TeamsService = /** @class */ (function () {
-    function TeamsService(http, memberShared) {
+    function TeamsService(http) {
         this.http = http;
-        this.memberShared = memberShared;
-        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__["BackEndWebServer"] + '/';
-        //this.auth_token = memberShared.Token;
+        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__["BackEndWebServer"] + '/';
     }
-    //For manuel model binding in Angular/TypeScript, also don't forget to use Object.assign(this, obj) or manuel your assignments in binding-model 
-    // myTeams(): Observable<Team[]>{ 
-    //   return this.http.get<any[]>(this.baseURL + "api/Teams/MyTeams", this.getOptions()).pipe(
-    //    map( (dizi,index)=> {  let teams: Team[] = []; dizi.forEach(value=> teams.push(new Team(value))); return teams; })
-    //   );
-    // } 
-    //token '0' means log out.
     TeamsService.prototype.myTeams = function () {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) { if (token == '0')
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(null);
-        else
-            return _this.http.get(_this.baseURL + "api/Teams/MyTeams", _this.getOptions(token)); }));
+        return this.http.get(this.baseURL + "api/Teams/MyTeams");
     };
     TeamsService.prototype.isMyTeam = function (teamId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/Teams/isMyTeam/" + teamId), _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + ("api/Teams/isMyTeam/" + teamId));
     };
     TeamsService.prototype.isTeamJoined = function (teamId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + ("api/Teams/isTeamJoined/" + teamId), _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + ("api/Teams/isTeamJoined/" + teamId));
     };
     TeamsService.prototype.teamsJoined = function () {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) { if (token == '0')
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(null);
-        else
-            return _this.http.get(_this.baseURL + "api/Teams/Joined", _this.getOptions(token)); }));
+        return this.http.get(this.baseURL + "api/Teams/Joined");
     };
     TeamsService.prototype.allTeamsPT = function () {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + "api/Teams/AllTeamsPT", _this.getOptions(token));
-        }));
+        return this.http.get(this.baseURL + "api/Teams/AllTeamsPT");
     };
     TeamsService.prototype.findTeam = function (teamId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) { if (token == '0')
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(null);
-        else
-            return _this.http.get(_this.baseURL + "api/Teams/" + teamId, _this.getOptions(token)); }));
+        return this.http.get(this.baseURL + "api/Teams/" + teamId);
     };
     TeamsService.prototype.saveTeam = function (team) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) { if (token == '0')
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(null);
-        else
-            return _this.http.post(_this.baseURL + "api/Teams", team, _this.getOptions(token)); }));
+        return this.http.post(this.baseURL + "api/Teams", team);
     };
     TeamsService.prototype.updateTeam = function (team) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(null);
-            else
-                return _this.http.put(_this.baseURL + "api/Teams/" + team.TeamId, team, _this.getOptions(token));
-        }));
+        return this.http.put(this.baseURL + "api/Teams/" + team.TeamId, team);
     };
     TeamsService.prototype.deleteTeam = function (teamId) {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) { if (token == '0')
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(null);
-        else
-            return _this.http.delete(_this.baseURL + "api/Teams/" + teamId, _this.getOptions(token)); }));
-    };
-    TeamsService.prototype.getOptions = function (token) {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({ "Authorization": "Bearer " + token }) };
-    };
-    TeamsService.prototype.getOptions2 = function () {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({ "Authorization": "Bearer " + this.auth_token }) };
+        return this.http.delete(this.baseURL + "api/Teams/" + teamId);
     };
     TeamsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"], _member_shared_model__WEBPACK_IMPORTED_MODULE_4__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], TeamsService);
     return TeamsService;
 }());
@@ -11246,41 +10465,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
-
-
-
+/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
 
 
 
 
 var TimeService = /** @class */ (function () {
-    function TimeService(http, memberShared) {
+    function TimeService(http) {
         this.http = http;
-        this.memberShared = memberShared;
-        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_6__["BackEndWebServer"] + '/';
+        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__["BackEndWebServer"] + '/';
     }
     TimeService.prototype.getUnixTimestamp = function () {
-        var _this = this;
-        return this.memberShared.token.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (token) {
-            if (token == '0')
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
-            else
-                return _this.http.get(_this.baseURL + "api/Auth/GetUnixTimestamp");
-        }));
+        return this.http.get(this.baseURL + "api/Auth/GetUnixTimestamp");
     };
     TimeService.prototype.getNow = function () {
         return this.http.get(this.baseURL + "api/Auth/GetNow", { responseType: 'text' });
     };
-    TimeService.prototype.getOptions3 = function () {
-        return { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json', }), responseType: 'text' };
-    };
     TimeService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _member_shared_model__WEBPACK_IMPORTED_MODULE_4__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], TimeService);
     return TimeService;
 }());
@@ -11302,12 +10505,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _aspnet_signalr__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @aspnet/signalr */ "./node_modules/@aspnet/signalr/dist/esm/index.js");
-/* harmony import */ var _member_shared_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../member-shared.model */ "./src/app/model/member-shared.model.ts");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
-/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
-/* harmony import */ var _notification_services_notification_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../notification-services/notification.service */ "./src/app/model/notification-services/notification.service.ts");
-
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
+/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var _notification_services_notification_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../notification-services/notification.service */ "./src/app/model/notification-services/notification.service.ts");
 
 
 
@@ -11316,53 +10517,50 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var XyzekiSignalrService = /** @class */ (function () {
-    function XyzekiSignalrService(memberShared, dataService, pushService) {
-        var _this = this;
-        this.memberShared = memberShared;
+    function XyzekiSignalrService(dataService, pushService) {
         this.dataService = dataService;
         this.pushService = pushService;
         // TeamMember Area
-        this.newTeamMemberAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_4__["ReplaySubject"](1);
-        this.newTeamMemberJoinedAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_4__["ReplaySubject"](1);
-        this.deletedTeamMemberAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_4__["ReplaySubject"](1);
+        this.newTeamMemberAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
+        this.newTeamMemberJoinedAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
+        this.deletedTeamMemberAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
         // QuickToDo Area
-        this.newQuickToDoAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_4__["ReplaySubject"](1);
-        this.deletedQuickToDoAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_4__["ReplaySubject"](1);
-        this.quickToDoReOrderingAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_4__["ReplaySubject"](1);
+        this.newQuickToDoAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
+        this.deletedQuickToDoAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
+        this.quickToDoReOrderingAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
         //ProjectToDo Area
-        this.newProjectToDoAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_4__["ReplaySubject"](1);
-        this.deletedProjectToDoAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_4__["ReplaySubject"](1);
-        this.projectToDoReOrderingAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_4__["ReplaySubject"](1);
+        this.newProjectToDoAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
+        this.deletedProjectToDoAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
+        this.projectToDoReOrderingAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
         //Project Area  
-        this.newProjectAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_4__["ReplaySubject"](1);
-        this.deletedProjectAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_4__["ReplaySubject"](1);
-        this.projectReOrderingAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_4__["ReplaySubject"](1);
+        this.newProjectAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
+        this.deletedProjectAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
+        this.projectReOrderingAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
         //PrivateTalk Area
-        this.deletedPrivateTalkJoinedAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_4__["ReplaySubject"](1);
-        this.newPrivateTalkJoinedAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_4__["ReplaySubject"](1);
+        this.deletedPrivateTalkJoinedAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
+        this.newPrivateTalkJoinedAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
         // PrivateTalkMessage Area
         this.newPrivateTalkMessageAvailable = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         // Container Area
-        this.newContainerAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_4__["ReplaySubject"](1);
-        this.deletedContainerAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_4__["ReplaySubject"](1);
+        this.newContainerAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
+        this.deletedContainerAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
         // ContainerBlob Area
-        this.newContainerBlobAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_4__["ReplaySubject"](1);
-        this.deletedContainerBlobAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_4__["ReplaySubject"](1);
+        this.newContainerBlobAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
+        this.deletedContainerBlobAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
         // Comment Area
-        this.newQuickToDoCommentAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_4__["ReplaySubject"](1);
-        this.deletedQuickToDoCommentAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_4__["ReplaySubject"](1);
-        this.newProjectToDoCommentAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_4__["ReplaySubject"](1);
-        this.deletedProjectToDoCommentAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_4__["ReplaySubject"](1);
-        this.memberShared.token.subscribe(function (token) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+        this.newQuickToDoCommentAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
+        this.deletedQuickToDoCommentAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
+        this.newProjectToDoCommentAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
+        this.deletedProjectToDoCommentAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
+    }
+    XyzekiSignalrService.prototype.startListening = function (token) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var baseURL, builder;
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (!(token == '0')) return [3 /*break*/, 1];
-                        return [3 /*break*/, 3];
-                    case 1:
-                        baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_5__["BackEndWebServer"] + '/';
+                        baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_4__["BackEndWebServer"] + '/';
                         builder = new _aspnet_signalr__WEBPACK_IMPORTED_MODULE_2__["HubConnectionBuilder"]();
                         this.hubConnection = builder.withUrl(baseURL + 'api/hubs/XyzekiNotificationHub', {
                             accessTokenFactory: function () { return token; }, skipNegotiation: false
@@ -11643,7 +10841,7 @@ var XyzekiSignalrService = /** @class */ (function () {
                                 _this.dataService.signalConnectionSeconds.next(undefined); // clearInterval in "second" counttimer
                                 _this.tryConnection();
                             })];
-                    case 2:
+                    case 1:
                         // Start Area
                         _a.sent();
                         this.hubConnection.onclose(function () {
@@ -11664,12 +10862,11 @@ var XyzekiSignalrService = /** @class */ (function () {
                                 }
                             });
                         }); });
-                        _a.label = 3;
-                    case 3: return [2 /*return*/];
+                        return [2 /*return*/];
                 }
             });
-        }); });
-    }
+        });
+    };
     XyzekiSignalrService.prototype.startConnection = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var _this = this;
@@ -12055,7 +11252,7 @@ var XyzekiSignalrService = /** @class */ (function () {
     };
     XyzekiSignalrService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_member_shared_model__WEBPACK_IMPORTED_MODULE_3__["MemberShared"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"], _notification_services_notification_service__WEBPACK_IMPORTED_MODULE_7__["NotificationService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"], _notification_services_notification_service__WEBPACK_IMPORTED_MODULE_6__["NotificationService"]])
     ], XyzekiSignalrService);
     return XyzekiSignalrService;
 }());
@@ -12150,6 +11347,187 @@ var Team = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/model/tuple.model.ts":
+/*!**************************************!*\
+  !*** ./src/app/model/tuple.model.ts ***!
+  \**************************************/
+/*! exports provided: Tuple */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Tuple", function() { return Tuple; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])();
+var Tuple = /** @class */ (function () {
+    // This is for when C# tuple used in API.
+    function Tuple() {
+    }
+    return Tuple;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/model/xyzeki-auth-service.ts":
+/*!**********************************************!*\
+  !*** ./src/app/model/xyzeki-auth-service.ts ***!
+  \**********************************************/
+/*! exports provided: XyzekiAuthData, XyzekiAuthService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "XyzekiAuthData", function() { return XyzekiAuthData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "XyzekiAuthService", function() { return XyzekiAuthService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _return_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./return.model */ "./src/app/model/return.model.ts");
+/* harmony import */ var _tuple_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tuple.model */ "./src/app/model/tuple.model.ts");
+/* harmony import */ var _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @auth0/angular-jwt */ "./node_modules/@auth0/angular-jwt/index.js");
+/* harmony import */ var src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/infrastructure/error-codes.enum */ "./src/infrastructure/error-codes.enum.ts");
+
+
+
+
+
+
+var jwtHelper = new _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_4__["JwtHelperService"]();
+var XyzekiAuthData = /** @class */ (function () {
+    function XyzekiAuthData() {
+    }
+    Object.defineProperty(XyzekiAuthData.prototype, "Member", {
+        get: function () {
+            var member = JSON.parse(localStorage.getItem("Xyzeki_Member"));
+            return member;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(XyzekiAuthData.prototype, "Username", {
+        get: function () {
+            var member = JSON.parse(localStorage.getItem("Xyzeki_Member"));
+            return member.Username;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(XyzekiAuthData.prototype, "Token", {
+        get: function () {
+            var token = localStorage.getItem("Xyzeki_JWTToken");
+            return token;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    XyzekiAuthData = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], XyzekiAuthData);
+    return XyzekiAuthData;
+}());
+
+var XyzekiAuthService = /** @class */ (function () {
+    function XyzekiAuthService() {
+    }
+    Object.defineProperty(XyzekiAuthService.prototype, "Member", {
+        //Get user information
+        get: function () {
+            var member = JSON.parse(localStorage.getItem("Xyzeki_Member"));
+            return member;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(XyzekiAuthService.prototype, "Token", {
+        get: function () {
+            var token = localStorage.getItem("Xyzeki_JWTToken");
+            return token;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(XyzekiAuthService.prototype, "SaveMember", {
+        //Save user information
+        set: function (member) {
+            localStorage.setItem("Xyzeki_Member", JSON.stringify(member)); // Persistance
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(XyzekiAuthService.prototype, "SaveToken", {
+        set: function (token) {
+            localStorage.setItem("Xyzeki_JWTToken", token); // Persistance
+        },
+        enumerable: true,
+        configurable: true
+    });
+    XyzekiAuthService.prototype.RemoveMember = function () {
+        localStorage.removeItem("Xyzeki_Member");
+    };
+    XyzekiAuthService.prototype.RemoveToken = function () {
+        localStorage.removeItem("Xyzeki_JWTToken");
+    };
+    Object.defineProperty(XyzekiAuthService.prototype, "IsTokenExpired", {
+        //Get more user information
+        get: function () {
+            return jwtHelper.isTokenExpired(this.Token);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(XyzekiAuthService.prototype, "Username", {
+        get: function () {
+            var member = JSON.parse(localStorage.getItem("Xyzeki_Member"));
+            return member.Username;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(XyzekiAuthService.prototype, "LoggedIn", {
+        get: function () {
+            if (this.Token && !this.IsTokenExpired) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    XyzekiAuthService.prototype.Auth = function (tokenAndMember) {
+        var member = tokenAndMember.Model.Item2;
+        var token = tokenAndMember.Model.Item1;
+        this.SaveMember(member);
+        this.SaveToken(token);
+    };
+    XyzekiAuthService.prototype.AuthAutoIfPossible = function () {
+        if (this.Member && this.Token && !this.IsTokenExpired) {
+            var memberTokenData = new _tuple_model__WEBPACK_IMPORTED_MODULE_3__["Tuple"]();
+            memberTokenData.Item1 = this.Token;
+            memberTokenData.Item2 = this.Member;
+            var authModel = new _return_model__WEBPACK_IMPORTED_MODULE_2__["ReturnModel"](src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_5__["ErrorCodes"].OK, memberTokenData);
+            this.Auth(authModel);
+        }
+    };
+    XyzekiAuthService.prototype.LogOut = function () {
+        this.RemoveMember();
+        this.RemoveToken();
+    };
+    XyzekiAuthService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], XyzekiAuthService);
+    return XyzekiAuthService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/navbar/nav-profile/nav-profile.component.css":
 /*!**************************************************************!*\
   !*** ./src/app/navbar/nav-profile/nav-profile.component.css ***!
@@ -12168,7 +11546,7 @@ module.exports = ".md-avatar.size-0 {\n  vertical-align: middle;\n  width: 30px;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"memberShared.LoggedIn\" class=\"removeFromMobile\">\n        <div ngbDropdown class=\"d-inline-block \">\n                <button class=\"btn btm-sm rounded-0 mb-0 mt-0  ml-0 mr-0 pb-0 pt-0 pl-1 pr-1  \"\n                        id=\"dropdownMemberOptions\" ngbDropdownToggle><img *ngIf=\"memberShared?.account?.getValue()\" [src]=\"memberShared?.account?.getValue()?.Avatar\" alt=\"Avatar\"\n                                class=\"md-avatar size-1-5 rounded-circle border-0\"> {{memberShared?.account?.getValue()?.Name}}</button>\n                <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\" class=\"rounded-0 dp-menu\" style=\"z-index: 10000!important\">\n                        <button ngbDropdownItem class=\"btn btn-outline-danger\" (click)=\"logOut()\">Oturumu\n                                Kapat</button>\n                        <button ngbDropdownItem [routerLink]=\"[ '/hesap' ]\">Hesap</button>\n                        <button ngbDropdownItem [routerLink]=\"[ '/ayarlar' ]\">Ayarlar</button>\n                        <button ngbDropdownItem [routerLink]=\"[ '/lisanslar' ]\">Lisanslar</button>\n                        <button ngbDropdownItem [routerLink]=\"[ '/hakkinda' ]\">Hakkında</button>\n                </div>\n        </div>\n\n</div>"
+module.exports = "<div *ngIf=\"xyzekiAuthService?.LoggedIn\" class=\"removeFromMobile\">\n        <div ngbDropdown class=\"d-inline-block \">\n                <button class=\"btn btm-sm rounded-0 mb-0 mt-0  ml-0 mr-0 pb-0 pt-0 pl-1 pr-1  \"\n                        id=\"dropdownMemberOptions\" ngbDropdownToggle><img *ngIf=\"xyzekiAuthService?.Member\" [src]=\"xyzekiAuthService?.Member?.Avatar\" alt=\"Avatar\"\n                                class=\"md-avatar size-1-5 rounded-circle border-0\"> {{xyzekiAuthService?.Member?.Name}}</button>\n                <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\" class=\"rounded-0 dp-menu\" style=\"z-index: 10000!important\">\n                        <button ngbDropdownItem class=\"btn btn-outline-danger\" (click)=\"logOut()\">Oturumu\n                                Kapat</button>\n                        <button ngbDropdownItem [routerLink]=\"[ '/hesap' ]\">Hesap</button>\n                        <button ngbDropdownItem [routerLink]=\"[ '/ayarlar' ]\">Ayarlar</button>\n                        <button ngbDropdownItem [routerLink]=\"[ '/lisanslar' ]\">Lisanslar</button>\n                        <button ngbDropdownItem [routerLink]=\"[ '/hakkinda' ]\">Hakkında</button>\n                </div>\n        </div>\n\n</div>"
 
 /***/ }),
 
@@ -12184,22 +11562,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NavProfileComponent", function() { return NavProfileComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 
 
 
 
 var NavProfileComponent = /** @class */ (function () {
-    function NavProfileComponent(router, memberShared) {
+    function NavProfileComponent(router, xyzekiAuthService) {
         this.router = router;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.isLocked = false;
     }
     NavProfileComponent.prototype.ngOnInit = function () {
     };
     NavProfileComponent.prototype.logOut = function () {
-        this.memberShared.LogOut();
+        this.xyzekiAuthService.LogOut();
         this.router.navigate(['/']);
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -12213,7 +11591,7 @@ var NavProfileComponent = /** @class */ (function () {
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./nav-profile.component.css */ "./src/app/navbar/nav-profile/nav-profile.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_2__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiAuthService"]])
     ], NavProfileComponent);
     return NavProfileComponent;
 }());
@@ -12347,7 +11725,7 @@ module.exports = ".xyz-nav-btn{\n  border: 1px rgb(252, 182, 177) solid;  \n  tr
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav id=\"navbarPC\" class=\"container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0\"\n        style=\"height:3rem!important\" *ngIf=\"memberShared.LoggedIn\">\n        <a class=\"navbar-brand\" [routerLink]=\"[ '/isler' ]\">\n                <img src=\"../../../assets/logo.svg\" style=\"height: 25px; font-family: Arial, Helvetica, sans-serif \">\n                Xyzeki\n        </a>\n\n        <a class=\"btn btn-light rounded-0 border-0 xyz-nav-btn \" [routerLink]=\"[ '/is-konusmalari' ]\">İş Konuşmaları <span\n                        ngbTooltip=\"{{getUnreadTotalPTCount}} okunmamış iş konuşması bulunmaktadır.\"\n                        tooltipClass=\"tooltipSpecial\" class=\"unreadCountTitle\">{{getUnreadTotalPTCount}}</span></a>\n        <a class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\" [routerLink]=\"[ '/projeler' ]\">Projeler</a>\n        <a class=\"btn btn-light rounded-0 border-0 xyz-nav-btn \" [routerLink]=\"[ '/takimlar' ]\">Ekipler</a>\n        <button class=\"btn btn-light rounded-0 border-0 xyz-nav-btn \" [routerLink]=\"[ '/dosyalar' ]\">Dosyalar</button>\n        <div class=\"float-right\">\n                <app-nav-profile></app-nav-profile>\n        </div>\n</nav>\n\n\n<nav id=\"navbarMobile\" class=\"container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0 \"\n        style=\"height:3rem!important\" *ngIf=\"memberShared.LoggedIn\">\n        <a class=\"navbar-brand\" [routerLink]=\"[ '/isler' ]\">\n                <img src=\"../../../assets/logo.svg\" style=\"height: 25px; font-family: Arial, Helvetica, sans-serif \">\n                Xyzeki\n        </a>\n\n        <div class=\"toggleClose\">\n                <div ngbDropdown class=\"d-inline-block\">\n                        <button class=\"btn btn-light rounded-0 border-0 mr-1  xyz-nav-btn rounded-0 mb-0 mt-0  ml-0 mr-0 pb-1 pt-1 pl-1 pr-1  \"\n                                id=\"dropdownMemberOptions\" ngbDropdownToggle><svg width=\"24\" height=\"24\" class=\"mb-1\"\n                                        xmlns=\"http://www.w3.org/2000/svg\" fill-rule=\"evenodd\" clip-rule=\"evenodd\">\n                                        <path d=\"M24 18v1h-24v-1h24zm0-6v1h-24v-1h24zm0-6v1h-24v-1h24z\"\n                                                fill=\"#1040e2\" />\n                                        <path d=\"M24 19h-24v-1h24v1zm0-6h-24v-1h24v1zm0-6h-24v-1h24v1z\" /></svg><span\n                                        class=\"text-uppercase\"> Menü</span></button>\n                        <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\" class=\"rounded-0\">\n\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/is-konusmalari' ]\">İş Konuşmaları <span\n                                                class=\"unreadCountTitleM\">{{getUnreadTotalPTCount}}</span></button>\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/takimlar' ]\">Ekipler</button>\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/projeler' ]\">Projeler</button>\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/dosyalar' ]\">Dosyalar</button>\n                        </div>\n                </div>\n\n        </div>\n\n\n\n\n        <div class=\"float-right\">\n                <app-nav-profile></app-nav-profile>\n        </div>\n</nav>\n\n<nav id=\"navbarTablet\" class=\"container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0\"\n        style=\"height:3rem!important\" *ngIf=\"memberShared.LoggedIn\">\n        <a class=\"navbar-brand\" [routerLink]=\"[ '/isler' ]\">\n                <img src=\"../../../assets/logo.svg\" style=\"height: 25px; font-family: Arial, Helvetica, sans-serif \">\n                Xyzeki\n        </a>\n        <button class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\" [routerLink]=\"[ '/is-konusmalari' ]\">İş Konuşmaları\n                <span class=\"unreadCountTitle\">{{getUnreadTotalPTCount}}</span></button>\n        <button class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\" [routerLink]=\"[ '/projeler']\">Projeler</button>\n\n        <div>\n                <div ngbDropdown class=\"d-inline-block\">\n                        <button class=\"btn btn-light rounded-0 border-0 mr-1  xyz-nav-btn rounded-0 mb-0 mt-0  ml-0 mr-0 pb-1 pt-1 pl-1 pr-1  \"\n                                id=\"dropdownMemberOptions\" ngbDropdownToggle>...</button>\n                        <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\" class=\"rounded-0\">\n\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/takimlar' ]\">Ekipler</button>\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/dosyalar' ]\">Dosyalar</button>\n\n\n                        </div>\n                </div>\n\n        </div>\n\n\n\n\n        <div class=\"float-right\">\n                <app-nav-profile></app-nav-profile>\n        </div>\n</nav>\n\n<nav class=\"container-fluid bg-dark sticky-top\" *ngIf=\"!memberShared.LoggedIn\">\n\n        <div class=\"float-right rounded-0\" style=\" border-top-left-radius:0!important; border-top-right-radius:0!important;\" role=\"group\">              \n                <a [routerLink]=\"[ 'giris' ]\" class=\"btn modernUnderlined\" style=\"border-radius: 2px;\">Oturum Aç <img\n                        src=\"../../../assets/arrow-2.png\"\n                        style=\"width: 16px;object-fit: cover; cursor: pointer; \" /></a>\n               \n                <a class=\"btn btn-dark  btn-sm border-0 rounded-0\" style=\"border-top-left-radius:0!important; border-top-right-radius:0!important;\" [routerLink]=\"[ 'kayit-ol' ]\">Üye Olun</a>\n        </div>\n\n        \n</nav>"
+module.exports = "<nav id=\"navbarPC\" class=\"container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0\"\n        style=\"height:3rem!important\" *ngIf=\"xyzekiAuthService?.LoggedIn\">\n        <a class=\"navbar-brand\" [routerLink]=\"[ '/isler' ]\">\n                <img src=\"../../../assets/logo.svg\" style=\"height: 25px; font-family: Arial, Helvetica, sans-serif \">\n                Xyzeki\n        </a>\n\n        <a class=\"btn btn-light rounded-0 border-0 xyz-nav-btn \" [routerLink]=\"[ '/is-konusmalari' ]\">İş Konuşmaları <span\n                        ngbTooltip=\"{{getUnreadTotalPTCount}} okunmamış iş konuşması bulunmaktadır.\"\n                        tooltipClass=\"tooltipSpecial\" class=\"unreadCountTitle\">{{getUnreadTotalPTCount}}</span></a>\n        <a class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\" [routerLink]=\"[ '/projeler' ]\">Projeler</a>\n        <a class=\"btn btn-light rounded-0 border-0 xyz-nav-btn \" [routerLink]=\"[ '/takimlar' ]\">Ekipler</a>\n        <button class=\"btn btn-light rounded-0 border-0 xyz-nav-btn \" [routerLink]=\"[ '/dosyalar' ]\">Dosyalar</button>\n        <div class=\"float-right\">\n                <app-nav-profile></app-nav-profile>\n        </div>\n</nav>\n\n\n<nav id=\"navbarMobile\" class=\"container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0 \"\n        style=\"height:3rem!important\" *ngIf=\"xyzekiAuthService?.LoggedIn\">\n        <a class=\"navbar-brand\" [routerLink]=\"[ '/isler' ]\">\n                <img src=\"../../../assets/logo.svg\" style=\"height: 25px; font-family: Arial, Helvetica, sans-serif \">\n                Xyzeki\n        </a>\n\n        <div class=\"toggleClose\">\n                <div ngbDropdown class=\"d-inline-block\">\n                        <button class=\"btn btn-light rounded-0 border-0 mr-1  xyz-nav-btn rounded-0 mb-0 mt-0  ml-0 mr-0 pb-1 pt-1 pl-1 pr-1  \"\n                                id=\"dropdownMemberOptions\" ngbDropdownToggle><svg width=\"24\" height=\"24\" class=\"mb-1\"\n                                        xmlns=\"http://www.w3.org/2000/svg\" fill-rule=\"evenodd\" clip-rule=\"evenodd\">\n                                        <path d=\"M24 18v1h-24v-1h24zm0-6v1h-24v-1h24zm0-6v1h-24v-1h24z\"\n                                                fill=\"#1040e2\" />\n                                        <path d=\"M24 19h-24v-1h24v1zm0-6h-24v-1h24v1zm0-6h-24v-1h24v1z\" /></svg><span\n                                        class=\"text-uppercase\"> Menü</span></button>\n                        <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\" class=\"rounded-0\">\n\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/is-konusmalari' ]\">İş Konuşmaları <span\n                                                class=\"unreadCountTitleM\">{{getUnreadTotalPTCount}}</span></button>\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/takimlar' ]\">Ekipler</button>\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/projeler' ]\">Projeler</button>\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/dosyalar' ]\">Dosyalar</button>\n                        </div>\n                </div>\n\n        </div>\n\n\n\n\n        <div class=\"float-right\">\n                <app-nav-profile></app-nav-profile>\n        </div>\n</nav>\n\n<nav id=\"navbarTablet\" class=\"container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0\"\n        style=\"height:3rem!important\" *ngIf=\"xyzekiAuthService?.LoggedIn\">\n        <a class=\"navbar-brand\" [routerLink]=\"[ '/isler' ]\">\n                <img src=\"../../../assets/logo.svg\" style=\"height: 25px; font-family: Arial, Helvetica, sans-serif \">\n                Xyzeki\n        </a>\n        <button class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\" [routerLink]=\"[ '/is-konusmalari' ]\">İş Konuşmaları\n                <span class=\"unreadCountTitle\">{{getUnreadTotalPTCount}}</span></button>\n        <button class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\" [routerLink]=\"[ '/projeler']\">Projeler</button>\n\n        <div>\n                <div ngbDropdown class=\"d-inline-block\">\n                        <button class=\"btn btn-light rounded-0 border-0 mr-1  xyz-nav-btn rounded-0 mb-0 mt-0  ml-0 mr-0 pb-1 pt-1 pl-1 pr-1  \"\n                                id=\"dropdownMemberOptions\" ngbDropdownToggle>...</button>\n                        <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\" class=\"rounded-0\">\n\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/takimlar' ]\">Ekipler</button>\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/dosyalar' ]\">Dosyalar</button>\n\n\n                        </div>\n                </div>\n\n        </div>\n\n\n\n\n        <div class=\"float-right\">\n                <app-nav-profile></app-nav-profile>\n        </div>\n</nav>\n\n<nav class=\"container-fluid bg-dark sticky-top\" *ngIf=\"!xyzekiAuthService?.LoggedIn\">\n\n        <div class=\"float-right rounded-0\" style=\" border-top-left-radius:0!important; border-top-right-radius:0!important;\" role=\"group\">              \n                <a [routerLink]=\"[ 'giris' ]\" class=\"btn modernUnderlined\" style=\"border-radius: 2px;\">Oturum Aç <img\n                        src=\"../../../assets/arrow-2.png\"\n                        style=\"width: 16px;object-fit: cover; cursor: pointer; \" /></a>\n               \n                <a class=\"btn btn-dark  btn-sm border-0 rounded-0\" style=\"border-top-left-radius:0!important; border-top-right-radius:0!important;\" [routerLink]=\"[ 'kayit-ol' ]\">Üye Olun</a>\n        </div>\n\n        \n</nav>"
 
 /***/ }),
 
@@ -12363,7 +11741,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NavbarComponent", function() { return NavbarComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var src_app_model_repository_private_talk_repository__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/repository/private-talk-repository */ "./src/app/model/repository/private-talk-repository.ts");
 
@@ -12372,9 +11750,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var NavbarComponent = /** @class */ (function () {
-    function NavbarComponent(router, memberShared, repositoryPT) {
+    function NavbarComponent(router, xyzekiAuthService, repositoryPT) {
         this.router = router;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.repositoryPT = repositoryPT;
     }
     NavbarComponent.prototype.ngOnInit = function () {
@@ -12397,7 +11775,7 @@ var NavbarComponent = /** @class */ (function () {
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./navbar.component.css */ "./src/app/navbar/navbar/navbar.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_2__["MemberShared"], src_app_model_repository_private_talk_repository__WEBPACK_IMPORTED_MODULE_4__["PrivateTalkRepository"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiAuthService"], src_app_model_repository_private_talk_repository__WEBPACK_IMPORTED_MODULE_4__["PrivateTalkRepository"]])
     ], NavbarComponent);
     return NavbarComponent;
 }());
@@ -12455,6 +11833,55 @@ var LiAnimateDirective = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/private-talk/_directives/show.directive.ts":
+/*!************************************************************!*\
+  !*** ./src/app/private-talk/_directives/show.directive.ts ***!
+  \************************************************************/
+/*! exports provided: ShowDirective */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ShowDirective", function() { return ShowDirective; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var ShowDirective = /** @class */ (function () {
+    function ShowDirective(elementRef) {
+        this.elementRef = elementRef;
+    }
+    ShowDirective.prototype.onMouseEnter = function () {
+        this.elementRef.nativeElement.classList.add('showDiv');
+    };
+    ShowDirective.prototype.onMouseLeave = function () {
+        this.elementRef.nativeElement.classList.remove('showDiv');
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"])('mouseenter'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", []),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
+    ], ShowDirective.prototype, "onMouseEnter", null);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"])('mouseleave'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", []),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
+    ], ShowDirective.prototype, "onMouseLeave", null);
+    ShowDirective = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Directive"])({
+            selector: '[show-dir]'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"]])
+    ], ShowDirective);
+    return ShowDirective;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/private-talk/edit-receivers/edit-receivers.component.css":
 /*!**************************************************************************!*\
   !*** ./src/app/private-talk/edit-receivers/edit-receivers.component.css ***!
@@ -12495,7 +11922,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
 /* harmony import */ var src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/model/repository/team-repository */ "./src/app/model/repository/team-repository.ts");
-/* harmony import */ var src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var src_app_model_repository_private_talk_receiver_repository__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/model/repository/private-talk-receiver-repository */ "./src/app/model/repository/private-talk-receiver-repository.ts");
 
 
@@ -12508,12 +11935,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var EditReceiversComponent = /** @class */ (function () {
-    function EditReceiversComponent(repositoryTM, receiverRepo, repository, memberShared) {
+    function EditReceiversComponent(repositoryTM, receiverRepo, repository, xyzekiAuthService) {
         var _this = this;
         this.repositoryTM = repositoryTM;
         this.receiverRepo = receiverRepo;
         this.repository = repository;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.visible = true;
         this.selectable = true;
         this.removable = true;
@@ -12657,7 +12084,7 @@ var EditReceiversComponent = /** @class */ (function () {
     };
     EditReceiversComponent.prototype.isValid = function (username) {
         var _this = this;
-        var index = this.repositoryTM.getAllTeamMembersPT().filter(function (val) { return val.Status == true && val.Username != _this.memberShared.Username; }).findIndex(function (tm) { return tm.Username == username; });
+        var index = this.repositoryTM.getAllTeamMembersPT().filter(function (val) { return val.Status == true && val.Username != _this.xyzekiAuthService.Username; }).findIndex(function (tm) { return tm.Username == username; });
         if (-1 != index)
             return true;
         else
@@ -12679,7 +12106,7 @@ var EditReceiversComponent = /** @class */ (function () {
     Object.defineProperty(EditReceiversComponent.prototype, "allTeamMembersPT_V2", {
         get: function () {
             var _this = this;
-            return this.repositoryTM.getAllTeamMembersPT().filter(function (val) { return val.Status == true && val.Username != _this.memberShared.Username; }).filter(this.uniqueFilter).filter(this.lookUpFilter);
+            return this.repositoryTM.getAllTeamMembersPT().filter(function (val) { return val.Status == true && val.Username != _this.xyzekiAuthService.Username; }).filter(this.uniqueFilter).filter(this.lookUpFilter);
         },
         enumerable: true,
         configurable: true
@@ -12745,7 +12172,7 @@ var EditReceiversComponent = /** @class */ (function () {
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./edit-receivers.component.css */ "./src/app/private-talk/edit-receivers/edit-receivers.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_6__["TeamMemberRepository"], src_app_model_repository_private_talk_receiver_repository__WEBPACK_IMPORTED_MODULE_9__["PrivateTalkReceiverRepository"], src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_7__["TeamRepository"], src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_8__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_6__["TeamMemberRepository"], src_app_model_repository_private_talk_receiver_repository__WEBPACK_IMPORTED_MODULE_9__["PrivateTalkReceiverRepository"], src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_7__["TeamRepository"], src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_8__["XyzekiAuthService"]])
     ], EditReceiversComponent);
     return EditReceiversComponent;
 }());
@@ -12791,7 +12218,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MyPrivateTalksComponent", function() { return MyPrivateTalksComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! util */ "./node_modules/util/util.js");
 /* harmony import */ var util__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_4__);
@@ -12825,7 +12252,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var MyPrivateTalksComponent = /** @class */ (function () {
-    function MyPrivateTalksComponent(repositoryTM, dataService, permissions, teamRepository, receiverRepo, route, router, repository, memberShared, teamMembersService, teamsService, membersService, teamMembersSignalrService, memberServ) {
+    function MyPrivateTalksComponent(repositoryTM, dataService, permissions, teamRepository, receiverRepo, route, router, repository, xyzekiAuthService, teamMembersService, teamsService, membersService, teamMembersSignalrService, memberServ) {
         this.repositoryTM = repositoryTM;
         this.dataService = dataService;
         this.permissions = permissions;
@@ -12834,7 +12261,7 @@ var MyPrivateTalksComponent = /** @class */ (function () {
         this.route = route;
         this.router = router;
         this.repository = repository;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.teamMembersService = teamMembersService;
         this.teamsService = teamsService;
         this.membersService = membersService;
@@ -12843,7 +12270,7 @@ var MyPrivateTalksComponent = /** @class */ (function () {
         // public getOrderingCriterion(privateTalkId, my = true) {
         //   return this.repository.PTOrderingCriterion(privateTalkId, my)
         // }
-        this.privateTalkModel = new src_app_model_private_talk_model__WEBPACK_IMPORTED_MODULE_6__["PrivateTalk"](null, this.memberShared.Username, null); //Reset
+        this.privateTalkModel = new src_app_model_private_talk_model__WEBPACK_IMPORTED_MODULE_6__["PrivateTalk"](null, this.xyzekiAuthService.Username, null); //Reset
         this.tabMy = true; // true means my, false means received
         this.newPrivateTalkPanelOpen = false;
         this.privateTalkId = 0;
@@ -13039,7 +12466,7 @@ var MyPrivateTalksComponent = /** @class */ (function () {
                 this.repository.savePrivateTalk(this.privateTalkModel, this.receiversModel, this.teamReceiversModel);
                 this.modelSent = true;
                 this.modelSubmitted = false;
-                this.privateTalkModel = new src_app_model_private_talk_model__WEBPACK_IMPORTED_MODULE_6__["PrivateTalk"](null, this.memberShared.Username, null); //Reset
+                this.privateTalkModel = new src_app_model_private_talk_model__WEBPACK_IMPORTED_MODULE_6__["PrivateTalk"](null, this.xyzekiAuthService.Username, null); //Reset
                 this.resetReceiverModels();
                 this.togglePrivateTalkPanel();
             }
@@ -13096,7 +12523,7 @@ var MyPrivateTalksComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./my-private-talks.component.css */ "./src/app/private-talk/my-private-talks/my-private-talks.component.css")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_7__["TeamMemberRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_15__["DataService"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_14__["MemberLicenseRepository"], src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_13__["TeamRepository"], src_app_model_repository_private_talk_receiver_repository__WEBPACK_IMPORTED_MODULE_12__["PrivateTalkReceiverRepository"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], src_app_model_repository_private_talk_repository__WEBPACK_IMPORTED_MODULE_5__["PrivateTalkRepository"],
-            src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_2__["MemberShared"],
+            src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiAuthService"],
             src_app_model_services_team_members_service__WEBPACK_IMPORTED_MODULE_8__["TeamMembersService"], src_app_model_services_teams_service__WEBPACK_IMPORTED_MODULE_9__["TeamsService"],
             src_app_model_services_auth_service__WEBPACK_IMPORTED_MODULE_10__["AuthService"],
             src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_16__["XyzekiSignalrService"], src_app_model_services_members_service__WEBPACK_IMPORTED_MODULE_11__["MembersService"]])
@@ -13115,7 +12542,7 @@ var MyPrivateTalksComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "input{\n\n  border-top: 0px;\n  border-left:0px !important;\n  border-right:0px!important;\n  border-bottom:rgb(247, 240, 177) 2px solid;   \n  border-radius: 0% !important;\n  transition: border-bottom 0.3s;\n  padding-left: 0!important;\n\n}\ninput:focus{\n  border-top: 0px;\n  border-left:0px !important;\n  border-bottom:2px solid rgb(243, 226, 70);\n  box-shadow:0 0px 0 0 rgb(243, 226, 70);\n}\n@-webkit-keyframes kaydir {\n  100% {\n    -webkit-transform: translate(0, 0);\n            transform: translate(0, 0);\n  }\n\n  50% {\n    -webkit-transform: translate(-150px, 0);\n            transform: translate(-150px, 0);\n  }\n\n  0% {\n    -webkit-transform: translate(0, 0);\n            transform: translate(0, 0);\n  }\n}\n@keyframes kaydir {\n  100% {\n    -webkit-transform: translate(0, 0);\n            transform: translate(0, 0);\n  }\n\n  50% {\n    -webkit-transform: translate(-150px, 0);\n            transform: translate(-150px, 0);\n  }\n\n  0% {\n    -webkit-transform: translate(0, 0);\n            transform: translate(0, 0);\n  }\n}\n.kaydirClass {\n  -webkit-animation: kaydir 1s 1 linear;\n          animation: kaydir 1s 1 linear;\n  -webkit-transform: translate(0, 0);\n          transform: translate(0, 0);\n}\n@-webkit-keyframes noktayiZiplat {\n    100% {\n      -webkit-transform: translate(0, 0);\n              transform: translate(0, 0);\n    }\n  \n    50% {\n      -webkit-transform: translate(0, -4px);\n              transform: translate(0, -4px);\n    }\n  \n    0% {\n      -webkit-transform: translate(0, 0);\n              transform: translate(0, 0);\n    }\n  }\n@keyframes noktayiZiplat {\n    100% {\n      -webkit-transform: translate(0, 0);\n              transform: translate(0, 0);\n    }\n  \n    50% {\n      -webkit-transform: translate(0, -4px);\n              transform: translate(0, -4px);\n    }\n  \n    0% {\n      -webkit-transform: translate(0, 0);\n              transform: translate(0, 0);\n    }\n  }\n.mesajYaziyor i {\n    width: 4px;\n    height: 4px;\n    background: #222;\n    border-radius: 50%;\n    display: inline-block;\n    -webkit-animation: noktayiZiplat 0.9s infinite linear;\n            animation: noktayiZiplat 0.9s infinite linear;\n    /* transform: translate(0, 0); */\n  }\n.mesajYaziyor {\n    display: block;\n    position: relative;\n  }\n.mesajYaziyor i+i {\n    margin-left: 3px;\n  }\n.mesajYaziyor i:nth-child(1) {\n    -webkit-animation-delay: .5s;\n            animation-delay: .5s;\n  }\n.mesajYaziyor i:nth-child(2) {\n    -webkit-animation-delay: .4s;\n            animation-delay: .4s;\n  }\n.mesajYaziyor i:nth-child(3) {\n    -webkit-animation-delay: .3s;\n            animation-delay: .3s;\n  }\n.btn-send{\n    width: 100%;\n    background-color:  rgb(80, 79, 79); /* Safari prior 6.1 */\n    transition: background-color,border 0.3s; /* Safari prior 6.1 */\n    transition: border 0.3s; \n    border-radius: 2px;\n    border-color: rgb(228, 226, 226);\n  }\n.btn-send:hover{\n    width: 100%;\n    background-color: rgb(59, 59, 59);\n    border: 1px;\n    border-style:solid;\n    border-color: rgb(255, 246, 126);\n    border-radius: 2px;\n  }\n.tooltipSpecial .tooltip-inner {\n  background-color: rgb(224, 224, 224);\n  color: rgb(59, 59, 59);\n  /* font-size: 125%; */\n}\n.tooltipSpecial .arrow::before {\n  border-top-color: rgb(160, 164, 187);\n}\n.xyz-textarea {\n    float:left;\n    resize: none;\n    box-sizing: border-box;\n    border-radius: 0;\n    font-size: 17 !important;\n    font-family: sans-serif;\n    max-width: 85%;\n    width: 85%;\n    color: rgb(20, 20, 20);\n    border: 1px solid #e5e5e5;\n    transition: .2s ease-in-out;\n    transition-property: color, background-color, border;\n    padding-left: 20px;\n    background-color: white;\n    \n  \n  }\n.xyz-textarea:focus {\n    outline: 0;\n    color: black;\n    font-size: 17 !important;\n    border: 1px solid #757575;\n    /* background-color: #f8f8f8; */\n  }\n.xyz-textarea::-moz-placeholder {\n    opacity: 1;\n    font-size: 17 !important;\n    font-family: sans-serif;\n  }\n.xyz-textarea:-ms-input-placeholder {\n    color: rgb(133, 133, 133);\n    font-size: 17 !important;\n    font-family: sans-serif;\n  }\n.xyz-textarea::-moz-placeholder {\n    color: rgb(133, 133, 133);\n    font-size: 17 !important;\n    font-family: sans-serif;\n  }\n.xyz-textarea::-webkit-input-placeholder {\n    color: rgb(133, 133, 133);\n    font-size: 17 !important;\n    font-family: sans-serif;\n  }\n.xyz-textarea::-webkit-input-placeholder:focus {\n    color: rgb(0, 0, 0);\n    font-size: 17 !important;\n    font-family: sans-serif;\n  }\n.xyz-card-big {\n    position: relative;\n    box-sizing: border-box;\n    transition: box-shadow .1s ease-in-out;\n    border-radius: 0px;\n    padding-left:3px;\n    padding-right: 3px;\n    overflow-y: scroll;\n    overflow-y : auto;\n    overflow-x: hidden;\n  \n  }\n.xyz-card {\n    position: relative;\n    box-sizing: border-box;\n    transition: box-shadow .1s ease-in-out;\n    border-radius: 5px;\n    padding-left: 10px;\n    padding-right: 10px;\n    padding-bottom: 0px;\n    padding-top: 5px;\n    margin-right:10px;\n    margin-left:10px;\n    height:100%;\n    width: 50%;\n    /* max-width: 200px; */\n    word-wrap: break-word;\n  \n  }\n@media (max-width:700px)\n  {  \n    .xyz-card {\n      position: relative;\n      box-sizing: border-box;\n      transition: box-shadow .1s ease-in-out;\n      border-radius: 5px;\n      padding-left: 10px;\n      padding-right: 10px;\n      padding-bottom: 0px;\n      padding-top: 5px;\n      margin-right:10px;\n      margin-left:10px;\n      height:100%;\n      width: 100%;\n      /* max-width: 200px; */\n      word-wrap: break-word;  \n    }\n  }\np{\n    font-size:15px;\n  }\n.xyz-ul{\n  width: 100%;\n  height: 100%;\n\n}\n.xyz-ul ul {\n  list-style-type: none;\n  margin: 0!important;\n  padding: 0!important;\n  overflow: hidden;\n  display: flex;\n  justify-items:left;\n  flex-wrap: nowrap;\n  width: 100%;\n  height: 100%;\n  left:0px;\n  right: 0px;\n  float: left;\n  background-color: inherit;\n  text-align: left;\n  \n  \n}\n.xyz-ul ul > li{\n  margin-left: 0px;\n  padding-left: 0px;\n  float: left;\n  margin-right: 10px; \n  white-space: nowrap; \n  background-color: inherit;\n  text-align: left;\n}\n.animateLi li{\n  -webkit-animation: kaydirFromRightToLeft 2s both linear;\n          animation: kaydirFromRightToLeft 2s both linear; \n  -webkit-animation-iteration-count: 1;    \n  animation-iteration-count: 1;\n  -webkit-transform: translate(0, 0);\n          transform: translate(0, 0);\n}\n@-webkit-keyframes kaydirFromRightToLeft {\n \n  \n    100% {\n      -webkit-transform: translate(0px, 0);\n              transform: translate(0px, 0);\n    }\n  \n    50% {\n      -webkit-transform: translate(-250px, 0);\n              transform: translate(-250px, 0);\n    }    \n  \n    0% {\n      -webkit-transform: translate(0, 0);\n              transform: translate(0, 0);\n    }\n  }\n@keyframes kaydirFromRightToLeft {\n \n  \n    100% {\n      -webkit-transform: translate(0px, 0);\n              transform: translate(0px, 0);\n    }\n  \n    50% {\n      -webkit-transform: translate(-250px, 0);\n              transform: translate(-250px, 0);\n    }    \n  \n    0% {\n      -webkit-transform: translate(0, 0);\n              transform: translate(0, 0);\n    }\n  }\n.avatarim{\n    width: 45px;\n    height: 45px;\n    border-radius: 10%;\n  }\n.xyz-card-default {\n    background: rgb(255, 255, 255);\n    color: rgb(0, 0, 0);\n    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.08)\n  }\n.xyz-card-default:hover {\n    background: rgb(255, 255, 255);\n    color: rgb(0, 0, 0);\n    box-shadow: 0 5px 15px rgba(0, 0, 0, .08)\n  }\n/* #1e87f0; #222; */\n.xyz-card-primary {\n    background: rgb(255, 255, 255);\n    color: rgb(0, 0, 0);\n    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.08);\n\n  }\n.xyz-card-primary:hover {\n    background: rgb(255, 255, 255);\n    color: rgb(0, 0, 0);\n    box-shadow: 0 5px 15px rgba(0, 0, 0, .08)\n  }\n.xyz-card-dark {\n    background: #222;\n    color: #fff;\n    box-shadow: 0 5px 15px rgba(0, 0, 0, .08)\n  }\n.xyz-card-footer {\n    border-top: 2px solid #e5e5e5;\n    padding-top: 10px;\n    padding-bottom: 5px;\n    position: relative;\n    box-sizing: border-box;\n    transition: box-shadow .1s ease-in-out;\n    z-index: 1;\n  }\n.karsiTaraf .xyz-card:after,\n  .ben .xyz-card:after {\n    width: 10px;\n    height: 45px;\n    position: absolute;\n    bottom: 0;\n  }\n.karsiTaraf .xyz-card:after {\n    background: #fdfdff; \n    left: -4px;\n    -webkit-clip-path: polygon(100% 70%, 0% 100%, 100% 100%);\n            clip-path: polygon(100% 70%, 0% 100%, 100% 100%);\n    content: ''\n  }\n.ben .xyz-card:after {\n    background: #fdfdff;; \n    left: -4px;\n    -webkit-clip-path: polygon(100% 70%, 0% 100%, 100% 100%);\n            clip-path: polygon(100% 70%, 0% 100%, 100% 100%);\n    content: ''\n  }\n/* background: #1e87f0; */\n/* .ben .xyz-card:after {\n    background: #fff;\n    right: -4px;\n    clip-path: polygon(0 70%, 0% 100%, 100% 100%);\n    content: ''\n  }  */\n.ben {\n    margin-bottom: 3px;\n    margin-top: 3px;\n  }\n.karsiTaraf {\n    margin-bottom: 3px;\n    margin-top: 3px;\n  }\nul {\n    list-style-type: none;\n  }\nul li {\n    float: left;\n  }\n.gear { /* Safari prior 6.1 */\n    transition:  all 0.8s;\n   \n  }\n.gear:hover{\n    box-shadow: 0 5px 15px rgba(0, 0, 0, .08);\n    -webkit-transform:rotate(60deg);\n    transform:rotate(60deg); \n    \n  }\n.tooltipSpecial .tooltip-inner {\n    background-color: rgb(224, 224, 224);\n    color: rgb(59, 59, 59);\n    /* font-size: 125%; */\n  }\n.tooltipSpecial .arrow::before {\n    border-top-color: rgb(160, 164, 187);\n  }\nhtml {\n    scroll-behavior: smooth;\n    scrollbar-face-color: #646464;\n    scrollbar-base-color: #646464;\n    scrollbar-3dlight-color: #646464;\n    scrollbar-highlight-color: #646464;\n    scrollbar-track-color: #000;\n    scrollbar-arrow-color: #000;\n    scrollbar-shadow-color: #646464;\n  }\n::-webkit-scrollbar {\n    width: 4px;\n    height: 3px;\n  }\n::-webkit-scrollbar-button {\n    background-color: #666;\n  }\n::-webkit-scrollbar-track {\n    background-color: #646464;\n  }\n::-webkit-scrollbar-track-piece {\n    background-color: #000;\n  }\n::-webkit-scrollbar-thumb {\n    height: 50px;\n    background-color: #666;\n    border-radius: 3px;\n  }\n::-webkit-scrollbar-corner {\n    background-color: #646464;\n  }\n::-webkit-resizer {\n    background-color: #666;\n  }\n@media (max-width:992PX)\n  {\n    .responsiveBTPadding{\n      padding-left: 4px;\n      padding-right: 4px;\n      padding-bottom: 20px;\n    \n      background-color: #fefefe;\n  \n    }\n   \n  }\n@media (min-width:993PX)\n  {\n    .responsiveBT{\n      display: none;\n    }\n  }\n.dropdown-toggle::after {\n    display:none;\n  }\n.filter-grey{\n    -webkit-filter: invert(97%) sepia(0%) saturate(0%) hue-rotate(239deg) brightness(88%) contrast(89%);\n            filter: invert(97%) sepia(0%) saturate(0%) hue-rotate(239deg) brightness(88%) contrast(89%);\n    transition: -webkit-filter 0.5s;\n    transition: filter 0.5s;\n    transition: filter 0.5s, -webkit-filter 0.5s;\n  }\n.filter-grey:hover{\n    -webkit-filter: invert(36%) sepia(8%) saturate(221%) hue-rotate(315deg) brightness(93%) contrast(90%);\n            filter: invert(36%) sepia(8%) saturate(221%) hue-rotate(315deg) brightness(93%) contrast(90%);\n  }\n.buton-secili{\n    background-color: rgb(209, 214, 241)\n  }\n.moreHead, moreHead:focus {\n    cursor: pointer;\n  }\np{\n    font-family: Arial, Helvetica, sans-serif;\n  }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcHJpdmF0ZS10YWxrL3ByaXZhdGUtdGFsay1tZXNzYWdlcy9wcml2YXRlLXRhbGstbWVzc2FnZXMuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7RUFFRSxlQUFlO0VBQ2YsMEJBQTBCO0VBQzFCLDBCQUEwQjtFQUMxQiwwQ0FBMEM7RUFDMUMsNEJBQTRCO0VBQzVCLDhCQUE4QjtFQUM5Qix5QkFBeUI7O0FBRTNCO0FBQ0E7RUFDRSxlQUFlO0VBQ2YsMEJBQTBCO0VBQzFCLHlDQUF5QztFQUN6QyxzQ0FBc0M7QUFDeEM7QUFFQTtFQUNFO0lBQ0Usa0NBQTBCO1lBQTFCLDBCQUEwQjtFQUM1Qjs7RUFFQTtJQUNFLHVDQUErQjtZQUEvQiwrQkFBK0I7RUFDakM7O0VBRUE7SUFDRSxrQ0FBMEI7WUFBMUIsMEJBQTBCO0VBQzVCO0FBQ0Y7QUFaQTtFQUNFO0lBQ0Usa0NBQTBCO1lBQTFCLDBCQUEwQjtFQUM1Qjs7RUFFQTtJQUNFLHVDQUErQjtZQUEvQiwrQkFBK0I7RUFDakM7O0VBRUE7SUFDRSxrQ0FBMEI7WUFBMUIsMEJBQTBCO0VBQzVCO0FBQ0Y7QUFFQTtFQUNFLHFDQUE2QjtVQUE3Qiw2QkFBNkI7RUFDN0Isa0NBQTBCO1VBQTFCLDBCQUEwQjtBQUM1QjtBQU1BO0lBQ0k7TUFDRSxrQ0FBMEI7Y0FBMUIsMEJBQTBCO0lBQzVCOztJQUVBO01BQ0UscUNBQTZCO2NBQTdCLDZCQUE2QjtJQUMvQjs7SUFFQTtNQUNFLGtDQUEwQjtjQUExQiwwQkFBMEI7SUFDNUI7RUFDRjtBQVpGO0lBQ0k7TUFDRSxrQ0FBMEI7Y0FBMUIsMEJBQTBCO0lBQzVCOztJQUVBO01BQ0UscUNBQTZCO2NBQTdCLDZCQUE2QjtJQUMvQjs7SUFFQTtNQUNFLGtDQUEwQjtjQUExQiwwQkFBMEI7SUFDNUI7RUFDRjtBQUVBO0lBQ0UsVUFBVTtJQUNWLFdBQVc7SUFDWCxnQkFBZ0I7SUFDaEIsa0JBQWtCO0lBQ2xCLHFCQUFxQjtJQUNyQixxREFBNkM7WUFBN0MsNkNBQTZDO0lBQzdDLGdDQUFnQztFQUNsQztBQUNBO0lBQ0UsY0FBYztJQUNkLGtCQUFrQjtFQUNwQjtBQUNBO0lBQ0UsZ0JBQWdCO0VBQ2xCO0FBQ0E7SUFDRSw0QkFBb0I7WUFBcEIsb0JBQW9CO0VBQ3RCO0FBQ0E7SUFDRSw0QkFBb0I7WUFBcEIsb0JBQW9CO0VBQ3RCO0FBQ0E7SUFDRSw0QkFBb0I7WUFBcEIsb0JBQW9CO0VBQ3RCO0FBQ0E7SUFDRSxXQUFXO0lBQ1gsa0NBQWtDLEVBQ2dCLHFCQUFxQjtJQUN2RSx3Q0FBd0MsRUFDUCxxQkFBcUI7SUFDdEQsdUJBQXVCO0lBQ3ZCLGtCQUFrQjtJQUNsQixnQ0FBZ0M7RUFDbEM7QUFDQTtJQUNFLFdBQVc7SUFDWCxpQ0FBaUM7SUFDakMsV0FBVztJQUNYLGtCQUFrQjtJQUNsQixnQ0FBZ0M7SUFDaEMsa0JBQWtCO0VBQ3BCO0FBRUY7RUFDRSxvQ0FBb0M7RUFDcEMsc0JBQXNCO0VBQ3RCLHFCQUFxQjtBQUN2QjtBQUNBO0VBQ0Usb0NBQW9DO0FBQ3RDO0FBQ0U7SUFDRSxVQUFVO0lBQ1YsWUFBWTtJQUNaLHNCQUFzQjtJQUN0QixnQkFBZ0I7SUFDaEIsd0JBQXdCO0lBQ3hCLHVCQUF1QjtJQUN2QixjQUFjO0lBQ2QsVUFBVTtJQUNWLHNCQUFzQjtJQUN0Qix5QkFBeUI7SUFFekIsMkJBQTJCO0lBRTNCLG9EQUFvRDtJQUNwRCxrQkFBa0I7SUFDbEIsdUJBQXVCOzs7RUFHekI7QUFDQTtJQUNFLFVBQVU7SUFDVixZQUFZO0lBQ1osd0JBQXdCO0lBQ3hCLHlCQUF5QjtJQUN6QiwrQkFBK0I7RUFDakM7QUFDQTtJQUNFLFVBQVU7SUFDVix3QkFBd0I7SUFDeEIsdUJBQXVCO0VBQ3pCO0FBQ0E7SUFDRSx5QkFBeUI7SUFDekIsd0JBQXdCO0lBQ3hCLHVCQUF1QjtFQUN6QjtBQUNBO0lBQ0UseUJBQXlCO0lBQ3pCLHdCQUF3QjtJQUN4Qix1QkFBdUI7RUFDekI7QUFDQTtJQUNFLHlCQUF5QjtJQUN6Qix3QkFBd0I7SUFDeEIsdUJBQXVCO0VBQ3pCO0FBQ0E7SUFDRSxtQkFBbUI7SUFDbkIsd0JBQXdCO0lBQ3hCLHVCQUF1QjtFQUN6QjtBQUNBO0lBQ0Usa0JBQWtCO0lBQ2xCLHNCQUFzQjtJQUV0QixzQ0FBc0M7SUFDdEMsa0JBQWtCO0lBQ2xCLGdCQUFnQjtJQUNoQixrQkFBa0I7SUFDbEIsa0JBQWtCO0lBQ2xCLGlCQUFpQjtJQUNqQixrQkFBa0I7O0VBRXBCO0FBQ0E7SUFDRSxrQkFBa0I7SUFDbEIsc0JBQXNCO0lBRXRCLHNDQUFzQztJQUN0QyxrQkFBa0I7SUFDbEIsa0JBQWtCO0lBQ2xCLG1CQUFtQjtJQUNuQixtQkFBbUI7SUFDbkIsZ0JBQWdCO0lBQ2hCLGlCQUFpQjtJQUNqQixnQkFBZ0I7SUFDaEIsV0FBVztJQUNYLFVBQVU7SUFDVixzQkFBc0I7SUFDdEIscUJBQXFCOztFQUV2QjtBQUNBOztJQUVFO01BQ0Usa0JBQWtCO01BQ2xCLHNCQUFzQjtNQUV0QixzQ0FBc0M7TUFDdEMsa0JBQWtCO01BQ2xCLGtCQUFrQjtNQUNsQixtQkFBbUI7TUFDbkIsbUJBQW1CO01BQ25CLGdCQUFnQjtNQUNoQixpQkFBaUI7TUFDakIsZ0JBQWdCO01BQ2hCLFdBQVc7TUFDWCxXQUFXO01BQ1gsc0JBQXNCO01BQ3RCLHFCQUFxQjtJQUN2QjtFQUNGO0FBRUE7SUFDRSxjQUFjO0VBQ2hCO0FBR0Y7RUFDRSxXQUFXO0VBQ1gsWUFBWTs7QUFFZDtBQUNBO0VBQ0UscUJBQXFCO0VBQ3JCLG1CQUFtQjtFQUNuQixvQkFBb0I7RUFDcEIsZ0JBQWdCO0VBQ2hCLGFBQWE7RUFDYixrQkFBa0I7RUFDbEIsaUJBQWlCO0VBQ2pCLFdBQVc7RUFDWCxZQUFZO0VBQ1osUUFBUTtFQUNSLFVBQVU7RUFDVixXQUFXO0VBQ1gseUJBQXlCO0VBQ3pCLGdCQUFnQjs7O0FBR2xCO0FBQ0E7RUFDRSxnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLFdBQVc7RUFDWCxrQkFBa0I7RUFDbEIsbUJBQW1CO0VBQ25CLHlCQUF5QjtFQUN6QixnQkFBZ0I7QUFDbEI7QUFDQTtFQUNFLHVEQUErQztVQUEvQywrQ0FBK0M7RUFDL0Msb0NBQW9DO0VBR3BDLDRCQUE0QjtFQUM1QixrQ0FBMEI7VUFBMUIsMEJBQTBCO0FBQzVCO0FBSUU7OztJQUdFO01BQ0Usb0NBQTRCO2NBQTVCLDRCQUE0QjtJQUM5Qjs7SUFFQTtNQUNFLHVDQUErQjtjQUEvQiwrQkFBK0I7SUFDakM7O0lBRUE7TUFDRSxrQ0FBMEI7Y0FBMUIsMEJBQTBCO0lBQzVCO0VBQ0Y7QUFkQTs7O0lBR0U7TUFDRSxvQ0FBNEI7Y0FBNUIsNEJBQTRCO0lBQzlCOztJQUVBO01BQ0UsdUNBQStCO2NBQS9CLCtCQUErQjtJQUNqQzs7SUFFQTtNQUNFLGtDQUEwQjtjQUExQiwwQkFBMEI7SUFDNUI7RUFDRjtBQUVBO0lBQ0UsV0FBVztJQUNYLFlBQVk7SUFDWixrQkFBa0I7RUFDcEI7QUFDQTtJQUNFLDhCQUE4QjtJQUM5QixtQkFBbUI7SUFDbkI7RUFDRjtBQUNBO0lBQ0UsOEJBQThCO0lBQzlCLG1CQUFtQjtJQUNuQjtFQUNGO0FBQ0EsbUJBQW1CO0FBQ25CO0lBQ0UsOEJBQThCO0lBQzlCLG1CQUFtQjtJQUNuQixnREFBZ0Q7O0VBRWxEO0FBQ0E7SUFDRSw4QkFBOEI7SUFDOUIsbUJBQW1CO0lBQ25CO0VBQ0Y7QUFDQTtJQUNFLGdCQUFnQjtJQUNoQixXQUFXO0lBQ1g7RUFDRjtBQUNBO0lBQ0UsNkJBQTZCO0lBQzdCLGlCQUFpQjtJQUNqQixtQkFBbUI7SUFDbkIsa0JBQWtCO0lBQ2xCLHNCQUFzQjtJQUV0QixzQ0FBc0M7SUFDdEMsVUFBVTtFQUNaO0FBQ0E7O0lBRUUsV0FBVztJQUNYLFlBQVk7SUFDWixrQkFBa0I7SUFDbEIsU0FBUztFQUNYO0FBQ0E7SUFDRSxtQkFBbUI7SUFDbkIsVUFBVTtJQUNWLHdEQUFnRDtZQUFoRCxnREFBZ0Q7SUFDaEQ7RUFDRjtBQUVEO0lBQ0csbUJBQW1CO0lBQ25CLFVBQVU7SUFDVix3REFBZ0Q7WUFBaEQsZ0RBQWdEO0lBQ2hEO0VBQ0Y7QUFDQSx5QkFBeUI7QUFFdEI7Ozs7O01BS0M7QUFFSjtJQUNFLGtCQUFrQjtJQUNsQixlQUFlO0VBQ2pCO0FBQ0E7SUFDRSxrQkFBa0I7SUFDbEIsZUFBZTtFQUNqQjtBQUNBO0lBQ0UscUJBQXFCO0VBQ3ZCO0FBQ0E7SUFDRSxXQUFXO0VBQ2I7QUFDQSxRQUNnQyxxQkFBcUI7SUFDbkQscUJBQXFCOztFQUV2QjtBQUNBO0lBQ0UseUNBQXlDO0lBQ3pDLCtCQUErQjtJQUcvQix1QkFBdUI7O0VBRXpCO0FBQ0E7SUFDRSxvQ0FBb0M7SUFDcEMsc0JBQXNCO0lBQ3RCLHFCQUFxQjtFQUN2QjtBQUNBO0lBQ0Usb0NBQW9DO0VBQ3RDO0FBRUE7SUFDRSx1QkFBdUI7SUFDdkIsNkJBQTZCO0lBQzdCLDZCQUE2QjtJQUM3QixnQ0FBZ0M7SUFDaEMsa0NBQWtDO0lBQ2xDLDJCQUEyQjtJQUMzQiwyQkFBMkI7SUFDM0IsK0JBQStCO0VBQ2pDO0FBRUE7SUFDRSxVQUFVO0lBQ1YsV0FBVztFQUNiO0FBQ0E7SUFDRSxzQkFBc0I7RUFDeEI7QUFDQTtJQUNFLHlCQUF5QjtFQUMzQjtBQUNBO0lBQ0Usc0JBQXNCO0VBQ3hCO0FBQ0E7SUFDRSxZQUFZO0lBQ1osc0JBQXNCO0lBQ3RCLGtCQUFrQjtFQUNwQjtBQUNBO0lBQ0UseUJBQXlCO0VBQzNCO0FBQ0E7SUFDRSxzQkFBc0I7RUFDeEI7QUFDQTs7SUFFRTtNQUNFLGlCQUFpQjtNQUNqQixrQkFBa0I7TUFDbEIsb0JBQW9COztNQUVwQix5QkFBeUI7O0lBRTNCOztFQUVGO0FBQ0E7O0lBRUU7TUFDRSxhQUFhO0lBQ2Y7RUFDRjtBQUNBO0lBQ0UsWUFBWTtFQUNkO0FBQ0E7SUFDRSxtR0FBMkY7WUFBM0YsMkZBQTJGO0lBQzNGLCtCQUF1QjtJQUF2Qix1QkFBdUI7SUFBdkIsNENBQXVCO0VBQ3pCO0FBQ0E7SUFDRSxxR0FBNkY7WUFBN0YsNkZBQTZGO0VBQy9GO0FBRUE7SUFDRTtFQUNGO0FBQ0E7SUFDRSxlQUFlO0VBQ2pCO0FBQ0E7SUFDRSx5Q0FBeUM7RUFDM0MiLCJmaWxlIjoic3JjL2FwcC9wcml2YXRlLXRhbGsvcHJpdmF0ZS10YWxrLW1lc3NhZ2VzL3ByaXZhdGUtdGFsay1tZXNzYWdlcy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW5wdXR7XG5cbiAgYm9yZGVyLXRvcDogMHB4O1xuICBib3JkZXItbGVmdDowcHggIWltcG9ydGFudDtcbiAgYm9yZGVyLXJpZ2h0OjBweCFpbXBvcnRhbnQ7XG4gIGJvcmRlci1ib3R0b206cmdiKDI0NywgMjQwLCAxNzcpIDJweCBzb2xpZDsgICBcbiAgYm9yZGVyLXJhZGl1czogMCUgIWltcG9ydGFudDtcbiAgdHJhbnNpdGlvbjogYm9yZGVyLWJvdHRvbSAwLjNzO1xuICBwYWRkaW5nLWxlZnQ6IDAhaW1wb3J0YW50O1xuXG59XG5pbnB1dDpmb2N1c3tcbiAgYm9yZGVyLXRvcDogMHB4O1xuICBib3JkZXItbGVmdDowcHggIWltcG9ydGFudDtcbiAgYm9yZGVyLWJvdHRvbToycHggc29saWQgcmdiKDI0MywgMjI2LCA3MCk7XG4gIGJveC1zaGFkb3c6MCAwcHggMCAwIHJnYigyNDMsIDIyNiwgNzApO1xufVxuXG5Aa2V5ZnJhbWVzIGtheWRpciB7XG4gIDEwMCUge1xuICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlKDAsIDApO1xuICB9XG5cbiAgNTAlIHtcbiAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgtMTUwcHgsIDApO1xuICB9XG5cbiAgMCUge1xuICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlKDAsIDApO1xuICB9XG59XG5cbi5rYXlkaXJDbGFzcyB7XG4gIGFuaW1hdGlvbjoga2F5ZGlyIDFzIDEgbGluZWFyO1xuICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgwLCAwKTtcbn1cblxuXG5cblxuXG5Aa2V5ZnJhbWVzIG5va3RheWlaaXBsYXQge1xuICAgIDEwMCUge1xuICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoMCwgMCk7XG4gICAgfVxuICBcbiAgICA1MCUge1xuICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoMCwgLTRweCk7XG4gICAgfVxuICBcbiAgICAwJSB7XG4gICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgwLCAwKTtcbiAgICB9XG4gIH1cbiAgXG4gIC5tZXNhallheml5b3IgaSB7XG4gICAgd2lkdGg6IDRweDtcbiAgICBoZWlnaHQ6IDRweDtcbiAgICBiYWNrZ3JvdW5kOiAjMjIyO1xuICAgIGJvcmRlci1yYWRpdXM6IDUwJTtcbiAgICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gICAgYW5pbWF0aW9uOiBub2t0YXlpWmlwbGF0IDAuOXMgaW5maW5pdGUgbGluZWFyO1xuICAgIC8qIHRyYW5zZm9ybTogdHJhbnNsYXRlKDAsIDApOyAqL1xuICB9XG4gIC5tZXNhallheml5b3Ige1xuICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgfVxuICAubWVzYWpZYXppeW9yIGkraSB7XG4gICAgbWFyZ2luLWxlZnQ6IDNweDtcbiAgfVxuICAubWVzYWpZYXppeW9yIGk6bnRoLWNoaWxkKDEpIHtcbiAgICBhbmltYXRpb24tZGVsYXk6IC41cztcbiAgfVxuICAubWVzYWpZYXppeW9yIGk6bnRoLWNoaWxkKDIpIHtcbiAgICBhbmltYXRpb24tZGVsYXk6IC40cztcbiAgfVxuICAubWVzYWpZYXppeW9yIGk6bnRoLWNoaWxkKDMpIHtcbiAgICBhbmltYXRpb24tZGVsYXk6IC4zcztcbiAgfVxuICAuYnRuLXNlbmR7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIHJnYig4MCwgNzksIDc5KTtcbiAgICAtd2Via2l0LXRyYW5zaXRpb246IGJhY2tncm91bmQtY29sb3IsYm9yZGVyIDAuM3M7IC8qIFNhZmFyaSBwcmlvciA2LjEgKi9cbiAgICB0cmFuc2l0aW9uOiBiYWNrZ3JvdW5kLWNvbG9yLGJvcmRlciAwLjNzOyBcbiAgICAtd2Via2l0LXRyYW5zaXRpb246IGJvcmRlciAwLjNzOyAvKiBTYWZhcmkgcHJpb3IgNi4xICovXG4gICAgdHJhbnNpdGlvbjogYm9yZGVyIDAuM3M7IFxuICAgIGJvcmRlci1yYWRpdXM6IDJweDtcbiAgICBib3JkZXItY29sb3I6IHJnYigyMjgsIDIyNiwgMjI2KTtcbiAgfVxuICAuYnRuLXNlbmQ6aG92ZXJ7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDU5LCA1OSwgNTkpO1xuICAgIGJvcmRlcjogMXB4O1xuICAgIGJvcmRlci1zdHlsZTpzb2xpZDtcbiAgICBib3JkZXItY29sb3I6IHJnYigyNTUsIDI0NiwgMTI2KTtcbiAgICBib3JkZXItcmFkaXVzOiAycHg7XG4gIH1cbiAgXG4udG9vbHRpcFNwZWNpYWwgLnRvb2x0aXAtaW5uZXIge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjI0LCAyMjQsIDIyNCk7XG4gIGNvbG9yOiByZ2IoNTksIDU5LCA1OSk7XG4gIC8qIGZvbnQtc2l6ZTogMTI1JTsgKi9cbn1cbi50b29sdGlwU3BlY2lhbCAuYXJyb3c6OmJlZm9yZSB7XG4gIGJvcmRlci10b3AtY29sb3I6IHJnYigxNjAsIDE2NCwgMTg3KTtcbn1cbiAgLnh5ei10ZXh0YXJlYSB7XG4gICAgZmxvYXQ6bGVmdDtcbiAgICByZXNpemU6IG5vbmU7XG4gICAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgICBib3JkZXItcmFkaXVzOiAwO1xuICAgIGZvbnQtc2l6ZTogMTcgIWltcG9ydGFudDtcbiAgICBmb250LWZhbWlseTogc2Fucy1zZXJpZjtcbiAgICBtYXgtd2lkdGg6IDg1JTtcbiAgICB3aWR0aDogODUlO1xuICAgIGNvbG9yOiByZ2IoMjAsIDIwLCAyMCk7XG4gICAgYm9yZGVyOiAxcHggc29saWQgI2U1ZTVlNTtcbiAgICAtd2Via2l0LXRyYW5zaXRpb246IC4ycyBlYXNlLWluLW91dDtcbiAgICB0cmFuc2l0aW9uOiAuMnMgZWFzZS1pbi1vdXQ7XG4gICAgLXdlYmtpdC10cmFuc2l0aW9uLXByb3BlcnR5OiBjb2xvciwgYmFja2dyb3VuZC1jb2xvciwgYm9yZGVyO1xuICAgIHRyYW5zaXRpb24tcHJvcGVydHk6IGNvbG9yLCBiYWNrZ3JvdW5kLWNvbG9yLCBib3JkZXI7XG4gICAgcGFkZGluZy1sZWZ0OiAyMHB4O1xuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xuICAgIFxuICBcbiAgfVxuICAueHl6LXRleHRhcmVhOmZvY3VzIHtcbiAgICBvdXRsaW5lOiAwO1xuICAgIGNvbG9yOiBibGFjaztcbiAgICBmb250LXNpemU6IDE3ICFpbXBvcnRhbnQ7XG4gICAgYm9yZGVyOiAxcHggc29saWQgIzc1NzU3NTtcbiAgICAvKiBiYWNrZ3JvdW5kLWNvbG9yOiAjZjhmOGY4OyAqL1xuICB9XG4gIC54eXotdGV4dGFyZWE6Oi1tb3otcGxhY2Vob2xkZXIge1xuICAgIG9wYWNpdHk6IDE7XG4gICAgZm9udC1zaXplOiAxNyAhaW1wb3J0YW50O1xuICAgIGZvbnQtZmFtaWx5OiBzYW5zLXNlcmlmO1xuICB9XG4gIC54eXotdGV4dGFyZWE6LW1zLWlucHV0LXBsYWNlaG9sZGVyIHtcbiAgICBjb2xvcjogcmdiKDEzMywgMTMzLCAxMzMpO1xuICAgIGZvbnQtc2l6ZTogMTcgIWltcG9ydGFudDtcbiAgICBmb250LWZhbWlseTogc2Fucy1zZXJpZjtcbiAgfVxuICAueHl6LXRleHRhcmVhOjotbW96LXBsYWNlaG9sZGVyIHtcbiAgICBjb2xvcjogcmdiKDEzMywgMTMzLCAxMzMpO1xuICAgIGZvbnQtc2l6ZTogMTcgIWltcG9ydGFudDtcbiAgICBmb250LWZhbWlseTogc2Fucy1zZXJpZjtcbiAgfVxuICAueHl6LXRleHRhcmVhOjotd2Via2l0LWlucHV0LXBsYWNlaG9sZGVyIHtcbiAgICBjb2xvcjogcmdiKDEzMywgMTMzLCAxMzMpO1xuICAgIGZvbnQtc2l6ZTogMTcgIWltcG9ydGFudDtcbiAgICBmb250LWZhbWlseTogc2Fucy1zZXJpZjtcbiAgfVxuICAueHl6LXRleHRhcmVhOjotd2Via2l0LWlucHV0LXBsYWNlaG9sZGVyOmZvY3VzIHtcbiAgICBjb2xvcjogcmdiKDAsIDAsIDApO1xuICAgIGZvbnQtc2l6ZTogMTcgIWltcG9ydGFudDtcbiAgICBmb250LWZhbWlseTogc2Fucy1zZXJpZjtcbiAgfVxuICAueHl6LWNhcmQtYmlnIHtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgICAtd2Via2l0LXRyYW5zaXRpb246IGJveC1zaGFkb3cgLjFzIGVhc2UtaW4tb3V0O1xuICAgIHRyYW5zaXRpb246IGJveC1zaGFkb3cgLjFzIGVhc2UtaW4tb3V0O1xuICAgIGJvcmRlci1yYWRpdXM6IDBweDtcbiAgICBwYWRkaW5nLWxlZnQ6M3B4O1xuICAgIHBhZGRpbmctcmlnaHQ6IDNweDtcbiAgICBvdmVyZmxvdy15OiBzY3JvbGw7XG4gICAgb3ZlcmZsb3cteSA6IGF1dG87XG4gICAgb3ZlcmZsb3cteDogaGlkZGVuO1xuICBcbiAgfVxuICAueHl6LWNhcmQge1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xuICAgIC13ZWJraXQtdHJhbnNpdGlvbjogYm94LXNoYWRvdyAuMXMgZWFzZS1pbi1vdXQ7XG4gICAgdHJhbnNpdGlvbjogYm94LXNoYWRvdyAuMXMgZWFzZS1pbi1vdXQ7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBhZGRpbmctbGVmdDogMTBweDtcbiAgICBwYWRkaW5nLXJpZ2h0OiAxMHB4O1xuICAgIHBhZGRpbmctYm90dG9tOiAwcHg7XG4gICAgcGFkZGluZy10b3A6IDVweDtcbiAgICBtYXJnaW4tcmlnaHQ6MTBweDtcbiAgICBtYXJnaW4tbGVmdDoxMHB4O1xuICAgIGhlaWdodDoxMDAlO1xuICAgIHdpZHRoOiA1MCU7XG4gICAgLyogbWF4LXdpZHRoOiAyMDBweDsgKi9cbiAgICB3b3JkLXdyYXA6IGJyZWFrLXdvcmQ7XG4gIFxuICB9XG4gIEBtZWRpYSAobWF4LXdpZHRoOjcwMHB4KVxuICB7ICBcbiAgICAueHl6LWNhcmQge1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgICAgIC13ZWJraXQtdHJhbnNpdGlvbjogYm94LXNoYWRvdyAuMXMgZWFzZS1pbi1vdXQ7XG4gICAgICB0cmFuc2l0aW9uOiBib3gtc2hhZG93IC4xcyBlYXNlLWluLW91dDtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgICAgIHBhZGRpbmctbGVmdDogMTBweDtcbiAgICAgIHBhZGRpbmctcmlnaHQ6IDEwcHg7XG4gICAgICBwYWRkaW5nLWJvdHRvbTogMHB4O1xuICAgICAgcGFkZGluZy10b3A6IDVweDtcbiAgICAgIG1hcmdpbi1yaWdodDoxMHB4O1xuICAgICAgbWFyZ2luLWxlZnQ6MTBweDtcbiAgICAgIGhlaWdodDoxMDAlO1xuICAgICAgd2lkdGg6IDEwMCU7XG4gICAgICAvKiBtYXgtd2lkdGg6IDIwMHB4OyAqL1xuICAgICAgd29yZC13cmFwOiBicmVhay13b3JkOyAgXG4gICAgfVxuICB9XG4gIFxuICBwe1xuICAgIGZvbnQtc2l6ZToxNXB4O1xuICB9XG4gIFxuXG4ueHl6LXVse1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuXG59XG4ueHl6LXVsIHVsIHtcbiAgbGlzdC1zdHlsZS10eXBlOiBub25lO1xuICBtYXJnaW46IDAhaW1wb3J0YW50O1xuICBwYWRkaW5nOiAwIWltcG9ydGFudDtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgZGlzcGxheTogZmxleDtcbiAganVzdGlmeS1pdGVtczpsZWZ0O1xuICBmbGV4LXdyYXA6IG5vd3JhcDtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcbiAgbGVmdDowcHg7XG4gIHJpZ2h0OiAwcHg7XG4gIGZsb2F0OiBsZWZ0O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiBpbmhlcml0O1xuICB0ZXh0LWFsaWduOiBsZWZ0O1xuICBcbiAgXG59XG4ueHl6LXVsIHVsID4gbGl7XG4gIG1hcmdpbi1sZWZ0OiAwcHg7XG4gIHBhZGRpbmctbGVmdDogMHB4O1xuICBmbG9hdDogbGVmdDtcbiAgbWFyZ2luLXJpZ2h0OiAxMHB4OyBcbiAgd2hpdGUtc3BhY2U6IG5vd3JhcDsgXG4gIGJhY2tncm91bmQtY29sb3I6IGluaGVyaXQ7XG4gIHRleHQtYWxpZ246IGxlZnQ7XG59XG4uYW5pbWF0ZUxpIGxpe1xuICBhbmltYXRpb246IGtheWRpckZyb21SaWdodFRvTGVmdCAycyBib3RoIGxpbmVhcjsgXG4gIC13ZWJraXQtYW5pbWF0aW9uLWl0ZXJhdGlvbi1jb3VudDogMTtcbiAgLW1vei1hbmltYXRpb24taXRlcmF0aW9uLWNvdW50OiAxO1xuICAtby1hbmltYXRpb24taXRlcmF0aW9uLWNvdW50OiAxOyAgICBcbiAgYW5pbWF0aW9uLWl0ZXJhdGlvbi1jb3VudDogMTtcbiAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoMCwgMCk7XG59XG5cblxuXG4gIEBrZXlmcmFtZXMga2F5ZGlyRnJvbVJpZ2h0VG9MZWZ0IHtcbiBcbiAgXG4gICAgMTAwJSB7XG4gICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgwcHgsIDApO1xuICAgIH1cbiAgXG4gICAgNTAlIHtcbiAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlKC0yNTBweCwgMCk7XG4gICAgfSAgICBcbiAgXG4gICAgMCUge1xuICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoMCwgMCk7XG4gICAgfVxuICB9XG5cbiAgLmF2YXRhcmlte1xuICAgIHdpZHRoOiA0NXB4O1xuICAgIGhlaWdodDogNDVweDtcbiAgICBib3JkZXItcmFkaXVzOiAxMCU7XG4gIH1cbiAgLnh5ei1jYXJkLWRlZmF1bHQge1xuICAgIGJhY2tncm91bmQ6IHJnYigyNTUsIDI1NSwgMjU1KTtcbiAgICBjb2xvcjogcmdiKDAsIDAsIDApO1xuICAgIGJveC1zaGFkb3c6IDAgNXB4IDE1cHggcmdiYSgyNTUsIDI1NSwgMjU1LCAwLjA4KVxuICB9XG4gIC54eXotY2FyZC1kZWZhdWx0OmhvdmVyIHtcbiAgICBiYWNrZ3JvdW5kOiByZ2IoMjU1LCAyNTUsIDI1NSk7XG4gICAgY29sb3I6IHJnYigwLCAwLCAwKTtcbiAgICBib3gtc2hhZG93OiAwIDVweCAxNXB4IHJnYmEoMCwgMCwgMCwgLjA4KVxuICB9XG4gIC8qICMxZTg3ZjA7ICMyMjI7ICovXG4gIC54eXotY2FyZC1wcmltYXJ5IHtcbiAgICBiYWNrZ3JvdW5kOiByZ2IoMjU1LCAyNTUsIDI1NSk7XG4gICAgY29sb3I6IHJnYigwLCAwLCAwKTtcbiAgICBib3gtc2hhZG93OiAwIDVweCAxNXB4IHJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wOCk7XG5cbiAgfVxuICAueHl6LWNhcmQtcHJpbWFyeTpob3ZlciB7XG4gICAgYmFja2dyb3VuZDogcmdiKDI1NSwgMjU1LCAyNTUpO1xuICAgIGNvbG9yOiByZ2IoMCwgMCwgMCk7XG4gICAgYm94LXNoYWRvdzogMCA1cHggMTVweCByZ2JhKDAsIDAsIDAsIC4wOClcbiAgfVxuICAueHl6LWNhcmQtZGFyayB7XG4gICAgYmFja2dyb3VuZDogIzIyMjtcbiAgICBjb2xvcjogI2ZmZjtcbiAgICBib3gtc2hhZG93OiAwIDVweCAxNXB4IHJnYmEoMCwgMCwgMCwgLjA4KVxuICB9XG4gIC54eXotY2FyZC1mb290ZXIge1xuICAgIGJvcmRlci10b3A6IDJweCBzb2xpZCAjZTVlNWU1O1xuICAgIHBhZGRpbmctdG9wOiAxMHB4O1xuICAgIHBhZGRpbmctYm90dG9tOiA1cHg7XG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gICAgLXdlYmtpdC10cmFuc2l0aW9uOiBib3gtc2hhZG93IC4xcyBlYXNlLWluLW91dDtcbiAgICB0cmFuc2l0aW9uOiBib3gtc2hhZG93IC4xcyBlYXNlLWluLW91dDtcbiAgICB6LWluZGV4OiAxO1xuICB9XG4gIC5rYXJzaVRhcmFmIC54eXotY2FyZDphZnRlcixcbiAgLmJlbiAueHl6LWNhcmQ6YWZ0ZXIge1xuICAgIHdpZHRoOiAxMHB4O1xuICAgIGhlaWdodDogNDVweDtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgYm90dG9tOiAwO1xuICB9XG4gIC5rYXJzaVRhcmFmIC54eXotY2FyZDphZnRlciB7XG4gICAgYmFja2dyb3VuZDogI2ZkZmRmZjsgXG4gICAgbGVmdDogLTRweDtcbiAgICBjbGlwLXBhdGg6IHBvbHlnb24oMTAwJSA3MCUsIDAlIDEwMCUsIDEwMCUgMTAwJSk7XG4gICAgY29udGVudDogJydcbiAgfVxuXG4gLmJlbiAueHl6LWNhcmQ6YWZ0ZXIge1xuICAgIGJhY2tncm91bmQ6ICNmZGZkZmY7OyBcbiAgICBsZWZ0OiAtNHB4O1xuICAgIGNsaXAtcGF0aDogcG9seWdvbigxMDAlIDcwJSwgMCUgMTAwJSwgMTAwJSAxMDAlKTtcbiAgICBjb250ZW50OiAnJ1xuICB9IFxuICAvKiBiYWNrZ3JvdW5kOiAjMWU4N2YwOyAqL1xuXG4gICAgIC8qIC5iZW4gLnh5ei1jYXJkOmFmdGVyIHtcbiAgICBiYWNrZ3JvdW5kOiAjZmZmO1xuICAgIHJpZ2h0OiAtNHB4O1xuICAgIGNsaXAtcGF0aDogcG9seWdvbigwIDcwJSwgMCUgMTAwJSwgMTAwJSAxMDAlKTtcbiAgICBjb250ZW50OiAnJ1xuICB9ICAqL1xuICBcbiAgLmJlbiB7XG4gICAgbWFyZ2luLWJvdHRvbTogM3B4O1xuICAgIG1hcmdpbi10b3A6IDNweDtcbiAgfVxuICAua2Fyc2lUYXJhZiB7XG4gICAgbWFyZ2luLWJvdHRvbTogM3B4O1xuICAgIG1hcmdpbi10b3A6IDNweDtcbiAgfVxuICB1bCB7XG4gICAgbGlzdC1zdHlsZS10eXBlOiBub25lO1xuICB9XG4gIHVsIGxpIHtcbiAgICBmbG9hdDogbGVmdDtcbiAgfVxuICAuZ2VhciB7XG4gICAgLXdlYmtpdC10cmFuc2l0aW9uOiBhbGwgMC44czsgLyogU2FmYXJpIHByaW9yIDYuMSAqL1xuICAgIHRyYW5zaXRpb246ICBhbGwgMC44cztcbiAgIFxuICB9IFxuICAuZ2Vhcjpob3ZlcntcbiAgICBib3gtc2hhZG93OiAwIDVweCAxNXB4IHJnYmEoMCwgMCwgMCwgLjA4KTtcbiAgICAtd2Via2l0LXRyYW5zZm9ybTpyb3RhdGUoNjBkZWcpO1xuICAgIC1tb3otdHJhbnNmb3JtOnJvdGF0ZSg2MGRlZyk7IFxuICAgIC1vLXRyYW5zZm9ybTpyb3RhdGUoNjBkZWcpO1xuICAgIHRyYW5zZm9ybTpyb3RhdGUoNjBkZWcpOyBcbiAgICBcbiAgfSBcbiAgLnRvb2x0aXBTcGVjaWFsIC50b29sdGlwLWlubmVyIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjI0LCAyMjQsIDIyNCk7XG4gICAgY29sb3I6IHJnYig1OSwgNTksIDU5KTtcbiAgICAvKiBmb250LXNpemU6IDEyNSU7ICovXG4gIH1cbiAgLnRvb2x0aXBTcGVjaWFsIC5hcnJvdzo6YmVmb3JlIHtcbiAgICBib3JkZXItdG9wLWNvbG9yOiByZ2IoMTYwLCAxNjQsIDE4Nyk7XG4gIH1cbiAgXG4gIGh0bWwge1xuICAgIHNjcm9sbC1iZWhhdmlvcjogc21vb3RoO1xuICAgIHNjcm9sbGJhci1mYWNlLWNvbG9yOiAjNjQ2NDY0O1xuICAgIHNjcm9sbGJhci1iYXNlLWNvbG9yOiAjNjQ2NDY0O1xuICAgIHNjcm9sbGJhci0zZGxpZ2h0LWNvbG9yOiAjNjQ2NDY0O1xuICAgIHNjcm9sbGJhci1oaWdobGlnaHQtY29sb3I6ICM2NDY0NjQ7XG4gICAgc2Nyb2xsYmFyLXRyYWNrLWNvbG9yOiAjMDAwO1xuICAgIHNjcm9sbGJhci1hcnJvdy1jb2xvcjogIzAwMDtcbiAgICBzY3JvbGxiYXItc2hhZG93LWNvbG9yOiAjNjQ2NDY0O1xuICB9XG4gIFxuICA6Oi13ZWJraXQtc2Nyb2xsYmFyIHtcbiAgICB3aWR0aDogNHB4O1xuICAgIGhlaWdodDogM3B4O1xuICB9XG4gIDo6LXdlYmtpdC1zY3JvbGxiYXItYnV0dG9uIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjNjY2O1xuICB9XG4gIDo6LXdlYmtpdC1zY3JvbGxiYXItdHJhY2sge1xuICAgIGJhY2tncm91bmQtY29sb3I6ICM2NDY0NjQ7XG4gIH1cbiAgOjotd2Via2l0LXNjcm9sbGJhci10cmFjay1waWVjZSB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzAwMDtcbiAgfVxuICA6Oi13ZWJraXQtc2Nyb2xsYmFyLXRodW1iIHtcbiAgICBoZWlnaHQ6IDUwcHg7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzY2NjtcbiAgICBib3JkZXItcmFkaXVzOiAzcHg7XG4gIH1cbiAgOjotd2Via2l0LXNjcm9sbGJhci1jb3JuZXIge1xuICAgIGJhY2tncm91bmQtY29sb3I6ICM2NDY0NjQ7XG4gIH1cbiAgOjotd2Via2l0LXJlc2l6ZXIge1xuICAgIGJhY2tncm91bmQtY29sb3I6ICM2NjY7XG4gIH1cbiAgQG1lZGlhIChtYXgtd2lkdGg6OTkyUFgpXG4gIHtcbiAgICAucmVzcG9uc2l2ZUJUUGFkZGluZ3tcbiAgICAgIHBhZGRpbmctbGVmdDogNHB4O1xuICAgICAgcGFkZGluZy1yaWdodDogNHB4O1xuICAgICAgcGFkZGluZy1ib3R0b206IDIwcHg7XG4gICAgXG4gICAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmVmZWZlO1xuICBcbiAgICB9XG4gICBcbiAgfVxuICBAbWVkaWEgKG1pbi13aWR0aDo5OTNQWClcbiAge1xuICAgIC5yZXNwb25zaXZlQlR7XG4gICAgICBkaXNwbGF5OiBub25lO1xuICAgIH1cbiAgfVxuICAuZHJvcGRvd24tdG9nZ2xlOjphZnRlciB7XG4gICAgZGlzcGxheTpub25lO1xuICB9XG4gIC5maWx0ZXItZ3JleXtcbiAgICBmaWx0ZXI6IGludmVydCg5NyUpIHNlcGlhKDAlKSBzYXR1cmF0ZSgwJSkgaHVlLXJvdGF0ZSgyMzlkZWcpIGJyaWdodG5lc3MoODglKSBjb250cmFzdCg4OSUpO1xuICAgIHRyYW5zaXRpb246IGZpbHRlciAwLjVzO1xuICB9XG4gIC5maWx0ZXItZ3JleTpob3ZlcntcbiAgICBmaWx0ZXI6IGludmVydCgzNiUpIHNlcGlhKDglKSBzYXR1cmF0ZSgyMjElKSBodWUtcm90YXRlKDMxNWRlZykgYnJpZ2h0bmVzcyg5MyUpIGNvbnRyYXN0KDkwJSk7XG4gIH1cbiAgXG4gIC5idXRvbi1zZWNpbGl7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDIwOSwgMjE0LCAyNDEpXG4gIH1cbiAgLm1vcmVIZWFkLCBtb3JlSGVhZDpmb2N1cyB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICB9XG4gIHB7XG4gICAgZm9udC1mYW1pbHk6IEFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWY7XG4gIH0iXX0= */"
+module.exports = ".showDiv .xyz-ul{\n  display: block;\n}\ninput{\n\n  border-top: 0px;\n  border-left:0px !important;\n  border-right:0px!important;\n  border-bottom:rgb(247, 240, 177) 2px solid;   \n  border-radius: 0% !important;\n  transition: border-bottom 0.3s;\n  padding-left: 0!important;\n\n}\ninput:focus{\n  border-top: 0px;\n  border-left:0px !important;\n  border-bottom:2px solid rgb(243, 226, 70);\n  box-shadow:0 0px 0 0 rgb(243, 226, 70);\n}\n@-webkit-keyframes kaydir {\n  100% {\n    -webkit-transform: translate(0, 0);\n            transform: translate(0, 0);\n  }\n\n  50% {\n    -webkit-transform: translate(-150px, 0);\n            transform: translate(-150px, 0);\n  }\n\n  0% {\n    -webkit-transform: translate(0, 0);\n            transform: translate(0, 0);\n  }\n}\n@keyframes kaydir {\n  100% {\n    -webkit-transform: translate(0, 0);\n            transform: translate(0, 0);\n  }\n\n  50% {\n    -webkit-transform: translate(-150px, 0);\n            transform: translate(-150px, 0);\n  }\n\n  0% {\n    -webkit-transform: translate(0, 0);\n            transform: translate(0, 0);\n  }\n}\n.kaydirClass {\n  -webkit-animation: kaydir 1s 1 linear;\n          animation: kaydir 1s 1 linear;\n  -webkit-transform: translate(0, 0);\n          transform: translate(0, 0);\n}\n@-webkit-keyframes noktayiZiplat {\n    100% {\n      -webkit-transform: translate(0, 0);\n              transform: translate(0, 0);\n    }\n  \n    50% {\n      -webkit-transform: translate(0, -4px);\n              transform: translate(0, -4px);\n    }\n  \n    0% {\n      -webkit-transform: translate(0, 0);\n              transform: translate(0, 0);\n    }\n  }\n@keyframes noktayiZiplat {\n    100% {\n      -webkit-transform: translate(0, 0);\n              transform: translate(0, 0);\n    }\n  \n    50% {\n      -webkit-transform: translate(0, -4px);\n              transform: translate(0, -4px);\n    }\n  \n    0% {\n      -webkit-transform: translate(0, 0);\n              transform: translate(0, 0);\n    }\n  }\n.mesajYaziyor i {\n    width: 4px;\n    height: 4px;\n    background: #222;\n    border-radius: 50%;\n    display: inline-block;\n    -webkit-animation: noktayiZiplat 0.9s infinite linear;\n            animation: noktayiZiplat 0.9s infinite linear;\n    /* transform: translate(0, 0); */\n  }\n.mesajYaziyor {\n    display: block;\n    position: relative;\n  }\n.mesajYaziyor i+i {\n    margin-left: 3px;\n  }\n.mesajYaziyor i:nth-child(1) {\n    -webkit-animation-delay: .5s;\n            animation-delay: .5s;\n  }\n.mesajYaziyor i:nth-child(2) {\n    -webkit-animation-delay: .4s;\n            animation-delay: .4s;\n  }\n.mesajYaziyor i:nth-child(3) {\n    -webkit-animation-delay: .3s;\n            animation-delay: .3s;\n  }\n.btn-send{\n    width: 100%;\n    background-color:  rgb(80, 79, 79); /* Safari prior 6.1 */\n    transition: background-color,border 0.3s; /* Safari prior 6.1 */\n    transition: border 0.3s; \n    border-radius: 2px;\n    border-color: rgb(228, 226, 226);\n  }\n.btn-send:hover{\n    width: 100%;\n    background-color: rgb(59, 59, 59);\n    border: 1px;\n    border-style:solid;\n    border-color: rgb(255, 246, 126);\n    border-radius: 2px;\n  }\n.tooltipSpecial .tooltip-inner {\n  background-color: rgb(224, 224, 224);\n  color: rgb(59, 59, 59);\n  /* font-size: 125%; */\n}\n.tooltipSpecial .arrow::before {\n  border-top-color: rgb(160, 164, 187);\n}\n.xyz-textarea {\n    float:left;\n    resize: none;\n    box-sizing: border-box;\n    border-radius: 0;\n    font-size: 17 !important;\n    font-family: sans-serif;\n    max-width: 85%;\n    width: 85%;\n    color: rgb(20, 20, 20);\n    border: 1px solid #e5e5e5;\n    transition: .2s ease-in-out;\n    transition-property: color, background-color, border;\n    padding-left: 20px;\n    background-color: white;\n    \n  \n  }\n.xyz-textarea:focus {\n    outline: 0;\n    color: black;\n    font-size: 17 !important;\n    border: 1px solid #757575;\n    /* background-color: #f8f8f8; */\n  }\n.xyz-textarea::-moz-placeholder {\n    opacity: 1;\n    font-size: 17 !important;\n    font-family: sans-serif;\n  }\n.xyz-textarea:-ms-input-placeholder {\n    color: rgb(133, 133, 133);\n    font-size: 17 !important;\n    font-family: sans-serif;\n  }\n.xyz-textarea::-moz-placeholder {\n    color: rgb(133, 133, 133);\n    font-size: 17 !important;\n    font-family: sans-serif;\n  }\n.xyz-textarea::-webkit-input-placeholder {\n    color: rgb(133, 133, 133);\n    font-size: 17 !important;\n    font-family: sans-serif;\n  }\n.xyz-textarea::-webkit-input-placeholder:focus {\n    color: rgb(0, 0, 0);\n    font-size: 17 !important;\n    font-family: sans-serif;\n  }\n.xyz-card-big {\n    position: relative;\n    box-sizing: border-box;\n    transition: box-shadow .1s ease-in-out;\n    border-radius: 0px;\n    padding-left:3px;\n    padding-right: 3px;\n    overflow-y: scroll;\n    overflow-y : auto;\n    overflow-x: hidden;\n  \n  }\n.xyz-card {\n    position: relative;\n    box-sizing: border-box;\n    transition: box-shadow .1s ease-in-out;\n    border-radius: 5px;\n    padding-left: 10px;\n    padding-right: 10px;\n    padding-bottom: 0px;\n    padding-top: 5px;\n    margin-right:10px;\n    margin-left:10px;\n    height:100%;\n    width: 50%;\n    /* max-width: 200px; */\n    word-wrap: break-word;\n  \n  }\n@media (max-width:700px)\n  {  \n    .xyz-card {\n      position: relative;\n      box-sizing: border-box;\n      transition: box-shadow .1s ease-in-out;\n      border-radius: 5px;\n      padding-left: 10px;\n      padding-right: 10px;\n      padding-bottom: 0px;\n      padding-top: 5px;\n      margin-right:10px;\n      margin-left:10px;\n      height:100%;\n      width: 100%;\n      /* max-width: 200px; */\n      word-wrap: break-word;  \n    }\n  }\np{\n    font-size:15px;\n  }\n.xyz-ul{\n  width: 100%;\n  height: 100%;\n  display:none;\n\n}\n.xyz-ul ul {\n\n  list-style-type: none;\n  margin: 0!important;\n  padding: 0!important;\n  overflow: hidden;\n  display: flex;\n  justify-items:left;\n  flex-wrap: nowrap;\n  width: 100%;\n  height: 100%;\n  left:0px;\n  right: 0px;\n  float: left;\n  background-color: inherit;\n  text-align: left;\n  \n  \n}\n.xyz-ul ul > li{\n  margin-left: 0px;\n  padding-left: 0px;\n  float: left;\n  margin-right: 10px; \n  white-space: nowrap; \n  background-color: inherit;\n  text-align: left;\n}\n.animateLi li{\n  -webkit-animation: kaydirFromRightToLeft 2s both linear;\n          animation: kaydirFromRightToLeft 2s both linear; \n  -webkit-animation-iteration-count: 1;    \n  animation-iteration-count: 1;\n  -webkit-transform: translate(0, 0);\n          transform: translate(0, 0);\n}\n@-webkit-keyframes kaydirFromRightToLeft {\n \n  \n    100% {\n      -webkit-transform: translate(0px, 0);\n              transform: translate(0px, 0);\n    }\n  \n    50% {\n      -webkit-transform: translate(-250px, 0);\n              transform: translate(-250px, 0);\n    }    \n  \n    0% {\n      -webkit-transform: translate(0, 0);\n              transform: translate(0, 0);\n    }\n  }\n@keyframes kaydirFromRightToLeft {\n \n  \n    100% {\n      -webkit-transform: translate(0px, 0);\n              transform: translate(0px, 0);\n    }\n  \n    50% {\n      -webkit-transform: translate(-250px, 0);\n              transform: translate(-250px, 0);\n    }    \n  \n    0% {\n      -webkit-transform: translate(0, 0);\n              transform: translate(0, 0);\n    }\n  }\n.avatarim{\n    width: 45px;\n    height: 45px;\n    border-radius: 10%;\n  }\n.xyz-card-default {\n    background: rgb(255, 255, 255);\n    color: rgb(0, 0, 0);\n    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.08)\n  }\n.xyz-card-default:hover {\n    background: rgb(255, 255, 255);\n    color: rgb(0, 0, 0);\n    box-shadow: 0 5px 15px rgba(0, 0, 0, .08)\n  }\n/* #1e87f0; #222; */\n.xyz-card-primary {\n    background: rgb(255, 255, 255);\n    color: rgb(0, 0, 0);\n    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.08);\n\n  }\n.xyz-card-primary:hover {\n    background: rgb(255, 255, 255);\n    color: rgb(0, 0, 0);\n    box-shadow: 0 5px 15px rgba(0, 0, 0, .08)\n  }\n.xyz-card-dark {\n    background: #222;\n    color: #fff;\n    box-shadow: 0 5px 15px rgba(0, 0, 0, .08)\n  }\n.xyz-card-footer {\n    border-top: 2px solid #e5e5e5;\n    padding-top: 10px;\n    padding-bottom: 5px;\n    position: relative;\n    box-sizing: border-box;\n    transition: box-shadow .1s ease-in-out;\n    z-index: 1;\n  }\n.karsiTaraf .xyz-card:after,\n  .ben .xyz-card:after {\n    width: 10px;\n    height: 45px;\n    position: absolute;\n    bottom: 0;\n  }\n.karsiTaraf .xyz-card:after {\n    background: #fdfdff; \n    left: -4px;\n    -webkit-clip-path: polygon(100% 70%, 0% 100%, 100% 100%);\n            clip-path: polygon(100% 70%, 0% 100%, 100% 100%);\n    content: ''\n  }\n.ben .xyz-card:after {\n    background: #fdfdff;; \n    left: -4px;\n    -webkit-clip-path: polygon(100% 70%, 0% 100%, 100% 100%);\n            clip-path: polygon(100% 70%, 0% 100%, 100% 100%);\n    content: ''\n  }\n/* background: #1e87f0; */\n/* .ben .xyz-card:after {\n    background: #fff;\n    right: -4px;\n    clip-path: polygon(0 70%, 0% 100%, 100% 100%);\n    content: ''\n  }  */\n.ben {\n    margin-bottom: 3px;\n    margin-top: 3px;\n  }\n.karsiTaraf {\n    margin-bottom: 3px;\n    margin-top: 3px;\n  }\nul {\n    list-style-type: none;\n  }\nul li {\n    float: left;\n  }\n.gear { /* Safari prior 6.1 */\n    transition:  all 0.8s;\n   \n  }\n.gear:hover{\n    box-shadow: 0 5px 15px rgba(0, 0, 0, .08);\n    -webkit-transform:rotate(60deg);\n    transform:rotate(60deg); \n    \n  }\n.tooltipSpecial .tooltip-inner {\n    background-color: rgb(224, 224, 224);\n    color: rgb(59, 59, 59);\n    /* font-size: 125%; */\n  }\n.tooltipSpecial .arrow::before {\n    border-top-color: rgb(160, 164, 187);\n  }\nhtml {\n    scroll-behavior: smooth;\n    scrollbar-face-color: #646464;\n    scrollbar-base-color: #646464;\n    scrollbar-3dlight-color: #646464;\n    scrollbar-highlight-color: #646464;\n    scrollbar-track-color: #000;\n    scrollbar-arrow-color: #000;\n    scrollbar-shadow-color: #646464;\n  }\n::-webkit-scrollbar {\n    width: 4px;\n    height: 3px;\n  }\n::-webkit-scrollbar-button {\n    background-color: #666;\n  }\n::-webkit-scrollbar-track {\n    background-color: #646464;\n  }\n::-webkit-scrollbar-track-piece {\n    background-color: #000;\n  }\n::-webkit-scrollbar-thumb {\n    height: 50px;\n    background-color: #666;\n    border-radius: 3px;\n  }\n::-webkit-scrollbar-corner {\n    background-color: #646464;\n  }\n::-webkit-resizer {\n    background-color: #666;\n  }\n@media (max-width:992PX)\n  {\n    .responsiveBTPadding{\n      padding-left: 4px;\n      padding-right: 4px;\n      padding-bottom: 20px;\n    \n      background-color: #fefefe;\n  \n    }\n   \n  }\n@media (min-width:993PX)\n  {\n    .responsiveBT{\n      display: none;\n    }\n  }\n.dropdown-toggle::after {\n    display:none;\n  }\n.filter-grey{\n    -webkit-filter: invert(97%) sepia(0%) saturate(0%) hue-rotate(239deg) brightness(88%) contrast(89%);\n            filter: invert(97%) sepia(0%) saturate(0%) hue-rotate(239deg) brightness(88%) contrast(89%);\n    transition: -webkit-filter 0.5s;\n    transition: filter 0.5s;\n    transition: filter 0.5s, -webkit-filter 0.5s;\n  }\n.filter-grey:hover{\n    -webkit-filter: invert(36%) sepia(8%) saturate(221%) hue-rotate(315deg) brightness(93%) contrast(90%);\n            filter: invert(36%) sepia(8%) saturate(221%) hue-rotate(315deg) brightness(93%) contrast(90%);\n  }\n.buton-secili{\n    background-color: rgb(209, 214, 241)\n  }\n.moreHead, moreHead:focus {\n    cursor: pointer;\n  }\np{\n    font-family: Arial, Helvetica, sans-serif;\n  }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcHJpdmF0ZS10YWxrL3ByaXZhdGUtdGFsay1tZXNzYWdlcy9wcml2YXRlLXRhbGstbWVzc2FnZXMuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGNBQWM7QUFDaEI7QUFDQTs7RUFFRSxlQUFlO0VBQ2YsMEJBQTBCO0VBQzFCLDBCQUEwQjtFQUMxQiwwQ0FBMEM7RUFDMUMsNEJBQTRCO0VBQzVCLDhCQUE4QjtFQUM5Qix5QkFBeUI7O0FBRTNCO0FBQ0E7RUFDRSxlQUFlO0VBQ2YsMEJBQTBCO0VBQzFCLHlDQUF5QztFQUN6QyxzQ0FBc0M7QUFDeEM7QUFFQTtFQUNFO0lBQ0Usa0NBQTBCO1lBQTFCLDBCQUEwQjtFQUM1Qjs7RUFFQTtJQUNFLHVDQUErQjtZQUEvQiwrQkFBK0I7RUFDakM7O0VBRUE7SUFDRSxrQ0FBMEI7WUFBMUIsMEJBQTBCO0VBQzVCO0FBQ0Y7QUFaQTtFQUNFO0lBQ0Usa0NBQTBCO1lBQTFCLDBCQUEwQjtFQUM1Qjs7RUFFQTtJQUNFLHVDQUErQjtZQUEvQiwrQkFBK0I7RUFDakM7O0VBRUE7SUFDRSxrQ0FBMEI7WUFBMUIsMEJBQTBCO0VBQzVCO0FBQ0Y7QUFFQTtFQUNFLHFDQUE2QjtVQUE3Qiw2QkFBNkI7RUFDN0Isa0NBQTBCO1VBQTFCLDBCQUEwQjtBQUM1QjtBQU1BO0lBQ0k7TUFDRSxrQ0FBMEI7Y0FBMUIsMEJBQTBCO0lBQzVCOztJQUVBO01BQ0UscUNBQTZCO2NBQTdCLDZCQUE2QjtJQUMvQjs7SUFFQTtNQUNFLGtDQUEwQjtjQUExQiwwQkFBMEI7SUFDNUI7RUFDRjtBQVpGO0lBQ0k7TUFDRSxrQ0FBMEI7Y0FBMUIsMEJBQTBCO0lBQzVCOztJQUVBO01BQ0UscUNBQTZCO2NBQTdCLDZCQUE2QjtJQUMvQjs7SUFFQTtNQUNFLGtDQUEwQjtjQUExQiwwQkFBMEI7SUFDNUI7RUFDRjtBQUVBO0lBQ0UsVUFBVTtJQUNWLFdBQVc7SUFDWCxnQkFBZ0I7SUFDaEIsa0JBQWtCO0lBQ2xCLHFCQUFxQjtJQUNyQixxREFBNkM7WUFBN0MsNkNBQTZDO0lBQzdDLGdDQUFnQztFQUNsQztBQUNBO0lBQ0UsY0FBYztJQUNkLGtCQUFrQjtFQUNwQjtBQUNBO0lBQ0UsZ0JBQWdCO0VBQ2xCO0FBQ0E7SUFDRSw0QkFBb0I7WUFBcEIsb0JBQW9CO0VBQ3RCO0FBQ0E7SUFDRSw0QkFBb0I7WUFBcEIsb0JBQW9CO0VBQ3RCO0FBQ0E7SUFDRSw0QkFBb0I7WUFBcEIsb0JBQW9CO0VBQ3RCO0FBQ0E7SUFDRSxXQUFXO0lBQ1gsa0NBQWtDLEVBQ2dCLHFCQUFxQjtJQUN2RSx3Q0FBd0MsRUFDUCxxQkFBcUI7SUFDdEQsdUJBQXVCO0lBQ3ZCLGtCQUFrQjtJQUNsQixnQ0FBZ0M7RUFDbEM7QUFDQTtJQUNFLFdBQVc7SUFDWCxpQ0FBaUM7SUFDakMsV0FBVztJQUNYLGtCQUFrQjtJQUNsQixnQ0FBZ0M7SUFDaEMsa0JBQWtCO0VBQ3BCO0FBRUY7RUFDRSxvQ0FBb0M7RUFDcEMsc0JBQXNCO0VBQ3RCLHFCQUFxQjtBQUN2QjtBQUNBO0VBQ0Usb0NBQW9DO0FBQ3RDO0FBQ0U7SUFDRSxVQUFVO0lBQ1YsWUFBWTtJQUNaLHNCQUFzQjtJQUN0QixnQkFBZ0I7SUFDaEIsd0JBQXdCO0lBQ3hCLHVCQUF1QjtJQUN2QixjQUFjO0lBQ2QsVUFBVTtJQUNWLHNCQUFzQjtJQUN0Qix5QkFBeUI7SUFFekIsMkJBQTJCO0lBRTNCLG9EQUFvRDtJQUNwRCxrQkFBa0I7SUFDbEIsdUJBQXVCOzs7RUFHekI7QUFDQTtJQUNFLFVBQVU7SUFDVixZQUFZO0lBQ1osd0JBQXdCO0lBQ3hCLHlCQUF5QjtJQUN6QiwrQkFBK0I7RUFDakM7QUFDQTtJQUNFLFVBQVU7SUFDVix3QkFBd0I7SUFDeEIsdUJBQXVCO0VBQ3pCO0FBQ0E7SUFDRSx5QkFBeUI7SUFDekIsd0JBQXdCO0lBQ3hCLHVCQUF1QjtFQUN6QjtBQUNBO0lBQ0UseUJBQXlCO0lBQ3pCLHdCQUF3QjtJQUN4Qix1QkFBdUI7RUFDekI7QUFDQTtJQUNFLHlCQUF5QjtJQUN6Qix3QkFBd0I7SUFDeEIsdUJBQXVCO0VBQ3pCO0FBQ0E7SUFDRSxtQkFBbUI7SUFDbkIsd0JBQXdCO0lBQ3hCLHVCQUF1QjtFQUN6QjtBQUNBO0lBQ0Usa0JBQWtCO0lBQ2xCLHNCQUFzQjtJQUV0QixzQ0FBc0M7SUFDdEMsa0JBQWtCO0lBQ2xCLGdCQUFnQjtJQUNoQixrQkFBa0I7SUFDbEIsa0JBQWtCO0lBQ2xCLGlCQUFpQjtJQUNqQixrQkFBa0I7O0VBRXBCO0FBQ0E7SUFDRSxrQkFBa0I7SUFDbEIsc0JBQXNCO0lBRXRCLHNDQUFzQztJQUN0QyxrQkFBa0I7SUFDbEIsa0JBQWtCO0lBQ2xCLG1CQUFtQjtJQUNuQixtQkFBbUI7SUFDbkIsZ0JBQWdCO0lBQ2hCLGlCQUFpQjtJQUNqQixnQkFBZ0I7SUFDaEIsV0FBVztJQUNYLFVBQVU7SUFDVixzQkFBc0I7SUFDdEIscUJBQXFCOztFQUV2QjtBQUNBOztJQUVFO01BQ0Usa0JBQWtCO01BQ2xCLHNCQUFzQjtNQUV0QixzQ0FBc0M7TUFDdEMsa0JBQWtCO01BQ2xCLGtCQUFrQjtNQUNsQixtQkFBbUI7TUFDbkIsbUJBQW1CO01BQ25CLGdCQUFnQjtNQUNoQixpQkFBaUI7TUFDakIsZ0JBQWdCO01BQ2hCLFdBQVc7TUFDWCxXQUFXO01BQ1gsc0JBQXNCO01BQ3RCLHFCQUFxQjtJQUN2QjtFQUNGO0FBRUE7SUFDRSxjQUFjO0VBQ2hCO0FBR0Y7RUFDRSxXQUFXO0VBQ1gsWUFBWTtFQUNaLFlBQVk7O0FBRWQ7QUFFQTs7RUFFRSxxQkFBcUI7RUFDckIsbUJBQW1CO0VBQ25CLG9CQUFvQjtFQUNwQixnQkFBZ0I7RUFDaEIsYUFBYTtFQUNiLGtCQUFrQjtFQUNsQixpQkFBaUI7RUFDakIsV0FBVztFQUNYLFlBQVk7RUFDWixRQUFRO0VBQ1IsVUFBVTtFQUNWLFdBQVc7RUFDWCx5QkFBeUI7RUFDekIsZ0JBQWdCOzs7QUFHbEI7QUFDQTtFQUNFLGdCQUFnQjtFQUNoQixpQkFBaUI7RUFDakIsV0FBVztFQUNYLGtCQUFrQjtFQUNsQixtQkFBbUI7RUFDbkIseUJBQXlCO0VBQ3pCLGdCQUFnQjtBQUNsQjtBQUNBO0VBQ0UsdURBQStDO1VBQS9DLCtDQUErQztFQUMvQyxvQ0FBb0M7RUFHcEMsNEJBQTRCO0VBQzVCLGtDQUEwQjtVQUExQiwwQkFBMEI7QUFDNUI7QUFJRTs7O0lBR0U7TUFDRSxvQ0FBNEI7Y0FBNUIsNEJBQTRCO0lBQzlCOztJQUVBO01BQ0UsdUNBQStCO2NBQS9CLCtCQUErQjtJQUNqQzs7SUFFQTtNQUNFLGtDQUEwQjtjQUExQiwwQkFBMEI7SUFDNUI7RUFDRjtBQWRBOzs7SUFHRTtNQUNFLG9DQUE0QjtjQUE1Qiw0QkFBNEI7SUFDOUI7O0lBRUE7TUFDRSx1Q0FBK0I7Y0FBL0IsK0JBQStCO0lBQ2pDOztJQUVBO01BQ0Usa0NBQTBCO2NBQTFCLDBCQUEwQjtJQUM1QjtFQUNGO0FBRUE7SUFDRSxXQUFXO0lBQ1gsWUFBWTtJQUNaLGtCQUFrQjtFQUNwQjtBQUNBO0lBQ0UsOEJBQThCO0lBQzlCLG1CQUFtQjtJQUNuQjtFQUNGO0FBQ0E7SUFDRSw4QkFBOEI7SUFDOUIsbUJBQW1CO0lBQ25CO0VBQ0Y7QUFDQSxtQkFBbUI7QUFDbkI7SUFDRSw4QkFBOEI7SUFDOUIsbUJBQW1CO0lBQ25CLGdEQUFnRDs7RUFFbEQ7QUFDQTtJQUNFLDhCQUE4QjtJQUM5QixtQkFBbUI7SUFDbkI7RUFDRjtBQUNBO0lBQ0UsZ0JBQWdCO0lBQ2hCLFdBQVc7SUFDWDtFQUNGO0FBQ0E7SUFDRSw2QkFBNkI7SUFDN0IsaUJBQWlCO0lBQ2pCLG1CQUFtQjtJQUNuQixrQkFBa0I7SUFDbEIsc0JBQXNCO0lBRXRCLHNDQUFzQztJQUN0QyxVQUFVO0VBQ1o7QUFDQTs7SUFFRSxXQUFXO0lBQ1gsWUFBWTtJQUNaLGtCQUFrQjtJQUNsQixTQUFTO0VBQ1g7QUFDQTtJQUNFLG1CQUFtQjtJQUNuQixVQUFVO0lBQ1Ysd0RBQWdEO1lBQWhELGdEQUFnRDtJQUNoRDtFQUNGO0FBRUQ7SUFDRyxtQkFBbUI7SUFDbkIsVUFBVTtJQUNWLHdEQUFnRDtZQUFoRCxnREFBZ0Q7SUFDaEQ7RUFDRjtBQUNBLHlCQUF5QjtBQUV0Qjs7Ozs7TUFLQztBQUVKO0lBQ0Usa0JBQWtCO0lBQ2xCLGVBQWU7RUFDakI7QUFDQTtJQUNFLGtCQUFrQjtJQUNsQixlQUFlO0VBQ2pCO0FBQ0E7SUFDRSxxQkFBcUI7RUFDdkI7QUFDQTtJQUNFLFdBQVc7RUFDYjtBQUNBLFFBQ2dDLHFCQUFxQjtJQUNuRCxxQkFBcUI7O0VBRXZCO0FBQ0E7SUFDRSx5Q0FBeUM7SUFDekMsK0JBQStCO0lBRy9CLHVCQUF1Qjs7RUFFekI7QUFDQTtJQUNFLG9DQUFvQztJQUNwQyxzQkFBc0I7SUFDdEIscUJBQXFCO0VBQ3ZCO0FBQ0E7SUFDRSxvQ0FBb0M7RUFDdEM7QUFFQTtJQUNFLHVCQUF1QjtJQUN2Qiw2QkFBNkI7SUFDN0IsNkJBQTZCO0lBQzdCLGdDQUFnQztJQUNoQyxrQ0FBa0M7SUFDbEMsMkJBQTJCO0lBQzNCLDJCQUEyQjtJQUMzQiwrQkFBK0I7RUFDakM7QUFFQTtJQUNFLFVBQVU7SUFDVixXQUFXO0VBQ2I7QUFDQTtJQUNFLHNCQUFzQjtFQUN4QjtBQUNBO0lBQ0UseUJBQXlCO0VBQzNCO0FBQ0E7SUFDRSxzQkFBc0I7RUFDeEI7QUFDQTtJQUNFLFlBQVk7SUFDWixzQkFBc0I7SUFDdEIsa0JBQWtCO0VBQ3BCO0FBQ0E7SUFDRSx5QkFBeUI7RUFDM0I7QUFDQTtJQUNFLHNCQUFzQjtFQUN4QjtBQUNBOztJQUVFO01BQ0UsaUJBQWlCO01BQ2pCLGtCQUFrQjtNQUNsQixvQkFBb0I7O01BRXBCLHlCQUF5Qjs7SUFFM0I7O0VBRUY7QUFDQTs7SUFFRTtNQUNFLGFBQWE7SUFDZjtFQUNGO0FBQ0E7SUFDRSxZQUFZO0VBQ2Q7QUFDQTtJQUNFLG1HQUEyRjtZQUEzRiwyRkFBMkY7SUFDM0YsK0JBQXVCO0lBQXZCLHVCQUF1QjtJQUF2Qiw0Q0FBdUI7RUFDekI7QUFDQTtJQUNFLHFHQUE2RjtZQUE3Riw2RkFBNkY7RUFDL0Y7QUFFQTtJQUNFO0VBQ0Y7QUFDQTtJQUNFLGVBQWU7RUFDakI7QUFDQTtJQUNFLHlDQUF5QztFQUMzQyIsImZpbGUiOiJzcmMvYXBwL3ByaXZhdGUtdGFsay9wcml2YXRlLXRhbGstbWVzc2FnZXMvcHJpdmF0ZS10YWxrLW1lc3NhZ2VzLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuc2hvd0RpdiAueHl6LXVse1xuICBkaXNwbGF5OiBibG9jaztcbn1cbmlucHV0e1xuXG4gIGJvcmRlci10b3A6IDBweDtcbiAgYm9yZGVyLWxlZnQ6MHB4ICFpbXBvcnRhbnQ7XG4gIGJvcmRlci1yaWdodDowcHghaW1wb3J0YW50O1xuICBib3JkZXItYm90dG9tOnJnYigyNDcsIDI0MCwgMTc3KSAycHggc29saWQ7ICAgXG4gIGJvcmRlci1yYWRpdXM6IDAlICFpbXBvcnRhbnQ7XG4gIHRyYW5zaXRpb246IGJvcmRlci1ib3R0b20gMC4zcztcbiAgcGFkZGluZy1sZWZ0OiAwIWltcG9ydGFudDtcblxufVxuaW5wdXQ6Zm9jdXN7XG4gIGJvcmRlci10b3A6IDBweDtcbiAgYm9yZGVyLWxlZnQ6MHB4ICFpbXBvcnRhbnQ7XG4gIGJvcmRlci1ib3R0b206MnB4IHNvbGlkIHJnYigyNDMsIDIyNiwgNzApO1xuICBib3gtc2hhZG93OjAgMHB4IDAgMCByZ2IoMjQzLCAyMjYsIDcwKTtcbn1cblxuQGtleWZyYW1lcyBrYXlkaXIge1xuICAxMDAlIHtcbiAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgwLCAwKTtcbiAgfVxuXG4gIDUwJSB7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTE1MHB4LCAwKTtcbiAgfVxuXG4gIDAlIHtcbiAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgwLCAwKTtcbiAgfVxufVxuXG4ua2F5ZGlyQ2xhc3Mge1xuICBhbmltYXRpb246IGtheWRpciAxcyAxIGxpbmVhcjtcbiAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoMCwgMCk7XG59XG5cblxuXG5cblxuQGtleWZyYW1lcyBub2t0YXlpWmlwbGF0IHtcbiAgICAxMDAlIHtcbiAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlKDAsIDApO1xuICAgIH1cbiAgXG4gICAgNTAlIHtcbiAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlKDAsIC00cHgpO1xuICAgIH1cbiAgXG4gICAgMCUge1xuICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoMCwgMCk7XG4gICAgfVxuICB9XG4gIFxuICAubWVzYWpZYXppeW9yIGkge1xuICAgIHdpZHRoOiA0cHg7XG4gICAgaGVpZ2h0OiA0cHg7XG4gICAgYmFja2dyb3VuZDogIzIyMjtcbiAgICBib3JkZXItcmFkaXVzOiA1MCU7XG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICAgIGFuaW1hdGlvbjogbm9rdGF5aVppcGxhdCAwLjlzIGluZmluaXRlIGxpbmVhcjtcbiAgICAvKiB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgwLCAwKTsgKi9cbiAgfVxuICAubWVzYWpZYXppeW9yIHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIH1cbiAgLm1lc2FqWWF6aXlvciBpK2kge1xuICAgIG1hcmdpbi1sZWZ0OiAzcHg7XG4gIH1cbiAgLm1lc2FqWWF6aXlvciBpOm50aC1jaGlsZCgxKSB7XG4gICAgYW5pbWF0aW9uLWRlbGF5OiAuNXM7XG4gIH1cbiAgLm1lc2FqWWF6aXlvciBpOm50aC1jaGlsZCgyKSB7XG4gICAgYW5pbWF0aW9uLWRlbGF5OiAuNHM7XG4gIH1cbiAgLm1lc2FqWWF6aXlvciBpOm50aC1jaGlsZCgzKSB7XG4gICAgYW5pbWF0aW9uLWRlbGF5OiAuM3M7XG4gIH1cbiAgLmJ0bi1zZW5ke1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGJhY2tncm91bmQtY29sb3I6ICByZ2IoODAsIDc5LCA3OSk7XG4gICAgLXdlYmtpdC10cmFuc2l0aW9uOiBiYWNrZ3JvdW5kLWNvbG9yLGJvcmRlciAwLjNzOyAvKiBTYWZhcmkgcHJpb3IgNi4xICovXG4gICAgdHJhbnNpdGlvbjogYmFja2dyb3VuZC1jb2xvcixib3JkZXIgMC4zczsgXG4gICAgLXdlYmtpdC10cmFuc2l0aW9uOiBib3JkZXIgMC4zczsgLyogU2FmYXJpIHByaW9yIDYuMSAqL1xuICAgIHRyYW5zaXRpb246IGJvcmRlciAwLjNzOyBcbiAgICBib3JkZXItcmFkaXVzOiAycHg7XG4gICAgYm9yZGVyLWNvbG9yOiByZ2IoMjI4LCAyMjYsIDIyNik7XG4gIH1cbiAgLmJ0bi1zZW5kOmhvdmVye1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGJhY2tncm91bmQtY29sb3I6IHJnYig1OSwgNTksIDU5KTtcbiAgICBib3JkZXI6IDFweDtcbiAgICBib3JkZXItc3R5bGU6c29saWQ7XG4gICAgYm9yZGVyLWNvbG9yOiByZ2IoMjU1LCAyNDYsIDEyNik7XG4gICAgYm9yZGVyLXJhZGl1czogMnB4O1xuICB9XG4gIFxuLnRvb2x0aXBTcGVjaWFsIC50b29sdGlwLWlubmVyIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDIyNCwgMjI0LCAyMjQpO1xuICBjb2xvcjogcmdiKDU5LCA1OSwgNTkpO1xuICAvKiBmb250LXNpemU6IDEyNSU7ICovXG59XG4udG9vbHRpcFNwZWNpYWwgLmFycm93OjpiZWZvcmUge1xuICBib3JkZXItdG9wLWNvbG9yOiByZ2IoMTYwLCAxNjQsIDE4Nyk7XG59XG4gIC54eXotdGV4dGFyZWEge1xuICAgIGZsb2F0OmxlZnQ7XG4gICAgcmVzaXplOiBub25lO1xuICAgIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gICAgYm9yZGVyLXJhZGl1czogMDtcbiAgICBmb250LXNpemU6IDE3ICFpbXBvcnRhbnQ7XG4gICAgZm9udC1mYW1pbHk6IHNhbnMtc2VyaWY7XG4gICAgbWF4LXdpZHRoOiA4NSU7XG4gICAgd2lkdGg6IDg1JTtcbiAgICBjb2xvcjogcmdiKDIwLCAyMCwgMjApO1xuICAgIGJvcmRlcjogMXB4IHNvbGlkICNlNWU1ZTU7XG4gICAgLXdlYmtpdC10cmFuc2l0aW9uOiAuMnMgZWFzZS1pbi1vdXQ7XG4gICAgdHJhbnNpdGlvbjogLjJzIGVhc2UtaW4tb3V0O1xuICAgIC13ZWJraXQtdHJhbnNpdGlvbi1wcm9wZXJ0eTogY29sb3IsIGJhY2tncm91bmQtY29sb3IsIGJvcmRlcjtcbiAgICB0cmFuc2l0aW9uLXByb3BlcnR5OiBjb2xvciwgYmFja2dyb3VuZC1jb2xvciwgYm9yZGVyO1xuICAgIHBhZGRpbmctbGVmdDogMjBweDtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgICBcbiAgXG4gIH1cbiAgLnh5ei10ZXh0YXJlYTpmb2N1cyB7XG4gICAgb3V0bGluZTogMDtcbiAgICBjb2xvcjogYmxhY2s7XG4gICAgZm9udC1zaXplOiAxNyAhaW1wb3J0YW50O1xuICAgIGJvcmRlcjogMXB4IHNvbGlkICM3NTc1NzU7XG4gICAgLyogYmFja2dyb3VuZC1jb2xvcjogI2Y4ZjhmODsgKi9cbiAgfVxuICAueHl6LXRleHRhcmVhOjotbW96LXBsYWNlaG9sZGVyIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIGZvbnQtc2l6ZTogMTcgIWltcG9ydGFudDtcbiAgICBmb250LWZhbWlseTogc2Fucy1zZXJpZjtcbiAgfVxuICAueHl6LXRleHRhcmVhOi1tcy1pbnB1dC1wbGFjZWhvbGRlciB7XG4gICAgY29sb3I6IHJnYigxMzMsIDEzMywgMTMzKTtcbiAgICBmb250LXNpemU6IDE3ICFpbXBvcnRhbnQ7XG4gICAgZm9udC1mYW1pbHk6IHNhbnMtc2VyaWY7XG4gIH1cbiAgLnh5ei10ZXh0YXJlYTo6LW1vei1wbGFjZWhvbGRlciB7XG4gICAgY29sb3I6IHJnYigxMzMsIDEzMywgMTMzKTtcbiAgICBmb250LXNpemU6IDE3ICFpbXBvcnRhbnQ7XG4gICAgZm9udC1mYW1pbHk6IHNhbnMtc2VyaWY7XG4gIH1cbiAgLnh5ei10ZXh0YXJlYTo6LXdlYmtpdC1pbnB1dC1wbGFjZWhvbGRlciB7XG4gICAgY29sb3I6IHJnYigxMzMsIDEzMywgMTMzKTtcbiAgICBmb250LXNpemU6IDE3ICFpbXBvcnRhbnQ7XG4gICAgZm9udC1mYW1pbHk6IHNhbnMtc2VyaWY7XG4gIH1cbiAgLnh5ei10ZXh0YXJlYTo6LXdlYmtpdC1pbnB1dC1wbGFjZWhvbGRlcjpmb2N1cyB7XG4gICAgY29sb3I6IHJnYigwLCAwLCAwKTtcbiAgICBmb250LXNpemU6IDE3ICFpbXBvcnRhbnQ7XG4gICAgZm9udC1mYW1pbHk6IHNhbnMtc2VyaWY7XG4gIH1cbiAgLnh5ei1jYXJkLWJpZyB7XG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gICAgLXdlYmtpdC10cmFuc2l0aW9uOiBib3gtc2hhZG93IC4xcyBlYXNlLWluLW91dDtcbiAgICB0cmFuc2l0aW9uOiBib3gtc2hhZG93IC4xcyBlYXNlLWluLW91dDtcbiAgICBib3JkZXItcmFkaXVzOiAwcHg7XG4gICAgcGFkZGluZy1sZWZ0OjNweDtcbiAgICBwYWRkaW5nLXJpZ2h0OiAzcHg7XG4gICAgb3ZlcmZsb3cteTogc2Nyb2xsO1xuICAgIG92ZXJmbG93LXkgOiBhdXRvO1xuICAgIG92ZXJmbG93LXg6IGhpZGRlbjtcbiAgXG4gIH1cbiAgLnh5ei1jYXJkIHtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgICAtd2Via2l0LXRyYW5zaXRpb246IGJveC1zaGFkb3cgLjFzIGVhc2UtaW4tb3V0O1xuICAgIHRyYW5zaXRpb246IGJveC1zaGFkb3cgLjFzIGVhc2UtaW4tb3V0O1xuICAgIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgICBwYWRkaW5nLWxlZnQ6IDEwcHg7XG4gICAgcGFkZGluZy1yaWdodDogMTBweDtcbiAgICBwYWRkaW5nLWJvdHRvbTogMHB4O1xuICAgIHBhZGRpbmctdG9wOiA1cHg7XG4gICAgbWFyZ2luLXJpZ2h0OjEwcHg7XG4gICAgbWFyZ2luLWxlZnQ6MTBweDtcbiAgICBoZWlnaHQ6MTAwJTtcbiAgICB3aWR0aDogNTAlO1xuICAgIC8qIG1heC13aWR0aDogMjAwcHg7ICovXG4gICAgd29yZC13cmFwOiBicmVhay13b3JkO1xuICBcbiAgfVxuICBAbWVkaWEgKG1heC13aWR0aDo3MDBweClcbiAgeyAgXG4gICAgLnh5ei1jYXJkIHtcbiAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICAgIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gICAgICAtd2Via2l0LXRyYW5zaXRpb246IGJveC1zaGFkb3cgLjFzIGVhc2UtaW4tb3V0O1xuICAgICAgdHJhbnNpdGlvbjogYm94LXNoYWRvdyAuMXMgZWFzZS1pbi1vdXQ7XG4gICAgICBib3JkZXItcmFkaXVzOiA1cHg7XG4gICAgICBwYWRkaW5nLWxlZnQ6IDEwcHg7XG4gICAgICBwYWRkaW5nLXJpZ2h0OiAxMHB4O1xuICAgICAgcGFkZGluZy1ib3R0b206IDBweDtcbiAgICAgIHBhZGRpbmctdG9wOiA1cHg7XG4gICAgICBtYXJnaW4tcmlnaHQ6MTBweDtcbiAgICAgIG1hcmdpbi1sZWZ0OjEwcHg7XG4gICAgICBoZWlnaHQ6MTAwJTtcbiAgICAgIHdpZHRoOiAxMDAlO1xuICAgICAgLyogbWF4LXdpZHRoOiAyMDBweDsgKi9cbiAgICAgIHdvcmQtd3JhcDogYnJlYWstd29yZDsgIFxuICAgIH1cbiAgfVxuICBcbiAgcHtcbiAgICBmb250LXNpemU6MTVweDtcbiAgfVxuICBcblxuLnh5ei11bHtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcbiAgZGlzcGxheTpub25lO1xuXG59XG5cbi54eXotdWwgdWwge1xuXG4gIGxpc3Qtc3R5bGUtdHlwZTogbm9uZTtcbiAgbWFyZ2luOiAwIWltcG9ydGFudDtcbiAgcGFkZGluZzogMCFpbXBvcnRhbnQ7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktaXRlbXM6bGVmdDtcbiAgZmxleC13cmFwOiBub3dyYXA7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIGxlZnQ6MHB4O1xuICByaWdodDogMHB4O1xuICBmbG9hdDogbGVmdDtcbiAgYmFja2dyb3VuZC1jb2xvcjogaW5oZXJpdDtcbiAgdGV4dC1hbGlnbjogbGVmdDtcbiAgXG4gIFxufVxuLnh5ei11bCB1bCA+IGxpe1xuICBtYXJnaW4tbGVmdDogMHB4O1xuICBwYWRkaW5nLWxlZnQ6IDBweDtcbiAgZmxvYXQ6IGxlZnQ7XG4gIG1hcmdpbi1yaWdodDogMTBweDsgXG4gIHdoaXRlLXNwYWNlOiBub3dyYXA7IFxuICBiYWNrZ3JvdW5kLWNvbG9yOiBpbmhlcml0O1xuICB0ZXh0LWFsaWduOiBsZWZ0O1xufVxuLmFuaW1hdGVMaSBsaXtcbiAgYW5pbWF0aW9uOiBrYXlkaXJGcm9tUmlnaHRUb0xlZnQgMnMgYm90aCBsaW5lYXI7IFxuICAtd2Via2l0LWFuaW1hdGlvbi1pdGVyYXRpb24tY291bnQ6IDE7XG4gIC1tb3otYW5pbWF0aW9uLWl0ZXJhdGlvbi1jb3VudDogMTtcbiAgLW8tYW5pbWF0aW9uLWl0ZXJhdGlvbi1jb3VudDogMTsgICAgXG4gIGFuaW1hdGlvbi1pdGVyYXRpb24tY291bnQ6IDE7XG4gIHRyYW5zZm9ybTogdHJhbnNsYXRlKDAsIDApO1xufVxuXG5cblxuICBAa2V5ZnJhbWVzIGtheWRpckZyb21SaWdodFRvTGVmdCB7XG4gXG4gIFxuICAgIDEwMCUge1xuICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoMHB4LCAwKTtcbiAgICB9XG4gIFxuICAgIDUwJSB7XG4gICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgtMjUwcHgsIDApO1xuICAgIH0gICAgXG4gIFxuICAgIDAlIHtcbiAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlKDAsIDApO1xuICAgIH1cbiAgfVxuXG4gIC5hdmF0YXJpbXtcbiAgICB3aWR0aDogNDVweDtcbiAgICBoZWlnaHQ6IDQ1cHg7XG4gICAgYm9yZGVyLXJhZGl1czogMTAlO1xuICB9XG4gIC54eXotY2FyZC1kZWZhdWx0IHtcbiAgICBiYWNrZ3JvdW5kOiByZ2IoMjU1LCAyNTUsIDI1NSk7XG4gICAgY29sb3I6IHJnYigwLCAwLCAwKTtcbiAgICBib3gtc2hhZG93OiAwIDVweCAxNXB4IHJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wOClcbiAgfVxuICAueHl6LWNhcmQtZGVmYXVsdDpob3ZlciB7XG4gICAgYmFja2dyb3VuZDogcmdiKDI1NSwgMjU1LCAyNTUpO1xuICAgIGNvbG9yOiByZ2IoMCwgMCwgMCk7XG4gICAgYm94LXNoYWRvdzogMCA1cHggMTVweCByZ2JhKDAsIDAsIDAsIC4wOClcbiAgfVxuICAvKiAjMWU4N2YwOyAjMjIyOyAqL1xuICAueHl6LWNhcmQtcHJpbWFyeSB7XG4gICAgYmFja2dyb3VuZDogcmdiKDI1NSwgMjU1LCAyNTUpO1xuICAgIGNvbG9yOiByZ2IoMCwgMCwgMCk7XG4gICAgYm94LXNoYWRvdzogMCA1cHggMTVweCByZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMDgpO1xuXG4gIH1cbiAgLnh5ei1jYXJkLXByaW1hcnk6aG92ZXIge1xuICAgIGJhY2tncm91bmQ6IHJnYigyNTUsIDI1NSwgMjU1KTtcbiAgICBjb2xvcjogcmdiKDAsIDAsIDApO1xuICAgIGJveC1zaGFkb3c6IDAgNXB4IDE1cHggcmdiYSgwLCAwLCAwLCAuMDgpXG4gIH1cbiAgLnh5ei1jYXJkLWRhcmsge1xuICAgIGJhY2tncm91bmQ6ICMyMjI7XG4gICAgY29sb3I6ICNmZmY7XG4gICAgYm94LXNoYWRvdzogMCA1cHggMTVweCByZ2JhKDAsIDAsIDAsIC4wOClcbiAgfVxuICAueHl6LWNhcmQtZm9vdGVyIHtcbiAgICBib3JkZXItdG9wOiAycHggc29saWQgI2U1ZTVlNTtcbiAgICBwYWRkaW5nLXRvcDogMTBweDtcbiAgICBwYWRkaW5nLWJvdHRvbTogNXB4O1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xuICAgIC13ZWJraXQtdHJhbnNpdGlvbjogYm94LXNoYWRvdyAuMXMgZWFzZS1pbi1vdXQ7XG4gICAgdHJhbnNpdGlvbjogYm94LXNoYWRvdyAuMXMgZWFzZS1pbi1vdXQ7XG4gICAgei1pbmRleDogMTtcbiAgfVxuICAua2Fyc2lUYXJhZiAueHl6LWNhcmQ6YWZ0ZXIsXG4gIC5iZW4gLnh5ei1jYXJkOmFmdGVyIHtcbiAgICB3aWR0aDogMTBweDtcbiAgICBoZWlnaHQ6IDQ1cHg7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIGJvdHRvbTogMDtcbiAgfVxuICAua2Fyc2lUYXJhZiAueHl6LWNhcmQ6YWZ0ZXIge1xuICAgIGJhY2tncm91bmQ6ICNmZGZkZmY7IFxuICAgIGxlZnQ6IC00cHg7XG4gICAgY2xpcC1wYXRoOiBwb2x5Z29uKDEwMCUgNzAlLCAwJSAxMDAlLCAxMDAlIDEwMCUpO1xuICAgIGNvbnRlbnQ6ICcnXG4gIH1cblxuIC5iZW4gLnh5ei1jYXJkOmFmdGVyIHtcbiAgICBiYWNrZ3JvdW5kOiAjZmRmZGZmOzsgXG4gICAgbGVmdDogLTRweDtcbiAgICBjbGlwLXBhdGg6IHBvbHlnb24oMTAwJSA3MCUsIDAlIDEwMCUsIDEwMCUgMTAwJSk7XG4gICAgY29udGVudDogJydcbiAgfSBcbiAgLyogYmFja2dyb3VuZDogIzFlODdmMDsgKi9cblxuICAgICAvKiAuYmVuIC54eXotY2FyZDphZnRlciB7XG4gICAgYmFja2dyb3VuZDogI2ZmZjtcbiAgICByaWdodDogLTRweDtcbiAgICBjbGlwLXBhdGg6IHBvbHlnb24oMCA3MCUsIDAlIDEwMCUsIDEwMCUgMTAwJSk7XG4gICAgY29udGVudDogJydcbiAgfSAgKi9cbiAgXG4gIC5iZW4ge1xuICAgIG1hcmdpbi1ib3R0b206IDNweDtcbiAgICBtYXJnaW4tdG9wOiAzcHg7XG4gIH1cbiAgLmthcnNpVGFyYWYge1xuICAgIG1hcmdpbi1ib3R0b206IDNweDtcbiAgICBtYXJnaW4tdG9wOiAzcHg7XG4gIH1cbiAgdWwge1xuICAgIGxpc3Qtc3R5bGUtdHlwZTogbm9uZTtcbiAgfVxuICB1bCBsaSB7XG4gICAgZmxvYXQ6IGxlZnQ7XG4gIH1cbiAgLmdlYXIge1xuICAgIC13ZWJraXQtdHJhbnNpdGlvbjogYWxsIDAuOHM7IC8qIFNhZmFyaSBwcmlvciA2LjEgKi9cbiAgICB0cmFuc2l0aW9uOiAgYWxsIDAuOHM7XG4gICBcbiAgfSBcbiAgLmdlYXI6aG92ZXJ7XG4gICAgYm94LXNoYWRvdzogMCA1cHggMTVweCByZ2JhKDAsIDAsIDAsIC4wOCk7XG4gICAgLXdlYmtpdC10cmFuc2Zvcm06cm90YXRlKDYwZGVnKTtcbiAgICAtbW96LXRyYW5zZm9ybTpyb3RhdGUoNjBkZWcpOyBcbiAgICAtby10cmFuc2Zvcm06cm90YXRlKDYwZGVnKTtcbiAgICB0cmFuc2Zvcm06cm90YXRlKDYwZGVnKTsgXG4gICAgXG4gIH0gXG4gIC50b29sdGlwU3BlY2lhbCAudG9vbHRpcC1pbm5lciB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDIyNCwgMjI0LCAyMjQpO1xuICAgIGNvbG9yOiByZ2IoNTksIDU5LCA1OSk7XG4gICAgLyogZm9udC1zaXplOiAxMjUlOyAqL1xuICB9XG4gIC50b29sdGlwU3BlY2lhbCAuYXJyb3c6OmJlZm9yZSB7XG4gICAgYm9yZGVyLXRvcC1jb2xvcjogcmdiKDE2MCwgMTY0LCAxODcpO1xuICB9XG4gIFxuICBodG1sIHtcbiAgICBzY3JvbGwtYmVoYXZpb3I6IHNtb290aDtcbiAgICBzY3JvbGxiYXItZmFjZS1jb2xvcjogIzY0NjQ2NDtcbiAgICBzY3JvbGxiYXItYmFzZS1jb2xvcjogIzY0NjQ2NDtcbiAgICBzY3JvbGxiYXItM2RsaWdodC1jb2xvcjogIzY0NjQ2NDtcbiAgICBzY3JvbGxiYXItaGlnaGxpZ2h0LWNvbG9yOiAjNjQ2NDY0O1xuICAgIHNjcm9sbGJhci10cmFjay1jb2xvcjogIzAwMDtcbiAgICBzY3JvbGxiYXItYXJyb3ctY29sb3I6ICMwMDA7XG4gICAgc2Nyb2xsYmFyLXNoYWRvdy1jb2xvcjogIzY0NjQ2NDtcbiAgfVxuICBcbiAgOjotd2Via2l0LXNjcm9sbGJhciB7XG4gICAgd2lkdGg6IDRweDtcbiAgICBoZWlnaHQ6IDNweDtcbiAgfVxuICA6Oi13ZWJraXQtc2Nyb2xsYmFyLWJ1dHRvbiB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzY2NjtcbiAgfVxuICA6Oi13ZWJraXQtc2Nyb2xsYmFyLXRyYWNrIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjNjQ2NDY0O1xuICB9XG4gIDo6LXdlYmtpdC1zY3JvbGxiYXItdHJhY2stcGllY2Uge1xuICAgIGJhY2tncm91bmQtY29sb3I6ICMwMDA7XG4gIH1cbiAgOjotd2Via2l0LXNjcm9sbGJhci10aHVtYiB7XG4gICAgaGVpZ2h0OiA1MHB4O1xuICAgIGJhY2tncm91bmQtY29sb3I6ICM2NjY7XG4gICAgYm9yZGVyLXJhZGl1czogM3B4O1xuICB9XG4gIDo6LXdlYmtpdC1zY3JvbGxiYXItY29ybmVyIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjNjQ2NDY0O1xuICB9XG4gIDo6LXdlYmtpdC1yZXNpemVyIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjNjY2O1xuICB9XG4gIEBtZWRpYSAobWF4LXdpZHRoOjk5MlBYKVxuICB7XG4gICAgLnJlc3BvbnNpdmVCVFBhZGRpbmd7XG4gICAgICBwYWRkaW5nLWxlZnQ6IDRweDtcbiAgICAgIHBhZGRpbmctcmlnaHQ6IDRweDtcbiAgICAgIHBhZGRpbmctYm90dG9tOiAyMHB4O1xuICAgIFxuICAgICAgYmFja2dyb3VuZC1jb2xvcjogI2ZlZmVmZTtcbiAgXG4gICAgfVxuICAgXG4gIH1cbiAgQG1lZGlhIChtaW4td2lkdGg6OTkzUFgpXG4gIHtcbiAgICAucmVzcG9uc2l2ZUJUe1xuICAgICAgZGlzcGxheTogbm9uZTtcbiAgICB9XG4gIH1cbiAgLmRyb3Bkb3duLXRvZ2dsZTo6YWZ0ZXIge1xuICAgIGRpc3BsYXk6bm9uZTtcbiAgfVxuICAuZmlsdGVyLWdyZXl7XG4gICAgZmlsdGVyOiBpbnZlcnQoOTclKSBzZXBpYSgwJSkgc2F0dXJhdGUoMCUpIGh1ZS1yb3RhdGUoMjM5ZGVnKSBicmlnaHRuZXNzKDg4JSkgY29udHJhc3QoODklKTtcbiAgICB0cmFuc2l0aW9uOiBmaWx0ZXIgMC41cztcbiAgfVxuICAuZmlsdGVyLWdyZXk6aG92ZXJ7XG4gICAgZmlsdGVyOiBpbnZlcnQoMzYlKSBzZXBpYSg4JSkgc2F0dXJhdGUoMjIxJSkgaHVlLXJvdGF0ZSgzMTVkZWcpIGJyaWdodG5lc3MoOTMlKSBjb250cmFzdCg5MCUpO1xuICB9XG4gIFxuICAuYnV0b24tc2VjaWxpe1xuICAgIGJhY2tncm91bmQtY29sb3I6IHJnYigyMDksIDIxNCwgMjQxKVxuICB9XG4gIC5tb3JlSGVhZCwgbW9yZUhlYWQ6Zm9jdXMge1xuICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgfVxuICBwe1xuICAgIGZvbnQtZmFtaWx5OiBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmO1xuICB9Il19 */"
 
 /***/ }),
 
@@ -13126,7 +12553,7 @@ module.exports = "input{\n\n  border-top: 0px;\n  border-left:0px !important;\n 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div [hidden]=\"!invalidLicensePanelOpen\"\n  style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\n z-index: 10000; background-color: rgb(243, 242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n  <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\" style=\"font-size:15px\">Özür\n    dileriz;\n    fakat herhangi bir\n    kurumsal, bireysel\n    veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>\n</div>\n<nav *ngIf=\"innerWidth < 992\" class=\"container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0\"\n  style=\"height:3rem!important\">\n\n  <a class=\"btn btn-light rounded-0 border-0 xyz-nav-btn \" [routerLink]=\"[ '/is-konusmalari' ]\">Geri</a>\n  <a class=\"navbar-brand\" [routerLink]=\"[ '/isler' ]\">\n    <img src=\"../../../assets/logo.svg\" style=\"height: 25px; font-family: Arial, Helvetica, sans-serif \"> Xyzeki\n  </a>\n  <div class=\"float-right\">\n    <app-nav-profile></app-nav-profile>\n  </div>\n</nav>\n\n<div *ngIf=\"!editPrivateTalkPanelOpen\">\n  <div #scrollMe [scrollTop]=\"scrollMe.scrollHeight \" infiniteScroll [infiniteScrollDistance]=\"2\"\n    [infiniteScrollUpDistance]=\"1.5\" [scrollWindow]=\"false\" [infiniteScrollThrottle]=\"100\" (scrolled)=\"onScrollDown()\"\n    (scrolledUp)=\"onScrollUp()\" [ngStyle]=\"{'height.px': (innerWidth>=577) ? innerHeight-167: innerHeight-103}\"\n    class=\"container-fluid xyz-card-big xyz-card-default bg-light\">\n    <div *ngIf=\"privateTalkId!=undefined && privateTalkId!=0\" class=\"sticky-top pl-2 pr-1 xyz-card-primary pt-1 bg-dark\"\n      style=\"z-index: 100!important\">\n      <div style=\"display: inline-block\" *ngIf=\"privateTalk()?.Sender == memberShared?.Username && this.privateTalkId\"\n        class=\"text-white \">\n        <!-- <app-receivers *ngIf=\"innerWidth < 992\" [whiteColor]=\"true\" [outgoing]=\"true\"\n          [setPrivateTalkId]=\"this.privateTalkId\">\n        </app-receivers> -->\n\n        <div class=\"xyz-ul\">\n          <ul appLiAnimate>\n            <!-- TEAM RECEIVERS-->\n\n            <li *ngFor=\"let pttr of getTeamReceivers(privateTalk()?.PrivateTalkId); index as i\">\n              <div style=\"display: inline-block\">\n                <img src=\"../../../assets/logo.svg\" style=\"background-color: white\" class=\"avatarim\">\n              </div>\n              <div style=\"display: inline-block\">\n                <span style=\"color: rgb(255, 254, 254); padding: 0; margin:0\">&nbsp;\n                  {{ getTeamPT(pttr?.TeamId)?.TeamName}}\n                </span>\n\n              </div>\n            </li>\n\n            <li *ngFor=\"let ptr of getReceivers(privateTalk()?.PrivateTalkId); index as i\">\n              <div style=\"display: inline-block\">\n                <img *ngIf=\"getMember(ptr?.Receiver)?.Avatar\" [src]=\"getMember(ptr?.Receiver)?.Avatar\" alt=\"Avatar\"\n                  class=\"avatarim\">\n              </div>\n              <div style=\"display: inline-block\">\n                <span style=\"color: rgb(255, 254, 254); padding: 0; margin:0\">&nbsp;\n                  {{getMember(ptr?.Receiver)?.Name}}\n                  {{getMember(ptr?.Receiver)?.Surname}}</span>\n              </div>\n            </li>\n\n\n          </ul>\n        </div>\n\n        <div class=\"clear-fix\" *ngIf=\"innerWidth < 992\"></div>\n        <div class=\"w-100 text-left\" style=\"font-family: Arial, Helvetica, sans-serif; font-size: 14px\">\n          #<b>{{privateTalk()?.Thread}} </b>\n          <div *ngIf=\"privateTalk()?.Sender == memberShared?.Username && privateTalk()?.PrivateTalkId\"\n            class=\"d-inline-block\" ngbDropdown placement=\"right-top\">\n            <a class=\"btn filter-grey\" style=\"border:0px solid !important; line-height: 15px; display: inline-block\"\n              id=\"dropdownMemberOptions\" ngbDropdownToggle>\n              <img class=\"moreHead mb-1\" src=\"../../../assets/more2.svg\" style=\"height: 5px;object-fit: cover;\" />\n            </a>\n\n            <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\" class=\"rounded-4 bg-white ml-0 mr-0\">\n              <button (click)=\"toggleEditPrivateTalkPanel(privateTalk()?.PrivateTalkId)\" ngbDropdownItem\n                class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"><img src=\"../../../assets/group.svg\"\n                  style=\"width: 17px;object-fit: cover; cursor: pointer;\" />&nbsp;Alıcıları Düzenle</button>\n              <hr>\n              <button (click)=\"deletePrivateTalk(privateTalkId)\" ngbDropdownItem\n                class=\"btn btn-light rounded-0 border-0 xyz-nav-btn2\"><img src=\"../../../assets/cancel.svg\"\n                  style=\"width: 15px;object-fit: cover; cursor: pointer;\" />&nbsp;İş Konuşmasını\n                Sonlandır</button>\n            </div>\n\n          </div>\n        </div>\n      </div>\n      <div class=\"text-white \" style=\"display: inline-block\"\n        *ngIf=\"privateTalk()?.Sender != memberShared?.Username && this.privateTalkId\">\n        <app-receivers [whiteColor]=\"true\" [incoming]=\"true\" [sender]=\"privateTalk()?.Sender\"\n          [setPrivateTalkId]=\"this.privateTalkId\">\n        </app-receivers>\n        <div class=\"clear-fix\"></div>\n        <span class=\"w-100 text-left\"\n          style=\"font-family: Arial, Helvetica, sans-serif; font-size: 14px\">#<b>{{privateTalk()?.Thread}}</b></span>\n      </div>\n      <div class=\"clearfix\"></div>\n\n    </div>\n    <div class=\"clearfix\">&nbsp;</div>\n\n    <div class=\"mb-2\" *ngFor=\"let message of privateTalkMessages | sortByDateTime: 'DateTimeSent': 'asc'\">\n\n      <div *ngIf=\"message?.Sender == memberShared.Username\" class=\"ben text-left d-flex justify-content-start pl-2\">\n        <div class=\"text-center\"><img *ngIf=\"memberShared?.account?.getValue()?.Avatar\" class=\"avatarim\"\n            [src]=\"memberShared?.account?.getValue()?.Avatar\"></div>\n        <div class=\"xyz-card xyz-card-primary\">\n          <p> <b>{{memberShared?.account?.getValue()?.Name + ' ' + memberShared?.account?.getValue()?.Surname}}</b>\n            <span class=\"text-muted pl-1 pr-1\" style=\"font-size: 18px\">&#183;</span>\n            <small class=\"text-muted\">{{message?.DateTimeSent | humanizer}},\n              {{message?.DateTimeSent | date: 'hh:mm aa' }}</small>\n            <br>\n            \n         \n           <a [innerHTML]=\"message?.Message | replaceEmojis\"></a>\n                <!-- {{message?.Message }} -->\n          </p>\n          <!-- <div [innerHTML]=\"message?.Message | replaceEmojis:'emojione'\"></div> -->\n        </div>\n\n      </div>\n\n      <div *ngIf=\"message?.Sender != memberShared.Username\"\n        class=\"karsiTaraf text-left d-flex justify-content-start pl-2\">\n        <div class=\"text-center\">\n          <img *ngIf=\"getMember(message?.Sender)?.Avatar\" class=\"avatarim\" [src]=\"getMember(message?.Sender)?.Avatar\">\n        </div>\n        <div class=\"xyz-card xyz-card-default\">\n          <p> <b>{{getMember(message?.Sender)?.Name}} {{getMember(message?.Sender)?.Surname}}</b>\n            <span class=\"text-muted pl-1 pr-1\" style=\"font-size: 18px\">&#183;</span>\n            <small class=\"text-muted\">{{message?.DateTimeSent | humanizer}},\n              {{message?.DateTimeSent | date: 'hh:mm aa' }}</small>\n            <br>\n            <!-- {{message?.Message}} -->\n            <a [innerHTML]=\"message?.Message | replaceEmojis\"></a>\n\n          </p>\n        </div>\n      </div>\n\n    </div>\n    <div *ngIf=\"typingSignalMessage\">\n      <div class=\"karsiTaraf text-left d-flex justify-content-start pl-2 mb-2\">\n        <div class=\"text-center\">\n          <img *ngIf=\"getMember(typingSignalMessage?.Sender)?.Avatar\" class=\"avatarim\"\n            [src]=\"getMember(typingSignalMessage?.Sender)?.Avatar\">\n        </div>\n        <div class=\"xyz-card xyz-card-default\">\n          <p class=\"mesajYaziyor\"> <b>{{getMember(typingSignalMessage?.Sender)?.Name}}\n              {{getMember(typingSignalMessage?.Sender)?.Surname}}</b>\n            <br>\n            <i></i>\n            <i></i>\n            <i></i>\n          </p>\n        </div>\n      </div>\n    </div>\n\n    <div *ngIf=\"privateTalkMessages?.length == 0\" class=\"p-4\">\n      <span class=\"lead\">Henüz bu iş konuşması kanalında bir mesaj bulunmuyor.</span> <br>\n    </div>\n\n\n  </div>\n\n  <div class=\"xyz-card-footer xyz-card-default\">\n    <div>\n      <form #messageForm=\"ngForm\" (ngSubmit)=\"addPrivateTalkMessage(messageForm)\" novalidate>\n        <div>\n          <textarea #textAreaX [(ngModel)]=\"privateTalkMessageModel.Message\"  (keydown)=\"onKeydownEvent($event)\"\n            #message=\"ngModel\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\"\n            id=\"textForFocus\" name=\"message\" required class=\"xyz-textarea border-0\" rows=\"2\"\n            placeholder=\"Mesajınızı yazınız.\"></textarea>\n\n          <div #emojiDP=\"ngbDropdown\" style=\"width:15%; float: right\" class=\"d-inline-block\" ngbDropdown\n            placement=\"left-bottom\">\n            <a ngbTooltip=\"Bir emoji seçiniz.\" placement=\"top\" tooltipClass=\"tooltipSpecial\"\n              class=\"btn btn-light rounded-circle p-1 text-center\"\n              style=\"border:0px solid !important; display: inline-block; ; cursor: pointer\" id=\"emojiDP\"\n              ngbDropdownToggle>\n              <img src=\"../../../assets/emoji/dizzy.png\" style=\"height: 32px; width: 32px;\">\n            </a>\n\n            <div ngbDropdownMenu aria-labelledby=\"emojiDP\" class=\"rounded-4 bg-white ml-0 mr-0 border-0 p-0\">\n              <emoji-mart [perLine]=\"this.innerWidth < 786 ? 7 : 10\" [showPreview]=\"true\" [showSingleCategory]=\"true\"\n                [ngClass]=\"{'hide-emoji-mart-search' : true}\" [set]=\"sheet === '' ? null : sheet\"\n                [emojiSize]=\"this.innerWidth < 786 ? 24 : 32\" [i18n]=\"{ search: 'Arama yapın', emojilist:'Emoji listesi', notfound: 'Emoji bulunamadı', clear:'Temizle',\n\n               categories: { search: 'Arama sonuçları', recent: 'Son kullandıklarınız',people:'Gülücükler & İnsanlar',\n               nature:'Hayvanlar & Doğa', foods: 'Yiyecekler & İçecekler', activity:'Rutin', \n              places:'Seyahat & Gezilecek Yerler',objects:'Nesneler', symbols:'Semboller', flags:'Bayraklar', custom:'Özel'\n     },skintones: { '1': 'Varsayılan','2': 'Işık tonlu', '3': 'Orta-ışık tonlu','4': 'Orta tonlu',\n     '5': 'Hafif koyu tonlu','6': 'Koyu tonlu'} }\" [title]=\"'Duygu durumunuz ?'\"\n                (emojiClick)=\"addEmoji($event); emojiDP.close();\" [backgroundImageFn]=\"backgroundImageFn\"\n                [isNative]=\"sheet === ''\">\n              </emoji-mart>\n            </div>\n\n          </div>\n        </div>\n\n        <div>\n          <!-- <emoji-mart [backgroundImageFn]=\"backgroundImage\" (emojiClick)=\"addEmoji($event)\"></emoji-mart> -->\n          <!-- <emoji-mart (emojiClick)=\"addEmoji($event)\" [backgroundImageFn]=\"backgroundImageFn\" [set]=\"sheet === '' ? null : sheet\" [isNative]=\"sheet === ''\"></emoji-mart> -->\n\n\n          <!-- [isNative]=\"true\"  -->\n\n          <!-- <emoji-mart  [set]=\"'emojione'\" title=\"Emoji seçiniz\" (emojiClick)=\"addEmoji($event)\"></emoji-mart> -->\n        </div>\n        <button type=\"submit\" class=\"btn btn-light btn-send text-uppercase text-white\">Gönder</button>\n      </form>\n    </div>\n  </div>\n</div>\n<div *ngIf=\"editPrivateTalkPanelOpen\">\n  <div [ngStyle]=\"{'height.px': (innerWidth>=577) ? innerHeight-80: innerHeight-20}\"\n    class=\"container-fluid xyz-card-big xyz-card-default\" style=\"background-color: #fdfdfd\">\n    <div class=\"col\">\n      <div class=\"row pl-2 pr-1 xyz-card-primary bg-dark\">\n        <span class=\"btn text-white rounded-0 \">İş Konuşmasını Düzenle</span>\n        <button class=\"btn btn-dark text-white rounded-0 close float-right \"\n          style=\"border: 0px solid #fefefe !important; cursor: pointer; padding-bottom: 5px;\"\n          (click)=\"toggleEditPrivateTalkPanel()\"><span class=\"text-white\">&times;</span></button>\n      </div>\n      <div class=\"row pl-3 pr-3\">\n        <form class=\"w-100 \" #privateTalkEditForm=\"ngForm\" (ngSubmit)=\"editPrivateTalk(privateTalkEditForm)\" novalidate>\n\n          <input type=\"text\" name=\"thread\" id=\"textForFocusEdit\" [(ngModel)]=\"privateTalkModelEdit.Thread\"\n            #thread=\"ngModel\" required class=\"form-control w-100 mt-2\" placeholder=\"Başlık\" />\n          <div class=\"pb-3 pt-3\">\n            <app-edit-receivers [setPrivateTalkId]=\"privateTalkIdToEdit\" [receivers]=\"receiversModel\"\n              [teamReceivers]=\"teamReceiversModel\" (saveChangesEvent)=\"onSaveChanges($event)\"></app-edit-receivers>\n          </div>\n\n\n        </form>\n      </div>\n    </div>\n  </div>\n\n</div>"
+module.exports = "<div [hidden]=\"!invalidLicensePanelOpen\"\n  style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\n z-index: 10000; background-color: rgb(243, 242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n  <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\" style=\"font-size:15px\">Özür\n    dileriz;\n    fakat herhangi bir\n    kurumsal, bireysel\n    veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>\n</div>\n<nav *ngIf=\"innerWidth < 992\" class=\"container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0\"\n  style=\"height:3rem!important\">\n\n  <a class=\"btn btn-light rounded-0 border-0 xyz-nav-btn \" [routerLink]=\"[ '/is-konusmalari' ]\">Geri</a>\n  <a class=\"navbar-brand\" [routerLink]=\"[ '/isler' ]\">\n    <img src=\"../../../assets/logo.svg\" style=\"height: 25px; font-family: Arial, Helvetica, sans-serif \"> Xyzeki\n  </a>\n  <div class=\"float-right\">\n    <app-nav-profile></app-nav-profile>\n  </div>\n</nav>\n\n<div *ngIf=\"!editPrivateTalkPanelOpen\">\n  <div #scrollMe [scrollTop]=\"scrollMe.scrollHeight \" infiniteScroll [infiniteScrollDistance]=\"2\"\n    [infiniteScrollUpDistance]=\"1.5\" [scrollWindow]=\"false\" [infiniteScrollThrottle]=\"100\" (scrolled)=\"onScrollDown()\"\n    (scrolledUp)=\"onScrollUp()\" [ngStyle]=\"{'height.px': (innerWidth>=577) ? innerHeight-167: innerHeight-103}\"\n    class=\"container-fluid xyz-card-big xyz-card-default bg-light\">\n    <div show-dir *ngIf=\"privateTalkId!=undefined && privateTalkId!=0\" class=\"sticky-top pl-2 pr-1 xyz-card-primary pt-1 bg-dark\"\n      style=\"z-index: 100!important\">\n      <div style=\"display: inline-block\" *ngIf=\"privateTalk()?.Sender == xyzekiAuthService?.Username && this.privateTalkId\"\n        class=\"text-white \">\n        <!-- <app-receivers *ngIf=\"innerWidth < 992\" [whiteColor]=\"true\" [outgoing]=\"true\"\n          [setPrivateTalkId]=\"this.privateTalkId\">\n        </app-receivers> -->\n\n        <div class=\"xyz-ul\" >\n          <ul appLiAnimate>\n            <!-- TEAM RECEIVERS-->\n\n            <li *ngFor=\"let pttr of getTeamReceivers(privateTalk()?.PrivateTalkId); index as i\">\n              <div style=\"display: inline-block\">\n                <img src=\"../../../assets/logo.svg\" style=\"background-color: white\" class=\"avatarim\">\n              </div>\n              <div style=\"display: inline-block\">\n                <span style=\"color: rgb(255, 254, 254); padding: 0; margin:0\">&nbsp;\n                  {{ getTeamPT(pttr?.TeamId)?.TeamName}}\n                </span>\n\n              </div>\n            </li>\n\n            <li *ngFor=\"let ptr of getReceivers(privateTalk()?.PrivateTalkId); index as i\">\n              <div style=\"display: inline-block\">\n                <img *ngIf=\"getMember(ptr?.Receiver)?.Avatar\" [src]=\"getMember(ptr?.Receiver)?.Avatar\" alt=\"Avatar\"\n                  class=\"avatarim\">\n              </div>\n              <div style=\"display: inline-block\">\n                <span style=\"color: rgb(255, 254, 254); padding: 0; margin:0\">&nbsp;\n                  {{getMember(ptr?.Receiver)?.Name}}\n                  {{getMember(ptr?.Receiver)?.Surname}}</span>\n              </div>\n            </li>\n\n\n          </ul>\n        </div>\n\n        <div class=\"clear-fix\" *ngIf=\"innerWidth < 992\"></div>\n        <div class=\"w-100 text-left\" style=\"font-family: Arial, Helvetica, sans-serif; font-size: 14px\">\n          #<b>{{privateTalk()?.Thread}} </b>\n          <div *ngIf=\"privateTalk()?.Sender == xyzekiAuthService?.Username && privateTalk()?.PrivateTalkId\"\n            class=\"d-inline-block\" ngbDropdown placement=\"right-top\">\n            <a class=\"btn filter-grey\" style=\"border:0px solid !important; line-height: 15px; display: inline-block\"\n              id=\"dropdownMemberOptions\" ngbDropdownToggle>\n              <img class=\"moreHead mb-1\" src=\"../../../assets/more2.svg\" style=\"height: 5px;object-fit: cover;\" />\n            </a>\n\n            <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\" class=\"rounded-4 bg-white ml-0 mr-0\">\n              <button (click)=\"toggleEditPrivateTalkPanel(privateTalk()?.PrivateTalkId)\" ngbDropdownItem\n                class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"><img src=\"../../../assets/group.svg\"\n                  style=\"width: 17px;object-fit: cover; cursor: pointer;\" />&nbsp;Alıcıları Düzenle</button>\n              <hr>\n              <button (click)=\"deletePrivateTalk(privateTalkId)\" ngbDropdownItem\n                class=\"btn btn-light rounded-0 border-0 xyz-nav-btn2\"><img src=\"../../../assets/cancel.svg\"\n                  style=\"width: 15px;object-fit: cover; cursor: pointer;\" />&nbsp;İş Konuşmasını\n                Sonlandır</button>\n            </div>\n\n          </div>\n        </div>\n      </div>\n      <div class=\"text-white \" style=\"display: inline-block\"\n        *ngIf=\"privateTalk()?.Sender != xyzekiAuthService?.Username && this.privateTalkId\">\n        <app-receivers [whiteColor]=\"true\" [incoming]=\"true\" [sender]=\"privateTalk()?.Sender\"\n          [setPrivateTalkId]=\"this.privateTalkId\">\n        </app-receivers>\n        <div class=\"clear-fix\"></div>\n        <span class=\"w-100 text-left\"\n          style=\"font-family: Arial, Helvetica, sans-serif; font-size: 14px\">#<b>{{privateTalk()?.Thread}}</b></span>\n      </div>\n      <div class=\"clearfix\"></div>\n\n    </div>\n    <div class=\"clearfix\">&nbsp;</div>\n\n    <div class=\"mb-2\" *ngFor=\"let message of privateTalkMessages | sortByDateTime: 'DateTimeSent': 'asc'\">\n\n      <div *ngIf=\"message?.Sender == xyzekiAuthService?.Username\" class=\"ben text-left d-flex justify-content-start pl-2\">\n        <div class=\"text-center\"><img *ngIf=\"xyzekiAuthService?.Member?.Avatar\" class=\"avatarim\"\n            [src]=\"xyzekiAuthService?.Member?.Avatar\"></div>\n        <div class=\"xyz-card xyz-card-primary\">\n          <p> <b>{{xyzekiAuthService?.Member?.Name + ' ' + xyzekiAuthService?.Member?.Surname}}</b>\n            <span class=\"text-muted pl-1 pr-1\" style=\"font-size: 18px\">&#183;</span>\n            <small class=\"text-muted\">{{message?.DateTimeSent | humanizer}},\n              {{message?.DateTimeSent | date: 'hh:mm aa' }}</small>\n            <br>\n            \n         \n           <a [innerHTML]=\"message?.Message | replaceEmojis\"></a>\n                <!-- {{message?.Message }} -->\n          </p>\n          <!-- <div [innerHTML]=\"message?.Message | replaceEmojis:'emojione'\"></div> -->\n        </div>\n\n      </div>\n\n      <div *ngIf=\"message?.Sender != xyzekiAuthService?.Username\"\n        class=\"karsiTaraf text-left d-flex justify-content-start pl-2\">\n        <div class=\"text-center\">\n          <img *ngIf=\"getMember(message?.Sender)?.Avatar\" class=\"avatarim\" [src]=\"getMember(message?.Sender)?.Avatar\">\n        </div>\n        <div class=\"xyz-card xyz-card-default\">\n          <p> <b>{{getMember(message?.Sender)?.Name}} {{getMember(message?.Sender)?.Surname}}</b>\n            <span class=\"text-muted pl-1 pr-1\" style=\"font-size: 18px\">&#183;</span>\n            <small class=\"text-muted\">{{message?.DateTimeSent | humanizer}},\n              {{message?.DateTimeSent | date: 'hh:mm aa' }}</small>\n            <br>\n            <!-- {{message?.Message}} -->\n            <a [innerHTML]=\"message?.Message | replaceEmojis\"></a>\n\n          </p>\n        </div>\n      </div>\n\n    </div>\n    <div *ngIf=\"typingSignalMessage\">\n      <div class=\"karsiTaraf text-left d-flex justify-content-start pl-2 mb-2\">\n        <div class=\"text-center\">\n          <img *ngIf=\"getMember(typingSignalMessage?.Sender)?.Avatar\" class=\"avatarim\"\n            [src]=\"getMember(typingSignalMessage?.Sender)?.Avatar\">\n        </div>\n        <div class=\"xyz-card xyz-card-default\">\n          <p class=\"mesajYaziyor\"> <b>{{getMember(typingSignalMessage?.Sender)?.Name}}\n              {{getMember(typingSignalMessage?.Sender)?.Surname}}</b>\n            <br>\n            <i></i>\n            <i></i>\n            <i></i>\n          </p>\n        </div>\n      </div>\n    </div>\n\n    <div *ngIf=\"privateTalkMessages?.length == 0\" class=\"p-4\">\n      <span class=\"lead\">Henüz bu iş konuşması kanalında bir mesaj bulunmuyor.</span> <br>\n    </div>\n\n\n  </div>\n\n  <div class=\"xyz-card-footer xyz-card-default\">\n    <div>\n      <form #messageForm=\"ngForm\" (ngSubmit)=\"addPrivateTalkMessage(messageForm)\" novalidate>\n        <div>\n          <textarea #textAreaX [(ngModel)]=\"privateTalkMessageModel.Message\"  (keydown)=\"onKeydownEvent($event)\"\n            #message=\"ngModel\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\"\n            id=\"textForFocus\" name=\"message\" required class=\"xyz-textarea border-0\" rows=\"2\"\n            placeholder=\"Mesajınızı yazınız.\"></textarea>\n\n          <div #emojiDP=\"ngbDropdown\" style=\"width:15%; float: right\" class=\"d-inline-block\" ngbDropdown\n            placement=\"left-bottom\">\n            <a ngbTooltip=\"Bir emoji seçiniz.\" placement=\"top\" tooltipClass=\"tooltipSpecial\"\n              class=\"btn btn-light rounded-circle p-1 text-center\"\n              style=\"border:0px solid !important; display: inline-block; ; cursor: pointer\" id=\"emojiDP\"\n              ngbDropdownToggle>\n              <img src=\"../../../assets/emoji/dizzy.png\" style=\"height: 32px; width: 32px;\">\n            </a>\n\n            <div ngbDropdownMenu aria-labelledby=\"emojiDP\" class=\"rounded-4 bg-white ml-0 mr-0 border-0 p-0\">\n              <emoji-mart [perLine]=\"this.innerWidth < 786 ? 7 : 10\" [showPreview]=\"true\" [showSingleCategory]=\"true\"\n                [ngClass]=\"{'hide-emoji-mart-search' : true}\" [set]=\"sheet === '' ? null : sheet\"\n                [emojiSize]=\"this.innerWidth < 786 ? 24 : 32\" [i18n]=\"{ search: 'Arama yapın', emojilist:'Emoji listesi', notfound: 'Emoji bulunamadı', clear:'Temizle',\n\n               categories: { search: 'Arama sonuçları', recent: 'Son kullandıklarınız',people:'Gülücükler & İnsanlar',\n               nature:'Hayvanlar & Doğa', foods: 'Yiyecekler & İçecekler', activity:'Rutin', \n              places:'Seyahat & Gezilecek Yerler',objects:'Nesneler', symbols:'Semboller', flags:'Bayraklar', custom:'Özel'\n     },skintones: { '1': 'Varsayılan','2': 'Işık tonlu', '3': 'Orta-ışık tonlu','4': 'Orta tonlu',\n     '5': 'Hafif koyu tonlu','6': 'Koyu tonlu'} }\" [title]=\"'Duygu durumunuz ?'\"\n                (emojiClick)=\"addEmoji($event); emojiDP.close();\" [backgroundImageFn]=\"backgroundImageFn\"\n                [isNative]=\"sheet === ''\">\n              </emoji-mart>\n            </div>\n\n          </div>\n        </div>\n\n        <div>\n          <!-- <emoji-mart [backgroundImageFn]=\"backgroundImage\" (emojiClick)=\"addEmoji($event)\"></emoji-mart> -->\n          <!-- <emoji-mart (emojiClick)=\"addEmoji($event)\" [backgroundImageFn]=\"backgroundImageFn\" [set]=\"sheet === '' ? null : sheet\" [isNative]=\"sheet === ''\"></emoji-mart> -->\n\n\n          <!-- [isNative]=\"true\"  -->\n\n          <!-- <emoji-mart  [set]=\"'emojione'\" title=\"Emoji seçiniz\" (emojiClick)=\"addEmoji($event)\"></emoji-mart> -->\n        </div>\n        <button type=\"submit\" class=\"btn btn-light btn-send text-uppercase text-white\">Gönder</button>\n      </form>\n    </div>\n  </div>\n</div>\n<div *ngIf=\"editPrivateTalkPanelOpen\">\n  <div [ngStyle]=\"{'height.px': (innerWidth>=577) ? innerHeight-80: innerHeight-20}\"\n    class=\"container-fluid xyz-card-big xyz-card-default\" style=\"background-color: #fdfdfd\">\n    <div class=\"col\">\n      <div class=\"row pl-2 pr-1 xyz-card-primary bg-dark\">\n        <span class=\"btn text-white rounded-0 \">İş Konuşmasını Düzenle</span>\n        <button class=\"btn btn-dark text-white rounded-0 close float-right \"\n          style=\"border: 0px solid #fefefe !important; cursor: pointer; padding-bottom: 5px;\"\n          (click)=\"toggleEditPrivateTalkPanel()\"><span class=\"text-white\">&times;</span></button>\n      </div>\n      <div class=\"row pl-3 pr-3\">\n        <form class=\"w-100 \" #privateTalkEditForm=\"ngForm\" (ngSubmit)=\"editPrivateTalk(privateTalkEditForm)\" novalidate>\n\n          <input type=\"text\" name=\"thread\" id=\"textForFocusEdit\" [(ngModel)]=\"privateTalkModelEdit.Thread\"\n            #thread=\"ngModel\" required class=\"form-control w-100 mt-2\" placeholder=\"Başlık\" />\n          <div class=\"pb-3 pt-3\">\n            <app-edit-receivers [setPrivateTalkId]=\"privateTalkIdToEdit\" [receivers]=\"receiversModel\"\n              [teamReceivers]=\"teamReceiversModel\" (saveChangesEvent)=\"onSaveChanges($event)\"></app-edit-receivers>\n          </div>\n\n\n        </form>\n      </div>\n    </div>\n  </div>\n\n</div>"
 
 /***/ }),
 
@@ -13143,7 +12570,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
 /* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
@@ -13185,7 +12612,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var PrivateTalkMessagesComponent = /** @class */ (function () {
-    function PrivateTalkMessagesComponent(repository, repositoryTM, teamRepository, receiverRepo, permissions, dataService, pTalkExistingRepo, pTalkService, router, route, memberShared, privateTalkMessageService, privateTalkMessageSignalrService, psz, timeService) {
+    function PrivateTalkMessagesComponent(repository, repositoryTM, teamRepository, receiverRepo, permissions, dataService, pTalkExistingRepo, pTalkService, router, route, xyzekiAuthService, privateTalkMessageService, privateTalkMessageSignalrService, psz, timeService) {
         this.repository = repository;
         this.repositoryTM = repositoryTM;
         this.teamRepository = teamRepository;
@@ -13196,7 +12623,7 @@ var PrivateTalkMessagesComponent = /** @class */ (function () {
         this.pTalkService = pTalkService;
         this.router = router;
         this.route = route;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.privateTalkMessageService = privateTalkMessageService;
         this.privateTalkMessageSignalrService = privateTalkMessageSignalrService;
         this.psz = psz;
@@ -13210,7 +12637,7 @@ var PrivateTalkMessagesComponent = /** @class */ (function () {
         this.invalidLicensePanelOpen = false;
         this.modelSentForEdit = false;
         this.modelSubmittedForEdit = false;
-        this.privateTalkModelEdit = new src_app_model_private_talk_model__WEBPACK_IMPORTED_MODULE_10__["PrivateTalk"](null, this.memberShared.Username, null); //Reset
+        this.privateTalkModelEdit = new src_app_model_private_talk_model__WEBPACK_IMPORTED_MODULE_10__["PrivateTalk"](null, this.xyzekiAuthService.Username, null); //Reset
         this.receiversModel = [];
         this.teamReceiversModel = [];
         this.editPrivateTalkPanelOpen = false;
@@ -13237,7 +12664,7 @@ var PrivateTalkMessagesComponent = /** @class */ (function () {
         this.repository.typingSignal = undefined;
         this.focusOnInput();
         var textSignals$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_17__["fromEvent"])(this.textAreaX.nativeElement, 'keyup')
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_18__["debounceTime"])(4000), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_18__["filter"])(function (event) { return event.target.value != ''; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_18__["map"])(function (event) { return new src_app_model_private_talk_message_model__WEBPACK_IMPORTED_MODULE_9__["PrivateTalkMessage"](_this.privateTalkId, event.target.value, _this.memberShared.Username, new Date().toISOString(), 0); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_18__["distinctUntilKeyChanged"])('Message'));
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_18__["debounceTime"])(4000), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_18__["filter"])(function (event) { return event.target.value != ''; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_18__["map"])(function (event) { return new src_app_model_private_talk_message_model__WEBPACK_IMPORTED_MODULE_9__["PrivateTalkMessage"](_this.privateTalkId, event.target.value, _this.xyzekiAuthService.Username, new Date().toISOString(), 0); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_18__["distinctUntilKeyChanged"])('Message'));
         this.subscriptionTextArea = textSignals$
             .subscribe(function (message) {
             _this.sendTypingSignalMessage(message);
@@ -13253,8 +12680,8 @@ var PrivateTalkMessagesComponent = /** @class */ (function () {
             _this.pageNo = 1;
             _this.repository.loadPrivateTalkMessages(_this.privateTalkId);
             //this.repository = new PrivateTalkMessageRepository(this.privateTalkId, privateTalkMessageService, privateTalkMessageSignalrService, this.psz, this.timeService)
-            Object.assign(_this.privateTalkMessageModel, new src_app_model_private_talk_message_model__WEBPACK_IMPORTED_MODULE_9__["PrivateTalkMessage"](_this.privateTalkId, '', _this.memberShared.Username, null));
-            //this.privateTalkMessageModel = new PrivateTalkMessage(this.privateTalkId, '', this.memberShared.Username, null);
+            Object.assign(_this.privateTalkMessageModel, new src_app_model_private_talk_message_model__WEBPACK_IMPORTED_MODULE_9__["PrivateTalkMessage"](_this.privateTalkId, '', _this.xyzekiAuthService.Username, null));
+            //this.privateTalkMessageModel = new PrivateTalkMessage(this.privateTalkId, '', this.xyzekiAuthService .Username, null);
         });
     };
     PrivateTalkMessagesComponent.prototype.ngOnDestroy = function () {
@@ -13364,7 +12791,7 @@ var PrivateTalkMessagesComponent = /** @class */ (function () {
                 this.repository.savePrivateTalkMessage(this.privateTalkMessageModel);
                 this.modelSent = true;
                 this.modelSubmitted = false;
-                this.privateTalkMessageModel = new src_app_model_private_talk_message_model__WEBPACK_IMPORTED_MODULE_9__["PrivateTalkMessage"](this.privateTalkId, '', this.memberShared.Username, null); // RESET
+                this.privateTalkMessageModel = new src_app_model_private_talk_message_model__WEBPACK_IMPORTED_MODULE_9__["PrivateTalkMessage"](this.privateTalkId, '', this.xyzekiAuthService.Username, null); // RESET
             }
         }
         else {
@@ -13382,7 +12809,7 @@ var PrivateTalkMessagesComponent = /** @class */ (function () {
                 this.pTalkExistingRepo.savePrivateTalk(this.privateTalkModelEdit, this.receiversModel, this.teamReceiversModel); // to-do: implement update
                 this.modelSentForEdit = true;
                 this.modelSubmittedForEdit = false;
-                this.privateTalkModelEdit = new src_app_model_private_talk_model__WEBPACK_IMPORTED_MODULE_10__["PrivateTalk"](null, this.memberShared.Username, null); //Reset
+                this.privateTalkModelEdit = new src_app_model_private_talk_model__WEBPACK_IMPORTED_MODULE_10__["PrivateTalk"](null, this.xyzekiAuthService.Username, null); //Reset
                 this.resetReceiverModels(); // reset receivers
                 this.editPrivateTalkPanelOpen = false;
             }
@@ -13490,7 +12917,7 @@ var PrivateTalkMessagesComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./private-talk-messages.component.css */ "./src/app/private-talk/private-talk-messages/private-talk-messages.component.css")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_private_talk_message_repository__WEBPACK_IMPORTED_MODULE_8__["PrivateTalkMessageRepository"], src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_5__["TeamMemberRepository"], src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_16__["TeamRepository"], src_app_model_repository_private_talk_receiver_repository__WEBPACK_IMPORTED_MODULE_15__["PrivateTalkReceiverRepository"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_13__["MemberLicenseRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"], src_app_model_repository_private_talk_repository__WEBPACK_IMPORTED_MODULE_11__["PrivateTalkRepository"], src_app_model_services_private_talks_service__WEBPACK_IMPORTED_MODULE_12__["PrivateTalksService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_3__["MemberShared"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"],
             src_app_model_services_private_talk_messages_service__WEBPACK_IMPORTED_MODULE_7__["PrivateTalkMessagesService"],
             src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_20__["XyzekiSignalrService"], src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_19__["PageSizes"], src_app_model_services_time_service__WEBPACK_IMPORTED_MODULE_21__["TimeService"]])
     ], PrivateTalkMessagesComponent);
@@ -13524,10 +12951,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ui_tools_ui_tools_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../ui-tools/ui-tools.module */ "./src/app/ui-tools/ui-tools.module.ts");
 /* harmony import */ var _receivers_receivers_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./receivers/receivers.component */ "./src/app/private-talk/receivers/receivers.component.ts");
 /* harmony import */ var _directives_li_animate_directive__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./_directives/li-animate.directive */ "./src/app/private-talk/_directives/li-animate.directive.ts");
-/* harmony import */ var ngx_infinite_scroll__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ngx-infinite-scroll */ "./node_modules/ngx-infinite-scroll/modules/ngx-infinite-scroll.es5.js");
-/* harmony import */ var _edit_receivers_edit_receivers_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./edit-receivers/edit-receivers.component */ "./src/app/private-talk/edit-receivers/edit-receivers.component.ts");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var _ctrl_ngx_emoji_mart__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @ctrl/ngx-emoji-mart */ "./node_modules/@ctrl/ngx-emoji-mart/fesm5/ctrl-ngx-emoji-mart.js");
+/* harmony import */ var _directives_show_directive__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./_directives/show.directive */ "./src/app/private-talk/_directives/show.directive.ts");
+/* harmony import */ var ngx_infinite_scroll__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ngx-infinite-scroll */ "./node_modules/ngx-infinite-scroll/modules/ngx-infinite-scroll.es5.js");
+/* harmony import */ var _edit_receivers_edit_receivers_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./edit-receivers/edit-receivers.component */ "./src/app/private-talk/edit-receivers/edit-receivers.component.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _ctrl_ngx_emoji_mart__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @ctrl/ngx-emoji-mart */ "./node_modules/@ctrl/ngx-emoji-mart/fesm5/ctrl-ngx-emoji-mart.js");
+
 
 
 
@@ -13550,13 +12979,14 @@ var PrivateTalkModule = /** @class */ (function () {
     }
     PrivateTalkModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-            declarations: [_directives_li_animate_directive__WEBPACK_IMPORTED_MODULE_12__["LiAnimateDirective"], _my_private_talks_my_private_talks_component__WEBPACK_IMPORTED_MODULE_3__["MyPrivateTalksComponent"], _private_talk_messages_private_talk_messages_component__WEBPACK_IMPORTED_MODULE_4__["PrivateTalkMessagesComponent"], _receivers_receivers_component__WEBPACK_IMPORTED_MODULE_11__["ReceiversComponent"], _edit_receivers_edit_receivers_component__WEBPACK_IMPORTED_MODULE_14__["EditReceiversComponent"]],
+            declarations: [_directives_li_animate_directive__WEBPACK_IMPORTED_MODULE_12__["LiAnimateDirective"], _my_private_talks_my_private_talks_component__WEBPACK_IMPORTED_MODULE_3__["MyPrivateTalksComponent"], _private_talk_messages_private_talk_messages_component__WEBPACK_IMPORTED_MODULE_4__["PrivateTalkMessagesComponent"],
+                _receivers_receivers_component__WEBPACK_IMPORTED_MODULE_11__["ReceiversComponent"], _edit_receivers_edit_receivers_component__WEBPACK_IMPORTED_MODULE_15__["EditReceiversComponent"], _directives_show_directive__WEBPACK_IMPORTED_MODULE_13__["ShowDirective"]],
             imports: [
-                _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_8__["NgbModule"], _navbar_navbar_module__WEBPACK_IMPORTED_MODULE_7__["NavbarModule"], ngx_infinite_scroll__WEBPACK_IMPORTED_MODULE_13__["InfiniteScrollModule"], src_infrastructure_pipes_pipes_module__WEBPACK_IMPORTED_MODULE_9__["PipesModule"], _ui_tools_ui_tools_module__WEBPACK_IMPORTED_MODULE_10__["UiToolsModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_15__["MatChipsModule"], _angular_material__WEBPACK_IMPORTED_MODULE_15__["MatFormFieldModule"], _angular_material__WEBPACK_IMPORTED_MODULE_15__["MatIconModule"], _angular_material__WEBPACK_IMPORTED_MODULE_15__["MatAutocompleteModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["ReactiveFormsModule"], _ctrl_ngx_emoji_mart__WEBPACK_IMPORTED_MODULE_16__["PickerModule"],
+                _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_8__["NgbModule"], _navbar_navbar_module__WEBPACK_IMPORTED_MODULE_7__["NavbarModule"], ngx_infinite_scroll__WEBPACK_IMPORTED_MODULE_14__["InfiniteScrollModule"], src_infrastructure_pipes_pipes_module__WEBPACK_IMPORTED_MODULE_9__["PipesModule"], _ui_tools_ui_tools_module__WEBPACK_IMPORTED_MODULE_10__["UiToolsModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatChipsModule"], _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatFormFieldModule"], _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatIconModule"], _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatAutocompleteModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["ReactiveFormsModule"], _ctrl_ngx_emoji_mart__WEBPACK_IMPORTED_MODULE_17__["PickerModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"]
             ],
-            exports: [_my_private_talks_my_private_talks_component__WEBPACK_IMPORTED_MODULE_3__["MyPrivateTalksComponent"], _private_talk_messages_private_talk_messages_component__WEBPACK_IMPORTED_MODULE_4__["PrivateTalkMessagesComponent"], _edit_receivers_edit_receivers_component__WEBPACK_IMPORTED_MODULE_14__["EditReceiversComponent"]],
+            exports: [_my_private_talks_my_private_talks_component__WEBPACK_IMPORTED_MODULE_3__["MyPrivateTalksComponent"], _private_talk_messages_private_talk_messages_component__WEBPACK_IMPORTED_MODULE_4__["PrivateTalkMessagesComponent"], _edit_receivers_edit_receivers_component__WEBPACK_IMPORTED_MODULE_15__["EditReceiversComponent"]],
         })
     ], PrivateTalkModule);
     return PrivateTalkModule;
@@ -13584,7 +13014,7 @@ module.exports = "ul {\n  list-style-type: none;\n  margin: 0;\n  padding: 0;\n 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<img [hidden]=\"!loading\" src=\"../../../assets/loading.gif\" style=\"height: 2rem; width: 2rem\">\n<!-- <ul appLiAnimate class=\"outgoing\" *ngIf=\"outgoing && !loading\">\n  <li *ngFor=\"let pttr of privateTalkTeamReceivers; index as i\">\n    <div style=\"display: inline-block\">\n      <img src=\"../../../assets/logo.svg\" style=\"background-color: white\" class=\"avatarim\">\n    </div>\n    <div style=\"display: inline-block\">\n      <p *ngIf=\"!whiteColor\" style=\"color: rgb(134, 134, 134)\">&nbsp;\n        {{ getTeamPT(pttr?.TeamId)?.TeamName}}\n      </p>\n      <p *ngIf=\"whiteColor\" style=\"color: rgb(255, 255, 255)\">&nbsp;\n        {{ getTeamPT(pttr?.TeamId)?.TeamName}}\n      </p>\n    </div>\n  </li>\n\n  <li *ngFor=\"let ptr of privateTalkReceivers; index as i\">\n    <div style=\"display: inline-block\">\n      <img *ngIf=\"getMember(ptr?.Receiver)?.Avatar\" [src]=\"getMember(ptr?.Receiver)?.Avatar\" alt=\"Avatar\"\n        class=\"avatarim\">\n    </div>\n    <div style=\"display: inline-block\">\n      <p *ngIf=\"!whiteColor\" style=\"color: rgb(134, 134, 134)\">&nbsp;\n        {{getMember(ptr?.Receiver)?.Name}}\n        {{getMember(ptr?.Receiver)?.Surname}}</p>\n\n      <p *ngIf=\"whiteColor\" style=\"color: rgb(240, 240, 240)\">&nbsp;\n        {{getMember(ptr?.Receiver)?.Name}}\n        {{getMember(ptr?.Receiver)?.Surname}}</p>\n    </div>\n  </li>\n\n\n</ul> -->\n<ul appLiAnimate class=\"incoming\" *ngIf=\"!loading\">\n  <!-- if incoming -->\n  <!-- TEAM RECEIVERS-->\n  <li *ngFor=\"let pttr of privateTalkTeamReceivers; index as i\">\n    <div style=\"display: inline-block; text-align: left\">\n      <img src=\"../../../assets/logo.svg\" style=\"background-color: white\" class=\"avatarim\">\n    </div>\n    <div style=\"display: inline-block;  text-align: left\">\n      <p *ngIf=\"!whiteColor\" style=\"color: rgb(134, 134, 134)\">&nbsp;\n        {{ getTeamPT(pttr?.TeamId)?.TeamName}}\n      </p>\n      <p *ngIf=\"whiteColor\" style=\"color: rgb(255, 255, 255)\">&nbsp;\n        {{ getTeamPT(pttr?.TeamId)?.TeamName}}\n      </p>\n    </div>\n    <div style=\"display: inline-block; text-align: left\">\n      <span>&nbsp;&nbsp;&nbsp;</span>\n    </div>\n  </li>\n\n\n  <li *ngFor=\"let ptr of privateTalkReceivers; index as i\">\n    <ng-container *ngIf=\"this.memberShared?.Username == ptr?.Receiver; else otherReceivers\">\n\n    </ng-container>\n    <ng-template #otherReceivers>\n      <div style=\"display: inline-block;text-align: left \">\n        <img *ngIf=\"getMember(ptr?.Receiver)?.Avatar\" [src]=\"getMember(ptr?.Receiver)?.Avatar\" alt=\"Avatar\"\n          class=\"avatarim\">\n      </div>\n      <div style=\"display: inline-block;text-align: left\">\n\n        <p *ngIf=\"!whiteColor\" style=\"color: rgb(134, 134, 134)\">&nbsp;\n          {{getMember(ptr?.Receiver)?.Name}}\n          {{getMember(ptr?.Receiver)?.Surname}}</p>\n\n        <p *ngIf=\"whiteColor\" style=\"color: rgb(240, 240, 240)\">&nbsp;\n          {{getMember(ptr?.Receiver)?.Name}}\n          {{getMember(ptr?.Receiver)?.Surname}}</p>\n      </div>\n      <div style=\"display: inline-block; text-align: left\">\n        <span>&nbsp;&nbsp;&nbsp;</span>\n      </div>\n    </ng-template>\n\n\n  </li>\n  <!-- sender-->\n  <li>\n    <div style=\"display: inline-block;text-align: left\">\n      <img *ngIf=\"getMember(sender)?.Avatar\" [src]=\"getMember(sender)?.Avatar\" alt=\"Avatar\" class=\"avatarim\">\n    </div>\n    <div style=\"display: inline-block;text-align: left\">\n      <p *ngIf=\"!whiteColor\" style=\"color: rgb(134, 134, 134)\">&nbsp;\n        {{getMember(sender)?.Name}}\n        {{getMember(sender)?.Surname}}</p>\n\n      <p *ngIf=\"whiteColor\" style=\"color: rgb(240, 240, 240)\">&nbsp;\n        {{getMember(sender)?.Name}}\n        {{getMember(sender)?.Surname}}</p>\n    </div>\n    <div style=\"display: inline-block; text-align: left\">\n      <span>&nbsp;&nbsp;&nbsp;</span>\n    </div>\n\n  </li>\n\n</ul>"
+module.exports = "<img [hidden]=\"!loading\" src=\"../../../assets/loading.gif\" style=\"height: 2rem; width: 2rem\">\n<!-- <ul appLiAnimate class=\"outgoing\" *ngIf=\"outgoing && !loading\">\n  <li *ngFor=\"let pttr of privateTalkTeamReceivers; index as i\">\n    <div style=\"display: inline-block\">\n      <img src=\"../../../assets/logo.svg\" style=\"background-color: white\" class=\"avatarim\">\n    </div>\n    <div style=\"display: inline-block\">\n      <p *ngIf=\"!whiteColor\" style=\"color: rgb(134, 134, 134)\">&nbsp;\n        {{ getTeamPT(pttr?.TeamId)?.TeamName}}\n      </p>\n      <p *ngIf=\"whiteColor\" style=\"color: rgb(255, 255, 255)\">&nbsp;\n        {{ getTeamPT(pttr?.TeamId)?.TeamName}}\n      </p>\n    </div>\n  </li>\n\n  <li *ngFor=\"let ptr of privateTalkReceivers; index as i\">\n    <div style=\"display: inline-block\">\n      <img *ngIf=\"getMember(ptr?.Receiver)?.Avatar\" [src]=\"getMember(ptr?.Receiver)?.Avatar\" alt=\"Avatar\"\n        class=\"avatarim\">\n    </div>\n    <div style=\"display: inline-block\">\n      <p *ngIf=\"!whiteColor\" style=\"color: rgb(134, 134, 134)\">&nbsp;\n        {{getMember(ptr?.Receiver)?.Name}}\n        {{getMember(ptr?.Receiver)?.Surname}}</p>\n\n      <p *ngIf=\"whiteColor\" style=\"color: rgb(240, 240, 240)\">&nbsp;\n        {{getMember(ptr?.Receiver)?.Name}}\n        {{getMember(ptr?.Receiver)?.Surname}}</p>\n    </div>\n  </li>\n\n\n</ul> -->\n<ul appLiAnimate class=\"incoming\" *ngIf=\"!loading\">\n  <!-- if incoming -->\n  <!-- TEAM RECEIVERS-->\n  <li *ngFor=\"let pttr of privateTalkTeamReceivers; index as i\">\n    <div style=\"display: inline-block; text-align: left\">\n      <img src=\"../../../assets/logo.svg\" style=\"background-color: white\" class=\"avatarim\">\n    </div>\n    <div style=\"display: inline-block;  text-align: left\">\n      <p *ngIf=\"!whiteColor\" style=\"color: rgb(134, 134, 134)\">&nbsp;\n        {{ getTeamPT(pttr?.TeamId)?.TeamName}}\n      </p>\n      <p *ngIf=\"whiteColor\" style=\"color: rgb(255, 255, 255)\">&nbsp;\n        {{ getTeamPT(pttr?.TeamId)?.TeamName}}\n      </p>\n    </div>\n    <div style=\"display: inline-block; text-align: left\">\n      <span>&nbsp;&nbsp;&nbsp;</span>\n    </div>\n  </li>\n\n\n  <li *ngFor=\"let ptr of privateTalkReceivers; index as i\">\n    <ng-container *ngIf=\"this.xyzekiAuthService ?.Username == ptr?.Receiver; else otherReceivers\">\n\n    </ng-container>\n    <ng-template #otherReceivers>\n      <div style=\"display: inline-block;text-align: left \">\n        <img *ngIf=\"getMember(ptr?.Receiver)?.Avatar\" [src]=\"getMember(ptr?.Receiver)?.Avatar\" alt=\"Avatar\"\n          class=\"avatarim\">\n      </div>\n      <div style=\"display: inline-block;text-align: left\">\n\n        <p *ngIf=\"!whiteColor\" style=\"color: rgb(134, 134, 134)\">&nbsp;\n          {{getMember(ptr?.Receiver)?.Name}}\n          {{getMember(ptr?.Receiver)?.Surname}}</p>\n\n        <p *ngIf=\"whiteColor\" style=\"color: rgb(240, 240, 240)\">&nbsp;\n          {{getMember(ptr?.Receiver)?.Name}}\n          {{getMember(ptr?.Receiver)?.Surname}}</p>\n      </div>\n      <div style=\"display: inline-block; text-align: left\">\n        <span>&nbsp;&nbsp;&nbsp;</span>\n      </div>\n    </ng-template>\n\n\n  </li>\n  <!-- sender-->\n  <li>\n    <div style=\"display: inline-block;text-align: left\">\n      <img *ngIf=\"getMember(sender)?.Avatar\" [src]=\"getMember(sender)?.Avatar\" alt=\"Avatar\" class=\"avatarim\">\n    </div>\n    <div style=\"display: inline-block;text-align: left\">\n      <p *ngIf=\"!whiteColor\" style=\"color: rgb(134, 134, 134)\">&nbsp;\n        {{getMember(sender)?.Name}}\n        {{getMember(sender)?.Surname}}</p>\n\n      <p *ngIf=\"whiteColor\" style=\"color: rgb(240, 240, 240)\">&nbsp;\n        {{getMember(sender)?.Name}}\n        {{getMember(sender)?.Surname}}</p>\n    </div>\n    <div style=\"display: inline-block; text-align: left\">\n      <span>&nbsp;&nbsp;&nbsp;</span>\n    </div>\n\n  </li>\n\n</ul>"
 
 /***/ }),
 
@@ -13601,7 +13031,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
 /* harmony import */ var src_app_model_services_private_talk_receivers_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/model/services/private-talk-receivers.service */ "./src/app/model/services/private-talk-receivers.service.ts");
@@ -13617,14 +13047,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ReceiversComponent = /** @class */ (function () {
-    function ReceiversComponent(repositoryTM, teamRepository, receiversService, teamReceiversService, router, route, memberShared) {
+    function ReceiversComponent(repositoryTM, teamRepository, receiversService, teamReceiversService, router, route, xyzekiAuthService) {
         this.repositoryTM = repositoryTM;
         this.teamRepository = teamRepository;
         this.receiversService = receiversService;
         this.teamReceiversService = teamReceiversService;
         this.router = router;
         this.route = route;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.outgoing = false;
         this.incoming = true;
         this.sender = null;
@@ -13754,7 +13184,7 @@ var ReceiversComponent = /** @class */ (function () {
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./receivers.component.css */ "./src/app/private-talk/receivers/receivers.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_5__["TeamMemberRepository"], src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_8__["TeamRepository"], src_app_model_services_private_talk_receivers_service__WEBPACK_IMPORTED_MODULE_6__["PrivateTalkReceiversService"], src_app_model_services_private_talk_team_receivers_service__WEBPACK_IMPORTED_MODULE_7__["PrivateTalkTeamReceiversService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_3__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_5__["TeamMemberRepository"], src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_8__["TeamRepository"], src_app_model_services_private_talk_receivers_service__WEBPACK_IMPORTED_MODULE_6__["PrivateTalkReceiversService"], src_app_model_services_private_talk_team_receivers_service__WEBPACK_IMPORTED_MODULE_7__["PrivateTalkTeamReceiversService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"]])
     ], ReceiversComponent);
     return ReceiversComponent;
 }());
@@ -13843,7 +13273,7 @@ module.exports = ".circleBtnSquareSearchBar{ \n  transition: background-color 0.
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div [hidden]=\"!invalidLicensePanelOpen\"\n    style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\n z-index: 10000; background-color: rgb(243, 242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n    <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\" style=\"font-size:15px\">Özür\n        dileriz;\n        fakat herhangi bir\n        kurumsal, bireysel\n        veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>\n</div>\n<nav class=\"container-fluid xyz-card-dark \">\n\n    <a class=\"btn btn-dark text-white rounded-0\" [routerLink]=\"[ '/isler' ]\"> Geri</a>\n    <a ngbTooltip=\"Yeni proje veya liste oluşturun\" tooltipClass=\"tooltipSpecial\" *ngIf=\"!newProjectPanelOpen\"\n        (click)=\"toggleProjectPanel()\" class=\"btn btn-dark rounded-0 text-white ml-1\" style=\"cursor: pointer\">Yeni +</a>\n    <button class=\"btn btn-dark text-white rounded-0 float-right\" disabled>Projeler/Listeler</button>\n    <div class=\"circleBtnSquareSearchBar pl-1\">\n        <span class=\"disable-select\">\n            <mat-search-bar (onOpen)=\"this.searchBarOpen=true\" (onClose)=\"this.searchBarOpen=false\"\n                [searchText]=\"'Xyzeki Proje Arama'\"></mat-search-bar>\n        </span>\n    </div>\n\n</nav>\n\n<div class=\"container-fluid pt-4 pb-4 bg-white\">\n    <div class=\"col-12\">\n        <div [ngStyle]=\"{'pointer-events': this?.repository?.reOrdering ? 'none':'unset'}\" class=\"row\"\n            id=\"projectsShared\">\n            <table [hidden]=\"myProjectsAssigned().length == 0\" class=\"table table-sm table-hover \">\n                <tbody>\n                    <tr style=\"cursor: pointer! important\" class=\"trOptimization\"\n                        *ngFor=\"let projectA of myProjectsAssigned()\">\n                        <td [routerLink]=\"[ projectA?.ProjectId, 'yapilacaklar']\" [fragment]=\"'shared'\"\n                            [ngClass]=\"{'router-link-active': true}\" style=\"font-size: 15px;float:left;  width: 100%;\">\n                            {{projectA?.ProjectName}}</td>\n\n                        <td cdkDragHandle *ngIf=\"projectModel?.ProjectId != projectA?.ProjectId\"\n                            style=\"max-width: 80px; min-width: 80px\">\n                            <div ngbTooltip=\"Size içeriği düzenleme yetkisi verildi.\" placement=\"bottom\"\n                                tooltipClass=\"tooltipSpecial\" class=\"wrapOrNot float-right draggable\"\n                                style=\"color: rgb(90, 90, 90); text-align: center;\"\n                                *ngIf=\"projectA?.ProjectManager && memberShared.Username == projectA?.ProjectManager\">\n                                <img alt=\"Avatar\" *ngIf=\"memberShared?.account?.getValue()\"\n                                    [src]=\"memberShared?.account?.getValue()?.Avatar\"\n                                    class=\"md-avatar size-1 rounded-circle \">\n                                <span> Siz</span>\n                            </div>\n\n\n                            <div class=\"wrapOrNot float-right mr-1 draggable\"\n                                style=\"color: rgb(94, 94, 94);  text-align: center; \"\n                                *ngIf=\"projectA?.ProjectManager &&  memberShared.Username != projectA?.ProjectManager\">\n                                <img *ngIf=\"getMember(projectA?.ProjectManager)\"\n                                    [src]=\"getMember(projectA?.ProjectManager)?.Avatar\" alt=\"Avatar\"\n                                    class=\"md-avatar size-1 rounded-circle \">\n                                <span> {{getMember(projectA?.ProjectManager)?.Name}}</span>\n                            </div>\n\n                        </td>\n                        <td>\n                            <img ngbTooltip=\"Sizinle paylaşılıyor.\" placement=\"bottom\" tooltipClass=\"tooltipSpecial\"\n                                class=\"m-1 float-right\" style=\"height: 38px; width:auto\"\n                                src=\"../../../../assets/share2.svg\">\n                        </td>\n                        <td style=\"cursor: pointer! important\">\n                            <div *ngIf=\"projectA\" class=\"btn m-1 float-right\"\n                                [ngStyle]=\"{'background-color': (projectA?.Color) ? projectA?.Color : '#E9F6FE', 'border-radius':'2px'}\">\n                                &nbsp;</div>\n                        </td>\n\n                    </tr>\n                </tbody>\n            </table>\n        </div>\n        <!-- <div class=\"row\">\n            \n        </div> -->\n        <form class=\"row pb-2\" *ngIf=\"newProjectPanelOpen\" #projectForm=\"ngForm\" (ngSubmit)=\"addProject(projectForm)\"\n            novalidate>\n            <div class=\"input-group\">\n                <div class=\"input-group-prepend\">\n                    <a class=\"btn btn-dark disabled text-white rounded-0\">Başlık</a>\n                </div>\n                <input id=\"textForFocus\" autofocus type=\"text\" name=\"projectName\" [(ngModel)]=\"projectModel.ProjectName\"\n                    #projectName=\"ngModel\" required class=\"form-control\"\n                    placeholder=\"Proje veya listenizin başlığı ne olsun?\" />\n\n\n                <div class=\"input-group-append\">\n                    <button type=\"submit\" class=\"btn btn-dark text-white rounded-0\">Oluştur</button>\n                    <a (click)=\"toggleProjectPanel()\" class=\"btn btn-danger rounded-0 text-white\">X</a>\n                </div>\n            </div>\n            <div class=\"container-fluid\">\n                <span class=\"text-danger row\" *ngIf=\"modelSubmitted && projectName?.errors?.required\">\n                    Üzgünüz, bir proje ismi gerekmektedir.\n                </span>\n                <span class=\"text-danger row\" *ngIf=\"modelSubmitted && projectName?.errors?.pattern\">\n                    Üzgünüz, proje başlığı için sadece harfler geçerlidir.\n                </span>\n            </div>\n        </form>\n        <div class=\" row \">\n            <table [hidden]=\" myProjects().length ==0\" class=\"table table-hover table-sm\">\n                <tbody cdkDropList id=\"ProjectsContainer\" (cdkDropListDropped)=\"drop($event)\">\n                    <tr cdkDrag (cdkDragStarted)=\"onDragStart($event)\" (cdkDragEnded)=\"onDragEnd($event)\"  [cdkDragData]=\"project\" class=\"draggable trOptimization\"\n                        [class.buton-secili]=\"selectedProjectId == project?.ProjectId\"\n                        *ngFor=\"let project of myProjects()\">\n                        <td [routerLink]=\"[ project?.ProjectId, 'yapilacaklar']\"\n                            [ngClass]=\"{'router-link-active': true}\" cdkDragHandle\n                            *ngIf=\"projectModel?.ProjectId != project?.ProjectId\"\n                            style=\"font-size: 15px; width: 100%; float:left; \">\n                            {{project?.ProjectName}}\n                        </td>\n                        <td cdkDragHandle *ngIf=\"projectModel?.ProjectId != project?.ProjectId\"\n                            style=\"max-width: 80px;min-width: 80px; float:right\">\n                            <div class=\"wrapOrNot float-right mr-1 draggable\"\n                                style=\"color: rgb(90, 90, 90); text-align: center;\"\n                                *ngIf=\"project?.ProjectManager && memberShared.Username == project?.ProjectManager\">\n                                <img alt=\"Avatar\" *ngIf=\"memberShared?.account?.getValue()\"\n                                    [src]=\"memberShared?.account?.getValue()?.Avatar\"\n                                    class=\"md-avatar size-1 rounded-circle \">\n                                <span> Ben</span>\n                            </div>\n\n\n                            <div class=\"wrapOrNot float-right mr-1 draggable\"\n                                style=\"color: rgb(94, 94, 94);  text-align: center; \"\n                                *ngIf=\"project?.ProjectManager &&  memberShared.Username != project?.ProjectManager\">\n                                <img *ngIf=\"getMember(project?.ProjectManager)\"\n                                    [src]=\"getMember(project?.ProjectManager)?.Avatar\" alt=\"Avatar\"\n                                    class=\"md-avatar size-1 rounded-circle \">\n                                <span> {{getMember(project?.ProjectManager)?.Name}}</span></div>\n                        </td>\n                        <td cdkDragHandle *ngIf=\"projectModel.ProjectId!= project?.ProjectId\"\n                            style=\"cursor: pointer! important; float: right; \">\n                            <!-- renk-->\n                            <div *ngIf=\"project?.ProjectId\" (click)=\"setColor(project?.ProjectId); \"\n                                class=\"btn m-1 float-right\"\n                                [ngStyle]=\"{'background-color': (project?.Color) ? project?.Color : '#E9F6FE', 'border-radius':'2px'}\">\n                                &nbsp;</div>\n                            <!-- renk-->\n                        </td>\n                        <td cdkDragHandleDisabled *ngIf=\"projectModel.ProjectId!= project?.ProjectId\"\n                            style=\"cursor: pointer! important; float: right; \">\n                            <div #pmDP=\"ngbDropdown\" [id]=\"'dp'+project?.ProjectId\" ngbDropdown\n                                class=\"d-inline-block float-right mb-2 \" placement=\"left\" *ngIf=\"project?.ProjectId\">\n                                <button\n                                    (click)=\"projectIdForProjectManager=project?.ProjectId; $event.stopPropagation();\"\n                                    class=\"btn filter-grey mb-0 \" style=\"z-index: 1000 !important\"\n                                    [id]=\"'dropdownMemberOptions'+project?.ProjectId\" ngbDropdownToggle>\n                                    <img src=\"../../../assets/more2.svg\"\n                                        style=\"height: 6px;object-fit: cover; cursor: pointer;\" />\n                                </button>\n                                <div ngbDropdownMenu attr.aria-labelledby=\"dropdownMemberOptions{{project?.ProjectId}}\"\n                                    class=\"rounded-4 bg-white ml-0 mr-0\">\n                                    <div *ngIf=\"project?.ProjectId\" style=\"text-align: center; line-height: 30px\">\n                                        <span style=\"display: block\">Proje/Liste Yöneticisi</span>\n                                        <app-assign-autocomplete [normalMode]=\"true\"\n                                            [selectedItemOver]=\"project?.ProjectManager\"\n                                            (projectManagerSelectedEvent)=\"onProjectManagerSelectedEvent($event)\">\n                                        </app-assign-autocomplete>\n                                    </div>\n                                    <hr>\n\n                                    <button (click)=\"toggleUpdateProjectPanel(project?.ProjectId);\" ngbDropdownItem\n                                        class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\">\n                                        <img src=\"../../../assets/pencil.png\"\n                                            style=\"width: 20px;object-fit: cover; cursor: pointer; \"\n                                            class=\"mr-2\" />Yeniden İsimlendir</button>\n                                    <hr>\n                                    <button (click)=\"deleteProject(project?.ProjectId)\" ngbDropdownItem\n                                        class=\"btn btn-light rounded-0 border-0 xyz-nav-btn2\"><img\n                                            src=\"../../../assets/cancel.svg\"\n                                            style=\"width: 18px;object-fit: cover; cursor: pointer; \"\n                                            class=\"mr-2\" />Projeyi Sil</button>\n\n                                </div>\n\n                            </div>\n\n                        </td>\n\n\n                        <td cdkDragHandleDisabled\n                            *ngIf=\"updateProjectPanelOpen &&  projectModel.ProjectId== project?.ProjectId\" colspan=\"3\"\n                            class=\"w-100\" id=\"editBar\">\n                            <form #projectUpdateForm=\"ngForm\" (ngSubmit)=\"addProject(projectUpdateForm)\" novalidate>\n                                <div class=\"input-group w-100\">\n                                    <div class=\"input-group-prepend\">\n                                        <a class=\"btn btn-dark disabled text-white\">Başlık</a>\n                                    </div>\n                                    <input id=\"textForFocus\" autofocus type=\"text\" name=\"projectNameForUpdate\"\n                                        [(ngModel)]=\"projectModel.ProjectName\" #projectNameForUpdate=\"ngModel\" required\n                                        class=\"form-control\" placeholder=\"Projenizin yeni adı ne olsun?\" />\n                                    <div class=\"input-group-append\">\n                                        <button type=\"submit\" class=\"btn btn-dark text-white\">Değiştir</button>\n                                        <a (click)=\"toggleUpdateProjectPanel(project?.ProjectId);\"\n                                            style=\"cursor: pointer;\"\n                                            class=\"btn btn-danger text-white text-uppercase\">X</a>\n                                    </div>\n                                    <div class=\"container-fluid\">\n                                        <span class=\"text-danger row\"\n                                            *ngIf=\"modelSubmitted && projectNameForUpdate?.errors?.required\">\n                                            Üzgünüz, bir proje ismi gerekmektedir.\n                                        </span>\n                                    </div>\n                                </div>\n\n                            </form>\n\n\n\n                        </td>\n\n\n                    </tr>\n                </tbody>\n            </table>\n\n            <p [hidden]=\" !( myProjects()?.length == 0 && !searchBarOpen)\" class=\"mt-1\">Şu an için bir projeniz\n                bulunmamaktadır.\n                Hemen sizin için bir tane oluşturalım.</p>\n            <p [hidden]=\"! (myProjects()?.length == 0 && searchBarOpen)\">\n                Üzgünüz, aradığınız kriterlerde size ait bir proje bulamadık.\n            </p>\n        </div>\n\n    </div>\n\n</div>\n\n<div [hidden]=\"!this.repository?.reOrdering\"\n    style=\" position: absolute;  top: 25%; padding-left: 35%; padding-right:35%;  z-index: 10000;\">\n    <img src=\"../assets/rolling.png\" style=\"opacity: 0.9;\">\n    <img src=\"../assets/logo.svg\" style=\"height: 3rem; width: auto\">\n</div>"
+module.exports = "<div [hidden]=\"!invalidLicensePanelOpen\"\n    style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\n z-index: 10000; background-color: rgb(243, 242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n    <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\" style=\"font-size:15px\">Özür\n        dileriz;\n        fakat herhangi bir\n        kurumsal, bireysel\n        veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>\n</div>\n<nav class=\"container-fluid xyz-card-dark \">\n\n    <a class=\"btn btn-dark text-white rounded-0\" [routerLink]=\"[ '/isler' ]\"> Geri</a>\n    <a ngbTooltip=\"Yeni proje veya liste oluşturun\" tooltipClass=\"tooltipSpecial\" *ngIf=\"!newProjectPanelOpen\"\n        (click)=\"toggleProjectPanel()\" class=\"btn btn-dark rounded-0 text-white ml-1\" style=\"cursor: pointer\">Yeni +</a>\n    <button class=\"btn btn-dark text-white rounded-0 float-right\" disabled>Projeler/Listeler</button>\n    <div class=\"circleBtnSquareSearchBar pl-1\">\n        <span class=\"disable-select\">\n            <mat-search-bar (onOpen)=\"this.searchBarOpen=true\" (onClose)=\"this.searchBarOpen=false\"\n                [searchText]=\"'Xyzeki Proje Arama'\"></mat-search-bar>\n        </span>\n    </div>\n\n</nav>\n\n<div class=\"container-fluid pt-4 pb-4 bg-white\">\n    <div class=\"col-12\">\n        <div [ngStyle]=\"{'pointer-events': this?.repository?.reOrdering ? 'none':'unset'}\" class=\"row\"\n            id=\"projectsShared\">\n            <table [hidden]=\"myProjectsAssigned().length == 0\" class=\"table table-sm table-hover \">\n                <tbody>\n                    <tr style=\"cursor: pointer! important\" class=\"trOptimization\"\n                        *ngFor=\"let projectA of myProjectsAssigned()\">\n                        <td [routerLink]=\"[ projectA?.ProjectId, 'yapilacaklar']\" [fragment]=\"'shared'\"\n                            [ngClass]=\"{'router-link-active': true}\" style=\"font-size: 15px;float:left;  width: 100%;\">\n                            {{projectA?.ProjectName}}</td>\n\n                        <td cdkDragHandle *ngIf=\"projectModel?.ProjectId != projectA?.ProjectId\"\n                            style=\"max-width: 80px; min-width: 80px\">\n                            <div ngbTooltip=\"Size içeriği düzenleme yetkisi verildi.\" placement=\"bottom\"\n                                tooltipClass=\"tooltipSpecial\" class=\"wrapOrNot float-right draggable\"\n                                style=\"color: rgb(90, 90, 90); text-align: center;\"\n                                *ngIf=\"projectA?.ProjectManager && xyzekiAuthService?.Username == projectA?.ProjectManager\">\n                                <img alt=\"Avatar\" *ngIf=\"xyzekiAuthService?.Member\"\n                                    [src]=\"xyzekiAuthService?.Member?.Avatar\"\n                                    class=\"md-avatar size-1 rounded-circle \">\n                                <span> Siz</span>\n                            </div>\n\n\n                            <div class=\"wrapOrNot float-right mr-1 draggable\"\n                                style=\"color: rgb(94, 94, 94);  text-align: center; \"\n                                *ngIf=\"projectA?.ProjectManager &&  xyzekiAuthService?.Username != projectA?.ProjectManager\">\n                                <img *ngIf=\"getMember(projectA?.ProjectManager)\"\n                                    [src]=\"getMember(projectA?.ProjectManager)?.Avatar\" alt=\"Avatar\"\n                                    class=\"md-avatar size-1 rounded-circle \">\n                                <span> {{getMember(projectA?.ProjectManager)?.Name}}</span>\n                            </div>\n\n                        </td>\n                        <td>\n                            <img ngbTooltip=\"Sizinle paylaşılıyor.\" placement=\"bottom\" tooltipClass=\"tooltipSpecial\"\n                                class=\"m-1 float-right\" style=\"height: 38px; width:auto\"\n                                src=\"../../../../assets/share2.svg\">\n                        </td>\n                        <td style=\"cursor: pointer! important\">\n                            <div *ngIf=\"projectA\" class=\"btn m-1 float-right\"\n                                [ngStyle]=\"{'background-color': (projectA?.Color) ? projectA?.Color : '#E9F6FE', 'border-radius':'2px'}\">\n                                &nbsp;</div>\n                        </td>\n\n                    </tr>\n                </tbody>\n            </table>\n        </div>\n        <!-- <div class=\"row\">\n            \n        </div> -->\n        <form class=\"row pb-2\" *ngIf=\"newProjectPanelOpen\" #projectForm=\"ngForm\" (ngSubmit)=\"addProject(projectForm)\"\n            novalidate>\n            <div class=\"input-group\">\n                <div class=\"input-group-prepend\">\n                    <a class=\"btn btn-dark disabled text-white rounded-0\">Başlık</a>\n                </div>\n                <input id=\"textForFocus\" autofocus type=\"text\" name=\"projectName\" [(ngModel)]=\"projectModel.ProjectName\"\n                    #projectName=\"ngModel\" required class=\"form-control\"\n                    placeholder=\"Proje veya listenizin başlığı ne olsun?\" />\n\n\n                <div class=\"input-group-append\">\n                    <button type=\"submit\" class=\"btn btn-dark text-white rounded-0\">Oluştur</button>\n                    <a (click)=\"toggleProjectPanel()\" class=\"btn btn-danger rounded-0 text-white\">X</a>\n                </div>\n            </div>\n            <div class=\"container-fluid\">\n                <span class=\"text-danger row\" *ngIf=\"modelSubmitted && projectName?.errors?.required\">\n                    Üzgünüz, bir proje ismi gerekmektedir.\n                </span>\n                <span class=\"text-danger row\" *ngIf=\"modelSubmitted && projectName?.errors?.pattern\">\n                    Üzgünüz, proje başlığı için sadece harfler geçerlidir.\n                </span>\n            </div>\n        </form>\n        <div class=\" row \">\n            <table [hidden]=\" myProjects().length ==0\" class=\"table table-hover table-sm\">\n                <tbody cdkDropList id=\"ProjectsContainer\" (cdkDropListDropped)=\"drop($event)\">\n                    <tr cdkDrag (cdkDragStarted)=\"onDragStart($event)\" (cdkDragEnded)=\"onDragEnd($event)\"  [cdkDragData]=\"project\" class=\"draggable trOptimization\"\n                        [class.buton-secili]=\"selectedProjectId == project?.ProjectId\"\n                        *ngFor=\"let project of myProjects()\">\n                        <td [routerLink]=\"[ project?.ProjectId, 'yapilacaklar']\"\n                            [ngClass]=\"{'router-link-active': true}\" cdkDragHandle\n                            *ngIf=\"projectModel?.ProjectId != project?.ProjectId\"\n                            style=\"font-size: 15px; width: 100%; float:left; \">\n                            {{project?.ProjectName}}\n                        </td>\n                        <td cdkDragHandle *ngIf=\"projectModel?.ProjectId != project?.ProjectId\"\n                            style=\"max-width: 80px;min-width: 80px; float:right\">\n                            <div class=\"wrapOrNot float-right mr-1 draggable\"\n                                style=\"color: rgb(90, 90, 90); text-align: center;\"\n                                *ngIf=\"project?.ProjectManager && xyzekiAuthService?.Username == project?.ProjectManager\">\n                                <img alt=\"Avatar\" *ngIf=\"xyzekiAuthService?.Member\"\n                                    [src]=\"xyzekiAuthService?.Member?.Avatar\"\n                                    class=\"md-avatar size-1 rounded-circle \">\n                                <span> Ben</span>\n                            </div>\n\n\n                            <div class=\"wrapOrNot float-right mr-1 draggable\"\n                                style=\"color: rgb(94, 94, 94);  text-align: center; \"\n                                *ngIf=\"project?.ProjectManager &&  xyzekiAuthService?.Username != project?.ProjectManager\">\n                                <img *ngIf=\"getMember(project?.ProjectManager)\"\n                                    [src]=\"getMember(project?.ProjectManager)?.Avatar\" alt=\"Avatar\"\n                                    class=\"md-avatar size-1 rounded-circle \">\n                                <span> {{getMember(project?.ProjectManager)?.Name}}</span></div>\n                        </td>\n                        <td cdkDragHandle *ngIf=\"projectModel.ProjectId!= project?.ProjectId\"\n                            style=\"cursor: pointer! important; float: right; \">\n                            <!-- renk-->\n                            <div *ngIf=\"project?.ProjectId\" (click)=\"setColor(project?.ProjectId); \"\n                                class=\"btn m-1 float-right\"\n                                [ngStyle]=\"{'background-color': (project?.Color) ? project?.Color : '#E9F6FE', 'border-radius':'2px'}\">\n                                &nbsp;</div>\n                            <!-- renk-->\n                        </td>\n                        <td cdkDragHandleDisabled *ngIf=\"projectModel.ProjectId!= project?.ProjectId\"\n                            style=\"cursor: pointer! important; float: right; \">\n                            <div #pmDP=\"ngbDropdown\" [id]=\"'dp'+project?.ProjectId\" ngbDropdown\n                                class=\"d-inline-block float-right mb-2 \" placement=\"left\" *ngIf=\"project?.ProjectId\">\n                                <button\n                                    (click)=\"projectIdForProjectManager=project?.ProjectId; $event.stopPropagation();\"\n                                    class=\"btn filter-grey mb-0 \" style=\"z-index: 1000 !important\"\n                                    [id]=\"'dropdownMemberOptions'+project?.ProjectId\" ngbDropdownToggle>\n                                    <img src=\"../../../assets/more2.svg\"\n                                        style=\"height: 6px;object-fit: cover; cursor: pointer;\" />\n                                </button>\n                                <div ngbDropdownMenu attr.aria-labelledby=\"dropdownMemberOptions{{project?.ProjectId}}\"\n                                    class=\"rounded-4 bg-white ml-0 mr-0\">\n                                    <div *ngIf=\"project?.ProjectId\" style=\"text-align: center; line-height: 30px\">\n                                        <span style=\"display: block\">Proje/Liste Yöneticisi</span>\n                                        <app-assign-autocomplete [normalMode]=\"true\"\n                                            [selectedItemOver]=\"project?.ProjectManager\"\n                                            (projectManagerSelectedEvent)=\"onProjectManagerSelectedEvent($event)\">\n                                        </app-assign-autocomplete>\n                                    </div>\n                                    <hr>\n\n                                    <button (click)=\"toggleUpdateProjectPanel(project?.ProjectId);\" ngbDropdownItem\n                                        class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\">\n                                        <img src=\"../../../assets/pencil.png\"\n                                            style=\"width: 20px;object-fit: cover; cursor: pointer; \"\n                                            class=\"mr-2\" />Yeniden İsimlendir</button>\n                                    <hr>\n                                    <button (click)=\"deleteProject(project?.ProjectId)\" ngbDropdownItem\n                                        class=\"btn btn-light rounded-0 border-0 xyz-nav-btn2\"><img\n                                            src=\"../../../assets/cancel.svg\"\n                                            style=\"width: 18px;object-fit: cover; cursor: pointer; \"\n                                            class=\"mr-2\" />Projeyi Sil</button>\n\n                                </div>\n\n                            </div>\n\n                        </td>\n\n\n                        <td cdkDragHandleDisabled\n                            *ngIf=\"updateProjectPanelOpen &&  projectModel.ProjectId== project?.ProjectId\" colspan=\"3\"\n                            class=\"w-100\" id=\"editBar\">\n                            <form #projectUpdateForm=\"ngForm\" (ngSubmit)=\"addProject(projectUpdateForm)\" novalidate>\n                                <div class=\"input-group w-100\">\n                                    <div class=\"input-group-prepend\">\n                                        <a class=\"btn btn-dark disabled text-white\">Başlık</a>\n                                    </div>\n                                    <input id=\"textForFocus\" autofocus type=\"text\" name=\"projectNameForUpdate\"\n                                        [(ngModel)]=\"projectModel.ProjectName\" #projectNameForUpdate=\"ngModel\" required\n                                        class=\"form-control\" placeholder=\"Projenizin yeni adı ne olsun?\" />\n                                    <div class=\"input-group-append\">\n                                        <button type=\"submit\" class=\"btn btn-dark text-white\">Değiştir</button>\n                                        <a (click)=\"toggleUpdateProjectPanel(project?.ProjectId);\"\n                                            style=\"cursor: pointer;\"\n                                            class=\"btn btn-danger text-white text-uppercase\">X</a>\n                                    </div>\n                                    <div class=\"container-fluid\">\n                                        <span class=\"text-danger row\"\n                                            *ngIf=\"modelSubmitted && projectNameForUpdate?.errors?.required\">\n                                            Üzgünüz, bir proje ismi gerekmektedir.\n                                        </span>\n                                    </div>\n                                </div>\n\n                            </form>\n\n\n\n                        </td>\n\n\n                    </tr>\n                </tbody>\n            </table>\n\n            <p [hidden]=\" !( myProjects()?.length == 0 && !searchBarOpen)\" class=\"mt-1\">Şu an için bir projeniz\n                bulunmamaktadır.\n                Hemen sizin için bir tane oluşturalım.</p>\n            <p [hidden]=\"! (myProjects()?.length == 0 && searchBarOpen)\">\n                Üzgünüz, aradığınız kriterlerde size ait bir proje bulamadık.\n            </p>\n        </div>\n\n    </div>\n\n</div>\n\n<div [hidden]=\"!this.repository?.reOrdering\"\n    style=\" position: absolute;  top: 25%; padding-left: 35%; padding-right:35%;  z-index: 10000;\">\n    <img src=\"../assets/rolling.png\" style=\"opacity: 0.9;\">\n    <img src=\"../assets/logo.svg\" style=\"height: 3rem; width: auto\">\n</div>"
 
 /***/ }),
 
@@ -13859,7 +13289,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MyProjectsComponent", function() { return MyProjectsComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var src_app_model_repository_project_repository__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/repository/project-repository */ "./src/app/model/repository/project-repository.ts");
 /* harmony import */ var src_app_model_project_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/project.model */ "./src/app/model/project.model.ts");
 /* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
@@ -13882,13 +13312,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var MyProjectsComponent = /** @class */ (function () {
-    function MyProjectsComponent(route, repositoryTM, permissions, repository, dataService, memberShared) {
+    function MyProjectsComponent(route, repositoryTM, permissions, repository, dataService, xyzekiAuthService) {
         this.route = route;
         this.repositoryTM = repositoryTM;
         this.permissions = permissions;
         this.repository = repository;
         this.dataService = dataService;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.colors = ['#E9F6FE', '#E3E651', '#EA6E4F', '#80C76B', '#84D3E2', '#D0E185', '#292930'];
         this.projectModel = new src_app_model_project_model__WEBPACK_IMPORTED_MODULE_4__["Project"](null);
         // get myProjects() {
@@ -14075,7 +13505,7 @@ var MyProjectsComponent = /** @class */ (function () {
         if (this.permissions.getAccessGranted()) {
             this.modelSubmitted = true;
             if (projectForm.valid) {
-                this.projectModel.Owner = this.memberShared.Username;
+                this.projectModel.Owner = this.xyzekiAuthService.Username;
                 this.repository.saveProject(this.projectModel);
                 this.modelSent = true;
                 this.modelSubmitted = false;
@@ -14125,7 +13555,7 @@ var MyProjectsComponent = /** @class */ (function () {
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./my-projects.component.css */ "./src/app/project/projects/my-projects/my-projects.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_11__["ActivatedRoute"], src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_8__["TeamMemberRepository"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_10__["MemberLicenseRepository"], src_app_model_repository_project_repository__WEBPACK_IMPORTED_MODULE_3__["ProjectRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"], src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_2__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_11__["ActivatedRoute"], src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_8__["TeamMemberRepository"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_10__["MemberLicenseRepository"], src_app_model_repository_project_repository__WEBPACK_IMPORTED_MODULE_3__["ProjectRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"], src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiAuthService"]])
     ], MyProjectsComponent);
     return MyProjectsComponent;
 }());
@@ -14152,7 +13582,7 @@ module.exports = "@font-face {\n  font-family: 'Material Icons';\n  font-style: 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div [hidden]=\"!invalidLicensePanelOpen\"\n    style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\n z-index: 10000; background-color: rgb(243, 242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n    <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\" style=\"font-size:15px\">Özür\n        dileriz;\n        fakat herhangi bir\n        kurumsal, bireysel\n        veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>\n</div>\n\n<nav [ngStyle]=\"{'pointer-events': this?.repository?.reOrdering ? 'none':'unset'}\"\n    class=\"container-fluid xyz-card-dark\">\n    <a class=\"btn btn-dark text-white rounded-0\" [routerLink]=\"[ '/projeler' ]\">Geri</a>\n    <button class=\"btn btn-dark text-white rounded-0 float-right\" disabled\n        *ngIf=\"projectId && this.innerWidth<=400\">{{(getProject(projectId)?.ProjectName).substr(0,20)}}..</button>\n    <button class=\"btn btn-dark text-white rounded-0 float-right\" disabled\n        *ngIf=\"projectId && this.innerWidth>400\">{{getProject(projectId)?.ProjectName}}</button>\n    <div *ngIf=\"projectId && this.memberShared?.Username == getProject(projectId)?.Owner\" class=\"float-right\">\n        <div ngbDropdown placement=\"bottom\" class=\"d-inline-block\">\n            <a class=\"xyz-card-dark-btn rounded-0 border-0 mr-2\" id=\"dropdownMemberOptions\" ngbDropdownToggle>\n                <img class=\"gear\" src=\"../../../../assets/gear.svg\" style=\"height: 25px; width: 25px\">\n            </a>\n            <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\" class=\"rounded-0\"\n                style=\"background-color: #ffffff\">\n                <div class=\"btn btn-light rounded-0 border-0 \">\n                    <h6>\n                        Gizlilik\n                    </h6>\n                    <!-- onlyOwner, onlyOwnerAndPM, openOnlyTasks, open -->\n                    <div *ngIf=\"projectId\" class=\"text-nowrap text-left\">\n                        <input (click)=\"checkPrivacy(0,projectId)\" [checked]=\"getProject(projectId)?.Privacy == 0\"\n                            type=\"radio\" name=\"demo\" id=\"radio-one\" class=\"xyz-radio-btn\"><label for=\"radio-one\">Tüm\n                            Paydaşlara Açık (Tümü)</label>\n                    </div>\n                    <div *ngIf=\"projectId\" class=\"text-nowrap text-center\">\n                        <small class=\"text-muted \">Proje içeriği ve ilgili görevler tüm paydaşlar tarafından\n                            görülebilir.</small>\n\n                    </div>\n                    <div *ngIf=\"projectId\" class=\"text-nowrap text-left\">\n                        <input (click)=\"checkPrivacy(1,projectId)\" [checked]=\"getProject(projectId)?.Privacy == 1\"\n                            type=\"radio\" name=\"demo\" id=\"radio-two\" class=\"xyz-radio-btn\">\n                        <label for=\"radio-two\">Tüm Paydaşlara Açık (Liste Modu)</label>\n                    </div>\n                    <div *ngIf=\"projectId\" class=\"text-left\">\n                        <small class=\"text-muted \">Proje bir listeye dönüştürülür. Liste alıcıları veya atanan paydaşlar\n                            proje ya da liste içeriğini 1. seçenekte olduğu gibi görüntüleyebilir fakat anasayfalarına\n                            bir görev talimatı düşmez.\n                        </small>\n                    </div>\n                    <!-- <div *ngIf=\"projectId\" class=\"text-nowrap text-left\">\n                        <input (click)=\"checkPrivacy(2,projectId)\" [checked]=\"getProject(projectId)?.Privacy == 2\"\n                            type=\"radio\" name=\"demo\" id=\"radio-three\" class=\"xyz-radio-btn\">\n                        <label for=\"radio-three\">Tüm Paydaşlara Açık (Görevler)</label>\n\n                    </div>\n                    <div *ngIf=\"projectId\" class=\"text-left\">\n                        <small class=\"text-muted \">Proje içeriğini gizler, tüm paydaşlar anasayfasında sadece kendi\n                            görevlerini\n                            görüntüleyebilir.</small>\n                    </div> -->\n                    <div *ngIf=\"projectId\" class=\"text-nowrap text-left\">\n                        <input (click)=\"checkPrivacy(3,projectId)\" [checked]=\"getProject(projectId)?.Privacy == 3\"\n                            type=\"radio\" name=\"demo\" id=\"radio-four\" class=\"xyz-radio-btn\"><label\n                            for=\"radio-four\">Sadece Ben ve Proje\n                            Yöneticisi</label>\n                    </div>\n                    <div *ngIf=\"projectId\" class=\"text-left\">\n                        <small class=\"text-muted \">Proje içeriğini ve atanmış görevleri siz (proje sahibi) ve proje\n                            yöneticisi görüntüleyebilir ve düzenleyebilir.</small>\n                    </div>\n                    <div *ngIf=\"projectId\" class=\"text-nowrap text-left \">\n                        <input (click)=\"checkPrivacy(4,projectId)\" [checked]=\"getProject(projectId)?.Privacy == 4\"\n                            type=\"radio\" name=\"demo\" id=\"radio-five\" class=\"xyz-radio-btn\"><label\n                            for=\"radio-five\">Sadece Ben</label>\n                    </div>\n                    <div *ngIf=\"projectId\" class=\"text-left\">\n                        <small class=\"text-muted \">Proje içeriğini ve atanmış görevleri sadece siz (proje sahibi)\n                            görüntüleyebilir ve düzenleyebilirsiniz.</small>\n                    </div>\n\n\n                </div>\n\n            </div>\n        </div>\n\n    </div>\n</nav>\n<div class=\"container-fluid  pt-2 pb-3 bg-white\"\n    [ngStyle]=\"{'padding': this.innerWidth <= 600 ? '3px!important': '30px', 'pointer-events':this?.repository?.reOrdering ? 'none':'unset'}\">\n    \n    <!-- cdkDropListGroup -->\n\n    <div class=\"row pl-1 pr-1\">\n    </div>\n    <div class=\"row pl-1 pr-1\">\n\n        <div #switchDayArea class=\"w-100\" style=\"z-index: 999\">\n\n            <app-switch-day class=\"w-100\" [isProjectMode]=\"'true'\" [projectTodoRepository]=\"repository\">\n            </app-switch-day>\n\n        </div>\n    </div>\n\n\n    <div class=\"row pt-2 pl-1 pr-1\" #scrollMe [scrollTop]=\"scrollMe.scrollHeight\">\n        <table class=\"table table-hover table-sm gizliHeader2  pb-0 mb-0 \">\n\n            <tbody cdkDropList id=\"ProjectToDosContainer\" (cdkDropListDropped)=\"drop($event)\" class=\"shadowedTr\">\n                <tr (mousedown)=\"onMouseDown($event)\" (cdkDragStarted)=\"onDragStart($event)\"\n                    (cdkDragEnded)=\"onDragEnd($event)\"\n                    [ngStyle]=\"projectToDo?.Zindex ? zIndexStyle(projectToDo?.Zindex):'' \" style=\"margin-bottom: 4px; \"\n                    cdkDrag [cdkDragData]=\"projectToDo\" *ngFor=\"let projectToDo  of projectToDos(); index as i\"\n                    class=\"draggable trOptimization\" [ngClass]=\"{'hideSubTask': !isProjectTaskShown(projectToDo)}\">\n\n                    <ng-container *ngIf=\"projectToDo?.Zindex == 1;\">\n                        &nbsp;&nbsp;&nbsp;\n                    </ng-container>\n\n\n\n\n                    <td cdkDragHandle class=\"pr-2\"\n                        [ngStyle]=\"{'background-color': editProjectToDoPanelOpen && projectToDo?.TaskId == projectToDoModelEdit?.TaskId ? 'rgb(230, 231, 231)' : ''}\">\n                        <div>\n                            <a role=\"button\" (click)=\"deCompletePT(projectToDo)\" *ngIf=\"projectToDo?.IsCompleted\"\n                                class=\"btn btn-secondary-outline p-0 m-0\"><img src=\"../../../assets/squareCheck.png\"\n                                    style=\"width: 1.3rem; height: 1.3rem; cursor: pointer; \" />\n                            </a>\n                            <a role=\"button\" (click)=\"completePT(projectToDo)\" *ngIf=\"!projectToDo?.IsCompleted\"\n                                class=\"btn btn-secondary-outline p-0 m-0\"><img src=\"../../../assets/squareUnCheck.png\"\n                                    style=\"width: 1.3rem; height: 1.3rem; cursor: pointer; \" />\n                            </a>\n                        </div>\n                        <small ngbTooltip=\"{{projectToDo?.Finish  |  date:'shortTime' }} saatinde\" placement=\"bottom\"\n                            tooltipClass=\"tooltipSpecial\">\n                            <span class=\"text-nowrap\">\n                                {{projectToDo?.IsCompleted && projectToDo?.Finish ? (projectToDo?.Finish | humanizer) : ''}}</span>\n                        </small>\n                    </td>\n                    <td [ngStyle]=\"{'font-weight': isSubTaskFounded(projectToDo) ? '500' : '400'}\"\n                        (click)=\"toggleEditProjectToDoPanel(projectToDo?.TaskId); \" cdkDragHandle class=\"pr-2 \"\n                        *ngIf=\"projectToDoModelEdit?.TaskId != projectToDo?.TaskId\">\n\n                        <div class=\"w-100\" *ngIf=\"projectToDo?.IsCompleted; else ptaskToDo\">\n                            <span class=\"w-100\" style=\"text-decoration: line-through\">\n                                <img *ngIf=\"isSubTaskFounded(projectToDo)\" class=\"mr-2\"\n                                    [hidden]=\"projectToDo?.ShowSubTasks\" ngbTooltip=\"Alt görevleri göster\"\n                                    tooltipClass=\"tooltipSpecial\" placement=\"bottom\"\n                                    (click)=\"showSubTasks(projectToDo); $event.stopPropagation();\"\n                                    src=\"../../../../assets/down.png\"\n                                    style=\"width: 17px;object-fit: cover; cursor: pointer; \" />\n                                <img *ngIf=\"isSubTaskFounded(projectToDo)\" class=\"mr-2\"\n                                    [hidden]=\"!projectToDo?.ShowSubTasks\" ngbTooltip=\"Alt görevleri gizle\"\n                                    tooltipClass=\"tooltipSpecial\" placement=\"bottom\"\n                                    (click)=\"hideSubTasks(projectToDo); $event.stopPropagation();\"\n                                    src=\"../../../../assets/up.png\"\n                                    style=\"width: 17px;object-fit: cover; cursor: pointer; \" />\n\n                                {{projectToDo?.TaskTitle}}\n\n\n\n                            </span>\n                            <a *ngIf=\"projectToDo?.TaskId && getProject(projectId)?.Privacy != 1\"\n                                class=\"modernUnderlined ml-2 w-100\"\n                                (click)=\"setStatus(projectToDo?.TaskId);$event.stopPropagation();\"\n                                style=\"cursor: pointer; font-size: 13px\">{{(projectToDo?.Status ? projectToDo?.Status  : 'Bekliyor')}}</a>\n                        </div>\n                        <ng-template #ptaskToDo class=\"w-100\">\n\n                            <img *ngIf=\"isSubTaskFounded(projectToDo)\" class=\"mr-2\" [hidden]=\"projectToDo?.ShowSubTasks\"\n                                ngbTooltip=\"Alt görevleri göster\" tooltipClass=\"tooltipSpecial\" placement=\"bottom\"\n                                (click)=\"showSubTasks(projectToDo); $event.stopPropagation();\"\n                                src=\"../../../../assets/down.png\"\n                                style=\"width: 17px;object-fit: cover; cursor: pointer; \" />\n                            <img *ngIf=\"isSubTaskFounded(projectToDo)\" class=\"mr-2\"\n                                [hidden]=\"!projectToDo?.ShowSubTasks\" ngbTooltip=\"Alt görevleri gizle\"\n                                tooltipClass=\"tooltipSpecial\" placement=\"bottom\"\n                                (click)=\"hideSubTasks(projectToDo); $event.stopPropagation();\"\n                                src=\"../../../../assets/up.png\"\n                                style=\"width: 17px;object-fit: cover; cursor: pointer; \" />\n\n                            <span class=\"w-100\"\n                                [ngClass]=\"{'shineYapiliyor': projectToDo?.Status == 'Yapılıyor',\n                                'shineBitmekuzere': projectToDo?.Status == 'Tamamlanmak Üzere' }\">{{projectToDo?.TaskTitle}}\n\n                                <a *ngIf=\"projectToDo?.TaskId && getProject(projectId)?.Privacy != 1\"\n                                    class=\"modernUnderlined  ml-2 w-100\"\n                                    (click)=\"setStatus(projectToDo?.TaskId); $event.stopPropagation();\"\n                                    style=\"cursor: pointer; font-size: 13px\">{{(projectToDo?.Status ? projectToDo?.Status  : 'Bekliyor')}}</a>\n                            </span>\n\n\n                        </ng-template>\n\n                        <div class=\"float-right text-nowrap\">\n                            <a *ngIf=\"projectToDo?.Zindex > 0\" ngbTooltip=\"Üst görev yap\" tooltipClass=\"tooltipSpecial\"\n                                placement=\"bottom\" (click)=\"decreaseTaskIndent(projectToDo); $event.stopPropagation();\"\n                                class=\"btn btn-light btn-sm rounded-1 border-0\" style=\"margin-right: 3px\">\n                                <img src=\"../../../../assets/arrow-3.png\"\n                                    style=\"width: 16px;object-fit: cover; cursor: pointer; \" /></a>\n                            <a *ngIf=\"projectToDo?.Zindex < 1\" ngbTooltip=\"Alt görev yap\" tooltipClass=\"tooltipSpecial\"\n                                placement=\"bottom\" (click)=\"increaseTaskIndent(projectToDo); $event.stopPropagation();\"\n                                class=\"btn btn-light btn-sm rounded-1 border-0\">\n                                <img src=\"../../../../assets/arrow-2.png\"\n                                    style=\"width: 16px;object-fit: cover; cursor: pointer; \" /></a>\n                        </div>\n\n                    </td>\n                    <td cdkDragHandle class=\"pr-2\" *ngIf=\"projectToDoModelEdit?.TaskId != projectToDo?.TaskId\">\n                        <div class=\"mobileDate\">\n                            <ng-container\n                                *ngIf=\"(projectToDo?.Start | humanizer) != (projectToDo?.Deadline | humanizer); else sameStartDate\">\n                                <span style=\"color: #00a028\">{{projectToDo?.Start | humanizer}}\n                                    <span *ngIf=\"projectToDo?.Start |  date:'shortTime' \"\n                                        class=\"time-pipe-design\">{{projectToDo?.Start |  date:'shortTime' }}</span>\n                                    <span *ngIf=\"projectToDo?.Start  && projectToDo?.Deadline\"> - </span>\n                                </span>\n                                <div class=\"clearfix\" *ngIf=\"this.innerWidth < 876\"> </div>\n                                <span style=\"color: #b80000\">{{projectToDo?.Deadline | humanizer}}\n                                    <span *ngIf=\"projectToDo?.Deadline |  date:'shortTime'\"\n                                        class=\"time-pipe-design\">{{projectToDo?.Deadline |  date:'shortTime' }}</span></span>\n                                <div class=\"clearfix\" *ngIf=\"this.innerWidth < 500\"> </div>\n                            </ng-container>\n                            <ng-template #sameStartDate>\n                                <span style=\"color: rgb(196, 199, 23); \">{{projectToDo?.Start | humanizer}}\n                                    <span *ngIf=\"projectToDo?.Start |  date:'shortTime' \"\n                                        class=\"time-pipe-design\">{{projectToDo?.Start |  date:'shortTime' }}</span>\n                                    <span\n                                        *ngIf=\"projectToDo?.Start |  date:'shortTime'  && projectToDo?.Deadline |  date:'shortTime' \">\n                                        -\n                                    </span>\n                                    <span class=\"time-pipe-design\"\n                                        *ngIf=\"projectToDo?.Deadline |  date:'shortTime' \">{{projectToDo?.Deadline |  date:'shortTime' }}</span>\n                                </span>\n                            </ng-template>\n\n\n                            <a *ngIf=(projectToDo?.TaskId) class=\"btn filter-cnote pl-0 pt-0 pb-0 ml-1 mr-1 text-nowrap\"\n                                style=\"cursor: pointer!important\"\n                                (click)=\"showCommentsDialog(projectToDo?.TaskId,projectToDo?.TaskTitle)\">\n                                <img src=\"../../../../assets/comment-note.svg\"\n                                    style=\"height: 1.5rem; cursor: pointer;\" />\n                                <span>\n                                    {{getPTCommentsForCount(projectToDo?.TaskId)?.CommentsCount}}\n                                </span>\n                            </a>\n                        </div>\n                    </td>\n                    <td cdkDragHandle class=\"pr-2\" *ngIf=\"projectToDoModelEdit?.TaskId != projectToDo?.TaskId\">\n                        <div class=\"wrapOrNot\" style=\"color: rgb(90, 90, 90); text-align: center;\"\n                            *ngIf=\"projectToDo?.AssignedTo && memberShared.Username == projectToDo?.AssignedTo\">\n                            <img alt=\"Avatar\" *ngIf=\"memberShared?.account?.getValue()\"\n                                [src]=\"memberShared?.account?.getValue()?.Avatar\"\n                                class=\"md-avatar size-1 rounded-circle \">\n                            <span> Ben</span>\n                        </div>\n\n\n                        <div class=\"wrapOrNot\" style=\"color: rgb(94, 94, 94);  text-align: center; \"\n                            *ngIf=\"projectToDo?.AssignedTo &&  memberShared.Username != projectToDo?.AssignedTo\">\n                            <img *ngIf=\"getMember(projectToDo?.AssignedTo)\"\n                                [src]=\"getMember(projectToDo?.AssignedTo)?.Avatar\" alt=\"Avatar\"\n                                class=\"md-avatar size-1 rounded-circle \">\n                            <span> {{getMember(projectToDo?.AssignedTo)?.Name}}\n                            </span></div>\n                    </td>\n\n                    <td cdkDragHandleDisabled *ngIf=\"projectToDoModelEdit?.TaskId != projectToDo?.TaskId\">\n                        <div ngbDropdown class=\"d-inline-block\" style=\"margin-left:2px!important\" placement=\"left\"\n                            *ngIf=\"projectToDo?.TaskId!=undefined\">\n                            <a class=\"btn filter-grey pl-0 pt-0 pb-0 mb-0\" style=\"border:0px solid !important\"\n                                id=\"dropdownMemberOptions\" ngbDropdownToggle>\n                                <img src=\"../../../assets/more2.svg\"\n                                    style=\"height: 7px;object-fit: cover; cursor: pointer;\" />\n\n                            </a>\n                            <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\"\n                                class=\"rounded-4 bg-white ml-0 mr-0\">\n\n                                <button (click)=\"toggleEditProjectToDoPanel(projectToDo?.TaskId); \" ngbDropdownItem\n                                    class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\">\n                                    <img src=\"../../../assets/pencil.png\"\n                                        style=\"width: 20px;object-fit: cover; cursor: pointer; \" class=\"mr-2\" />Görevi\n                                    Düzenle</button>\n                                <hr>\n                                <button (click)=\"deleteProjectToDo(projectToDo?.TaskId)\" ngbDropdownItem\n                                    class=\"btn btn-light rounded-0 border-0 xyz-nav-btn2\"><img\n                                        src=\"../../../assets/cancel.svg\"\n                                        style=\"width: 18px;object-fit: cover; cursor: pointer; \" class=\"mr-2\" />Görevi\n                                    Sil</button>\n\n                            </div>\n\n\n                        </div>\n                    </td>\n                    <td cdkDragHandleDisabled style=\"background-color: rgb(230, 231, 231); width: 100%\" colspan=\"4\"\n                        *ngIf=\"editProjectToDoPanelOpen && projectToDoModelEdit?.TaskId == projectToDo?.TaskId\">\n                        <form #projectToDoEditForm=\"ngForm\" (ngSubmit)=\"editProjectToDo(projectToDoEditForm)\"\n                            novalidate>\n                            <div class=\"input-group w-100 others\">\n                                <textarea (keydown)=\"onKeydownEvent($event)\" id=\"textForFocus\" autofocus\n                                    name=\"projectToDoEdit\" #projectToDoEdit=\"ngModel\"\n                                    [(ngModel)]=\"projectToDoModelEdit.TaskTitle\" required class=\"xyz-textarea border-0\"\n                                    placeholder=\"Görevi tanımlar mısınız?\" rows=\"2\"> </textarea>\n\n                                <ng-template #footerEditStart>\n                                    <div class=\"myCal general\"\n                                        style=\"padding-top:0.1px; padding-bottom:0.5px; padding-left:0.1px;  padding-right:2.1px\">\n                                        <button disabled class=\"btn w-100 rounded-0 border-0\"\n                                            style=\"display: none\">&nbsp;</button>\n                                        <input (keydown)=\" $event?.keyCode === 13 ? datePickerEditStart.close() : ' ' \"\n                                            ngbDatepicker placeholder=\"Başlangıç tarihi\" autocomplete=\"off\"\n                                            [showWeekNumbers]=\"true\" navigation=\"arrows\" class=\"form-control w-100\"\n                                            style=\"margin-left: 1px; margin-bottom: 1px; text-align:center\"\n                                            name=\"datePickerEditStartX\" [(ngModel)]=\"dateEditStart\"\n                                            (ngModelChange)=\"onSelectDateEditStart($event)\"\n                                            #datePickerEditStartX=\"ngbDatepicker\" />\n\n                                        <div class=\"timePickerXyz\" *ngIf=\"dateEditStart\">\n                                            <ngb-timepicker #timePickerEditStart name=\"timePickerEditStart\"\n                                                [(ngModel)]=\"timeEditStart\"\n                                                (ngModelChange)=\"onSelectTimeEditStart($event)\" [spinners]=\"false\">\n                                            </ngb-timepicker>\n                                        </div>\n\n                                        <button type=\"button\" (click)=\"calendarButtonSelect('today',false,false);\"\n                                            class=\" btn-day w-100 rounded-0 border-0 p-1\"\n                                            style=\"margin-left: 1px\">Bugün</button>\n                                        <button type=\"button\" (click)=\"calendarButtonSelect('tomorrow',false,false); \"\n                                            class=\" btn-day w-100 rounded-0 border-0 p-1\"\n                                            style=\"margin-left: 1px\">Yarın</button>\n                                        <button type=\"button\" [hidden]=\"!dateEditStart\"\n                                            (click)=\"calendarButtonSelect('noDate',false,false); \"\n                                            class=\" btn-day w-100 rounded-0 border-0 p-1\"\n                                            style=\"margin-left: 1px; margin-bottom: 4px;\">\n                                            <mat-icon class=\"mat-search_icon-close\" matRipple>close</mat-icon>\n                                        </button>\n                                        <!-- time select-->\n\n                                    </div>\n                                </ng-template>\n\n                                <ng-template #customDayEditStart let-date let-currentMonth=\"currentMonth\"\n                                    let-selected=\"selected\" let-disabled=\"disabled\">\n                                    <span [ngbTooltip]=\"isToday(date) ? 'Bugün' : ''\" tooltipClass=\"tooltipSpecial\"\n                                        placement=\"top\" class=\"custom-day\" [class.weekend]=\"isWeekend(date)\"\n                                        [class.today]=\"isToday(date)\" [class.bg-primary]=\"selected\"\n                                        [class.hidden]=\"date.month !== currentMonth\" [class.text-muted]=\"disabled\">\n                                        {{ date.day }}\n                                    </span>\n                                </ng-template>\n\n\n                                <a class=\"btn calendar rounded-0 tarihSeciciBtn\"\n                                    style=\"cursor: pointer;  border-bottom:#CED4DA 0.5px solid; background-color: white  \"\n                                    (click)=\"datePickerEditStart.toggle()\">\n                                    <img src=\"../../../../assets/calender.png\"\n                                        style=\"width: 1.3rem; height: 1.1rem; cursor: pointer;\" />\n                                </a>\n\n\n                                <input [autoClose]=\"'outside'\" style=\"cursor: pointer\"\n                                    (click)=\"datePickerEditStart.toggle()\" ngbDatepicker\n                                    [dayTemplate]=\"customDayEditStart\" [footerTemplate]=\"footerEditStart\"\n                                    [markDisabled]=\"isDisabled\" placeholder=\"Başlangıç tarihi\" autocomplete=\"off\"\n                                    [showWeekNumbers]=\"true\" placement=\"bottom\" navigation=\"arrows\"\n                                    class=\"form-control tarihSecici\" name=\"datePickerEditStart\"\n                                    [(ngModel)]=\"dateEditStart\" (ngModelChange)=\"onSelectDateEditStart($event)\"\n                                    #datePickerEditStart=\"ngbDatepicker\" />\n                                <!-- END OF START DATE-->\n\n\n                                <ng-template #footerEdit>\n                                    <div class=\"myCal general\"\n                                        style=\"padding-top:0.1px; padding-bottom:0.5px; padding-left:0.1px;  padding-right:2.1px\">\n                                        <button disabled class=\"btn w-100 rounded-0 border-0\"\n                                            style=\"display: none\">&nbsp;</button>\n                                        <input (keydown)=\" $event?.keyCode === 13 ? datePickerEdit.close() : ' ' \"\n                                            ngbDatepicker placeholder=\"Teslim tarihi\" autocomplete=\"off\"\n                                            [showWeekNumbers]=\"true\" navigation=\"arrows\" class=\"form-control w-100\"\n                                            style=\"margin-left: 1px; margin-bottom: 1px; text-align:center\"\n                                            name=\"datePickerEditX\" [(ngModel)]=\"dateEdit\"\n                                            (ngModelChange)=\"onSelectDateEdit($event)\"\n                                            #datePickerEditX=\"ngbDatepicker\" />\n\n                                        <div class=\"timePickerXyz\" *ngIf=\"dateEdit\">\n                                            <ngb-timepicker #timePickerEdit name=\"timePickerEdit\" [(ngModel)]=\"timeEdit\"\n                                                (ngModelChange)=\"onSelectTimeEdit($event)\" [spinners]=\"false\">\n                                            </ngb-timepicker>\n                                        </div>\n                                        <button type=\"button\" (click)=\"calendarButtonSelect('today',false); \"\n                                            class=\" btn-day w-100 rounded-0 border-0 p-1\"\n                                            style=\"margin-left: 1px\">Bugün</button>\n                                        <button type=\"button\" (click)=\"calendarButtonSelect('tomorrow',false);\"\n                                            class=\" btn-day w-100 rounded-0 border-0 p-1\"\n                                            style=\"margin-left: 1px\">Yarın</button>\n                                        <button [hidden]=\"!dateEdit\" type=\"button\"\n                                            (click)=\"calendarButtonSelect('noDate',false); \"\n                                            class=\" btn-day w-100 rounded-0 border-0 p-1\"\n                                            style=\"margin-left: 1px; margin-bottom: 4px;\">\n                                            <mat-icon class=\"mat-search_icon-close\" matRipple>close</mat-icon>\n                                        </button>\n                                        <!-- time select-->\n\n                                    </div>\n                                </ng-template>\n\n\n\n                                <ng-template #customDayEdit let-date let-currentMonth=\"currentMonth\"\n                                    let-selected=\"selected\" let-disabled=\"disabled\">\n                                    <span [ngbTooltip]=\"isToday(date) ? 'Bugün' : ''\" tooltipClass=\"tooltipSpecial\"\n                                        placement=\"top\" class=\"custom-day\" [class.weekend]=\"isWeekend(date)\"\n                                        [class.today]=\"isToday(date)\" [class.bg-primary]=\"selected\"\n                                        [class.hidden]=\"date.month !== currentMonth\" [class.text-muted]=\"disabled\">\n                                        {{ date.day }}\n                                    </span>\n                                </ng-template>\n\n\n                                <a class=\"btn calendar rounded-0 tarihSeciciBtn\"\n                                    style=\"cursor: pointer;  border-bottom:#CED4DA 0.5px solid; background-color: white  \"\n                                    (click)=\"datePickerEdit.toggle()\">\n                                    <img src=\"../../../../assets/calender.png\"\n                                        style=\"width: 1.3rem; height: 1.1rem; cursor: pointer;\" />\n                                </a>\n                                <input [autoClose]=\"'outside'\" style=\"cursor: pointer\" (click)=\"datePickerEdit.toggle()\"\n                                    ngbDatepicker [dayTemplate]=\"customDayEdit\" [footerTemplate]=\"footerEdit\"\n                                    [markDisabled]=\"isDisabled\" placeholder=\"Teslim tarihi\" autocomplete=\"off\"\n                                    [showWeekNumbers]=\"true\" placement=\"bottom\" navigation=\"arrows\"\n                                    class=\"form-control tarihSecici\" name=\"datePickerEdit\" [(ngModel)]=\"dateEdit\"\n                                    (ngModelChange)=\"onSelectDateEdit($event)\" #datePickerEdit=\"ngbDatepicker\" />\n\n\n                                <div class=\"input-group-append btn-group btn-group-toggle\">\n                                    <app-assign-autocomplete\n                                        *ngIf=\"(projectId && this.memberShared?.Username != getProject(projectId)?.ProjectManager)\"\n                                        [normalMode]=\"true\" [selectedItemOver]=\"this.projectToDoModelEdit?.AssignedTo\"\n                                        #editChild (assignedToEventForProjectEdit)=\"onAssignedToEventEdit($event)\">\n                                    </app-assign-autocomplete>\n\n                                    <app-assign-autocomplete\n                                        *ngIf=\"(projectId && this.memberShared?.Username == getProject(projectId)?.ProjectManager)\"\n                                        [projectManagerMode]=\"true\"\n                                        [selectedItemOver]=\"this.projectToDoModelEdit?.AssignedTo\" #editChild\n                                        (assignedToEventForProjectEdit)=\"onAssignedToEventEdit($event)\">\n                                    </app-assign-autocomplete>\n\n\n\n\n                                </div>\n                                <div class=\"input-group-append\">\n                                    <button type=\"submit\"\n                                        class=\"btn btn-secondary text-white rounded-0 degistirBtn\">Değiştir</button>\n                                    <a (click)=\"toggleEditProjectToDoPanel(projectToDo?.TaskId)\"\n                                        class=\"btn btn-danger rounded-0 text-white text-uppercase kapatBtn\"\n                                        style=\"cursor: pointer\">X</a>\n                                </div>\n                            </div>\n\n                        </form>\n\n\n                    </td>\n                </tr>\n            </tbody>\n        </table>\n\n    </div>\n    <div *ngIf=\"projectToDos()?.length == 0\" class=\"row pt-3 pl-1 pr-1\">\n        <p *ngIf=\"dayDateStr == 'Gecikmiş'\">\n            Şu an için projenizde teslim tarihi geçmiş bir görev bulamadık.\n        </p>\n        <p *ngIf=\"dayDateStr == 'Tümü'\">\n            Şu an için projenizde bir görev bulunmamaktadır. Hemen sizin için bir tane oluşturalım.\n        </p>\n        <p *ngIf=\"dayDateStr == 'Gün'\">\n            Şu an için bugün yapılması gereken veya devam eden bir proje görevi bulamadık.\n        </p>\n    </div>\n    <div class=\"row  pl-1 pr-1\">\n        <a ngbTooltip=\"Yeni görev oluşturun\" tooltipClass=\"tooltipSpecial\" placement=\"bottom\"\n            *ngIf=\"!newProjectToDoPanelOpen\" (click)=\"toggleProjectToDoPanel()\"\n            class=\"btn btn-dark rounded-0 text-white\" style=\"cursor: pointer\">Yeni +</a>\n    </div>\n    <div class=\"row  pl-1 pr-1\" *ngIf=\"this.innerWidth < 992\">\n        <form class=\"bg-white w-100\" *ngIf=\"newProjectToDoPanelOpen\" #projectToDoForm=\"ngForm\"\n            (ngSubmit)=\"addProjectToDo(projectToDoForm)\" novalidate>\n            <div class=\"input-group mb-2 \">\n                <!-- <div class=\"input-group-prepend\">\n                        <a class=\"btn btn-dark disabled text-white\">Görev</a>\n                    </div> -->\n                <div class=\"input-group-prepend\">\n                    <!-- <a class=\"btn btn-dark disabled text-white\">Ata</a> -->\n                    <app-assign-autocomplete\n                        *ngIf=\"(projectId && this.memberShared?.Username != getProject(projectId)?.ProjectManager)\"\n                        [normalMode]=\"true\" (assignedToEventForProject)=\"onAssignedToEvent($event)\">\n                    </app-assign-autocomplete>\n\n                    <app-assign-autocomplete\n                        *ngIf=\"(projectId && this.memberShared?.Username == getProject(projectId)?.ProjectManager)\"\n                        [projectManagerMode]=\"true\" (assignedToEventForProject)=\"onAssignedToEvent($event)\">\n                    </app-assign-autocomplete>\n\n                </div>\n                <input id=\"textForFocusCreate\" autofocus type=\"text\" name=\"projectTask\"\n                    [(ngModel)]=\"projectToDoModel.TaskTitle\" #projectTask=\"ngModel\" required\n                    class=\"form-control  pl-2 pr-2\" placeholder=\"Görev, yapılacak iş ya da liste öğesi\" />\n            </div>\n            <div class=\"container-fluid\">\n                <span class=\"text-danger row\" *ngIf=\"modelSubmitted && projectTask?.errors?.required\">\n                    Bir iş tanımı belirtmelisiniz.\n                </span>\n            </div>\n            <div class=\"input-group mb-2\">\n                <div class=\"input-group-append\">\n                    <a class=\"btn  calendar\"\n                        style=\"cursor: pointer; border-bottom: 1px gainsboro solid; background-color: white; \"\n                        (click)=\"start.toggle()\">\n                        <img src=\"../../../../assets/calender.png\"\n                            style=\"width: 1.3rem; height: 1.1rem; cursor: pointer;\" />\n                    </a>\n                    <ng-template #footerCreateStart>\n                        <div class=\"myCal general\"\n                            style=\"padding-top:0.1px; padding-bottom:0.5px; padding-left:0.1px;  padding-right:2.1px\">\n                            <button disabled class=\"btn w-100 rounded-0 border-0\" style=\"display: none\">&nbsp;</button>\n                            <input (keydown)=\" $event?.keyCode === 13 ? start.close() : ' ' \" ngbDatepicker\n                                placeholder=\"Başlangıç tarihi\" autocomplete=\"off\" [showWeekNumbers]=\"true\"\n                                navigation=\"arrows\" class=\"form-control w-100\"\n                                style=\"margin-left: 1px; margin-bottom: 1px; text-align:center\" name=\"startX\"\n                                [(ngModel)]=\"startDate\" (ngModelChange)=\"onSelectStartDate($event)\"\n                                #startX=\"ngbDatepicker\" />\n\n                            <div class=\"timePickerXyz\" *ngIf=\"startDate\">\n                                <ngb-timepicker #timePickerStart name=\"timePickerStart\" [(ngModel)]=\"timeStart\"\n                                    (ngModelChange)=\"onSelectTimeStart($event)\" [spinners]=\"false\">\n                                </ngb-timepicker>\n                            </div>\n\n\n                            <button type=\"button\" (click)=\"calendarButtonSelect('today',true,false);\"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Bugün</button>\n                            <button type=\"button\" (click)=\"calendarButtonSelect('tomorrow',true,false); \"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Yarın</button>\n                            <button [hidden]=\"!startDate\" type=\"button\"\n                                (click)=\"calendarButtonSelect('noDate',true,false); \"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\"\n                                style=\"margin-left: 1px; margin-bottom: 4px;\">\n                                <mat-icon class=\"mat-search_icon-close\" matRipple>close</mat-icon>\n                            </button>\n                            <!-- time select-->\n\n                        </div>\n                    </ng-template>\n\n                    <ng-template #customDayCreateStart let-date let-currentMonth=\"currentMonth\" let-selected=\"selected\"\n                        let-disabled=\"disabled\">\n                        <span [ngbTooltip]=\"isToday(date) ? 'Bugün' : ''\" tooltipClass=\"tooltipSpecial\" placement=\"top\"\n                            class=\"custom-day\" [class.weekend]=\"isWeekend(date)\" [class.today]=\"isToday(date)\"\n                            [class.bg-primary]=\"selected\" [class.hidden]=\"date.month !== currentMonth\"\n                            [class.text-muted]=\"disabled\">\n                            {{ date.day }}\n                        </span>\n                    </ng-template>\n\n                    <input [autoClose]=\"'outside'\" ngbDatepicker placement=\"bottom\" [showWeekNumbers]=\"true\"\n                        (click)=\"start.toggle()\" [dayTemplate]=\"customDayCreateStart\"\n                        [footerTemplate]=\"footerCreateStart\" [markDisabled]=\"isDisabled\" placeholder=\"Başlangıç tarihi\"\n                        autocomplete=\"off\" navigation=\"arrows\" class=\"form-control pl-2 pr-2\"\n                        style=\"max-width:10rem!important; cursor: pointer\" name=\"start\" [(ngModel)]=\"startDate\"\n                        (ngModelChange)=\"onSelectStartDate($event)\" #start=\"ngbDatepicker\" />\n                </div>\n                <div class=\"input-group-append\">\n                    <a class=\"btn  calendar\"\n                        style=\"cursor: pointer; border-bottom: 1px gainsboro solid; background-color: white; \"\n                        (click)=\"deadline.toggle()\">\n                        <img src=\"../../../../assets/calender.png\"\n                            style=\"width: 1.3rem; height: 1.1rem; cursor: pointer;\" />\n                    </a>\n                    <ng-template #footerCreate>\n                        <div class=\"myCal general\"\n                            style=\"padding-top:0.1px; padding-bottom:0.5px; padding-left:0.1px;  padding-right:2.1px\">\n                            <button disabled class=\"btn w-100 rounded-0 border-0\" style=\"display: none\">&nbsp;</button>\n                            <input (keydown)=\" $event?.keyCode === 13 ? deadline.close() : ' ' \" ngbDatepicker\n                                placeholder=\"Teslim tarihi\" autocomplete=\"off\" [showWeekNumbers]=\"true\"\n                                navigation=\"arrows\" class=\"form-control w-100\"\n                                style=\"margin-left: 1px; margin-bottom: 1px; text-align:center\" name=\"deadlineX\"\n                                [(ngModel)]=\"deadlineDate\" (ngModelChange)=\"onSelectDeadlineDate($event)\"\n                                #deadlineX=\"ngbDatepicker\" />\n\n                            <div class=\"timePickerXyz\" *ngIf=\"deadlineDate\">\n                                <ngb-timepicker #timePickerDeadline name=\"timePickerDeadline\" [(ngModel)]=\"timeDeadline\"\n                                    (ngModelChange)=\"onSelectTimeDeadline($event)\" [spinners]=\"false\"></ngb-timepicker>\n                            </div>\n                            <button type=\"button\" (click)=\"calendarButtonSelect('today',true);\"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Bugün</button>\n                            <button type=\"button\" (click)=\"calendarButtonSelect('tomorrow',true);\"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Yarın</button>\n                            <button [hidden]=\"!deadlineDate\" type=\"button\"\n                                (click)=\"calendarButtonSelect('noDate',true); \"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\"\n                                style=\"margin-left: 1px; margin-bottom: 4px;\">\n                                <mat-icon class=\"mat-search_icon-close\" matRipple>close</mat-icon>\n                            </button>\n                            <!-- time select-->\n\n                        </div>\n                    </ng-template>\n\n                    <ng-template #customDayCreate let-date let-currentMonth=\"currentMonth\" let-selected=\"selected\"\n                        let-disabled=\"disabled\">\n                        <span [ngbTooltip]=\"isToday(date) ? 'Bugün' : ''\" tooltipClass=\"tooltipSpecial\" placement=\"top\"\n                            class=\"custom-day\" [class.weekend]=\"isWeekend(date)\" [class.today]=\"isToday(date)\"\n                            [class.bg-primary]=\"selected\" [class.hidden]=\"date.month !== currentMonth\"\n                            [class.text-muted]=\"disabled\">\n                            {{ date.day }}\n                        </span>\n                    </ng-template>\n\n                    <input [autoClose]=\"'outside'\" ngbDatepicker placement=\"bottom\" [showWeekNumbers]=\"true\"\n                        (click)=\"deadline.toggle()\" [dayTemplate]=\"customDayCreate\" [footerTemplate]=\"footerCreate\"\n                        [markDisabled]=\"isDisabled\" placeholder=\"Teslim tarihi\" autocomplete=\"off\" navigation=\"arrows\"\n                        class=\"form-control pl-2 pr-2\" style=\"max-width:10rem!important; cursor: pointer\"\n                        name=\"deadline\" [(ngModel)]=\"deadlineDate\" (ngModelChange)=\"onSelectDeadlineDate($event)\"\n                        #deadline=\"ngbDatepicker\" />\n\n                </div>\n            </div>\n\n            <div class=\"input-group mb-2\">\n                <div class=\"input-group-append\">\n                    <button type=\"submit\" class=\"btn btn-dark text-white text-uppercase\">Oluştur</button>\n                    <a (click)=\"toggleProjectToDoPanel()\" class=\"btn btn-danger rounded-1 text-white text-uppercase\"\n                        style=\"cursor: pointer\">X</a>\n                </div>\n            </div> <!-- add and close buttons-->\n        </form>\n    </div>\n    <div class=\"row  pl-1 pr-1\" *ngIf=\"this.innerWidth >= 992\">\n        <form class=\"bg-white w-100 m-0 p-0\" *ngIf=\"newProjectToDoPanelOpen\" #projectToDoForm=\"ngForm\"\n            (ngSubmit)=\"addProjectToDo(projectToDoForm)\" novalidate>\n\n            <div class=\"input-group mb-2 \">\n                <!-- <div class=\"input-group-prepend\">\n                        <a class=\"btn btn-dark disabled text-white\">İş</a>\n                    </div> -->\n                <input id=\"textForFocusCreate\" autofocus type=\"text\" name=\"projectTask\"\n                    [(ngModel)]=\"projectToDoModel.TaskTitle\" #projectTask=\"ngModel\" required\n                    class=\"form-control  pl-2 pr-2\" placeholder=\"Görev, yapılacak iş ya da liste öğesi\" />\n\n                <div class=\"input-group-prepend\">\n\n                    <app-assign-autocomplete\n                        *ngIf=\"(projectId && this.memberShared?.Username != getProject(projectId)?.ProjectManager)\"\n                        [normalMode]=\"true\" (assignedToEventForProject)=\"onAssignedToEvent($event)\">\n                    </app-assign-autocomplete>\n\n                    <app-assign-autocomplete\n                        *ngIf=\"(projectId && this.memberShared?.Username == getProject(projectId)?.ProjectManager)\"\n                        [projectManagerMode]=\"true\" (assignedToEventForProject)=\"onAssignedToEvent($event)\">\n                    </app-assign-autocomplete>\n\n                </div>\n                <div class=\"input-group-append\">\n                    <a class=\"btn  calendar\"\n                        style=\"cursor: pointer; border-bottom: 1px gainsboro solid; background-color: white; \"\n                        (click)=\"start.toggle()\">\n                        <img src=\"../../../../assets/calender.png\"\n                            style=\"width: 1.3rem; height: 1.1rem; cursor: pointer;\" />\n                    </a>\n                    <ng-template #footerCreateStart>\n                        <div class=\"myCal general\"\n                            style=\"padding-top:0.1px; padding-bottom:0.5px; padding-left:0.1px;  padding-right:2.1px\">\n                            <button disabled class=\"btn w-100 rounded-0 border-0\" style=\"display: none\">&nbsp;</button>\n                            <input (keydown)=\" $event?.keyCode === 13 ? start.close() : ' ' \" ngbDatepicker\n                                placeholder=\"Başlangıç tarihi\" autocomplete=\"off\" [showWeekNumbers]=\"true\"\n                                navigation=\"arrows\" class=\"form-control w-100\"\n                                style=\"margin-left: 1px; margin-bottom: 1px; text-align:center\" name=\"startX\"\n                                [(ngModel)]=\"startDate\" (ngModelChange)=\"onSelectStartDate($event)\"\n                                #startX=\"ngbDatepicker\" />\n\n                            <div class=\"timePickerXyz\" *ngIf=\"startDate\">\n                                <ngb-timepicker #timePickerStart name=\"timePickerStart\" [(ngModel)]=\"timeStart\"\n                                    (ngModelChange)=\"onSelectTimeStart($event)\" [spinners]=\"false\">\n                                </ngb-timepicker>\n                            </div>\n\n\n                            <button type=\"button\" (click)=\"calendarButtonSelect('today',true,false);\"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Bugün</button>\n                            <button type=\"button\" (click)=\"calendarButtonSelect('tomorrow',true,false); \"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Yarın</button>\n                            <button [hidden]=\"!startDate\" type=\"button\"\n                                (click)=\"calendarButtonSelect('noDate',true,false); \"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\"\n                                style=\"margin-left: 1px; margin-bottom: 4px;\">\n                                <mat-icon class=\"mat-search_icon-close\" matRipple>close</mat-icon>\n                            </button>\n                            <!-- time select-->\n\n                        </div>\n                    </ng-template>\n\n                    <ng-template #customDayCreateStart let-date let-currentMonth=\"currentMonth\" let-selected=\"selected\"\n                        let-disabled=\"disabled\">\n                        <span [ngbTooltip]=\"isToday(date) ? 'Bugün' : ''\" tooltipClass=\"tooltipSpecial\" placement=\"top\"\n                            class=\"custom-day\" [class.weekend]=\"isWeekend(date)\" [class.today]=\"isToday(date)\"\n                            [class.bg-primary]=\"selected\" [class.hidden]=\"date.month !== currentMonth\"\n                            [class.text-muted]=\"disabled\">\n                            {{ date.day }}\n                        </span>\n                    </ng-template>\n\n                    <input [autoClose]=\"'outside'\" ngbDatepicker placement=\"bottom\" [showWeekNumbers]=\"true\"\n                        (click)=\"start.toggle()\" [dayTemplate]=\"customDayCreateStart\"\n                        [footerTemplate]=\"footerCreateStart\" [markDisabled]=\"isDisabled\" placeholder=\"Başlangıç tarihi\"\n                        autocomplete=\"off\" navigation=\"arrows\" class=\"form-control pl-2 pr-2\"\n                        style=\"max-width:10rem!important; cursor: pointer\" name=\"start\" [(ngModel)]=\"startDate\"\n                        (ngModelChange)=\"onSelectStartDate($event)\" #start=\"ngbDatepicker\" />\n                </div>\n                <div class=\"input-group-append\">\n                    <a class=\"btn  calendar\"\n                        style=\"cursor: pointer; border-bottom: 1px gainsboro solid; background-color: white; \"\n                        (click)=\"deadline.toggle()\">\n                        <img src=\"../../../../assets/calender.png\"\n                            style=\"width: 1.3rem; height: 1.1rem; cursor: pointer;\" />\n                    </a>\n                    <ng-template #footerCreate>\n                        <div class=\"myCal general\"\n                            style=\"padding-top:0.1px; padding-bottom:0.5px; padding-left:0.1px;  padding-right:2.1px\">\n                            <button disabled class=\"btn w-100 rounded-0 border-0\" style=\"display: none\">&nbsp;</button>\n                            <input (keydown)=\" $event?.keyCode === 13 ? deadline.close() : ' ' \" ngbDatepicker\n                                placeholder=\"Teslim tarihi\" autocomplete=\"off\" [showWeekNumbers]=\"true\"\n                                navigation=\"arrows\" class=\"form-control w-100\"\n                                style=\"margin-left: 1px; margin-bottom: 1px; text-align:center\" name=\"deadlineX\"\n                                [(ngModel)]=\"deadlineDate\" (ngModelChange)=\"onSelectDeadlineDate($event)\"\n                                #deadlineX=\"ngbDatepicker\" />\n\n                            <div class=\"timePickerXyz\" *ngIf=\"deadlineDate\">\n                                <ngb-timepicker #timePickerDeadline name=\"timePickerDeadline\" [(ngModel)]=\"timeDeadline\"\n                                    (ngModelChange)=\"onSelectTimeDeadline($event)\" [spinners]=\"false\"></ngb-timepicker>\n                            </div>\n                            <button type=\"button\" (click)=\"calendarButtonSelect('today',true);\"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Bugün</button>\n                            <button type=\"button\" (click)=\"calendarButtonSelect('tomorrow',true);\"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Yarın</button>\n                            <button [hidden]=\"!deadlineDate\" type=\"button\"\n                                (click)=\"calendarButtonSelect('noDate',true); \"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\"\n                                style=\"margin-left: 1px; margin-bottom: 4px;\">\n                                <mat-icon class=\"mat-search_icon-close\" matRipple>close</mat-icon>\n                            </button>\n                            <!-- time select-->\n\n                        </div>\n                    </ng-template>\n\n                    <ng-template #customDayCreate let-date let-currentMonth=\"currentMonth\" let-selected=\"selected\"\n                        let-disabled=\"disabled\">\n                        <span [ngbTooltip]=\"isToday(date) ? 'Bugün' : ''\" tooltipClass=\"tooltipSpecial\" placement=\"top\"\n                            class=\"custom-day\" [class.weekend]=\"isWeekend(date)\" [class.today]=\"isToday(date)\"\n                            [class.bg-primary]=\"selected\" [class.hidden]=\"date.month !== currentMonth\"\n                            [class.text-muted]=\"disabled\">\n                            {{ date.day }}\n                        </span>\n                    </ng-template>\n\n                    <input [autoClose]=\"'outside'\" ngbDatepicker placement=\"bottom\" [showWeekNumbers]=\"true\"\n                        (click)=\"deadline.toggle()\" [dayTemplate]=\"customDayCreate\" [footerTemplate]=\"footerCreate\"\n                        [markDisabled]=\"isDisabled\" placeholder=\"Teslim tarihi\" autocomplete=\"off\" navigation=\"arrows\"\n                        class=\"form-control pl-2 pr-2\" style=\"max-width:10rem!important; cursor: pointer\"\n                        name=\"deadline\" [(ngModel)]=\"deadlineDate\" (ngModelChange)=\"onSelectDeadlineDate($event)\"\n                        #deadline=\"ngbDatepicker\" />\n                </div>\n\n                <div class=\"input-group-append\">\n                    <button type=\"submit\" class=\"btn btn-dark text-white text-uppercase\">Oluştur</button>\n                    <a (click)=\"toggleProjectToDoPanel()\" class=\"btn btn-danger rounded-3 text-white text-uppercase\"\n                        style=\"cursor: pointer\">X</a>\n                </div>\n            </div>\n            <div class=\"container-fluid\">\n                <span class=\"text-danger row\" *ngIf=\"modelSubmitted && projectTask?.errors?.required\">\n                    Bir iş tanımı belirtmelisiniz.\n                </span>\n            </div>\n\n        </form>\n    </div>\n</div>\n\n\n<div [hidden]=\"!this.repository?.reOrdering\"\n    style=\" position: absolute;  top: 25%; padding-left: 35%; padding-right:35%;  z-index: 10000;\">\n    <img src=\"../assets/rolling.png\" style=\"opacity: 0.9;\">\n    <img src=\"../assets/logo.svg\" style=\"height: 3rem; width: auto\">\n</div>"
+module.exports = "<div [hidden]=\"!invalidLicensePanelOpen\"\n    style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\n z-index: 10000; background-color: rgb(243, 242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n    <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\" style=\"font-size:15px\">Özür\n        dileriz;\n        fakat herhangi bir\n        kurumsal, bireysel\n        veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>\n</div>\n\n<nav [ngStyle]=\"{'pointer-events': this?.repository?.reOrdering ? 'none':'unset'}\" class=\"container-fluid xyz-card-dark\"\n    style=\" position: sticky;\n    top: 0;\n    z-index: 1;\">\n    <a class=\"btn btn-dark text-white rounded-0\" [routerLink]=\"[ '/projeler' ]\">Geri</a>\n    <button class=\"btn btn-dark text-white rounded-0 float-right\" disabled\n        *ngIf=\"projectId && this.innerWidth<=400\">{{(getProject(projectId)?.ProjectName).substr(0,20)}}..</button>\n    <button class=\"btn btn-dark text-white rounded-0 float-right\" disabled\n        *ngIf=\"projectId && this.innerWidth>400\">{{getProject(projectId)?.ProjectName}}</button>\n    <div *ngIf=\"projectId && this.xyzekiAuthService ?.Username == getProject(projectId)?.Owner\" class=\"float-right\">\n        <div ngbDropdown placement=\"bottom\" class=\"d-inline-block\">\n            <a class=\"xyz-card-dark-btn rounded-0 border-0 mr-2\" id=\"dropdownMemberOptions\" ngbDropdownToggle>\n                <img class=\"gear\" src=\"../../../../assets/gear.svg\" style=\"height: 25px; width: 25px\">\n            </a>\n            <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\" class=\"rounded-0\"\n                style=\"background-color: #ffffff\">\n                <div class=\"btn btn-light rounded-0 border-0 \">\n                    <h6>\n                        Gizlilik\n                    </h6>\n                    <!-- onlyOwner, onlyOwnerAndPM, openOnlyTasks, open -->\n                    <div *ngIf=\"projectId\" class=\"text-nowrap text-left\">\n                        <input (click)=\"checkPrivacy(0,projectId)\" [checked]=\"getProject(projectId)?.Privacy == 0\"\n                            type=\"radio\" name=\"demo\" id=\"radio-one\" class=\"xyz-radio-btn\"><label for=\"radio-one\">Tüm\n                            Paydaşlara Açık (Tümü)</label>\n                    </div>\n                    <div *ngIf=\"projectId\" class=\"text-nowrap text-center\">\n                        <small class=\"text-muted \">Proje içeriği ve ilgili görevler tüm paydaşlar tarafından\n                            görülebilir.</small>\n\n                    </div>\n                    <div *ngIf=\"projectId\" class=\"text-nowrap text-left\">\n                        <input (click)=\"checkPrivacy(1,projectId)\" [checked]=\"getProject(projectId)?.Privacy == 1\"\n                            type=\"radio\" name=\"demo\" id=\"radio-two\" class=\"xyz-radio-btn\">\n                        <label for=\"radio-two\">Tüm Paydaşlara Açık (Liste Modu)</label>\n                    </div>\n                    <div *ngIf=\"projectId\" class=\"text-left\">\n                        <small class=\"text-muted \">Proje bir listeye dönüştürülür. Liste alıcıları veya atanan paydaşlar\n                            proje ya da liste içeriğini 1. seçenekte olduğu gibi görüntüleyebilir fakat anasayfalarına\n                            bir görev talimatı düşmez.\n                        </small>\n                    </div>\n                    <!-- <div *ngIf=\"projectId\" class=\"text-nowrap text-left\">\n                        <input (click)=\"checkPrivacy(2,projectId)\" [checked]=\"getProject(projectId)?.Privacy == 2\"\n                            type=\"radio\" name=\"demo\" id=\"radio-three\" class=\"xyz-radio-btn\">\n                        <label for=\"radio-three\">Tüm Paydaşlara Açık (Görevler)</label>\n\n                    </div>\n                    <div *ngIf=\"projectId\" class=\"text-left\">\n                        <small class=\"text-muted \">Proje içeriğini gizler, tüm paydaşlar anasayfasında sadece kendi\n                            görevlerini\n                            görüntüleyebilir.</small>\n                    </div> -->\n                    <div *ngIf=\"projectId\" class=\"text-nowrap text-left\">\n                        <input (click)=\"checkPrivacy(3,projectId)\" [checked]=\"getProject(projectId)?.Privacy == 3\"\n                            type=\"radio\" name=\"demo\" id=\"radio-four\" class=\"xyz-radio-btn\"><label\n                            for=\"radio-four\">Sadece Ben ve Proje\n                            Yöneticisi</label>\n                    </div>\n                    <div *ngIf=\"projectId\" class=\"text-left\">\n                        <small class=\"text-muted \">Proje içeriğini ve atanmış görevleri siz (proje sahibi) ve proje\n                            yöneticisi görüntüleyebilir ve düzenleyebilir.</small>\n                    </div>\n                    <div *ngIf=\"projectId\" class=\"text-nowrap text-left \">\n                        <input (click)=\"checkPrivacy(4,projectId)\" [checked]=\"getProject(projectId)?.Privacy == 4\"\n                            type=\"radio\" name=\"demo\" id=\"radio-five\" class=\"xyz-radio-btn\"><label\n                            for=\"radio-five\">Sadece Ben</label>\n                    </div>\n                    <div *ngIf=\"projectId\" class=\"text-left\">\n                        <small class=\"text-muted \">Proje içeriğini ve atanmış görevleri sadece siz (proje sahibi)\n                            görüntüleyebilir ve düzenleyebilirsiniz.</small>\n                    </div>\n\n\n                </div>\n\n            </div>\n        </div>\n\n    </div>\n</nav>\n<div class=\"container-fluid  pt-2 pb-3 bg-white\"\n    [ngStyle]=\"{'padding': this.innerWidth <= 600 ? '3px!important': '30px', 'pointer-events':this?.repository?.reOrdering ? 'none':'unset'}\">\n\n    <!-- cdkDropListGroup -->\n\n    <div class=\"row pl-1 pr-1\">\n    </div>\n    <div class=\"row pl-1 pr-1\" style=\" position: sticky;\n    top: 50px;\n    z-index: 1; background-color: black; padding-top:0px; padding-bottom:0px\">\n\n        <div #switchDayArea class=\"w-100\" style=\"z-index: 999\">\n\n            <app-switch-day class=\"w-100\" [isProjectMode]=\"'true'\" [projectTodoRepository]=\"repository\">\n            </app-switch-day>\n\n        </div>\n    </div>\n\n\n    <div class=\"row pt-2 pl-1 pr-1\" #scrollMe [scrollTop]=\"scrollMe.scrollHeight\">\n        <table class=\"table table-hover table-sm gizliHeader2  pb-0 mb-0 \">\n\n            <tbody cdkDropList id=\"ProjectToDosContainer\" (cdkDropListDropped)=\"drop($event)\" class=\"shadowedTr\">\n                <tr (mousedown)=\"onMouseDown($event, projectToDo)\" (cdkDragStarted)=\"onDragStart($event)\"\n                    (cdkDragEnded)=\"onDragEnd($event)\"\n                    [ngStyle]=\"projectToDo?.Zindex ? zIndexStyle(projectToDo?.Zindex):'' \" style=\"margin-bottom: 4px; \"\n                    cdkDrag [cdkDragData]=\"projectToDo\" *ngFor=\"let projectToDo  of projectToDos(); index as i\"\n                    class=\"draggable trOptimization\" [ngClass]=\"{'hideSubTask': !isProjectTaskShown(projectToDo)}\">\n\n\n                    <td style=\"width:5%;\" cdkDragHandle>\n\n                        <div [ngStyle]=\"{'padding-left': projectToDo.Zindex > 0 ? ' 10px' : '0'}\">\n\n                            <div>\n                                <a role=\"button\" (click)=\"deCompletePT(projectToDo)\" *ngIf=\"projectToDo?.IsCompleted\"\n                                    class=\"btn btn-secondary-outline p-0 m-0\"><img src=\"../../../assets/squareCheck.png\"\n                                        style=\"width: 1.3rem; height: 1.3rem; cursor: pointer; \" />\n                                </a>\n                                <a role=\"button\" (click)=\"completePT(projectToDo)\" *ngIf=\"!projectToDo?.IsCompleted\"\n                                    class=\"btn btn-secondary-outline p-0 m-0\"><img\n                                        src=\"../../../assets/squareUnCheck.png\"\n                                        style=\"width: 1.3rem; height: 1.3rem; cursor: pointer; \" />\n                                </a>\n                            </div>\n                            <small ngbTooltip=\"{{projectToDo?.Finish  |  date:'shortTime' }} saatinde\"\n                                placement=\"bottom\" tooltipClass=\"tooltipSpecial\">\n                                <span class=\"text-nowrap\">\n                                    {{projectToDo?.IsCompleted && projectToDo?.Finish ? (projectToDo?.Finish | humanizer) : ''}}</span>\n                            </small>\n                        </div>\n                    </td>\n\n                    <td style=\"width:30%; cursor:text!important\"\n                        [ngStyle]=\"{'font-weight': isSubTaskFounded(projectToDo) ? '500' : '400'}\"\n                        (click)=\"toggleEditProjectToDoPanel(projectToDo?.TaskId); \" cdkDragHandle\n                        *ngIf=\"projectToDoModelEdit?.TaskId != projectToDo?.TaskId\">\n\n\n                        <div class=\"w-100\" *ngIf=\"projectToDo?.IsCompleted; else ptaskToDo\">\n                            <span class=\"w-100\" style=\"text-decoration: line-through; cursor:text!important\">\n\n                                <img *ngIf=\"isSubTaskFounded(projectToDo)\" class=\"mr-2\"\n                                    [hidden]=\"projectToDo?.ShowSubTasks\" ngbTooltip=\"Alt görevleri göster\"\n                                    tooltipClass=\"tooltipSpecial\" placement=\"bottom\"\n                                    (click)=\"showSubTasks(projectToDo); $event.stopPropagation();\"\n                                    src=\"../../../../assets/down.png\"\n                                    style=\"width: 17px;object-fit: cover; cursor: pointer; display:inline-block\" />\n                                <img *ngIf=\"isSubTaskFounded(projectToDo)\" class=\"mr-2\"\n                                    [hidden]=\"!projectToDo?.ShowSubTasks\" ngbTooltip=\"Alt görevleri gizle\"\n                                    tooltipClass=\"tooltipSpecial\" placement=\"bottom\"\n                                    (click)=\"hideSubTasks(projectToDo); $event.stopPropagation();\"\n                                    src=\"../../../../assets/up.png\"\n                                    style=\"width: 17px;object-fit: cover; cursor: pointer; display:inline-block \" />\n\n\n\n                                {{projectToDo?.TaskTitle}}\n\n                                <!-- <span *ngIf=\"projectToDo.Zindex>0\" >L</span> -->\n\n\n                            </span>\n\n                        </div>\n                        <ng-template #ptaskToDo class=\"w-100\">\n\n\n\n                            <span class=\"w-100\" [ngClass]=\"{'shineYapiliyor': projectToDo?.Status == 'Yapılıyor',\n                                'shineBitmekuzere': projectToDo?.Status == 'Test Ediliyor' }\">\n\n\n                                <img *ngIf=\"isSubTaskFounded(projectToDo)\" class=\"mr-2\"\n                                    [hidden]=\"projectToDo?.ShowSubTasks\" ngbTooltip=\"Alt görevleri göster\"\n                                    tooltipClass=\"tooltipSpecial\" placement=\"bottom\"\n                                    (click)=\"showSubTasks(projectToDo); $event.stopPropagation();\"\n                                    src=\"../../../../assets/down.png\"\n                                    style=\"width: 17px;object-fit: cover; cursor: pointer; display:inline-block\" />\n                                <img *ngIf=\"isSubTaskFounded(projectToDo)\" class=\"mr-2\"\n                                    [hidden]=\"!projectToDo?.ShowSubTasks\" ngbTooltip=\"Alt görevleri gizle\"\n                                    tooltipClass=\"tooltipSpecial\" placement=\"bottom\"\n                                    (click)=\"hideSubTasks(projectToDo); $event.stopPropagation();\"\n                                    src=\"../../../../assets/up.png\"\n                                    style=\"width: 17px;object-fit: cover; cursor: pointer; display:inline-block \" />\n\n                                {{projectToDo?.TaskTitle}}\n\n\n                                <!-- <span *ngIf=\"projectToDo.Zindex>0\" >L</span> -->\n\n\n                            </span>\n\n\n                        </ng-template>\n\n\n                    </td>\n                    <td style=\"width:10%\" cdkDragHandle *ngIf=\"projectToDoModelEdit?.TaskId != projectToDo?.TaskId\">\n                        <a *ngIf=\"projectToDo?.TaskId && getProject(projectId)?.Privacy != 1\"\n                            class=\"modernUnderlined ml-2 w-100\"\n                            (click)=\"setStatus(projectToDo?.TaskId);$event.stopPropagation();\"\n                            style=\"cursor: pointer; font-size: 13px\">{{(projectToDo?.Status ? projectToDo?.Status  : 'Bekliyor')}}</a>\n                    </td>\n\n                    <td style=\"width:25%\" class=\"text-center\" cdkDragHandle\n                        *ngIf=\"projectToDoModelEdit?.TaskId != projectToDo?.TaskId\">\n\n\n\n\n\n\n                        <ng-container\n                            *ngIf=\"(projectToDo?.Start | humanizer) != (projectToDo?.Deadline | humanizer); else sameStartDate\">\n                            <div *ngIf=\"projectToDo?.Start || projectToDo?.Deadline\"\n                                style=\"background-color:rgb(245, 241, 241); border-radius: 20px; padding:5px\">\n\n                                <span\n                                    style=\"color: #00a028; display:block; margin-bottom:5px; \">{{projectToDo?.Start | humanizer}}\n                                    <span *ngIf=\"projectToDo?.Start |  date:'shortTime' \"\n                                        class=\"time-pipe-design\">{{projectToDo?.Start |  date:'shortTime' }}</span>\n                                    <span [hidden]=\"!projectToDo?.Start\">&nbsp;başl.</span>\n                                </span>\n\n                                <span style=\"color: #b80000; display:block\">{{projectToDo?.Deadline | humanizer}}\n                                    <span *ngIf=\"projectToDo?.Deadline |  date:'shortTime' \"\n                                        class=\"time-pipe-design\">{{projectToDo?.Deadline |  date:'shortTime' }} </span>\n                                    <span [hidden]=\"!projectToDo?.Deadline\">&nbsp;bit.</span>\n                                </span>\n\n                            </div>\n                        </ng-container>\n                        <ng-template #sameStartDate>\n\n                            <div *ngIf=\"projectToDo?.Start || projectToDo?.Deadline\"\n                                style=\"background-color:rgb(245, 241, 241); border-radius: 20px; padding:5px\">\n\n\n                                <span style=\" display:block; margin-bottom:5px;\" style=\"color: rgb(196, 199, 23); \">{{projectToDo?.Start | humanizer}}\n                                    <span *ngIf=\"projectToDo?.Start |  date:'shortTime' \"\n                                        class=\"time-pipe-design\">{{projectToDo?.Start |  date:'shortTime' }}</span>\n                                    <span\n                                        *ngIf=\"projectToDo?.Start |  date:'shortTime'  && projectToDo?.Deadline |  date:'shortTime' \">\n                                        - </span>\n                                    <span class=\"time-pipe-design\"\n                                        *ngIf=\"projectToDo?.Deadline |  date:'shortTime' \">{{projectToDo?.Deadline |  date:'shortTime' }}</span>\n\n                                    <span style=\" display:block; \">başl. ve bit.</span>\n                                </span>\n\n\n\n                            </div>\n\n\n\n                        </ng-template>\n\n\n                    </td>\n\n\n                    <td style=\"width:5%\" cdkDragHandle class=\"text-center\"\n                        *ngIf=\"projectToDoModelEdit?.TaskId != projectToDo?.TaskId\">\n\n                        <a class=\"btn filter-cnote pl-0 pt-0 pb-0 ml-1 mr-1 text-nowrap\"\n                            style=\"cursor: pointer!important\"\n                            (click)=\"showCommentsDialog(projectToDo?.TaskId,projectToDo?.TaskTitle)\">\n                            <img src=\"../../../../assets/comment-note.svg\" style=\"height: 1.5rem; cursor: pointer;\" />\n                            <span>\n                                {{getPTCommentsForCount(projectToDo?.TaskId)?.CommentsCount}}\n                            </span>\n                        </a>\n                    </td>\n                    <td style=\"width:15%;\" class=\"text-center\" cdkDragHandle\n                        *ngIf=\"projectToDoModelEdit?.TaskId != projectToDo?.TaskId\">\n                        <div class=\"wrapOrNot\" style=\"color: rgb(90, 90, 90); text-align: center;\"\n                            *ngIf=\"projectToDo?.AssignedTo && xyzekiAuthService?.Username == projectToDo?.AssignedTo\">\n                            <img alt=\"Avatar\" *ngIf=\"xyzekiAuthService?.Member\"\n                                [src]=\"xyzekiAuthService?.Member?.Avatar\"\n                                class=\"md-avatar size-1 rounded-circle \">\n                            <span> Ben</span>\n                        </div>\n\n\n                        <div class=\"wrapOrNot\" style=\"color: rgb(94, 94, 94);  text-align: center; \"\n                            *ngIf=\"projectToDo?.AssignedTo &&  xyzekiAuthService?.Username != projectToDo?.AssignedTo\">\n                            <img *ngIf=\"getMember(projectToDo?.AssignedTo)\"\n                                [src]=\"getMember(projectToDo?.AssignedTo)?.Avatar\" alt=\"Avatar\"\n                                class=\"md-avatar size-1 rounded-circle \">\n                            <span> {{getMember(projectToDo?.AssignedTo)?.Name}}\n                            </span></div>\n\n\n\n\n\n\n\n\n                    </td>\n                    <td style=\"width:5%\" cdkDragHandle class=\"text-center \"\n                        *ngIf=\"projectToDoModelEdit?.TaskId != projectToDo?.TaskId\">\n                        <div class=\" text-nowrap\">\n                            <a *ngIf=\"projectToDo?.Zindex > 0\" ngbTooltip=\"Üst görev yap\" tooltipClass=\"tooltipSpecial\"\n                                placement=\"bottom\" (click)=\"decreaseTaskIndent(projectToDo); $event.stopPropagation();\"\n                                class=\"btn btn-light btn-sm rounded-1 border-0\" style=\"margin-right: 3px\">\n                                <img src=\"../../../../assets/arrow-3.png\"\n                                    style=\"width: 16px;object-fit: cover; cursor: pointer; \" /></a>\n                            <a *ngIf=\"projectToDo?.Zindex < 1\" ngbTooltip=\"Alt görev yap\" tooltipClass=\"tooltipSpecial\"\n                                placement=\"bottom\" (click)=\"increaseTaskIndent(projectToDo); $event.stopPropagation();\"\n                                class=\"btn btn-light btn-sm rounded-1 border-0\">\n                                <img src=\"../../../../assets/arrow-2.png\"\n                                    style=\"width: 16px;object-fit: cover; cursor: pointer; \" /></a>\n                        </div>\n\n                    </td>\n\n                    <td style=\"width:5%\" class=\"text-center \" cdkDragHandleDisabled\n                        *ngIf=\"projectToDoModelEdit?.TaskId != projectToDo?.TaskId\">\n                        <div ngbDropdown class=\"d-inline-block\" style=\"margin-left:2px!important\" placement=\"left\"\n                            *ngIf=\"projectToDo?.TaskId!=undefined\">\n                            <a class=\"btn filter-grey pl-0 pt-0 pb-0 mb-0\" style=\"border:0px solid !important\"\n                                id=\"dropdownMemberOptions\" ngbDropdownToggle>\n                                <img src=\"../../../assets/more2.svg\"\n                                    style=\"height: 7px;object-fit: cover; cursor: pointer;\" />\n\n                            </a>\n                            <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\"\n                                class=\"rounded-4 bg-white ml-0 mr-0\">\n\n                                <button (click)=\"toggleEditProjectToDoPanel(projectToDo?.TaskId); \" ngbDropdownItem\n                                    class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\">\n                                    <img src=\"../../../assets/pencil.png\"\n                                        style=\"width: 20px;object-fit: cover; cursor: pointer; \" class=\"mr-2\" />Görevi\n                                    Düzenle</button>\n                                <hr>\n                                <button (click)=\"deleteProjectToDo(projectToDo?.TaskId)\" ngbDropdownItem\n                                    class=\"btn btn-light rounded-0 border-0 xyz-nav-btn2\"><img\n                                        src=\"../../../assets/cancel.svg\"\n                                        style=\"width: 18px;object-fit: cover; cursor: pointer; \" class=\"mr-2\" />Görevi\n                                    Sil</button>\n\n                            </div>\n\n\n                        </div>\n                    </td>\n                    <td cdkDragHandleDisabled style=\"background-color: rgb(230, 231, 231); width: 100%\" colspan=\"4\"\n                        *ngIf=\"editProjectToDoPanelOpen && projectToDoModelEdit?.TaskId == projectToDo?.TaskId\">\n                        <form #projectToDoEditForm=\"ngForm\" (ngSubmit)=\"editProjectToDo(projectToDoEditForm)\"\n                            novalidate>\n                            <div class=\"input-group w-100 others\">\n                                <textarea (keydown)=\"onKeydownEvent($event)\" id=\"textForFocus\" autofocus\n                                    name=\"projectToDoEdit\" #projectToDoEdit=\"ngModel\"\n                                    [(ngModel)]=\"projectToDoModelEdit.TaskTitle\" required class=\"xyz-textarea border-0\"\n                                    placeholder=\"Görevi tanımlar mısınız?\" rows=\"2\"> </textarea>\n\n                                <ng-template #footerEditStart>\n                                    <div class=\"myCal general\"\n                                        style=\"padding-top:0.1px; padding-bottom:0.5px; padding-left:0.1px;  padding-right:2.1px\">\n                                        <button disabled class=\"btn w-100 rounded-0 border-0\"\n                                            style=\"display: none\">&nbsp;</button>\n                                        <input (keydown)=\" $event?.keyCode === 13 ? datePickerEditStart.close() : ' ' \"\n                                            ngbDatepicker placeholder=\"Başlangıç tarihi\" autocomplete=\"off\"\n                                            [showWeekNumbers]=\"true\" navigation=\"arrows\" class=\"form-control w-100\"\n                                            style=\"margin-left: 1px; margin-bottom: 1px; text-align:center\"\n                                            name=\"datePickerEditStartX\" [(ngModel)]=\"dateEditStart\"\n                                            (ngModelChange)=\"onSelectDateEditStart($event)\"\n                                            #datePickerEditStartX=\"ngbDatepicker\" />\n\n                                        <div class=\"timePickerXyz\" *ngIf=\"dateEditStart\">\n                                            <ngb-timepicker #timePickerEditStart name=\"timePickerEditStart\"\n                                                [(ngModel)]=\"timeEditStart\"\n                                                (ngModelChange)=\"onSelectTimeEditStart($event)\" [spinners]=\"false\">\n                                            </ngb-timepicker>\n                                        </div>\n\n                                        <button type=\"button\" (click)=\"calendarButtonSelect('today',false,false);\"\n                                            class=\" btn-day w-100 rounded-0 border-0 p-1\"\n                                            style=\"margin-left: 1px\">Bugün</button>\n                                        <button type=\"button\" (click)=\"calendarButtonSelect('tomorrow',false,false); \"\n                                            class=\" btn-day w-100 rounded-0 border-0 p-1\"\n                                            style=\"margin-left: 1px\">Yarın</button>\n                                        <button type=\"button\" [hidden]=\"!dateEditStart\"\n                                            (click)=\"calendarButtonSelect('noDate',false,false); \"\n                                            class=\" btn-day w-100 rounded-0 border-0 p-1\"\n                                            style=\"margin-left: 1px; margin-bottom: 4px;\">\n                                            <mat-icon class=\"mat-search_icon-close\" matRipple>close</mat-icon>\n                                        </button>\n                                        <!-- time select-->\n\n                                    </div>\n                                </ng-template>\n\n                                <ng-template #customDayEditStart let-date let-currentMonth=\"currentMonth\"\n                                    let-selected=\"selected\" let-disabled=\"disabled\">\n                                    <span [ngbTooltip]=\"isToday(date) ? 'Bugün' : ''\" tooltipClass=\"tooltipSpecial\"\n                                        placement=\"top\" class=\"custom-day\" [class.weekend]=\"isWeekend(date)\"\n                                        [class.today]=\"isToday(date)\" [class.bg-primary]=\"selected\"\n                                        [class.hidden]=\"date.month !== currentMonth\" [class.text-muted]=\"disabled\">\n                                        {{ date.day }}\n                                    </span>\n                                </ng-template>\n\n\n                                <a class=\"btn calendar rounded-0 tarihSeciciBtn\"\n                                    style=\"cursor: pointer;  border-bottom:#CED4DA 0.5px solid; background-color: white  \"\n                                    (click)=\"datePickerEditStart.toggle()\">\n                                    <img src=\"../../../../assets/calender.png\"\n                                        style=\"width: 1.3rem; height: 1.1rem; cursor: pointer;\" />\n                                </a>\n\n\n                                <input [autoClose]=\"'outside'\" style=\"cursor: pointer\"\n                                    (click)=\"datePickerEditStart.toggle()\" ngbDatepicker\n                                    [dayTemplate]=\"customDayEditStart\" [footerTemplate]=\"footerEditStart\"\n                                    [markDisabled]=\"isDisabled\" placeholder=\"Başlangıç tarihi\" autocomplete=\"off\"\n                                    [showWeekNumbers]=\"true\" placement=\"bottom\" navigation=\"arrows\"\n                                    class=\"form-control tarihSecici\" name=\"datePickerEditStart\"\n                                    [(ngModel)]=\"dateEditStart\" (ngModelChange)=\"onSelectDateEditStart($event)\"\n                                    #datePickerEditStart=\"ngbDatepicker\" />\n                                <!-- END OF START DATE-->\n\n\n                                <ng-template #footerEdit>\n                                    <div class=\"myCal general\"\n                                        style=\"padding-top:0.1px; padding-bottom:0.5px; padding-left:0.1px;  padding-right:2.1px\">\n                                        <button disabled class=\"btn w-100 rounded-0 border-0\"\n                                            style=\"display: none\">&nbsp;</button>\n                                        <input (keydown)=\" $event?.keyCode === 13 ? datePickerEdit.close() : ' ' \"\n                                            ngbDatepicker placeholder=\"Teslim tarihi\" autocomplete=\"off\"\n                                            [showWeekNumbers]=\"true\" navigation=\"arrows\" class=\"form-control w-100\"\n                                            style=\"margin-left: 1px; margin-bottom: 1px; text-align:center\"\n                                            name=\"datePickerEditX\" [(ngModel)]=\"dateEdit\"\n                                            (ngModelChange)=\"onSelectDateEdit($event)\"\n                                            #datePickerEditX=\"ngbDatepicker\" />\n\n                                        <div class=\"timePickerXyz\" *ngIf=\"dateEdit\">\n                                            <ngb-timepicker #timePickerEdit name=\"timePickerEdit\" [(ngModel)]=\"timeEdit\"\n                                                (ngModelChange)=\"onSelectTimeEdit($event)\" [spinners]=\"false\">\n                                            </ngb-timepicker>\n                                        </div>\n                                        <button type=\"button\" (click)=\"calendarButtonSelect('today',false); \"\n                                            class=\" btn-day w-100 rounded-0 border-0 p-1\"\n                                            style=\"margin-left: 1px\">Bugün</button>\n                                        <button type=\"button\" (click)=\"calendarButtonSelect('tomorrow',false);\"\n                                            class=\" btn-day w-100 rounded-0 border-0 p-1\"\n                                            style=\"margin-left: 1px\">Yarın</button>\n                                        <button [hidden]=\"!dateEdit\" type=\"button\"\n                                            (click)=\"calendarButtonSelect('noDate',false); \"\n                                            class=\" btn-day w-100 rounded-0 border-0 p-1\"\n                                            style=\"margin-left: 1px; margin-bottom: 4px;\">\n                                            <mat-icon class=\"mat-search_icon-close\" matRipple>close</mat-icon>\n                                        </button>\n                                        <!-- time select-->\n\n                                    </div>\n                                </ng-template>\n\n\n\n                                <ng-template #customDayEdit let-date let-currentMonth=\"currentMonth\"\n                                    let-selected=\"selected\" let-disabled=\"disabled\">\n                                    <span [ngbTooltip]=\"isToday(date) ? 'Bugün' : ''\" tooltipClass=\"tooltipSpecial\"\n                                        placement=\"top\" class=\"custom-day\" [class.weekend]=\"isWeekend(date)\"\n                                        [class.today]=\"isToday(date)\" [class.bg-primary]=\"selected\"\n                                        [class.hidden]=\"date.month !== currentMonth\" [class.text-muted]=\"disabled\">\n                                        {{ date.day }}\n                                    </span>\n                                </ng-template>\n\n\n                                <a class=\"btn calendar rounded-0 tarihSeciciBtn\"\n                                    style=\"cursor: pointer;  border-bottom:#CED4DA 0.5px solid; background-color: white  \"\n                                    (click)=\"datePickerEdit.toggle()\">\n                                    <img src=\"../../../../assets/calender.png\"\n                                        style=\"width: 1.3rem; height: 1.1rem; cursor: pointer;\" />\n                                </a>\n                                <input [autoClose]=\"'outside'\" style=\"cursor: pointer\" (click)=\"datePickerEdit.toggle()\"\n                                    ngbDatepicker [dayTemplate]=\"customDayEdit\" [footerTemplate]=\"footerEdit\"\n                                    [markDisabled]=\"isDisabled\" placeholder=\"Teslim tarihi\" autocomplete=\"off\"\n                                    [showWeekNumbers]=\"true\" placement=\"bottom\" navigation=\"arrows\"\n                                    class=\"form-control tarihSecici\" name=\"datePickerEdit\" [(ngModel)]=\"dateEdit\"\n                                    (ngModelChange)=\"onSelectDateEdit($event)\" #datePickerEdit=\"ngbDatepicker\" />\n\n\n                                <div class=\"input-group-append btn-group btn-group-toggle\">\n                                    <app-assign-autocomplete\n                                        *ngIf=\"(projectId && this.xyzekiAuthService ?.Username != getProject(projectId)?.ProjectManager)\"\n                                        [normalMode]=\"true\" [selectedItemOver]=\"this.projectToDoModelEdit?.AssignedTo\"\n                                        #editChild (assignedToEventForProjectEdit)=\"onAssignedToEventEdit($event)\">\n                                    </app-assign-autocomplete>\n\n                                    <app-assign-autocomplete\n                                        *ngIf=\"(projectId && this.xyzekiAuthService ?.Username == getProject(projectId)?.ProjectManager)\"\n                                        [projectManagerMode]=\"true\"\n                                        [selectedItemOver]=\"this.projectToDoModelEdit?.AssignedTo\" #editChild\n                                        (assignedToEventForProjectEdit)=\"onAssignedToEventEdit($event)\">\n                                    </app-assign-autocomplete>\n\n\n\n\n                                </div>\n                                <div class=\"input-group-append\">\n                                    <button type=\"submit\"\n                                        class=\"btn btn-secondary text-white rounded-0 degistirBtn\">Değiştir</button>\n                                    <a (click)=\"toggleEditProjectToDoPanel(projectToDo?.TaskId)\"\n                                        class=\"btn btn-danger rounded-0 text-white text-uppercase kapatBtn\"\n                                        style=\"cursor: pointer\">X</a>\n                                </div>\n                            </div>\n\n                        </form>\n\n\n                    </td>\n                </tr>\n            </tbody>\n        </table>\n\n    </div>\n    <div *ngIf=\"projectToDos()?.length == 0\" class=\"row pt-3 pl-1 pr-1\">\n        <p *ngIf=\"dayDateStr == 'Gecikmiş'\">\n            Şu an için projenizde teslim tarihi geçmiş bir görev bulamadık.\n        </p>\n        <p *ngIf=\"dayDateStr == 'Tümü'\">\n            Şu an için projenizde bir görev bulunmamaktadır. Hemen sizin için bir tane oluşturalım.\n        </p>\n        <p *ngIf=\"dayDateStr == 'Gün'\">\n            Şu an için bugün yapılması gereken veya devam eden bir proje görevi bulamadık.\n        </p>\n    </div>\n    <div class=\"row  pl-1 pr-1\">\n        <a ngbTooltip=\"Yeni görev oluşturun\" tooltipClass=\"tooltipSpecial\" placement=\"bottom\"\n            *ngIf=\"!newProjectToDoPanelOpen\" (click)=\"toggleProjectToDoPanel()\"\n            class=\"btn btn-dark rounded-0 text-white\" style=\"cursor: pointer\">Yeni +</a>\n    </div>\n    <div class=\"row  pl-1 pr-1\" *ngIf=\"this.innerWidth < 992\">\n        <form class=\"bg-white w-100\" *ngIf=\"newProjectToDoPanelOpen\" #projectToDoForm=\"ngForm\"\n            (ngSubmit)=\"addProjectToDo(projectToDoForm)\" novalidate>\n            <div class=\"input-group mb-2 \">\n                <!-- <div class=\"input-group-prepend\">\n                        <a class=\"btn btn-dark disabled text-white\">Görev</a>\n                    </div> -->\n                <div class=\"input-group-prepend\">\n                    <!-- <a class=\"btn btn-dark disabled text-white\">Ata</a> -->\n                    <app-assign-autocomplete\n                        *ngIf=\"(projectId && this.xyzekiAuthService ?.Username != getProject(projectId)?.ProjectManager)\"\n                        [normalMode]=\"true\" (assignedToEventForProject)=\"onAssignedToEvent($event)\">\n                    </app-assign-autocomplete>\n\n                    <app-assign-autocomplete\n                        *ngIf=\"(projectId && this.xyzekiAuthService ?.Username == getProject(projectId)?.ProjectManager)\"\n                        [projectManagerMode]=\"true\" (assignedToEventForProject)=\"onAssignedToEvent($event)\">\n                    </app-assign-autocomplete>\n\n                </div>\n                <input id=\"textForFocusCreate\" autofocus type=\"text\" name=\"projectTask\"\n                    [(ngModel)]=\"projectToDoModel.TaskTitle\" #projectTask=\"ngModel\" required\n                    class=\"form-control  pl-2 pr-2\" placeholder=\"Görev, yapılacak iş ya da liste öğesi\" />\n            </div>\n            <div class=\"container-fluid\">\n                <span class=\"text-danger row\" *ngIf=\"modelSubmitted && projectTask?.errors?.required\">\n                    Bir iş tanımı belirtmelisiniz.\n                </span>\n            </div>\n            <div class=\"input-group mb-2\">\n                <div class=\"input-group-append\">\n                    <a class=\"btn  calendar\"\n                        style=\"cursor: pointer; border-bottom: 1px gainsboro solid; background-color: white; \"\n                        (click)=\"start.toggle()\">\n                        <img src=\"../../../../assets/calender.png\"\n                            style=\"width: 1.3rem; height: 1.1rem; cursor: pointer;\" />\n                    </a>\n                    <ng-template #footerCreateStart>\n                        <div class=\"myCal general\"\n                            style=\"padding-top:0.1px; padding-bottom:0.5px; padding-left:0.1px;  padding-right:2.1px\">\n                            <button disabled class=\"btn w-100 rounded-0 border-0\" style=\"display: none\">&nbsp;</button>\n                            <input (keydown)=\" $event?.keyCode === 13 ? start.close() : ' ' \" ngbDatepicker\n                                placeholder=\"Başlangıç tarihi\" autocomplete=\"off\" [showWeekNumbers]=\"true\"\n                                navigation=\"arrows\" class=\"form-control w-100\"\n                                style=\"margin-left: 1px; margin-bottom: 1px; text-align:center\" name=\"startX\"\n                                [(ngModel)]=\"startDate\" (ngModelChange)=\"onSelectStartDate($event)\"\n                                #startX=\"ngbDatepicker\" />\n\n                            <div class=\"timePickerXyz\" *ngIf=\"startDate\">\n                                <ngb-timepicker #timePickerStart name=\"timePickerStart\" [(ngModel)]=\"timeStart\"\n                                    (ngModelChange)=\"onSelectTimeStart($event)\" [spinners]=\"false\">\n                                </ngb-timepicker>\n                            </div>\n\n\n                            <button type=\"button\" (click)=\"calendarButtonSelect('today',true,false);\"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Bugün</button>\n                            <button type=\"button\" (click)=\"calendarButtonSelect('tomorrow',true,false); \"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Yarın</button>\n                            <button [hidden]=\"!startDate\" type=\"button\"\n                                (click)=\"calendarButtonSelect('noDate',true,false); \"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\"\n                                style=\"margin-left: 1px; margin-bottom: 4px;\">\n                                <mat-icon class=\"mat-search_icon-close\" matRipple>close</mat-icon>\n                            </button>\n                            <!-- time select-->\n\n                        </div>\n                    </ng-template>\n\n                    <ng-template #customDayCreateStart let-date let-currentMonth=\"currentMonth\" let-selected=\"selected\"\n                        let-disabled=\"disabled\">\n                        <span [ngbTooltip]=\"isToday(date) ? 'Bugün' : ''\" tooltipClass=\"tooltipSpecial\" placement=\"top\"\n                            class=\"custom-day\" [class.weekend]=\"isWeekend(date)\" [class.today]=\"isToday(date)\"\n                            [class.bg-primary]=\"selected\" [class.hidden]=\"date.month !== currentMonth\"\n                            [class.text-muted]=\"disabled\">\n                            {{ date.day }}\n                        </span>\n                    </ng-template>\n\n                    <input [autoClose]=\"'outside'\" ngbDatepicker placement=\"bottom\" [showWeekNumbers]=\"true\"\n                        (click)=\"start.toggle()\" [dayTemplate]=\"customDayCreateStart\"\n                        [footerTemplate]=\"footerCreateStart\" [markDisabled]=\"isDisabled\" placeholder=\"Başlangıç tarihi\"\n                        autocomplete=\"off\" navigation=\"arrows\" class=\"form-control pl-2 pr-2\"\n                        style=\"max-width:10rem!important; cursor: pointer\" name=\"start\" [(ngModel)]=\"startDate\"\n                        (ngModelChange)=\"onSelectStartDate($event)\" #start=\"ngbDatepicker\" />\n                </div>\n                <div class=\"input-group-append\">\n                    <a class=\"btn  calendar\"\n                        style=\"cursor: pointer; border-bottom: 1px gainsboro solid; background-color: white; \"\n                        (click)=\"deadline.toggle()\">\n                        <img src=\"../../../../assets/calender.png\"\n                            style=\"width: 1.3rem; height: 1.1rem; cursor: pointer;\" />\n                    </a>\n                    <ng-template #footerCreate>\n                        <div class=\"myCal general\"\n                            style=\"padding-top:0.1px; padding-bottom:0.5px; padding-left:0.1px;  padding-right:2.1px\">\n                            <button disabled class=\"btn w-100 rounded-0 border-0\" style=\"display: none\">&nbsp;</button>\n                            <input (keydown)=\" $event?.keyCode === 13 ? deadline.close() : ' ' \" ngbDatepicker\n                                placeholder=\"Teslim tarihi\" autocomplete=\"off\" [showWeekNumbers]=\"true\"\n                                navigation=\"arrows\" class=\"form-control w-100\"\n                                style=\"margin-left: 1px; margin-bottom: 1px; text-align:center\" name=\"deadlineX\"\n                                [(ngModel)]=\"deadlineDate\" (ngModelChange)=\"onSelectDeadlineDate($event)\"\n                                #deadlineX=\"ngbDatepicker\" />\n\n                            <div class=\"timePickerXyz\" *ngIf=\"deadlineDate\">\n                                <ngb-timepicker #timePickerDeadline name=\"timePickerDeadline\" [(ngModel)]=\"timeDeadline\"\n                                    (ngModelChange)=\"onSelectTimeDeadline($event)\" [spinners]=\"false\"></ngb-timepicker>\n                            </div>\n                            <button type=\"button\" (click)=\"calendarButtonSelect('today',true);\"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Bugün</button>\n                            <button type=\"button\" (click)=\"calendarButtonSelect('tomorrow',true);\"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Yarın</button>\n                            <button [hidden]=\"!deadlineDate\" type=\"button\"\n                                (click)=\"calendarButtonSelect('noDate',true); \"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\"\n                                style=\"margin-left: 1px; margin-bottom: 4px;\">\n                                <mat-icon class=\"mat-search_icon-close\" matRipple>close</mat-icon>\n                            </button>\n                            <!-- time select-->\n\n                        </div>\n                    </ng-template>\n\n                    <ng-template #customDayCreate let-date let-currentMonth=\"currentMonth\" let-selected=\"selected\"\n                        let-disabled=\"disabled\">\n                        <span [ngbTooltip]=\"isToday(date) ? 'Bugün' : ''\" tooltipClass=\"tooltipSpecial\" placement=\"top\"\n                            class=\"custom-day\" [class.weekend]=\"isWeekend(date)\" [class.today]=\"isToday(date)\"\n                            [class.bg-primary]=\"selected\" [class.hidden]=\"date.month !== currentMonth\"\n                            [class.text-muted]=\"disabled\">\n                            {{ date.day }}\n                        </span>\n                    </ng-template>\n\n                    <input [autoClose]=\"'outside'\" ngbDatepicker placement=\"bottom\" [showWeekNumbers]=\"true\"\n                        (click)=\"deadline.toggle()\" [dayTemplate]=\"customDayCreate\" [footerTemplate]=\"footerCreate\"\n                        [markDisabled]=\"isDisabled\" placeholder=\"Teslim tarihi\" autocomplete=\"off\" navigation=\"arrows\"\n                        class=\"form-control pl-2 pr-2\" style=\"max-width:10rem!important; cursor: pointer\"\n                        name=\"deadline\" [(ngModel)]=\"deadlineDate\" (ngModelChange)=\"onSelectDeadlineDate($event)\"\n                        #deadline=\"ngbDatepicker\" />\n\n                </div>\n            </div>\n\n            <div class=\"input-group mb-2\">\n                <div class=\"input-group-append\">\n                    <button type=\"submit\" class=\"btn btn-dark text-white text-uppercase\">Oluştur</button>\n                    <a (click)=\"toggleProjectToDoPanel()\" class=\"btn btn-danger rounded-1 text-white text-uppercase\"\n                        style=\"cursor: pointer\">X</a>\n                </div>\n            </div> <!-- add and close buttons-->\n        </form>\n    </div>\n    <div class=\"row  pl-1 pr-1\" *ngIf=\"this.innerWidth >= 992\">\n        <form class=\"bg-white w-100 m-0 p-0\" *ngIf=\"newProjectToDoPanelOpen\" #projectToDoForm=\"ngForm\"\n            (ngSubmit)=\"addProjectToDo(projectToDoForm)\" novalidate>\n\n            <div class=\"input-group mb-2 \">\n                <!-- <div class=\"input-group-prepend\">\n                        <a class=\"btn btn-dark disabled text-white\">İş</a>\n                    </div> -->\n                <input id=\"textForFocusCreate\" autofocus type=\"text\" name=\"projectTask\"\n                    [(ngModel)]=\"projectToDoModel.TaskTitle\" #projectTask=\"ngModel\" required\n                    class=\"form-control  pl-2 pr-2\" placeholder=\"Görev, yapılacak iş ya da liste öğesi\" />\n\n                <div class=\"input-group-prepend\">\n\n                    <app-assign-autocomplete\n                        *ngIf=\"(projectId && this.xyzekiAuthService ?.Username != getProject(projectId)?.ProjectManager)\"\n                        [normalMode]=\"true\" (assignedToEventForProject)=\"onAssignedToEvent($event)\">\n                    </app-assign-autocomplete>\n\n                    <app-assign-autocomplete\n                        *ngIf=\"(projectId && this.xyzekiAuthService ?.Username == getProject(projectId)?.ProjectManager)\"\n                        [projectManagerMode]=\"true\" (assignedToEventForProject)=\"onAssignedToEvent($event)\">\n                    </app-assign-autocomplete>\n\n                </div>\n                <div class=\"input-group-append\">\n                    <a class=\"btn  calendar\"\n                        style=\"cursor: pointer; border-bottom: 1px gainsboro solid; background-color: white; \"\n                        (click)=\"start.toggle()\">\n                        <img src=\"../../../../assets/calender.png\"\n                            style=\"width: 1.3rem; height: 1.1rem; cursor: pointer;\" />\n                    </a>\n                    <ng-template #footerCreateStart>\n                        <div class=\"myCal general\"\n                            style=\"padding-top:0.1px; padding-bottom:0.5px; padding-left:0.1px;  padding-right:2.1px\">\n                            <button disabled class=\"btn w-100 rounded-0 border-0\" style=\"display: none\">&nbsp;</button>\n                            <input (keydown)=\" $event?.keyCode === 13 ? start.close() : ' ' \" ngbDatepicker\n                                placeholder=\"Başlangıç tarihi\" autocomplete=\"off\" [showWeekNumbers]=\"true\"\n                                navigation=\"arrows\" class=\"form-control w-100\"\n                                style=\"margin-left: 1px; margin-bottom: 1px; text-align:center\" name=\"startX\"\n                                [(ngModel)]=\"startDate\" (ngModelChange)=\"onSelectStartDate($event)\"\n                                #startX=\"ngbDatepicker\" />\n\n                            <div class=\"timePickerXyz\" *ngIf=\"startDate\">\n                                <ngb-timepicker #timePickerStart name=\"timePickerStart\" [(ngModel)]=\"timeStart\"\n                                    (ngModelChange)=\"onSelectTimeStart($event)\" [spinners]=\"false\">\n                                </ngb-timepicker>\n                            </div>\n\n\n                            <button type=\"button\" (click)=\"calendarButtonSelect('today',true,false);\"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Bugün</button>\n                            <button type=\"button\" (click)=\"calendarButtonSelect('tomorrow',true,false); \"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Yarın</button>\n                            <button [hidden]=\"!startDate\" type=\"button\"\n                                (click)=\"calendarButtonSelect('noDate',true,false); \"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\"\n                                style=\"margin-left: 1px; margin-bottom: 4px;\">\n                                <mat-icon class=\"mat-search_icon-close\" matRipple>close</mat-icon>\n                            </button>\n                            <!-- time select-->\n\n                        </div>\n                    </ng-template>\n\n                    <ng-template #customDayCreateStart let-date let-currentMonth=\"currentMonth\" let-selected=\"selected\"\n                        let-disabled=\"disabled\">\n                        <span [ngbTooltip]=\"isToday(date) ? 'Bugün' : ''\" tooltipClass=\"tooltipSpecial\" placement=\"top\"\n                            class=\"custom-day\" [class.weekend]=\"isWeekend(date)\" [class.today]=\"isToday(date)\"\n                            [class.bg-primary]=\"selected\" [class.hidden]=\"date.month !== currentMonth\"\n                            [class.text-muted]=\"disabled\">\n                            {{ date.day }}\n                        </span>\n                    </ng-template>\n\n                    <input [autoClose]=\"'outside'\" ngbDatepicker placement=\"bottom\" [showWeekNumbers]=\"true\"\n                        (click)=\"start.toggle()\" [dayTemplate]=\"customDayCreateStart\"\n                        [footerTemplate]=\"footerCreateStart\" [markDisabled]=\"isDisabled\" placeholder=\"Başlangıç tarihi\"\n                        autocomplete=\"off\" navigation=\"arrows\" class=\"form-control pl-2 pr-2\"\n                        style=\"max-width:10rem!important; cursor: pointer\" name=\"start\" [(ngModel)]=\"startDate\"\n                        (ngModelChange)=\"onSelectStartDate($event)\" #start=\"ngbDatepicker\" />\n                </div>\n                <div class=\"input-group-append\">\n                    <a class=\"btn  calendar\"\n                        style=\"cursor: pointer; border-bottom: 1px gainsboro solid; background-color: white; \"\n                        (click)=\"deadline.toggle()\">\n                        <img src=\"../../../../assets/calender.png\"\n                            style=\"width: 1.3rem; height: 1.1rem; cursor: pointer;\" />\n                    </a>\n                    <ng-template #footerCreate>\n                        <div class=\"myCal general\"\n                            style=\"padding-top:0.1px; padding-bottom:0.5px; padding-left:0.1px;  padding-right:2.1px\">\n                            <button disabled class=\"btn w-100 rounded-0 border-0\" style=\"display: none\">&nbsp;</button>\n                            <input (keydown)=\" $event?.keyCode === 13 ? deadline.close() : ' ' \" ngbDatepicker\n                                placeholder=\"Teslim tarihi\" autocomplete=\"off\" [showWeekNumbers]=\"true\"\n                                navigation=\"arrows\" class=\"form-control w-100\"\n                                style=\"margin-left: 1px; margin-bottom: 1px; text-align:center\" name=\"deadlineX\"\n                                [(ngModel)]=\"deadlineDate\" (ngModelChange)=\"onSelectDeadlineDate($event)\"\n                                #deadlineX=\"ngbDatepicker\" />\n\n                            <div class=\"timePickerXyz\" *ngIf=\"deadlineDate\">\n                                <ngb-timepicker #timePickerDeadline name=\"timePickerDeadline\" [(ngModel)]=\"timeDeadline\"\n                                    (ngModelChange)=\"onSelectTimeDeadline($event)\" [spinners]=\"false\"></ngb-timepicker>\n                            </div>\n                            <button type=\"button\" (click)=\"calendarButtonSelect('today',true);\"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Bugün</button>\n                            <button type=\"button\" (click)=\"calendarButtonSelect('tomorrow',true);\"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\" style=\"margin-left: 1px\">Yarın</button>\n                            <button [hidden]=\"!deadlineDate\" type=\"button\"\n                                (click)=\"calendarButtonSelect('noDate',true); \"\n                                class=\" btn-day w-100 rounded-0 border-0 p-1\"\n                                style=\"margin-left: 1px; margin-bottom: 4px;\">\n                                <mat-icon class=\"mat-search_icon-close\" matRipple>close</mat-icon>\n                            </button>\n                            <!-- time select-->\n\n                        </div>\n                    </ng-template>\n\n                    <ng-template #customDayCreate let-date let-currentMonth=\"currentMonth\" let-selected=\"selected\"\n                        let-disabled=\"disabled\">\n                        <span [ngbTooltip]=\"isToday(date) ? 'Bugün' : ''\" tooltipClass=\"tooltipSpecial\" placement=\"top\"\n                            class=\"custom-day\" [class.weekend]=\"isWeekend(date)\" [class.today]=\"isToday(date)\"\n                            [class.bg-primary]=\"selected\" [class.hidden]=\"date.month !== currentMonth\"\n                            [class.text-muted]=\"disabled\">\n                            {{ date.day }}\n                        </span>\n                    </ng-template>\n\n                    <input [autoClose]=\"'outside'\" ngbDatepicker placement=\"bottom\" [showWeekNumbers]=\"true\"\n                        (click)=\"deadline.toggle()\" [dayTemplate]=\"customDayCreate\" [footerTemplate]=\"footerCreate\"\n                        [markDisabled]=\"isDisabled\" placeholder=\"Teslim tarihi\" autocomplete=\"off\" navigation=\"arrows\"\n                        class=\"form-control pl-2 pr-2\" style=\"max-width:10rem!important; cursor: pointer\"\n                        name=\"deadline\" [(ngModel)]=\"deadlineDate\" (ngModelChange)=\"onSelectDeadlineDate($event)\"\n                        #deadline=\"ngbDatepicker\" />\n                </div>\n\n                <div class=\"input-group-append\">\n                    <button type=\"submit\" class=\"btn btn-dark text-white text-uppercase\">Oluştur</button>\n                    <a (click)=\"toggleProjectToDoPanel()\" class=\"btn btn-danger rounded-3 text-white text-uppercase\"\n                        style=\"cursor: pointer\">X</a>\n                </div>\n            </div>\n            <div class=\"container-fluid\">\n                <span class=\"text-danger row\" *ngIf=\"modelSubmitted && projectTask?.errors?.required\">\n                    Bir iş tanımı belirtmelisiniz.\n                </span>\n            </div>\n\n        </form>\n    </div>\n</div>\n\n\n<div [hidden]=\"!this.repository?.reOrdering\"\n    style=\" position: absolute;  top: 25%; padding-left: 35%; padding-right:35%;  z-index: 10000;\">\n    <img src=\"../assets/rolling.png\" style=\"opacity: 0.9;\">\n    <img src=\"../assets/logo.svg\" style=\"height: 3rem; width: auto\">\n</div>"
 
 /***/ }),
 
@@ -14175,7 +13605,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
 /* harmony import */ var src_app_model_repository_project_repository__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/repository/project-repository */ "./src/app/model/repository/project-repository.ts");
-/* harmony import */ var src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/model/member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/model/xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 /* harmony import */ var src_app_ui_tools_assign_autocomplete_assign_autocomplete_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! src/app/ui-tools/assign-autocomplete/assign-autocomplete.component */ "./src/app/ui-tools/assign-autocomplete/assign-autocomplete.component.ts");
 /* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
@@ -14211,7 +13641,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ProjectToDosComponent = /** @class */ (function () {
-    function ProjectToDosComponent(repository, switchHourDataService, dateTimeInfra, repositoryTM, permissions, repositoryProject, dataService, route, router, projectToDosService, projectToDoSignalrService, memberShared, memberServ, dialog, commentSignalService, projectSignalService, changeDetection, timeService) {
+    function ProjectToDosComponent(repository, switchHourDataService, dateTimeInfra, repositoryTM, permissions, repositoryProject, dataService, route, router, projectToDosService, projectToDoSignalrService, xyzekiAuthService, memberServ, dialog, commentSignalService, projectSignalService, changeDetection, timeService) {
         var _this = this;
         this.repository = repository;
         this.switchHourDataService = switchHourDataService;
@@ -14224,7 +13654,7 @@ var ProjectToDosComponent = /** @class */ (function () {
         this.router = router;
         this.projectToDosService = projectToDosService;
         this.projectToDoSignalrService = projectToDoSignalrService;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.memberServ = memberServ;
         this.dialog = dialog;
         this.commentSignalService = commentSignalService;
@@ -14233,7 +13663,7 @@ var ProjectToDosComponent = /** @class */ (function () {
         this.timeService = timeService;
         this.projectToDoModel = new src_app_model_project_task_model__WEBPACK_IMPORTED_MODULE_4__["ProjectTask"](0, undefined, undefined, undefined, undefined, undefined, undefined, false, 0, 0, false, 0, false, undefined);
         this.searchFilter = function (pt) { return _this.searchValue ? pt.TaskTitle.includes(_this.searchValue) : pt; };
-        this.taskStatus = ['Bekliyor', 'Yapılıyor', 'Tamamlanmak Üzere', 'Tamamlandı']; // max allowed length is 20 in db column
+        this.taskStatus = ['Bekliyor', 'Yapılıyor', 'Test Ediliyor', 'Tamamlandı']; // max allowed length is 20 in db column
         this.arcFilter = function (pt) { if (!pt.Archived == true)
             return pt; }; // closed at first.
         this.dayFilter = function (qt) { return qt; };
@@ -14655,7 +14085,7 @@ var ProjectToDosComponent = /** @class */ (function () {
                 if ((diff > 0 && minutediff >= 1 && (pt.Status == 'Bekliyor' || pt.Status == null))
                     || (diff2 > 0 && minutediff2 >= 1 && !pt.IsCompleted))
                     return pt;
-                // ['Bekliyor', 'Yapılıyor', 'Tamamlanmak Üzere', 'Tamamlandı'] // max allowed length is 20 in db column
+                // ['Bekliyor', 'Yapılıyor', 'Test Ediliyor', 'Tamamlandı'] // max allowed length is 20 in db column
             }
             else if (pt.Start) { // başlangıç zamanı şu andan küçük ve de hala başlamamış olanları göster(sadece bekliyor olanları)
                 var diff = ((now.getTime() - dateStart.getTime()) / 1000);
@@ -14695,7 +14125,7 @@ var ProjectToDosComponent = /** @class */ (function () {
             if ((diff > 0 && minutediff >= 1 && (pt.Status == 'Bekliyor' || pt.Status == null))
                 || (diff2 > 0 && minutediff2 >= 1 && !pt.IsCompleted))
                 return true;
-            // ['Bekliyor', 'Yapılıyor', 'Tamamlanmak Üzere', 'Tamamlandı'] // max allowed length is 20 in db column
+            // ['Bekliyor', 'Yapılıyor', 'Test Ediliyor', 'Tamamlandı'] // max allowed length is 20 in db column
         }
         return false;
     };
@@ -15211,12 +14641,28 @@ var ProjectToDosComponent = /** @class */ (function () {
             }
         }
     };
-    ProjectToDosComponent.prototype.onDragStart = function (event) {
+    ProjectToDosComponent.prototype.onDragStart = function (event, projectToDo) {
+        // sürüklenen elementin zindexi 0 ise çocuklarını geçici olarak gizle
+        // if(projectToDo.Zindex == 0){
+        //  projectToDo.ShowSubTasks = false;
+        // }
+        //
         if (this.innerWidth < 600) {
             var element = document.getElementsByTagName('html')[0];
             element.className = null;
         }
         this.switchHourDataService.setupStyle.next({ isOpen: true, Visibility: 'visible', Left: this.left - 21 + 'px', Top: this.top + 'px' });
+    };
+    ProjectToDosComponent.prototype.onDragEnd = function (event, projectToDo) {
+        // sürüklenen elementin zindexi 0 ise çocuklarını geçici olarak gizlenen durumdan göstere geçir
+        //  if(projectToDo.Zindex == 0){
+        //   projectToDo.ShowSubTasks = true;
+        // }
+        if (this.innerWidth < 600) {
+            var element = document.getElementsByTagName('html')[0];
+            element.classList.add('hizlandir');
+        }
+        this.switchHourDataService.setupStyle.next({ isOpen: true, Visibility: 'hidden', Left: this.left - 21 + 'px', Top: this.top + 'px' });
     };
     ProjectToDosComponent.prototype.getPosition = function (event) {
         var el = this.switchDayArea.nativeElement;
@@ -15243,14 +14689,12 @@ var ProjectToDosComponent = /** @class */ (function () {
         var top = real.top + el.clientHeight; // Bu değer sürüklenen öğenin
         return [left, top];
     };
-    ProjectToDosComponent.prototype.onDragEnd = function (event) {
-        if (this.innerWidth < 600) {
-            var element = document.getElementsByTagName('html')[0];
-            element.classList.add('hizlandir');
-        }
-        this.switchHourDataService.setupStyle.next({ isOpen: true, Visibility: 'hidden', Left: this.left - 21 + 'px', Top: this.top + 'px' });
-    };
-    ProjectToDosComponent.prototype.onMouseDown = function (event) {
+    ProjectToDosComponent.prototype.onMouseDown = function (event, projectToDo) {
+        // this.oldProjectToDoShowSubTasksStatus = projectToDo.ShowSubTasks
+        // //sürüklenen elementin zindexi 0 ise çocuklarını geçici olarak gizle
+        // if (projectToDo.Zindex == 0) {
+        //   projectToDo.ShowSubTasks = false;
+        // }
         var _a = this.getPosition(event), left = _a[0], top = _a[1];
         this.left = left;
         this.top = top;
@@ -15289,7 +14733,7 @@ var ProjectToDosComponent = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_project_to_do_repository__WEBPACK_IMPORTED_MODULE_5__["ProjectToDoRepository"], src_app_model_services_shared_switch_hour_data_service__WEBPACK_IMPORTED_MODULE_19__["SwitchHourDataService"], src_infrastructure_xyzeki_datetime_infra__WEBPACK_IMPORTED_MODULE_18__["XyzekiDateTimeInfra"], src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_12__["TeamMemberRepository"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_17__["MemberLicenseRepository"], src_app_model_repository_project_repository__WEBPACK_IMPORTED_MODULE_8__["ProjectRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_7__["DataService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], src_app_model_services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_3__["ProjectToDosService"],
             src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_20__["XyzekiSignalrService"],
-            src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_9__["MemberShared"], src_app_model_services_members_service__WEBPACK_IMPORTED_MODULE_13__["MembersService"],
+            src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_9__["XyzekiAuthService"], src_app_model_services_members_service__WEBPACK_IMPORTED_MODULE_13__["MembersService"],
             _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatDialog"], src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_20__["XyzekiSignalrService"],
             src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_20__["XyzekiSignalrService"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"], src_app_model_services_time_service__WEBPACK_IMPORTED_MODULE_21__["TimeService"]])
     ], ProjectToDosComponent);
@@ -15424,7 +14868,7 @@ module.exports = ".md-avatar.size-0 {\n    vertical-align: middle;\n    width: 3
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div [hidden]=\"!bothTeamOwnerAndTeamMemberCanceled\"\n    style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\n z-index: 10000; background-color: rgb(243,\n  242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n    <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\" style=\"font-size:15px\">Özür\n        dileriz;\n        fakat bu ürünümüzde aynı hesapla aynı anda hem Ekipden kurucusu hem de başka birisine ait bir Ekipdenın üyesi olamazsınız.</span>\n</div> -->\n<div [hidden]=\"!getError()\" style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\n z-index: 10000; background-color: rgb(243,\n  242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n    <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\"\n        style=\"font-size:15px\">{{getError()}}, Xyzeki 403</span>\n</div>\n<nav class=\"container-fluid xyz-card-dark\">\n    <a class=\"btn btn-dark text-white rounded-0\" [routerLink]=\"[ '/takimlar' ]\"> Geri</a>\n    <button class=\"btn btn-dark text-white rounded-0 float-right\" disabled>Gelen Davetiyeler<img\n            style=\"height:18px; object-fit: cover\" class=\"pl-1 pb-1\"\n            src=\"../../../../assets/closed-envelope.svg\"></button>\n</nav>\n<div class=\"container-fluid pt-4 pb-4  bg-white\">\n    <div class=\"row\">\n        <div class=\"col\">\n            <div class=\"container-fluid mb-4\">\n                <div class=\"row\">\n                    <h5 class=\"lead\">Gelen Kutusu</h5>\n                    <table [hidden]=\"teamMembersJoinedWR.length == 0\" class=\"table table-hover table-sm table-striped\">\n\n                        <tbody>\n                            <tr *ngFor=\"let teamMemberWR of teamMembersJoinedWR ; index as i\">\n                                <td class=\"text-nowrap\" *ngIf=\"teamMemberWR?.TeamId != undefined\">\n                                    {{getTeam(teamMemberWR?.TeamId)?.TeamName}}\n                                </td>\n                                <td *ngIf=\"teamMemberWR?.TeamId != undefined\">(@{{getTeam(teamMemberWR?.TeamId)?.Owner}})\n                                </td>\n\n                                <td>{{(teamMemberWR?.Status) == null ? 'Cevap bekliyor': 'Teklif reddedildi' }}\n                                </td>\n                                <td>\n                                    <div class=\"float-left\" *ngIf=\"teamMemberWR?.Status == null\">\n                                        <a *ngIf=\"teamMemberWR\" (click)=\"updateTeamMember(teamMemberWR,true)\"\n                                            class=\"btn btn-light\" type=\"button\">Kabul et</a>\n                                        <a *ngIf=\"teamMemberWR\" (click)=\"updateTeamMember(teamMemberWR,false)\"\n                                            class=\"btn btn-light\" type=\"button\">Reddet</a>\n                                    </div>\n\n                                </td>\n                            </tr>\n                        </tbody>\n                    </table>\n                </div>\n                <div class=\"row\">\n                    <p [hidden]=\"teamMembersJoinedWR.length != 0\">\n                        Şu an için gelen bir ekip davetiyeniz bulunmamaktadır.\n                    </p>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n</div>\n\n<div class=\"container-fluid pt-4 pb-4  bg-white\">\n    <div class=\"row\">\n        <div class=\"col-xs-5 col-lg-6 col-md-12 col-sm-12\">\n            <div class=\"container-fluid mb-4\">\n                <div class=\"row\">\n                    <h5>Katıldığınız Ekipler</h5>\n                    <table [hidden]=\"teamMembersJoined.length == 0\" class=\"table table-hover\">\n                        <thead>\n                        </thead>\n                        <tbody>\n                            <tr *ngFor=\"let teamMember of teamMembersJoined\">\n                                <td class=\"w-100\" >\n                                    <b>{{getTeam(teamMember?.TeamId)?.TeamName}}</b>\n                                </td>\n                                <td >{{getTeam(teamMember?.TeamId)?.Owner}}</td>\n                                <!-- <td>{{teamMember?.TeamId}} {{getTeam(teamMember?.TeamId)}}</td> -->\n                                <!-- <td>{{teamMember?.Owner}}{{memberShared.Username == teamMember?.Owner ? '(Siz)': ''}}</td> -->\n                                <td >\n                                    <div class=\"float-right\">\n                                        <a class=\"btn btn-light rounded-0\"\n                                            [routerLink]=\"[teamMember.TeamId, 'takim-uyeleri']\">Ekip Arkadaşlarınız</a>\n                                    </div>\n                                </td>\n                            </tr>\n                        </tbody>\n                    </table>\n\n                </div>\n                <div class=\"row\">\n                    <p [hidden]=\"teamMembersJoined.length != 0\">\n                        Şu an katıldığınız bir ekip bulunmamaktadır.\n                    </p>\n                </div>\n            </div>\n        </div>\n        <div class=\"col\">\n            <router-outlet></router-outlet>\n        </div>\n    </div>\n</div>"
+module.exports = "<!-- <div [hidden]=\"!bothTeamOwnerAndTeamMemberCanceled\"\n    style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\n z-index: 10000; background-color: rgb(243,\n  242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n    <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\" style=\"font-size:15px\">Özür\n        dileriz;\n        fakat bu ürünümüzde aynı hesapla aynı anda hem Ekipden kurucusu hem de başka birisine ait bir Ekipdenın üyesi olamazsınız.</span>\n</div> -->\n<div [hidden]=\"!getError()\" style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\n z-index: 10000; background-color: rgb(243,\n  242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n    <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\"\n        style=\"font-size:15px\">{{getError()}}, Xyzeki 403</span>\n</div>\n<nav class=\"container-fluid xyz-card-dark\">\n    <a class=\"btn btn-dark text-white rounded-0\" [routerLink]=\"[ '/takimlar' ]\"> Geri</a>\n    <button class=\"btn btn-dark text-white rounded-0 float-right\" disabled>Gelen Davetiyeler<img\n            style=\"height:18px; object-fit: cover\" class=\"pl-1 pb-1\"\n            src=\"../../../../assets/closed-envelope.svg\"></button>\n</nav>\n<div class=\"container-fluid pt-4 pb-4  bg-white\">\n    <div class=\"row\">\n        <div class=\"col\">\n            <div class=\"container-fluid mb-4\">\n                <div class=\"row\">\n                    <h5 class=\"lead\">Gelen Kutusu</h5>\n                    <table [hidden]=\"teamMembersJoinedWR.length == 0\" class=\"table table-hover table-sm table-striped\">\n\n                        <tbody>\n                            <tr *ngFor=\"let teamMemberWR of teamMembersJoinedWR ; index as i\">\n                                <td class=\"text-nowrap\" *ngIf=\"teamMemberWR?.TeamId != undefined\">\n                                    {{getTeam(teamMemberWR?.TeamId)?.TeamName}}\n                                </td>\n                                <td *ngIf=\"teamMemberWR?.TeamId != undefined\">(@{{getTeam(teamMemberWR?.TeamId)?.Owner}})\n                                </td>\n\n                                <td>{{(teamMemberWR?.Status) == null ? 'Cevap bekliyor': 'Teklif reddedildi' }}\n                                </td>\n                                <td>\n                                    <div class=\"float-left\" *ngIf=\"teamMemberWR?.Status == null\">\n                                        <a *ngIf=\"teamMemberWR\" (click)=\"updateTeamMember(teamMemberWR,true)\"\n                                            class=\"btn btn-light\" type=\"button\">Kabul et</a>\n                                        <a *ngIf=\"teamMemberWR\" (click)=\"updateTeamMember(teamMemberWR,false)\"\n                                            class=\"btn btn-light\" type=\"button\">Reddet</a>\n                                    </div>\n\n                                </td>\n                            </tr>\n                        </tbody>\n                    </table>\n                </div>\n                <div class=\"row\">\n                    <p [hidden]=\"teamMembersJoinedWR.length != 0\">\n                        Şu an için gelen bir ekip davetiyeniz bulunmamaktadır.\n                    </p>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n</div>\n\n<div class=\"container-fluid pt-4 pb-4  bg-white\">\n    <div class=\"row\">\n        <div class=\"col-xs-5 col-lg-6 col-md-12 col-sm-12\">\n            <div class=\"container-fluid mb-4\">\n                <div class=\"row\">\n                    <h5>Katıldığınız Ekipler</h5>\n                    <table [hidden]=\"teamMembersJoined.length == 0\" class=\"table table-hover\">\n                        <thead>\n                        </thead>\n                        <tbody>\n                            <tr *ngFor=\"let teamMember of teamMembersJoined\">\n                                <td class=\"w-100\" >\n                                    <b>{{getTeam(teamMember?.TeamId)?.TeamName}}</b>\n                                </td>\n                                <td >{{getTeam(teamMember?.TeamId)?.Owner}}</td>\n                                <!-- <td>{{teamMember?.TeamId}} {{getTeam(teamMember?.TeamId)}}</td> -->\n                                <!-- <td>{{teamMember?.Owner}}{{xyzekiAuthService?.Username == teamMember?.Owner ? '(Siz)': ''}}</td> -->\n                                <td >\n                                    <div class=\"float-right\">\n                                        <a class=\"btn btn-light rounded-0\"\n                                            [routerLink]=\"[teamMember.TeamId, 'takim-uyeleri']\">Ekip Arkadaşlarınız</a>\n                                    </div>\n                                </td>\n                            </tr>\n                        </tbody>\n                    </table>\n\n                </div>\n                <div class=\"row\">\n                    <p [hidden]=\"teamMembersJoined.length != 0\">\n                        Şu an katıldığınız bir ekip bulunmamaktadır.\n                    </p>\n                </div>\n            </div>\n        </div>\n        <div class=\"col\">\n            <router-outlet></router-outlet>\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -15441,7 +14885,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
-/* harmony import */ var src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
 
 
@@ -15449,10 +14893,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var IncomingInvitationsComponent = /** @class */ (function () {
-    function IncomingInvitationsComponent(repository, dataService, memberShared) {
+    function IncomingInvitationsComponent(repository, dataService, xyzekiAuthService) {
         this.repository = repository;
         this.dataService = dataService;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.doubleTeamTeamMemberCanceled = false;
     }
     IncomingInvitationsComponent.prototype.ngOnDestroy = function () {
@@ -15501,7 +14945,7 @@ var IncomingInvitationsComponent = /** @class */ (function () {
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./incoming-invitations.component.css */ "./src/app/team/teams/incoming-invitations/incoming-invitations.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_2__["TeamMemberRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_4__["DataService"], src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_3__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_2__["TeamMemberRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_4__["DataService"], src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"]])
     ], IncomingInvitationsComponent);
     return IncomingInvitationsComponent;
 }());
@@ -15546,7 +14990,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var src_app_model_team_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/team.model */ "./src/app/model/team.model.ts");
-/* harmony import */ var src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/repository/team-repository */ "./src/app/model/repository/team-repository.ts");
 /* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
 /* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
@@ -15560,13 +15004,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var MyTeamsComponent = /** @class */ (function () {
-    function MyTeamsComponent(permissions, route, repository, dataService, router, memberShared) {
+    function MyTeamsComponent(permissions, route, repository, dataService, router, xyzekiAuthService) {
         this.permissions = permissions;
         this.route = route;
         this.repository = repository;
         this.dataService = dataService;
         this.router = router;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.teamModel = new src_app_model_team_model__WEBPACK_IMPORTED_MODULE_3__["Team"]("");
         //edit mechanism
         this.updateTeamPanelOpen = false;
@@ -15659,7 +15103,7 @@ var MyTeamsComponent = /** @class */ (function () {
         if (this.permissions.getPrimaryAccessGranted()) {
             this.modelSubmitted = true;
             if (teamForm.valid) {
-                this.teamModel.Owner = this.memberShared.Username; // or imply on hidden input
+                this.teamModel.Owner = this.xyzekiAuthService.Username; // or imply on hidden input
                 this.repository.saveTeam(this.teamModel);
                 this.modelSent = true;
                 this.modelSubmitted = false;
@@ -15703,7 +15147,7 @@ var MyTeamsComponent = /** @class */ (function () {
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./my-teams.component.css */ "./src/app/team/teams/my-teams/my-teams.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_7__["MemberLicenseRepository"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_5__["TeamRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_4__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_7__["MemberLicenseRepository"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_5__["TeamRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_4__["XyzekiAuthService"]])
     ], MyTeamsComponent);
     return MyTeamsComponent;
 }());
@@ -15730,7 +15174,7 @@ module.exports = "\ninput{\n\n  border-top: 0px;\n  border-left:0px !important;\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div [hidden]=\"!invalidLicensePanelOpen\"\n        style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\n z-index: 10000; background-color: rgb(243, 242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n        <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\" style=\"font-size:15px\">Özür\n                dileriz;\n                fakat herhangi bir\n                kurumsal veya bireysel geçerli bir lisans bulamadık.</span>\n</div>\n\n<div [hidden]=\"!getError()\" style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\n z-index: 10000; background-color: rgb(243,\n  242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n    <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\"\n        style=\"font-size:15px\">{{getError()}}, Xyzeki 403</span>\n</div>\n\n<div *ngIf=\"loaded\" class=\"container-fluid\">\n        <div class=\"row\">\n                <div class=\"col ml-0 pl-0\">\n                        <h5>Ekip Üyeleri</h5>                       \n                </div>\n                <div class=\"col-3 float-right\">\n                        <div ngbDropdown class=\"d-inline-block\" placement=\"left\"\n                                *ngIf=\"!isLimited\">\n                                <button class=\"btn filter-grey\" id=\"dropdownMemberOptions\" ngbDropdownToggle>\n                                        <img src=\"../../../assets/more2.svg\"\n                                                style=\"height: 6px;object-fit: cover; cursor: pointer;\" />\n                                </button>\n                                <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\"\n                                        class=\"rounded-4 bg-white ml-0 mr-0\">\n                                        <button (click)=\"deleteTeam(teamId)\" ngbDropdownItem\n                                                class=\"btn btn-light rounded-0 border-0 xyz-nav-btn2\"><img\n                                                        src=\"../../../assets/cancel.svg\"\n                                                        style=\"width: 18px;object-fit: cover; cursor: pointer; \"\n                                                        class=\"mr-2\" />Ekibi Sonlandır</button>\n\n                                </div>\n                        </div>\n                </div>\n\n        </div>\n        <div name=\"forTM-part1\" class=\"row\">\n\n                <table [hidden]=\"teamMembers()?.length == 0\" class=\"table table-hover\">\n                        <thead>\n                                <tr>\n\n                                </tr>\n                        </thead>\n                        <tbody>\n                                <tr *ngFor=\"let teamMember of teamMembers() ; index as i\">\n                                        <td *ngIf=\"!isLimited\">\n                                                <div\n                                                        *ngIf=\"memberShared.Username == teamMember?.Username;else tmAvatar\">\n                                                        <img *ngIf=\"memberShared?.account?.getValue()\" alt=\"Avatar\"\n                                                                [src]=\"memberShared?.account?.getValue()?.Avatar\"\n                                                                class=\"md-avatar size-2 rounded-circle\">\n                                                </div>\n                                                <ng-template #tmAvatar>\n                                                        <img *ngIf=\"getMember(teamMember?.Username)\"\n                                                                [src]=\"getMember(teamMember?.Username)?.Avatar\"\n                                                                alt=\"Avatar\" class=\"md-avatar size-2 rounded-circle\">\n                                                </ng-template>\n                                        </td>\n                                        <td *ngIf=\"isLimited\">\n                                                <div\n                                                        *ngIf=\"memberShared.Username == teamMember?.Username;else tmAvatar2\">\n                                                        <img *ngIf=\"memberShared?.account?.getValue()\" alt=\"Avatar\"\n                                                                [src]=\"memberShared?.account?.getValue()?.Avatar\"\n                                                                class=\"md-avatar size-2 rounded-circle\">\n                                                </div>\n                                                <ng-template #tmAvatar2>\n                                                        <img *ngIf=\"getMemberJoined(teamMember?.Username)\"\n                                                                [src]=\"getMemberJoined(teamMember?.Username)?.Avatar\"\n                                                                alt=\"Avatar\" class=\"md-avatar size-2 rounded-circle\">\n                                                </ng-template>\n                                        </td>\n                                        <td>\n                                                <div\n                                                        *ngIf=\"memberShared.Username == teamMember?.Username; else tmDetail\">\n                                                        <b>{{ memberShared?.account?.getValue()?.Name + ' ' + memberShared?.account?.getValue()?.Surname}}</b><br>\n                                                        @{{teamMember?.Username}}(Siz)\n                                                </div>\n                                                <ng-template #tmDetail>\n                                                        <b>{{getMember(teamMember?.Username)?.Name + ' ' + getMember(teamMember?.Username)?.Surname}}</b><br>\n                                                        @{{teamMember?.Username}}\n                                                </ng-template>\n\n\n\n\n                                        </td>\n                                        <td>\n\n                                                <div *ngIf=\"!isLimited && teamMember?.TeamMemberId != undefined\"\n                                                        class=\"float-left\">\n                                                        <button *ngIf=\"teamMember?.TeamMemberId != undefined\"\n                                                                (click)=\"deleteTeamMember(teamMember?.TeamMemberId)\"\n                                                                class=\"btn btn-light\" type=\"button\">Ekipdendan\n                                                                çıkar</button>\n                                                </div>\n                                                <div *ngIf=\"isLimited && teamMember?.Username == memberShared.Username && teamMember?.TeamMemberId\"\n                                                        class=\"float-left\">\n                                                        <button (click)=\"deleteTeamMember(teamMember?.TeamMemberId,true)\"\n                                                                class=\"btn btn-light\" type=\"button\">Ekipdendan\n                                                                ayrıl</button>\n                                                </div>\n\n                                        </td>\n                                </tr>\n                        </tbody>\n                </table>\n\n        </div>\n\n        <div name=\"forTM-part2\" class=\"row pt-1\">\n                <p [hidden]=\"teamMembers().length != 0\">\n                        Şu an bu ekipte bir ekip üyeniz bulunmamaktadır.\n                </p>\n        </div>\n\n\n        <ng-container *ngIf=\"!isLimited\" name=\"TMWR\">\n                <div name=\"forTMWR-part1\" class=\"row bg-light p-1\">\n                        <span class=\"lead mb-1\">Ekip Davetiyeleriniz</span>\n                        <table [hidden]=\"teamMembersWaitingOrRejected()?.length == 0\" class=\"table table-hover table-striped\">\n                                <thead>\n                                        <tr>\n\n                                        </tr>\n                                </thead>\n                                <tbody>\n                                        <tr *ngFor=\"let teamMemberWR of teamMembersWaitingOrRejected() ; index as i\">\n                                                <td>\n                                                        <img *ngIf=\"getMember(teamMemberWR?.Username)\"\n                                                                [src]=\"getMember(teamMemberWR?.Username)?.Avatar\"\n                                                                alt=\"Avatar\" class=\"md-avatar size-2 rounded-circle\">\n                                                </td>\n                                                <td>\n                                                        <div\n                                                                *ngIf=\"memberShared.Username == teamMemberWR?.Username; else tmDetailWR\">\n                                                                <b>{{ memberShared?.account?.getValue()?.Name + ' ' + memberShared?.account?.getValue()?.Surname}}</b><br>\n                                                                @{{teamMemberWR?.Username}}(Siz)\n                                                        </div>\n                                                        <ng-template #tmDetailWR>\n                                                                <b>{{getMember(teamMemberWR?.Username)?.Name + ' ' + getMember(teamMemberWR?.Username)?.Surname}}</b><br>\n                                                                @{{teamMemberWR?.Username}}\n                                                        </ng-template>\n                                                </td>\n                                                <td>{{(teamMemberWR?.Status) == null ? 'Cevap bekleniyor': 'Teklif reddedildi' }}\n                                                </td>\n                                                <td>\n                                                        <div class=\"float-left\">\n                                                                <a *ngIf=\"teamMemberWR?.TeamMemberId != undefined\"\n                                                                        (click)=\"deleteTeamMember(teamMemberWR?.TeamMemberId)\"\n                                                                        class=\"btn btn-light\" type=\"button\">Sil</a>\n                                                        </div>\n                                                        <div class=\"float-left\" *ngIf=\"teamMemberWR?.Status == false\">\n                                                                <a *ngIf=\"teamMemberWR\"\n                                                                        (click)=\"updateTeamMember(teamMemberWR,null)\"\n                                                                        class=\"btn btn-light \" type=\"button\">Davetiye'yi\n                                                                        yenile</a>\n                                                        </div>\n\n                                                </td>\n                                        </tr>\n                                </tbody>\n                        </table>\n\n                </div>\n                <div name=\"forTMWR-part2\" class=\"row bg-light pl-1 pr-1\">\n                        <p [hidden]=\"teamMembersWaitingOrRejected().length != 0\">\n                                Şu an bir ekip davetiyeniz bulunmamaktadır. Hemen sizin için bir tane iletelim.\n                        </p>\n                </div>\n                <div name=\"forTMWR-part3\" class=\"row bg-light pl-1 pr-1\">\n                        <a *ngIf=\"!newTeamMemberPanelWROpen\" (click)=\"toggleTeamMemberWRPanel()\"\n                                class=\"btn btn-dark rounded-0 text-white\" style=\"cursor:pointer\">Yeni Davetiye</a>\n                </div>\n                <form name=\"forTMWR-part4\" class=\"row bg-light pl-1 pr-1\" *ngIf=\"newTeamMemberPanelWROpen\"\n                        #teamMemberForm=\"ngForm\" (ngSubmit)=\"addTeamMemberWR(teamMemberForm)\" novalidate>\n                        <div class=\"input-group\">\n                                <!-- \n                                        submit: It is html default form submit event, it will call underlying method when form gets submitted.\n                                        ngSubmit: Is host binding situated on form element. Basically it prevent default submit event of browser(which can be form post) by returning false. Eventually you can prevent traditional PostBack calls or page reload due to form load. This way you can validate your form & submit it to server by manual ajax from Component code\n                                    -->\n\n                                <div class=\"input-group-prepend\">\n                                        <a class=\"btn btn-info disabled text-white\">Kullanıcı Adı</a>\n                                </div>\n                                <input id=\"textForFocusTM\" autofocus type=\"text\" name=\"username\"\n                                        [(ngModel)]=\"teamMemberModel.Username\" #username=\"ngModel\" required\n                                        class=\"form-control\" placeholder=\"Kullanıcı adı giriniz\" />\n\n                                <div class=\"input-group-append\">\n                                        <button type=\"submit\" class=\"btn btn-dark text-white text-uppercase\">İstek\n                                                Gönder</button>\n                                        <a (click)=\"toggleTeamMemberWRPanel()\"\n                                                class=\"btn btn-danger rounded-5 text-white text-uppercase\">X</a>\n                                </div>\n                        </div>\n                        <div class=\"container-fluid\">\n                                <span class=\"text-danger row\" *ngIf=\"modelSubmitted && username?.errors?.required\">\n                                        Bir kullanıcı adı gerekmektedir.\n                                </span>\n                                <!-- <span class=\"text-danger row\" *ngIf=\"modelSubmitted && username?.errors?.pattern\">\n                                            İsimler için sadece harfler geçerlidir.\n                                        </span> -->\n                        </div>\n                </form>\n        </ng-container>\n\n\n</div>"
+module.exports = "<div [hidden]=\"!invalidLicensePanelOpen\"\n        style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\n z-index: 10000; background-color: rgb(243, 242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n        <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\" style=\"font-size:15px\">Özür\n                dileriz;\n                fakat herhangi bir\n                kurumsal veya bireysel geçerli bir lisans bulamadık.</span>\n</div>\n\n<div [hidden]=\"!getError()\" style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\n z-index: 10000; background-color: rgb(243,\n  242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n    <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\"\n        style=\"font-size:15px\">{{getError()}}, Xyzeki 403</span>\n</div>\n\n<div *ngIf=\"loaded\" class=\"container-fluid\">\n        <div class=\"row\">\n                <div class=\"col ml-0 pl-0\">\n                        <h5>Ekip Üyeleri</h5>                       \n                </div>\n                <div class=\"col-3 float-right\">\n                        <div ngbDropdown class=\"d-inline-block\" placement=\"left\"\n                                *ngIf=\"!isLimited\">\n                                <button class=\"btn filter-grey\" id=\"dropdownMemberOptions\" ngbDropdownToggle>\n                                        <img src=\"../../../assets/more2.svg\"\n                                                style=\"height: 6px;object-fit: cover; cursor: pointer;\" />\n                                </button>\n                                <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\"\n                                        class=\"rounded-4 bg-white ml-0 mr-0\">\n                                        <button (click)=\"deleteTeam(teamId)\" ngbDropdownItem\n                                                class=\"btn btn-light rounded-0 border-0 xyz-nav-btn2\"><img\n                                                        src=\"../../../assets/cancel.svg\"\n                                                        style=\"width: 18px;object-fit: cover; cursor: pointer; \"\n                                                        class=\"mr-2\" />Ekibi Sonlandır</button>\n\n                                </div>\n                        </div>\n                </div>\n\n        </div>\n        <div name=\"forTM-part1\" class=\"row\">\n\n                <table [hidden]=\"teamMembers()?.length == 0\" class=\"table table-hover\">\n                        <thead>\n                                <tr>\n\n                                </tr>\n                        </thead>\n                        <tbody>\n                                <tr *ngFor=\"let teamMember of teamMembers() ; index as i\">\n                                        <td *ngIf=\"!isLimited\">\n                                                <div\n                                                        *ngIf=\"xyzekiAuthService?.Username == teamMember?.Username;else tmAvatar\">\n                                                        <img *ngIf=\"xyzekiAuthService?.Member\" alt=\"Avatar\"\n                                                                [src]=\"xyzekiAuthService?.Member?.Avatar\"\n                                                                class=\"md-avatar size-2 rounded-circle\">\n                                                </div>\n                                                <ng-template #tmAvatar>\n                                                        <img *ngIf=\"getMember(teamMember?.Username)\"\n                                                                [src]=\"getMember(teamMember?.Username)?.Avatar\"\n                                                                alt=\"Avatar\" class=\"md-avatar size-2 rounded-circle\">\n                                                </ng-template>\n                                        </td>\n                                        <td *ngIf=\"isLimited\">\n                                                <div\n                                                        *ngIf=\"xyzekiAuthService?.Username == teamMember?.Username;else tmAvatar2\">\n                                                        <img *ngIf=\"xyzekiAuthService?.Member\" alt=\"Avatar\"\n                                                                [src]=\"xyzekiAuthService?.Member?.Avatar\"\n                                                                class=\"md-avatar size-2 rounded-circle\">\n                                                </div>\n                                                <ng-template #tmAvatar2>\n                                                        <img *ngIf=\"getMemberJoined(teamMember?.Username)\"\n                                                                [src]=\"getMemberJoined(teamMember?.Username)?.Avatar\"\n                                                                alt=\"Avatar\" class=\"md-avatar size-2 rounded-circle\">\n                                                </ng-template>\n                                        </td>\n                                        <td>\n                                                <div\n                                                        *ngIf=\"xyzekiAuthService?.Username == teamMember?.Username; else tmDetail\">\n                                                        <b>{{ xyzekiAuthService?.Member?.Name + ' ' + xyzekiAuthService?.Member?.Surname}}</b><br>\n                                                        @{{teamMember?.Username}}(Siz)\n                                                </div>\n                                                <ng-template #tmDetail>\n                                                        <b>{{getMember(teamMember?.Username)?.Name + ' ' + getMember(teamMember?.Username)?.Surname}}</b><br>\n                                                        @{{teamMember?.Username}}\n                                                </ng-template>\n\n\n\n\n                                        </td>\n                                        <td>\n\n                                                <div *ngIf=\"!isLimited && teamMember?.TeamMemberId != undefined\"\n                                                        class=\"float-left\">\n                                                        <button *ngIf=\"teamMember?.TeamMemberId != undefined\"\n                                                                (click)=\"deleteTeamMember(teamMember?.TeamMemberId)\"\n                                                                class=\"btn btn-light\" type=\"button\">Ekipdendan\n                                                                çıkar</button>\n                                                </div>\n                                                <div *ngIf=\"isLimited && teamMember?.Username == xyzekiAuthService?.Username && teamMember?.TeamMemberId\"\n                                                        class=\"float-left\">\n                                                        <button (click)=\"deleteTeamMember(teamMember?.TeamMemberId,true)\"\n                                                                class=\"btn btn-light\" type=\"button\">Ekipdendan\n                                                                ayrıl</button>\n                                                </div>\n\n                                        </td>\n                                </tr>\n                        </tbody>\n                </table>\n\n        </div>\n\n        <div name=\"forTM-part2\" class=\"row pt-1\">\n                <p [hidden]=\"teamMembers().length != 0\">\n                        Şu an bu ekipte bir ekip üyeniz bulunmamaktadır.\n                </p>\n        </div>\n\n\n        <ng-container *ngIf=\"!isLimited\" name=\"TMWR\">\n                <div name=\"forTMWR-part1\" class=\"row bg-light p-1\">\n                        <span class=\"lead mb-1\">Ekip Davetiyeleriniz</span>\n                        <table [hidden]=\"teamMembersWaitingOrRejected()?.length == 0\" class=\"table table-hover table-striped\">\n                                <thead>\n                                        <tr>\n\n                                        </tr>\n                                </thead>\n                                <tbody>\n                                        <tr *ngFor=\"let teamMemberWR of teamMembersWaitingOrRejected() ; index as i\">\n                                                <td>\n                                                        <img *ngIf=\"getMember(teamMemberWR?.Username)\"\n                                                                [src]=\"getMember(teamMemberWR?.Username)?.Avatar\"\n                                                                alt=\"Avatar\" class=\"md-avatar size-2 rounded-circle\">\n                                                </td>\n                                                <td>\n                                                        <div\n                                                                *ngIf=\"xyzekiAuthService?.Username == teamMemberWR?.Username; else tmDetailWR\">\n                                                                <b>{{ xyzekiAuthService?.Member?.Name + ' ' + xyzekiAuthService?.Member?.Surname}}</b><br>\n                                                                @{{teamMemberWR?.Username}}(Siz)\n                                                        </div>\n                                                        <ng-template #tmDetailWR>\n                                                                <b>{{getMember(teamMemberWR?.Username)?.Name + ' ' + getMember(teamMemberWR?.Username)?.Surname}}</b><br>\n                                                                @{{teamMemberWR?.Username}}\n                                                        </ng-template>\n                                                </td>\n                                                <td>{{(teamMemberWR?.Status) == null ? 'Cevap bekleniyor': 'Teklif reddedildi' }}\n                                                </td>\n                                                <td>\n                                                        <div class=\"float-left\">\n                                                                <a *ngIf=\"teamMemberWR?.TeamMemberId != undefined\"\n                                                                        (click)=\"deleteTeamMember(teamMemberWR?.TeamMemberId)\"\n                                                                        class=\"btn btn-light\" type=\"button\">Sil</a>\n                                                        </div>\n                                                        <div class=\"float-left\" *ngIf=\"teamMemberWR?.Status == false\">\n                                                                <a *ngIf=\"teamMemberWR\"\n                                                                        (click)=\"updateTeamMember(teamMemberWR,null)\"\n                                                                        class=\"btn btn-light \" type=\"button\">Davetiye'yi\n                                                                        yenile</a>\n                                                        </div>\n\n                                                </td>\n                                        </tr>\n                                </tbody>\n                        </table>\n\n                </div>\n                <div name=\"forTMWR-part2\" class=\"row bg-light pl-1 pr-1\">\n                        <p [hidden]=\"teamMembersWaitingOrRejected().length != 0\">\n                                Şu an bir ekip davetiyeniz bulunmamaktadır. Hemen sizin için bir tane iletelim.\n                        </p>\n                </div>\n                <div name=\"forTMWR-part3\" class=\"row bg-light pl-1 pr-1\">\n                        <a *ngIf=\"!newTeamMemberPanelWROpen\" (click)=\"toggleTeamMemberWRPanel()\"\n                                class=\"btn btn-dark rounded-0 text-white\" style=\"cursor:pointer\">Yeni Davetiye</a>\n                </div>\n                <form name=\"forTMWR-part4\" class=\"row bg-light pl-1 pr-1\" *ngIf=\"newTeamMemberPanelWROpen\"\n                        #teamMemberForm=\"ngForm\" (ngSubmit)=\"addTeamMemberWR(teamMemberForm)\" novalidate>\n                        <div class=\"input-group\">\n                                <!-- \n                                        submit: It is html default form submit event, it will call underlying method when form gets submitted.\n                                        ngSubmit: Is host binding situated on form element. Basically it prevent default submit event of browser(which can be form post) by returning false. Eventually you can prevent traditional PostBack calls or page reload due to form load. This way you can validate your form & submit it to server by manual ajax from Component code\n                                    -->\n\n                                <div class=\"input-group-prepend\">\n                                        <a class=\"btn btn-info disabled text-white\">Kullanıcı Adı</a>\n                                </div>\n                                <input id=\"textForFocusTM\" autofocus type=\"text\" name=\"username\"\n                                        [(ngModel)]=\"teamMemberModel.Username\" #username=\"ngModel\" required\n                                        class=\"form-control\" placeholder=\"Kullanıcı adı giriniz\" />\n\n                                <div class=\"input-group-append\">\n                                        <button type=\"submit\" class=\"btn btn-dark text-white text-uppercase\">İstek\n                                                Gönder</button>\n                                        <a (click)=\"toggleTeamMemberWRPanel()\"\n                                                class=\"btn btn-danger rounded-5 text-white text-uppercase\">X</a>\n                                </div>\n                        </div>\n                        <div class=\"container-fluid\">\n                                <span class=\"text-danger row\" *ngIf=\"modelSubmitted && username?.errors?.required\">\n                                        Bir kullanıcı adı gerekmektedir.\n                                </span>\n                                <!-- <span class=\"text-danger row\" *ngIf=\"modelSubmitted && username?.errors?.pattern\">\n                                            İsimler için sadece harfler geçerlidir.\n                                        </span> -->\n                        </div>\n                </form>\n        </ng-container>\n\n\n</div>"
 
 /***/ }),
 
@@ -15749,7 +15193,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
 /* harmony import */ var src_app_model_team_member_model___WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/team-member.model. */ "./src/app/model/team-member.model..ts");
-/* harmony import */ var src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
 /* harmony import */ var src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/model/repository/team-repository */ "./src/app/model/repository/team-repository.ts");
 /* harmony import */ var src_app_model_repository_member_repository__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/repository/member-repository */ "./src/app/model/repository/member-repository.ts");
@@ -15767,7 +15211,7 @@ __webpack_require__.r(__webpack_exports__);
 var TeamMembersComponent = /** @class */ (function () {
     //teamExistingRepo is injected from Module module. That instance will be same with Team components' because of related repo provider with 'existing' keyword  in Model Module
     //only also team owner can use that repo, not for joined teams section.
-    function TeamMembersComponent(repository, permissions, memberRepository, teamExistingRepo, dataService, router, route, memberShared) {
+    function TeamMembersComponent(repository, permissions, memberRepository, teamExistingRepo, dataService, router, route, xyzekiAuthService) {
         this.repository = repository;
         this.permissions = permissions;
         this.memberRepository = memberRepository;
@@ -15775,7 +15219,7 @@ var TeamMembersComponent = /** @class */ (function () {
         this.dataService = dataService;
         this.router = router;
         this.route = route;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.loaded = false;
         this.teamMemberModel = new src_app_model_team_member_model___WEBPACK_IMPORTED_MODULE_4__["TeamMember"]("", 0, null);
         this.teamId = 0;
@@ -15939,7 +15383,7 @@ var TeamMembersComponent = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_3__["TeamMemberRepository"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_9__["MemberLicenseRepository"],
             src_app_model_repository_member_repository__WEBPACK_IMPORTED_MODULE_8__["MemberRepository"], src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_7__["TeamRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
-            src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_5__["MemberShared"]])
+            src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_5__["XyzekiAuthService"]])
     ], TeamMembersComponent);
     return TeamMembersComponent;
 }());
@@ -16012,7 +15456,7 @@ var TeamsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".md-avatar.size-0 {\n    vertical-align: middle;\n    width: 30px;\n    height: 30px;\n}\n.md-avatar {\n      vertical-align: middle;\n      width: 50px;\n      height: 50px;\n}\n.md-avatar.size-1 {\n      width: 55px;\n      height: 55px;\n}\n.md-avatar.size-2 {\n      width: 70px;\n      height: 70px;\n}\n.md-avatar.size-3 {\n      width: 90px;\n      height: 90px;\n}\n.md-avatar.size-4 {\n      width: 110px;\n      height: 110px;\n}\n.resim{\n      display: inline-block;\n}\n.yazilar{\n      display: inline-block;\n}\n.yazilar span{\n      display: inline-block;\n}\n.dp-menu{\n      top: -55px !important;\n      transition:all 0.2s;\n}\n.acilirListe{      \n      padding: 0;\n      box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);\n      background-color:#FEFEFE; \n      position: relative;\n      left: 0px;\n     \n\n}\n.acilirListe ul{      \n      list-style-type: none;\n      padding: 0;\n      background-color:#FEFEFE;\n      position: relative;\n      left: 0px;\n\n\n\n}\n.scrollable{\n      overflow-y: auto;\n      overflow-x: hidden;\n      max-height: 550px;\n}\n.acilirListe li:not(.disabled):not(.disabled2){\n      clear:both;\n      /* color: #FEFEFE; */\n      color:#000;\n      cursor:pointer;\n      line-height:1.3rem;\n      text-align:left;\n      text-transform:none;\n      background-color: #FEFEFE;\n       /* background-color: rgb(247, 246, 244); */\n      /* background-color: rgb(10, 10, 10); */\n      transition: background-color 0.3s;\n      padding-left: 0.5rem;\n      padding-right: 0.5rem;\n      padding-top: 0.15rem;\n      padding-bottom: 0.15rem;\n      /* border-bottom: 0.5px rgb(97, 97, 97) solid; */\n      opacity: 0.99;\n}\n.acilirListe li:not(.disabled):not(.disabled2):last-child{\n      border-bottom: 0px rgb(255, 255, 255) solid !important\n}\n.acilirListe .disabled{\n      clear:both;\n      color:#000;\n      cursor: default;\n      line-height:1.3rem;\n      text-align:left;\n      text-transform:none;\n      background-color: #FEFEFE;\n      padding-left: 0.5rem;\n      padding-right: 0.5rem;\n      padding-top: 0.9rem;\n      padding-bottom: 0.3rem;\n      margin-right: 2rem;\n}\n.acilirListe li:not(.disabled):not(.disabled2):hover{\n      /* background-color: #EEEEEE; */\n      /* background-color: rgb(226, 223, 219);\n      color:#000; */\n         background-color: rgb(10, 10, 10);\n         color:white;\n}\n.acilirListe .disabled span{\n     color: #E4E4E4;    \n}\n.acilirListe .disabled2 span{\n      color: rgb(160, 160, 160);\n      cursor: default;\n \n }\n.liSelected{\n      /* background-color: #EEEEEE !important;\n      color:#000; */\n      background-color: rgb(221, 221, 221) !important;\n      color:white;;\n}\n.liSelected span{\n      background-color: rgb(10, 10, 10);\n      color:white;\n}\n.liSelected p{\n      background-color: rgb(10, 10, 10);\n      color:white;\n}\n.acilirListe li img{\n      margin-right: 0.3rem;\n}\n.acilirListe li{\n      white-space: nowrap;\n      word-wrap: nowrap;\n}\ninput:-moz-read-only { background-color: #f8f9fa; }\ninput:read-only { background-color: #f8f9fa; }\ninput:-moz-read-only:hover { background-color: #E2E6EA; }\ninput:read-only:hover { background-color: #E2E6EA; }\n.atama-bolgesi-2{\n      padding-top:0.2rem;\n      background-color: #FEFEFE;\n   \n      \n}\n.atama-bolgesi-2 input{\n      cursor: pointer;\n      border-right: 0!important;\n      border-left: 0 !important;\n      border-top:0 !important;\n      border-bottom:rgb(151, 153, 255) 2px solid;       \n      border-radius: 0% !important;\n      transition: border-bottom 0.3s;\n\n}\n.atama-bolgesi-2 input:focus{\n      border-bottom:2px solid rgb(87, 90, 238);\n      box-shadow:0 0px 0 0 rgb(87, 90, 238);\n}\n@media (max-width:575px){\n\n      .atama-bolgesi-2 input{\n            padding-left: 0.2rem;\n            padding-right: 0.2rem;\n            /* max-width: 16rem; */\n      }\n      .bolge-width-limited{\n            max-width: 4.5rem;\n      }\n}\n@media (min-width:576px){\n\n      .atama-bolgesi-2 input{\n            padding-left: 0.5rem;\n            padding-right: 0.5rem;\n            /* max-width: 16rem; */\n      }\n      .bolge-width-limited{\n            max-width: 6.5rem;\n      }\n}\n.atama-bolgesi{\n      width:100%;\n}\n.atama-bolgesi input{\n      border-top: 0px;\n      border-left:0px;\n      border-right:0px!important;\n      border-bottom:#CED4DA 1px solid;      \n      border-radius: 0% !important;\n      transition: border-bottom 0.2s;\n      width: 100%!important;\n      margin-top: 1rem;\n      padding-top: 1rem;\n      padding-bottom: 1rem;\n      padding-left: 0px;\n      padding-right: 0px;\n\n}\n.atama-bolgesi input:focus{\n      border-bottom:2px solid rgb(87, 90, 238);\n      box-shadow:0 0px 0 0 rgb(87, 90, 238);\n}\n/* .atama-bolgesi input:focus{\n      border-bottom:2px solid #c00;\n      box-shadow:0 0px 0 0 #c00\n} */\n.atama-bolgesi-999{\n      padding-top:0.2rem;\n      background-color: #FEFEFE;\n   \n      \n}\n.atama-bolgesi-999 input{\n      cursor: pointer;\n      border-right: 0!important;\n      border-left: 0 !important;\n      border-top:0 !important;\n      border-bottom:rgb(151, 153, 255) 2px solid;       \n      border-radius: 0% !important;\n      transition: border-bottom 0.3s;\n      padding-left: 0.5rem;\n      padding-right: 0.5rem;\n      /* max-width: 6.5rem; */\n\n}\n.atama-bolgesi-999 input:focus{\n      border-bottom:2px solid rgb(87, 90, 238);\n      box-shadow:0 0px 0 0 rgb(87, 90, 238);\n}\natama-bolgesi-999-pm input{\n      max-width: 6.5rem;\n}\n.avatarim{\n      width: 15px;\n      height: 15px;\n      border-radius: 10%;\n      background-color: whitesmoke;      \n      background-size: cover\n}\n::-webkit-scrollbar {\n      width: 3px!important;\n      height: 4px;\n\n    }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdWktdG9vbHMvYXNzaWduLWF1dG9jb21wbGV0ZS9hc3NpZ24tYXV0b2NvbXBsZXRlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxzQkFBc0I7SUFDdEIsV0FBVztJQUNYLFlBQVk7QUFDaEI7QUFDQTtNQUNNLHNCQUFzQjtNQUN0QixXQUFXO01BQ1gsWUFBWTtBQUNsQjtBQUNBO01BQ00sV0FBVztNQUNYLFlBQVk7QUFDbEI7QUFDQTtNQUNNLFdBQVc7TUFDWCxZQUFZO0FBQ2xCO0FBQ0E7TUFDTSxXQUFXO01BQ1gsWUFBWTtBQUNsQjtBQUNBO01BQ00sWUFBWTtNQUNaLGFBQWE7QUFDbkI7QUFDQTtNQUNNLHFCQUFxQjtBQUMzQjtBQUNBO01BQ00scUJBQXFCO0FBQzNCO0FBQ0E7TUFDTSxxQkFBcUI7QUFDM0I7QUFHQTtNQUNNLHFCQUFxQjtNQUtyQixtQkFBbUI7QUFDekI7QUFDQTtNQUNNLFVBQVU7TUFDVixtRUFBbUU7TUFDbkUsd0JBQXdCO01BQ3hCLGtCQUFrQjtNQUNsQixTQUFTOzs7QUFHZjtBQUNBO01BQ00scUJBQXFCO01BQ3JCLFVBQVU7TUFDVix3QkFBd0I7TUFDeEIsa0JBQWtCO01BQ2xCLFNBQVM7Ozs7QUFJZjtBQUNBO01BQ00sZ0JBQWdCO01BQ2hCLGtCQUFrQjtNQUNsQixpQkFBaUI7QUFDdkI7QUFDQTtNQUNNLFVBQVU7TUFDVixvQkFBb0I7TUFDcEIsVUFBVTtNQUNWLGNBQWM7TUFDZCxrQkFBa0I7TUFDbEIsZUFBZTtNQUNmLG1CQUFtQjtNQUNuQix5QkFBeUI7T0FDeEIsMENBQTBDO01BQzNDLHVDQUF1QztNQUN2QyxpQ0FBaUM7TUFDakMsb0JBQW9CO01BQ3BCLHFCQUFxQjtNQUNyQixvQkFBb0I7TUFDcEIsdUJBQXVCO01BQ3ZCLGdEQUFnRDtNQUNoRCxhQUFhO0FBQ25CO0FBQ0E7TUFDTTtBQUNOO0FBRUE7TUFDTSxVQUFVO01BQ1YsVUFBVTtNQUNWLGVBQWU7TUFDZixrQkFBa0I7TUFDbEIsZUFBZTtNQUNmLG1CQUFtQjtNQUNuQix5QkFBeUI7TUFDekIsb0JBQW9CO01BQ3BCLHFCQUFxQjtNQUNyQixtQkFBbUI7TUFDbkIsc0JBQXNCO01BQ3RCLGtCQUFrQjtBQUN4QjtBQUNBO01BQ00sK0JBQStCO01BQy9CO21CQUNhO1NBQ1YsaUNBQWlDO1NBQ2pDLFdBQVc7QUFDcEI7QUFDQTtLQUNLLGNBQWM7QUFDbkI7QUFDQTtNQUNNLHlCQUF5QjtNQUN6QixlQUFlOztDQUVwQjtBQUVEO01BQ007bUJBQ2E7TUFDYiwrQ0FBK0M7TUFDL0MsV0FBVztBQUNqQjtBQUNBO01BQ00saUNBQWlDO01BQ2pDLFdBQVc7QUFDakI7QUFDQTtNQUNNLGlDQUFpQztNQUNqQyxXQUFXO0FBQ2pCO0FBQ0E7TUFDTSxvQkFBb0I7QUFDMUI7QUFFQTtNQUNNLG1CQUFtQjtNQUNuQixpQkFBaUI7QUFDdkI7QUFFQSx1QkFBdUIseUJBQXlCLEVBQUU7QUFDbEQsa0JBQWtCLHlCQUF5QixFQUFFO0FBQzdDLDZCQUE2Qix5QkFBeUIsRUFBRTtBQUN4RCx3QkFBd0IseUJBQXlCLEVBQUU7QUFFbkQ7TUFDTSxrQkFBa0I7TUFDbEIseUJBQXlCOzs7QUFHL0I7QUFDQTtNQUNNLGVBQWU7TUFDZix5QkFBeUI7TUFDekIseUJBQXlCO01BQ3pCLHVCQUF1QjtNQUN2QiwwQ0FBMEM7TUFDMUMsNEJBQTRCO01BQzVCLDhCQUE4Qjs7QUFFcEM7QUFDQTtNQUNNLHdDQUF3QztNQUN4QyxxQ0FBcUM7QUFDM0M7QUFLQTs7TUFFTTtZQUNNLG9CQUFvQjtZQUNwQixxQkFBcUI7WUFDckIsc0JBQXNCO01BQzVCO01BQ0E7WUFDTSxpQkFBaUI7TUFDdkI7QUFDTjtBQUVBOztNQUVNO1lBQ00sb0JBQW9CO1lBQ3BCLHFCQUFxQjtZQUNyQixzQkFBc0I7TUFDNUI7TUFDQTtZQUNNLGlCQUFpQjtNQUN2QjtBQUNOO0FBSUE7TUFDTSxVQUFVO0FBQ2hCO0FBQ0E7TUFDTSxlQUFlO01BQ2YsZUFBZTtNQUNmLDBCQUEwQjtNQUMxQiwrQkFBK0I7TUFDL0IsNEJBQTRCO01BQzVCLDhCQUE4QjtNQUM5QixxQkFBcUI7TUFDckIsZ0JBQWdCO01BQ2hCLGlCQUFpQjtNQUNqQixvQkFBb0I7TUFDcEIsaUJBQWlCO01BQ2pCLGtCQUFrQjs7QUFFeEI7QUFDQTtNQUNNLHdDQUF3QztNQUN4QyxxQ0FBcUM7QUFDM0M7QUFFQTs7O0dBR0c7QUFLSDtNQUNNLGtCQUFrQjtNQUNsQix5QkFBeUI7OztBQUcvQjtBQUNBO01BQ00sZUFBZTtNQUNmLHlCQUF5QjtNQUN6Qix5QkFBeUI7TUFDekIsdUJBQXVCO01BQ3ZCLDBDQUEwQztNQUMxQyw0QkFBNEI7TUFDNUIsOEJBQThCO01BQzlCLG9CQUFvQjtNQUNwQixxQkFBcUI7TUFDckIsdUJBQXVCOztBQUU3QjtBQUNBO01BQ00sd0NBQXdDO01BQ3hDLHFDQUFxQztBQUMzQztBQUNBO01BQ00saUJBQWlCO0FBQ3ZCO0FBRUE7TUFDTSxXQUFXO01BQ1gsWUFBWTtNQUNaLGtCQUFrQjtNQUNsQiw0QkFBNEI7TUFDNUI7QUFDTjtBQUNBO01BQ00sb0JBQW9CO01BQ3BCLFdBQVc7O0lBRWIiLCJmaWxlIjoic3JjL2FwcC91aS10b29scy9hc3NpZ24tYXV0b2NvbXBsZXRlL2Fzc2lnbi1hdXRvY29tcGxldGUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5tZC1hdmF0YXIuc2l6ZS0wIHtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICAgIHdpZHRoOiAzMHB4O1xuICAgIGhlaWdodDogMzBweDtcbn1cbi5tZC1hdmF0YXIge1xuICAgICAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcbiAgICAgIHdpZHRoOiA1MHB4O1xuICAgICAgaGVpZ2h0OiA1MHB4O1xufVxuLm1kLWF2YXRhci5zaXplLTEge1xuICAgICAgd2lkdGg6IDU1cHg7XG4gICAgICBoZWlnaHQ6IDU1cHg7XG59XG4ubWQtYXZhdGFyLnNpemUtMiB7XG4gICAgICB3aWR0aDogNzBweDtcbiAgICAgIGhlaWdodDogNzBweDtcbn1cbi5tZC1hdmF0YXIuc2l6ZS0zIHtcbiAgICAgIHdpZHRoOiA5MHB4O1xuICAgICAgaGVpZ2h0OiA5MHB4O1xufVxuLm1kLWF2YXRhci5zaXplLTQge1xuICAgICAgd2lkdGg6IDExMHB4O1xuICAgICAgaGVpZ2h0OiAxMTBweDtcbn1cbi5yZXNpbXtcbiAgICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbn1cbi55YXppbGFye1xuICAgICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xufVxuLnlhemlsYXIgc3BhbntcbiAgICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbn1cblxuXG4uZHAtbWVudXtcbiAgICAgIHRvcDogLTU1cHggIWltcG9ydGFudDtcbiAgICAgIC13ZWJraXQtdHJhbnNpdGlvbjphbGwgMC4ycztcbiAgICAgIC1tb3otdHJhbnNpdGlvbjphbGwgMC4ycztcbiAgICAgIC1tcy10cmFuc2l0aW9uOmFsbCAwLjJzO1xuICAgICAgLW8tdHJhbnNpdGlvbjphbGwgMC4ycztcbiAgICAgIHRyYW5zaXRpb246YWxsIDAuMnM7XG59XG4uYWNpbGlyTGlzdGV7ICAgICAgXG4gICAgICBwYWRkaW5nOiAwO1xuICAgICAgYm94LXNoYWRvdzowIDJweCA1cHggMCByZ2JhKDAsMCwwLC4xNiksMCAycHggMTBweCAwIHJnYmEoMCwwLDAsLjEyKTtcbiAgICAgIGJhY2tncm91bmQtY29sb3I6I0ZFRkVGRTsgXG4gICAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgICBsZWZ0OiAwcHg7XG4gICAgIFxuXG59XG4uYWNpbGlyTGlzdGUgdWx7ICAgICAgXG4gICAgICBsaXN0LXN0eWxlLXR5cGU6IG5vbmU7XG4gICAgICBwYWRkaW5nOiAwO1xuICAgICAgYmFja2dyb3VuZC1jb2xvcjojRkVGRUZFO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgbGVmdDogMHB4O1xuXG5cblxufVxuLnNjcm9sbGFibGV7XG4gICAgICBvdmVyZmxvdy15OiBhdXRvO1xuICAgICAgb3ZlcmZsb3cteDogaGlkZGVuO1xuICAgICAgbWF4LWhlaWdodDogNTUwcHg7XG59XG4uYWNpbGlyTGlzdGUgbGk6bm90KC5kaXNhYmxlZCk6bm90KC5kaXNhYmxlZDIpe1xuICAgICAgY2xlYXI6Ym90aDtcbiAgICAgIC8qIGNvbG9yOiAjRkVGRUZFOyAqL1xuICAgICAgY29sb3I6IzAwMDtcbiAgICAgIGN1cnNvcjpwb2ludGVyO1xuICAgICAgbGluZS1oZWlnaHQ6MS4zcmVtO1xuICAgICAgdGV4dC1hbGlnbjpsZWZ0O1xuICAgICAgdGV4dC10cmFuc2Zvcm06bm9uZTtcbiAgICAgIGJhY2tncm91bmQtY29sb3I6ICNGRUZFRkU7XG4gICAgICAgLyogYmFja2dyb3VuZC1jb2xvcjogcmdiKDI0NywgMjQ2LCAyNDQpOyAqL1xuICAgICAgLyogYmFja2dyb3VuZC1jb2xvcjogcmdiKDEwLCAxMCwgMTApOyAqL1xuICAgICAgdHJhbnNpdGlvbjogYmFja2dyb3VuZC1jb2xvciAwLjNzO1xuICAgICAgcGFkZGluZy1sZWZ0OiAwLjVyZW07XG4gICAgICBwYWRkaW5nLXJpZ2h0OiAwLjVyZW07XG4gICAgICBwYWRkaW5nLXRvcDogMC4xNXJlbTtcbiAgICAgIHBhZGRpbmctYm90dG9tOiAwLjE1cmVtO1xuICAgICAgLyogYm9yZGVyLWJvdHRvbTogMC41cHggcmdiKDk3LCA5NywgOTcpIHNvbGlkOyAqL1xuICAgICAgb3BhY2l0eTogMC45OTtcbn1cbi5hY2lsaXJMaXN0ZSBsaTpub3QoLmRpc2FibGVkKTpub3QoLmRpc2FibGVkMik6bGFzdC1jaGlsZHtcbiAgICAgIGJvcmRlci1ib3R0b206IDBweCByZ2IoMjU1LCAyNTUsIDI1NSkgc29saWQgIWltcG9ydGFudFxufVxuXG4uYWNpbGlyTGlzdGUgLmRpc2FibGVke1xuICAgICAgY2xlYXI6Ym90aDtcbiAgICAgIGNvbG9yOiMwMDA7XG4gICAgICBjdXJzb3I6IGRlZmF1bHQ7XG4gICAgICBsaW5lLWhlaWdodDoxLjNyZW07XG4gICAgICB0ZXh0LWFsaWduOmxlZnQ7XG4gICAgICB0ZXh0LXRyYW5zZm9ybTpub25lO1xuICAgICAgYmFja2dyb3VuZC1jb2xvcjogI0ZFRkVGRTtcbiAgICAgIHBhZGRpbmctbGVmdDogMC41cmVtO1xuICAgICAgcGFkZGluZy1yaWdodDogMC41cmVtO1xuICAgICAgcGFkZGluZy10b3A6IDAuOXJlbTtcbiAgICAgIHBhZGRpbmctYm90dG9tOiAwLjNyZW07XG4gICAgICBtYXJnaW4tcmlnaHQ6IDJyZW07XG59XG4uYWNpbGlyTGlzdGUgbGk6bm90KC5kaXNhYmxlZCk6bm90KC5kaXNhYmxlZDIpOmhvdmVye1xuICAgICAgLyogYmFja2dyb3VuZC1jb2xvcjogI0VFRUVFRTsgKi9cbiAgICAgIC8qIGJhY2tncm91bmQtY29sb3I6IHJnYigyMjYsIDIyMywgMjE5KTtcbiAgICAgIGNvbG9yOiMwMDA7ICovXG4gICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMTAsIDEwLCAxMCk7XG4gICAgICAgICBjb2xvcjp3aGl0ZTtcbn1cbi5hY2lsaXJMaXN0ZSAuZGlzYWJsZWQgc3BhbntcbiAgICAgY29sb3I6ICNFNEU0RTQ7ICAgIFxufVxuLmFjaWxpckxpc3RlIC5kaXNhYmxlZDIgc3BhbntcbiAgICAgIGNvbG9yOiByZ2IoMTYwLCAxNjAsIDE2MCk7XG4gICAgICBjdXJzb3I6IGRlZmF1bHQ7XG4gXG4gfVxuXG4ubGlTZWxlY3RlZHtcbiAgICAgIC8qIGJhY2tncm91bmQtY29sb3I6ICNFRUVFRUUgIWltcG9ydGFudDtcbiAgICAgIGNvbG9yOiMwMDA7ICovXG4gICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjIxLCAyMjEsIDIyMSkgIWltcG9ydGFudDtcbiAgICAgIGNvbG9yOndoaXRlOztcbn1cbi5saVNlbGVjdGVkIHNwYW57XG4gICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMTAsIDEwLCAxMCk7XG4gICAgICBjb2xvcjp3aGl0ZTtcbn1cbi5saVNlbGVjdGVkIHB7XG4gICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMTAsIDEwLCAxMCk7XG4gICAgICBjb2xvcjp3aGl0ZTtcbn1cbi5hY2lsaXJMaXN0ZSBsaSBpbWd7XG4gICAgICBtYXJnaW4tcmlnaHQ6IDAuM3JlbTtcbn1cblxuLmFjaWxpckxpc3RlIGxpe1xuICAgICAgd2hpdGUtc3BhY2U6IG5vd3JhcDtcbiAgICAgIHdvcmQtd3JhcDogbm93cmFwO1xufVxuXG5pbnB1dDotbW96LXJlYWQtb25seSB7IGJhY2tncm91bmQtY29sb3I6ICNmOGY5ZmE7IH0gXG5pbnB1dDpyZWFkLW9ubHkgeyBiYWNrZ3JvdW5kLWNvbG9yOiAjZjhmOWZhOyB9XG5pbnB1dDotbW96LXJlYWQtb25seTpob3ZlciB7IGJhY2tncm91bmQtY29sb3I6ICNFMkU2RUE7IH0gXG5pbnB1dDpyZWFkLW9ubHk6aG92ZXIgeyBiYWNrZ3JvdW5kLWNvbG9yOiAjRTJFNkVBOyB9XG5cbi5hdGFtYS1ib2xnZXNpLTJ7XG4gICAgICBwYWRkaW5nLXRvcDowLjJyZW07XG4gICAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjRkVGRUZFO1xuICAgXG4gICAgICBcbn1cbi5hdGFtYS1ib2xnZXNpLTIgaW5wdXR7XG4gICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICBib3JkZXItcmlnaHQ6IDAhaW1wb3J0YW50O1xuICAgICAgYm9yZGVyLWxlZnQ6IDAgIWltcG9ydGFudDtcbiAgICAgIGJvcmRlci10b3A6MCAhaW1wb3J0YW50O1xuICAgICAgYm9yZGVyLWJvdHRvbTpyZ2IoMTUxLCAxNTMsIDI1NSkgMnB4IHNvbGlkOyAgICAgICBcbiAgICAgIGJvcmRlci1yYWRpdXM6IDAlICFpbXBvcnRhbnQ7XG4gICAgICB0cmFuc2l0aW9uOiBib3JkZXItYm90dG9tIDAuM3M7XG5cbn1cbi5hdGFtYS1ib2xnZXNpLTIgaW5wdXQ6Zm9jdXN7XG4gICAgICBib3JkZXItYm90dG9tOjJweCBzb2xpZCByZ2IoODcsIDkwLCAyMzgpO1xuICAgICAgYm94LXNoYWRvdzowIDBweCAwIDAgcmdiKDg3LCA5MCwgMjM4KTtcbn1cblxuXG5cblxuQG1lZGlhIChtYXgtd2lkdGg6NTc1cHgpe1xuXG4gICAgICAuYXRhbWEtYm9sZ2VzaS0yIGlucHV0e1xuICAgICAgICAgICAgcGFkZGluZy1sZWZ0OiAwLjJyZW07XG4gICAgICAgICAgICBwYWRkaW5nLXJpZ2h0OiAwLjJyZW07XG4gICAgICAgICAgICAvKiBtYXgtd2lkdGg6IDE2cmVtOyAqL1xuICAgICAgfVxuICAgICAgLmJvbGdlLXdpZHRoLWxpbWl0ZWR7XG4gICAgICAgICAgICBtYXgtd2lkdGg6IDQuNXJlbTtcbiAgICAgIH1cbn1cblxuQG1lZGlhIChtaW4td2lkdGg6NTc2cHgpe1xuXG4gICAgICAuYXRhbWEtYm9sZ2VzaS0yIGlucHV0e1xuICAgICAgICAgICAgcGFkZGluZy1sZWZ0OiAwLjVyZW07XG4gICAgICAgICAgICBwYWRkaW5nLXJpZ2h0OiAwLjVyZW07XG4gICAgICAgICAgICAvKiBtYXgtd2lkdGg6IDE2cmVtOyAqL1xuICAgICAgfVxuICAgICAgLmJvbGdlLXdpZHRoLWxpbWl0ZWR7XG4gICAgICAgICAgICBtYXgtd2lkdGg6IDYuNXJlbTtcbiAgICAgIH1cbn1cblxuXG5cbi5hdGFtYS1ib2xnZXNpe1xuICAgICAgd2lkdGg6MTAwJTtcbn1cbi5hdGFtYS1ib2xnZXNpIGlucHV0e1xuICAgICAgYm9yZGVyLXRvcDogMHB4O1xuICAgICAgYm9yZGVyLWxlZnQ6MHB4O1xuICAgICAgYm9yZGVyLXJpZ2h0OjBweCFpbXBvcnRhbnQ7XG4gICAgICBib3JkZXItYm90dG9tOiNDRUQ0REEgMXB4IHNvbGlkOyAgICAgIFxuICAgICAgYm9yZGVyLXJhZGl1czogMCUgIWltcG9ydGFudDtcbiAgICAgIHRyYW5zaXRpb246IGJvcmRlci1ib3R0b20gMC4ycztcbiAgICAgIHdpZHRoOiAxMDAlIWltcG9ydGFudDtcbiAgICAgIG1hcmdpbi10b3A6IDFyZW07XG4gICAgICBwYWRkaW5nLXRvcDogMXJlbTtcbiAgICAgIHBhZGRpbmctYm90dG9tOiAxcmVtO1xuICAgICAgcGFkZGluZy1sZWZ0OiAwcHg7XG4gICAgICBwYWRkaW5nLXJpZ2h0OiAwcHg7XG5cbn1cbi5hdGFtYS1ib2xnZXNpIGlucHV0OmZvY3Vze1xuICAgICAgYm9yZGVyLWJvdHRvbToycHggc29saWQgcmdiKDg3LCA5MCwgMjM4KTtcbiAgICAgIGJveC1zaGFkb3c6MCAwcHggMCAwIHJnYig4NywgOTAsIDIzOCk7XG59XG5cbi8qIC5hdGFtYS1ib2xnZXNpIGlucHV0OmZvY3Vze1xuICAgICAgYm9yZGVyLWJvdHRvbToycHggc29saWQgI2MwMDtcbiAgICAgIGJveC1zaGFkb3c6MCAwcHggMCAwICNjMDBcbn0gKi9cblxuXG5cblxuLmF0YW1hLWJvbGdlc2ktOTk5e1xuICAgICAgcGFkZGluZy10b3A6MC4ycmVtO1xuICAgICAgYmFja2dyb3VuZC1jb2xvcjogI0ZFRkVGRTtcbiAgIFxuICAgICAgXG59XG4uYXRhbWEtYm9sZ2VzaS05OTkgaW5wdXR7XG4gICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICBib3JkZXItcmlnaHQ6IDAhaW1wb3J0YW50O1xuICAgICAgYm9yZGVyLWxlZnQ6IDAgIWltcG9ydGFudDtcbiAgICAgIGJvcmRlci10b3A6MCAhaW1wb3J0YW50O1xuICAgICAgYm9yZGVyLWJvdHRvbTpyZ2IoMTUxLCAxNTMsIDI1NSkgMnB4IHNvbGlkOyAgICAgICBcbiAgICAgIGJvcmRlci1yYWRpdXM6IDAlICFpbXBvcnRhbnQ7XG4gICAgICB0cmFuc2l0aW9uOiBib3JkZXItYm90dG9tIDAuM3M7XG4gICAgICBwYWRkaW5nLWxlZnQ6IDAuNXJlbTtcbiAgICAgIHBhZGRpbmctcmlnaHQ6IDAuNXJlbTtcbiAgICAgIC8qIG1heC13aWR0aDogNi41cmVtOyAqL1xuXG59XG4uYXRhbWEtYm9sZ2VzaS05OTkgaW5wdXQ6Zm9jdXN7XG4gICAgICBib3JkZXItYm90dG9tOjJweCBzb2xpZCByZ2IoODcsIDkwLCAyMzgpO1xuICAgICAgYm94LXNoYWRvdzowIDBweCAwIDAgcmdiKDg3LCA5MCwgMjM4KTtcbn1cbmF0YW1hLWJvbGdlc2ktOTk5LXBtIGlucHV0e1xuICAgICAgbWF4LXdpZHRoOiA2LjVyZW07XG59XG5cbi5hdmF0YXJpbXtcbiAgICAgIHdpZHRoOiAxNXB4O1xuICAgICAgaGVpZ2h0OiAxNXB4O1xuICAgICAgYm9yZGVyLXJhZGl1czogMTAlO1xuICAgICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGVzbW9rZTsgICAgICBcbiAgICAgIGJhY2tncm91bmQtc2l6ZTogY292ZXJcbn1cbjo6LXdlYmtpdC1zY3JvbGxiYXIge1xuICAgICAgd2lkdGg6IDNweCFpbXBvcnRhbnQ7XG4gICAgICBoZWlnaHQ6IDRweDtcblxuICAgIH0iXX0= */"
+module.exports = ".md-avatar.size-0 {\n    vertical-align: middle;\n    width: 30px;\n    height: 30px;\n}\n.md-avatar {\n      vertical-align: middle;\n      width: 50px;\n      height: 50px;\n}\n.md-avatar.size-1 {\n      width: 55px;\n      height: 55px;\n}\n.md-avatar.size-2 {\n      width: 70px;\n      height: 70px;\n}\n.md-avatar.size-3 {\n      width: 90px;\n      height: 90px;\n}\n.md-avatar.size-4 {\n      width: 110px;\n      height: 110px;\n}\n.resim{\n      display: inline-block;\n}\n.yazilar{\n      display: inline-block;\n}\n.yazilar span{\n      display: inline-block;\n}\n.dp-menu{\n      top: -55px !important;\n      transition:all 0.2s;\n}\n.acilirListe{      \n      padding: 0;\n      box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);\n      background-color:#FEFEFE; \n      position: relative;\n      left: 0px;\n     \n\n}\n.acilirListe ul{      \n      list-style-type: none;\n      padding: 0;\n      background-color:#FEFEFE;\n      position: relative;\n      left: 0px;\n\n\n\n}\n.scrollable{\n      overflow-y: auto;\n      overflow-x: hidden;\n      max-height: 550px;\n}\n.acilirListe li:not(.disabled):not(.disabled2){\n      clear:both;\n      /* color: #FEFEFE; */\n      color:#000;\n      cursor:pointer;\n      line-height:1.3rem;\n      text-align:left;\n      text-transform:none;\n      background-color: #FEFEFE;\n       /* background-color: rgb(247, 246, 244); */\n      /* background-color: rgb(10, 10, 10); */\n      transition: background-color 0.3s;\n      padding-left: 0.5rem;\n      padding-right: 0.5rem;\n      padding-top: 0.15rem;\n      padding-bottom: 0.15rem;\n      /* border-bottom: 0.5px rgb(97, 97, 97) solid; */\n      opacity: 0.99;\n}\n.acilirListe li:not(.disabled):not(.disabled2):last-child{\n      border-bottom: 0px rgb(255, 255, 255) solid !important\n}\n.acilirListe .disabled{\n      clear:both;\n      color:#000;\n      cursor: default;\n      line-height:1.3rem;\n      text-align:left;\n      text-transform:none;\n      background-color: #FEFEFE;\n      padding-left: 0.5rem;\n      padding-right: 0.5rem;\n      padding-top: 0.9rem;\n      padding-bottom: 0.3rem;\n      margin-right: 2rem;\n}\n.acilirListe li:not(.disabled):not(.disabled2):hover{\n      /* background-color: #EEEEEE; */\n      /* background-color: rgb(226, 223, 219);\n      color:#000; */\n         background-color: rgb(10, 10, 10);\n         color:white;\n}\n.acilirListe .disabled span{\n     color: #E4E4E4;    \n}\n.acilirListe .disabled2 span{\n      color: rgb(160, 160, 160);\n      cursor: default;\n \n }\n.liSelected{\n      /* background-color: #EEEEEE !important;\n      color:#000; */\n      background-color: rgb(0, 0, 0) !important;\n      color:white;;\n}\n.liSelected span{\n      background-color:   rgb(0, 0, 0);\n      color:white;\n}\n.liSelected p{\n      background-color: rgb(0, 0, 0);\n      color:white;\n}\n.acilirListe li img{\n      margin-right: 0.3rem;\n}\n.acilirListe li{\n      white-space: nowrap;\n      word-wrap: nowrap;\n}\ninput:-moz-read-only { background-color: #f8f9fa; }\ninput:read-only { background-color: #f8f9fa; }\ninput:-moz-read-only:hover { background-color: #E2E6EA; }\ninput:read-only:hover { background-color: #E2E6EA; }\n.atama-bolgesi-2{\n      padding-top:0.2rem;\n      background-color: #FEFEFE;\n   \n      \n}\n.atama-bolgesi-2 input{\n      cursor: pointer;\n      border-right: 0!important;\n      border-left: 0 !important;\n      border-top:0 !important;\n      border-bottom:rgb(151, 153, 255) 2px solid;       \n      border-radius: 0% !important;\n      transition: border-bottom 0.3s;\n\n}\n.atama-bolgesi-2 input:focus{\n      border-bottom:2px solid rgb(87, 90, 238);\n      box-shadow:0 0px 0 0 rgb(87, 90, 238);\n}\n@media (max-width:575px){\n\n      .atama-bolgesi-2 input{\n            padding-left: 0.2rem;\n            padding-right: 0.2rem;\n            /* max-width: 16rem; */\n      }\n      .bolge-width-limited{\n            max-width: 4.5rem;\n      }\n}\n@media (min-width:576px){\n\n      .atama-bolgesi-2 input{\n            padding-left: 0.5rem;\n            padding-right: 0.5rem;\n            /* max-width: 16rem; */\n      }\n      .bolge-width-limited{\n            max-width: 6.5rem;\n      }\n}\n.atama-bolgesi{\n      width:100%;\n}\n.atama-bolgesi input{\n      border-top: 0px;\n      border-left:0px;\n      border-right:0px!important;\n      border-bottom:#CED4DA 1px solid;      \n      border-radius: 0% !important;\n      transition: border-bottom 0.2s;\n      width: 100%!important;\n      margin-top: 1rem;\n      padding-top: 1rem;\n      padding-bottom: 1rem;\n      padding-left: 0px;\n      padding-right: 0px;\n\n}\n.atama-bolgesi input:focus{\n      border-bottom:2px solid rgb(87, 90, 238);\n      box-shadow:0 0px 0 0 rgb(87, 90, 238);\n}\n/* .atama-bolgesi input:focus{\n      border-bottom:2px solid #c00;\n      box-shadow:0 0px 0 0 #c00\n} */\n.atama-bolgesi-999{\n      padding-top:0.2rem;\n      background-color: #FEFEFE;\n   \n      \n}\n.atama-bolgesi-999 input{\n      cursor: pointer;\n      border-right: 0!important;\n      border-left: 0 !important;\n      border-top:0 !important;\n      border-bottom:rgb(151, 153, 255) 2px solid;       \n      border-radius: 0% !important;\n      transition: border-bottom 0.3s;\n      padding-left: 0.5rem;\n      padding-right: 0.5rem;\n      /* max-width: 6.5rem; */\n\n}\n.atama-bolgesi-999 input:focus{\n      border-bottom:2px solid rgb(87, 90, 238);\n      box-shadow:0 0px 0 0 rgb(87, 90, 238);\n}\natama-bolgesi-999-pm input{\n      max-width: 6.5rem;\n}\n.avatarim{\n      width: 15px;\n      height: 15px;\n      border-radius: 10%;\n      background-color: whitesmoke;      \n      background-size: cover\n}\n::-webkit-scrollbar {\n      width: 3px!important;\n      height: 4px;\n\n    }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdWktdG9vbHMvYXNzaWduLWF1dG9jb21wbGV0ZS9hc3NpZ24tYXV0b2NvbXBsZXRlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxzQkFBc0I7SUFDdEIsV0FBVztJQUNYLFlBQVk7QUFDaEI7QUFDQTtNQUNNLHNCQUFzQjtNQUN0QixXQUFXO01BQ1gsWUFBWTtBQUNsQjtBQUNBO01BQ00sV0FBVztNQUNYLFlBQVk7QUFDbEI7QUFDQTtNQUNNLFdBQVc7TUFDWCxZQUFZO0FBQ2xCO0FBQ0E7TUFDTSxXQUFXO01BQ1gsWUFBWTtBQUNsQjtBQUNBO01BQ00sWUFBWTtNQUNaLGFBQWE7QUFDbkI7QUFDQTtNQUNNLHFCQUFxQjtBQUMzQjtBQUNBO01BQ00scUJBQXFCO0FBQzNCO0FBQ0E7TUFDTSxxQkFBcUI7QUFDM0I7QUFHQTtNQUNNLHFCQUFxQjtNQUtyQixtQkFBbUI7QUFDekI7QUFDQTtNQUNNLFVBQVU7TUFDVixtRUFBbUU7TUFDbkUsd0JBQXdCO01BQ3hCLGtCQUFrQjtNQUNsQixTQUFTOzs7QUFHZjtBQUNBO01BQ00scUJBQXFCO01BQ3JCLFVBQVU7TUFDVix3QkFBd0I7TUFDeEIsa0JBQWtCO01BQ2xCLFNBQVM7Ozs7QUFJZjtBQUNBO01BQ00sZ0JBQWdCO01BQ2hCLGtCQUFrQjtNQUNsQixpQkFBaUI7QUFDdkI7QUFDQTtNQUNNLFVBQVU7TUFDVixvQkFBb0I7TUFDcEIsVUFBVTtNQUNWLGNBQWM7TUFDZCxrQkFBa0I7TUFDbEIsZUFBZTtNQUNmLG1CQUFtQjtNQUNuQix5QkFBeUI7T0FDeEIsMENBQTBDO01BQzNDLHVDQUF1QztNQUN2QyxpQ0FBaUM7TUFDakMsb0JBQW9CO01BQ3BCLHFCQUFxQjtNQUNyQixvQkFBb0I7TUFDcEIsdUJBQXVCO01BQ3ZCLGdEQUFnRDtNQUNoRCxhQUFhO0FBQ25CO0FBQ0E7TUFDTTtBQUNOO0FBRUE7TUFDTSxVQUFVO01BQ1YsVUFBVTtNQUNWLGVBQWU7TUFDZixrQkFBa0I7TUFDbEIsZUFBZTtNQUNmLG1CQUFtQjtNQUNuQix5QkFBeUI7TUFDekIsb0JBQW9CO01BQ3BCLHFCQUFxQjtNQUNyQixtQkFBbUI7TUFDbkIsc0JBQXNCO01BQ3RCLGtCQUFrQjtBQUN4QjtBQUNBO01BQ00sK0JBQStCO01BQy9CO21CQUNhO1NBQ1YsaUNBQWlDO1NBQ2pDLFdBQVc7QUFDcEI7QUFDQTtLQUNLLGNBQWM7QUFDbkI7QUFDQTtNQUNNLHlCQUF5QjtNQUN6QixlQUFlOztDQUVwQjtBQUVEO01BQ007bUJBQ2E7TUFDYix5Q0FBeUM7TUFDekMsV0FBVztBQUNqQjtBQUNBO01BQ00sZ0NBQWdDO01BQ2hDLFdBQVc7QUFDakI7QUFDQTtNQUNNLDhCQUE4QjtNQUM5QixXQUFXO0FBQ2pCO0FBQ0E7TUFDTSxvQkFBb0I7QUFDMUI7QUFFQTtNQUNNLG1CQUFtQjtNQUNuQixpQkFBaUI7QUFDdkI7QUFFQSx1QkFBdUIseUJBQXlCLEVBQUU7QUFDbEQsa0JBQWtCLHlCQUF5QixFQUFFO0FBQzdDLDZCQUE2Qix5QkFBeUIsRUFBRTtBQUN4RCx3QkFBd0IseUJBQXlCLEVBQUU7QUFFbkQ7TUFDTSxrQkFBa0I7TUFDbEIseUJBQXlCOzs7QUFHL0I7QUFDQTtNQUNNLGVBQWU7TUFDZix5QkFBeUI7TUFDekIseUJBQXlCO01BQ3pCLHVCQUF1QjtNQUN2QiwwQ0FBMEM7TUFDMUMsNEJBQTRCO01BQzVCLDhCQUE4Qjs7QUFFcEM7QUFDQTtNQUNNLHdDQUF3QztNQUN4QyxxQ0FBcUM7QUFDM0M7QUFLQTs7TUFFTTtZQUNNLG9CQUFvQjtZQUNwQixxQkFBcUI7WUFDckIsc0JBQXNCO01BQzVCO01BQ0E7WUFDTSxpQkFBaUI7TUFDdkI7QUFDTjtBQUVBOztNQUVNO1lBQ00sb0JBQW9CO1lBQ3BCLHFCQUFxQjtZQUNyQixzQkFBc0I7TUFDNUI7TUFDQTtZQUNNLGlCQUFpQjtNQUN2QjtBQUNOO0FBSUE7TUFDTSxVQUFVO0FBQ2hCO0FBQ0E7TUFDTSxlQUFlO01BQ2YsZUFBZTtNQUNmLDBCQUEwQjtNQUMxQiwrQkFBK0I7TUFDL0IsNEJBQTRCO01BQzVCLDhCQUE4QjtNQUM5QixxQkFBcUI7TUFDckIsZ0JBQWdCO01BQ2hCLGlCQUFpQjtNQUNqQixvQkFBb0I7TUFDcEIsaUJBQWlCO01BQ2pCLGtCQUFrQjs7QUFFeEI7QUFDQTtNQUNNLHdDQUF3QztNQUN4QyxxQ0FBcUM7QUFDM0M7QUFFQTs7O0dBR0c7QUFLSDtNQUNNLGtCQUFrQjtNQUNsQix5QkFBeUI7OztBQUcvQjtBQUNBO01BQ00sZUFBZTtNQUNmLHlCQUF5QjtNQUN6Qix5QkFBeUI7TUFDekIsdUJBQXVCO01BQ3ZCLDBDQUEwQztNQUMxQyw0QkFBNEI7TUFDNUIsOEJBQThCO01BQzlCLG9CQUFvQjtNQUNwQixxQkFBcUI7TUFDckIsdUJBQXVCOztBQUU3QjtBQUNBO01BQ00sd0NBQXdDO01BQ3hDLHFDQUFxQztBQUMzQztBQUNBO01BQ00saUJBQWlCO0FBQ3ZCO0FBRUE7TUFDTSxXQUFXO01BQ1gsWUFBWTtNQUNaLGtCQUFrQjtNQUNsQiw0QkFBNEI7TUFDNUI7QUFDTjtBQUNBO01BQ00sb0JBQW9CO01BQ3BCLFdBQVc7O0lBRWIiLCJmaWxlIjoic3JjL2FwcC91aS10b29scy9hc3NpZ24tYXV0b2NvbXBsZXRlL2Fzc2lnbi1hdXRvY29tcGxldGUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5tZC1hdmF0YXIuc2l6ZS0wIHtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICAgIHdpZHRoOiAzMHB4O1xuICAgIGhlaWdodDogMzBweDtcbn1cbi5tZC1hdmF0YXIge1xuICAgICAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcbiAgICAgIHdpZHRoOiA1MHB4O1xuICAgICAgaGVpZ2h0OiA1MHB4O1xufVxuLm1kLWF2YXRhci5zaXplLTEge1xuICAgICAgd2lkdGg6IDU1cHg7XG4gICAgICBoZWlnaHQ6IDU1cHg7XG59XG4ubWQtYXZhdGFyLnNpemUtMiB7XG4gICAgICB3aWR0aDogNzBweDtcbiAgICAgIGhlaWdodDogNzBweDtcbn1cbi5tZC1hdmF0YXIuc2l6ZS0zIHtcbiAgICAgIHdpZHRoOiA5MHB4O1xuICAgICAgaGVpZ2h0OiA5MHB4O1xufVxuLm1kLWF2YXRhci5zaXplLTQge1xuICAgICAgd2lkdGg6IDExMHB4O1xuICAgICAgaGVpZ2h0OiAxMTBweDtcbn1cbi5yZXNpbXtcbiAgICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbn1cbi55YXppbGFye1xuICAgICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xufVxuLnlhemlsYXIgc3BhbntcbiAgICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbn1cblxuXG4uZHAtbWVudXtcbiAgICAgIHRvcDogLTU1cHggIWltcG9ydGFudDtcbiAgICAgIC13ZWJraXQtdHJhbnNpdGlvbjphbGwgMC4ycztcbiAgICAgIC1tb3otdHJhbnNpdGlvbjphbGwgMC4ycztcbiAgICAgIC1tcy10cmFuc2l0aW9uOmFsbCAwLjJzO1xuICAgICAgLW8tdHJhbnNpdGlvbjphbGwgMC4ycztcbiAgICAgIHRyYW5zaXRpb246YWxsIDAuMnM7XG59XG4uYWNpbGlyTGlzdGV7ICAgICAgXG4gICAgICBwYWRkaW5nOiAwO1xuICAgICAgYm94LXNoYWRvdzowIDJweCA1cHggMCByZ2JhKDAsMCwwLC4xNiksMCAycHggMTBweCAwIHJnYmEoMCwwLDAsLjEyKTtcbiAgICAgIGJhY2tncm91bmQtY29sb3I6I0ZFRkVGRTsgXG4gICAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgICBsZWZ0OiAwcHg7XG4gICAgIFxuXG59XG4uYWNpbGlyTGlzdGUgdWx7ICAgICAgXG4gICAgICBsaXN0LXN0eWxlLXR5cGU6IG5vbmU7XG4gICAgICBwYWRkaW5nOiAwO1xuICAgICAgYmFja2dyb3VuZC1jb2xvcjojRkVGRUZFO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgbGVmdDogMHB4O1xuXG5cblxufVxuLnNjcm9sbGFibGV7XG4gICAgICBvdmVyZmxvdy15OiBhdXRvO1xuICAgICAgb3ZlcmZsb3cteDogaGlkZGVuO1xuICAgICAgbWF4LWhlaWdodDogNTUwcHg7XG59XG4uYWNpbGlyTGlzdGUgbGk6bm90KC5kaXNhYmxlZCk6bm90KC5kaXNhYmxlZDIpe1xuICAgICAgY2xlYXI6Ym90aDtcbiAgICAgIC8qIGNvbG9yOiAjRkVGRUZFOyAqL1xuICAgICAgY29sb3I6IzAwMDtcbiAgICAgIGN1cnNvcjpwb2ludGVyO1xuICAgICAgbGluZS1oZWlnaHQ6MS4zcmVtO1xuICAgICAgdGV4dC1hbGlnbjpsZWZ0O1xuICAgICAgdGV4dC10cmFuc2Zvcm06bm9uZTtcbiAgICAgIGJhY2tncm91bmQtY29sb3I6ICNGRUZFRkU7XG4gICAgICAgLyogYmFja2dyb3VuZC1jb2xvcjogcmdiKDI0NywgMjQ2LCAyNDQpOyAqL1xuICAgICAgLyogYmFja2dyb3VuZC1jb2xvcjogcmdiKDEwLCAxMCwgMTApOyAqL1xuICAgICAgdHJhbnNpdGlvbjogYmFja2dyb3VuZC1jb2xvciAwLjNzO1xuICAgICAgcGFkZGluZy1sZWZ0OiAwLjVyZW07XG4gICAgICBwYWRkaW5nLXJpZ2h0OiAwLjVyZW07XG4gICAgICBwYWRkaW5nLXRvcDogMC4xNXJlbTtcbiAgICAgIHBhZGRpbmctYm90dG9tOiAwLjE1cmVtO1xuICAgICAgLyogYm9yZGVyLWJvdHRvbTogMC41cHggcmdiKDk3LCA5NywgOTcpIHNvbGlkOyAqL1xuICAgICAgb3BhY2l0eTogMC45OTtcbn1cbi5hY2lsaXJMaXN0ZSBsaTpub3QoLmRpc2FibGVkKTpub3QoLmRpc2FibGVkMik6bGFzdC1jaGlsZHtcbiAgICAgIGJvcmRlci1ib3R0b206IDBweCByZ2IoMjU1LCAyNTUsIDI1NSkgc29saWQgIWltcG9ydGFudFxufVxuXG4uYWNpbGlyTGlzdGUgLmRpc2FibGVke1xuICAgICAgY2xlYXI6Ym90aDtcbiAgICAgIGNvbG9yOiMwMDA7XG4gICAgICBjdXJzb3I6IGRlZmF1bHQ7XG4gICAgICBsaW5lLWhlaWdodDoxLjNyZW07XG4gICAgICB0ZXh0LWFsaWduOmxlZnQ7XG4gICAgICB0ZXh0LXRyYW5zZm9ybTpub25lO1xuICAgICAgYmFja2dyb3VuZC1jb2xvcjogI0ZFRkVGRTtcbiAgICAgIHBhZGRpbmctbGVmdDogMC41cmVtO1xuICAgICAgcGFkZGluZy1yaWdodDogMC41cmVtO1xuICAgICAgcGFkZGluZy10b3A6IDAuOXJlbTtcbiAgICAgIHBhZGRpbmctYm90dG9tOiAwLjNyZW07XG4gICAgICBtYXJnaW4tcmlnaHQ6IDJyZW07XG59XG4uYWNpbGlyTGlzdGUgbGk6bm90KC5kaXNhYmxlZCk6bm90KC5kaXNhYmxlZDIpOmhvdmVye1xuICAgICAgLyogYmFja2dyb3VuZC1jb2xvcjogI0VFRUVFRTsgKi9cbiAgICAgIC8qIGJhY2tncm91bmQtY29sb3I6IHJnYigyMjYsIDIyMywgMjE5KTtcbiAgICAgIGNvbG9yOiMwMDA7ICovXG4gICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMTAsIDEwLCAxMCk7XG4gICAgICAgICBjb2xvcjp3aGl0ZTtcbn1cbi5hY2lsaXJMaXN0ZSAuZGlzYWJsZWQgc3BhbntcbiAgICAgY29sb3I6ICNFNEU0RTQ7ICAgIFxufVxuLmFjaWxpckxpc3RlIC5kaXNhYmxlZDIgc3BhbntcbiAgICAgIGNvbG9yOiByZ2IoMTYwLCAxNjAsIDE2MCk7XG4gICAgICBjdXJzb3I6IGRlZmF1bHQ7XG4gXG4gfVxuXG4ubGlTZWxlY3RlZHtcbiAgICAgIC8qIGJhY2tncm91bmQtY29sb3I6ICNFRUVFRUUgIWltcG9ydGFudDtcbiAgICAgIGNvbG9yOiMwMDA7ICovXG4gICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMCwgMCwgMCkgIWltcG9ydGFudDtcbiAgICAgIGNvbG9yOndoaXRlOztcbn1cbi5saVNlbGVjdGVkIHNwYW57XG4gICAgICBiYWNrZ3JvdW5kLWNvbG9yOiAgIHJnYigwLCAwLCAwKTtcbiAgICAgIGNvbG9yOndoaXRlO1xufVxuLmxpU2VsZWN0ZWQgcHtcbiAgICAgIGJhY2tncm91bmQtY29sb3I6IHJnYigwLCAwLCAwKTtcbiAgICAgIGNvbG9yOndoaXRlO1xufVxuLmFjaWxpckxpc3RlIGxpIGltZ3tcbiAgICAgIG1hcmdpbi1yaWdodDogMC4zcmVtO1xufVxuXG4uYWNpbGlyTGlzdGUgbGl7XG4gICAgICB3aGl0ZS1zcGFjZTogbm93cmFwO1xuICAgICAgd29yZC13cmFwOiBub3dyYXA7XG59XG5cbmlucHV0Oi1tb3otcmVhZC1vbmx5IHsgYmFja2dyb3VuZC1jb2xvcjogI2Y4ZjlmYTsgfSBcbmlucHV0OnJlYWQtb25seSB7IGJhY2tncm91bmQtY29sb3I6ICNmOGY5ZmE7IH1cbmlucHV0Oi1tb3otcmVhZC1vbmx5OmhvdmVyIHsgYmFja2dyb3VuZC1jb2xvcjogI0UyRTZFQTsgfSBcbmlucHV0OnJlYWQtb25seTpob3ZlciB7IGJhY2tncm91bmQtY29sb3I6ICNFMkU2RUE7IH1cblxuLmF0YW1hLWJvbGdlc2ktMntcbiAgICAgIHBhZGRpbmctdG9wOjAuMnJlbTtcbiAgICAgIGJhY2tncm91bmQtY29sb3I6ICNGRUZFRkU7XG4gICBcbiAgICAgIFxufVxuLmF0YW1hLWJvbGdlc2ktMiBpbnB1dHtcbiAgICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICAgIGJvcmRlci1yaWdodDogMCFpbXBvcnRhbnQ7XG4gICAgICBib3JkZXItbGVmdDogMCAhaW1wb3J0YW50O1xuICAgICAgYm9yZGVyLXRvcDowICFpbXBvcnRhbnQ7XG4gICAgICBib3JkZXItYm90dG9tOnJnYigxNTEsIDE1MywgMjU1KSAycHggc29saWQ7ICAgICAgIFxuICAgICAgYm9yZGVyLXJhZGl1czogMCUgIWltcG9ydGFudDtcbiAgICAgIHRyYW5zaXRpb246IGJvcmRlci1ib3R0b20gMC4zcztcblxufVxuLmF0YW1hLWJvbGdlc2ktMiBpbnB1dDpmb2N1c3tcbiAgICAgIGJvcmRlci1ib3R0b206MnB4IHNvbGlkIHJnYig4NywgOTAsIDIzOCk7XG4gICAgICBib3gtc2hhZG93OjAgMHB4IDAgMCByZ2IoODcsIDkwLCAyMzgpO1xufVxuXG5cblxuXG5AbWVkaWEgKG1heC13aWR0aDo1NzVweCl7XG5cbiAgICAgIC5hdGFtYS1ib2xnZXNpLTIgaW5wdXR7XG4gICAgICAgICAgICBwYWRkaW5nLWxlZnQ6IDAuMnJlbTtcbiAgICAgICAgICAgIHBhZGRpbmctcmlnaHQ6IDAuMnJlbTtcbiAgICAgICAgICAgIC8qIG1heC13aWR0aDogMTZyZW07ICovXG4gICAgICB9XG4gICAgICAuYm9sZ2Utd2lkdGgtbGltaXRlZHtcbiAgICAgICAgICAgIG1heC13aWR0aDogNC41cmVtO1xuICAgICAgfVxufVxuXG5AbWVkaWEgKG1pbi13aWR0aDo1NzZweCl7XG5cbiAgICAgIC5hdGFtYS1ib2xnZXNpLTIgaW5wdXR7XG4gICAgICAgICAgICBwYWRkaW5nLWxlZnQ6IDAuNXJlbTtcbiAgICAgICAgICAgIHBhZGRpbmctcmlnaHQ6IDAuNXJlbTtcbiAgICAgICAgICAgIC8qIG1heC13aWR0aDogMTZyZW07ICovXG4gICAgICB9XG4gICAgICAuYm9sZ2Utd2lkdGgtbGltaXRlZHtcbiAgICAgICAgICAgIG1heC13aWR0aDogNi41cmVtO1xuICAgICAgfVxufVxuXG5cblxuLmF0YW1hLWJvbGdlc2l7XG4gICAgICB3aWR0aDoxMDAlO1xufVxuLmF0YW1hLWJvbGdlc2kgaW5wdXR7XG4gICAgICBib3JkZXItdG9wOiAwcHg7XG4gICAgICBib3JkZXItbGVmdDowcHg7XG4gICAgICBib3JkZXItcmlnaHQ6MHB4IWltcG9ydGFudDtcbiAgICAgIGJvcmRlci1ib3R0b206I0NFRDREQSAxcHggc29saWQ7ICAgICAgXG4gICAgICBib3JkZXItcmFkaXVzOiAwJSAhaW1wb3J0YW50O1xuICAgICAgdHJhbnNpdGlvbjogYm9yZGVyLWJvdHRvbSAwLjJzO1xuICAgICAgd2lkdGg6IDEwMCUhaW1wb3J0YW50O1xuICAgICAgbWFyZ2luLXRvcDogMXJlbTtcbiAgICAgIHBhZGRpbmctdG9wOiAxcmVtO1xuICAgICAgcGFkZGluZy1ib3R0b206IDFyZW07XG4gICAgICBwYWRkaW5nLWxlZnQ6IDBweDtcbiAgICAgIHBhZGRpbmctcmlnaHQ6IDBweDtcblxufVxuLmF0YW1hLWJvbGdlc2kgaW5wdXQ6Zm9jdXN7XG4gICAgICBib3JkZXItYm90dG9tOjJweCBzb2xpZCByZ2IoODcsIDkwLCAyMzgpO1xuICAgICAgYm94LXNoYWRvdzowIDBweCAwIDAgcmdiKDg3LCA5MCwgMjM4KTtcbn1cblxuLyogLmF0YW1hLWJvbGdlc2kgaW5wdXQ6Zm9jdXN7XG4gICAgICBib3JkZXItYm90dG9tOjJweCBzb2xpZCAjYzAwO1xuICAgICAgYm94LXNoYWRvdzowIDBweCAwIDAgI2MwMFxufSAqL1xuXG5cblxuXG4uYXRhbWEtYm9sZ2VzaS05OTl7XG4gICAgICBwYWRkaW5nLXRvcDowLjJyZW07XG4gICAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjRkVGRUZFO1xuICAgXG4gICAgICBcbn1cbi5hdGFtYS1ib2xnZXNpLTk5OSBpbnB1dHtcbiAgICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICAgIGJvcmRlci1yaWdodDogMCFpbXBvcnRhbnQ7XG4gICAgICBib3JkZXItbGVmdDogMCAhaW1wb3J0YW50O1xuICAgICAgYm9yZGVyLXRvcDowICFpbXBvcnRhbnQ7XG4gICAgICBib3JkZXItYm90dG9tOnJnYigxNTEsIDE1MywgMjU1KSAycHggc29saWQ7ICAgICAgIFxuICAgICAgYm9yZGVyLXJhZGl1czogMCUgIWltcG9ydGFudDtcbiAgICAgIHRyYW5zaXRpb246IGJvcmRlci1ib3R0b20gMC4zcztcbiAgICAgIHBhZGRpbmctbGVmdDogMC41cmVtO1xuICAgICAgcGFkZGluZy1yaWdodDogMC41cmVtO1xuICAgICAgLyogbWF4LXdpZHRoOiA2LjVyZW07ICovXG5cbn1cbi5hdGFtYS1ib2xnZXNpLTk5OSBpbnB1dDpmb2N1c3tcbiAgICAgIGJvcmRlci1ib3R0b206MnB4IHNvbGlkIHJnYig4NywgOTAsIDIzOCk7XG4gICAgICBib3gtc2hhZG93OjAgMHB4IDAgMCByZ2IoODcsIDkwLCAyMzgpO1xufVxuYXRhbWEtYm9sZ2VzaS05OTktcG0gaW5wdXR7XG4gICAgICBtYXgtd2lkdGg6IDYuNXJlbTtcbn1cblxuLmF2YXRhcmlte1xuICAgICAgd2lkdGg6IDE1cHg7XG4gICAgICBoZWlnaHQ6IDE1cHg7XG4gICAgICBib3JkZXItcmFkaXVzOiAxMCU7XG4gICAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZXNtb2tlOyAgICAgIFxuICAgICAgYmFja2dyb3VuZC1zaXplOiBjb3ZlclxufVxuOjotd2Via2l0LXNjcm9sbGJhciB7XG4gICAgICB3aWR0aDogM3B4IWltcG9ydGFudDtcbiAgICAgIGhlaWdodDogNHB4O1xuXG4gICAgfSJdfQ== */"
 
 /***/ }),
 
@@ -16023,7 +15467,7 @@ module.exports = ".md-avatar.size-0 {\n    vertical-align: middle;\n    width: 3
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- UPDATE -->\n<ng-container *ngIf=\"normalMode\">\n  <div ngbDropdown #acilirListem=\"ngbDropdown\" class=\"d-inline-block m-0 p-0\">\n    <div class=\"atama-bolgesi-2 m-0 p-0 bolge-width-limited\">\n      <input class=\"form-control btn btn-light minimizeInMobile\" autocomplete=\"off\" readonly type=\"text\"\n        (click)=\"focusInput()\" ngbDropdownToggle placeholder=\"Ata\" #inputToSearch>\n\n    </div>\n    <div ngbDropdownMenu  class=\"m-0 p-0 border-0  bg-dark dp-menu\">\n      <div class=\"acilirListe m-0 p-0\">\n        <div class=\"atama-bolgesi pl-2 pr-2\">\n          <div class=\"bg-dark\" style=\"height: 1px\">\n          </div>\n          <input #dropdownTitle type=\"text\" (input)=\"onSearchEvent($event)\" class=\"form-control aramaKutusu \"\n            autocomplete=\"off\" placeholder=\"Kime atayalım?\" #inputToFocus>\n          <button *ngIf=\"inputToSearch.value\" class=\"btn btn-light btn-sm rounded-circle border-0 m-1\"\n            style=\" position: absolute; right: 0px;\" (click)=\"secimIptal();\">x</button>\n        </div>\n        <li class=\"disabled\" (click)=\"secimIptal();\">\n          <span #dropdownDetail>Lütfen bir ekip üyesi seçiniz.</span>\n        </li>\n        <div class=\"scrollable\">\n          <ul *ngFor=\"let team of myTeams\" [hidden]=\"myTeamMembers(team?.TeamId)?.length == 0\" class=\"m-0 p-0\">\n            <li class=\"pl-2 disabled2\">\n              <span>{{team?.TeamName}}</span>\n            </li>\n            <li *ngFor=\"let uye of myTeamMembers(team?.TeamId)\"\n              (click)=\"selectTeamMember(uye?.Username); acilirListem.close();\"\n              [ngClass]=\"{'liSelected': uye?.Username== selectedTM}\">\n\n              <div style=\"display: inline-block\">\n                <img *ngIf=\"memberShared?.Username == uye?.Username && memberShared?.account?.getValue()\" alt=\"Avatar\"\n                  [src]=\"memberShared?.account?.getValue()?.Avatar\" class=\"md-avatar size-1 rounded-circle \">\n\n                <img *ngIf=\"memberShared?.Username != uye?.Username && getMember(uye?.Username)\"\n                  [src]=\"getMember(uye?.Username)?.Avatar\" alt=\"Avatar\" class=\"md-avatar size-1 rounded-circle \">\n              </div>\n              <div style=\"display: inline-block\">\n                <span style=\"color: rgb(177, 177, 177)\">@{{uye?.Username}}</span>\n                <p *ngIf=\"memberShared?.Username == uye?.Username\">\n                  {{memberShared?.account?.getValue()?.Name}}\n                  {{memberShared?.account?.getValue()?.Surname}}</p>\n                <p *ngIf=\"memberShared?.Username != uye?.Username\">\n                  {{getMember(uye?.Username)?.Name}}\n                  {{getMember(uye?.Username)?.Surname}}</p>\n\n              </div>\n            </li>\n\n          </ul>\n        </div>\n      </div>\n\n    </div>\n  </div>\n</ng-container>\n\n<ng-container *ngIf=\"privateTalkMode\">\n  <div ngbDropdown #acilirListem=\"ngbDropdown\" class=\"d-inline-block m-0 p-0\">\n    <div class=\"atama-bolgesi-2 m-0 p-0\">\n      <input class=\"form-control btn btn-light\" autocomplete=\"off\" readonly type=\"text\" \n        (click)=\"focusInput()\" [size]=\"(inputToSearch?.value?.length ? inputToSearch.value.length : 10)\"\n        ngbDropdownToggle placeholder=\"{{ extraPrivateTalkMode ? '+': 'Ekip/Kişi (+)' }}\" #inputToSearch>\n    </div>\n    <div ngbDropdownMenu  class=\"m-0 p-0 border-0  bg-dark dp-menu\">\n      <div class=\"acilirListe m-0 p-0\">\n        <div class=\"atama-bolgesi pl-2 pr-2\">\n          <!-- <div class=\"bg-dark\" style=\"height: 1px\">\n          </div> -->\n          <input #dropdownTitle type=\"text\" (input)=\"onSearchEvent($event)\" class=\"form-control aramaKutusu \"\n            autocomplete=\"off\" placeholder=\"Ekip veya kişi\" #inputToFocus>\n          <button *ngIf=\"inputToSearch.value\" class=\"btn btn-light btn-sm rounded-circle border-0 m-1\"\n            style=\" position: absolute; right: 0px; \" (click)=\"secimIptal();\">x</button>\n        </div>\n        <li class=\"disabled\" (click)=\"secimIptal();\">\n          <span #dropdownDetail>Lütfen bir ekip veya ekip üyesi seçiniz.</span>\n        </li>\n        <div class=\"scrollable\">\n          <ul *ngFor=\"let team of allTeamsPT\" [hidden]=\"allTeamMembersPT(team?.TeamId)?.length == 0\" class=\"m-0 p-0\">\n            <li (click)=\"selectTeam(team?.TeamId);  acilirListem.close();\" class=\"pl-2\">\n              <div style=\"display: inline-block\">\n                <img src=\"../../../assets/logo.svg\" alt=\"Avatar\" class=\"avatarim\">\n              </div>\n              <div style=\"display: inline-block\">\n                <span>{{team?.TeamName}}</span>\n              </div>\n            </li>\n            <li [hidden]=\"uye.Username==memberShared.Username\" *ngFor=\"let uye of allTeamMembersPT(team?.TeamId)\"\n              (click)=\"selectTeamMember(uye?.Username); acilirListem.close();\"\n              [ngClass]=\"{'liSelected': uye?.Username== selectedTM}\">\n\n              <div style=\"display: inline-block\">\n                <img *ngIf=\"memberShared?.Username == uye?.Username && memberShared?.account?.getValue()\" alt=\"Avatar\"\n                  [src]=\"memberShared?.account?.getValue()?.Avatar\" class=\"md-avatar size-1 rounded-circle \">\n\n                <img *ngIf=\"memberShared?.Username != uye?.Username && getMemberPT(uye?.Username)\"\n                  [src]=\"getMemberPT(uye?.Username)?.Avatar\" alt=\"Avatar\" class=\"md-avatar size-1 rounded-circle \">\n              </div>\n              <div style=\"display: inline-block\">\n                <span style=\"color: rgb(177, 177, 177)\">@{{uye?.Username}}</span>\n                <p *ngIf=\"memberShared?.Username == uye?.Username\">\n                  {{memberShared?.account?.getValue()?.Name}}\n                  {{memberShared?.account?.getValue()?.Surname}}</p>\n                <p *ngIf=\"memberShared?.Username != uye?.Username\">\n                  {{getMemberPT(uye?.Username)?.Name}}\n                  {{getMemberPT(uye?.Username)?.Surname}}</p>\n              </div>\n            </li>\n\n          </ul>\n        </div>\n      </div>\n\n    </div>\n  </div>\n</ng-container>\n\n<ng-container *ngIf=\"projectManagerMode\">\n  <div ngbDropdown #acilirListem=\"ngbDropdown\" class=\"d-inline-block m-0 p-0\">\n    <div class=\"atama-bolgesi-2 m-0 p-0 bolge-width-limited\">\n      <input class=\"form-control btn btn-light\" autocomplete=\"off\" readonly type=\"text\" \n        (click)=\"focusInput()\" ngbDropdownToggle placeholder=\"Ata\" #inputToSearch>\n    </div>\n    <div ngbDropdownMenu class=\"m-0 p-0 border-0  bg-dark dp-menu\">\n      <div class=\"acilirListe m-0 p-0\">\n        <div class=\"atama-bolgesi pl-2 pr-2 \">\n          <!-- <div class=\"bg-dark\" style=\"height: 1px\">\n          </div> -->\n          <input #dropdownTitle type=\"text\" (input)=\"onSearchEvent($event)\" class=\"form-control aramaKutusu \"\n            autocomplete=\"off\" placeholder=\"Kime atayalım?\" #inputToFocus>\n          <button *ngIf=\"inputToSearch.value\" class=\"btn btn-light btn-sm rounded-circle border-0 m-1\"\n            style=\" position: absolute; right: 0px; \" (click)=\"secimIptal();\">x</button>\n        </div>\n        <li class=\"disabled\" (click)=\"secimIptal();\">\n          <span #dropdownDetail>Lütfen bir ekip üyesi seçiniz.</span>\n        </li>\n        <div class=\"scrollable\">\n          <ul *ngFor=\"let team of allTeamsPT\" [hidden]=\"allTeamMembersPT(team?.TeamId)?.length == 0\" class=\"m-0 p-0\">\n            <li class=\"pl-2 disabled2\">\n              <span>{{team?.TeamName}}</span>\n            </li>\n\n            <li *ngFor=\"let uye of allTeamMembersPT(team?.TeamId)\"\n              (click)=\"selectTeamMember(uye?.Username); acilirListem.close();\"\n              [ngClass]=\"{'liSelected': uye?.Username== selectedTM}\">\n\n              <div style=\"display: inline-block\">\n                <img *ngIf=\"memberShared?.Username == uye?.Username && memberShared?.account?.getValue()\" alt=\"Avatar\"\n                  [src]=\"memberShared?.account?.getValue()?.Avatar\" class=\"md-avatar size-1 rounded-circle \">\n\n                <img *ngIf=\"memberShared?.Username != uye?.Username && getMemberPT(uye?.Username)\"\n                  [src]=\"getMemberPT(uye?.Username)?.Avatar\" alt=\"Avatar\" class=\"md-avatar size-1 rounded-circle \">\n              </div>\n              <div style=\"display: inline-block\">\n                <span style=\"color: rgb(177, 177, 177)\">@{{uye?.Username}}</span>\n                <p *ngIf=\"memberShared?.Username == uye?.Username\">\n                  {{memberShared?.account?.getValue()?.Name}}\n                  {{memberShared?.account?.getValue()?.Surname}}</p>\n                <p *ngIf=\"memberShared?.Username != uye?.Username\">\n                  {{getMemberPT(uye?.Username)?.Name}}\n                  {{getMemberPT(uye?.Username)?.Surname}}</p>\n              </div>\n            </li>\n\n          </ul>\n        </div>\n      </div>\n\n    </div>\n  </div>\n</ng-container>"
+module.exports = "<!-- UPDATE -->\n<ng-container *ngIf=\"normalMode\">\n  <div ngbDropdown #acilirListem=\"ngbDropdown\" class=\"d-inline-block m-0 p-0\">\n    <div class=\"atama-bolgesi-2 m-0 p-0 bolge-width-limited\">\n      <input class=\"form-control btn btn-light minimizeInMobile\" autocomplete=\"off\" readonly type=\"text\"\n        (click)=\"focusInput()\" ngbDropdownToggle placeholder=\"Ata\" #inputToSearch>\n\n    </div>\n    <div ngbDropdownMenu  class=\"m-0 p-0 border-0  bg-dark dp-menu\">\n      <div class=\"acilirListe m-0 p-0\">\n        <div class=\"atama-bolgesi pl-2 pr-2\">\n          <div class=\"bg-dark\" style=\"height: 1px\">\n          </div>\n          <input #dropdownTitle type=\"text\" (input)=\"onSearchEvent($event)\" class=\"form-control aramaKutusu \"\n            autocomplete=\"off\" placeholder=\"Kime atayalım?\" #inputToFocus>\n          <button *ngIf=\"inputToSearch.value\" class=\"btn btn-light btn-sm rounded-0 border-0 m-1\"\n            style=\" position: absolute; right: 0px;\" (click)=\"secimIptal();\">x</button>\n        </div>\n        <li class=\"disabled\" (click)=\"secimIptal();\">\n          <span #dropdownDetail>Lütfen bir ekip üyesi seçiniz.</span>\n        </li>\n        <div class=\"scrollable\">\n          <ul *ngFor=\"let team of myTeams\" [hidden]=\"myTeamMembers(team?.TeamId)?.length == 0\" class=\"m-0 p-0\">\n            <li class=\"pl-2 disabled2\">\n              <span>{{team?.TeamName}}</span>\n            </li>\n            <li *ngFor=\"let uye of myTeamMembers(team?.TeamId)\"\n              (click)=\"selectTeamMember(uye?.Username); acilirListem.close();\"\n              [ngClass]=\"{'liSelected': uye?.Username== selectedTM}\">\n\n              <div style=\"display: inline-block\">\n                <img *ngIf=\"xyzekiAuthService?.Username == uye?.Username && xyzekiAuthService?.Member\" alt=\"Avatar\"\n                  [src]=\"xyzekiAuthService?.Member?.Avatar\" class=\"md-avatar size-1 rounded-circle \">\n\n                <img *ngIf=\"xyzekiAuthService?.Username != uye?.Username && getMember(uye?.Username)\"\n                  [src]=\"getMember(uye?.Username)?.Avatar\" alt=\"Avatar\" class=\"md-avatar size-1 rounded-circle \">\n              </div>\n              <div style=\"display: inline-block\">\n                <span style=\"color: rgb(177, 177, 177)\">@{{uye?.Username}}</span>\n                <p *ngIf=\"xyzekiAuthService?.Username == uye?.Username\">\n                  {{xyzekiAuthService?.Member?.Name}}\n                  {{xyzekiAuthService?.Member?.Surname}}</p>\n                <p *ngIf=\"xyzekiAuthService?.Username != uye?.Username\">\n                  {{getMember(uye?.Username)?.Name}}\n                  {{getMember(uye?.Username)?.Surname}}</p>\n\n              </div>\n            </li>\n\n          </ul>\n        </div>\n      </div>\n\n    </div>\n  </div>\n</ng-container>\n\n<ng-container *ngIf=\"privateTalkMode\">\n  <div ngbDropdown #acilirListem=\"ngbDropdown\" class=\"d-inline-block m-0 p-0\">\n    <div class=\"atama-bolgesi-2 m-0 p-0\">\n      <input class=\"form-control btn btn-light\" autocomplete=\"off\" readonly type=\"text\" \n        (click)=\"focusInput()\" [size]=\"(inputToSearch?.value?.length ? inputToSearch.value.length : 10)\"\n        ngbDropdownToggle placeholder=\"{{ extraPrivateTalkMode ? '+': 'Ekip/Kişi (+)' }}\" #inputToSearch>\n    </div>\n    <div ngbDropdownMenu  class=\"m-0 p-0 border-0  bg-dark dp-menu\">\n      <div class=\"acilirListe m-0 p-0\">\n        <div class=\"atama-bolgesi pl-2 pr-2\">\n          <!-- <div class=\"bg-dark\" style=\"height: 1px\">\n          </div> -->\n          <input #dropdownTitle type=\"text\" (input)=\"onSearchEvent($event)\" class=\"form-control aramaKutusu \"\n            autocomplete=\"off\" placeholder=\"Ekip veya kişi\" #inputToFocus>\n          <button *ngIf=\"inputToSearch.value\" class=\"btn btn-light btn-sm rounded-circle border-0 m-1\"\n            style=\" position: absolute; right: 0px; \" (click)=\"secimIptal();\">x</button>\n        </div>\n        <li class=\"disabled\" (click)=\"secimIptal();\">\n          <span #dropdownDetail>Lütfen bir ekip veya ekip üyesi seçiniz.</span>\n        </li>\n        <div class=\"scrollable\">\n          <ul *ngFor=\"let team of allTeamsPT\" [hidden]=\"allTeamMembersPT(team?.TeamId)?.length == 0\" class=\"m-0 p-0\">\n            <li (click)=\"selectTeam(team?.TeamId);  acilirListem.close();\" class=\"pl-2\">\n              <div style=\"display: inline-block\">\n                <img src=\"../../../assets/logo.svg\" alt=\"Avatar\" class=\"avatarim\">\n              </div>\n              <div style=\"display: inline-block\">\n                <span>{{team?.TeamName}}</span>\n              </div>\n            </li>\n            <li [hidden]=\"uye.Username==xyzekiAuthService?.Username\" *ngFor=\"let uye of allTeamMembersPT(team?.TeamId)\"\n              (click)=\"selectTeamMember(uye?.Username); acilirListem.close();\"\n              [ngClass]=\"{'liSelected': uye?.Username== selectedTM}\">\n\n              <div style=\"display: inline-block\">\n                <img *ngIf=\"xyzekiAuthService?.Username == uye?.Username && xyzekiAuthService?.Member\" alt=\"Avatar\"\n                  [src]=\"xyzekiAuthService?.Member?.Avatar\" class=\"md-avatar size-1 rounded-circle \">\n\n                <img *ngIf=\"xyzekiAuthService?.Username != uye?.Username && getMemberPT(uye?.Username)\"\n                  [src]=\"getMemberPT(uye?.Username)?.Avatar\" alt=\"Avatar\" class=\"md-avatar size-1 rounded-circle \">\n              </div>\n              <div style=\"display: inline-block\">\n                <span style=\"color: rgb(177, 177, 177)\">@{{uye?.Username}}</span>\n                <p *ngIf=\"xyzekiAuthService?.Username == uye?.Username\">\n                  {{xyzekiAuthService?.Member?.Name}}\n                  {{xyzekiAuthService?.Member?.Surname}}</p>\n                <p *ngIf=\"xyzekiAuthService?.Username != uye?.Username\">\n                  {{getMemberPT(uye?.Username)?.Name}}\n                  {{getMemberPT(uye?.Username)?.Surname}}</p>\n              </div>\n            </li>\n\n          </ul>\n        </div>\n      </div>\n\n    </div>\n  </div>\n</ng-container>\n\n<ng-container *ngIf=\"projectManagerMode\">\n  <div ngbDropdown #acilirListem=\"ngbDropdown\" class=\"d-inline-block m-0 p-0\">\n    <div class=\"atama-bolgesi-2 m-0 p-0 bolge-width-limited\">\n      <input class=\"form-control btn btn-light\" autocomplete=\"off\" readonly type=\"text\" \n        (click)=\"focusInput()\" ngbDropdownToggle placeholder=\"Ata\" #inputToSearch>\n    </div>\n    <div ngbDropdownMenu class=\"m-0 p-0 border-0  bg-dark dp-menu\">\n      <div class=\"acilirListe m-0 p-0\">\n        <div class=\"atama-bolgesi pl-2 pr-2 \">\n          <!-- <div class=\"bg-dark\" style=\"height: 1px\">\n          </div> -->\n          <input #dropdownTitle type=\"text\" (input)=\"onSearchEvent($event)\" class=\"form-control aramaKutusu \"\n            autocomplete=\"off\" placeholder=\"Kime atayalım?\" #inputToFocus>\n          <button *ngIf=\"inputToSearch.value\" class=\"btn btn-light btn-sm rounded-circle border-0 m-1\"\n            style=\" position: absolute; right: 0px; \" (click)=\"secimIptal();\">x</button>\n        </div>\n        <li class=\"disabled\" (click)=\"secimIptal();\">\n          <span #dropdownDetail>Lütfen bir ekip üyesi seçiniz.</span>\n        </li>\n        <div class=\"scrollable\">\n          <ul *ngFor=\"let team of allTeamsPT\" [hidden]=\"allTeamMembersPT(team?.TeamId)?.length == 0\" class=\"m-0 p-0\">\n            <li class=\"pl-2 disabled2\">\n              <span>{{team?.TeamName}}</span>\n            </li>\n\n            <li *ngFor=\"let uye of allTeamMembersPT(team?.TeamId)\"\n              (click)=\"selectTeamMember(uye?.Username); acilirListem.close();\"\n              [ngClass]=\"{'liSelected': uye?.Username== selectedTM}\">\n\n              <div style=\"display: inline-block\">\n                <img *ngIf=\"xyzekiAuthService?.Username == uye?.Username && xyzekiAuthService?.Member\" alt=\"Avatar\"\n                  [src]=\"xyzekiAuthService?.Member?.Avatar\" class=\"md-avatar size-1 rounded-circle \">\n\n                <img *ngIf=\"xyzekiAuthService?.Username != uye?.Username && getMemberPT(uye?.Username)\"\n                  [src]=\"getMemberPT(uye?.Username)?.Avatar\" alt=\"Avatar\" class=\"md-avatar size-1 rounded-circle \">\n              </div>\n              <div style=\"display: inline-block\">\n                <span style=\"color: rgb(177, 177, 177)\">@{{uye?.Username}}</span>\n                <p *ngIf=\"xyzekiAuthService?.Username == uye?.Username\">\n                  {{xyzekiAuthService?.Member?.Name}}\n                  {{xyzekiAuthService?.Member?.Surname}}</p>\n                <p *ngIf=\"xyzekiAuthService?.Username != uye?.Username\">\n                  {{getMemberPT(uye?.Username)?.Name}}\n                  {{getMemberPT(uye?.Username)?.Surname}}</p>\n              </div>\n            </li>\n\n          </ul>\n        </div>\n      </div>\n\n    </div>\n  </div>\n</ng-container>"
 
 /***/ }),
 
@@ -16040,7 +15484,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
-/* harmony import */ var src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/member-shared.model */ "./src/app/model/member-shared.model.ts");
+/* harmony import */ var src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/xyzeki-auth-service */ "./src/app/model/xyzeki-auth-service.ts");
 /* harmony import */ var src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/repository/team-repository */ "./src/app/model/repository/team-repository.ts");
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
 
@@ -16050,10 +15494,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var AssignAutocompleteComponent = /** @class */ (function () {
-    function AssignAutocompleteComponent(repositoryTM, repository, memberShared) {
+    function AssignAutocompleteComponent(repositoryTM, repository, xyzekiAuthService) {
         this.repositoryTM = repositoryTM;
         this.repository = repository;
-        this.memberShared = memberShared;
+        this.xyzekiAuthService = xyzekiAuthService;
         this.normalMode = false;
         this.privateTalkMode = false;
         this.firstPrivateTalkMode = false;
@@ -16158,7 +15602,7 @@ var AssignAutocompleteComponent = /** @class */ (function () {
     };
     AssignAutocompleteComponent.prototype.selectTeamMember = function (username, isEmit) {
         if (isEmit === void 0) { isEmit = true; }
-        if (this.privateTalkMode && this.memberShared.Username == username) // He/She can't add him/herself.
+        if (this.privateTalkMode && this.xyzekiAuthService.Username == username) // He/She can't add him/herself.
             return;
         this.selectedTM = username;
         this.inputElement.nativeElement.value = this.selectedTM;
@@ -16252,7 +15696,7 @@ var AssignAutocompleteComponent = /** @class */ (function () {
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./assign-autocomplete.component.css */ "./src/app/ui-tools/assign-autocomplete/assign-autocomplete.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_2__["TeamMemberRepository"], src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_4__["TeamRepository"], src_app_model_member_shared_model__WEBPACK_IMPORTED_MODULE_3__["MemberShared"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_2__["TeamMemberRepository"], src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_4__["TeamRepository"], src_app_model_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"]])
     ], AssignAutocompleteComponent);
     return AssignAutocompleteComponent;
 }());
@@ -16785,15 +16229,15 @@ var SwitchDayComponent = /** @class */ (function () {
     SwitchDayComponent.prototype.toggleLedType = function () {
         if (this.dataService.ledTypeClassShared == 'led-green') {
             this.dataService.ledTypeClassShared = 'led-red';
-            this.dataService.ledToolTipMessage = 'Kırmızı ışık: sürükle bırak işlevi teslim için atama yapar.';
+            this.dataService.ledToolTipMessage = 'Kırmızı ışık\'ta sürükle bırak işlevi teslim tarihi/zamanı için atama yapar.';
         }
         else if (this.dataService.ledTypeClassShared == 'led-red') {
             this.dataService.ledTypeClassShared = 'led-yellow';
-            this.dataService.ledToolTipMessage = 'Sarı ışık: sürükle bırak işlevi hem başlangıç hem de teslim için atama yapar.';
+            this.dataService.ledToolTipMessage = 'Sarı ışık\'ta sürükle bırak işlevi hem başlangıç hem de teslim tarihi/zamanı için atama yapar.';
         }
         else { // yellow
             this.dataService.ledTypeClassShared = 'led-green'; // turnover
-            this.dataService.ledToolTipMessage = 'Yeşil ışık: sürükle bırak işlevi başlangıç için atama yapar.';
+            this.dataService.ledToolTipMessage = 'Yeşil ışık\'ta sürükle bırak işlevi başlangıç tarihi/zamanı için atama yapar.';
         }
     };
     SwitchDayComponent.prototype.onKeyDown = function (e) {

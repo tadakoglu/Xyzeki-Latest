@@ -1,6 +1,6 @@
 // import { Injectable, OnDestroy } from '@angular/core';
 // import { HubConnection, HubConnectionBuilder, HubConnectionState, HttpTransportType, LogLevel } from '@aspnet/signalr';
-// import { MemberShared } from '../member-shared.model';
+// import { XyzekiAuthService } from  '../member-shared.model';
 // import { BehaviorSubject, ReplaySubject } from 'rxjs';
 // import { QuickTask } from '../quick-task.model';
 // import { TeamMember } from '../team-member.model.';
@@ -12,9 +12,9 @@
 
 //   private hubConnection: HubConnection;
 
-//   constructor(private memberShared: MemberShared) {
+//   constructor(public xyzekiAuthService : XyzekiAuthService ) {
 //     // #TODO, END CONNECTION WHEN LOGGED OUT. CHECK TOKEN
-//     this.memberShared.token.subscribe((async token => {
+//     this.xyzekiAuthService .token.subscribe((async token => {
 //       if (token == '0') {
 //         //this.hubConnection.stop();
 //       } else {

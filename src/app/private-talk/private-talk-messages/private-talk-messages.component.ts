@@ -1,7 +1,7 @@
 
 import { Component, OnInit, ViewChild, OnDestroy, ElementRef, HostListener, AfterViewInit, SimpleChanges, OnChanges, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MemberShared } from 'src/app/model/member-shared.model';
+import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
 import { NgForm } from '@angular/forms';
 import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
 import { Member } from 'src/app/model/member.model';
@@ -51,7 +51,7 @@ export class PrivateTalkMessagesComponent implements OnInit, AfterViewInit, OnDe
     this.focusOnInput();
     const textSignals$ = fromEvent<any>(this.textAreaX.nativeElement, 'keyup')
       .pipe(debounceTime(4000), filter(event => event.target.value != ''),
-        map(event => new PrivateTalkMessage(this.privateTalkId, event.target.value, this.memberShared.Username, new Date().toISOString(), 0)),
+        map(event => new PrivateTalkMessage(this.privateTalkId, event.target.value, this.xyzekiAuthService .Username, new Date().toISOString(), 0)),
         distinctUntilKeyChanged('Message'),
       )
     this.subscriptionTextArea = textSignals$
@@ -75,8 +75,8 @@ export class PrivateTalkMessagesComponent implements OnInit, AfterViewInit, OnDe
       this.pageNo = 1;
       this.repository.loadPrivateTalkMessages(this.privateTalkId)
       //this.repository = new PrivateTalkMessageRepository(this.privateTalkId, privateTalkMessageService, privateTalkMessageSignalrService, this.psz, this.timeService)
-      Object.assign(this.privateTalkMessageModel, new PrivateTalkMessage(this.privateTalkId, '', this.memberShared.Username, null));
-      //this.privateTalkMessageModel = new PrivateTalkMessage(this.privateTalkId, '', this.memberShared.Username, null);
+      Object.assign(this.privateTalkMessageModel, new PrivateTalkMessage(this.privateTalkId, '', this.xyzekiAuthService .Username, null));
+      //this.privateTalkMessageModel = new PrivateTalkMessage(this.privateTalkId, '', this.xyzekiAuthService .Username, null);
 
     })
   }
@@ -117,7 +117,7 @@ export class PrivateTalkMessagesComponent implements OnInit, AfterViewInit, OnDe
     return this.repository.getTypingSignalMessage();
   }
   constructor(private repository: PrivateTalkMessageRepository, private repositoryTM: TeamMemberRepository, private teamRepository: TeamRepository, private receiverRepo: PrivateTalkReceiverRepository, private permissions: MemberLicenseRepository, private dataService: DataService, private pTalkExistingRepo: PrivateTalkRepository, private pTalkService: PrivateTalksService,
-    private router: Router, private route: ActivatedRoute, public memberShared: MemberShared,
+    private router: Router, private route: ActivatedRoute, public xyzekiAuthService: XyzekiAuthService,
     private privateTalkMessageService: PrivateTalkMessagesService,
     private privateTalkMessageSignalrService: XyzekiSignalrService, private psz: PageSizes, private timeService: TimeService) {
 
@@ -229,7 +229,7 @@ export class PrivateTalkMessagesComponent implements OnInit, AfterViewInit, OnDe
         this.repository.savePrivateTalkMessage(this.privateTalkMessageModel)
         this.modelSent = true;
         this.modelSubmitted = false;
-        this.privateTalkMessageModel = new PrivateTalkMessage(this.privateTalkId, '', this.memberShared.Username, null); // RESET
+        this.privateTalkMessageModel = new PrivateTalkMessage(this.privateTalkId, '', this.xyzekiAuthService .Username, null); // RESET
       }
     }
     else {
@@ -246,7 +246,7 @@ export class PrivateTalkMessagesComponent implements OnInit, AfterViewInit, OnDe
 
   modelSentForEdit: boolean = false;
   modelSubmittedForEdit: boolean = false;
-  public privateTalkModelEdit = new PrivateTalk(null, this.memberShared.Username, null); //Reset
+  public privateTalkModelEdit = new PrivateTalk(null, this.xyzekiAuthService .Username, null); //Reset
 
   editPrivateTalk(privateTalkForm: NgForm) {
     if (this.permissions.getAccessGranted()) {
@@ -256,7 +256,7 @@ export class PrivateTalkMessagesComponent implements OnInit, AfterViewInit, OnDe
         this.pTalkExistingRepo.savePrivateTalk(this.privateTalkModelEdit, this.receiversModel, this.teamReceiversModel); // to-do: implement update
         this.modelSentForEdit = true;
         this.modelSubmittedForEdit = false;
-        this.privateTalkModelEdit = new PrivateTalk(null, this.memberShared.Username, null); //Reset
+        this.privateTalkModelEdit = new PrivateTalk(null, this.xyzekiAuthService .Username, null); //Reset
         this.resetReceiverModels() // reset receivers
         this.editPrivateTalkPanelOpen = false;
       }

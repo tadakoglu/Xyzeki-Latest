@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IProjectRepository } from '../abstract/i-project-repository';
 import { Project } from '../project.model';
 import { ProjectsService } from '../services/projects.service';
-import { MemberShared } from '../member-shared.model';
+import { XyzekiAuthService } from  '../xyzeki-auth-service';
 import { PrivacyModes } from 'src/infrastructure/project-privacy-modes';
 import { ProjectOrderModel } from '../project-order.model';
 import { DataService } from '../services/shared/data.service';
@@ -10,7 +10,7 @@ import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service
 
 @Injectable()
 export class ProjectRepository implements IProjectRepository {
-    constructor(private service: ProjectsService, private signalService: XyzekiSignalrService, private memberShared: MemberShared, private dataService: DataService) { // signalr for selecting project manager
+    constructor(private service: ProjectsService, private signalService: XyzekiSignalrService, public xyzekiAuthService : XyzekiAuthService , private dataService: DataService) { // signalr for selecting project manager
 
         this.loadProjects();
 
@@ -126,8 +126,8 @@ export class ProjectRepository implements IProjectRepository {
     //     return this.myProjectsAssigned.filter(p => p.Privacy != PrivacyModes.onlyOwner && (
     //         p.Privacy == PrivacyModes.open // ve eğer içinde bulunuyorsa
     //         || p.Privacy == PrivacyModes.listMode // ve eğer içinde bulunuyorsa
-    //         || (p.Privacy == PrivacyModes.onlyOwnerAndPM && p.ProjectManager == this.memberShared.Username)
-    //         || (p.Privacy == PrivacyModes.openOnlyTasks && p.ProjectManager == this.memberShared.Username)))
+    //         || (p.Privacy == PrivacyModes.onlyOwnerAndPM && p.ProjectManager == this.xyzekiAuthService .Username)
+    //         || (p.Privacy == PrivacyModes.openOnlyTasks && p.ProjectManager == this.xyzekiAuthService .Username)))
     // }
     getMyProjectsAssigned(): Project[] { // Privacy filtreleme işini front endde yapıyorum yoksa sorunlar çıkıyor.
         return this.myProjectsAssigned

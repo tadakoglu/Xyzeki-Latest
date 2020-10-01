@@ -103,13 +103,13 @@
                 style="font-family: Arial, Helvetica, sans-serif; font-size: 14px"><b>{{container?.ContainerName}}</b>
               </span>
               <div class="w-100 float-left text-left">
-                <ng-template [ngIf]="this?.memberShared?.Username == container?.CreatedBy" [ngIfElse]="others">
+                <ng-template [ngIf]="this?.xyzekiAuthService?.Username == container?.CreatedBy" [ngIfElse]="others">
                   <div style="display: inline-block;  white-space: nowrap;">
-                    <img *ngIf="this?.memberShared?.account?.getValue()?.Avatar"
-                      [src]="this?.memberShared?.account?.getValue()?.Avatar" alt="Avatar" class="avatarim">
+                    <img *ngIf="this?.xyzekiAuthService?.Member?.Avatar"
+                      [src]="this?.xyzekiAuthService?.Member?.Avatar" alt="Avatar" class="avatarim">
                     <span>&nbsp;
-                      {{this?.memberShared?.account?.getValue()?.Name}}
-                      {{this?.memberShared?.account?.getValue()?.Surname}}</span>
+                      {{this?.xyzekiAuthService?.Member?.Name}}
+                      {{this?.xyzekiAuthService?.Member?.Surname}}</span>
                   </div>
                 </ng-template>
 

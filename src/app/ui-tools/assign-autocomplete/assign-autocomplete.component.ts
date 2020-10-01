@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter, Input, AfterViewInit, AfterContentInit, SimpleChanges, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
 import { TeamMember } from 'src/app/model/team-member.model.';
-import { MemberShared } from 'src/app/model/member-shared.model';
+import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
 import { TeamRepository } from 'src/app/model/repository/team-repository';
 import { Team } from 'src/app/model/team.model';
 import { Member } from 'src/app/model/member.model';
@@ -43,7 +43,7 @@ export class AssignAutocompleteComponent implements AfterViewInit, OnDestroy, On
   @Input() public projectManagerMode: boolean = false;
 
 
-  constructor(private repositoryTM: TeamMemberRepository, private repository: TeamRepository, public memberShared: MemberShared, ) {
+  constructor(private repositoryTM: TeamMemberRepository, private repository: TeamRepository, public xyzekiAuthService: XyzekiAuthService, ) {
   }
 
   get allTeamsPT(): Team[] {
@@ -148,7 +148,7 @@ export class AssignAutocompleteComponent implements AfterViewInit, OnDestroy, On
   public selectedTM: string;
 
   selectTeamMember(username, isEmit = true) {
-    if (this.privateTalkMode && this.memberShared.Username == username) // He/She can't add him/herself.
+    if (this.privateTalkMode && this.xyzekiAuthService .Username == username) // He/She can't add him/herself.
       return;
 
     this.selectedTM = username;

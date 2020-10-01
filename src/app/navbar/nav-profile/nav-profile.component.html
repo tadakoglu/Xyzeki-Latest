@@ -1,8 +1,8 @@
-<div *ngIf="memberShared.LoggedIn" class="removeFromMobile">
+<div *ngIf="xyzekiAuthService?.LoggedIn" class="removeFromMobile">
         <div ngbDropdown class="d-inline-block ">
                 <button class="btn btm-sm rounded-0 mb-0 mt-0  ml-0 mr-0 pb-0 pt-0 pl-1 pr-1  "
-                        id="dropdownMemberOptions" ngbDropdownToggle><img *ngIf="memberShared?.account?.getValue()" [src]="memberShared?.account?.getValue()?.Avatar" alt="Avatar"
-                                class="md-avatar size-1-5 rounded-circle border-0"> {{memberShared?.account?.getValue()?.Name}}</button>
+                        id="dropdownMemberOptions" ngbDropdownToggle><img *ngIf="xyzekiAuthService?.Member" [src]="xyzekiAuthService?.Member?.Avatar" alt="Avatar"
+                                class="md-avatar size-1-5 rounded-circle border-0"> {{xyzekiAuthService?.Member?.Name}}</button>
                 <div ngbDropdownMenu aria-labelledby="dropdownMemberOptions" class="rounded-0 dp-menu" style="z-index: 10000!important">
                         <button ngbDropdownItem class="btn btn-outline-danger" (click)="logOut()">Oturumu
                                 Kapat</button>

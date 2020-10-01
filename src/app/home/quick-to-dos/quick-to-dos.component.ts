@@ -3,7 +3,7 @@ import { QuickTask } from 'src/app/model/quick-task.model';
 import { QuickToDoRepository } from 'src/app/model/repository/quick-to-do-repository';
 import { NgbDateStruct, NgbDate, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
-import { MemberShared } from 'src/app/model/member-shared.model';
+import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
 import { AssignAutocompleteComponent } from 'src/app/ui-tools/assign-autocomplete/assign-autocomplete.component';
 import { DatePipe } from '@angular/common';
 import { DataService } from 'src/app/model/services/shared/data.service';
@@ -81,7 +81,7 @@ export class QuickToDosComponent implements AfterViewInit, OnDestroy, OnInit {
   }
   constructor(private switchHourDataService: SwitchHourDataService, private dateTimeInfra: XyzekiDateTimeInfra,
     private repositoryTM: TeamMemberRepository, private permissions: MemberLicenseRepository,
-    public memberShared: MemberShared, public quickTodoRepository: QuickToDoRepository,
+    public xyzekiAuthService: XyzekiAuthService, public quickTodoRepository: QuickToDoRepository,
     public dataService: DataService, private dialog: MatDialog, public changeDetection: ChangeDetectorRef) {
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
@@ -339,7 +339,7 @@ export class QuickToDosComponent implements AfterViewInit, OnDestroy, OnInit {
         let nextIndex = (++statusIndex % 4);
         qTask.Status = this.taskStatus[nextIndex];
         if (nextIndex == 3) {
-          qTask.Completedby = this.memberShared.Username;
+          qTask.Completedby = this.xyzekiAuthService .Username;
 
           // let date = new Date();
           // date.setHours(0, 0, 0, 0);
@@ -704,7 +704,7 @@ export class QuickToDosComponent implements AfterViewInit, OnDestroy, OnInit {
   completeQT(quickToDo: QuickTask) {
     if (this.permissions.getAccessGranted()) {
       if (quickToDo) {
-        quickToDo.Completedby = this.memberShared.Username;
+        quickToDo.Completedby = this.xyzekiAuthService .Username;
 
         // let finish: Date = new Date();
         // finish.setHours(0, 0, 0, 0);

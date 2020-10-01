@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HubConnection, HubConnectionBuilder, HubConnectionState, HttpTransportType, LogLevel, IHttpConnectionOptions } from '@aspnet/signalr';
-import { MemberShared } from '../member-shared.model';
+
 import { BehaviorSubject, ReplaySubject, interval } from 'rxjs';
 import { QuickTaskComment } from '../quick-task-comment.model';
 import { ProjectTaskComment } from '../project-task-comment.model';
@@ -19,156 +19,155 @@ import { PrivateTalkMessage } from '../private-talk-message.model';
 import { CloudContainer } from '../azure-models/cloud-container.model';
 import { CloudFile } from '../azure-models/cloud-file.model';
 import { NotificationService } from '../notification-services/notification.service';
+import { XyzekiAuthService } from '../xyzeki-auth-service';
 
 @Injectable()
 export class XyzekiSignalrService {
 
   private hubConnection: HubConnection;
 
-  constructor(private memberShared: MemberShared, private dataService: DataService, private pushService: NotificationService) {
-    this.memberShared.token.subscribe(async token => {
-      if (token == '0') {
-        //this.hubConnection.stop();
-      } else {
-        let baseURL = BackEndWebServer + '/'
-        let builder = new HubConnectionBuilder();
-        this.hubConnection = builder.withUrl(baseURL + 'api/hubs/XyzekiNotificationHub',
-          {
-            accessTokenFactory: () => { return token }, skipNegotiation:false
-          }).build();
+  constructor(private dataService: DataService, private pushService: NotificationService) {
+  }
 
-        this.hubConnection.serverTimeoutInMilliseconds = 15000;
-        this.hubConnection.keepAliveIntervalInMilliseconds = 5000;
-        // TeamMember Area
-        this.hubConnection.on("NewTeamMemberAvailable", async (teamMember: string, mode: string) => {
-          if (mode == 'new') { // Gelen kutusu
-            let tm: TeamMember = JSON.parse(teamMember)
-            await this.newTeamMemberJoinedAvailable.next(tm)
-            this.pushService.pushNotifyNewTeamMember(tm);
-          }
-          else if (mode == 'update') { // Daveti kabul ettiğinde takım sahibi ve takım arkadaşlarının sayfasını güncelle.
-            await this.newTeamMemberAvailable.next(JSON.parse(teamMember))
-          }
-        });
-        this.hubConnection.on("DeletedTeamMemberAvailable", async (teamMember: string) => {
-          await this.deletedTeamMemberAvailable.next(JSON.parse(teamMember)) // communicates with id
-        });
+  
+  async startListening(token){
+    let baseURL = BackEndWebServer + '/'
+    let builder = new HubConnectionBuilder();
+    this.hubConnection = builder.withUrl(baseURL + 'api/hubs/XyzekiNotificationHub',
+      {
+        accessTokenFactory: () => { return token }, skipNegotiation:false
+      }).build();
 
-        // QuickToDo Area
-        this.hubConnection.on("NewQuickToDoAvailable", async (quickToDo: string, to: string, mode: string) => {
-          let qt: QuickTask = JSON.parse(quickToDo)
-          await this.newQuickToDoAvailable.next(qt) // same for both adding and update
-          this.pushService.pushNotifyNewQuickTask(qt);
-        });
-        this.hubConnection.on("DeletedQuickToDoAvailable", async (quickToDo: string, to: string) => {
-          await this.deletedQuickToDoAvailable.next(JSON.parse(quickToDo))
-        });
-        this.hubConnection.on("QuickToDoReOrderingAvailable", async (TOMs: string) => {
-          await this.quickToDoReOrderingAvailable.next(JSON.parse(TOMs))
-        });
-
-
-        // ProjectToDo Area
-        this.hubConnection.on("NewProjectToDoAvailable", async (projectToDo: string) => {
-          await this.newProjectToDoAvailable.next(JSON.parse(projectToDo))
-        });
-        this.hubConnection.on("DeletedProjectToDoAvailable", async (projectToDo: string) => {
-          await this.deletedProjectToDoAvailable.next(JSON.parse(projectToDo))
-        });
-        this.hubConnection.on("ProjectToDoReOrderingAvailable", async (TOMs: string, projectId: number) => {
-          await this.projectToDoReOrderingAvailable.next([JSON.parse(TOMs), projectId])
-        });
-
-        // Project Area
-        this.hubConnection.on("NewProjectAvailable", async (project: string, extra: string) => {
-          let p: Project = JSON.parse(project)
-          await this.newProjectAvailable.next(p)
-          this.pushService.pushNotifyNewProject(p);
-        });
-        this.hubConnection.on("DeletedProjectAvailable", async (project: string) => {
-          await this.deletedProjectAvailable.next(JSON.parse(project))
-        });
-        this.hubConnection.on("ProjectReOrderingAvailable", async (POMs: string) => {
-          await this.projectReOrderingAvailable.next(JSON.parse(POMs))
-        });
-
-        // PrivateTalk Area
-        this.hubConnection.on("DeletedPrivateTalkAvailable", async (privateTalk: string, receivers: string, teamReceivers: string) => {
-          await this.deletedPrivateTalkJoinedAvailable.next(JSON.parse(privateTalk))
-        });
-
-        this.hubConnection.on("NewPrivateTalkAvailable", async (privateTalk: string, receivers: string, teamReceivers: string) => {
-          await this.newPrivateTalkJoinedAvailable.next(JSON.parse(privateTalk))
-        });
-
-        // PrivateTalkMessage Area
-        this.hubConnection.on("NewPrivateTalkMessageAvailable", async (privateTalkMessage: string, isTypingSignal: boolean) => {
-          let ptm: PrivateTalkMessage = JSON.parse(privateTalkMessage)
-          await this.newPrivateTalkMessageAvailable.next([ptm, isTypingSignal])
-          if (!isTypingSignal) {
-            this.pushService.pushNotifyNewMessage(ptm);
-          }
-        });
-
-        // Container Area
-        this.hubConnection.on("NewContainerAvailable", async (container: string) => {
-          await this.newContainerAvailable.next(JSON.parse(container))
-        });
-        this.hubConnection.on("DeletedContainerAvailable", async (container: string) => {
-          await this.deletedContainerAvailable.next(JSON.parse(container))
-        });
-
-        // Container Blob Area
-        this.hubConnection.on("NewContainerBlobAvailable", async (containerBlob: string) => {
-          let cf: CloudFile = JSON.parse(containerBlob)
-          await this.newContainerBlobAvailable.next(cf)
-          this.pushService.pushNotifyNewBlob(cf);
-        });
-        this.hubConnection.on("DeletedContainerBlobAvailable", async (containerBlob: string) => {
-          await this.deletedContainerBlobAvailable.next(JSON.parse(containerBlob))
-        });
-
-
-        //Comment Area
-        this.hubConnection.on("NewQuickToDoCommentAvailable", async (comment: string, mode: string) => {
-          let qtc: QuickTaskComment = JSON.parse(comment)
-          await this.newQuickToDoCommentAvailable.next([qtc, mode])
-          this.pushService.pushNotifyNewQTComment(qtc)
-        });
-
-        this.hubConnection.on("DeletedQuickToDoCommentAvailable", async (comment: string) => {
-          await this.deletedQuickToDoCommentAvailable.next(JSON.parse(comment))
-        });
-
-        this.hubConnection.on("NewProjectToDoCommentAvailable", async (comment: string, mode: string) => {
-          let ptc: ProjectTaskComment = JSON.parse(comment)
-          await this.newProjectToDoCommentAvailable.next([ptc, mode])
-          this.pushService.pushNotifyNewPTComment(ptc)
-        });
-        this.hubConnection.on("DeletedProjectToDoCommentAvailable", async (comment: string) => {
-          await this.deletedProjectToDoCommentAvailable.next(JSON.parse(comment))
-        });
-
-        // Start Area
-        await this.hubConnection.start().catch(error => { // ilk defa bağlanamadı ise
-          //console.error(error)
-          clearTimeout(this.timeOutId); // clearTimeout here
-          this.dataService.signalConnectionSeconds.next(undefined) // clearInterval in "second" counttimer
-          this.tryConnection();
-        });
-
-        this.hubConnection.onclose(() => { // bağlandıkdan sonra bir süre sonra bağlantı koptu ise
-          clearTimeout(this.timeOutId); // clearTimeout here
-          this.dataService.signalConnectionSeconds.next(undefined) // clearInterval in "second" counttimer
-          this.tryConnection();
-        });
-
-        this.dataService.startSignalConnection.subscribe(async () => {
-          clearTimeout(this.timeOutId); // clearTimeout here
-          this.dataService.signalConnectionSeconds.next(undefined) // clearInterval in "second" counttimer
-          await this.startConnection();
-        })
+    this.hubConnection.serverTimeoutInMilliseconds = 15000;
+    this.hubConnection.keepAliveIntervalInMilliseconds = 5000;
+    // TeamMember Area
+    this.hubConnection.on("NewTeamMemberAvailable", async (teamMember: string, mode: string) => {
+      if (mode == 'new') { // Gelen kutusu
+        let tm: TeamMember = JSON.parse(teamMember)
+        await this.newTeamMemberJoinedAvailable.next(tm)
+        this.pushService.pushNotifyNewTeamMember(tm);
       }
+      else if (mode == 'update') { // Daveti kabul ettiğinde takım sahibi ve takım arkadaşlarının sayfasını güncelle.
+        await this.newTeamMemberAvailable.next(JSON.parse(teamMember))
+      }
+    });
+    this.hubConnection.on("DeletedTeamMemberAvailable", async (teamMember: string) => {
+      await this.deletedTeamMemberAvailable.next(JSON.parse(teamMember)) // communicates with id
+    });
+
+    // QuickToDo Area
+    this.hubConnection.on("NewQuickToDoAvailable", async (quickToDo: string, to: string, mode: string) => {
+      let qt: QuickTask = JSON.parse(quickToDo)
+      await this.newQuickToDoAvailable.next(qt) // same for both adding and update
+      this.pushService.pushNotifyNewQuickTask(qt);
+    });
+    this.hubConnection.on("DeletedQuickToDoAvailable", async (quickToDo: string, to: string) => {
+      await this.deletedQuickToDoAvailable.next(JSON.parse(quickToDo))
+    });
+    this.hubConnection.on("QuickToDoReOrderingAvailable", async (TOMs: string) => {
+      await this.quickToDoReOrderingAvailable.next(JSON.parse(TOMs))
+    });
+
+
+    // ProjectToDo Area
+    this.hubConnection.on("NewProjectToDoAvailable", async (projectToDo: string) => {
+      await this.newProjectToDoAvailable.next(JSON.parse(projectToDo))
+    });
+    this.hubConnection.on("DeletedProjectToDoAvailable", async (projectToDo: string) => {
+      await this.deletedProjectToDoAvailable.next(JSON.parse(projectToDo))
+    });
+    this.hubConnection.on("ProjectToDoReOrderingAvailable", async (TOMs: string, projectId: number) => {
+      await this.projectToDoReOrderingAvailable.next([JSON.parse(TOMs), projectId])
+    });
+
+    // Project Area
+    this.hubConnection.on("NewProjectAvailable", async (project: string, extra: string) => {
+      let p: Project = JSON.parse(project)
+      await this.newProjectAvailable.next(p)
+      this.pushService.pushNotifyNewProject(p);
+    });
+    this.hubConnection.on("DeletedProjectAvailable", async (project: string) => {
+      await this.deletedProjectAvailable.next(JSON.parse(project))
+    });
+    this.hubConnection.on("ProjectReOrderingAvailable", async (POMs: string) => {
+      await this.projectReOrderingAvailable.next(JSON.parse(POMs))
+    });
+
+    // PrivateTalk Area
+    this.hubConnection.on("DeletedPrivateTalkAvailable", async (privateTalk: string, receivers: string, teamReceivers: string) => {
+      await this.deletedPrivateTalkJoinedAvailable.next(JSON.parse(privateTalk))
+    });
+
+    this.hubConnection.on("NewPrivateTalkAvailable", async (privateTalk: string, receivers: string, teamReceivers: string) => {
+      await this.newPrivateTalkJoinedAvailable.next(JSON.parse(privateTalk))
+    });
+
+    // PrivateTalkMessage Area
+    this.hubConnection.on("NewPrivateTalkMessageAvailable", async (privateTalkMessage: string, isTypingSignal: boolean) => {
+      let ptm: PrivateTalkMessage = JSON.parse(privateTalkMessage)
+      await this.newPrivateTalkMessageAvailable.next([ptm, isTypingSignal])
+      if (!isTypingSignal) {
+        this.pushService.pushNotifyNewMessage(ptm);
+      }
+    });
+
+    // Container Area
+    this.hubConnection.on("NewContainerAvailable", async (container: string) => {
+      await this.newContainerAvailable.next(JSON.parse(container))
+    });
+    this.hubConnection.on("DeletedContainerAvailable", async (container: string) => {
+      await this.deletedContainerAvailable.next(JSON.parse(container))
+    });
+
+    // Container Blob Area
+    this.hubConnection.on("NewContainerBlobAvailable", async (containerBlob: string) => {
+      let cf: CloudFile = JSON.parse(containerBlob)
+      await this.newContainerBlobAvailable.next(cf)
+      this.pushService.pushNotifyNewBlob(cf);
+    });
+    this.hubConnection.on("DeletedContainerBlobAvailable", async (containerBlob: string) => {
+      await this.deletedContainerBlobAvailable.next(JSON.parse(containerBlob))
+    });
+
+
+    //Comment Area
+    this.hubConnection.on("NewQuickToDoCommentAvailable", async (comment: string, mode: string) => {
+      let qtc: QuickTaskComment = JSON.parse(comment)
+      await this.newQuickToDoCommentAvailable.next([qtc, mode])
+      this.pushService.pushNotifyNewQTComment(qtc)
+    });
+
+    this.hubConnection.on("DeletedQuickToDoCommentAvailable", async (comment: string) => {
+      await this.deletedQuickToDoCommentAvailable.next(JSON.parse(comment))
+    });
+
+    this.hubConnection.on("NewProjectToDoCommentAvailable", async (comment: string, mode: string) => {
+      let ptc: ProjectTaskComment = JSON.parse(comment)
+      await this.newProjectToDoCommentAvailable.next([ptc, mode])
+      this.pushService.pushNotifyNewPTComment(ptc)
+    });
+    this.hubConnection.on("DeletedProjectToDoCommentAvailable", async (comment: string) => {
+      await this.deletedProjectToDoCommentAvailable.next(JSON.parse(comment))
+    });
+
+    // Start Area
+    await this.hubConnection.start().catch(error => { // ilk defa bağlanamadı ise
+      //console.error(error)
+      clearTimeout(this.timeOutId); // clearTimeout here
+      this.dataService.signalConnectionSeconds.next(undefined) // clearInterval in "second" counttimer
+      this.tryConnection();
+    });
+
+    this.hubConnection.onclose(() => { // bağlandıkdan sonra bir süre sonra bağlantı koptu ise
+      clearTimeout(this.timeOutId); // clearTimeout here
+      this.dataService.signalConnectionSeconds.next(undefined) // clearInterval in "second" counttimer
+      this.tryConnection();
+    });
+
+    this.dataService.startSignalConnection.subscribe(async () => {
+      clearTimeout(this.timeOutId); // clearTimeout here
+      this.dataService.signalConnectionSeconds.next(undefined) // clearInterval in "second" counttimer
+      await this.startConnection();
     })
   }
 

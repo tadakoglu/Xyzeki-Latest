@@ -39,7 +39,7 @@ Welcome to {{title}}! to Bienvenue à {{title}}!. -->
       <router-outlet></router-outlet>
     </div>
 
-    <div #switchHourArea *ngIf="this.innerWidth > 500 && this?.memberShared?.LoggedIn"
+    <div #switchHourArea *ngIf="this.innerWidth > 500 && this?.xyzekiAuthService?.LoggedIn"
       [hidden]="!switchHourStyle.isOpen" class="switchHourArea"
       [ngStyle]="{'left': switchHourStyle?.Left, 'top': switchHourStyle?.Top, 'visibility': switchHourStyle?.Visibility}">
       <app-switch-hour></app-switch-hour>

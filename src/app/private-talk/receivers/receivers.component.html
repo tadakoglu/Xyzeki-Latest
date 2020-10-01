@@ -54,7 +54,7 @@
 
 
   <li *ngFor="let ptr of privateTalkReceivers; index as i">
-    <ng-container *ngIf="this.memberShared?.Username == ptr?.Receiver; else otherReceivers">
+    <ng-container *ngIf="this.xyzekiAuthService ?.Username == ptr?.Receiver; else otherReceivers">
 
     </ng-container>
     <ng-template #otherReceivers>

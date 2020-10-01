@@ -38,6 +38,7 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
   public passwordRepeatUpdate: string;
   public securityCodeModel: SecurityCodeModel = new SecurityCodeModel(null, null);
 
+
   changePassword(secureCodeModelForm: NgModel) {
     this.modelSubmitted = true;
     if (this.securityCodeModel.NewPassword != this.passwordRepeatUpdate)
@@ -45,29 +46,29 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     if (secureCodeModelForm.valid) {
       this.isLoading = true;
 
-      this.subscription = this.recaptchaV3Service.execute(GoogleReCaptcha_LoginAction).pipe(concatMap(
-        recaptchaToken => { return this.repository.setUpNewPassword(Object.assign({},this.securityCodeModel), recaptchaToken) })).subscribe(r => {
-          if (r.ErrorCode == ErrorCodes.OK) {
-            this.informUser = "Tebrikler, şifreniz başarıyla değiştirildi. Artık giriş yapabilirsiniz."
-            this.succeeded = true;
-          }
-          this.modelSent = true;
-          this.modelSubmitted = false;
-          this.isLoading = false;
-        }, (error: HttpErrorResponse) => {
-          switch (error.status) { // This is the TRUE option to get 404 answers.
-            case 404:
-              this.informUser = "Üzgünüz, işleminizi gerçekleştiremiyoruz. Bu bağlantının geçerliliği dolmuş gözüküyor."
-              break;
-            case 503: ; case 0:
-              this.informUser = "Servis şu anda ulaşılabilir değildir. "
-              break; // 0 status code = ERR_CONNECTION_REFUSED
 
-          }
-          this.isLoading = false;
-          this.modelSent = true;
-          this.modelSubmitted = false;
-        })
+      this.subscription = this.repository.setUpNewPassword(Object.assign({}, this.securityCodeModel),'recaptchaCode').subscribe(r => {
+        if (r.ErrorCode == ErrorCodes.OK) {
+          this.informUser = "Tebrikler, şifreniz başarıyla değiştirildi. Artık giriş yapabilirsiniz."
+          this.succeeded = true;
+        }
+        this.modelSent = true;
+        this.modelSubmitted = false;
+        this.isLoading = false;
+      }, (error: HttpErrorResponse) => {
+        switch (error.status) { // This is the TRUE option to get 404 answers.
+          case 404:
+            this.informUser = "Üzgünüz, işleminizi gerçekleştiremiyoruz. Bu bağlantının geçerliliği dolmuş gözüküyor."
+            break;
+          case 503: ; case 0:
+            this.informUser = "Servis şu anda ulaşılabilir değildir. "
+            break; // 0 status code = ERR_CONNECTION_REFUSED
+
+        }
+        this.isLoading = false;
+        this.modelSent = true;
+        this.modelSubmitted = false;
+      })
 
 
 
@@ -75,6 +76,44 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 
     }
   }
+
+  // changePassword(secureCodeModelForm: NgModel) {
+  //   this.modelSubmitted = true;
+  //   if (this.securityCodeModel.NewPassword != this.passwordRepeatUpdate)
+  //     return;
+  //   if (secureCodeModelForm.valid) {
+  //     this.isLoading = true;
+
+  //     this.subscription = this.recaptchaV3Service.execute(GoogleReCaptcha_LoginAction).pipe(concatMap(
+  //       recaptchaToken => { return this.repository.setUpNewPassword(Object.assign({},this.securityCodeModel), recaptchaToken) })).subscribe(r => {
+  //         if (r.ErrorCode == ErrorCodes.OK) {
+  //           this.informUser = "Tebrikler, şifreniz başarıyla değiştirildi. Artık giriş yapabilirsiniz."
+  //           this.succeeded = true;
+  //         }
+  //         this.modelSent = true;
+  //         this.modelSubmitted = false;
+  //         this.isLoading = false;
+  //       }, (error: HttpErrorResponse) => {
+  //         switch (error.status) { // This is the TRUE option to get 404 answers.
+  //           case 404:
+  //             this.informUser = "Üzgünüz, işleminizi gerçekleştiremiyoruz. Bu bağlantının geçerliliği dolmuş gözüküyor."
+  //             break;
+  //           case 503: ; case 0:
+  //             this.informUser = "Servis şu anda ulaşılabilir değildir. "
+  //             break; // 0 status code = ERR_CONNECTION_REFUSED
+
+  //         }
+  //         this.isLoading = false;
+  //         this.modelSent = true;
+  //         this.modelSubmitted = false;
+  //       })
+
+
+
+
+
+  //   }
+  // }
   ngOnInit() {
   }
 

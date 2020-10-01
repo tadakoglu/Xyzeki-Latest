@@ -91,13 +91,13 @@
           </div>
           
           <div class="pt-1"  *ngIf="this.innerWidth <= 786">
-            <ng-template [ngIf]="this?.memberShared?.Username == file?.UploadedBy" [ngIfElse]="others">
+            <ng-template [ngIf]="this?.xyzekiAuthService?.Username == file?.UploadedBy" [ngIfElse]="others">
               <div style="display: inline-block;  white-space: nowrap;">
-                <img *ngIf="this?.memberShared?.account?.getValue()?.Avatar"
-                  [src]="this?.memberShared?.account?.getValue()?.Avatar" alt="Avatar" class="avatarim">
+                <img *ngIf="this?.xyzekiAuthService?.Member?.Avatar"
+                  [src]="this?.xyzekiAuthService?.Member?.Avatar" alt="Avatar" class="avatarim">
                 <span style="color: rgb(68, 68, 68);">&nbsp;
-                  {{this?.memberShared?.account?.getValue()?.Name}}
-                  {{this?.memberShared?.account?.getValue()?.Surname}}</span>
+                  {{this?.xyzekiAuthService?.Member?.Name}}
+                  {{this?.xyzekiAuthService?.Member?.Surname}}</span>
               </div>
             </ng-template>
 
@@ -119,13 +119,13 @@
           {{(file?.Size / 1048576) | number: '1.1-1' }} MB
         </td>
         <td *ngIf="this.innerWidth > 786">
-          <ng-template [ngIf]="this?.memberShared?.Username == file?.UploadedBy" [ngIfElse]="others">
+          <ng-template [ngIf]="this?.xyzekiAuthService?.Username == file?.UploadedBy" [ngIfElse]="others">
             <div style="display: inline-block;  white-space: nowrap;">
-              <img *ngIf="this?.memberShared?.account?.getValue()?.Avatar"
-                [src]="this?.memberShared?.account?.getValue()?.Avatar" alt="Avatar" class="avatarim">
+              <img *ngIf="this?.xyzekiAuthService?.Member?.Avatar"
+                [src]="this?.xyzekiAuthService?.Member?.Avatar" alt="Avatar" class="avatarim">
               <span style="color: rgb(68, 68, 68);">&nbsp;
-                {{this?.memberShared?.account?.getValue()?.Name}}
-                {{this?.memberShared?.account?.getValue()?.Surname}}</span>
+                {{this?.xyzekiAuthService?.Member?.Name}}
+                {{this?.xyzekiAuthService?.Member?.Surname}}</span>
             </div>
           </ng-template>
 
@@ -150,7 +150,7 @@
         </td>
         <td>
           <div
-            *ngIf="(file?.UploadedBy == this?.memberShared?.Username) || this?.mLicenseRepository?.getPrimaryAccessGranted()"
+            *ngIf="(file?.UploadedBy == this?.xyzekiAuthService?.Username) || this?.mLicenseRepository?.getPrimaryAccessGranted()"
             ngbDropdown class="d-inline-block float-right mb-2 " placement="left">
             <a class="btn filter-grey mb-0 " style="z-index: 1000 !important; border: 0px !important"
               id="dropdownMemberOptions" ngbDropdownToggle>

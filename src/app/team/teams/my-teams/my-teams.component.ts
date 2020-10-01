@@ -5,7 +5,7 @@ import { Team } from 'src/app/model/team.model';
 import { NgForm } from '@angular/forms';
 import { Observable, of, Subscribable, Subscription } from 'rxjs';
 import { TeamsService } from 'src/app/model/services/teams.service';
-import { MemberShared } from 'src/app/model/member-shared.model';
+import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
 import { TeamRepository } from 'src/app/model/repository/team-repository';
 import { DataService } from 'src/app/model/services/shared/data.service';
 import { debounceTime } from 'rxjs/operators';
@@ -58,7 +58,7 @@ export class MyTeamsComponent implements OnInit, OnDestroy {
   private firstTeamAvailable(): Team {
     return this.repository.getMyTeams().find((val, index, arr) => index == 0);
   }
-  constructor(private permissions: MemberLicenseRepository, private route: ActivatedRoute, private repository: TeamRepository, private dataService: DataService, private router: Router, private memberShared: MemberShared) {
+  constructor(private permissions: MemberLicenseRepository, private route: ActivatedRoute, private repository: TeamRepository, private dataService: DataService, private router: Router, public xyzekiAuthService : XyzekiAuthService ) {
   }
   public getError(): string {
     return this.repository.getError();
@@ -135,7 +135,7 @@ export class MyTeamsComponent implements OnInit, OnDestroy {
     if (this.permissions.getPrimaryAccessGranted()) {
       this.modelSubmitted = true;
       if (teamForm.valid) {
-        this.teamModel.Owner = this.memberShared.Username; // or imply on hidden input
+        this.teamModel.Owner = this.xyzekiAuthService .Username; // or imply on hidden input
         this.repository.saveTeam(this.teamModel);
         this.modelSent = true;
         this.modelSubmitted = false;

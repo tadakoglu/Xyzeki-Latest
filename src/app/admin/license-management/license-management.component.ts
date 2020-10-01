@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AdminRepository } from 'src/app/model/repository/admin-repository';
-import { MemberShared } from 'src/app/model/member-shared.model';
+import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
 import { MemberLicense } from 'src/app/model/member-license.model';
 import { NgForm } from '@angular/forms';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
@@ -14,7 +14,7 @@ import { MemberLicenseService } from 'src/app/model/services/member-license.serv
 })
 export class LicenseManagementComponent {
 
-  constructor(private repository: AdminRepository, private memberShared: MemberShared) { }
+  constructor(private repository: AdminRepository, public xyzekiAuthService : XyzekiAuthService ) { }
 
   get allLicenses(): MemberLicense[] {
     return this.repository.getAllLicenses();

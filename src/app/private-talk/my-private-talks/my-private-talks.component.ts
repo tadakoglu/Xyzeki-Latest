@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener, OnDestroy, ElementRef, ViewChild, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
-import { MemberShared } from 'src/app/model/member-shared.model';
+import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Team } from 'src/app/model/team.model';
@@ -85,7 +85,7 @@ export class MyPrivateTalksComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   constructor(private repositoryTM: TeamMemberRepository, private dataService: DataService, private permissions: MemberLicenseRepository, private teamRepository: TeamRepository, private receiverRepo: PrivateTalkReceiverRepository, private route: ActivatedRoute, private router: Router, private repository: PrivateTalkRepository,
-    private memberShared: MemberShared,
+    public xyzekiAuthService : XyzekiAuthService ,
     private teamMembersService: TeamMembersService, private teamsService: TeamsService,
     private membersService: AuthService,
     private teamMembersSignalrService: XyzekiSignalrService, private memberServ: MembersService) {
@@ -107,7 +107,7 @@ export class MyPrivateTalksComponent implements OnInit, AfterViewInit, OnDestroy
   //   return this.repository.PTOrderingCriterion(privateTalkId, my)
   // }
 
-  public privateTalkModel = new PrivateTalk(null, this.memberShared.Username, null); //Reset
+  public privateTalkModel = new PrivateTalk(null, this.xyzekiAuthService .Username, null); //Reset
 
   get myPrivateTalks_Ongoing(): PrivateTalk[] {
     return this.repository.getMyPrivateTalks();
@@ -254,7 +254,7 @@ export class MyPrivateTalksComponent implements OnInit, AfterViewInit, OnDestroy
         this.modelSent = true;
         this.modelSubmitted = false;
 
-        this.privateTalkModel = new PrivateTalk(null, this.memberShared.Username, null); //Reset
+        this.privateTalkModel = new PrivateTalk(null, this.xyzekiAuthService .Username, null); //Reset
         this.resetReceiverModels();
         this.togglePrivateTalkPanel();
       }

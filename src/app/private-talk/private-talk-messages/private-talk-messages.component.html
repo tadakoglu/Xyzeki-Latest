@@ -26,7 +26,7 @@
     class="container-fluid xyz-card-big xyz-card-default bg-light">
     <div show-dir *ngIf="privateTalkId!=undefined && privateTalkId!=0" class="sticky-top pl-2 pr-1 xyz-card-primary pt-1 bg-dark"
       style="z-index: 100!important">
-      <div style="display: inline-block" *ngIf="privateTalk()?.Sender == memberShared?.Username && this.privateTalkId"
+      <div style="display: inline-block" *ngIf="privateTalk()?.Sender == xyzekiAuthService?.Username && this.privateTalkId"
         class="text-white ">
         <!-- <app-receivers *ngIf="innerWidth < 992" [whiteColor]="true" [outgoing]="true"
           [setPrivateTalkId]="this.privateTalkId">
@@ -67,7 +67,7 @@
         <div class="clear-fix" *ngIf="innerWidth < 992"></div>
         <div class="w-100 text-left" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px">
           #<b>{{privateTalk()?.Thread}} </b>
-          <div *ngIf="privateTalk()?.Sender == memberShared?.Username && privateTalk()?.PrivateTalkId"
+          <div *ngIf="privateTalk()?.Sender == xyzekiAuthService?.Username && privateTalk()?.PrivateTalkId"
             class="d-inline-block" ngbDropdown placement="right-top">
             <a class="btn filter-grey" style="border:0px solid !important; line-height: 15px; display: inline-block"
               id="dropdownMemberOptions" ngbDropdownToggle>
@@ -89,7 +89,7 @@
         </div>
       </div>
       <div class="text-white " style="display: inline-block"
-        *ngIf="privateTalk()?.Sender != memberShared?.Username && this.privateTalkId">
+        *ngIf="privateTalk()?.Sender != xyzekiAuthService?.Username && this.privateTalkId">
         <app-receivers [whiteColor]="true" [incoming]="true" [sender]="privateTalk()?.Sender"
           [setPrivateTalkId]="this.privateTalkId">
         </app-receivers>
@@ -104,11 +104,11 @@
 
     <div class="mb-2" *ngFor="let message of privateTalkMessages | sortByDateTime: 'DateTimeSent': 'asc'">
 
-      <div *ngIf="message?.Sender == memberShared.Username" class="ben text-left d-flex justify-content-start pl-2">
-        <div class="text-center"><img *ngIf="memberShared?.account?.getValue()?.Avatar" class="avatarim"
-            [src]="memberShared?.account?.getValue()?.Avatar"></div>
+      <div *ngIf="message?.Sender == xyzekiAuthService?.Username" class="ben text-left d-flex justify-content-start pl-2">
+        <div class="text-center"><img *ngIf="xyzekiAuthService?.Member?.Avatar" class="avatarim"
+            [src]="xyzekiAuthService?.Member?.Avatar"></div>
         <div class="xyz-card xyz-card-primary">
-          <p> <b>{{memberShared?.account?.getValue()?.Name + ' ' + memberShared?.account?.getValue()?.Surname}}</b>
+          <p> <b>{{xyzekiAuthService?.Member?.Name + ' ' + xyzekiAuthService?.Member?.Surname}}</b>
             <span class="text-muted pl-1 pr-1" style="font-size: 18px">&#183;</span>
             <small class="text-muted">{{message?.DateTimeSent | humanizer}},
               {{message?.DateTimeSent | date: 'hh:mm aa' }}</small>
@@ -123,7 +123,7 @@
 
       </div>
 
-      <div *ngIf="message?.Sender != memberShared.Username"
+      <div *ngIf="message?.Sender != xyzekiAuthService?.Username"
         class="karsiTaraf text-left d-flex justify-content-start pl-2">
         <div class="text-center">
           <img *ngIf="getMember(message?.Sender)?.Avatar" class="avatarim" [src]="getMember(message?.Sender)?.Avatar">

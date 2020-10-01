@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
 import { TeamMember } from 'src/app/model/team-member.model.';
-import { MemberShared } from 'src/app/model/member-shared.model';
+import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
 import { DataService } from 'src/app/model/services/shared/data.service';
 import { Team } from 'src/app/model/team.model';
 import { Subscription } from 'rxjs';
@@ -32,7 +32,7 @@ export class IncomingInvitationsComponent implements OnInit, OnDestroy {
 
   public teamMemberModel: TeamMember;
 
-  constructor(private repository: TeamMemberRepository, private dataService: DataService, public memberShared: MemberShared) {
+  constructor(private repository: TeamMemberRepository, private dataService: DataService, public xyzekiAuthService: XyzekiAuthService) {
   }
 
   get teamMembersJoinedWR(): TeamMember[] { // gelen davetiye istekleriniz, you can't receieve invitation from your own team.(your own teams' teammember status always True)

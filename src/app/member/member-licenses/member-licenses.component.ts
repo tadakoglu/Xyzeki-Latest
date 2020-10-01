@@ -3,7 +3,7 @@ import { MemberLicenseRepository } from 'src/app/model/repository/member-license
 import { NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import { MemberLicense } from 'src/app/model/member-license.model';
 import { MemberLicenseSM } from 'src/app/model/member-license-sm.model';
-import { MemberShared } from 'src/app/model/member-shared.model';
+import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
 import { MemberLicenseService } from 'src/app/model/services/member-license.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { MemberLicenseService } from 'src/app/model/services/member-license.serv
 })
 export class MemberLicensesComponent {
 
-  constructor(private repository: MemberLicenseRepository, public memberShared: MemberShared) { }
+  constructor(private repository: MemberLicenseRepository, public xyzekiAuthService: XyzekiAuthService) { }
   totalEmployee;
   totalMonths;
   public licenceModel: any;
@@ -32,7 +32,7 @@ export class MemberLicensesComponent {
     return this.repository.getMemberLicense();
   }
 
-  public memberLicenseModel: MemberLicenseSM = new MemberLicenseSM(this.memberShared.Username,""); // Fill this form with ng form 
+  public memberLicenseModel: MemberLicenseSM = new MemberLicenseSM(this.xyzekiAuthService .Username,""); // Fill this form with ng form 
 
   // validateLicense() {
   //   this.repository.validateLicense(this.memberLicenseModel)

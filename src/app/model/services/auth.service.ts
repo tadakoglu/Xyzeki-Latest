@@ -8,7 +8,7 @@ import { Member } from '../member.model';
 import { ReturnModel } from '../return.model';
 import { ErrorCodes } from 'src/infrastructure/error-codes.enum';
 import { RegisterModel } from '../register.model';
-import { MemberShared } from '../member-shared.model';
+import { XyzekiAuthService } from  '../xyzeki-auth-service';
 import { Tuple } from '../tuple.model';
 import { SecurityCodeModel } from '../security-code.model';
 import { GoogleReCaptcha_SecretKey } from 'src/infrastructure/google-captcha';
@@ -22,7 +22,7 @@ export class AuthService {
   baseURL: string;
   auth_token: string;
 
-  constructor(private http: HttpClient, private memberShared: MemberShared, private cryptoHelpers: CryptoHelpersService) {
+  constructor(private http: HttpClient, public xyzekiAuthService : XyzekiAuthService , private cryptoHelpers: CryptoHelpersService) {
     this.baseURL = BackEndWebServer + '/'
   }
   getRecaptchaUserResponse(token: string): Observable<any> { //https://developers.google.com/recaptcha/docs/verify
@@ -78,7 +78,7 @@ export class AuthService {
   isSecurityCodeFoundAndValid(securityCode: string): Observable<boolean> {
     return this.http.get<boolean>(`${this.baseURL}api/Auth/IsSecurityCodeFoundAndValid/` + securityCode);
   }
-  setUpNewPassword(securityCodeModel: SecurityCodeModel, recaptchaToken: string): Observable<ReturnModel<null>> {
+  setUpNewPassword(securityCodeModel: SecurityCodeModel, recaptchaToken: string=''): Observable<ReturnModel<null>> {
     //securityCodeModel.NewPassword = this.cryptoHelpers.encryptWithAES(securityCodeModel.NewPassword); // Later will be decrypt in .NET 
 
     return this.http.post(this.baseURL + "api/Auth/SetUpNewPassword", securityCodeModel, { observe: "response", params: { 'recaptchaToken': recaptchaToken }, headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).

@@ -5,7 +5,7 @@ import { MatAutocompleteSelectedEvent, MatChipInputEvent, MatAutocomplete, MatAu
 import { map, startWith } from 'rxjs/operators';
 import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
 import { TeamRepository } from 'src/app/model/repository/team-repository';
-import { MemberShared } from 'src/app/model/member-shared.model';
+import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
 import { Team } from 'src/app/model/team.model';
 import { TeamMember } from 'src/app/model/team-member.model.';
 import { Member } from 'src/app/model/member.model';
@@ -76,7 +76,7 @@ export class EditReceiversComponent implements OnChanges {
   @ViewChild('receiverInputForTeam') receiverInputForTeam: ElementRef<HTMLInputElement>;
   @ViewChild('autoForTeam') matAutocompleteForTeam: MatAutocomplete;
 
-  constructor(private repositoryTM: TeamMemberRepository, private receiverRepo: PrivateTalkReceiverRepository, private repository: TeamRepository, public memberShared: MemberShared) {
+  constructor(private repositoryTM: TeamMemberRepository, private receiverRepo: PrivateTalkReceiverRepository, private repository: TeamRepository, public xyzekiAuthService: XyzekiAuthService) {
     this.receiverCtrl.valueChanges.pipe(startWith(null)).subscribe((receiver: string | null) => this.receiverToLookUp = receiver);
     this.receiverCtrlForTeam.valueChanges.pipe(startWith(null)).subscribe((teamReceiver: string | null) => this.teamReceiverToLookUp = teamReceiver);
   }
@@ -195,7 +195,7 @@ export class EditReceiversComponent implements OnChanges {
 
   }
   isValid(username): boolean {
-    let index = this.repositoryTM.getAllTeamMembersPT().filter(val => val.Status == true && val.Username != this.memberShared.Username).findIndex(tm => tm.Username == username);
+    let index = this.repositoryTM.getAllTeamMembersPT().filter(val => val.Status == true && val.Username != this.xyzekiAuthService .Username).findIndex(tm => tm.Username == username);
     if (-1 != index)
       return true;
     else
@@ -227,7 +227,7 @@ export class EditReceiversComponent implements OnChanges {
   }
 
   get allTeamMembersPT_V2(): TeamMember[] {
-    return this.repositoryTM.getAllTeamMembersPT().filter(val => val.Status == true && val.Username != this.memberShared.Username).filter(this.uniqueFilter).filter(this.lookUpFilter);
+    return this.repositoryTM.getAllTeamMembersPT().filter(val => val.Status == true && val.Username != this.xyzekiAuthService .Username).filter(this.uniqueFilter).filter(this.lookUpFilter);
   }
   public teamMemberTeam(teamId: number): Team {
     return this.repository.getAllTeamsPT().find(t => t.TeamId == teamId);

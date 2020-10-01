@@ -1,6 +1,6 @@
 // import { Injectable } from '@angular/core';
 // import { HubConnection, HubConnectionBuilder, HubConnectionState, HttpTransportType, LogLevel } from '@aspnet/signalr';
-// import { MemberShared } from '../member-shared.model';
+// import { XyzekiAuthService } from  '../member-shared.model';
 // import { BehaviorSubject, ReplaySubject } from 'rxjs';
 // import { PrivateTalk } from '../private-talk.model';
 // import { PrivateTalkReceiver } from '../private-talk-receiver.model';
@@ -12,8 +12,8 @@
 
 //     private hubConnection: HubConnection;
 
-//     constructor(private memberShared: MemberShared) {
-//         this.memberShared.token.subscribe(async token => {
+//     constructor(public xyzekiAuthService : XyzekiAuthService ) {
+//         this.xyzekiAuthService .token.subscribe(async token => {
 //             if (token == '0') {
 //                 //this.hubConnection.stop();
 //             } else {

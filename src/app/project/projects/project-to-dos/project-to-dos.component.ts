@@ -8,7 +8,7 @@ import { NgForm } from '@angular/forms';
 import { DataService } from 'src/app/model/services/shared/data.service';
 import { ProjectRepository } from 'src/app/model/repository/project-repository';
 import { Project } from 'src/app/model/project.model';
-import { MemberShared } from 'src/app/model/member-shared.model';
+import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
 import { DatePipe } from '@angular/common';
 import { AssignAutocompleteComponent } from 'src/app/ui-tools/assign-autocomplete/assign-autocomplete.component';
 import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
@@ -102,7 +102,7 @@ export class ProjectToDosComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(public repository: ProjectToDoRepository, public switchHourDataService: SwitchHourDataService, private dateTimeInfra: XyzekiDateTimeInfra, private repositoryTM: TeamMemberRepository, private permissions: MemberLicenseRepository, public repositoryProject: ProjectRepository, private dataService: DataService, private route: ActivatedRoute,
     private router: Router, private projectToDosService: ProjectToDosService,
     private projectToDoSignalrService: XyzekiSignalrService,
-    public memberShared: MemberShared, private memberServ: MembersService,
+    public xyzekiAuthService: XyzekiAuthService, private memberServ: MembersService,
     private dialog: MatDialog, private commentSignalService: XyzekiSignalrService,
     private projectSignalService: XyzekiSignalrService, private changeDetection: ChangeDetectorRef, private timeService: TimeService) {
     this.innerWidth = window.innerWidth;

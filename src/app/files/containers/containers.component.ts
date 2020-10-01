@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener, AfterViewInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { ContainerRepository } from 'src/app/model/repository/container-repository';
-import { MemberShared } from 'src/app/model/member-shared.model';
+import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
 import { DataService } from 'src/app/model/services/shared/data.service';
 import { MemberLicenseRepository } from 'src/app/model/repository/member-license-repository';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -31,7 +31,7 @@ export class ContainersComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   private searchSubscription: Subscription;
 
-  constructor(public memberShared: MemberShared, private repositoryTM: TeamMemberRepository, private dataService: DataService, public mLicenseRepository: MemberLicenseRepository, private route: ActivatedRoute, private router: Router, private repository: ContainerRepository) { }
+  constructor(public xyzekiAuthService: XyzekiAuthService, private repositoryTM: TeamMemberRepository, private dataService: DataService, public mLicenseRepository: MemberLicenseRepository, private route: ActivatedRoute, private router: Router, private repository: ContainerRepository) { }
 
   private subscription: Subscription
   ngOnInit() {
@@ -196,7 +196,7 @@ export class ContainersComponent implements OnInit, AfterViewInit, OnDestroy {
       this.modelSubmitted = true;
       if (containerForm.valid) {
         this.containerModel.CreatedAt = new Date().toISOString()
-        this.containerModel.CreatedBy = this.memberShared.Username;
+        this.containerModel.CreatedBy = this.xyzekiAuthService .Username;
         this.repository.saveContainer(this.containerModel);
         this.modelSent = true;
         this.modelSubmitted = false;

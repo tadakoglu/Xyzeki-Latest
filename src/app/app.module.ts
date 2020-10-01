@@ -22,6 +22,7 @@ import { environment } from '../environments/environment';
 import { isNullOrUndefined } from 'util';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CustomInterceptor } from 'src/infrastructure/interceptor';
+import { TokenInterceptor } from './model/interceptors/token-inceptor';
 registerLocaleData(localeTr);
 
 @NgModule({
@@ -36,8 +37,14 @@ registerLocaleData(localeTr);
     AdminModule, DragDropModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'tr-TR' },
- ],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'tr-TR' },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 
 })

@@ -17,7 +17,7 @@
         *ngIf="projectId && this.innerWidth<=400">{{(getProject(projectId)?.ProjectName).substr(0,20)}}..</button>
     <button class="btn btn-dark text-white rounded-0 float-right" disabled
         *ngIf="projectId && this.innerWidth>400">{{getProject(projectId)?.ProjectName}}</button>
-    <div *ngIf="projectId && this.memberShared?.Username == getProject(projectId)?.Owner" class="float-right">
+    <div *ngIf="projectId && this.xyzekiAuthService ?.Username == getProject(projectId)?.Owner" class="float-right">
         <div ngbDropdown placement="bottom" class="d-inline-block">
             <a class="xyz-card-dark-btn rounded-0 border-0 mr-2" id="dropdownMemberOptions" ngbDropdownToggle>
                 <img class="gear" src="../../../../assets/gear.svg" style="height: 25px; width: 25px">
@@ -289,16 +289,16 @@
                     <td style="width:15%;" class="text-center" cdkDragHandle
                         *ngIf="projectToDoModelEdit?.TaskId != projectToDo?.TaskId">
                         <div class="wrapOrNot" style="color: rgb(90, 90, 90); text-align: center;"
-                            *ngIf="projectToDo?.AssignedTo && memberShared.Username == projectToDo?.AssignedTo">
-                            <img alt="Avatar" *ngIf="memberShared?.account?.getValue()"
-                                [src]="memberShared?.account?.getValue()?.Avatar"
+                            *ngIf="projectToDo?.AssignedTo && xyzekiAuthService?.Username == projectToDo?.AssignedTo">
+                            <img alt="Avatar" *ngIf="xyzekiAuthService?.Member"
+                                [src]="xyzekiAuthService?.Member?.Avatar"
                                 class="md-avatar size-1 rounded-circle ">
                             <span> Ben</span>
                         </div>
 
 
                         <div class="wrapOrNot" style="color: rgb(94, 94, 94);  text-align: center; "
-                            *ngIf="projectToDo?.AssignedTo &&  memberShared.Username != projectToDo?.AssignedTo">
+                            *ngIf="projectToDo?.AssignedTo &&  xyzekiAuthService?.Username != projectToDo?.AssignedTo">
                             <img *ngIf="getMember(projectToDo?.AssignedTo)"
                                 [src]="getMember(projectToDo?.AssignedTo)?.Avatar" alt="Avatar"
                                 class="md-avatar size-1 rounded-circle ">
@@ -501,13 +501,13 @@
 
                                 <div class="input-group-append btn-group btn-group-toggle">
                                     <app-assign-autocomplete
-                                        *ngIf="(projectId && this.memberShared?.Username != getProject(projectId)?.ProjectManager)"
+                                        *ngIf="(projectId && this.xyzekiAuthService ?.Username != getProject(projectId)?.ProjectManager)"
                                         [normalMode]="true" [selectedItemOver]="this.projectToDoModelEdit?.AssignedTo"
                                         #editChild (assignedToEventForProjectEdit)="onAssignedToEventEdit($event)">
                                     </app-assign-autocomplete>
 
                                     <app-assign-autocomplete
-                                        *ngIf="(projectId && this.memberShared?.Username == getProject(projectId)?.ProjectManager)"
+                                        *ngIf="(projectId && this.xyzekiAuthService ?.Username == getProject(projectId)?.ProjectManager)"
                                         [projectManagerMode]="true"
                                         [selectedItemOver]="this.projectToDoModelEdit?.AssignedTo" #editChild
                                         (assignedToEventForProjectEdit)="onAssignedToEventEdit($event)">
@@ -561,12 +561,12 @@
                 <div class="input-group-prepend">
                     <!-- <a class="btn btn-dark disabled text-white">Ata</a> -->
                     <app-assign-autocomplete
-                        *ngIf="(projectId && this.memberShared?.Username != getProject(projectId)?.ProjectManager)"
+                        *ngIf="(projectId && this.xyzekiAuthService ?.Username != getProject(projectId)?.ProjectManager)"
                         [normalMode]="true" (assignedToEventForProject)="onAssignedToEvent($event)">
                     </app-assign-autocomplete>
 
                     <app-assign-autocomplete
-                        *ngIf="(projectId && this.memberShared?.Username == getProject(projectId)?.ProjectManager)"
+                        *ngIf="(projectId && this.xyzekiAuthService ?.Username == getProject(projectId)?.ProjectManager)"
                         [projectManagerMode]="true" (assignedToEventForProject)="onAssignedToEvent($event)">
                     </app-assign-autocomplete>
 
@@ -719,12 +719,12 @@
                 <div class="input-group-prepend">
 
                     <app-assign-autocomplete
-                        *ngIf="(projectId && this.memberShared?.Username != getProject(projectId)?.ProjectManager)"
+                        *ngIf="(projectId && this.xyzekiAuthService ?.Username != getProject(projectId)?.ProjectManager)"
                         [normalMode]="true" (assignedToEventForProject)="onAssignedToEvent($event)">
                     </app-assign-autocomplete>
 
                     <app-assign-autocomplete
-                        *ngIf="(projectId && this.memberShared?.Username == getProject(projectId)?.ProjectManager)"
+                        *ngIf="(projectId && this.xyzekiAuthService ?.Username == getProject(projectId)?.ProjectManager)"
                         [projectManagerMode]="true" (assignedToEventForProject)="onAssignedToEvent($event)">
                     </app-assign-autocomplete>
 

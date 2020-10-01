@@ -42,7 +42,7 @@ namespace XYZToDo.Controllers
             }
             try
             {
-                member.Password = this.cryptoHelpers.DecryptWithAES(member.Password);
+                //member.Password = this.cryptoHelpers.DecryptWithAES(member.Password);
             }
             catch (System.Exception)
             {

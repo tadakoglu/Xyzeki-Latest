@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
-import { MemberShared } from 'src/app/model/member-shared.model';
+import { XyzekiAuthService } from 'src/app/model/xyzeki-auth-service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,12 +10,12 @@ import { Router } from '@angular/router';
 })
 export class NavProfileComponent implements OnInit {
 
-  constructor(private router: Router, public memberShared: MemberShared) { }
+  constructor(private router: Router, public xyzekiAuthService: XyzekiAuthService) { }
 
   ngOnInit() {
   }
   logOut(){
-    this.memberShared.LogOut();
+    this.xyzekiAuthService.LogOut();
     this.router.navigate(['/'])
   }
   @Input() isLocked=false;

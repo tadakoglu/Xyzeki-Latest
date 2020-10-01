@@ -32,7 +32,7 @@
         style="font-size: 16.6px; font-family: Arial, Helvetica, sans-serif; color: rgb(26, 26, 26)!important">{{title}}</span>
     </div>
     <div *ngFor=" let comment of comments">
-      <div *ngIf="comment?.Sender == memberShared.Username" class="ben text-right d-flex justify-content-end pr-3">
+      <div *ngIf="comment?.Sender == xyzekiAuthService?.Username" class="ben text-right d-flex justify-content-end pr-3">
         <div class="xyz-card xyz-card-primary" (click)="setColor(comment?.MessageId)"
           [ngStyle]="{'background-color': (comment?.Color) ? comment?.Color : '#E9F6FE', 'border-radius':'2px'}">
           <p [ngStyle]="{'color': (comment?.Color == '#E9F6FE' || comment?.Color == null) ? '#000000' : '#ffffff'}">
@@ -52,11 +52,11 @@
 
         </div>
 
-        <img *ngIf="memberShared?.account?.getValue()?.Avatar" class="avatarim"
-          [src]="memberShared?.account?.getValue()?.Avatar">
+        <img *ngIf="xyzekiAuthService?.Member?.Avatar" class="avatarim"
+          [src]="xyzekiAuthService?.Member?.Avatar">
       </div>
 
-      <div *ngIf="comment?.Sender != memberShared.Username"
+      <div *ngIf="comment?.Sender != xyzekiAuthService?.Username"
         class="karsiTaraf text-right d-flex justify-content-end pr-3">
         <div class="xyz-card"
           [ngStyle]="{'background-color': (comment?.Color) ? comment?.Color : '#E9F6FE', 'border-radius':'2px', 'box-shadow': '0 5px 15px rgba(0, 0, 0, .08)'}">

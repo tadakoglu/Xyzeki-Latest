@@ -39,9 +39,9 @@
                             <div ngbTooltip="Size içeriği düzenleme yetkisi verildi." placement="bottom"
                                 tooltipClass="tooltipSpecial" class="wrapOrNot float-right draggable"
                                 style="color: rgb(90, 90, 90); text-align: center;"
-                                *ngIf="projectA?.ProjectManager && memberShared.Username == projectA?.ProjectManager">
-                                <img alt="Avatar" *ngIf="memberShared?.account?.getValue()"
-                                    [src]="memberShared?.account?.getValue()?.Avatar"
+                                *ngIf="projectA?.ProjectManager && xyzekiAuthService?.Username == projectA?.ProjectManager">
+                                <img alt="Avatar" *ngIf="xyzekiAuthService?.Member"
+                                    [src]="xyzekiAuthService?.Member?.Avatar"
                                     class="md-avatar size-1 rounded-circle ">
                                 <span> Siz</span>
                             </div>
@@ -49,7 +49,7 @@
 
                             <div class="wrapOrNot float-right mr-1 draggable"
                                 style="color: rgb(94, 94, 94);  text-align: center; "
-                                *ngIf="projectA?.ProjectManager &&  memberShared.Username != projectA?.ProjectManager">
+                                *ngIf="projectA?.ProjectManager &&  xyzekiAuthService?.Username != projectA?.ProjectManager">
                                 <img *ngIf="getMember(projectA?.ProjectManager)"
                                     [src]="getMember(projectA?.ProjectManager)?.Avatar" alt="Avatar"
                                     class="md-avatar size-1 rounded-circle ">
@@ -116,9 +116,9 @@
                             style="max-width: 80px;min-width: 80px; float:right">
                             <div class="wrapOrNot float-right mr-1 draggable"
                                 style="color: rgb(90, 90, 90); text-align: center;"
-                                *ngIf="project?.ProjectManager && memberShared.Username == project?.ProjectManager">
-                                <img alt="Avatar" *ngIf="memberShared?.account?.getValue()"
-                                    [src]="memberShared?.account?.getValue()?.Avatar"
+                                *ngIf="project?.ProjectManager && xyzekiAuthService?.Username == project?.ProjectManager">
+                                <img alt="Avatar" *ngIf="xyzekiAuthService?.Member"
+                                    [src]="xyzekiAuthService?.Member?.Avatar"
                                     class="md-avatar size-1 rounded-circle ">
                                 <span> Ben</span>
                             </div>
@@ -126,7 +126,7 @@
 
                             <div class="wrapOrNot float-right mr-1 draggable"
                                 style="color: rgb(94, 94, 94);  text-align: center; "
-                                *ngIf="project?.ProjectManager &&  memberShared.Username != project?.ProjectManager">
+                                *ngIf="project?.ProjectManager &&  xyzekiAuthService?.Username != project?.ProjectManager">
                                 <img *ngIf="getMember(project?.ProjectManager)"
                                     [src]="getMember(project?.ProjectManager)?.Avatar" alt="Avatar"
                                     class="md-avatar size-1 rounded-circle ">

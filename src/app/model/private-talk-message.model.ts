@@ -1,4 +1,4 @@
-import { MemberShared } from './member-shared.model';
+import { XyzekiAuthService } from  './xyzeki-auth-service';
 
 export class PrivateTalkMessage
 {

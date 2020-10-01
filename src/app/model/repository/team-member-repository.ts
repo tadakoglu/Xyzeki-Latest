@@ -8,7 +8,7 @@ import { AuthService } from '../services/auth.service';
 import { Team } from '../team.model';
 import { TeamsService } from '../services/teams.service';
 import { MembersService } from '../services/members.service';
-import { MemberShared } from '../member-shared.model';
+import { XyzekiAuthService } from  '../xyzeki-auth-service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MemberLicenseRepository } from './member-license-repository';
 import { TeamRepository } from './team-repository';
@@ -19,7 +19,7 @@ import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service
 @Injectable()
 export class TeamMemberRepository implements ITeamMemberRepository {
 
-    constructor(private teamRepo: TeamRepository, private mLicense: MemberLicenseRepository, private service: TeamMembersService, private service2: TeamsService, private serviceMember: AuthService, private signalService: XyzekiSignalrService, private membersService: MembersService, private memberShared: MemberShared, private permissions: MemberLicenseRepository, private dataService: DataService) {
+    constructor(private teamRepo: TeamRepository, private mLicense: MemberLicenseRepository, private service: TeamMembersService, private service2: TeamsService, private serviceMember: AuthService, private signalService: XyzekiSignalrService, private membersService: MembersService, public xyzekiAuthService : XyzekiAuthService , private permissions: MemberLicenseRepository, private dataService: DataService) {
 
         this.loadMYRelateds();
         this.loadPTRelateds();
@@ -177,12 +177,12 @@ export class TeamMemberRepository implements ITeamMemberRepository {
             this.service.saveTeamMember(teamMember).subscribe((id) => {
                 teamMember.TeamMemberId = id;
 
-                if (this.memberShared.Username == teamMember.Username)
+                if (this.xyzekiAuthService .Username == teamMember.Username)
                     teamMember.Status = true;
 
                 this.teamMembers.push(teamMember);
 
-                if (this.memberShared.Username != teamMember.Username)
+                if (this.xyzekiAuthService .Username != teamMember.Username)
                     this.signalService.notifyNewTeamMember(teamMember, 'new');
 
                 let index: number = this.teamMembersOwnedAsMembers.findIndex(m => m.Username == teamMember.Username);
@@ -288,7 +288,7 @@ export class TeamMemberRepository implements ITeamMemberRepository {
             if (status) {
                 if (this.teamMembersJoined.length == 0 && this.permissions) {
                     this.permissions.removeMemberLicenseForJoinedTeamMember();
-                    this.memberShared.LogOut();
+                    this.xyzekiAuthService .LogOut();
                 }
             }
 

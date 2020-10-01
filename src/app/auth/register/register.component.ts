@@ -3,7 +3,7 @@ import { NgForm, FormControl } from '@angular/forms';
 import { IAuthRepository } from 'src/app/model/abstract/i-auth-repository';
 import { RegisterModel } from 'src/app/model/register.model';
 import { ErrorCodes } from 'src/infrastructure/error-codes.enum';
-import { MemberShared } from 'src/app/model/member-shared.model';
+import { XyzekiAuthService } from 'src/app/model/xyzeki-auth-service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthRepository } from 'src/app/model/repository/auth-repository';
 
@@ -61,7 +61,7 @@ export class RegisterComponent implements AfterViewInit, OnDestroy {
   private subscription4: Subscription;
   private subscription5: Subscription;
   constructor(private route: ActivatedRoute, private router: Router, private repository: AuthRepository,
-    public registerModel: RegisterModel, private memberShared: MemberShared, private membersService: MembersService, private recaptchaV3Service: ReCaptchaV3Service) {
+    public registerModel: RegisterModel, public xyzekiAuthService: XyzekiAuthService, private membersService: MembersService, private recaptchaV3Service: ReCaptchaV3Service) {
     this.route.data.subscribe(data => {
       if (data.kind === 'update') {
         this.isUpdateMode = true;
@@ -93,11 +93,9 @@ export class RegisterComponent implements AfterViewInit, OnDestroy {
     request.send();
   }
   loadAvatarBack() {
-    this.subscription = this.memberShared.account.subscribe(myAccount => {
-      this.registerModel.Avatar = myAccount.Avatar;
-      this.avatar = myAccount.Avatar;
-      this.avatarStatus = 'back';
-    })
+    this.registerModel.Avatar = this.xyzekiAuthService.Member.Avatar;
+    this.avatar = this.xyzekiAuthService.Member.Avatar;
+    this.avatarStatus = 'back';
   }
 
   public avatarStatus = 'back';
@@ -126,6 +124,47 @@ export class RegisterComponent implements AfterViewInit, OnDestroy {
   modelSubmitted: boolean = false;
   informUser: string;
   isLoading = false;
+  // register(registerForm: NgForm) {
+  //   if (this.isUpdateMode)
+  //     this.update(registerForm);
+  //   else {
+  //     this.modelSubmitted = true;
+  //     if (this.passwordRepeat != this.registerModel.Password)
+  //       return;
+  //     if (registerForm.valid) {
+  //       this.isLoading = true;
+  //       this.subscription2 = this.recaptchaV3Service.execute(GoogleReCaptcha_LoginAction).pipe(concatMap(
+  //         recaptchaToken => { return this.repository.register(Object.assign({}, this.registerModel), recaptchaToken) })).subscribe(r => {
+  //           if (r.ErrorCode == ErrorCodes.OK) {
+  //             this.isLoading = true;
+  //             this.informUser = "Tebrikler, üyeliğinizi tamamladık. Lütfen bekleyiniz..."
+  //             setTimeout(() => {
+  //               this.router.navigate(['/giris']);
+  //             }, 2000);
+  //           }
+  //           else if (r.ErrorCode == ErrorCodes.MemberAlreadyExistsError) {
+  //             this.informUser = "Üzgünüz, bu kullanıcı adı veya email'i kullanan başka bir üye bulunmaktadır."
+
+  //           }
+  //           this.modelSent = true;
+  //           this.modelSubmitted = false;
+  //           this.isLoading = false;
+
+  //         }, (error: HttpErrorResponse) => {
+  //           switch (error.status) {
+  //             case 503: ; case 0:
+  //               this.informUser = "Servis şu anda ulaşılabilir değildir. "
+  //               break; // 0 status code = ERR_CONNECTION_REFUSED
+
+  //           }
+  //           this.modelSent = true;
+  //           this.modelSubmitted = false;
+  //           this.isLoading = false;
+  //         })
+  //     }
+  //   }
+  // }
+
   register(registerForm: NgForm) {
     if (this.isUpdateMode)
       this.update(registerForm);
@@ -135,38 +174,36 @@ export class RegisterComponent implements AfterViewInit, OnDestroy {
         return;
       if (registerForm.valid) {
         this.isLoading = true;
-        this.subscription2 = this.recaptchaV3Service.execute(GoogleReCaptcha_LoginAction).pipe(concatMap(
-          recaptchaToken => { return this.repository.register(Object.assign({}, this.registerModel), recaptchaToken) })).subscribe(r => {
-            if (r.ErrorCode == ErrorCodes.OK) {
-              this.isLoading = true;
-              this.informUser = "Tebrikler, üyeliğinizi tamamladık. Lütfen bekleyiniz..."
-              setTimeout(() => {
-                this.router.navigate(['/giris']);
-              }, 2000);
-            }
-            else if (r.ErrorCode == ErrorCodes.MemberAlreadyExistsError) {
-              this.informUser = "Üzgünüz, bu kullanıcı adı veya email'i kullanan başka bir üye bulunmaktadır."
+        this.subscription2 = this.repository.register(Object.assign({}, this.registerModel), 'recaptchaToken').subscribe(r => {
+          if (r.ErrorCode == ErrorCodes.OK) {
+            this.isLoading = true;
+            this.informUser = "Tebrikler, üyeliğinizi tamamladık. Lütfen bekleyiniz..."
+            setTimeout(() => {
+              this.router.navigate(['/giris']);
+            }, 2000);
+          }
+          else if (r.ErrorCode == ErrorCodes.MemberAlreadyExistsError) {
+            this.informUser = "Üzgünüz, bu kullanıcı adı veya email'i kullanan başka bir üye bulunmaktadır."
 
-            }
-            this.modelSent = true;
-            this.modelSubmitted = false;
-            this.isLoading = false;
+          }
+          this.modelSent = true;
+          this.modelSubmitted = false;
+          this.isLoading = false;
 
-          }, (error: HttpErrorResponse) => {
-            switch (error.status) {
-              case 503: ; case 0:
-                this.informUser = "Servis şu anda ulaşılabilir değildir. "
-                break; // 0 status code = ERR_CONNECTION_REFUSED
+        }, (error: HttpErrorResponse) => {
+          switch (error.status) {
+            case 503: ; case 0:
+              this.informUser = "Servis şu anda ulaşılabilir değildir. "
+              break; // 0 status code = ERR_CONNECTION_REFUSED
 
-            }
-            this.modelSent = true;
-            this.modelSubmitted = false;
-            this.isLoading = false;
-          })
+          }
+          this.modelSent = true;
+          this.modelSubmitted = false;
+          this.isLoading = false;
+        })
       }
     }
   }
-
   update(registerForm: NgForm) {
     this.modelSubmitted = true;
     if (this.passwordRepeatUpdate != this.registerModel.Password)
@@ -182,7 +219,7 @@ export class RegisterComponent implements AfterViewInit, OnDestroy {
 
           let member: Member = new Member(null, null, null, null, null, null, null, 0, 0);
           Object.assign(member, this.registerModel);
-          this.memberShared.account.next(member)
+          this.xyzekiAuthService.SaveMember(member);
         }
         else if (r.ErrorCode == ErrorCodes.MemberAlreadyExistsError) {
           setTimeout(() => {
@@ -238,16 +275,15 @@ export class RegisterComponent implements AfterViewInit, OnDestroy {
   }
   accessInfo = null;
   loadAccount() {
-    this.subscription5 = this.memberShared.account.subscribe(myAccount => {
-      this.registerModel.Username = myAccount.Username;
-      this.registerModel.Name = myAccount.Name;
-      this.registerModel.Surname = myAccount.Surname;
-      this.registerModel.Email = myAccount.Email;
-      this.registerModel.CellCountry = myAccount.CellCountry;
-      this.registerModel.Cell = myAccount.Cell
-      this.registerModel.Avatar = myAccount.Avatar;
-      this.avatar = myAccount.Avatar;
-    })
+    let myAccount: Member = this.xyzekiAuthService.Member
+    this.registerModel.Username = myAccount.Username;
+    this.registerModel.Name = myAccount.Name;
+    this.registerModel.Surname = myAccount.Surname;
+    this.registerModel.Email = myAccount.Email;
+    this.registerModel.CellCountry = myAccount.CellCountry;
+    this.registerModel.Cell = myAccount.Cell
+    this.registerModel.Avatar = myAccount.Avatar;
+    this.avatar = myAccount.Avatar;
   }
 
 }

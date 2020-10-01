@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { MemberShared } from '../../member-shared.model';
+import { XyzekiAuthService } from  '../../xyzeki-auth-service';
 import { PrivateTalkMessage } from '../../private-talk-message.model';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class SaveLastSeenGuardService implements CanDeactivate<PrivateTalkMessag
   /**
    *
    */
-  constructor(private memberShared: MemberShared) {
+  constructor(public xyzekiAuthService : XyzekiAuthService ) {
 
 
   }

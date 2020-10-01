@@ -4,7 +4,7 @@
             <div class="card bg-white mt-3 mb-3 ">
                 <div class="card-header xyz-card-dark text-light rounded-0">
                     <a class="btn btn-dark text-white rounded-0" [routerLink]="[ '/isler' ]">Geri</a>
-                    <a *ngIf="this?.memberShared?.Username == 'tadakoglu'" class="btn btn-dark text-white rounded-0"
+                    <a *ngIf="this?.xyzekiAuthService?.Username == 'tadakoglu'" class="btn btn-dark text-white rounded-0"
                         [routerLink]="[ '/admin/license-management' ]">Lisans Yönetimi</a>
                     <a class="btn float-right">Lisanslar</a>
                 </div>

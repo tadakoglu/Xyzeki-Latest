@@ -1,11 +1,8 @@
-import { Injectable, ReflectiveInjector, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate } from '@angular/router';
-import { TeamRepository } from '../../repository/team-repository';
 import { TeamsService } from '../teams.service';
 import { from, of, Observable, BehaviorSubject } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
-import { MemberShared } from '../../member-shared.model';
 
 @Injectable()
 export class TeamMembersJoinedGuardService implements CanActivate {

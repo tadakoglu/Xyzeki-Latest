@@ -28,7 +28,7 @@
   </div>
   <div class="card-body bg-white p-2" *ngIf="projectToDosAssignedToMe.length != 0">
 
-    <table *ngIf="memberShared.LoggedIn" class="pt-4 pb-4 table table-hover  table-sm  gizliHeader">
+    <table *ngIf="xyzekiAuthService?.LoggedIn" class="pt-4 pb-4 table table-hover  table-sm  gizliHeader">
       <thead>
         <thead>
         </thead>
@@ -57,7 +57,7 @@
 
             <a *ngIf="this.getProject(projectToDo?.ProjectId)" ngbTooltip="Projeye git" tooltipClass="tooltipSpecial"
               [routerLink]="['/projeler', projectToDo?.ProjectId, 'yapilacaklar']"
-              [fragment]="this.getProject(projectToDo?.ProjectId).Owner!=this.memberShared.Username ? 'shared': ''"
+              [fragment]="this.getProject(projectToDo?.ProjectId).Owner!=this.xyzekiAuthService .Username ? 'shared': ''"
               class="btn btn-light btn-sm rounded-1 border-0">
               <img src="../../../assets/arrow-2.png" style="width: 16px;object-fit: cover; cursor: pointer; " /></a>
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, OnDestroy, ElementRef, HostListener, AfterViewInit, Input, ChangeDetectionStrategy, SimpleChanges, OnChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MemberShared } from 'src/app/model/member-shared.model';
+import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
 import { NgForm } from '@angular/forms';
 import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
 import { Member } from 'src/app/model/member.model';
@@ -19,7 +19,7 @@ import { Team } from 'src/app/model/team.model';
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class ReceiversComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
-  constructor(private repositoryTM: TeamMemberRepository, private teamRepository: TeamRepository, private receiversService: PrivateTalkReceiversService, private teamReceiversService: PrivateTalkTeamReceiversService, private router: Router, private route: ActivatedRoute, public memberShared: MemberShared, ) {
+  constructor(private repositoryTM: TeamMemberRepository, private teamRepository: TeamRepository, private receiversService: PrivateTalkReceiversService, private teamReceiversService: PrivateTalkTeamReceiversService, private router: Router, private route: ActivatedRoute, public xyzekiAuthService: XyzekiAuthService, ) {
     this.focusOnInput();
 
   }

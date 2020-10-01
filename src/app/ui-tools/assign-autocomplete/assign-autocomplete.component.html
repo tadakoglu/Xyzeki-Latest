@@ -29,18 +29,18 @@
               [ngClass]="{'liSelected': uye?.Username== selectedTM}">
 
               <div style="display: inline-block">
-                <img *ngIf="memberShared?.Username == uye?.Username && memberShared?.account?.getValue()" alt="Avatar"
-                  [src]="memberShared?.account?.getValue()?.Avatar" class="md-avatar size-1 rounded-circle ">
+                <img *ngIf="xyzekiAuthService?.Username == uye?.Username && xyzekiAuthService?.Member" alt="Avatar"
+                  [src]="xyzekiAuthService?.Member?.Avatar" class="md-avatar size-1 rounded-circle ">
 
-                <img *ngIf="memberShared?.Username != uye?.Username && getMember(uye?.Username)"
+                <img *ngIf="xyzekiAuthService?.Username != uye?.Username && getMember(uye?.Username)"
                   [src]="getMember(uye?.Username)?.Avatar" alt="Avatar" class="md-avatar size-1 rounded-circle ">
               </div>
               <div style="display: inline-block">
                 <span style="color: rgb(177, 177, 177)">@{{uye?.Username}}</span>
-                <p *ngIf="memberShared?.Username == uye?.Username">
-                  {{memberShared?.account?.getValue()?.Name}}
-                  {{memberShared?.account?.getValue()?.Surname}}</p>
-                <p *ngIf="memberShared?.Username != uye?.Username">
+                <p *ngIf="xyzekiAuthService?.Username == uye?.Username">
+                  {{xyzekiAuthService?.Member?.Name}}
+                  {{xyzekiAuthService?.Member?.Surname}}</p>
+                <p *ngIf="xyzekiAuthService?.Username != uye?.Username">
                   {{getMember(uye?.Username)?.Name}}
                   {{getMember(uye?.Username)?.Surname}}</p>
 
@@ -85,23 +85,23 @@
                 <span>{{team?.TeamName}}</span>
               </div>
             </li>
-            <li [hidden]="uye.Username==memberShared.Username" *ngFor="let uye of allTeamMembersPT(team?.TeamId)"
+            <li [hidden]="uye.Username==xyzekiAuthService?.Username" *ngFor="let uye of allTeamMembersPT(team?.TeamId)"
               (click)="selectTeamMember(uye?.Username); acilirListem.close();"
               [ngClass]="{'liSelected': uye?.Username== selectedTM}">
 
               <div style="display: inline-block">
-                <img *ngIf="memberShared?.Username == uye?.Username && memberShared?.account?.getValue()" alt="Avatar"
-                  [src]="memberShared?.account?.getValue()?.Avatar" class="md-avatar size-1 rounded-circle ">
+                <img *ngIf="xyzekiAuthService?.Username == uye?.Username && xyzekiAuthService?.Member" alt="Avatar"
+                  [src]="xyzekiAuthService?.Member?.Avatar" class="md-avatar size-1 rounded-circle ">
 
-                <img *ngIf="memberShared?.Username != uye?.Username && getMemberPT(uye?.Username)"
+                <img *ngIf="xyzekiAuthService?.Username != uye?.Username && getMemberPT(uye?.Username)"
                   [src]="getMemberPT(uye?.Username)?.Avatar" alt="Avatar" class="md-avatar size-1 rounded-circle ">
               </div>
               <div style="display: inline-block">
                 <span style="color: rgb(177, 177, 177)">@{{uye?.Username}}</span>
-                <p *ngIf="memberShared?.Username == uye?.Username">
-                  {{memberShared?.account?.getValue()?.Name}}
-                  {{memberShared?.account?.getValue()?.Surname}}</p>
-                <p *ngIf="memberShared?.Username != uye?.Username">
+                <p *ngIf="xyzekiAuthService?.Username == uye?.Username">
+                  {{xyzekiAuthService?.Member?.Name}}
+                  {{xyzekiAuthService?.Member?.Surname}}</p>
+                <p *ngIf="xyzekiAuthService?.Username != uye?.Username">
                   {{getMemberPT(uye?.Username)?.Name}}
                   {{getMemberPT(uye?.Username)?.Surname}}</p>
               </div>
@@ -145,18 +145,18 @@
               [ngClass]="{'liSelected': uye?.Username== selectedTM}">
 
               <div style="display: inline-block">
-                <img *ngIf="memberShared?.Username == uye?.Username && memberShared?.account?.getValue()" alt="Avatar"
-                  [src]="memberShared?.account?.getValue()?.Avatar" class="md-avatar size-1 rounded-circle ">
+                <img *ngIf="xyzekiAuthService?.Username == uye?.Username && xyzekiAuthService?.Member" alt="Avatar"
+                  [src]="xyzekiAuthService?.Member?.Avatar" class="md-avatar size-1 rounded-circle ">
 
-                <img *ngIf="memberShared?.Username != uye?.Username && getMemberPT(uye?.Username)"
+                <img *ngIf="xyzekiAuthService?.Username != uye?.Username && getMemberPT(uye?.Username)"
                   [src]="getMemberPT(uye?.Username)?.Avatar" alt="Avatar" class="md-avatar size-1 rounded-circle ">
               </div>
               <div style="display: inline-block">
                 <span style="color: rgb(177, 177, 177)">@{{uye?.Username}}</span>
-                <p *ngIf="memberShared?.Username == uye?.Username">
-                  {{memberShared?.account?.getValue()?.Name}}
-                  {{memberShared?.account?.getValue()?.Surname}}</p>
-                <p *ngIf="memberShared?.Username != uye?.Username">
+                <p *ngIf="xyzekiAuthService?.Username == uye?.Username">
+                  {{xyzekiAuthService?.Member?.Name}}
+                  {{xyzekiAuthService?.Member?.Surname}}</p>
+                <p *ngIf="xyzekiAuthService?.Username != uye?.Username">
                   {{getMemberPT(uye?.Username)?.Name}}
                   {{getMemberPT(uye?.Username)?.Surname}}</p>
               </div>

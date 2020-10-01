@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, HostListener, ViewChild, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
-import { MemberShared } from 'src/app/model/member-shared.model';
+import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
 import { ProjectToDosService } from 'src/app/model/services/project-to-dos.service';
 import { ProjectToDoRepository } from 'src/app/model/repository/project-to-do-repository';
 import { ProjectTask } from 'src/app/model/project-task.model';
@@ -109,7 +109,7 @@ export class MyToDosComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   // private repository: ProjectToDoRepository
   constructor(private repository: ProjectToDoRepository, private switchHourDataService: SwitchHourDataService, private projectRepo: ProjectRepository, private permissions: MemberLicenseRepository, public dataService: DataService, private router: Router,
-    public memberShared: MemberShared, private projectToDosService: ProjectToDosService,
+    public xyzekiAuthService: XyzekiAuthService, private projectToDosService: ProjectToDosService,
     private projectToDoSignalrService: XyzekiSignalrService, private dialog: MatDialog,
     private commentSignalService: XyzekiSignalrService,
     private projectSignalService: XyzekiSignalrService, public changeDetection: ChangeDetectorRef, private timeService: TimeService) {
