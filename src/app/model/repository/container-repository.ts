@@ -1,12 +1,12 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
+import { concatMap } from 'rxjs/operators';
 import { IContainerRepository } from '../abstract/i-container-repository';
 import { CloudContainer } from '../azure-models/cloud-container.model';
+import { CloudContainers } from '../azure-models/cloud-containers.model';
 import { FilesService } from '../services/files.service';
 import { DataService } from '../services/shared/data.service';
-import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
 import { TimeService } from '../services/time.service';
-import { concatMap } from 'rxjs/operators';
-import { CloudContainers } from '../azure-models/cloud-containers.model';
+import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
 
 @Injectable()
 export class ContainerRepository implements IContainerRepository {

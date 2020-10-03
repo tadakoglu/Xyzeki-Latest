@@ -1,13 +1,9 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, HostListener } from '@angular/core';
-import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
-import { MembersService } from 'src/app/model/services/members.service';
-import { Member } from 'src/app/model/member.model';
-import { MemberSettingService } from 'src/app/model/services/member-setting.service';
-import { MemberSetting } from 'src/app/model/member-setting.model';
-import { isNullOrUndefined } from 'util';
+import { ChangeDetectionStrategy, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
+import { MemberSetting } from 'src/app/model/member-setting.model';
 import { MemberLicenseRepository } from 'src/app/model/repository/member-license-repository';
-import { MemberLicenseService } from 'src/app/model/services/member-license.service';
+import { MemberSettingService } from 'src/app/model/services/member-setting.service';
 
 @Component({
   selector: 'app-settings',

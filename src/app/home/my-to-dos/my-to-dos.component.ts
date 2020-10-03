@@ -1,20 +1,20 @@
-import { Component, OnInit, AfterViewInit, HostListener, ViewChild, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
-import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
-import { ProjectToDosService } from 'src/app/model/services/project-to-dos.service';
-import { ProjectToDoRepository } from 'src/app/model/repository/project-to-do-repository';
-import { ProjectTask } from 'src/app/model/project-task.model';
-import { DataService } from 'src/app/model/services/shared/data.service';
-import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material';
+import { Subscription } from 'rxjs';
 import { TaskCommentsComponent } from 'src/app/comment/task-comments/task-comments.component';
+import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
+import { ProjectTask } from 'src/app/model/project-task.model';
+import { Project } from 'src/app/model/project.model';
 import { MemberLicenseRepository } from 'src/app/model/repository/member-license-repository';
 import { ProjectRepository } from 'src/app/model/repository/project-repository';
-import { Project } from 'src/app/model/project.model';
-import { isNullOrUndefined } from 'util';
-import { Subscription } from 'rxjs';
+import { ProjectToDoRepository } from 'src/app/model/repository/project-to-do-repository';
+import { ProjectToDosService } from 'src/app/model/services/project-to-dos.service';
+import { DataService } from 'src/app/model/services/shared/data.service';
 import { SwitchHourDataService } from 'src/app/model/services/shared/switch-hour-data.service';
-import { XyzekiSignalrService } from 'src/app/model/signalr-services/xyzeki-signalr.service';
 import { TimeService } from 'src/app/model/services/time.service';
+import { XyzekiSignalrService } from 'src/app/model/signalr-services/xyzeki-signalr.service';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-my-to-dos',

@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
-import { LoginModel } from '../login.model';
-import { ReturnModel } from '../return.model';
-import { AuthService } from '../services/auth.service';
+import { Observable } from 'rxjs';
 import { IAuthRepository } from '../abstract/i-auth-repository';
-import { RegisterModel } from '../register.model';
-import { Observable, from, of, observable, Subject, BehaviorSubject } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
-import { ErrorCodes } from 'src/infrastructure/error-codes.enum';
+import { LoginModel } from '../login.model';
 import { Member } from '../member.model';
-import { Tuple } from '../tuple.model';
+import { RegisterModel } from '../register.model';
+import { ReturnModel } from '../return.model';
 import { SecurityCodeModel } from '../security-code.model';
+import { AuthService } from '../services/auth.service';
+import { Tuple } from '../tuple.model';
 
 @Injectable()
 export class AuthRepository implements IAuthRepository {

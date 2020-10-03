@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
+import { concatMap } from 'rxjs/operators';
 import { IMemberLicenseRepository } from '../abstract/i-member-license-repository';
 import { MemberLicense } from '../member-license.model';
-import { MemberLicenseSM } from '../member-license-sm.model';
 import { MemberLicenseService } from '../services/member-license.service';
-import { flatMap, concatMap } from 'rxjs/operators';
 import { DataService } from '../services/shared/data.service';
 
 

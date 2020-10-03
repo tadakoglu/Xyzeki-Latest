@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { IProjectRepository } from '../abstract/i-project-repository';
+import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
+import { ProjectOrderModel } from '../project-order.model';
 import { Project } from '../project.model';
 import { ProjectsService } from '../services/projects.service';
-import { XyzekiAuthService } from  '../auth-services/xyzeki-auth-service';
-import { PrivacyModes } from 'src/infrastructure/project-privacy-modes';
-import { ProjectOrderModel } from '../project-order.model';
 import { DataService } from '../services/shared/data.service';
 import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
 

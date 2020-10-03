@@ -1,26 +1,26 @@
-import { Component, OnInit, HostListener, OnDestroy, ElementRef, ViewChild, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
-import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
+import { AfterViewInit, ChangeDetectionStrategy, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Team } from 'src/app/model/team.model';
-import { isNullOrUndefined } from 'util';
-import { PrivateTalkRepository } from 'src/app/model/repository/private-talk-repository';
-import { PrivateTalk } from 'src/app/model/private-talk.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
 import { Member } from 'src/app/model/member.model';
-import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
-import { TeamMembersService } from 'src/app/model/services/team-members.service';
-import { TeamsService } from 'src/app/model/services/teams.service';
-import { AuthService } from 'src/app/model/services/auth.service';
-import { MembersService } from 'src/app/model/services/members.service';
+import { MessageCountModel } from 'src/app/model/message-count.model';
 import { PrivateTalkReceiver } from 'src/app/model/private-talk-receiver.model';
 import { PrivateTalkTeamReceiver } from 'src/app/model/private-talk-team-receiver.model';
-import { PrivateTalkReceiverRepository } from 'src/app/model/repository/private-talk-receiver-repository';
-import { TeamRepository } from 'src/app/model/repository/team-repository';
-import { MessageCountModel } from 'src/app/model/message-count.model';
+import { PrivateTalk } from 'src/app/model/private-talk.model';
 import { MemberLicenseRepository } from 'src/app/model/repository/member-license-repository';
+import { PrivateTalkReceiverRepository } from 'src/app/model/repository/private-talk-receiver-repository';
+import { PrivateTalkRepository } from 'src/app/model/repository/private-talk-repository';
+import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
+import { TeamRepository } from 'src/app/model/repository/team-repository';
+import { AuthService } from 'src/app/model/services/auth.service';
+import { MembersService } from 'src/app/model/services/members.service';
 import { DataService } from 'src/app/model/services/shared/data.service';
-import { Subscription } from 'rxjs';
+import { TeamMembersService } from 'src/app/model/services/team-members.service';
+import { TeamsService } from 'src/app/model/services/teams.service';
 import { XyzekiSignalrService } from 'src/app/model/signalr-services/xyzeki-signalr.service';
+import { Team } from 'src/app/model/team.model';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-my-private-talks',

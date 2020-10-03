@@ -1,13 +1,13 @@
-import { Injectable, SimpleChanges } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { concatMap } from 'rxjs/operators';
+import { PageSizes } from 'src/infrastructure/page-sizes';
 import { PrivateTalkReceiver } from '../private-talk-receiver.model';
 import { PrivateTalkTeamReceiver } from '../private-talk-team-receiver.model';
+import { PrivateTalk } from '../private-talk.model';
 import { PrivateTalkReceiversService } from '../services/private-talk-receivers.service';
 import { PrivateTalkTeamReceiversService } from '../services/private-talk-team-receivers.service';
-import { PrivateTalk } from '../private-talk.model';
 import { DataService } from '../services/shared/data.service';
-import { PageSizes } from 'src/infrastructure/page-sizes';
 import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
-import { concatMap } from 'rxjs/operators';
 
 @Injectable()
 export class PrivateTalkReceiverRepository {

@@ -1,19 +1,19 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ITeamMemberRepository } from '../abstract/i-team-member-repository';
-import { TeamMember } from '../team-member.model.';
+import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
 import { Member } from '../member.model';
-import { TeamMembersService } from '../services/team-members.service';
 import { AuthService } from '../services/auth.service';
+import { MembersService } from '../services/members.service';
+import { DataService } from '../services/shared/data.service';
+import { TeamMembersService } from '../services/team-members.service';
+import { TeamsService } from '../services/teams.service';
+import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
+import { TeamMember } from '../team-member.model.';
 // import { mergeMap, flatMap, switchMap, map, concat, concatMap } from 'rxjs/operators';
 import { Team } from '../team.model';
-import { TeamsService } from '../services/teams.service';
-import { MembersService } from '../services/members.service';
-import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { MemberLicenseRepository } from './member-license-repository';
 import { TeamRepository } from './team-repository';
-import { DataService } from '../services/shared/data.service';
-import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
 
 
 @Injectable()

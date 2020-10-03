@@ -1,17 +1,11 @@
-import { Injectable, OnInit } from '@angular/core';
-import { ITeamRepository } from '../abstract/i-team-repository';
-import { Team } from '../team.model';
-import { TeamsService } from '../services/teams.service';
-import { Subject, Observable, of, Subscription } from 'rxjs';
-import { refreshDescendantViews } from '@angular/core/src/render3/instructions';
-import { switchMap } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { IMemberRepository } from '../abstract/i-member-repository';
+import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
 import { Member } from '../member.model';
-import { MembersService } from '../services/members.service';
-import { isNullOrUndefined } from 'util';
-import { XyzekiAuthService } from  '../auth-services/xyzeki-auth-service';
 import { RegisterModel } from '../register.model';
 import { ReturnModel } from '../return.model';
+import { MembersService } from '../services/members.service';
 
 @Injectable()
 export class MemberRepository implements IMemberRepository { 

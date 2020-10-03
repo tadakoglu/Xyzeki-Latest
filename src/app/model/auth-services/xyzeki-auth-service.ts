@@ -82,6 +82,9 @@ export class XyzekiAuthService {
     LoadAllRepositories(){
         this.dataService.loadAllRepositoriesEvent.next();
     }
+    ClearAllRepositories(){
+        this.dataService.clearAllRepositoriesEvent.next();
+    }
     Auth(tokenAndMember: ReturnModel<Tuple<string, Member>>) {
         let member = tokenAndMember.Model.Item2;
         let token = tokenAndMember.Model.Item1;
@@ -96,6 +99,7 @@ export class XyzekiAuthService {
         this.RemoveMember();
         this.RemoveToken();
         this.StopRefreshTokenTimer();
+        this.ClearAllRepositories();
     }
 
     AuthAutoIfPossible() {

@@ -1,13 +1,13 @@
-import { IPrivateTalkMessageRepository } from '../abstract/i-private-talk-message-repository';
-import { PrivateTalkMessagesService } from '../services/private-talk-messages.service';
-import { PrivateTalkMessage } from '../private-talk-message.model';
-import { Subscription } from 'rxjs';
-import { PageSizes } from 'src/infrastructure/page-sizes';
-import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
-import { TimeService } from '../services/time.service';
-import { concatMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { concatMap } from 'rxjs/operators';
+import { PageSizes } from 'src/infrastructure/page-sizes';
+import { IPrivateTalkMessageRepository } from '../abstract/i-private-talk-message-repository';
+import { PrivateTalkMessage } from '../private-talk-message.model';
+import { PrivateTalkMessagesService } from '../services/private-talk-messages.service';
 import { DataService } from '../services/shared/data.service';
+import { TimeService } from '../services/time.service';
+import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
 
 // @Injectable()
 @Injectable()

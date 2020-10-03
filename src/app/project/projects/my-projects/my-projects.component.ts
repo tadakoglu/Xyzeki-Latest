@@ -1,17 +1,17 @@
-import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit, ChangeDetectionStrategy, HostListener } from '@angular/core';
-import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
-import { ProjectRepository } from 'src/app/model/repository/project-repository';
-import { Project } from 'src/app/model/project.model';
+import { CdkDragDrop, CdkDragEnd, CdkDragStart, moveItemInArray } from '@angular/cdk/drag-drop';
+import { AfterViewInit, ChangeDetectionStrategy, Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { DataService } from 'src/app/model/services/shared/data.service';
-import { CdkDragDrop, moveItemInArray, CdkDragStart, CdkDragEnd } from '@angular/cdk/drag-drop';
-import { AssignAutocompleteComponent } from 'src/app/ui-tools/assign-autocomplete/assign-autocomplete.component';
-import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
-import { Member } from 'src/app/model/member.model';
-import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
-import { MemberLicenseRepository } from 'src/app/model/repository/member-license-repository';
-import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
+import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
+import { Member } from 'src/app/model/member.model';
+import { Project } from 'src/app/model/project.model';
+import { MemberLicenseRepository } from 'src/app/model/repository/member-license-repository';
+import { ProjectRepository } from 'src/app/model/repository/project-repository';
+import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
+import { DataService } from 'src/app/model/services/shared/data.service';
+import { AssignAutocompleteComponent } from 'src/app/ui-tools/assign-autocomplete/assign-autocomplete.component';
 
 @Component({
   selector: 'app-my-projects',

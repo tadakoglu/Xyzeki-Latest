@@ -1,20 +1,20 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { PrivateTalksService } from '../services/private-talks.service';
-import { PrivateTalk } from '../private-talk.model';
+import { EventEmitter, Injectable } from '@angular/core';
+import { concatMap } from 'rxjs/operators';
+import { PageSizes } from 'src/infrastructure/page-sizes';
 import { IPrivateTalkRepository } from '../abstract/i-private-talk-repository';
 import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
-import { PrivateTalkReceiversService } from '../services/private-talk-receivers.service';
+import { MessageCountModel } from '../message-count.model';
 import { PrivateTalkReceiver } from '../private-talk-receiver.model';
 import { PrivateTalkTeamReceiver } from '../private-talk-team-receiver.model';
+import { PrivateTalk } from '../private-talk.model';
+import { PrivateTalkReceiversService } from '../services/private-talk-receivers.service';
 import { PrivateTalkTeamReceiversService } from '../services/private-talk-team-receivers.service';
-import { PrivateTalkReceiverRepository } from './private-talk-receiver-repository';
-import { MessageCountModel } from '../message-count.model';
+import { PrivateTalksService } from '../services/private-talks.service';
 import { DataService } from '../services/shared/data.service';
-import { MemberLicenseRepository } from './member-license-repository';
-import { PageSizes } from 'src/infrastructure/page-sizes';
-import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
 import { TimeService } from '../services/time.service';
-import { concatMap } from 'rxjs/operators';
+import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
+import { MemberLicenseRepository } from './member-license-repository';
+import { PrivateTalkReceiverRepository } from './private-talk-receiver-repository';
 
 @Injectable()
 export class PrivateTalkRepository implements IPrivateTalkRepository {

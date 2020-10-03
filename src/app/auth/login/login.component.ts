@@ -1,23 +1,20 @@
-import { Component, OnInit, NgZone, OnDestroy, AfterViewInit, ChangeDetectionStrategy, HostListener } from '@angular/core';
-import { NgModel } from '@angular/forms';
-import { LoginModel } from 'src/app/model/login.model';
-import { IAuthRepository } from 'src/app/model/abstract/i-auth-repository';
-import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
-import { Router } from '@angular/router';
-import { JsonPipe } from '@angular/common';
-import { TeamRepository } from 'src/app/model/repository/team-repository';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AuthRepository } from 'src/app/model/repository/auth-repository';
-import { Member } from 'src/app/model/member.model';
-import { ReturnModel } from 'src/app/model/return.model';
-import { Tuple } from 'src/app/model/tuple.model';
-import { MemberSettingService } from 'src/app/model/services/member-setting.service';
-import { Subscription } from 'rxjs';
+import { AfterViewInit, ChangeDetectionStrategy, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { NgModel } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
-import { GoogleReCaptcha_LoginAction } from 'src/infrastructure/google-captcha';
+import { Subscription } from 'rxjs';
 import { concatMap } from 'rxjs/operators';
+import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
+import { LoginModel } from 'src/app/model/login.model';
+import { Member } from 'src/app/model/member.model';
+import { AuthRepository } from 'src/app/model/repository/auth-repository';
+import { ReturnModel } from 'src/app/model/return.model';
+import { MemberSettingService } from 'src/app/model/services/member-setting.service';
 import { DataService } from 'src/app/model/services/shared/data.service';
 import { XyzekiSignalrService } from 'src/app/model/signalr-services/xyzeki-signalr.service';
+import { Tuple } from 'src/app/model/tuple.model';
+import { GoogleReCaptcha_LoginAction } from 'src/infrastructure/google-captcha';
 
 
 @Component({

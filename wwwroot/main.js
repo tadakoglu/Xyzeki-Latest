@@ -6060,14 +6060,15 @@ var AdminRepository = /** @class */ (function () {
         this.dataService = dataService;
         this.allLicenses = [];
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { return _this.loadAllLicences(); });
+        this.dataService.clearAllRepositoriesEvent.subscribe(function () { return _this.clearAllLicences(); });
     }
+    AdminRepository.prototype.clearAllLicences = function () {
+        this.allLicenses = [];
+    };
     AdminRepository.prototype.loadAllLicences = function () {
         var _this = this;
         this.service.allLicenses().subscribe(function (lics) {
-            var _a;
-            _this.allLicenses.splice(0, _this.allLicenses.length);
-            (_a = _this.allLicenses).push.apply(_a, lics);
-            //this.allLicenses = lics
+            _this.allLicenses = lics;
         });
     };
     AdminRepository.prototype.getAllLicenses = function () {
@@ -6175,7 +6176,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var ContainerRepository = /** @class */ (function () {
     function ContainerRepository(service, signalService, dataService, timeService) {
-        // this.loadBlobContainers();
         var _this = this;
         this.service = service;
         this.signalService = signalService;
@@ -6190,27 +6190,25 @@ var ContainerRepository = /** @class */ (function () {
         this.signalService.deletedContainerAvailable.subscribe(function (containerDeleted) {
             _this.deleteContainerViaSignalR(containerDeleted);
         });
-        this.dataService.loadAllRepositoriesEvent.subscribe(function () {
-            _this.loadBlobContainers(false);
-        });
+        this.dataService.loadAllRepositoriesEvent.subscribe(function () { _this.loadBlobContainers(false); });
+        this.dataService.clearAllRepositoriesEvent.subscribe(function () { return _this.clearBlobContainers(); });
     }
+    ContainerRepository.prototype.clearBlobContainers = function () {
+        this.containers = [];
+        this.loaded = false;
+    };
     ContainerRepository.prototype.loadBlobContainers = function (containerToOpen) {
         var _this = this;
         if (containerToOpen === void 0) { containerToOpen = true; }
         this.service.showContainers().subscribe(function (containersEnc) {
-            var _a;
-            _this.containers.splice(0, _this.containers.length);
-            (_a = _this.containers).push.apply(_a, containersEnc.Containers);
-            //this.containers = containersEnc.Containers
+            _this.containers = containersEnc.Containers;
             if (containersEnc[0] && containerToOpen)
                 _this.containerToOpen.next(containersEnc[0]);
             _this.loaded = true;
         });
     };
     ContainerRepository.prototype.loadContainersViaResolver = function (containers) {
-        var _a;
-        this.containers.splice(0, this.containers.length);
-        (_a = this.containers).push.apply(_a, containers.Containers);
+        this.containers = containers.Containers;
     };
     ContainerRepository.prototype.getContainers = function () {
         return this.containers;
@@ -6310,16 +6308,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(file_saver__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+
 
 
 
 
 
 var FileRepository = /** @class */ (function () {
-    function FileRepository(service, signalService) {
+    function FileRepository(service, signalService, dataService) {
         var _this = this;
         this.service = service;
         this.signalService = signalService;
+        this.dataService = dataService;
         this.files = [];
         this.loaded = false;
         this.signalService.newContainerBlobAvailable.subscribe(function (containerBlob) {
@@ -6328,26 +6329,29 @@ var FileRepository = /** @class */ (function () {
         this.signalService.deletedContainerBlobAvailable.subscribe(function (containerBlobDeleted) {
             _this.deleteContainerBlobViaSignalR(containerBlobDeleted);
         });
+        this.dataService.clearAllRepositoriesEvent.subscribe(function () { return _this.clearContainerFiles(); });
     }
+    FileRepository.prototype.clearContainerFiles = function () {
+        this.files = [];
+        this.containerName = undefined;
+        this.loaded = false;
+        this.uploadHandler = undefined;
+        this.fileDownloadInitiated = undefined;
+        this.fileUploadInitiated = undefined;
+    };
     FileRepository.prototype.loadContainerFilesViaResolver = function (files, containerName) {
-        var _a;
         this.containerName = containerName;
-        this.files.splice(0, this.files.length);
-        (_a = this.files).push.apply(_a, files.Files);
+        this.files = files.Files;
     };
     FileRepository.prototype.loadAll = function (containerName) {
         var _this = this;
         this.containerName = containerName;
         this.service.showBlobs(containerName).subscribe(function (files) {
-            var _a;
-            _this.files.splice(0, _this.files.length);
-            (_a = _this.files).push.apply(_a, files.Files);
-            //this.files = files.Files; 
+            _this.files = files.Files;
             _this.loaded = true;
         }, function (error) { return console.error(error); });
     };
     FileRepository.prototype.getFiles = function () {
-        // return this.files
         return this.files.sort(function (cf1, cf2) { return new Date(cf2.CreatedAt).getTime() - new Date(cf1.CreatedAt).getTime(); });
     };
     FileRepository.prototype.getUploadHandler = function () {
@@ -6432,7 +6436,7 @@ var FileRepository = /** @class */ (function () {
     };
     FileRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_files_service__WEBPACK_IMPORTED_MODULE_1__["FilesService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiSignalrService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_files_service__WEBPACK_IMPORTED_MODULE_1__["FilesService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiSignalrService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"]])
     ], FileRepository);
     return FileRepository;
 }());
@@ -6485,7 +6489,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var MemberLicenseRepository = /** @class */ (function () {
     function MemberLicenseRepository(service, dataService) {
-        // this.loadLicenseRelateds();
         var _this = this;
         this.service = service;
         this.dataService = dataService;
@@ -6495,7 +6498,15 @@ var MemberLicenseRepository = /** @class */ (function () {
         this.primaryAccessGranted = false;
         this.memberLicense = new _member_license_model__WEBPACK_IMPORTED_MODULE_2__["MemberLicense"](null, null, null, null, null, null, null, null, null, null, null, null);
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { return _this.loadLicenseRelateds(); });
+        this.dataService.clearAllRepositoriesEvent.subscribe(function () { return _this.clearLicenseRelateds(); });
     }
+    MemberLicenseRepository.prototype.clearLicenseRelateds = function () {
+        this.memberLicense = new _member_license_model__WEBPACK_IMPORTED_MODULE_2__["MemberLicense"](null, null, null, null, null, null, null, null, null, null, null, null);
+        this.accessGranted = false;
+        this.primaryAccessGranted = false;
+        this.AzureSaSizeInGb = 0;
+        this.AzureSaUsedSizeInBytes = 0;
+    };
     MemberLicenseRepository.prototype.loadLicenseRelateds = function () {
         var _this = this;
         this.service.myLicense().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["concatMap"])(function (lic) {
@@ -6600,6 +6611,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_time_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/time.service */ "./src/app/model/services/time.service.ts");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+
 
 
 
@@ -6609,26 +6622,30 @@ __webpack_require__.r(__webpack_exports__);
 
 // @Injectable()
 var PrivateTalkMessageRepository = /** @class */ (function () {
-    function PrivateTalkMessageRepository(service, signalService, psz, timeService) {
+    function PrivateTalkMessageRepository(service, signalService, psz, timeService, dataService) {
         var _this = this;
         this.service = service;
         this.signalService = signalService;
         this.psz = psz;
         this.timeService = timeService;
+        this.dataService = dataService;
         this.privateTalkId = 0;
         this.privateTalkMessages = [];
         this.newMessageSubscription = this.signalService.newPrivateTalkMessageAvailable.subscribe(function (message) {
             _this.savePrivateTalkMessageViaSignalR(message[0], message[1]);
         });
+        this.dataService.clearAllRepositoriesEvent.subscribe(function () { return _this.clearPrivateTalkMessages(); });
     }
+    PrivateTalkMessageRepository.prototype.clearPrivateTalkMessages = function () {
+        this.privateTalkMessages = [];
+        this.privateTalkId = 0;
+        this.typingSignalMessage = undefined;
+    };
     PrivateTalkMessageRepository.prototype.loadPrivateTalkMessages = function (privateTalkId) {
         var _this = this;
         this.privateTalkId = privateTalkId;
         this.service.privateTalkMessages(privateTalkId, 1, this.psz.PTMPageSize).subscribe(function (messages) {
-            var _a;
-            _this.privateTalkMessages.splice(0, _this.privateTalkMessages.length);
-            (_a = _this.privateTalkMessages).push.apply(_a, messages);
-            //this.privateTalkMessages = messages
+            _this.privateTalkMessages = messages;
         });
     };
     PrivateTalkMessageRepository.prototype.getPrivateTalkMessages = function () {
@@ -6670,9 +6687,6 @@ var PrivateTalkMessageRepository = /** @class */ (function () {
         if (privateTalkMessage.PrivateTalkId != this.privateTalkId)
             return; //otherwise add
         if (!isTypingSignal) { // PrivateTalkMessage
-            // if (this.typingSignalMessage && this.typingSignalMessage.Sender == privateTalkMessage.Sender)
-            //     this.typingSignalMessage = undefined;
-            // //
             var index = this.privateTalkMessages.findIndex(function (val) { return val.MessageId == privateTalkMessage.MessageId; });
             if (-1 == index) // Not founded on repository
              {
@@ -6716,7 +6730,7 @@ var PrivateTalkMessageRepository = /** @class */ (function () {
     PrivateTalkMessageRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_6__["Injectable"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_private_talk_messages_service__WEBPACK_IMPORTED_MODULE_1__["PrivateTalkMessagesService"],
-            _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiSignalrService"], src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_2__["PageSizes"], _services_time_service__WEBPACK_IMPORTED_MODULE_4__["TimeService"]])
+            _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiSignalrService"], src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_2__["PageSizes"], _services_time_service__WEBPACK_IMPORTED_MODULE_4__["TimeService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_7__["DataService"]])
     ], PrivateTalkMessageRepository);
     return PrivateTalkMessageRepository;
 }());
@@ -6753,7 +6767,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var PrivateTalkReceiverRepository = /** @class */ (function () {
     function PrivateTalkReceiverRepository(psz, dataService, signalService, receiversService, teamReceiversService) {
-        // this.loadAll(1);
         var _this = this;
         this.psz = psz;
         this.dataService = dataService;
@@ -6763,21 +6776,20 @@ var PrivateTalkReceiverRepository = /** @class */ (function () {
         this.privateTalkReceivers = [];
         this.privateTalkTeamReceivers = [];
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { _this.loadAll(1); });
+        this.dataService.clearAllRepositoriesEvent.subscribe(function () { return _this.clearPrivateTalkReceivers(); });
     }
+    PrivateTalkReceiverRepository.prototype.clearPrivateTalkReceivers = function () {
+        this.privateTalkReceivers = [];
+        this.privateTalkTeamReceivers = [];
+        this.privateTalkId = undefined;
+    };
     PrivateTalkReceiverRepository.prototype.loadAll = function (pageNo, searchValue) {
         var _this = this;
         this.receiversService.myPrivateTalkReceivers(pageNo, searchValue, this.psz.PTPageSize).subscribe(function (ptr) {
-            var _a;
-            _this.privateTalkReceivers.splice(0, _this.privateTalkReceivers.length);
-            (_a = _this.privateTalkReceivers).push.apply(_a, ptr);
-            //this.privateTalkReceivers = ptr;
+            _this.privateTalkReceivers = ptr;
         });
         this.teamReceiversService.myPrivateTalkTeamReceivers(pageNo, searchValue, this.psz.PTPageSize).subscribe(function (pttr) {
-            var _a;
-            _this.privateTalkTeamReceivers.splice(0, _this.privateTalkTeamReceivers.length);
-            (_a = _this.privateTalkTeamReceivers).push.apply(_a, pttr);
-            //this.privateTalkTeamReceivers = pttr;
-            //this.loading = false;
+            _this.privateTalkTeamReceivers = pttr;
         });
     };
     Object.defineProperty(PrivateTalkReceiverRepository.prototype, "setPrivateTalkId", {
@@ -6907,7 +6919,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var PrivateTalkRepository = /** @class */ (function () {
     function PrivateTalkRepository(psz, receiverRepo, dataService, service, signalService, signalMessageService, serviceReceivers, serviceTeamReceivers, xyzekiAuthService, memberLicenseRepo, timeService) {
-        // this.loadAll();
         var _this = this;
         this.psz = psz;
         this.receiverRepo = receiverRepo;
@@ -6930,7 +6941,6 @@ var PrivateTalkRepository = /** @class */ (function () {
         this.receivedPTMessagesCount = [];
         this.unreadMyPrivateTalksCount = 0;
         this.unreadReceivedPrivateTalksCount = 0;
-        // this.loadPTCount();
         this.signalService.newPrivateTalkJoinedAvailable.subscribe(function (pTalk) {
             _this.savePrivateTalkReceivedViaSignalR(pTalk);
         });
@@ -6980,7 +6990,19 @@ var PrivateTalkRepository = /** @class */ (function () {
             }
         });
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { _this.loadPTCount(); _this.loadAll(1, undefined, false); });
+        this.dataService.clearAllRepositoriesEvent.subscribe(function () { _this.clearPrivateTalks(); });
     }
+    PrivateTalkRepository.prototype.clearPrivateTalks = function () {
+        this.myPrivateTalks = [];
+        this.privateTalksReceived = [];
+        this.myPTMessagesCount = [];
+        this.receivedPTMessagesCount = [];
+        this.unreadMyPrivateTalksCount = 0;
+        this.unreadReceivedPrivateTalksCount = 0;
+        this.pageNo = 1;
+        this.pageNoReceived = 1;
+        this.searchValue = undefined;
+    };
     PrivateTalkRepository.prototype.loadPTCount = function () {
         var _this = this;
         this.service.unreadMyPtCount().subscribe(function (countMy) {
@@ -6994,10 +7016,7 @@ var PrivateTalkRepository = /** @class */ (function () {
         var _this = this;
         if (privateTalkToOpen === void 0) { privateTalkToOpen = true; }
         this.service.myPrivateTalks(pageNo, searchValue, this.psz.PTPageSize).subscribe(function (privateTalks) {
-            var _a;
-            _this.myPrivateTalks.splice(0, _this.myPrivateTalks.length);
-            (_a = _this.myPrivateTalks).push.apply(_a, privateTalks);
-            //this.myPrivateTalks = privateTalks;
+            _this.myPrivateTalks = privateTalks;
             if (privateTalks[0] && privateTalkToOpen)
                 _this.privateTalkToOpen.next(privateTalks[0]);
         });
@@ -7070,17 +7089,6 @@ var PrivateTalkRepository = /** @class */ (function () {
         else
             return 0;
     };
-    // PTOrderingCriterion(privateTalkId, my = true): string {
-    //     let ptMessages: MessageCountModel
-    //     if (my) {
-    //         ptMessages = this.myPTMessagesCount.find(messageCountModel => messageCountModel.PrivateTalkId == privateTalkId);
-    //     }
-    //     else {
-    //         ptMessages = this.receivedPTMessagesCount.find(messageCountModel => messageCountModel.PrivateTalkId == privateTalkId);
-    //     }
-    //     if (ptMessages)
-    //         return ptMessages.OrderingCriterion; // return orderin criterion of private talk(either last response time or pt/bt creation time)
-    // }
     PrivateTalkRepository.prototype.getMyPrivateTalks = function () {
         return this.myPrivateTalks.sort(function (pt1, pt2) { return new Date(pt2.DateTimeCreated).getTime() - new Date(pt1.DateTimeCreated).getTime(); });
     };
@@ -7296,36 +7304,33 @@ var ProjectRepository = /** @class */ (function () {
             _this.savePOMs(POMs);
         });
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { _this.loadProjects(); });
+        this.dataService.clearAllRepositoriesEvent.subscribe(function () { _this.clearProjects(); });
     }
+    ProjectRepository.prototype.clearProjects = function () {
+        this.myProjects = [];
+        this.myProjectsAssigned = [];
+        this.loading = false;
+        this.reOrdering = false;
+    };
     ProjectRepository.prototype.loadProjects = function () {
         var _this = this;
         this.service.myProjects().subscribe(function (projects) {
-            var _a;
             var tempP = Object.assign([], projects.sort(function (pt1, pt2) { return pt1.Order - pt2.Order; }));
-            _this.myProjects.splice(0, _this.myProjects.length);
-            (_a = _this.myProjects).push.apply(_a, tempP);
-            //this.myProjects = projects.sort((pt1, pt2) => pt1.Order - pt2.Order);
+            _this.myProjects = tempP;
             _this.loading = false;
         });
         this.service.myProjectsAssigned().subscribe(function (projectsAssigned) {
-            var _a;
             var tempPTA = Object.assign([], projectsAssigned.sort(function (pt1, pt2) { return pt1.Order - pt2.Order; }));
-            _this.myProjectsAssigned.splice(0, _this.myProjectsAssigned.length);
-            (_a = _this.myProjectsAssigned).push.apply(_a, tempPTA);
-            //this.myProjectsAssigned = projectsAssigned.sort((pt1, pt2) => pt1.Order - pt2.Order)
+            _this.myProjectsAssigned = tempPTA;
         });
     };
     ProjectRepository.prototype.loadMyProjectsViaResolver = function (myProjects) {
-        var _a;
         var tempP = Object.assign([], myProjects.sort(function (pt1, pt2) { return pt1.Order - pt2.Order; }));
-        this.myProjects.splice(0, this.myProjects.length);
-        (_a = this.myProjects).push.apply(_a, tempP);
+        this.myProjects = tempP;
     };
     ProjectRepository.prototype.loadProjectsAssignedViaResolver = function (projectsAssigned) {
-        var _a;
         var tempPTA = Object.assign([], projectsAssigned.sort(function (pt1, pt2) { return pt1.Order - pt2.Order; }));
-        this.myProjectsAssigned.splice(0, this.myProjectsAssigned.length);
-        (_a = this.myProjectsAssigned).push.apply(_a, tempPTA);
+        this.myProjectsAssigned = tempPTA;
     };
     ProjectRepository.prototype.getProject = function (projectId) {
         return this.myProjects.find(function (p) { return p.ProjectId == projectId; });
@@ -7386,31 +7391,12 @@ var ProjectRepository = /** @class */ (function () {
             this.reOrdering = false;
         }
     };
-    // getMyProjectsAssigned(): Project[] { // Privacy filtreleme işini front endde yapıyorum yoksa sorunlar çıkıyor.
-    //     return this.myProjectsAssigned.filter(p => p.Privacy != PrivacyModes.onlyOwner && (
-    //         p.Privacy == PrivacyModes.open // ve eğer içinde bulunuyorsa
-    //         || p.Privacy == PrivacyModes.listMode // ve eğer içinde bulunuyorsa
-    //         || (p.Privacy == PrivacyModes.onlyOwnerAndPM && p.ProjectManager == this.xyzekiAuthService .Username)
-    //         || (p.Privacy == PrivacyModes.openOnlyTasks && p.ProjectManager == this.xyzekiAuthService .Username)))
-    // }
     ProjectRepository.prototype.getMyProjectsAssigned = function () {
         return this.myProjectsAssigned;
     };
     ProjectRepository.prototype.getMyProjectsAssignedWithoutPrivacyFilter = function () {
         return this.myProjectsAssigned;
     };
-    // getMyProjectsAssignedIncludingOpenOnlyTasks(): Project[] {
-    //     return this.myProjectsAssigned;
-    // }
-    // getNext(): number {
-    //     let projects = this.myProjects;
-    //     if (projects.length >= 1) {
-    //         let nextIndex = projects[projects.length - 1].Order + 1;
-    //         return nextIndex;
-    //     } else {
-    //         return 0;
-    //     }
-    // }
     ProjectRepository.prototype.getNext = function () {
         var pts = this.myProjects;
         if (pts.length >= 1) {
@@ -7505,6 +7491,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_time_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/time.service */ "./src/app/model/services/time.service.ts");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+
 
 
 
@@ -7512,9 +7500,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ProjectToDoCommentRepository = /** @class */ (function () {
-    function ProjectToDoCommentRepository(service, signalService, timeService) {
+    function ProjectToDoCommentRepository(service, dataService, signalService, timeService) {
         var _this = this;
         this.service = service;
+        this.dataService = dataService;
         this.signalService = signalService;
         this.timeService = timeService;
         this.projectToDoComments = [];
@@ -7524,7 +7513,12 @@ var ProjectToDoCommentRepository = /** @class */ (function () {
         this.signalService.deletedProjectToDoCommentAvailable.subscribe(function (ptComment) {
             _this.deletePTCommentViaSignalR(ptComment);
         });
+        this.dataService.clearAllRepositoriesEvent.subscribe(function () { _this.clearPTComments(); });
     }
+    ProjectToDoCommentRepository.prototype.clearPTComments = function () {
+        this.taskId = undefined;
+        this.projectToDoComments = [];
+    };
     ProjectToDoCommentRepository.prototype.loadComments = function (taskId) {
         var _this = this;
         this.taskId = taskId;
@@ -7588,7 +7582,7 @@ var ProjectToDoCommentRepository = /** @class */ (function () {
     };
     ProjectToDoCommentRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_5__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_project_to_do_comments_service__WEBPACK_IMPORTED_MODULE_1__["ProjectToDoCommentsService"],
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_project_to_do_comments_service__WEBPACK_IMPORTED_MODULE_1__["ProjectToDoCommentsService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"],
             src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiSignalrService"], _services_time_service__WEBPACK_IMPORTED_MODULE_3__["TimeService"]])
     ], ProjectToDoCommentRepository);
     return ProjectToDoCommentRepository;
@@ -7634,7 +7628,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var ProjectToDoRepository = /** @class */ (function () {
     function ProjectToDoRepository(service, signalService, xyzekiAuthService, commentSignalService, projectSignalService, projectRepository, dataService, timeService) {
-        // this.loadAll();
         var _this = this;
         this.service = service;
         this.signalService = signalService;
@@ -7686,34 +7679,33 @@ var ProjectToDoRepository = /** @class */ (function () {
             }
         });
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { _this.loadAll(); });
+        this.dataService.clearAllRepositoriesEvent.subscribe(function () { _this.clearProjectToDos(); });
     }
+    ProjectToDoRepository.prototype.clearProjectToDos = function () {
+        this.projectToDos = [];
+        this.ptCommentsCount = [];
+        this.projectToDosAssignedToMe = [];
+        this.ptAssignedCommentsCount = [];
+        this.projectId = undefined;
+        this.reOrdering = false;
+    };
     ProjectToDoRepository.prototype.loadProjectsToDosViaResolver = function (projectToDos, projectId) {
-        var _a;
         this.projectId = projectId;
         var tempPT = Object.assign([], projectToDos.sort(function (pt1, pt2) { return pt1.Order - pt2.Order; }));
-        this.projectToDos.splice(0, this.projectToDos.length);
-        (_a = this.projectToDos).push.apply(_a, tempPT);
+        this.projectToDos = tempPT;
     };
     ProjectToDoRepository.prototype.loadProjectsToDosCommentsCountViaResolver = function (ptCommentsCount) {
-        var _a;
-        this.ptCommentsCount.splice(0, this.ptCommentsCount.length);
-        (_a = this.ptCommentsCount).push.apply(_a, ptCommentsCount);
+        this.ptCommentsCount = ptCommentsCount;
     };
     ProjectToDoRepository.prototype.loadProject = function (projectId) {
         var _this = this;
         this.projectId = projectId;
         this.service.projectToDos(projectId).subscribe(function (projectTodos) {
-            var _a;
             var tempPT = Object.assign([], projectTodos.sort(function (pt1, pt2) { return pt1.Order - pt2.Order; }));
-            _this.projectToDos.splice(0, _this.projectToDos.length);
-            (_a = _this.projectToDos).push.apply(_a, tempPT);
-            //this.projectToDos = projectTodos.sort((pt1, pt2) => pt1.Order - pt2.Order);
+            _this.projectToDos = tempPT;
         });
         this.service.projectToDosCommentsCount(projectId).subscribe(function (ptCommentsCount) {
-            var _a;
-            _this.ptCommentsCount.splice(0, _this.ptCommentsCount.length);
-            (_a = _this.ptCommentsCount).push.apply(_a, ptCommentsCount);
-            //this.ptCommentsCount = ptCommentsCount;
+            _this.ptCommentsCount = ptCommentsCount;
         });
     };
     ProjectToDoRepository.prototype.deepSearch = function (searchValue) {
@@ -7722,17 +7714,11 @@ var ProjectToDoRepository = /** @class */ (function () {
     ProjectToDoRepository.prototype.loadAll = function (searchValue) {
         var _this = this;
         this.service.projectToDosAssignedToMe(searchValue).subscribe(function (assignedToMe) {
-            var _a;
             var PTA = Object.assign([], assignedToMe.sort(function (qt1, qt2) { return qt1.Order - qt2.Order; }));
-            _this.projectToDosAssignedToMe.splice(0, _this.projectToDosAssignedToMe.length);
-            (_a = _this.projectToDosAssignedToMe).push.apply(_a, PTA);
-            //this.projectToDosAssignedToMe = assignedToMe.sort((qt1, qt2) => qt1.Order - qt2.Order);
+            _this.projectToDosAssignedToMe = PTA;
         });
         this.service.assignedToMePTCommentsCount(searchValue).subscribe(function (ptAssignedCommentsCount) {
-            var _a;
-            _this.ptAssignedCommentsCount.splice(0, _this.ptAssignedCommentsCount.length);
-            (_a = _this.ptAssignedCommentsCount).push.apply(_a, ptAssignedCommentsCount);
-            //this.ptAssignedCommentsCount = ptAssignedCommentsCount;
+            _this.ptAssignedCommentsCount = ptAssignedCommentsCount;
         });
     };
     ProjectToDoRepository.prototype.reOrderAndSavePT = function (projectId) {
@@ -7788,9 +7774,6 @@ var ProjectToDoRepository = /** @class */ (function () {
                 pTask_1 = _this.projectToDos.find(function (pt) { return pt.TaskId == TOM.TaskId; });
                 if (pTask_1)
                     pTask_1.Order = TOM.Order;
-                // pTaskAss = this.projectToDosAssignedToMe.find(pt => pt.TaskId == TOM.TaskId);
-                // if (pTaskAss)
-                //     pTaskAss.Order = TOM.Order;
             });
             var tempPT = Object.assign([], this.projectToDos.sort(function (pt1, pt2) { return pt1.Order - pt2.Order; }));
             this.projectToDos.splice(0, this.projectToDos.length);
@@ -8043,6 +8026,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_time_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/time.service */ "./src/app/model/services/time.service.ts");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+
 
 
 
@@ -8050,11 +8035,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var QuickToDoCommentRepository = /** @class */ (function () {
-    function QuickToDoCommentRepository(service, signalService, timeService) {
+    function QuickToDoCommentRepository(service, signalService, timeService, dataService) {
         var _this = this;
         this.service = service;
         this.signalService = signalService;
         this.timeService = timeService;
+        this.dataService = dataService;
         this.quickToDoComments = [];
         this.signalService.newQuickToDoCommentAvailable.subscribe(function (qtComment) {
             _this.saveQTCommentViaSignalR(qtComment[0]);
@@ -8062,15 +8048,17 @@ var QuickToDoCommentRepository = /** @class */ (function () {
         this.signalService.deletedQuickToDoCommentAvailable.subscribe(function (qtComment) {
             _this.deleteQTCommentViaSignalR(qtComment);
         });
+        this.dataService.clearAllRepositoriesEvent.subscribe(function () { _this.clearQTComments(); });
     }
+    QuickToDoCommentRepository.prototype.clearQTComments = function () {
+        this.quickToDoComments = [];
+        this.taskId = undefined;
+    };
     QuickToDoCommentRepository.prototype.loadComments = function (taskId) {
         var _this = this;
         this.taskId = taskId;
         this.service.quickTaskComments(taskId).subscribe(function (qtComments) {
-            var _a;
-            _this.quickToDoComments.splice(0, _this.quickToDoComments.length);
-            (_a = _this.quickToDoComments).push.apply(_a, qtComments);
-            //this.quickToDoComments = qtComments
+            _this.quickToDoComments = qtComments;
         });
     };
     QuickToDoCommentRepository.prototype.getQuickToDoComments = function () {
@@ -8130,7 +8118,7 @@ var QuickToDoCommentRepository = /** @class */ (function () {
     QuickToDoCommentRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_5__["Injectable"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_quick_to_do_comments_service__WEBPACK_IMPORTED_MODULE_1__["QuickToDoCommentsService"],
-            _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiSignalrService"], _services_time_service__WEBPACK_IMPORTED_MODULE_3__["TimeService"]])
+            _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiSignalrService"], _services_time_service__WEBPACK_IMPORTED_MODULE_3__["TimeService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"]])
     ], QuickToDoCommentRepository);
     return QuickToDoCommentRepository;
 }());
@@ -8173,8 +8161,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var QuickToDoRepository = /** @class */ (function () {
     function QuickToDoRepository(psz, service, xyzekiAuthService, signalService, commentSignalService, dataService, timeService) {
-        // this.loadAll();
-        // end of comments count
         var _this = this;
         this.psz = psz;
         this.service = service;
@@ -8212,44 +8198,40 @@ var QuickToDoRepository = /** @class */ (function () {
             }
         });
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { _this.loadAll(); });
+        this.dataService.clearAllRepositoriesEvent.subscribe(function () { _this.clearQuickToDos(); });
     }
+    QuickToDoRepository.prototype.clearQuickToDos = function () {
+        this.myQuickToDos = [];
+        this.assignedToMe = [];
+        this.qtCommentsCount = [];
+        this.pageNo = 1;
+        this.searchValue = undefined;
+        this.reOrdering = false;
+    };
     QuickToDoRepository.prototype.loadAll = function (pageNo, searchValue) {
         var _this = this;
         this.service.myQuickToDos(pageNo, searchValue, this.psz.QTPageSize).subscribe(function (qts) {
-            var _a;
-            _this.myQuickToDos.splice(0, _this.myQuickToDos.length);
-            (_a = _this.myQuickToDos).push.apply(_a, qts);
-            //this.myQuickToDos = qts;
+            _this.myQuickToDos = qts;
         });
         this.service.assignedToMe(searchValue).subscribe(function (qts) {
-            var _a;
-            _this.assignedToMe.splice(0, _this.assignedToMe.length);
-            (_a = _this.assignedToMe).push.apply(_a, qts);
-            //this.assignedToMe = qts
+            _this.assignedToMe = qts;
         });
         //comments count
         this.service.myAndAssignedToMeQTCommentsCount(pageNo, searchValue, this.psz.QTPageSize).subscribe(function (qtCommentsCount) {
-            var _a;
-            _this.qtCommentsCount.splice(0, _this.qtCommentsCount.length);
-            (_a = _this.qtCommentsCount).push.apply(_a, qtCommentsCount);
-            //this.qtCommentsCount = qtCommentsCount;
+            _this.qtCommentsCount = qtCommentsCount;
         });
     };
     QuickToDoRepository.prototype.loadMoreMyQuickToDos = function (pageNo, searchValue, pageSize) {
         var _this = this;
         this.service.myQuickToDos(pageNo, searchValue, this.psz.QTPageSize).subscribe(function (qts) {
-            var _a, _b;
+            var _a;
             (_a = _this.myQuickToDos).push.apply(_a, qts);
-            //eşsizlik ve order sıralaması
-            //  this.myQuickToDos = this.myQuickToDos.filter((value, index, self) => self.indexOf(self.find(val => val.TaskId == value.TaskId)) === index);
             var tempQT = Object.assign([], _this.myQuickToDos.filter(function (value, index, self) { return self.indexOf(self.find(function (val) { return val.TaskId == value.TaskId; })) === index; }));
-            _this.myQuickToDos.splice(0, _this.myQuickToDos.length);
-            (_b = _this.myQuickToDos).push.apply(_b, tempQT);
+            _this.myQuickToDos = tempQT;
         });
         this.service.myAndAssignedToMeQTCommentsCount(pageNo, searchValue, this.psz.QTPageSize).subscribe(function (qtCommentsCount) {
             var _a;
             (_a = _this.qtCommentsCount).push.apply(_a, qtCommentsCount);
-            // 
         });
     };
     QuickToDoRepository.prototype.reOrderAndSaveQT = function () {
@@ -8351,8 +8333,6 @@ var QuickToDoRepository = /** @class */ (function () {
         var qts = this.myQuickToDos.filter(function (qt) { return !qt.Archived; });
         if (qts.length >= 1) {
             var nextIndex = Math.max.apply(Math, qts.map(function (qt) { return qt.Order; })) + 1;
-            //let nextIndex = qts.sort((qt1, qt2) => qt2.Order - qt1.Order).find((val, index, obj) => index == 0).Order + 1;
-            //let nextIndex = qts[qts.length - 1].Order + 1;
             return nextIndex;
         }
         else {
@@ -8601,8 +8581,6 @@ var TeamMemberRepository = /** @class */ (function () {
         this.teamMembersJoinedAsMembers = [];
         this.allTeamMembersPT = [];
         this.allTeamMembersPTAsMembers = [];
-        // this.loadMYRelateds();
-        // this.loadPTRelateds();
         //incoming signals
         this.signalService.newTeamMemberJoinedAvailable.subscribe(function (teamMemberJ) {
             _this.saveTeamMemberJoinedViaSignalR(teamMemberJ);
@@ -8631,76 +8609,61 @@ var TeamMemberRepository = /** @class */ (function () {
             _this.deleteTeamMemberViaSignalR(teamMemberDeleted);
         });
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { _this.loadMYRelateds(); _this.loadPTRelateds(); });
+        this.dataService.clearAllRepositoriesEvent.subscribe(function () { _this.clearTeamMembers(); });
     }
+    TeamMemberRepository.prototype.clearTeamMembers = function () {
+        this.TeamId = 0;
+        this.teamMembers = []; // üyemizin seçmiş olduğu takım'daki takım üyeleri
+        this.teamMembersOwned = []; // sahip olduğum takımlardaki takım üyeleri
+        this.teamMembersJoined = []; // katılmış olduğum takımlardaki takım üyeleri
+        this.teamsJoined = []; // katılmış olduğum takımlar
+        this.teamMembersOwnedAsMembers = []; // sahip olduğum takımlardaki takım üyelerinin üyelik bilgileri(member) dizisi
+        this.teamMembersJoinedAsMembers = []; // katılmış olduğum takımlardaki takım üyelerinin üyelik bilgileri(member) dizisi
+        this.allTeamMembersPT = []; // sahip olduğum ve katılmış olduğum takımlardaki takım üyeleri
+        this.allTeamMembersPTAsMembers = []; // sahip olduğum ve katılmış olduğum takımlardaki takım üyelerinin üyelik bilgileri(member) dizisi; burası yukarıdakilerin düzgünce birleşimidir.
+        this.informUser = undefined;
+    };
     TeamMemberRepository.prototype.loadMYRelateds = function () {
         var _this = this;
         //Start: For assign autocomplete components
         this.service.teamMembersOwned().subscribe(function (tmo) {
-            var _a;
-            _this.teamMembersOwned.splice(0, _this.teamMembersOwned.length);
-            (_a = _this.teamMembersOwned).push.apply(_a, tmo);
-            //this.teamMembersOwned = tmo
+            _this.teamMembersOwned = tmo;
         });
-        //End
         //Start: For invitations
         this.service.teamMembersJoined().subscribe(function (tmsj) {
-            var _a;
-            _this.teamMembersJoined.splice(0, _this.teamMembersJoined.length);
-            (_a = _this.teamMembersJoined).push.apply(_a, tmsj);
-            //this.teamMembersJoined = tmsj
+            _this.teamMembersJoined = tmsj;
         });
         this.service2.teamsJoined().subscribe(function (tj) {
-            var _a;
-            _this.teamsJoined.splice(0, _this.teamsJoined.length);
-            (_a = _this.teamsJoined).push.apply(_a, tj);
-            //this.teamsJoined = tj
+            _this.teamsJoined = tj;
         });
-        //End 
         this.service.teamMembersOwnedAsMembers().subscribe(function (tmoAsM) {
-            var _a;
-            _this.teamMembersOwnedAsMembers.splice(0, _this.teamMembersOwnedAsMembers.length);
-            (_a = _this.teamMembersOwnedAsMembers).push.apply(_a, tmoAsM);
-            //this.teamMembersOwnedAsMembers = tmoAsM
+            _this.teamMembersOwnedAsMembers = tmoAsM;
         });
         this.service.teamMembersJoinedAsMembers().subscribe(function (tmjAsM) {
-            var _a;
-            _this.teamMembersJoinedAsMembers.splice(0, _this.teamMembersJoinedAsMembers.length);
-            (_a = _this.teamMembersJoinedAsMembers).push.apply(_a, tmjAsM);
-            //this.teamMembersJoinedAsMembers = tmjAsM
+            _this.teamMembersJoinedAsMembers = tmjAsM;
         });
     };
     TeamMemberRepository.prototype.loadPTRelateds = function () {
         var _this = this;
         this.service.allTeamMembersPT().subscribe(function (teamMembers) {
-            var _a;
-            _this.allTeamMembersPT.splice(0, _this.allTeamMembersPT.length);
-            (_a = _this.allTeamMembersPT).push.apply(_a, teamMembers);
-            //this.allTeamMembersPT = teamMembers
+            _this.allTeamMembersPT = teamMembers;
         });
         this.service.allTeamMembersPTAsMembers().subscribe(function (teamMembersAs) {
-            var _a;
-            _this.allTeamMembersPTAsMembers.splice(0, _this.allTeamMembersPTAsMembers.length);
-            (_a = _this.allTeamMembersPTAsMembers).push.apply(_a, teamMembersAs);
-            //this.allTeamMembersPTAsMembers = teamMembersAs
+            _this.allTeamMembersPTAsMembers = teamMembersAs;
         });
     };
     TeamMemberRepository.prototype.loadTeamMembers = function (teamId) {
         var _this = this;
         //add and update here with id on signalr
         this.service.teamMembers(teamId).subscribe(function (members) {
-            var _a;
-            _this.teamMembers.splice(0, _this.teamMembers.length);
-            (_a = _this.teamMembers).push.apply(_a, members);
-            //this.teamMembers = members; 
+            _this.teamMembers = members;
             _this.TeamId = teamId;
         });
         //Start: For my-accounts and transformation tm=> member syste
     };
     TeamMemberRepository.prototype.loadTeamMembersViaResolver = function (teamMembers, teamId) {
-        var _a;
         this.TeamId = teamId;
-        this.teamMembers.splice(0, this.teamMembers.length);
-        (_a = this.teamMembers).push.apply(_a, teamMembers);
+        this.teamMembers = teamMembers;
     };
     TeamMemberRepository.prototype.getTeamMembers = function () {
         return this.teamMembers;
@@ -8890,7 +8853,7 @@ var TeamMemberRepository = /** @class */ (function () {
 //https://stackoverflow.com/questions/44593900/rxjs-one-observable-feeding-into-another
 // saveTeamMember(teamMember: TeamMember) {
 //     // one-observable-feeding-into-another
-//     this.service.saveTeamMember(teamMember).pipe(flatMap( ()=> {
+//     this.service.saveTeamMember(teamMember).pipe(concatMap( ()=> {
 //         return this.serviceMember.getMember(teamMember.Username)
 //     })).subscribe(member=> {
 //         this.teamMembers.push(member);
@@ -8921,8 +8884,6 @@ __webpack_require__.r(__webpack_exports__);
 var TeamRepository = /** @class */ (function () {
     // Note: C# auto-properties return attributes with lowercase letters  !!! TS models should be start with lowercase or same, unless, Angular won't model bind!
     function TeamRepository(service, dataService) {
-        // this.loadMYRelateds();
-        // this.loadPTRelateds();
         var _this = this;
         this.service = service;
         this.dataService = dataService;
@@ -8931,7 +8892,14 @@ var TeamRepository = /** @class */ (function () {
         this.allTeamsPT = [];
         this.teamToOpen = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { _this.loadMYRelateds(false); _this.loadPTRelateds(); });
+        this.dataService.clearAllRepositoriesEvent.subscribe(function () { _this.clearTeams(); });
     }
+    TeamRepository.prototype.clearTeams = function () {
+        this.myTeams = []; // sahip olduğum takımlar
+        this.myTeamsJoined = []; // katılmış olduğum takılmlar
+        this.allTeamsPT = []; // sahip olduğum ve katılmış olduğum takımlar(ikisi bir arada)
+        this.informUser = undefined;
+    };
     TeamRepository.prototype.loadMYRelateds = function (teamToOpen) {
         var _this = this;
         if (teamToOpen === void 0) { teamToOpen = true; }
@@ -10450,6 +10418,7 @@ var DataService = /** @class */ (function () {
         this.switchMode = 0; // Giden, Gelen 0 ; Giden 1; Gelen 2
         this.saveChangesEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.loadAllRepositoriesEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        this.clearAllRepositoriesEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.signalConnectionSeconds = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.startSignalConnection = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
     }

@@ -1,12 +1,10 @@
-import { Injectable, OnInit, EventEmitter } from '@angular/core';
-import { ITeamRepository } from '../abstract/i-team-repository';
-import { Team } from '../team.model';
-import { TeamsService } from '../services/teams.service';
-import { Subject, Observable, of, Subscription } from 'rxjs';
-import { refreshDescendantViews } from '@angular/core/src/render3/instructions';
-import { switchMap } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
+import { EventEmitter, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ITeamRepository } from '../abstract/i-team-repository';
 import { DataService } from '../services/shared/data.service';
+import { TeamsService } from '../services/teams.service';
+import { Team } from '../team.model';
 
 @Injectable()
 export class TeamRepository implements ITeamRepository {

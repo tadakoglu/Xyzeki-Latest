@@ -1,11 +1,11 @@
+import { Injectable } from '@angular/core';
+import { concatMap } from 'rxjs/operators';
 import { IQuickToDoCommentRepository } from '../abstract/i-quick-to-do-comment-repository';
 import { QuickTaskComment } from '../quick-task-comment.model';
 import { QuickToDoCommentsService } from '../services/quick-to-do-comments.service';
-import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
-import { TimeService } from '../services/time.service';
-import { concatMap } from 'rxjs/operators';
-import { Injectable } from '@angular/core';
 import { DataService } from '../services/shared/data.service';
+import { TimeService } from '../services/time.service';
+import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
 
 @Injectable()
 export class QuickToDoCommentRepository implements IQuickToDoCommentRepository {

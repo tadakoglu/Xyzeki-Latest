@@ -1,10 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { AdminRepository } from 'src/app/model/repository/admin-repository';
-import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
-import { MemberLicense } from 'src/app/model/member-license.model';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { MemberLicenseService } from 'src/app/model/services/member-license.service';
+import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
+import { MemberLicense } from 'src/app/model/member-license.model';
+import { AdminRepository } from 'src/app/model/repository/admin-repository';
 
 @Component({
   selector: 'app-license-management',

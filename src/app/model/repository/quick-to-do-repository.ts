@@ -1,16 +1,16 @@
-import { IQuickToDoRepository } from '../abstract/i-quick-to-do-repository';
-import { QuickTask } from '../quick-task.model';
-import { QuickToDosService } from '../services/quick-to-dos.service';
 import { Injectable } from '@angular/core';
-
+import { concatMap } from 'rxjs/operators';
+import { PageSizes } from 'src/infrastructure/page-sizes';
+import { IQuickToDoRepository } from '../abstract/i-quick-to-do-repository';
 import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
 import { CommentCountModel } from '../comment-count.model';
-import { PageSizes } from 'src/infrastructure/page-sizes';
-import { TaskOrderModel } from '../task-order.model';
+import { QuickTask } from '../quick-task.model';
+import { QuickToDosService } from '../services/quick-to-dos.service';
 import { DataService } from '../services/shared/data.service';
-import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
 import { TimeService } from '../services/time.service';
-import { concatMap } from 'rxjs/operators';
+import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
+import { TaskOrderModel } from '../task-order.model';
+
 
 
 @Injectable()

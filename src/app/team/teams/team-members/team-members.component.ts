@@ -1,15 +1,15 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
-import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
-import { TeamMember } from 'src/app/model/team-member.model.';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
-import { DataService } from 'src/app/model/services/shared/data.service';
-import { TeamRepository } from 'src/app/model/repository/team-repository';
-import { MemberRepository } from 'src/app/model/repository/member-repository';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
 import { Member } from 'src/app/model/member.model';
 import { MemberLicenseRepository } from 'src/app/model/repository/member-license-repository';
+import { MemberRepository } from 'src/app/model/repository/member-repository';
+import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
+import { TeamRepository } from 'src/app/model/repository/team-repository';
+import { DataService } from 'src/app/model/services/shared/data.service';
+import { TeamMember } from 'src/app/model/team-member.model.';
 
 @Component({
   selector: 'app-team-members',

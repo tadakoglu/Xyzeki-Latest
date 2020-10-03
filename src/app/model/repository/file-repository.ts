@@ -1,11 +1,11 @@
-import { FilesService } from '../services/files.service';
-import { IFileRepository } from '../abstract/i-file-repository';
-import { saveAs } from 'file-saver';
-import { CloudFile } from '../azure-models/cloud-file.model';
-import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
 import { Injectable } from '@angular/core';
+import { saveAs } from 'file-saver';
+import { IFileRepository } from '../abstract/i-file-repository';
+import { CloudFile } from '../azure-models/cloud-file.model';
 import { CloudFiles } from '../azure-models/cloud-files.model';
+import { FilesService } from '../services/files.service';
 import { DataService } from '../services/shared/data.service';
+import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
 
 @Injectable()
 export class FileRepository implements IFileRepository {

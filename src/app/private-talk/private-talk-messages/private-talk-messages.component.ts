@@ -1,29 +1,30 @@
 
-import { Component, OnInit, ViewChild, OnDestroy, ElementRef, HostListener, AfterViewInit, SimpleChanges, OnChanges, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Emoji } from '@ctrl/ngx-emoji-mart/ngx-emoji/emoji.component';
+import { fromEvent, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilKeyChanged, filter, map } from 'rxjs/operators';
+import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
 import { Member } from 'src/app/model/member.model';
-import { DataService } from 'src/app/model/services/shared/data.service';
-import { PrivateTalkMessagesService } from 'src/app/model/services/private-talk-messages.service'; import { PrivateTalkMessageRepository } from 'src/app/model/repository/private-talk-message-repository';
 import { PrivateTalkMessage } from 'src/app/model/private-talk-message.model';
-import { PrivateTalk } from 'src/app/model/private-talk.model';
-import { PrivateTalkRepository } from 'src/app/model/repository/private-talk-repository';
-import { PrivateTalksService } from 'src/app/model/services/private-talks.service';
-import { MemberLicenseRepository } from 'src/app/model/repository/member-license-repository';
 import { PrivateTalkReceiver } from 'src/app/model/private-talk-receiver.model';
 import { PrivateTalkTeamReceiver } from 'src/app/model/private-talk-team-receiver.model';
-import { EditReceiversComponent } from '../edit-receivers/edit-receivers.component';
+import { PrivateTalk } from 'src/app/model/private-talk.model';
+import { MemberLicenseRepository } from 'src/app/model/repository/member-license-repository';
+import { PrivateTalkMessageRepository } from 'src/app/model/repository/private-talk-message-repository';
 import { PrivateTalkReceiverRepository } from 'src/app/model/repository/private-talk-receiver-repository';
+import { PrivateTalkRepository } from 'src/app/model/repository/private-talk-repository';
+import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
 import { TeamRepository } from 'src/app/model/repository/team-repository';
-import { Team } from 'src/app/model/team.model';
-import { fromEvent, Subscription, Subject } from 'rxjs';
-import { map, debounceTime, distinctUntilChanged, distinctUntilKeyChanged, filter, startWith } from 'rxjs/operators';
-import { Emoji } from '@ctrl/ngx-emoji-mart/ngx-emoji/emoji.component';
-import { PageSizes } from 'src/infrastructure/page-sizes';
-import { XyzekiSignalrService } from 'src/app/model/signalr-services/xyzeki-signalr.service';
+import { PrivateTalkMessagesService } from 'src/app/model/services/private-talk-messages.service';
+import { PrivateTalksService } from 'src/app/model/services/private-talks.service';
+import { DataService } from 'src/app/model/services/shared/data.service';
 import { TimeService } from 'src/app/model/services/time.service';
+import { XyzekiSignalrService } from 'src/app/model/signalr-services/xyzeki-signalr.service';
+import { Team } from 'src/app/model/team.model';
+import { PageSizes } from 'src/infrastructure/page-sizes';
+import { EditReceiversComponent } from '../edit-receivers/edit-receivers.component';
 
 
 @Component({

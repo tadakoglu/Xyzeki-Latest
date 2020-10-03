@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
-import { TeamMember } from 'src/app/model/team-member.model.';
-import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
-import { DataService } from 'src/app/model/services/shared/data.service';
-import { Team } from 'src/app/model/team.model';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
+import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
+import { DataService } from 'src/app/model/services/shared/data.service';
+import { TeamMember } from 'src/app/model/team-member.model.';
+import { Team } from 'src/app/model/team.model';
 
 @Component({
   selector: 'app-incoming-invitations',

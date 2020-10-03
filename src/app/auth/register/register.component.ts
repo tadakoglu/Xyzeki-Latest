@@ -1,21 +1,17 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { NgForm, FormControl } from '@angular/forms';
-import { IAuthRepository } from 'src/app/model/abstract/i-auth-repository';
-import { RegisterModel } from 'src/app/model/register.model';
-import { ErrorCodes } from 'src/infrastructure/error-codes.enum';
-import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AuthRepository } from 'src/app/model/repository/auth-repository';
-
-import { isNullOrUndefined } from 'util';
-import { Router, ActivatedRoute } from '@angular/router';
-import { MemberRepository } from 'src/app/model/repository/member-repository';
-import { MembersService } from 'src/app/model/services/members.service';
-import { Member } from 'src/app/model/member.model';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
-import { GoogleReCaptcha_LoginAction } from 'src/infrastructure/google-captcha';
-import { concatMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
+import { Member } from 'src/app/model/member.model';
+import { RegisterModel } from 'src/app/model/register.model';
+import { AuthRepository } from 'src/app/model/repository/auth-repository';
+import { MembersService } from 'src/app/model/services/members.service';
+import { ErrorCodes } from 'src/infrastructure/error-codes.enum';
+import { isNullOrUndefined } from 'util';
+
 
 @Component({
   selector: 'app-register',

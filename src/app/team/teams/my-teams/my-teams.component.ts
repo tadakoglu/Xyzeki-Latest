@@ -1,17 +1,12 @@
-import { Component, OnInit, ChangeDetectorRef, Input, OnDestroy, HostListener } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ITeamRepository } from 'src/app/model/abstract/i-team-repository';
-import { Team } from 'src/app/model/team.model';
+import { ChangeDetectionStrategy, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Observable, of, Subscribable, Subscription } from 'rxjs';
-import { TeamsService } from 'src/app/model/services/teams.service';
-import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
+import { MemberLicenseRepository } from 'src/app/model/repository/member-license-repository';
 import { TeamRepository } from 'src/app/model/repository/team-repository';
 import { DataService } from 'src/app/model/services/shared/data.service';
-import { debounceTime } from 'rxjs/operators';
-import {ChangeDetectionStrategy } from '@angular/core';
-import { MemberLicenseRepository } from 'src/app/model/repository/member-license-repository';
-import { MemberLicenseService } from 'src/app/model/services/member-license.service';
+import { Team } from 'src/app/model/team.model';
 
 
 @Component({

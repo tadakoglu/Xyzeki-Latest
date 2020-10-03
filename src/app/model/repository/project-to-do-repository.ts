@@ -1,17 +1,17 @@
+import { Injectable } from '@angular/core';
+import { concatMap } from 'rxjs/operators';
+import { XyzekiSignalrService } from 'src/app/model/signalr-services/xyzeki-signalr.service';
+import { PrivacyModes } from 'src/infrastructure/project-privacy-modes';
 import { IProjectToDoRepository } from '../abstract/i-project-to-do-repository';
-import { ProjectTask } from '../project-task.model';
-import { ProjectToDosService } from '../services/project-to-dos.service';
 import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
 import { CommentCountModel } from '../comment-count.model';
+import { ProjectTask } from '../project-task.model';
 import { Project } from '../project.model';
-import { ProjectRepository } from './project-repository';
-import { PrivacyModes } from 'src/infrastructure/project-privacy-modes';
-import { TaskOrderModel } from '../task-order.model';
+import { ProjectToDosService } from '../services/project-to-dos.service';
 import { DataService } from '../services/shared/data.service';
-import { XyzekiSignalrService } from 'src/app/model/signalr-services/xyzeki-signalr.service';
 import { TimeService } from '../services/time.service';
-import { concatMap } from 'rxjs/operators';
-import { Injectable } from '@angular/core';
+import { TaskOrderModel } from '../task-order.model';
+import { ProjectRepository } from './project-repository';
 
 
 @Injectable()

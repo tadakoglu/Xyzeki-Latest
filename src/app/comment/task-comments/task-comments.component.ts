@@ -1,21 +1,19 @@
-import { Component, Inject, HostListener, ViewChild, ElementRef, ChangeDetectionStrategy, OnInit, AfterViewInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { QuickToDoCommentRepository } from 'src/app/model/repository/quick-to-do-comment-repository';
-import { ProjectToDoCommentRepository } from 'src/app/model/repository/project-to-do-comment-repository';
-import { QuickToDoCommentsService } from 'src/app/model/services/quick-to-do-comments.service';
-import { ProjectToDoCommentsService } from 'src/app/model/services/project-to-do-comments.service';
-import { QuickTaskComment } from 'src/app/model/quick-task-comment.model';
-import { ProjectTaskComment } from 'src/app/model/project-task-comment.model';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, Inject, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
-import { Member } from 'src/app/model/member.model';
-import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
-import { MemberLicenseRepository } from 'src/app/model/repository/member-license-repository';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Emoji } from '@ctrl/ngx-emoji-mart/ngx-emoji/emoji.component';
-import { XyzekiSignalrService } from 'src/app/model/signalr-services/xyzeki-signalr.service';
-import { Subject, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
+import { Member } from 'src/app/model/member.model';
+import { ProjectTaskComment } from 'src/app/model/project-task-comment.model';
+import { QuickTaskComment } from 'src/app/model/quick-task-comment.model';
+import { MemberLicenseRepository } from 'src/app/model/repository/member-license-repository';
+import { ProjectToDoCommentRepository } from 'src/app/model/repository/project-to-do-comment-repository';
+import { QuickToDoCommentRepository } from 'src/app/model/repository/quick-to-do-comment-repository';
+import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
+import { ProjectToDoCommentsService } from 'src/app/model/services/project-to-do-comments.service';
+import { QuickToDoCommentsService } from 'src/app/model/services/quick-to-do-comments.service';
 import { TimeService } from 'src/app/model/services/time.service';
+import { XyzekiSignalrService } from 'src/app/model/signalr-services/xyzeki-signalr.service';
 
 
 export interface DialogData {

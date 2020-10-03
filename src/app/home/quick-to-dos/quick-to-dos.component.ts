@@ -1,22 +1,21 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit, Input, ViewEncapsulation, HostListener, ChangeDetectionStrategy } from '@angular/core';
-import { QuickTask } from 'src/app/model/quick-task.model';
-import { QuickToDoRepository } from 'src/app/model/repository/quick-to-do-repository';
-import { NgbDateStruct, NgbDate, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
-import { NgForm } from '@angular/forms';
-import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
-import { AssignAutocompleteComponent } from 'src/app/ui-tools/assign-autocomplete/assign-autocomplete.component';
+import { CdkDragDrop, CdkDragEnd, CdkDragStart, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DatePipe } from '@angular/common';
-import { DataService } from 'src/app/model/services/shared/data.service';
-import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
-import { Member } from 'src/app/model/member.model';
-import { CdkDragDrop, moveItemInArray, CdkDragStart, CdkDragEnd } from '@angular/cdk/drag-drop';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
-import { TaskCommentsComponent } from 'src/app/comment/task-comments/task-comments.component';
-import { MemberLicenseRepository } from 'src/app/model/repository/member-license-repository';
+import { NgbDate, NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { XyzekiDateTimeInfra } from 'src/infrastructure/xyzeki-datetime-infra';
+import { TaskCommentsComponent } from 'src/app/comment/task-comments/task-comments.component';
+import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
+import { Member } from 'src/app/model/member.model';
+import { QuickTask } from 'src/app/model/quick-task.model';
+import { MemberLicenseRepository } from 'src/app/model/repository/member-license-repository';
+import { QuickToDoRepository } from 'src/app/model/repository/quick-to-do-repository';
+import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
+import { DataService } from 'src/app/model/services/shared/data.service';
 import { SwitchHourDataService } from 'src/app/model/services/shared/switch-hour-data.service';
-import { ChangeDetectorRef } from '@angular/core';
+import { AssignAutocompleteComponent } from 'src/app/ui-tools/assign-autocomplete/assign-autocomplete.component';
+import { XyzekiDateTimeInfra } from 'src/infrastructure/xyzeki-datetime-infra';
 
 
 @Component({
