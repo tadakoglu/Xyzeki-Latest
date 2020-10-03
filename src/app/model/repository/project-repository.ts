@@ -20,7 +20,7 @@ export class ProjectRepository implements IProjectRepository {
         this.signalService.projectReOrderingAvailable.subscribe(POMs => {
             this.savePOMs(POMs);
         })
-        //this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadProjects(); });
+        this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadProjects(); });
         this.dataService.clearAllRepositoriesEvent.subscribe(() => { this.clearProjects() })
 
         
@@ -29,7 +29,8 @@ export class ProjectRepository implements IProjectRepository {
     }
     
     loadRepository() {
-      this.loadProjects();
+      this.loadProjects(); // my and assigned at once
+     
     }
     clearProjects(){
         this.myProjects=[]

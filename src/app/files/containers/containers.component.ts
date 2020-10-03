@@ -38,9 +38,9 @@ export class ContainersComponent implements OnInit, AfterViewInit, OnDestroy {
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
     
-    this.route.data.subscribe((resolvedData: { containers: CloudContainers }) => {
-      this.repository.loadContainersViaResolver(resolvedData.containers);
-    })
+    // this.route.data.subscribe((resolvedData: { containers: CloudContainers }) => {
+    //   this.repository.loadContainersViaResolver(resolvedData.containers);
+    // })
 
     //when first loaded, searched pt, when added new pt, open first private talk if exists.
     // this.subscription = this.repository.containerToOpen.subscribe((container) => { //if a signal comes here, it works in every condition.

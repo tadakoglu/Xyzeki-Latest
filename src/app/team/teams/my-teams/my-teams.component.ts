@@ -26,9 +26,9 @@ export class MyTeamsComponent implements OnInit, OnDestroy {
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
    
-    this.route.data.subscribe((resolvedData: { myTeams: Team[] }) => {
-      this.repository.loadMyTeamsViaResolver(resolvedData.myTeams);
-    })
+    // this.route.data.subscribe((resolvedData: { myTeams: Team[] }) => {
+    //   this.repository.loadMyTeamsViaResolver(resolvedData.myTeams);
+    // })
 
     this.subscription = this.repository.teamToOpen.subscribe((team) => { //if a signal comes here, it works in every condition.
       if (this.innerWidth > 992) {

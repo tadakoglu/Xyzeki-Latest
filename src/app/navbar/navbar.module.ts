@@ -8,11 +8,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import {MatIconModule} from '@angular/material/icon'
 @NgModule({
   declarations: [NavbarComponent, NavbarSecondaryComponent, NavProfileComponent],
   imports: [
-    CommonModule, FormsModule, NgbModule, RouterModule
+    CommonModule, FormsModule, NgbModule, RouterModule,MatIconModule
   ],
   exports:[NavbarComponent, NavbarSecondaryComponent, NavProfileComponent],
   providers:[AuthGuardService]

@@ -2,6 +2,9 @@
   border: 1px rgb(252, 182, 177) solid;  
   transition: background-color 0.2s;
   border-radius:2px!important;
+  display:flex;
+ 
+  align-items: center;
 }
 .xyz-nav-btn:hover{
   box-shadow: 0 5px 15px rgba(255, 251, 0, 0.08);

@@ -10,7 +10,7 @@ import { Team } from '../team.model';
 export class TeamRepository implements ITeamRepository {
     // Note: C# auto-properties return attributes with lowercase letters  !!! TS models should be start with lowercase or same, unless, Angular won't model bind!
     constructor(private service: TeamsService, private dataService: DataService) {
-        //this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadMYRelateds(false); this.loadPTRelateds() });
+        this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadMYRelateds(false); this.loadPTRelateds() });
         this.dataService.clearAllRepositoriesEvent.subscribe(() => { this.clearTeams() })
         this.loadRepository();
     }

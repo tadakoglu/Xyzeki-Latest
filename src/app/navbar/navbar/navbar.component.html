@@ -5,7 +5,8 @@
                 Xyzeki
         </a>
 
-        <a class="btn btn-light rounded-0 border-0 xyz-nav-btn " [routerLink]="[ '/is-konusmalari' ]">İş Konuşmaları <span
+        <a class="btn btn-light rounded-0 border-0 xyz-nav-btn " [routerLink]="[ '/is-konusmalari' ]">
+                <mat-icon style="margin-right: 5px;">people</mat-icon>İş Konuşmaları <span style="margin-left: 5px;"
                         ngbTooltip="{{getUnreadTotalPTCount}} okunmamış iş konuşması bulunmaktadır."
                         tooltipClass="tooltipSpecial" class="unreadCountTitle">{{getUnreadTotalPTCount}}</span></a>
         <a class="btn btn-light rounded-0 border-0 xyz-nav-btn" [routerLink]="[ '/projeler' ]">Projeler</a>

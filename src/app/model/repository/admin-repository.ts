@@ -10,7 +10,7 @@ import { DataService } from '../services/shared/data.service';
 export class AdminRepository implements IAdminRepository {
     constructor(private service: MemberLicenseService, private dataService: DataService) {
 
-        //this.dataService.loadAllRepositoriesEvent.subscribe(() => this.loadAllLicences());
+        this.dataService.loadAllRepositoriesEvent.subscribe(() => this.loadAllLicences());
         this.dataService.clearAllRepositoriesEvent.subscribe(() => this.clearAllLicences());
 
         

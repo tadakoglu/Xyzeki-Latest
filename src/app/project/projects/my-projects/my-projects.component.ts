@@ -31,10 +31,10 @@ export class MyProjectsComponent implements OnDestroy, OnInit, AfterViewInit {
   private searchSubscription: Subscription
 
   ngOnInit(): void {
-    this.route.data.subscribe((resolvedData: { myProjects: Project[], projectsAssigned: Project[] }) => {
-      this.repository.loadMyProjectsViaResolver(resolvedData.myProjects);
-      this.repository.loadProjectsAssignedViaResolver(resolvedData.projectsAssigned);
-    })
+    // this.route.data.subscribe((resolvedData: { myProjects: Project[], projectsAssigned: Project[] }) => {
+    //   this.repository.loadMyProjectsViaResolver(resolvedData.myProjects);
+    //   this.repository.loadProjectsAssignedViaResolver(resolvedData.projectsAssigned);
+    // })
 
   }
 

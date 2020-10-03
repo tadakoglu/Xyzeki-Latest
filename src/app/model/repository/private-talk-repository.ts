@@ -87,7 +87,7 @@ export class PrivateTalkRepository implements IPrivateTalkRepository {
 
         });
 
-        //this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadPTCount(); this.loadAll(1, undefined, false); });
+        this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadPTCount(); this.loadAll(1, undefined, false); });
         this.dataService.clearAllRepositoriesEvent.subscribe(() => { this.clearPrivateTalks() })
         this.loadRepository();
     }
