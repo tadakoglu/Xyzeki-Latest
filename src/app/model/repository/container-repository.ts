@@ -12,8 +12,8 @@ import { CloudContainers } from '../azure-models/cloud-containers.model';
 export class ContainerRepository implements IContainerRepository {
     constructor(private service: FilesService, private signalService: XyzekiSignalrService,
         private dataService: DataService, private timeService: TimeService) {
-
-        this.loadBlobContainers();
+            
+        // this.loadBlobContainers();
 
         this.signalService.newContainerAvailable.subscribe(container => {
             this.saveContainerViaSignalR(container);
@@ -21,7 +21,7 @@ export class ContainerRepository implements IContainerRepository {
         this.signalService.deletedContainerAvailable.subscribe(containerDeleted => {
             this.deleteContainerViaSignalR(containerDeleted);
         })
-        this.dataService.reloadAllOnTeamDestroyEvent.subscribe(() => {
+        this.dataService.loadAllRepositoriesEvent.subscribe(() => {
             this.loadBlobContainers(false)
         })
     }

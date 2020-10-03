@@ -22,7 +22,7 @@ export class ProjectToDoRepository implements IProjectToDoRepository {
         private commentSignalService: XyzekiSignalrService, private projectSignalService: XyzekiSignalrService,
         private projectRepository: ProjectRepository, private dataService: DataService, private timeService: TimeService) {
 
-        this.loadAll();
+        // this.loadAll();
 
         this.signalService.deletedProjectToDoAvailable.subscribe(projectToDo => {
             this.deleteProjectToDoViaSignalR(projectToDo);
@@ -59,7 +59,7 @@ export class ProjectToDoRepository implements IProjectToDoRepository {
             }
         })
 
-        this.dataService.reloadAllOnTeamDestroyEvent.subscribe(() => { this.loadAll(); });
+        this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadAll(); });
 
     }
 

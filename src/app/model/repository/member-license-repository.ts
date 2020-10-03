@@ -10,9 +10,9 @@ import { DataService } from '../services/shared/data.service';
 @Injectable()
 export class MemberLicenseRepository implements IMemberLicenseRepository {
     constructor(private service: MemberLicenseService, private dataService: DataService) {
-        this.loadLicenseRelateds();
+        // this.loadLicenseRelateds();
      
-        this.dataService.reloadAllOnTeamDestroyEvent.subscribe(() => this.loadLicenseRelateds());
+        this.dataService.loadAllRepositoriesEvent.subscribe(() => this.loadLicenseRelateds());
     }
     loadLicenseRelateds() {  // ### reload this when team component destroyed.
 

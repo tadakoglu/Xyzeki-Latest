@@ -24,7 +24,7 @@ import { MemberLicenseService } from 'src/app/model/services/member-license.serv
 export class MyTeamsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription ? this.subscription.unsubscribe() : () => { };
-    this.dataService.reloadAllOnTeamDestroyEvent.next(); // Reload all Xyzeki software to get license, team members joined etc...
+    this.dataService.loadAllRepositoriesEvent.next(); // Reload all Xyzeki software to get license, team members joined etc...
   }
   private subscription: Subscription
   ngOnInit(): void {

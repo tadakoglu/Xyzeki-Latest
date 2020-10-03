@@ -3,11 +3,19 @@ import { MemberLicenseService } from '../services/member-license.service';
 import { MemberLicense } from '../member-license.model';
 import { IAdminRepository } from '../abstract/i-admin-repository';
 import { isNullOrUndefined } from 'util';
+import { DataService } from '../services/shared/data.service';
 
 
 @Injectable()
 export class AdminRepository implements IAdminRepository {
-    constructor(private service: MemberLicenseService) {
+    constructor(private service: MemberLicenseService, private dataService: DataService) {
+
+        this.dataService.loadAllRepositoriesEvent.subscribe(() => this.loadAllLicences());
+
+
+
+    }
+    loadAllLicences() {
         this.service.allLicenses().subscribe((lics) => {
             this.allLicenses.splice(0, this.allLicenses.length);
             this.allLicenses.push(...lics);

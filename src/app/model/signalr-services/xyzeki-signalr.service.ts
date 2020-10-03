@@ -177,7 +177,7 @@ export class XyzekiSignalrService {
         clearTimeout(this.timeOutId); // clearTimeout here
         this.dataService.signalConnectionSeconds.next(undefined)
 
-        this.dataService.reloadAllOnTeamDestroyEvent.next();  //İçerikleri yeniden yükle
+        this.dataService.loadAllRepositoriesEvent.next();  //İçerikleri yeniden yükle
       }).catch(error => { // ilk defa bağlanamadı ise
         //console.error(error)      
         clearTimeout(this.timeOutId); // clearTimeout here
@@ -194,7 +194,7 @@ export class XyzekiSignalrService {
 
     this.timeOutId = setTimeout(async () => {
       await this.hubConnection.start().then(() => {
-        this.dataService.reloadAllOnTeamDestroyEvent.next();  //İçerikleri yeniden yükle
+        this.dataService.loadAllRepositoriesEvent.next();  //İçerikleri yeniden yükle
         this.dataService.signalConnectionSeconds.next(undefined);
 
 

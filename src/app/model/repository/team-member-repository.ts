@@ -21,8 +21,8 @@ export class TeamMemberRepository implements ITeamMemberRepository {
 
     constructor(private teamRepo: TeamRepository, private mLicense: MemberLicenseRepository, private service: TeamMembersService, private service2: TeamsService, private serviceMember: AuthService, private signalService: XyzekiSignalrService, private membersService: MembersService, public xyzekiAuthService : XyzekiAuthService , private permissions: MemberLicenseRepository, private dataService: DataService) {
 
-        this.loadMYRelateds();
-        this.loadPTRelateds();
+        // this.loadMYRelateds();
+        // this.loadPTRelateds();
         //incoming signals
         this.signalService.newTeamMemberJoinedAvailable.subscribe(teamMemberJ => { // add operation
             this.saveTeamMemberJoinedViaSignalR(teamMemberJ);
@@ -52,7 +52,7 @@ export class TeamMemberRepository implements ITeamMemberRepository {
             this.deleteTeamMemberViaSignalR(teamMemberDeleted);
         });
 
-        this.dataService.reloadAllOnTeamDestroyEvent.subscribe(() => { this.loadMYRelateds(); this.loadPTRelateds() });
+        this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadMYRelateds(); this.loadPTRelateds() });
 
 
 

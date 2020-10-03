@@ -12,7 +12,10 @@ import { concatMap } from 'rxjs/operators';
 @Injectable()
 export class PrivateTalkReceiverRepository {
     constructor(private psz: PageSizes, private dataService: DataService, public signalService: XyzekiSignalrService, private receiversService: PrivateTalkReceiversService, private teamReceiversService: PrivateTalkTeamReceiversService) {
-        this.loadAll(1);
+        // this.loadAll(1);
+
+        this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadAll(1) });
+
     }
 
     loadAll(pageNo?: number, searchValue?: string) { //  private talk repo can do reloadeding when team component destroyed)

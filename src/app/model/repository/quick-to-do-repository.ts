@@ -20,7 +20,7 @@ export class QuickToDoRepository implements IQuickToDoRepository {
         public xyzekiAuthService : XyzekiAuthService , private signalService: XyzekiSignalrService,
         private commentSignalService: XyzekiSignalrService, private dataService: DataService, private timeService: TimeService) {
 
-        this.loadAll();
+        // this.loadAll();
         // end of comments count
 
         this.signalService.deletedQuickToDoAvailable.subscribe(quickToDo => {
@@ -49,7 +49,7 @@ export class QuickToDoRepository implements IQuickToDoRepository {
             }
         })
 
-        this.dataService.reloadAllOnTeamDestroyEvent.subscribe(() => { this.loadAll(); });
+        this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadAll(); });
 
 
     }

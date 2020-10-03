@@ -8,6 +8,7 @@ import { ErrorCodes } from 'src/infrastructure/error-codes.enum';
 import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
 import { AuthService } from '../services/auth.service';
 import { LoginModel } from '../login.model';
+import { DataService } from '../services/shared/data.service';
 
 const jwtHelper = new JwtHelperService();
 
@@ -32,7 +33,7 @@ export class XyzekiAuthData {
 
 @Injectable()
 export class XyzekiAuthService {
-    constructor(public authService: AuthService) { }
+    constructor(public authService: AuthService, private dataService: DataService) { }
 
     //Get user information
     get Member(): Member {
@@ -78,7 +79,9 @@ export class XyzekiAuthService {
         }
     }
 
-
+    LoadAllRepositories(){
+        this.dataService.loadAllRepositoriesEvent.next();
+    }
     Auth(tokenAndMember: ReturnModel<Tuple<string, Member>>) {
         let member = tokenAndMember.Model.Item2;
         let token = tokenAndMember.Model.Item1;
@@ -86,7 +89,7 @@ export class XyzekiAuthService {
         this.SaveToken(token);
 
         this.StartRefreshTokenTimer();
-
+        this.LoadAllRepositories();
     }
 
     LogOut() {

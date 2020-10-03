@@ -20,7 +20,7 @@ export class PrivateTalkMessageRepository implements IPrivateTalkMessageReposito
         });
     }
     private privateTalkId: number = 0;
-    
+
     loadPrivateTalkMessages(privateTalkId: number) {
         this.privateTalkId = privateTalkId;
         this.service.privateTalkMessages(privateTalkId, 1, this.psz.PTMPageSize).subscribe(messages => {

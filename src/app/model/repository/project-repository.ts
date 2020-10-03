@@ -12,7 +12,7 @@ import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service
 export class ProjectRepository implements IProjectRepository {
     constructor(private service: ProjectsService, private signalService: XyzekiSignalrService, public xyzekiAuthService : XyzekiAuthService , private dataService: DataService) { // signalr for selecting project manager
 
-        this.loadProjects();
+        // this.loadProjects();
 
         this.signalService.deletedProjectAvailable.subscribe(project => {
             this.deleteProjectViaSignalR(project);
@@ -23,7 +23,7 @@ export class ProjectRepository implements IProjectRepository {
         this.signalService.projectReOrderingAvailable.subscribe(POMs => {
             this.savePOMs(POMs);
         })
-        this.dataService.reloadAllOnTeamDestroyEvent.subscribe(() => { this.loadProjects(); });
+        this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadProjects(); });
     }
     loadProjects() { // ## load this when team comp destroyed.
         this.service.myProjects().subscribe(projects => {

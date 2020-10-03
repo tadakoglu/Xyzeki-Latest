@@ -22,9 +22,9 @@ export class PrivateTalkRepository implements IPrivateTalkRepository {
     constructor(private psz: PageSizes, private receiverRepo: PrivateTalkReceiverRepository, private dataService: DataService, private service: PrivateTalksService, public signalService: XyzekiSignalrService, public signalMessageService: XyzekiSignalrService, private serviceReceivers: PrivateTalkReceiversService, private serviceTeamReceivers: PrivateTalkTeamReceiversService, public xyzekiAuthService : XyzekiAuthService ,
         private memberLicenseRepo: MemberLicenseRepository, private timeService: TimeService) {
 
-        this.loadAll();
+        // this.loadAll();
 
-        this.loadPTCount();
+        // this.loadPTCount();
 
 
         this.signalService.newPrivateTalkJoinedAvailable.subscribe(pTalk => {
@@ -92,7 +92,7 @@ export class PrivateTalkRepository implements IPrivateTalkRepository {
 
         });
 
-        this.dataService.reloadAllOnTeamDestroyEvent.subscribe(() => { this.loadPTCount(); this.loadAll(1, undefined, false); });
+        this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadPTCount(); this.loadAll(1, undefined, false); });
 
     }
     loadPTCount() { // ###reload this when team component destroyed...
