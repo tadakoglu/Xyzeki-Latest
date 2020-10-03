@@ -19,7 +19,7 @@ export class FileRepository implements IFileRepository {
         })
 
         this.dataService.clearAllRepositoriesEvent.subscribe(() => this.clearContainerFiles());
-
+        
     }
     clearContainerFiles() {
         this.files = []

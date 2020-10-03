@@ -6,8 +6,6 @@ import { BehaviorSubject, Subject, ReplaySubject, Observable } from 'rxjs';
 export class DataService {
 
   public removeTeamMemberEvent: EventEmitter<number> = new EventEmitter();
-  // private removeTeamMemberEventSource = new BehaviorSubject(0);
-  // current = this.removeTeamMemberEventSource.asObservable();
 
   public newSwitchDayEvent: Subject<string> = new ReplaySubject<string>(1);
   public newDeepSearchEvent: EventEmitter<string> = new EventEmitter();
@@ -33,12 +31,5 @@ export class DataService {
 
 
   constructor() { }
-
-  // removeTeamMemberEvent(teamMemberId: number) {
-  //   this.removeTeamMemberEventSource.next(teamMemberId)
-  //   this.removeTeamMemberEventSource.next(0); // reset behaviour subject , #todo change that replaysubject 
-  // }
-
-
 
 }

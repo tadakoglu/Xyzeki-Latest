@@ -57,10 +57,14 @@ export class ProjectToDoRepository implements IProjectToDoRepository {
             }
         })
 
-        this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadAll(); });
+        //this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadAll(); });
         this.dataService.clearAllRepositoriesEvent.subscribe(() => { this.clearProjectToDos() })
 
     }
+
+    loadRepository() {
+        this.loadAll();
+      }
 
     clearProjectToDos() {
         this.projectToDos = [];

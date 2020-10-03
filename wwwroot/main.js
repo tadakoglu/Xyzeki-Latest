@@ -103,9 +103,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LicenseManagementComponent", function() { return LicenseManagementComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_app_model_repository_admin_repository__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/repository/admin-repository */ "./src/app/model/repository/admin-repository.ts");
-/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
-/* harmony import */ var src_app_model_member_license_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/member-license.model */ "./src/app/model/member-license.model.ts");
+/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var src_app_model_member_license_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/member-license.model */ "./src/app/model/member-license.model.ts");
+/* harmony import */ var src_app_model_repository_admin_repository__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/repository/admin-repository */ "./src/app/model/repository/admin-repository.ts");
 
 
 
@@ -117,7 +117,7 @@ var LicenseManagementComponent = /** @class */ (function () {
         this.xyzekiAuthService = xyzekiAuthService;
         this.modelSent = false;
         this.modelSubmitted = false; // That's for validation method
-        this.licenseModel = new src_app_model_member_license_model__WEBPACK_IMPORTED_MODULE_4__["MemberLicense"](null, null, null, null, null, null, null, null, null, null, null, null);
+        this.licenseModel = new src_app_model_member_license_model__WEBPACK_IMPORTED_MODULE_3__["MemberLicense"](null, null, null, null, null, null, null, null, null, null, null, null);
         this.newLicensePanelOpen = false;
         this.startDate = null;
         this.endDate = null;
@@ -135,7 +135,7 @@ var LicenseManagementComponent = /** @class */ (function () {
             this.repository.newLicense(this.licenseModel);
             this.modelSent = true;
             this.modelSubmitted = false;
-            this.licenseModel = new src_app_model_member_license_model__WEBPACK_IMPORTED_MODULE_4__["MemberLicense"](null, null, null, null, null, null, null, null, null, null, null, null);
+            this.licenseModel = new src_app_model_member_license_model__WEBPACK_IMPORTED_MODULE_3__["MemberLicense"](null, null, null, null, null, null, null, null, null, null, null, null);
         }
     };
     LicenseManagementComponent.prototype.deleteLicense = function (licenseId) {
@@ -173,7 +173,7 @@ var LicenseManagementComponent = /** @class */ (function () {
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./license-management.component.css */ "./src/app/admin/license-management/license-management.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_admin_repository__WEBPACK_IMPORTED_MODULE_2__["AdminRepository"], src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_admin_repository__WEBPACK_IMPORTED_MODULE_4__["AdminRepository"], src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiAuthService"]])
     ], LicenseManagementComponent);
     return LicenseManagementComponent;
 }());
@@ -952,16 +952,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginComponent", function() { return LoginComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_app_model_login_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/login.model */ "./src/app/model/login.model.ts");
-/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var src_app_model_repository_auth_repository__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/repository/auth-repository */ "./src/app/model/repository/auth-repository.ts");
-/* harmony import */ var src_app_model_services_member_setting_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/model/services/member-setting.service */ "./src/app/model/services/member-setting.service.ts");
-/* harmony import */ var ng_recaptcha__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ng-recaptcha */ "./node_modules/ng-recaptcha/fesm5/ng-recaptcha.js");
-/* harmony import */ var src_infrastructure_google_captcha__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/infrastructure/google-captcha */ "./src/infrastructure/google-captcha.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
-/* harmony import */ var src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! src/app/model/signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var ng_recaptcha__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ng-recaptcha */ "./node_modules/ng-recaptcha/fesm5/ng-recaptcha.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var src_app_model_login_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/model/login.model */ "./src/app/model/login.model.ts");
+/* harmony import */ var src_app_model_repository_auth_repository__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/model/repository/auth-repository */ "./src/app/model/repository/auth-repository.ts");
+/* harmony import */ var src_app_model_services_member_setting_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/services/member-setting.service */ "./src/app/model/services/member-setting.service.ts");
+/* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/model/signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
+/* harmony import */ var src_infrastructure_google_captcha__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! src/infrastructure/google-captcha */ "./src/infrastructure/google-captcha.ts");
 
 
 
@@ -1016,7 +1016,7 @@ var LoginComponent = /** @class */ (function () {
         this.modelSubmitted = true;
         if (loginForm.valid) {
             this.isLoading = true;
-            this.subscription = this.recaptchaV3Service.execute(src_infrastructure_google_captcha__WEBPACK_IMPORTED_MODULE_8__["GoogleReCaptcha_LoginAction"]).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["concatMap"])(function (recaptchaToken) { return _this.repository.authenticate(Object.assign({}, _this.loginModel), recaptchaToken); })).subscribe(function (tokenAndMember) {
+            this.subscription = this.recaptchaV3Service.execute(src_infrastructure_google_captcha__WEBPACK_IMPORTED_MODULE_11__["GoogleReCaptcha_LoginAction"]).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["concatMap"])(function (recaptchaToken) { return _this.repository.authenticate(Object.assign({}, _this.loginModel), recaptchaToken); })).subscribe(function (tokenAndMember) {
                 _this.xyzekiAuthService.Auth(tokenAndMember);
                 _this.xyzekiSignalService.startListening(tokenAndMember.Model.Item1);
                 _this.setUpMySetting();
@@ -1146,12 +1146,13 @@ var LoginComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-login',
             template: __webpack_require__(/*! ./login.component.html */ "./src/app/auth/login/login.component.html"),
-            providers: [{ provide: src_app_model_login_model__WEBPACK_IMPORTED_MODULE_2__["LoginModel"], useClass: src_app_model_login_model__WEBPACK_IMPORTED_MODULE_2__["LoginModel"] }],
+            providers: [{ provide: src_app_model_login_model__WEBPACK_IMPORTED_MODULE_6__["LoginModel"], useClass: src_app_model_login_model__WEBPACK_IMPORTED_MODULE_6__["LoginModel"] },
+            ],
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./login.component.css */ "./src/app/auth/login/login.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [ng_recaptcha__WEBPACK_IMPORTED_MODULE_7__["ReCaptchaV3Service"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], src_app_model_repository_auth_repository__WEBPACK_IMPORTED_MODULE_5__["AuthRepository"],
-            src_app_model_login_model__WEBPACK_IMPORTED_MODULE_2__["LoginModel"], src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"], src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_11__["XyzekiSignalrService"], src_app_model_services_member_setting_service__WEBPACK_IMPORTED_MODULE_6__["MemberSettingService"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_10__["DataService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [ng_recaptcha__WEBPACK_IMPORTED_MODULE_3__["ReCaptchaV3Service"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], src_app_model_repository_auth_repository__WEBPACK_IMPORTED_MODULE_7__["AuthRepository"],
+            src_app_model_login_model__WEBPACK_IMPORTED_MODULE_6__["LoginModel"], src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_5__["XyzekiAuthService"], src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_10__["XyzekiSignalrService"], src_app_model_services_member_setting_service__WEBPACK_IMPORTED_MODULE_8__["MemberSettingService"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_9__["DataService"]])
     ], LoginComponent);
     return LoginComponent;
 }());
@@ -1194,16 +1195,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RegisterComponent", function() { return RegisterComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_app_model_register_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/register.model */ "./src/app/model/register.model.ts");
-/* harmony import */ var src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/error-codes.enum */ "./src/infrastructure/error-codes.enum.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var ng_recaptcha__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ng-recaptcha */ "./node_modules/ng-recaptcha/fesm5/ng-recaptcha.js");
 /* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
-/* harmony import */ var src_app_model_repository_auth_repository__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/repository/auth-repository */ "./src/app/model/repository/auth-repository.ts");
-/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! util */ "./node_modules/util/util.js");
-/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_app_model_member_model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/member.model */ "./src/app/model/member.model.ts");
+/* harmony import */ var src_app_model_register_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/model/register.model */ "./src/app/model/register.model.ts");
+/* harmony import */ var src_app_model_repository_auth_repository__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/model/repository/auth-repository */ "./src/app/model/repository/auth-repository.ts");
 /* harmony import */ var src_app_model_services_members_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/services/members.service */ "./src/app/model/services/members.service.ts");
-/* harmony import */ var src_app_model_member_model__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/model/member.model */ "./src/app/model/member.model.ts");
-/* harmony import */ var ng_recaptcha__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ng-recaptcha */ "./node_modules/ng-recaptcha/fesm5/ng-recaptcha.js");
+/* harmony import */ var src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/infrastructure/error-codes.enum */ "./src/infrastructure/error-codes.enum.ts");
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! util */ "./node_modules/util/util.js");
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_10__);
 
 
 
@@ -1286,7 +1287,7 @@ var RegisterComponent = /** @class */ (function () {
                 _this.registerModel.Avatar = _this.avatar; // load to model;
                 _this.showReset = false;
                 _this.avatarStatus = 'default';
-                if (!Object(util__WEBPACK_IMPORTED_MODULE_6__["isNullOrUndefined"])(_this.lastEvent) && !Object(util__WEBPACK_IMPORTED_MODULE_6__["isNullOrUndefined"])(_this.lastEvent.target))
+                if (!Object(util__WEBPACK_IMPORTED_MODULE_10__["isNullOrUndefined"])(_this.lastEvent) && !Object(util__WEBPACK_IMPORTED_MODULE_10__["isNullOrUndefined"])(_this.lastEvent.target))
                     _this.lastEvent.target.value = ''; //also cancel file selection
             };
         };
@@ -1360,14 +1361,14 @@ var RegisterComponent = /** @class */ (function () {
             if (registerForm.valid) {
                 this.isLoading = true;
                 this.subscription2 = this.repository.register(Object.assign({}, this.registerModel), 'recaptchaToken').subscribe(function (r) {
-                    if (r.ErrorCode == src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_3__["ErrorCodes"].OK) {
+                    if (r.ErrorCode == src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_9__["ErrorCodes"].OK) {
                         _this.isLoading = true;
                         _this.informUser = "Tebrikler, üyeliğinizi tamamladık. Lütfen bekleyiniz...";
                         setTimeout(function () {
                             _this.router.navigate(['/giris']);
                         }, 2000);
                     }
-                    else if (r.ErrorCode == src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_3__["ErrorCodes"].MemberAlreadyExistsError) {
+                    else if (r.ErrorCode == src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_9__["ErrorCodes"].MemberAlreadyExistsError) {
                         _this.informUser = "Üzgünüz, bu kullanıcı adı veya email'i kullanan başka bir üye bulunmaktadır.";
                     }
                     _this.modelSent = true;
@@ -1394,16 +1395,16 @@ var RegisterComponent = /** @class */ (function () {
             return;
         if (registerForm.valid) {
             this.subscription3 = this.membersService.updateMember(Object.assign({}, this.registerModel)).subscribe(function (r) {
-                if (r.ErrorCode == src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_3__["ErrorCodes"].OK) {
+                if (r.ErrorCode == src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_9__["ErrorCodes"].OK) {
                     _this.informUser = "Tebrikler, profil bilgileriniz güncellendi.";
                     setTimeout(function () {
                         _this.informUser = "";
                     }, 1500);
-                    var member = new src_app_model_member_model__WEBPACK_IMPORTED_MODULE_9__["Member"](null, null, null, null, null, null, null, 0, 0);
+                    var member = new src_app_model_member_model__WEBPACK_IMPORTED_MODULE_5__["Member"](null, null, null, null, null, null, null, 0, 0);
                     Object.assign(member, _this.registerModel);
                     _this.xyzekiAuthService.SaveMember(member);
                 }
-                else if (r.ErrorCode == src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_3__["ErrorCodes"].MemberAlreadyExistsError) {
+                else if (r.ErrorCode == src_infrastructure_error_codes_enum__WEBPACK_IMPORTED_MODULE_9__["ErrorCodes"].MemberAlreadyExistsError) {
                     setTimeout(function () {
                         _this.informUser = "";
                     }, 1500);
@@ -1428,7 +1429,7 @@ var RegisterComponent = /** @class */ (function () {
     };
     RegisterComponent.prototype.grantAccess = function () {
         var _this = this;
-        if (Object(util__WEBPACK_IMPORTED_MODULE_6__["isNullOrUndefined"])(this.enteredPassword))
+        if (Object(util__WEBPACK_IMPORTED_MODULE_10__["isNullOrUndefined"])(this.enteredPassword))
             return;
         this.subscription4 = this.membersService.grantAccess(this.enteredPassword).subscribe(function (answer) {
             if (answer) {
@@ -1463,12 +1464,12 @@ var RegisterComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-register',
             template: __webpack_require__(/*! ./register.component.html */ "./src/app/auth/register/register.component.html"),
-            providers: [{ provide: src_app_model_register_model__WEBPACK_IMPORTED_MODULE_2__["RegisterModel"], useClass: src_app_model_register_model__WEBPACK_IMPORTED_MODULE_2__["RegisterModel"] }],
+            providers: [{ provide: src_app_model_register_model__WEBPACK_IMPORTED_MODULE_6__["RegisterModel"], useClass: src_app_model_register_model__WEBPACK_IMPORTED_MODULE_6__["RegisterModel"] }],
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./register.component.css */ "./src/app/auth/register/register.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"], src_app_model_repository_auth_repository__WEBPACK_IMPORTED_MODULE_5__["AuthRepository"],
-            src_app_model_register_model__WEBPACK_IMPORTED_MODULE_2__["RegisterModel"], src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_4__["XyzekiAuthService"], src_app_model_services_members_service__WEBPACK_IMPORTED_MODULE_8__["MembersService"], ng_recaptcha__WEBPACK_IMPORTED_MODULE_10__["ReCaptchaV3Service"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], src_app_model_repository_auth_repository__WEBPACK_IMPORTED_MODULE_7__["AuthRepository"],
+            src_app_model_register_model__WEBPACK_IMPORTED_MODULE_6__["RegisterModel"], src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_4__["XyzekiAuthService"], src_app_model_services_members_service__WEBPACK_IMPORTED_MODULE_8__["MembersService"], ng_recaptcha__WEBPACK_IMPORTED_MODULE_3__["ReCaptchaV3Service"]])
     ], RegisterComponent);
     return RegisterComponent;
 }());
@@ -1567,19 +1568,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TaskCommentsComponent", function() { return TaskCommentsComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material/dialog */ "./node_modules/@angular/material/esm5/dialog.es5.js");
-/* harmony import */ var src_app_model_repository_quick_to_do_comment_repository__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/repository/quick-to-do-comment-repository */ "./src/app/model/repository/quick-to-do-comment-repository.ts");
-/* harmony import */ var src_app_model_repository_project_to_do_comment_repository__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/repository/project-to-do-comment-repository */ "./src/app/model/repository/project-to-do-comment-repository.ts");
-/* harmony import */ var src_app_model_services_quick_to_do_comments_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/services/quick-to-do-comments.service */ "./src/app/model/services/quick-to-do-comments.service.ts");
-/* harmony import */ var src_app_model_services_project_to_do_comments_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/model/services/project-to-do-comments.service */ "./src/app/model/services/project-to-do-comments.service.ts");
-/* harmony import */ var src_app_model_quick_task_comment_model__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/model/quick-task-comment.model */ "./src/app/model/quick-task-comment.model.ts");
-/* harmony import */ var src_app_model_project_task_comment_model__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/project-task-comment.model */ "./src/app/model/project-task-comment.model.ts");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
-/* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
-/* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
-/* harmony import */ var src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! src/app/model/signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
-/* harmony import */ var src_app_model_services_time_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! src/app/model/services/time.service */ "./src/app/model/services/time.service.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material/dialog */ "./node_modules/@angular/material/esm5/dialog.es5.js");
+/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var src_app_model_project_task_comment_model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/project-task-comment.model */ "./src/app/model/project-task-comment.model.ts");
+/* harmony import */ var src_app_model_quick_task_comment_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/model/quick-task-comment.model */ "./src/app/model/quick-task-comment.model.ts");
+/* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
+/* harmony import */ var src_app_model_repository_project_to_do_comment_repository__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/repository/project-to-do-comment-repository */ "./src/app/model/repository/project-to-do-comment-repository.ts");
+/* harmony import */ var src_app_model_repository_quick_to_do_comment_repository__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/model/repository/quick-to-do-comment-repository */ "./src/app/model/repository/quick-to-do-comment-repository.ts");
+/* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
+/* harmony import */ var src_app_model_services_project_to_do_comments_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! src/app/model/services/project-to-do-comments.service */ "./src/app/model/services/project-to-do-comments.service.ts");
+/* harmony import */ var src_app_model_services_quick_to_do_comments_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! src/app/model/services/quick-to-do-comments.service */ "./src/app/model/services/quick-to-do-comments.service.ts");
+/* harmony import */ var src_app_model_services_time_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! src/app/model/services/time.service */ "./src/app/model/services/time.service.ts");
+/* harmony import */ var src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! src/app/model/signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
 
 
 
@@ -1608,8 +1609,8 @@ var TaskCommentsComponent = /** @class */ (function () {
         this.commentSignalService = commentSignalService;
         this.timeService = timeService;
         this.colors = ['#E9F6FE', '#E3E651', '#EA6E4F', '#80C76B', '#84D3E2', '#D0E185', '#292930'];
-        this.qtCommentModel = new src_app_model_quick_task_comment_model__WEBPACK_IMPORTED_MODULE_7__["QuickTaskComment"](0, undefined, undefined, undefined, 0, undefined);
-        this.ptCommentModel = new src_app_model_project_task_comment_model__WEBPACK_IMPORTED_MODULE_8__["ProjectTaskComment"](0, undefined, undefined, undefined, 0, undefined);
+        this.qtCommentModel = new src_app_model_quick_task_comment_model__WEBPACK_IMPORTED_MODULE_6__["QuickTaskComment"](0, undefined, undefined, undefined, 0, undefined);
+        this.ptCommentModel = new src_app_model_project_task_comment_model__WEBPACK_IMPORTED_MODULE_5__["ProjectTaskComment"](0, undefined, undefined, undefined, 0, undefined);
         this.modelSent = false;
         this.modelSubmitted = false; // That's for validation method
         this.invalidLicensePanelOpen = false;
@@ -1621,7 +1622,7 @@ var TaskCommentsComponent = /** @class */ (function () {
         this.kind = data.kind;
         this.title = data.title;
         if (this.kind == 'qtComments') {
-            Object.assign(this.qtCommentModel, new src_app_model_quick_task_comment_model__WEBPACK_IMPORTED_MODULE_7__["QuickTaskComment"](this.taskId, '', this.xyzekiAuthService.Username));
+            Object.assign(this.qtCommentModel, new src_app_model_quick_task_comment_model__WEBPACK_IMPORTED_MODULE_6__["QuickTaskComment"](this.taskId, '', this.xyzekiAuthService.Username));
             this.qtCommentRepository.loadComments(this.taskId);
             //this.qtCommentRepository = new QuickToDoCommentRepository(this.taskId, this.qtCommentsService, this.commentSignalService, this.timeService);
             //this.qtCommentModel = new QuickTaskComment(this.taskId, '', this.xyzekiAuthService.Username);
@@ -1631,7 +1632,7 @@ var TaskCommentsComponent = /** @class */ (function () {
             // })
         }
         else if (this.kind == 'ptComments') {
-            Object.assign(this.ptCommentModel, new src_app_model_project_task_comment_model__WEBPACK_IMPORTED_MODULE_8__["ProjectTaskComment"](this.taskId, '', this.xyzekiAuthService.Username));
+            Object.assign(this.ptCommentModel, new src_app_model_project_task_comment_model__WEBPACK_IMPORTED_MODULE_5__["ProjectTaskComment"](this.taskId, '', this.xyzekiAuthService.Username));
             this.ptCommentRepository.loadComments(this.taskId);
             // this.ptCommentRepository = new ProjectToDoCommentRepository(this.taskId, this.ptCommentsService, this.commentSignalService, this.timeService);
             // this.ptCommentModel = new ProjectTaskComment(this.taskId, '', this.xyzekiAuthService.Username);
@@ -1721,12 +1722,12 @@ var TaskCommentsComponent = /** @class */ (function () {
                 if (this.kind == 'qtComments') {
                     this.qtCommentModel.DateTimeSent = new Date().toISOString(); // set date time when sent.
                     this.qtCommentRepository.saveQuickToDoComment(this.qtCommentModel);
-                    this.qtCommentModel = new src_app_model_quick_task_comment_model__WEBPACK_IMPORTED_MODULE_7__["QuickTaskComment"](this.taskId, '', this.xyzekiAuthService.Username);
+                    this.qtCommentModel = new src_app_model_quick_task_comment_model__WEBPACK_IMPORTED_MODULE_6__["QuickTaskComment"](this.taskId, '', this.xyzekiAuthService.Username);
                 }
                 else if (this.kind == 'ptComments') {
                     this.ptCommentModel.DateTimeSent = new Date().toISOString(); // set date time when sent.
                     this.ptCommentRepository.saveProjectToDoComment(this.ptCommentModel);
-                    this.ptCommentModel = new src_app_model_project_task_comment_model__WEBPACK_IMPORTED_MODULE_8__["ProjectTaskComment"](this.taskId, '', this.xyzekiAuthService.Username);
+                    this.ptCommentModel = new src_app_model_project_task_comment_model__WEBPACK_IMPORTED_MODULE_5__["ProjectTaskComment"](this.taskId, '', this.xyzekiAuthService.Username);
                 }
                 this.modelSent = true;
                 this.modelSubmitted = false;
@@ -1826,7 +1827,7 @@ var TaskCommentsComponent = /** @class */ (function () {
     ], TaskCommentsComponent.prototype, "onResize", null);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('messageForm'),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_9__["NgForm"])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_2__["NgForm"])
     ], TaskCommentsComponent.prototype, "form", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('textAreaX'),
@@ -1839,9 +1840,9 @@ var TaskCommentsComponent = /** @class */ (function () {
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./task-comments.component.css */ "./src/app/comment/task-comments/task-comments.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](5, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"])),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_quick_to_do_comment_repository__WEBPACK_IMPORTED_MODULE_3__["QuickToDoCommentRepository"], src_app_model_repository_project_to_do_comment_repository__WEBPACK_IMPORTED_MODULE_4__["ProjectToDoCommentRepository"], src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_11__["TeamMemberRepository"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_12__["MemberLicenseRepository"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MatDialogRef"], Object, src_app_model_services_quick_to_do_comments_service__WEBPACK_IMPORTED_MODULE_5__["QuickToDoCommentsService"], src_app_model_services_project_to_do_comments_service__WEBPACK_IMPORTED_MODULE_6__["ProjectToDoCommentsService"],
-            src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_10__["XyzekiAuthService"], src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_13__["XyzekiSignalrService"], src_app_model_services_time_service__WEBPACK_IMPORTED_MODULE_14__["TimeService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](5, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__["MAT_DIALOG_DATA"])),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_quick_to_do_comment_repository__WEBPACK_IMPORTED_MODULE_9__["QuickToDoCommentRepository"], src_app_model_repository_project_to_do_comment_repository__WEBPACK_IMPORTED_MODULE_8__["ProjectToDoCommentRepository"], src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_10__["TeamMemberRepository"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_7__["MemberLicenseRepository"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__["MatDialogRef"], Object, src_app_model_services_quick_to_do_comments_service__WEBPACK_IMPORTED_MODULE_12__["QuickToDoCommentsService"], src_app_model_services_project_to_do_comments_service__WEBPACK_IMPORTED_MODULE_11__["ProjectToDoCommentsService"],
+            src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_4__["XyzekiAuthService"], src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_14__["XyzekiSignalrService"], src_app_model_services_time_service__WEBPACK_IMPORTED_MODULE_13__["TimeService"]])
     ], TaskCommentsComponent);
     return TaskCommentsComponent;
 }());
@@ -2676,20 +2677,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MyToDosComponent", function() { return MyToDosComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
-/* harmony import */ var src_app_model_services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/services/project-to-dos.service */ "./src/app/model/services/project-to-dos.service.ts");
-/* harmony import */ var src_app_model_repository_project_to_do_repository__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/repository/project-to-do-repository */ "./src/app/model/repository/project-to-do-repository.ts");
-/* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var src_app_comment_task_comments_task_comments_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/comment/task-comments/task-comments.component */ "./src/app/comment/task-comments/task-comments.component.ts");
-/* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
-/* harmony import */ var src_app_model_repository_project_repository__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/model/repository/project-repository */ "./src/app/model/repository/project-repository.ts");
-/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! util */ "./node_modules/util/util.js");
-/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var src_app_model_services_shared_switch_hour_data_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! src/app/model/services/shared/switch-hour-data.service */ "./src/app/model/services/shared/switch-hour-data.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_app_comment_task_comments_task_comments_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/comment/task-comments/task-comments.component */ "./src/app/comment/task-comments/task-comments.component.ts");
+/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
+/* harmony import */ var src_app_model_repository_project_repository__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/model/repository/project-repository */ "./src/app/model/repository/project-repository.ts");
+/* harmony import */ var src_app_model_repository_project_to_do_repository__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/repository/project-to-do-repository */ "./src/app/model/repository/project-to-do-repository.ts");
+/* harmony import */ var src_app_model_services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/model/services/project-to-dos.service */ "./src/app/model/services/project-to-dos.service.ts");
+/* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var src_app_model_services_shared_switch_hour_data_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! src/app/model/services/shared/switch-hour-data.service */ "./src/app/model/services/shared/switch-hour-data.service.ts");
+/* harmony import */ var src_app_model_services_time_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! src/app/model/services/time.service */ "./src/app/model/services/time.service.ts");
 /* harmony import */ var src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! src/app/model/signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
-/* harmony import */ var src_app_model_services_time_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! src/app/model/services/time.service */ "./src/app/model/services/time.service.ts");
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! util */ "./node_modules/util/util.js");
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_14__);
 
 
 
@@ -2823,7 +2824,7 @@ var MyToDosComponent = /** @class */ (function () {
             element.className = null;
         }
         //ref https://blog.angular-university.io/angular-material-dialog/
-        var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatDialogConfig"]();
+        var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogConfig"]();
         // dialogConfig.hasBackdrop = true;
         // dialogConfig.autoFocus = true;
         // dialogConfig.disableClose = true; 
@@ -2850,7 +2851,7 @@ var MyToDosComponent = /** @class */ (function () {
             title: title
         };
         //this.changeDetection.detach(); // for slow textinput problem in angular
-        this.dialogRef = this.dialog.open(src_app_comment_task_comments_task_comments_component__WEBPACK_IMPORTED_MODULE_8__["TaskCommentsComponent"], dialogConfig);
+        this.dialogRef = this.dialog.open(src_app_comment_task_comments_task_comments_component__WEBPACK_IMPORTED_MODULE_4__["TaskCommentsComponent"], dialogConfig);
         this.dialogRef.afterClosed().subscribe(function (result) {
             //console.log(`Dialog result: ${result}`);
             //this.changeDetection.reattach(); // for slow textinput problem in angular
@@ -2893,10 +2894,10 @@ var MyToDosComponent = /** @class */ (function () {
         if (new Date(a.Start).getTime() === new Date(b.Start).getTime()) { // a=b return 0
             return 0;
         }
-        else if (Object(util__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(a.Deadline)) {
+        else if (Object(util__WEBPACK_IMPORTED_MODULE_14__["isNullOrUndefined"])(a.Deadline)) {
             return 1;
         }
-        else if (Object(util__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(b.Deadline)) {
+        else if (Object(util__WEBPACK_IMPORTED_MODULE_14__["isNullOrUndefined"])(b.Deadline)) {
             return -1;
         }
         else {
@@ -2907,10 +2908,10 @@ var MyToDosComponent = /** @class */ (function () {
         if (new Date(a.Deadline).getTime() === new Date(b.Deadline).getTime()) { // a=b return 0
             return 0;
         }
-        else if (Object(util__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(a.Deadline)) {
+        else if (Object(util__WEBPACK_IMPORTED_MODULE_14__["isNullOrUndefined"])(a.Deadline)) {
             return 1;
         }
-        else if (Object(util__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(b.Deadline)) {
+        else if (Object(util__WEBPACK_IMPORTED_MODULE_14__["isNullOrUndefined"])(b.Deadline)) {
             return -1;
         }
         else {
@@ -2924,10 +2925,10 @@ var MyToDosComponent = /** @class */ (function () {
             return 0;
         }
         // nulls sort after anything else
-        else if (Object(util__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(a.Start)) {
+        else if (Object(util__WEBPACK_IMPORTED_MODULE_14__["isNullOrUndefined"])(a.Start)) {
             return 1;
         }
-        else if (Object(util__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(b.Start)) {
+        else if (Object(util__WEBPACK_IMPORTED_MODULE_14__["isNullOrUndefined"])(b.Start)) {
             return -1;
         }
         // otherwise, if we're ascending, lowest sorts first
@@ -3104,7 +3105,7 @@ var MyToDosComponent = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
     ], MyToDosComponent.prototype, "onResize", null);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(src_app_comment_task_comments_task_comments_component__WEBPACK_IMPORTED_MODULE_8__["TaskCommentsComponent"]),
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(src_app_comment_task_comments_task_comments_component__WEBPACK_IMPORTED_MODULE_4__["TaskCommentsComponent"]),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
     ], MyToDosComponent.prototype, "commentsDialog", void 0);
     MyToDosComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -3114,11 +3115,11 @@ var MyToDosComponent = /** @class */ (function () {
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./my-to-dos.component.css */ "./src/app/home/my-to-dos/my-to-dos.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_project_to_do_repository__WEBPACK_IMPORTED_MODULE_5__["ProjectToDoRepository"], src_app_model_services_shared_switch_hour_data_service__WEBPACK_IMPORTED_MODULE_12__["SwitchHourDataService"], src_app_model_repository_project_repository__WEBPACK_IMPORTED_MODULE_10__["ProjectRepository"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_9__["MemberLicenseRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
-            src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"], src_app_model_services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_4__["ProjectToDosService"],
-            src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_13__["XyzekiSignalrService"], _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatDialog"],
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_project_to_do_repository__WEBPACK_IMPORTED_MODULE_8__["ProjectToDoRepository"], src_app_model_services_shared_switch_hour_data_service__WEBPACK_IMPORTED_MODULE_11__["SwitchHourDataService"], src_app_model_repository_project_repository__WEBPACK_IMPORTED_MODULE_7__["ProjectRepository"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_6__["MemberLicenseRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_10__["DataService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
+            src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_5__["XyzekiAuthService"], src_app_model_services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_9__["ProjectToDosService"],
+            src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_13__["XyzekiSignalrService"], _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialog"],
             src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_13__["XyzekiSignalrService"],
-            src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_13__["XyzekiSignalrService"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"], src_app_model_services_time_service__WEBPACK_IMPORTED_MODULE_14__["TimeService"]])
+            src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_13__["XyzekiSignalrService"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"], src_app_model_services_time_service__WEBPACK_IMPORTED_MODULE_12__["TimeService"]])
     ], MyToDosComponent);
     return MyToDosComponent;
 }());
@@ -3172,22 +3173,21 @@ module.exports = "<div [hidden]=\"!invalidLicensePanelOpen\"\r\n  style=\"border
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QuickToDosComponent", function() { return QuickToDosComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_app_model_quick_task_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/quick-task.model */ "./src/app/model/quick-task.model.ts");
-/* harmony import */ var src_app_model_repository_quick_to_do_repository__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/repository/quick-to-do-repository */ "./src/app/model/repository/quick-to-do-repository.ts");
+/* harmony import */ var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/cdk/drag-drop */ "./node_modules/@angular/cdk/esm5/drag-drop.es5.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
-/* harmony import */ var src_app_ui_tools_assign_autocomplete_assign_autocomplete_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/ui-tools/assign-autocomplete/assign-autocomplete.component */ "./src/app/ui-tools/assign-autocomplete/assign-autocomplete.component.ts");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
-/* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
-/* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
-/* harmony import */ var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/cdk/drag-drop */ "./node_modules/@angular/cdk/esm5/drag-drop.es5.js");
-/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/material/dialog */ "./node_modules/@angular/material/esm5/dialog.es5.js");
-/* harmony import */ var src_app_comment_task_comments_task_comments_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! src/app/comment/task-comments/task-comments.component */ "./src/app/comment/task-comments/task-comments.component.ts");
-/* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
-/* harmony import */ var src_infrastructure_xyzeki_datetime_infra__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! src/infrastructure/xyzeki-datetime-infra */ "./src/infrastructure/xyzeki-datetime-infra.ts");
-/* harmony import */ var src_app_model_services_shared_switch_hour_data_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! src/app/model/services/shared/switch-hour-data.service */ "./src/app/model/services/shared/switch-hour-data.service.ts");
-
+/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/dialog */ "./node_modules/@angular/material/esm5/dialog.es5.js");
+/* harmony import */ var src_app_comment_task_comments_task_comments_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/comment/task-comments/task-comments.component */ "./src/app/comment/task-comments/task-comments.component.ts");
+/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var src_app_model_quick_task_model__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/quick-task.model */ "./src/app/model/quick-task.model.ts");
+/* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
+/* harmony import */ var src_app_model_repository_quick_to_do_repository__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/model/repository/quick-to-do-repository */ "./src/app/model/repository/quick-to-do-repository.ts");
+/* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
+/* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var src_app_model_services_shared_switch_hour_data_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! src/app/model/services/shared/switch-hour-data.service */ "./src/app/model/services/shared/switch-hour-data.service.ts");
+/* harmony import */ var src_app_ui_tools_assign_autocomplete_assign_autocomplete_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! src/app/ui-tools/assign-autocomplete/assign-autocomplete.component */ "./src/app/ui-tools/assign-autocomplete/assign-autocomplete.component.ts");
+/* harmony import */ var src_infrastructure_xyzeki_datetime_infra__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! src/infrastructure/xyzeki-datetime-infra */ "./src/infrastructure/xyzeki-datetime-infra.ts");
 
 
 
@@ -3235,7 +3235,7 @@ var QuickToDosComponent = /** @class */ (function () {
                 date.month == tomorrow.getMonth() + 1 &&
                 date.year == tomorrow.getFullYear();
         };
-        this.quickToDoModel = new src_app_model_quick_task_model__WEBPACK_IMPORTED_MODULE_2__["QuickTask"](null, null);
+        this.quickToDoModel = new src_app_model_quick_task_model__WEBPACK_IMPORTED_MODULE_8__["QuickTask"](null, null);
         this.modelSent = false;
         this.modelSubmitted = false; // That's for validation method
         this.invalidLicensePanelOpen = false;
@@ -3245,10 +3245,10 @@ var QuickToDosComponent = /** @class */ (function () {
         this.date = null;
         this.timeDeadline = { hour: 0, minute: 0, second: 0 };
         //Edit option
-        this.quickToDoModelEdit = new src_app_model_quick_task_model__WEBPACK_IMPORTED_MODULE_2__["QuickTask"](null, null);
+        this.quickToDoModelEdit = new src_app_model_quick_task_model__WEBPACK_IMPORTED_MODULE_8__["QuickTask"](null, null);
         this.modelSentEdit = false;
         this.modelSubmittedEdit = false; // That's for validation method
-        this.datePipe = new _angular_common__WEBPACK_IMPORTED_MODULE_7__["DatePipe"]('tr-TR');
+        this.datePipe = new _angular_common__WEBPACK_IMPORTED_MODULE_2__["DatePipe"]('tr-TR');
         this.editQuickToDoPanelOpen = false;
         this.oldTaskId = 0;
         this.dateEditStart = null;
@@ -3306,7 +3306,7 @@ var QuickToDosComponent = /** @class */ (function () {
             element.className = null;
         }
         //ref https://blog.angular-university.io/angular-material-dialog/
-        var dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_11__["MatDialogConfig"]();
+        var dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__["MatDialogConfig"]();
         // dialogConfig.hasBackdrop = true;
         // dialogConfig.autoFocus = true;
         // dialogConfig.disableClose = true; 
@@ -3333,7 +3333,7 @@ var QuickToDosComponent = /** @class */ (function () {
             title: title
         };
         //this.changeDetection.detach(); // for slow textinput problem in angular
-        this.dialogRef = this.dialog.open(src_app_comment_task_comments_task_comments_component__WEBPACK_IMPORTED_MODULE_12__["TaskCommentsComponent"], dialogConfig);
+        this.dialogRef = this.dialog.open(src_app_comment_task_comments_task_comments_component__WEBPACK_IMPORTED_MODULE_6__["TaskCommentsComponent"], dialogConfig);
         this.dialogRef.afterClosed().subscribe(function (result) {
             //console.log(`Dialog result: ${result}`);
             //this.changeDetection.reattach(); // for slow textinput problem in angular
@@ -3361,7 +3361,7 @@ var QuickToDosComponent = /** @class */ (function () {
             var indexPrevious = this.quickTodoRepository.getMyQuickToDos().findIndex((function (val) { return val.TaskId == item1_1.TaskId; }));
             var item2_1 = this.myQuickToDos.find(function (val, index, obj) { return index == event.currentIndex; });
             var indexCurrent = this.quickTodoRepository.getMyQuickToDos().findIndex((function (val) { return val.TaskId == item2_1.TaskId; }));
-            Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_10__["moveItemInArray"])(this.quickTodoRepository.getMyQuickToDos(), indexPrevious, indexCurrent);
+            Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_1__["moveItemInArray"])(this.quickTodoRepository.getMyQuickToDos(), indexPrevious, indexCurrent);
             this.quickTodoRepository.reOrderAndSaveQT();
         }
         else {
@@ -3849,7 +3849,7 @@ var QuickToDosComponent = /** @class */ (function () {
         this.quickToDoModel.Status = null;
     };
     QuickToDosComponent.prototype.resetModel = function () {
-        this.quickToDoModel = new src_app_model_quick_task_model__WEBPACK_IMPORTED_MODULE_2__["QuickTask"](null, null);
+        this.quickToDoModel = new src_app_model_quick_task_model__WEBPACK_IMPORTED_MODULE_8__["QuickTask"](null, null);
         this.date = null;
         this.dateStart = null;
         this.timeStart = { hour: 0, minute: 0, second: 0 };
@@ -3864,7 +3864,7 @@ var QuickToDosComponent = /** @class */ (function () {
                 if (this.quickToDoModel.Archived)
                     this.quickToDoModel.ArchivedDate = new Date().toISOString();
                 this.quickTodoRepository.saveQuickToDo(this.quickToDoModel);
-                this.quickToDoModel = new src_app_model_quick_task_model__WEBPACK_IMPORTED_MODULE_2__["QuickTask"](null, null, null, this.quickToDoModel.Start, this.quickToDoModel.Date, null, this.quickToDoModel.AssignedTo, 0, 0, this.quickToDoModel.Archived);
+                this.quickToDoModel = new src_app_model_quick_task_model__WEBPACK_IMPORTED_MODULE_8__["QuickTask"](null, null, null, this.quickToDoModel.Start, this.quickToDoModel.Date, null, this.quickToDoModel.AssignedTo, 0, 0, this.quickToDoModel.Archived);
                 //this.child.secimIptal();//reset assigner
                 //this.date = null;
                 this.modelSent = true;
@@ -4005,7 +4005,7 @@ var QuickToDosComponent = /** @class */ (function () {
             this.modelSubmittedEdit = true;
             if (quickToDoEditForm.valid) {
                 this.quickTodoRepository.saveQuickToDo(this.quickToDoModelEdit);
-                this.quickToDoModelEdit = new src_app_model_quick_task_model__WEBPACK_IMPORTED_MODULE_2__["QuickTask"](null, null);
+                this.quickToDoModelEdit = new src_app_model_quick_task_model__WEBPACK_IMPORTED_MODULE_8__["QuickTask"](null, null);
                 this.dateEdit = null;
                 this.dateEditStart = null;
                 this.timeEdit = { hour: 0, minute: 0, second: 0 };
@@ -4069,7 +4069,7 @@ var QuickToDosComponent = /** @class */ (function () {
             else {
                 this.editQuickToDoPanelOpen = false;
                 // load
-                this.quickToDoModelEdit = new src_app_model_quick_task_model__WEBPACK_IMPORTED_MODULE_2__["QuickTask"](null, null);
+                this.quickToDoModelEdit = new src_app_model_quick_task_model__WEBPACK_IMPORTED_MODULE_8__["QuickTask"](null, null);
                 this.dateEdit = null;
                 this.dateEditStart = null;
                 this.timeEdit = { hour: 0, minute: 0, second: 0 };
@@ -4206,56 +4206,56 @@ var QuickToDosComponent = /** @class */ (function () {
         this.quickToDoModelEdit.Status = null;
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"])('window:resize', ['$event']) // respond to browser resizing
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["HostListener"])('window:resize', ['$event']) // respond to browser resizing
         ,
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [Object]),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
     ], QuickToDosComponent.prototype, "onResize", null);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(src_app_comment_task_comments_task_comments_component__WEBPACK_IMPORTED_MODULE_12__["TaskCommentsComponent"]),
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"])(src_app_comment_task_comments_task_comments_component__WEBPACK_IMPORTED_MODULE_6__["TaskCommentsComponent"]),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
     ], QuickToDosComponent.prototype, "commentsDialog", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('arsivSurukleAlani'),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"])('arsivSurukleAlani'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_3__["ElementRef"])
     ], QuickToDosComponent.prototype, "arsivSurukleAlani", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('switchDayArea'),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"])('switchDayArea'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_3__["ElementRef"])
     ], QuickToDosComponent.prototype, "switchDayArea", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('datePickerEdit'),
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"])('datePickerEdit'),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
     ], QuickToDosComponent.prototype, "datePickerEdit", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('quickTaskEdit'),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"])('quickTaskEdit'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_3__["ElementRef"])
     ], QuickToDosComponent.prototype, "quickTaskEdit", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('editChild'),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", src_app_ui_tools_assign_autocomplete_assign_autocomplete_component__WEBPACK_IMPORTED_MODULE_6__["AssignAutocompleteComponent"])
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"])('editChild'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", src_app_ui_tools_assign_autocomplete_assign_autocomplete_component__WEBPACK_IMPORTED_MODULE_14__["AssignAutocompleteComponent"])
     ], QuickToDosComponent.prototype, "editChild", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(src_app_ui_tools_assign_autocomplete_assign_autocomplete_component__WEBPACK_IMPORTED_MODULE_6__["AssignAutocompleteComponent"]),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", src_app_ui_tools_assign_autocomplete_assign_autocomplete_component__WEBPACK_IMPORTED_MODULE_6__["AssignAutocompleteComponent"])
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"])(src_app_ui_tools_assign_autocomplete_assign_autocomplete_component__WEBPACK_IMPORTED_MODULE_14__["AssignAutocompleteComponent"]),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", src_app_ui_tools_assign_autocomplete_assign_autocomplete_component__WEBPACK_IMPORTED_MODULE_14__["AssignAutocompleteComponent"])
     ], QuickToDosComponent.prototype, "child", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('quickToDoEditForm'),
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"])('quickToDoEditForm'),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgForm"])
     ], QuickToDosComponent.prototype, "form", void 0);
     QuickToDosComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewEncapsulation"].None,
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+            encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewEncapsulation"].None,
             selector: 'app-quick-to-dos',
             template: __webpack_require__(/*! ./quick-to-dos.component.html */ "./src/app/home/quick-to-dos/quick-to-dos.component.html"),
-            changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
+            changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./quick-to-dos.component.css */ "./src/app/home/quick-to-dos/quick-to-dos.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_services_shared_switch_hour_data_service__WEBPACK_IMPORTED_MODULE_15__["SwitchHourDataService"], src_infrastructure_xyzeki_datetime_infra__WEBPACK_IMPORTED_MODULE_14__["XyzekiDateTimeInfra"],
-            src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_9__["TeamMemberRepository"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_13__["MemberLicenseRepository"],
-            src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_5__["XyzekiAuthService"], src_app_model_repository_quick_to_do_repository__WEBPACK_IMPORTED_MODULE_3__["QuickToDoRepository"],
-            src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_8__["DataService"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_11__["MatDialog"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_services_shared_switch_hour_data_service__WEBPACK_IMPORTED_MODULE_13__["SwitchHourDataService"], src_infrastructure_xyzeki_datetime_infra__WEBPACK_IMPORTED_MODULE_15__["XyzekiDateTimeInfra"],
+            src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_11__["TeamMemberRepository"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_9__["MemberLicenseRepository"],
+            src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_7__["XyzekiAuthService"], src_app_model_repository_quick_to_do_repository__WEBPACK_IMPORTED_MODULE_10__["QuickToDoRepository"],
+            src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_12__["DataService"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__["MatDialog"], _angular_core__WEBPACK_IMPORTED_MODULE_3__["ChangeDetectorRef"]])
     ], QuickToDosComponent);
     return QuickToDosComponent;
 }());
@@ -4603,9 +4603,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
-/* harmony import */ var src_app_model_services_member_setting_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/services/member-setting.service */ "./src/app/model/services/member-setting.service.ts");
-/* harmony import */ var src_app_model_member_setting_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/member-setting.model */ "./src/app/model/member-setting.model.ts");
-/* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
+/* harmony import */ var src_app_model_member_setting_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/member-setting.model */ "./src/app/model/member-setting.model.ts");
+/* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
+/* harmony import */ var src_app_model_services_member_setting_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/services/member-setting.service */ "./src/app/model/services/member-setting.service.ts");
 
 
 
@@ -4637,7 +4637,7 @@ var SettingsComponent = /** @class */ (function () {
     SettingsComponent.prototype.selectTheme = function (selectedTheme) {
         var _this = this;
         if (this.permissions.getAccessGranted()) {
-            var mSetting = new src_app_model_member_setting_model__WEBPACK_IMPORTED_MODULE_4__["MemberSetting"](this.xyzekiAuthService.Username, selectedTheme, this.ownerReporting, this.assignedToReporting);
+            var mSetting = new src_app_model_member_setting_model__WEBPACK_IMPORTED_MODULE_3__["MemberSetting"](this.xyzekiAuthService.Username, selectedTheme, this.ownerReporting, this.assignedToReporting);
             if (selectedTheme) {
                 this.subscription = this.memberSettingService.updateMySetting(mSetting).subscribe(function () {
                     _this.selectedTheme = selectedTheme;
@@ -4750,7 +4750,7 @@ var SettingsComponent = /** @class */ (function () {
             else {
                 this.assignedToReporting = value;
             }
-            var mSetting = new src_app_model_member_setting_model__WEBPACK_IMPORTED_MODULE_4__["MemberSetting"](this.xyzekiAuthService.Username, this.selectedTheme, this.ownerReporting, this.assignedToReporting);
+            var mSetting = new src_app_model_member_setting_model__WEBPACK_IMPORTED_MODULE_3__["MemberSetting"](this.xyzekiAuthService.Username, this.selectedTheme, this.ownerReporting, this.assignedToReporting);
             this.subscription = this.memberSettingService.updateMySetting(mSetting).subscribe(function () {
                 // this.ownerReporting = mSetting.OwnerReporting;
                 // this.assignedToReporting = mSetting.AssignedToReporting;
@@ -4777,7 +4777,7 @@ var SettingsComponent = /** @class */ (function () {
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./settings.component.css */ "./src/app/member/settings/settings.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_5__["MemberLicenseRepository"], src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiAuthService"], src_app_model_services_member_setting_service__WEBPACK_IMPORTED_MODULE_3__["MemberSettingService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_4__["MemberLicenseRepository"], src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiAuthService"], src_app_model_services_member_setting_service__WEBPACK_IMPORTED_MODULE_5__["MemberSettingService"]])
     ], SettingsComponent);
     return SettingsComponent;
 }());
@@ -4908,17 +4908,21 @@ var XyzekiAuthService = /** @class */ (function () {
     XyzekiAuthService.prototype.LoadAllRepositories = function () {
         this.dataService.loadAllRepositoriesEvent.next();
     };
+    XyzekiAuthService.prototype.ClearAllRepositories = function () {
+        this.dataService.clearAllRepositoriesEvent.next();
+    };
     XyzekiAuthService.prototype.Auth = function (tokenAndMember) {
         var member = tokenAndMember.Model.Item2;
         var token = tokenAndMember.Model.Item1;
         this.SaveMember(member);
         this.SaveToken(token);
-        this.StartRefreshTokenTimer();
         this.LoadAllRepositories();
+        this.StartRefreshTokenTimer();
     };
     XyzekiAuthService.prototype.LogOut = function () {
         this.RemoveMember();
         this.RemoveToken();
+        this.ClearAllRepositories();
         this.StopRefreshTokenTimer();
     };
     XyzekiAuthService.prototype.AuthAutoIfPossible = function () {
@@ -6061,6 +6065,7 @@ var AdminRepository = /** @class */ (function () {
         this.allLicenses = [];
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { return _this.loadAllLicences(); });
         this.dataService.clearAllRepositoriesEvent.subscribe(function () { return _this.clearAllLicences(); });
+        this.loadAllLicences();
     }
     AdminRepository.prototype.clearAllLicences = function () {
         this.allLicenses = [];
@@ -6162,11 +6167,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContainerRepository", function() { return ContainerRepository; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_files_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/files.service */ "./src/app/model/services/files.service.ts");
-/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
-/* harmony import */ var _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _services_files_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/files.service */ "./src/app/model/services/files.service.ts");
+/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
 /* harmony import */ var _services_time_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/time.service */ "./src/app/model/services/time.service.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
 
 
 
@@ -6190,8 +6195,11 @@ var ContainerRepository = /** @class */ (function () {
         this.signalService.deletedContainerAvailable.subscribe(function (containerDeleted) {
             _this.deleteContainerViaSignalR(containerDeleted);
         });
-        this.dataService.loadAllRepositoriesEvent.subscribe(function () { _this.loadBlobContainers(false); });
+        this.dataService.loadAllRepositoriesEvent.subscribe(function () {
+            _this.loadBlobContainers(false);
+        });
         this.dataService.clearAllRepositoriesEvent.subscribe(function () { return _this.clearBlobContainers(); });
+        this.loadBlobContainers();
     }
     ContainerRepository.prototype.clearBlobContainers = function () {
         this.containers = [];
@@ -6215,7 +6223,7 @@ var ContainerRepository = /** @class */ (function () {
     };
     ContainerRepository.prototype.saveContainer = function (container) {
         var _this = this;
-        this.timeService.getNow().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["concatMap"])(function (now) {
+        this.timeService.getNow().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["concatMap"])(function (now) {
             container.CreatedAt = now;
             return _this.service.createContainer(container.ContainerName);
         })).subscribe(function (result) {
@@ -6260,8 +6268,8 @@ var ContainerRepository = /** @class */ (function () {
     };
     ContainerRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_files_service__WEBPACK_IMPORTED_MODULE_2__["FilesService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_4__["XyzekiSignalrService"],
-            _services_shared_data_service__WEBPACK_IMPORTED_MODULE_3__["DataService"], _services_time_service__WEBPACK_IMPORTED_MODULE_5__["TimeService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_files_service__WEBPACK_IMPORTED_MODULE_3__["FilesService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_6__["XyzekiSignalrService"],
+            _services_shared_data_service__WEBPACK_IMPORTED_MODULE_4__["DataService"], _services_time_service__WEBPACK_IMPORTED_MODULE_5__["TimeService"]])
     ], ContainerRepository);
     return ContainerRepository;
 }());
@@ -6303,12 +6311,12 @@ var ContainerRepository = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FileRepository", function() { return FileRepository; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _services_files_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/files.service */ "./src/app/model/services/files.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! file-saver */ "./node_modules/file-saver/dist/FileSaver.min.js");
 /* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(file_saver__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var _services_files_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/files.service */ "./src/app/model/services/files.service.ts");
+/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
 
 
 
@@ -6435,8 +6443,8 @@ var FileRepository = /** @class */ (function () {
         }
     };
     FileRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_files_service__WEBPACK_IMPORTED_MODULE_1__["FilesService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiSignalrService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"]])
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_files_service__WEBPACK_IMPORTED_MODULE_3__["FilesService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_5__["XyzekiSignalrService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_4__["DataService"]])
     ], FileRepository);
     return FileRepository;
 }());
@@ -6477,9 +6485,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MemberLicenseRepository", function() { return MemberLicenseRepository; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _member_license_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../member-license.model */ "./src/app/model/member-license.model.ts");
-/* harmony import */ var _services_member_license_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/member-license.service */ "./src/app/model/services/member-license.service.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _member_license_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../member-license.model */ "./src/app/model/member-license.model.ts");
+/* harmony import */ var _services_member_license_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/member-license.service */ "./src/app/model/services/member-license.service.ts");
 /* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
 
 
@@ -6496,12 +6504,13 @@ var MemberLicenseRepository = /** @class */ (function () {
         this.AzureSaSizeInGb = 0;
         this.accessGranted = false;
         this.primaryAccessGranted = false;
-        this.memberLicense = new _member_license_model__WEBPACK_IMPORTED_MODULE_2__["MemberLicense"](null, null, null, null, null, null, null, null, null, null, null, null);
+        this.memberLicense = new _member_license_model__WEBPACK_IMPORTED_MODULE_3__["MemberLicense"](null, null, null, null, null, null, null, null, null, null, null, null);
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { return _this.loadLicenseRelateds(); });
         this.dataService.clearAllRepositoriesEvent.subscribe(function () { return _this.clearLicenseRelateds(); });
+        this.loadLicenseRelateds();
     }
     MemberLicenseRepository.prototype.clearLicenseRelateds = function () {
-        this.memberLicense = new _member_license_model__WEBPACK_IMPORTED_MODULE_2__["MemberLicense"](null, null, null, null, null, null, null, null, null, null, null, null);
+        this.memberLicense = new _member_license_model__WEBPACK_IMPORTED_MODULE_3__["MemberLicense"](null, null, null, null, null, null, null, null, null, null, null, null);
         this.accessGranted = false;
         this.primaryAccessGranted = false;
         this.AzureSaSizeInGb = 0;
@@ -6509,7 +6518,7 @@ var MemberLicenseRepository = /** @class */ (function () {
     };
     MemberLicenseRepository.prototype.loadLicenseRelateds = function () {
         var _this = this;
-        this.service.myLicense().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["concatMap"])(function (lic) {
+        this.service.myLicense().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["concatMap"])(function (lic) {
             //this.memberLicense = lic;
             Object.assign(_this.memberLicense, lic);
             _this.AzureSaSizeInGb = lic.AzureSaSizeInGb;
@@ -6541,11 +6550,11 @@ var MemberLicenseRepository = /** @class */ (function () {
         return this.memberLicense;
     };
     MemberLicenseRepository.prototype.removeMemberLicenseForJoinedTeamMember = function () {
-        this.memberLicense = new _member_license_model__WEBPACK_IMPORTED_MODULE_2__["MemberLicense"](null, null, null, null, null, null, null, null, null, null, null, null);
+        this.memberLicense = new _member_license_model__WEBPACK_IMPORTED_MODULE_3__["MemberLicense"](null, null, null, null, null, null, null, null, null, null, null, null);
     };
     MemberLicenseRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_member_license_service__WEBPACK_IMPORTED_MODULE_3__["MemberLicenseService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_member_license_service__WEBPACK_IMPORTED_MODULE_4__["MemberLicenseService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"]])
     ], MemberLicenseRepository);
     return MemberLicenseRepository;
 }());
@@ -6566,8 +6575,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MemberRepository", function() { return MemberRepository; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_members_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/members.service */ "./src/app/model/services/members.service.ts");
-/* harmony import */ var _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var _services_members_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/members.service */ "./src/app/model/services/members.service.ts");
 
 
 
@@ -6585,7 +6594,7 @@ var MemberRepository = /** @class */ (function () {
     };
     MemberRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_members_service__WEBPACK_IMPORTED_MODULE_2__["MembersService"], _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_members_service__WEBPACK_IMPORTED_MODULE_3__["MembersService"], _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiAuthService"]])
     ], MemberRepository);
     return MemberRepository;
 }());
@@ -6605,13 +6614,13 @@ var MemberRepository = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PrivateTalkMessageRepository", function() { return PrivateTalkMessageRepository; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _services_private_talk_messages_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/private-talk-messages.service */ "./src/app/model/services/private-talk-messages.service.ts");
-/* harmony import */ var src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/infrastructure/page-sizes */ "./src/infrastructure/page-sizes.ts");
-/* harmony import */ var _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
-/* harmony import */ var _services_time_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/time.service */ "./src/app/model/services/time.service.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/page-sizes */ "./src/infrastructure/page-sizes.ts");
+/* harmony import */ var _services_private_talk_messages_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/private-talk-messages.service */ "./src/app/model/services/private-talk-messages.service.ts");
+/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var _services_time_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/time.service */ "./src/app/model/services/time.service.ts");
+/* harmony import */ var _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
 
 
 
@@ -6654,7 +6663,7 @@ var PrivateTalkMessageRepository = /** @class */ (function () {
     PrivateTalkMessageRepository.prototype.savePrivateTalkMessage = function (privateTalkMessage) {
         var _this = this;
         if (privateTalkMessage.MessageId == 0 || privateTalkMessage.MessageId == null) {
-            this.timeService.getNow().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["concatMap"])(function (now) {
+            this.timeService.getNow().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["concatMap"])(function (now) {
                 privateTalkMessage.DateTimeSent = now;
                 return _this.service.savePrivateTalkMessage(privateTalkMessage);
             })).subscribe(function (messageId) {
@@ -6728,9 +6737,9 @@ var PrivateTalkMessageRepository = /** @class */ (function () {
         });
     };
     PrivateTalkMessageRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_6__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_private_talk_messages_service__WEBPACK_IMPORTED_MODULE_1__["PrivateTalkMessagesService"],
-            _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiSignalrService"], src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_2__["PageSizes"], _services_time_service__WEBPACK_IMPORTED_MODULE_4__["TimeService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_7__["DataService"]])
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_private_talk_messages_service__WEBPACK_IMPORTED_MODULE_4__["PrivateTalkMessagesService"],
+            _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_7__["XyzekiSignalrService"], src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_3__["PageSizes"], _services_time_service__WEBPACK_IMPORTED_MODULE_6__["TimeService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"]])
     ], PrivateTalkMessageRepository);
     return PrivateTalkMessageRepository;
 }());
@@ -6751,12 +6760,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PrivateTalkReceiverRepository", function() { return PrivateTalkReceiverRepository; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_private_talk_receivers_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/private-talk-receivers.service */ "./src/app/model/services/private-talk-receivers.service.ts");
-/* harmony import */ var _services_private_talk_team_receivers_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/private-talk-team-receivers.service */ "./src/app/model/services/private-talk-team-receivers.service.ts");
-/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
-/* harmony import */ var src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/infrastructure/page-sizes */ "./src/infrastructure/page-sizes.ts");
-/* harmony import */ var _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/page-sizes */ "./src/infrastructure/page-sizes.ts");
+/* harmony import */ var _services_private_talk_receivers_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/private-talk-receivers.service */ "./src/app/model/services/private-talk-receivers.service.ts");
+/* harmony import */ var _services_private_talk_team_receivers_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/private-talk-team-receivers.service */ "./src/app/model/services/private-talk-team-receivers.service.ts");
+/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
 
 
 
@@ -6777,6 +6786,7 @@ var PrivateTalkReceiverRepository = /** @class */ (function () {
         this.privateTalkTeamReceivers = [];
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { _this.loadAll(1); });
         this.dataService.clearAllRepositoriesEvent.subscribe(function () { return _this.clearPrivateTalkReceivers(); });
+        this.loadAll();
     }
     PrivateTalkReceiverRepository.prototype.clearPrivateTalkReceivers = function () {
         this.privateTalkReceivers = [];
@@ -6829,7 +6839,7 @@ var PrivateTalkReceiverRepository = /** @class */ (function () {
         var _this = this;
         if (mode === void 0) { mode = 'new'; }
         if (mode == 'new') {
-            this.receiversService.savePrivateTalkReceivers(receivers).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["concatMap"])(function () {
+            this.receiversService.savePrivateTalkReceivers(receivers).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["concatMap"])(function () {
                 return _this.teamReceiversService.savePrivateTalkTeamReceivers(teamReceivers);
             })).subscribe(function () {
                 var _a, _b;
@@ -6842,10 +6852,10 @@ var PrivateTalkReceiverRepository = /** @class */ (function () {
             var receiversOld = Object.assign([], this.getPrivateTalkReceivers().filter(function (val) { return val.PrivateTalkId == privateTalk.PrivateTalkId; }));
             var teamReceiversOld = Object.assign([], this.getPrivateTalkTeamReceivers().filter(function (val) { return val.PrivateTalkId == privateTalk.PrivateTalkId; }));
             this.signalService.notifyDeletedPrivateTalkJoined(privateTalk, receiversOld, teamReceiversOld);
-            this.receiversService.deletePrivateTalkReceivers(privateTalk.PrivateTalkId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["concatMap"])(function (val, index) {
+            this.receiversService.deletePrivateTalkReceivers(privateTalk.PrivateTalkId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["concatMap"])(function (val, index) {
                 return _this.receiversService.savePrivateTalkReceivers(receivers);
-            })).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["concatMap"])(function (val, index) {
-                return _this.teamReceiversService.deletePrivateTalkTeamReceivers(privateTalk.PrivateTalkId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["concatMap"])(function (val, index) {
+            })).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["concatMap"])(function (val, index) {
+                return _this.teamReceiversService.deletePrivateTalkTeamReceivers(privateTalk.PrivateTalkId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["concatMap"])(function (val, index) {
                     return _this.teamReceiversService.savePrivateTalkTeamReceivers(teamReceivers);
                 }));
             })).subscribe(function () {
@@ -6866,7 +6876,7 @@ var PrivateTalkReceiverRepository = /** @class */ (function () {
     };
     PrivateTalkReceiverRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_5__["PageSizes"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_4__["DataService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_6__["XyzekiSignalrService"], _services_private_talk_receivers_service__WEBPACK_IMPORTED_MODULE_2__["PrivateTalkReceiversService"], _services_private_talk_team_receivers_service__WEBPACK_IMPORTED_MODULE_3__["PrivateTalkTeamReceiversService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_3__["PageSizes"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_7__["XyzekiSignalrService"], _services_private_talk_receivers_service__WEBPACK_IMPORTED_MODULE_4__["PrivateTalkReceiversService"], _services_private_talk_team_receivers_service__WEBPACK_IMPORTED_MODULE_5__["PrivateTalkTeamReceiversService"]])
     ], PrivateTalkReceiverRepository);
     return PrivateTalkReceiverRepository;
 }());
@@ -6887,20 +6897,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PrivateTalkRepository", function() { return PrivateTalkRepository; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_private_talks_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/private-talks.service */ "./src/app/model/services/private-talks.service.ts");
-/* harmony import */ var _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
-/* harmony import */ var _services_private_talk_receivers_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/private-talk-receivers.service */ "./src/app/model/services/private-talk-receivers.service.ts");
-/* harmony import */ var _private_talk_receiver_model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../private-talk-receiver.model */ "./src/app/model/private-talk-receiver.model.ts");
-/* harmony import */ var _private_talk_team_receiver_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../private-talk-team-receiver.model */ "./src/app/model/private-talk-team-receiver.model.ts");
-/* harmony import */ var _services_private_talk_team_receivers_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../services/private-talk-team-receivers.service */ "./src/app/model/services/private-talk-team-receivers.service.ts");
-/* harmony import */ var _private_talk_receiver_repository__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./private-talk-receiver-repository */ "./src/app/model/repository/private-talk-receiver-repository.ts");
-/* harmony import */ var _message_count_model__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../message-count.model */ "./src/app/model/message-count.model.ts");
-/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
-/* harmony import */ var _member_license_repository__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
-/* harmony import */ var src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! src/infrastructure/page-sizes */ "./src/infrastructure/page-sizes.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/page-sizes */ "./src/infrastructure/page-sizes.ts");
+/* harmony import */ var _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var _message_count_model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../message-count.model */ "./src/app/model/message-count.model.ts");
+/* harmony import */ var _private_talk_receiver_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../private-talk-receiver.model */ "./src/app/model/private-talk-receiver.model.ts");
+/* harmony import */ var _private_talk_team_receiver_model__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../private-talk-team-receiver.model */ "./src/app/model/private-talk-team-receiver.model.ts");
+/* harmony import */ var _services_private_talk_receivers_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../services/private-talk-receivers.service */ "./src/app/model/services/private-talk-receivers.service.ts");
+/* harmony import */ var _services_private_talk_team_receivers_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../services/private-talk-team-receivers.service */ "./src/app/model/services/private-talk-team-receivers.service.ts");
+/* harmony import */ var _services_private_talks_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../services/private-talks.service */ "./src/app/model/services/private-talks.service.ts");
+/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var _services_time_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../services/time.service */ "./src/app/model/services/time.service.ts");
 /* harmony import */ var _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
-/* harmony import */ var _services_time_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../services/time.service */ "./src/app/model/services/time.service.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _member_license_repository__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
+/* harmony import */ var _private_talk_receiver_repository__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./private-talk-receiver-repository */ "./src/app/model/repository/private-talk-receiver-repository.ts");
 
 
 
@@ -6991,6 +7001,8 @@ var PrivateTalkRepository = /** @class */ (function () {
         });
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { _this.loadPTCount(); _this.loadAll(1, undefined, false); });
         this.dataService.clearAllRepositoriesEvent.subscribe(function () { _this.clearPrivateTalks(); });
+        this.loadPTCount();
+        this.loadAll(1, undefined, false);
     }
     PrivateTalkRepository.prototype.clearPrivateTalks = function () {
         this.myPrivateTalks = [];
@@ -7102,8 +7114,8 @@ var PrivateTalkRepository = /** @class */ (function () {
         //Filter zero and null values in receiver models
         receiversModel = receiversModel.filter(function (val) { return val != null; }).filter(function (val, index, self) { return self.indexOf(val) === index; });
         teamReceiversModel = teamReceiversModel.filter(function (val) { return val != 0; }).filter(function (val, index, self) { return self.indexOf(val) === index; });
-        receiversModel.forEach(function (recVal, index, arr) { receivers.push(new _private_talk_receiver_model__WEBPACK_IMPORTED_MODULE_5__["PrivateTalkReceiver"](privateTalkId, recVal)); });
-        teamReceiversModel.forEach(function (teamRecVal, index, arr) { teamReceivers.push(new _private_talk_team_receiver_model__WEBPACK_IMPORTED_MODULE_6__["PrivateTalkTeamReceiver"](privateTalkId, teamRecVal)); });
+        receiversModel.forEach(function (recVal, index, arr) { receivers.push(new _private_talk_receiver_model__WEBPACK_IMPORTED_MODULE_6__["PrivateTalkReceiver"](privateTalkId, recVal)); });
+        teamReceiversModel.forEach(function (teamRecVal, index, arr) { teamReceivers.push(new _private_talk_team_receiver_model__WEBPACK_IMPORTED_MODULE_7__["PrivateTalkTeamReceiver"](privateTalkId, teamRecVal)); });
         //Return actual models
         return [receivers, teamReceivers];
     };
@@ -7111,7 +7123,7 @@ var PrivateTalkRepository = /** @class */ (function () {
         var _this = this;
         privateTalk.Owner = this.memberLicenseRepo.getMemberLicense().Username;
         if (privateTalk.PrivateTalkId == 0 || privateTalk.PrivateTalkId == null) {
-            this.timeService.getNow().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_15__["concatMap"])(function (now) {
+            this.timeService.getNow().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["concatMap"])(function (now) {
                 privateTalk.DateTimeCreated = now;
                 return _this.service.savePrivateTalk(privateTalk);
             })).subscribe(function (privateTalkId) {
@@ -7122,7 +7134,7 @@ var PrivateTalkRepository = /** @class */ (function () {
                 _a = _this.populateAllReceivers(receiversModel, teamReceiversModel, privateTalkId), receivers = _a[0], teamReceivers = _a[1];
                 _this.receiverRepo.savePrivateTalkReceivers(receivers, teamReceivers, 'new', privateTalk);
                 _this.myPrivateTalks.unshift(privateTalk);
-                _this.myPTMessagesCount.push(new _message_count_model__WEBPACK_IMPORTED_MODULE_9__["MessageCountModel"](0, privateTalkId, privateTalk.DateTimeCreated));
+                _this.myPTMessagesCount.push(new _message_count_model__WEBPACK_IMPORTED_MODULE_5__["MessageCountModel"](0, privateTalkId, privateTalk.DateTimeCreated));
                 _this.privateTalkToOpen.next(privateTalk);
                 // this.signalService.notifyNewPrivateTalk(privateTalk, receivers, teamReceivers);
             });
@@ -7153,7 +7165,7 @@ var PrivateTalkRepository = /** @class */ (function () {
         }
         var indexCount = this.receivedPTMessagesCount.findIndex(function (value) { return value.PrivateTalkId == privateTalk.PrivateTalkId; });
         if (-1 == indexCount) //if not exists.
-            this.receivedPTMessagesCount.push(new _message_count_model__WEBPACK_IMPORTED_MODULE_9__["MessageCountModel"](0, privateTalk.PrivateTalkId, privateTalk.DateTimeCreated));
+            this.receivedPTMessagesCount.push(new _message_count_model__WEBPACK_IMPORTED_MODULE_5__["MessageCountModel"](0, privateTalk.PrivateTalkId, privateTalk.DateTimeCreated));
     };
     PrivateTalkRepository.prototype.deletePrivateTalk = function (privateTalkId) {
         var _this = this;
@@ -7236,8 +7248,8 @@ var PrivateTalkRepository = /** @class */ (function () {
     };
     PrivateTalkRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_12__["PageSizes"], _private_talk_receiver_repository__WEBPACK_IMPORTED_MODULE_8__["PrivateTalkReceiverRepository"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_10__["DataService"], _services_private_talks_service__WEBPACK_IMPORTED_MODULE_2__["PrivateTalksService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_13__["XyzekiSignalrService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_13__["XyzekiSignalrService"], _services_private_talk_receivers_service__WEBPACK_IMPORTED_MODULE_4__["PrivateTalkReceiversService"], _services_private_talk_team_receivers_service__WEBPACK_IMPORTED_MODULE_7__["PrivateTalkTeamReceiversService"], _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"],
-            _member_license_repository__WEBPACK_IMPORTED_MODULE_11__["MemberLicenseRepository"], _services_time_service__WEBPACK_IMPORTED_MODULE_14__["TimeService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_3__["PageSizes"], _private_talk_receiver_repository__WEBPACK_IMPORTED_MODULE_15__["PrivateTalkReceiverRepository"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_11__["DataService"], _services_private_talks_service__WEBPACK_IMPORTED_MODULE_10__["PrivateTalksService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_13__["XyzekiSignalrService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_13__["XyzekiSignalrService"], _services_private_talk_receivers_service__WEBPACK_IMPORTED_MODULE_8__["PrivateTalkReceiversService"], _services_private_talk_team_receivers_service__WEBPACK_IMPORTED_MODULE_9__["PrivateTalkTeamReceiversService"], _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_4__["XyzekiAuthService"],
+            _member_license_repository__WEBPACK_IMPORTED_MODULE_14__["MemberLicenseRepository"], _services_time_service__WEBPACK_IMPORTED_MODULE_12__["TimeService"]])
     ], PrivateTalkRepository);
     return PrivateTalkRepository;
 }());
@@ -7270,9 +7282,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProjectRepository", function() { return ProjectRepository; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_projects_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/projects.service */ "./src/app/model/services/projects.service.ts");
-/* harmony import */ var _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
-/* harmony import */ var _project_order_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../project-order.model */ "./src/app/model/project-order.model.ts");
+/* harmony import */ var _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var _project_order_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../project-order.model */ "./src/app/model/project-order.model.ts");
+/* harmony import */ var _services_projects_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/projects.service */ "./src/app/model/services/projects.service.ts");
 /* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
 /* harmony import */ var _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
 
@@ -7284,7 +7296,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var ProjectRepository = /** @class */ (function () {
     function ProjectRepository(service, signalService, xyzekiAuthService, dataService) {
-        // this.loadProjects();
         var _this = this;
         this.service = service;
         this.signalService = signalService;
@@ -7305,6 +7316,7 @@ var ProjectRepository = /** @class */ (function () {
         });
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { _this.loadProjects(); });
         this.dataService.clearAllRepositoriesEvent.subscribe(function () { _this.clearProjects(); });
+        this.loadProjects();
     }
     ProjectRepository.prototype.clearProjects = function () {
         this.myProjects = [];
@@ -7349,7 +7361,7 @@ var ProjectRepository = /** @class */ (function () {
             var POMs_1 = [];
             var projects_1 = [];
             this.myProjects.forEach(function (p) {
-                var POM = new _project_order_model__WEBPACK_IMPORTED_MODULE_4__["ProjectOrderModel"](order_1, p.ProjectId);
+                var POM = new _project_order_model__WEBPACK_IMPORTED_MODULE_3__["ProjectOrderModel"](order_1, p.ProjectId);
                 var proj = Object.assign({}, p);
                 proj.Order = order_1;
                 POMs_1.push(POM);
@@ -7466,7 +7478,7 @@ var ProjectRepository = /** @class */ (function () {
     };
     ProjectRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_projects_service__WEBPACK_IMPORTED_MODULE_2__["ProjectsService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_6__["XyzekiSignalrService"], _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_projects_service__WEBPACK_IMPORTED_MODULE_4__["ProjectsService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_6__["XyzekiSignalrService"], _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiAuthService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"]])
     ], ProjectRepository);
     return ProjectRepository;
 }());
@@ -7486,12 +7498,12 @@ var ProjectRepository = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProjectToDoCommentRepository", function() { return ProjectToDoCommentRepository; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _services_project_to_do_comments_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/project-to-do-comments.service */ "./src/app/model/services/project-to-do-comments.service.ts");
-/* harmony import */ var src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
-/* harmony import */ var _services_time_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/time.service */ "./src/app/model/services/time.service.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
+/* harmony import */ var _services_project_to_do_comments_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/project-to-do-comments.service */ "./src/app/model/services/project-to-do-comments.service.ts");
+/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var _services_time_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/time.service */ "./src/app/model/services/time.service.ts");
 
 
 
@@ -7535,7 +7547,7 @@ var ProjectToDoCommentRepository = /** @class */ (function () {
     ProjectToDoCommentRepository.prototype.saveProjectToDoComment = function (projectToDoComment) {
         var _this = this;
         if (projectToDoComment.MessageId == 0 || projectToDoComment.MessageId == null) {
-            this.timeService.getNow().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["concatMap"])(function (now) {
+            this.timeService.getNow().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["concatMap"])(function (now) {
                 projectToDoComment.DateTimeSent = now;
                 return _this.service.saveProjectTaskComment(projectToDoComment);
             })).subscribe(function (messageId) {
@@ -7581,9 +7593,9 @@ var ProjectToDoCommentRepository = /** @class */ (function () {
             this.projectToDoComments.splice(index, 1);
     };
     ProjectToDoCommentRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_5__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_project_to_do_comments_service__WEBPACK_IMPORTED_MODULE_1__["ProjectToDoCommentsService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"],
-            src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiSignalrService"], _services_time_service__WEBPACK_IMPORTED_MODULE_3__["TimeService"]])
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_project_to_do_comments_service__WEBPACK_IMPORTED_MODULE_4__["ProjectToDoCommentsService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"],
+            src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiSignalrService"], _services_time_service__WEBPACK_IMPORTED_MODULE_6__["TimeService"]])
     ], ProjectToDoCommentRepository);
     return ProjectToDoCommentRepository;
 }());
@@ -7603,17 +7615,17 @@ var ProjectToDoCommentRepository = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProjectToDoRepository", function() { return ProjectToDoRepository; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/project-to-dos.service */ "./src/app/model/services/project-to-dos.service.ts");
-/* harmony import */ var _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
-/* harmony import */ var _comment_count_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../comment-count.model */ "./src/app/model/comment-count.model.ts");
-/* harmony import */ var _project_repository__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./project-repository */ "./src/app/model/repository/project-repository.ts");
-/* harmony import */ var src_infrastructure_project_privacy_modes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/infrastructure/project-privacy-modes */ "./src/infrastructure/project-privacy-modes.ts");
-/* harmony import */ var _task_order_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../task-order.model */ "./src/app/model/task-order.model.ts");
-/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
-/* harmony import */ var src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
+/* harmony import */ var src_infrastructure_project_privacy_modes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/infrastructure/project-privacy-modes */ "./src/infrastructure/project-privacy-modes.ts");
+/* harmony import */ var _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var _comment_count_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../comment-count.model */ "./src/app/model/comment-count.model.ts");
+/* harmony import */ var _services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../services/project-to-dos.service */ "./src/app/model/services/project-to-dos.service.ts");
+/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
 /* harmony import */ var _services_time_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../services/time.service */ "./src/app/model/services/time.service.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _task_order_model__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../task-order.model */ "./src/app/model/task-order.model.ts");
+/* harmony import */ var _project_repository__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./project-repository */ "./src/app/model/repository/project-repository.ts");
 
 
 
@@ -7643,9 +7655,9 @@ var ProjectToDoRepository = /** @class */ (function () {
         this.ptCommentsCount = [];
         this.reOrdering = false;
         this.filterBasedOnProject = function (pt) {
-            if (_this.getProjectSpecial(pt.ProjectId) && _this.getProjectSpecial(pt.ProjectId).Privacy != src_infrastructure_project_privacy_modes__WEBPACK_IMPORTED_MODULE_5__["PrivacyModes"].listMode && ((_this.getProjectSpecial(pt.ProjectId).Privacy == src_infrastructure_project_privacy_modes__WEBPACK_IMPORTED_MODULE_5__["PrivacyModes"].onlyOwner && _this.getProjectSpecial(pt.ProjectId).Owner == _this.xyzekiAuthService.Username) ||
-                (_this.getProjectSpecial(pt.ProjectId).Privacy == src_infrastructure_project_privacy_modes__WEBPACK_IMPORTED_MODULE_5__["PrivacyModes"].onlyOwnerAndPM && (_this.getProjectSpecial(pt.ProjectId).ProjectManager == _this.xyzekiAuthService.Username || _this.getProjectSpecial(pt.ProjectId).Owner == _this.xyzekiAuthService.Username))
-                || (_this.getProjectSpecial(pt.ProjectId).Privacy == src_infrastructure_project_privacy_modes__WEBPACK_IMPORTED_MODULE_5__["PrivacyModes"].open) || (_this.getProjectSpecial(pt.ProjectId).Privacy == src_infrastructure_project_privacy_modes__WEBPACK_IMPORTED_MODULE_5__["PrivacyModes"].openOnlyTasks)))
+            if (_this.getProjectSpecial(pt.ProjectId) && _this.getProjectSpecial(pt.ProjectId).Privacy != src_infrastructure_project_privacy_modes__WEBPACK_IMPORTED_MODULE_4__["PrivacyModes"].listMode && ((_this.getProjectSpecial(pt.ProjectId).Privacy == src_infrastructure_project_privacy_modes__WEBPACK_IMPORTED_MODULE_4__["PrivacyModes"].onlyOwner && _this.getProjectSpecial(pt.ProjectId).Owner == _this.xyzekiAuthService.Username) ||
+                (_this.getProjectSpecial(pt.ProjectId).Privacy == src_infrastructure_project_privacy_modes__WEBPACK_IMPORTED_MODULE_4__["PrivacyModes"].onlyOwnerAndPM && (_this.getProjectSpecial(pt.ProjectId).ProjectManager == _this.xyzekiAuthService.Username || _this.getProjectSpecial(pt.ProjectId).Owner == _this.xyzekiAuthService.Username))
+                || (_this.getProjectSpecial(pt.ProjectId).Privacy == src_infrastructure_project_privacy_modes__WEBPACK_IMPORTED_MODULE_4__["PrivacyModes"].open) || (_this.getProjectSpecial(pt.ProjectId).Privacy == src_infrastructure_project_privacy_modes__WEBPACK_IMPORTED_MODULE_4__["PrivacyModes"].openOnlyTasks)))
                 return pt;
         };
         this.signalService.deletedProjectToDoAvailable.subscribe(function (projectToDo) {
@@ -7729,7 +7741,7 @@ var ProjectToDoRepository = /** @class */ (function () {
             var TOMs_1 = [];
             var pTasks_1 = [];
             this.projectToDos.forEach(function (pt) {
-                var TOM = new _task_order_model__WEBPACK_IMPORTED_MODULE_6__["TaskOrderModel"](order_1, pt.TaskId);
+                var TOM = new _task_order_model__WEBPACK_IMPORTED_MODULE_10__["TaskOrderModel"](order_1, pt.TaskId);
                 var pTask = Object.assign({}, pt);
                 pTask.Order = order_1;
                 TOMs_1.push(TOM);
@@ -7863,7 +7875,7 @@ var ProjectToDoRepository = /** @class */ (function () {
             return;
         if (projectTask.TaskId == 0 || projectTask.TaskId == null) {
             projectTask.Order = this.getNext();
-            this.timeService.getNow().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_10__["concatMap"])(function (now) {
+            this.timeService.getNow().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["concatMap"])(function (now) {
                 if (finish === 0) {
                     projectTask.Finish = null;
                 }
@@ -7876,13 +7888,13 @@ var ProjectToDoRepository = /** @class */ (function () {
                 _this.projectToDos.push(projectTask);
                 if (projectTask.AssignedTo == _this.xyzekiAuthService.Username) // if assigned to me and not exists in assignedTo repo.
                     _this.projectToDosAssignedToMe.push(projectTask);
-                _this.ptCommentsCount.push(new _comment_count_model__WEBPACK_IMPORTED_MODULE_3__["CommentCountModel"](0, projectToDoId));
+                _this.ptCommentsCount.push(new _comment_count_model__WEBPACK_IMPORTED_MODULE_6__["CommentCountModel"](0, projectToDoId));
                 // to owner, project manager, project insiders(signalR service will not send to this user.)
                 _this.signalService.notifyNewProjectToDo(projectTask);
             });
         }
         else {
-            this.timeService.getNow().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_10__["concatMap"])(function (now) {
+            this.timeService.getNow().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["concatMap"])(function (now) {
                 if (finish === 0) {
                     projectTask.Finish = null;
                 }
@@ -7917,9 +7929,9 @@ var ProjectToDoRepository = /** @class */ (function () {
                         if (commentsCount) {
                             var indexC = _this.ptAssignedCommentsCount.findIndex(function (val) { return val.TaskId == projectToDo.TaskId; });
                             if (indexC == -1)
-                                _this.ptAssignedCommentsCount.push(new _comment_count_model__WEBPACK_IMPORTED_MODULE_3__["CommentCountModel"](commentsCount.CommentsCount, projectToDo.TaskId));
+                                _this.ptAssignedCommentsCount.push(new _comment_count_model__WEBPACK_IMPORTED_MODULE_6__["CommentCountModel"](commentsCount.CommentsCount, projectToDo.TaskId));
                             else {
-                                _this.ptAssignedCommentsCount.splice(indexC, 1, new _comment_count_model__WEBPACK_IMPORTED_MODULE_3__["CommentCountModel"](commentsCount.CommentsCount, projectToDo.TaskId));
+                                _this.ptAssignedCommentsCount.splice(indexC, 1, new _comment_count_model__WEBPACK_IMPORTED_MODULE_6__["CommentCountModel"](commentsCount.CommentsCount, projectToDo.TaskId));
                             }
                         }
                     }
@@ -7946,9 +7958,9 @@ var ProjectToDoRepository = /** @class */ (function () {
                     if (commentsCount) {
                         var indexC = _this.ptCommentsCount.findIndex(function (val) { return val.TaskId == projectToDo.TaskId; });
                         if (indexC == -1)
-                            _this.ptCommentsCount.push(new _comment_count_model__WEBPACK_IMPORTED_MODULE_3__["CommentCountModel"](commentsCount.CommentsCount, projectToDo.TaskId));
+                            _this.ptCommentsCount.push(new _comment_count_model__WEBPACK_IMPORTED_MODULE_6__["CommentCountModel"](commentsCount.CommentsCount, projectToDo.TaskId));
                         else {
-                            _this.ptCommentsCount.splice(indexC, 1, new _comment_count_model__WEBPACK_IMPORTED_MODULE_3__["CommentCountModel"](commentsCount.CommentsCount, projectToDo.TaskId));
+                            _this.ptCommentsCount.splice(indexC, 1, new _comment_count_model__WEBPACK_IMPORTED_MODULE_6__["CommentCountModel"](commentsCount.CommentsCount, projectToDo.TaskId));
                         }
                     }
                 }
@@ -7998,10 +8010,10 @@ var ProjectToDoRepository = /** @class */ (function () {
         });
     };
     ProjectToDoRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_11__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_1__["ProjectToDosService"], src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_8__["XyzekiSignalrService"], _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiAuthService"],
-            src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_8__["XyzekiSignalrService"], src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_8__["XyzekiSignalrService"],
-            _project_repository__WEBPACK_IMPORTED_MODULE_4__["ProjectRepository"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_7__["DataService"], _services_time_service__WEBPACK_IMPORTED_MODULE_9__["TimeService"]])
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_7__["ProjectToDosService"], src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiSignalrService"], _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_5__["XyzekiAuthService"],
+            src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiSignalrService"], src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiSignalrService"],
+            _project_repository__WEBPACK_IMPORTED_MODULE_11__["ProjectRepository"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_8__["DataService"], _services_time_service__WEBPACK_IMPORTED_MODULE_9__["TimeService"]])
     ], ProjectToDoRepository);
     return ProjectToDoRepository;
 }());
@@ -8021,12 +8033,12 @@ var ProjectToDoRepository = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QuickToDoCommentRepository", function() { return QuickToDoCommentRepository; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _services_quick_to_do_comments_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/quick-to-do-comments.service */ "./src/app/model/services/quick-to-do-comments.service.ts");
-/* harmony import */ var _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
-/* harmony import */ var _services_time_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/time.service */ "./src/app/model/services/time.service.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _services_quick_to_do_comments_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/quick-to-do-comments.service */ "./src/app/model/services/quick-to-do-comments.service.ts");
+/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var _services_time_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/time.service */ "./src/app/model/services/time.service.ts");
+/* harmony import */ var _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
 
 
 
@@ -8070,7 +8082,7 @@ var QuickToDoCommentRepository = /** @class */ (function () {
     QuickToDoCommentRepository.prototype.saveQuickToDoComment = function (quickToDoComment) {
         var _this = this;
         if (quickToDoComment.MessageId == 0 || quickToDoComment.MessageId == null) {
-            this.timeService.getNow().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["concatMap"])(function (now) {
+            this.timeService.getNow().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["concatMap"])(function (now) {
                 quickToDoComment.DateTimeSent = now;
                 return _this.service.saveQuickTaskComment(quickToDoComment);
             })).subscribe(function (messageId) {
@@ -8116,9 +8128,9 @@ var QuickToDoCommentRepository = /** @class */ (function () {
             this.quickToDoComments.splice(index, 1);
     };
     QuickToDoCommentRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_5__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_quick_to_do_comments_service__WEBPACK_IMPORTED_MODULE_1__["QuickToDoCommentsService"],
-            _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiSignalrService"], _services_time_service__WEBPACK_IMPORTED_MODULE_3__["TimeService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"]])
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_quick_to_do_comments_service__WEBPACK_IMPORTED_MODULE_3__["QuickToDoCommentsService"],
+            _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_6__["XyzekiSignalrService"], _services_time_service__WEBPACK_IMPORTED_MODULE_5__["TimeService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_4__["DataService"]])
     ], QuickToDoCommentRepository);
     return QuickToDoCommentRepository;
 }());
@@ -8138,16 +8150,16 @@ var QuickToDoCommentRepository = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QuickToDoRepository", function() { return QuickToDoRepository; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _services_quick_to_dos_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/quick-to-dos.service */ "./src/app/model/services/quick-to-dos.service.ts");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
-/* harmony import */ var _comment_count_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../comment-count.model */ "./src/app/model/comment-count.model.ts");
-/* harmony import */ var src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/infrastructure/page-sizes */ "./src/infrastructure/page-sizes.ts");
-/* harmony import */ var _task_order_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../task-order.model */ "./src/app/model/task-order.model.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/page-sizes */ "./src/infrastructure/page-sizes.ts");
+/* harmony import */ var _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var _comment_count_model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../comment-count.model */ "./src/app/model/comment-count.model.ts");
+/* harmony import */ var _services_quick_to_dos_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/quick-to-dos.service */ "./src/app/model/services/quick-to-dos.service.ts");
 /* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
-/* harmony import */ var _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
-/* harmony import */ var _services_time_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../services/time.service */ "./src/app/model/services/time.service.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _services_time_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../services/time.service */ "./src/app/model/services/time.service.ts");
+/* harmony import */ var _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
+/* harmony import */ var _task_order_model__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../task-order.model */ "./src/app/model/task-order.model.ts");
 
 
 
@@ -8199,6 +8211,7 @@ var QuickToDoRepository = /** @class */ (function () {
         });
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { _this.loadAll(); });
         this.dataService.clearAllRepositoriesEvent.subscribe(function () { _this.clearQuickToDos(); });
+        this.loadAll();
     }
     QuickToDoRepository.prototype.clearQuickToDos = function () {
         this.myQuickToDos = [];
@@ -8242,7 +8255,7 @@ var QuickToDoRepository = /** @class */ (function () {
             var TOMs_1 = [];
             var qTasks_1 = [];
             this.myQuickToDos.filter(function (qt) { return !qt.Archived; }).forEach(function (qt) {
-                var TOM = new _task_order_model__WEBPACK_IMPORTED_MODULE_6__["TaskOrderModel"](order_1, qt.TaskId);
+                var TOM = new _task_order_model__WEBPACK_IMPORTED_MODULE_10__["TaskOrderModel"](order_1, qt.TaskId);
                 var qTask = Object.assign({}, qt);
                 qTask.Order = order_1;
                 TOMs_1.push(TOM);
@@ -8348,7 +8361,7 @@ var QuickToDoRepository = /** @class */ (function () {
             if (!quickToDo.Archived) {
                 quickToDo.Order = this.getNext();
             }
-            this.timeService.getNow().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_10__["concatMap"])(function (now) {
+            this.timeService.getNow().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["concatMap"])(function (now) {
                 if (finish === 0) {
                     quickToDo.Finish = null;
                 }
@@ -8371,14 +8384,14 @@ var QuickToDoRepository = /** @class */ (function () {
                     _this.myQuickToDos.push(quickToDo);
                 if (quickToDo.AssignedTo == _this.xyzekiAuthService.Username)
                     _this.assignedToMe.push(quickToDo);
-                _this.qtCommentsCount.push(new _comment_count_model__WEBPACK_IMPORTED_MODULE_4__["CommentCountModel"](0, qtId));
+                _this.qtCommentsCount.push(new _comment_count_model__WEBPACK_IMPORTED_MODULE_5__["CommentCountModel"](0, qtId));
                 //Signalling via SignalR
                 if (quickToDo.AssignedTo != null && quickToDo.AssignedTo != _this.xyzekiAuthService.Username) // disable signalr for free members, or take information from xyzekiAuthService
                     _this.signalService.notifyNewQuickToDo(quickToDo, quickToDo.AssignedTo); // that doesnt send messages to this member. only newCommments send...
             });
         }
         else {
-            this.timeService.getNow().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_10__["concatMap"])(function (now) {
+            this.timeService.getNow().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["concatMap"])(function (now) {
                 if (finish === 0) {
                     quickToDo.Finish = null;
                 }
@@ -8478,9 +8491,9 @@ var QuickToDoRepository = /** @class */ (function () {
                         if (commentsCount) {
                             var indexC = _this.qtCommentsCount.findIndex(function (val) { return val.TaskId == quickToDo.TaskId; });
                             if (indexC == -1)
-                                _this.qtCommentsCount.push(new _comment_count_model__WEBPACK_IMPORTED_MODULE_4__["CommentCountModel"](commentsCount.CommentsCount, quickToDo.TaskId)); // <<< problem is here in update operations.
+                                _this.qtCommentsCount.push(new _comment_count_model__WEBPACK_IMPORTED_MODULE_5__["CommentCountModel"](commentsCount.CommentsCount, quickToDo.TaskId)); // <<< problem is here in update operations.
                             else {
-                                _this.qtCommentsCount.splice(indexC, 1, new _comment_count_model__WEBPACK_IMPORTED_MODULE_4__["CommentCountModel"](commentsCount.CommentsCount, quickToDo.TaskId));
+                                _this.qtCommentsCount.splice(indexC, 1, new _comment_count_model__WEBPACK_IMPORTED_MODULE_5__["CommentCountModel"](commentsCount.CommentsCount, quickToDo.TaskId));
                             }
                         }
                     }
@@ -8515,10 +8528,10 @@ var QuickToDoRepository = /** @class */ (function () {
         }
     };
     QuickToDoRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_5__["PageSizes"], _services_quick_to_dos_service__WEBPACK_IMPORTED_MODULE_1__["QuickToDosService"],
-            _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_8__["XyzekiSignalrService"],
-            _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_8__["XyzekiSignalrService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_7__["DataService"], _services_time_service__WEBPACK_IMPORTED_MODULE_9__["TimeService"]])
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_3__["PageSizes"], _services_quick_to_dos_service__WEBPACK_IMPORTED_MODULE_6__["QuickToDosService"],
+            _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_4__["XyzekiAuthService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_9__["XyzekiSignalrService"],
+            _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_9__["XyzekiSignalrService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_7__["DataService"], _services_time_service__WEBPACK_IMPORTED_MODULE_8__["TimeService"]])
     ], QuickToDoRepository);
     return QuickToDoRepository;
 }());
@@ -8539,15 +8552,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TeamMemberRepository", function() { return TeamMemberRepository; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_team_members_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/team-members.service */ "./src/app/model/services/team-members.service.ts");
+/* harmony import */ var _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
 /* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/auth.service */ "./src/app/model/services/auth.service.ts");
-/* harmony import */ var _services_teams_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/teams.service */ "./src/app/model/services/teams.service.ts");
-/* harmony import */ var _services_members_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/members.service */ "./src/app/model/services/members.service.ts");
-/* harmony import */ var _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
-/* harmony import */ var _member_license_repository__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
-/* harmony import */ var _team_repository__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./team-repository */ "./src/app/model/repository/team-repository.ts");
-/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
-/* harmony import */ var _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
+/* harmony import */ var _services_members_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/members.service */ "./src/app/model/services/members.service.ts");
+/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var _services_team_members_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/team-members.service */ "./src/app/model/services/team-members.service.ts");
+/* harmony import */ var _services_teams_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../services/teams.service */ "./src/app/model/services/teams.service.ts");
+/* harmony import */ var _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
+/* harmony import */ var _member_license_repository__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
+/* harmony import */ var _team_repository__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./team-repository */ "./src/app/model/repository/team-repository.ts");
 
 
 
@@ -8610,6 +8623,8 @@ var TeamMemberRepository = /** @class */ (function () {
         });
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { _this.loadMYRelateds(); _this.loadPTRelateds(); });
         this.dataService.clearAllRepositoriesEvent.subscribe(function () { _this.clearTeamMembers(); });
+        this.loadMYRelateds();
+        this.loadPTRelateds();
     }
     TeamMemberRepository.prototype.clearTeamMembers = function () {
         this.TeamId = 0;
@@ -8844,7 +8859,7 @@ var TeamMemberRepository = /** @class */ (function () {
     };
     TeamMemberRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_team_repository__WEBPACK_IMPORTED_MODULE_8__["TeamRepository"], _member_license_repository__WEBPACK_IMPORTED_MODULE_7__["MemberLicenseRepository"], _services_team_members_service__WEBPACK_IMPORTED_MODULE_2__["TeamMembersService"], _services_teams_service__WEBPACK_IMPORTED_MODULE_4__["TeamsService"], _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_10__["XyzekiSignalrService"], _services_members_service__WEBPACK_IMPORTED_MODULE_5__["MembersService"], _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_6__["XyzekiAuthService"], _member_license_repository__WEBPACK_IMPORTED_MODULE_7__["MemberLicenseRepository"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_9__["DataService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_team_repository__WEBPACK_IMPORTED_MODULE_10__["TeamRepository"], _member_license_repository__WEBPACK_IMPORTED_MODULE_9__["MemberLicenseRepository"], _services_team_members_service__WEBPACK_IMPORTED_MODULE_6__["TeamMembersService"], _services_teams_service__WEBPACK_IMPORTED_MODULE_7__["TeamsService"], _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_8__["XyzekiSignalrService"], _services_members_service__WEBPACK_IMPORTED_MODULE_4__["MembersService"], _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiAuthService"], _member_license_repository__WEBPACK_IMPORTED_MODULE_9__["MemberLicenseRepository"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"]])
     ], TeamMemberRepository);
     return TeamMemberRepository;
 }());
@@ -8875,8 +8890,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TeamRepository", function() { return TeamRepository; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_teams_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/teams.service */ "./src/app/model/services/teams.service.ts");
-/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var _services_teams_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/teams.service */ "./src/app/model/services/teams.service.ts");
 
 
 
@@ -8893,6 +8908,7 @@ var TeamRepository = /** @class */ (function () {
         this.teamToOpen = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { _this.loadMYRelateds(false); _this.loadPTRelateds(); });
         this.dataService.clearAllRepositoriesEvent.subscribe(function () { _this.clearTeams(); });
+        this.loadMYRelateds();
     }
     TeamRepository.prototype.clearTeams = function () {
         this.myTeams = []; // sahip olduğum takımlar
@@ -8993,7 +9009,7 @@ var TeamRepository = /** @class */ (function () {
     };
     TeamRepository = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_teams_service__WEBPACK_IMPORTED_MODULE_2__["TeamsService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_3__["DataService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_teams_service__WEBPACK_IMPORTED_MODULE_3__["TeamsService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_2__["DataService"]])
     ], TeamRepository);
     return TeamRepository;
 }());
@@ -10407,8 +10423,6 @@ __webpack_require__.r(__webpack_exports__);
 var DataService = /** @class */ (function () {
     function DataService() {
         this.removeTeamMemberEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
-        // private removeTeamMemberEventSource = new BehaviorSubject(0);
-        // current = this.removeTeamMemberEventSource.asObservable();
         this.newSwitchDayEvent = new rxjs__WEBPACK_IMPORTED_MODULE_2__["ReplaySubject"](1);
         this.newDeepSearchEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.newContainerSearchEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
@@ -12186,22 +12200,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MyPrivateTalksComponent", function() { return MyPrivateTalksComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! util */ "./node_modules/util/util.js");
-/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var src_app_model_repository_private_talk_repository__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/repository/private-talk-repository */ "./src/app/model/repository/private-talk-repository.ts");
-/* harmony import */ var src_app_model_private_talk_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/model/private-talk.model */ "./src/app/model/private-talk.model.ts");
-/* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
-/* harmony import */ var src_app_model_services_team_members_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/services/team-members.service */ "./src/app/model/services/team-members.service.ts");
-/* harmony import */ var src_app_model_services_teams_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/model/services/teams.service */ "./src/app/model/services/teams.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var src_app_model_private_talk_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/private-talk.model */ "./src/app/model/private-talk.model.ts");
+/* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
+/* harmony import */ var src_app_model_repository_private_talk_receiver_repository__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/model/repository/private-talk-receiver-repository */ "./src/app/model/repository/private-talk-receiver-repository.ts");
+/* harmony import */ var src_app_model_repository_private_talk_repository__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/model/repository/private-talk-repository */ "./src/app/model/repository/private-talk-repository.ts");
+/* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
+/* harmony import */ var src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/model/repository/team-repository */ "./src/app/model/repository/team-repository.ts");
 /* harmony import */ var src_app_model_services_auth_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/model/services/auth.service */ "./src/app/model/services/auth.service.ts");
 /* harmony import */ var src_app_model_services_members_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! src/app/model/services/members.service */ "./src/app/model/services/members.service.ts");
-/* harmony import */ var src_app_model_repository_private_talk_receiver_repository__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! src/app/model/repository/private-talk-receiver-repository */ "./src/app/model/repository/private-talk-receiver-repository.ts");
-/* harmony import */ var src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! src/app/model/repository/team-repository */ "./src/app/model/repository/team-repository.ts");
-/* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
-/* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
-/* harmony import */ var src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! src/app/model/signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
+/* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var src_app_model_services_team_members_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! src/app/model/services/team-members.service */ "./src/app/model/services/team-members.service.ts");
+/* harmony import */ var src_app_model_services_teams_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! src/app/model/services/teams.service */ "./src/app/model/services/teams.service.ts");
+/* harmony import */ var src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! src/app/model/signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! util */ "./node_modules/util/util.js");
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_16__);
 
 
 
@@ -12238,7 +12252,7 @@ var MyPrivateTalksComponent = /** @class */ (function () {
         // public getOrderingCriterion(privateTalkId, my = true) {
         //   return this.repository.PTOrderingCriterion(privateTalkId, my)
         // }
-        this.privateTalkModel = new src_app_model_private_talk_model__WEBPACK_IMPORTED_MODULE_6__["PrivateTalk"](null, this.xyzekiAuthService.Username, null); //Reset
+        this.privateTalkModel = new src_app_model_private_talk_model__WEBPACK_IMPORTED_MODULE_4__["PrivateTalk"](null, this.xyzekiAuthService.Username, null); //Reset
         this.tabMy = true; // true means my, false means received
         this.newPrivateTalkPanelOpen = false;
         this.privateTalkId = 0;
@@ -12274,9 +12288,9 @@ var MyPrivateTalksComponent = /** @class */ (function () {
             if (this.innerWidth > 992) {
                 if (this.route.children) {
                     var child = this.route.children.find(function (val, index, obj) { return index == 0; });
-                    if (!Object(util__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(child)) {
+                    if (!Object(util__WEBPACK_IMPORTED_MODULE_16__["isNullOrUndefined"])(child)) {
                         child.paramMap.subscribe(function (params) {
-                            if (!Object(util__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(params)) {
+                            if (!Object(util__WEBPACK_IMPORTED_MODULE_16__["isNullOrUndefined"])(params)) {
                                 _this.privateTalkId = Number.parseInt(params.get('PrivateTalkId'));
                             }
                         });
@@ -12434,7 +12448,7 @@ var MyPrivateTalksComponent = /** @class */ (function () {
                 this.repository.savePrivateTalk(this.privateTalkModel, this.receiversModel, this.teamReceiversModel);
                 this.modelSent = true;
                 this.modelSubmitted = false;
-                this.privateTalkModel = new src_app_model_private_talk_model__WEBPACK_IMPORTED_MODULE_6__["PrivateTalk"](null, this.xyzekiAuthService.Username, null); //Reset
+                this.privateTalkModel = new src_app_model_private_talk_model__WEBPACK_IMPORTED_MODULE_4__["PrivateTalk"](null, this.xyzekiAuthService.Username, null); //Reset
                 this.resetReceiverModels();
                 this.togglePrivateTalkPanel();
             }
@@ -12490,11 +12504,11 @@ var MyPrivateTalksComponent = /** @class */ (function () {
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./my-private-talks.component.css */ "./src/app/private-talk/my-private-talks/my-private-talks.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_7__["TeamMemberRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_15__["DataService"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_14__["MemberLicenseRepository"], src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_13__["TeamRepository"], src_app_model_repository_private_talk_receiver_repository__WEBPACK_IMPORTED_MODULE_12__["PrivateTalkReceiverRepository"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], src_app_model_repository_private_talk_repository__WEBPACK_IMPORTED_MODULE_5__["PrivateTalkRepository"],
-            src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiAuthService"],
-            src_app_model_services_team_members_service__WEBPACK_IMPORTED_MODULE_8__["TeamMembersService"], src_app_model_services_teams_service__WEBPACK_IMPORTED_MODULE_9__["TeamsService"],
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_8__["TeamMemberRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_12__["DataService"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_5__["MemberLicenseRepository"], src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_9__["TeamRepository"], src_app_model_repository_private_talk_receiver_repository__WEBPACK_IMPORTED_MODULE_6__["PrivateTalkReceiverRepository"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], src_app_model_repository_private_talk_repository__WEBPACK_IMPORTED_MODULE_7__["PrivateTalkRepository"],
+            src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"],
+            src_app_model_services_team_members_service__WEBPACK_IMPORTED_MODULE_13__["TeamMembersService"], src_app_model_services_teams_service__WEBPACK_IMPORTED_MODULE_14__["TeamsService"],
             src_app_model_services_auth_service__WEBPACK_IMPORTED_MODULE_10__["AuthService"],
-            src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_16__["XyzekiSignalrService"], src_app_model_services_members_service__WEBPACK_IMPORTED_MODULE_11__["MembersService"]])
+            src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_15__["XyzekiSignalrService"], src_app_model_services_members_service__WEBPACK_IMPORTED_MODULE_11__["MembersService"]])
     ], MyPrivateTalksComponent);
     return MyPrivateTalksComponent;
 }());
@@ -12537,26 +12551,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PrivateTalkMessagesComponent", function() { return PrivateTalkMessagesComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
-/* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
-/* harmony import */ var src_app_model_services_private_talk_messages_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/model/services/private-talk-messages.service */ "./src/app/model/services/private-talk-messages.service.ts");
-/* harmony import */ var src_app_model_repository_private_talk_message_repository__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/repository/private-talk-message-repository */ "./src/app/model/repository/private-talk-message-repository.ts");
-/* harmony import */ var src_app_model_private_talk_message_model__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/model/private-talk-message.model */ "./src/app/model/private-talk-message.model.ts");
-/* harmony import */ var src_app_model_private_talk_model__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/model/private-talk.model */ "./src/app/model/private-talk.model.ts");
-/* harmony import */ var src_app_model_repository_private_talk_repository__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! src/app/model/repository/private-talk-repository */ "./src/app/model/repository/private-talk-repository.ts");
-/* harmony import */ var src_app_model_services_private_talks_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! src/app/model/services/private-talks.service */ "./src/app/model/services/private-talks.service.ts");
-/* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
-/* harmony import */ var _edit_receivers_edit_receivers_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../edit-receivers/edit-receivers.component */ "./src/app/private-talk/edit-receivers/edit-receivers.component.ts");
-/* harmony import */ var src_app_model_repository_private_talk_receiver_repository__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! src/app/model/repository/private-talk-receiver-repository */ "./src/app/model/repository/private-talk-receiver-repository.ts");
-/* harmony import */ var src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! src/app/model/repository/team-repository */ "./src/app/model/repository/team-repository.ts");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! src/infrastructure/page-sizes */ "./src/infrastructure/page-sizes.ts");
-/* harmony import */ var src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! src/app/model/signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
-/* harmony import */ var src_app_model_services_time_service__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! src/app/model/services/time.service */ "./src/app/model/services/time.service.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var src_app_model_private_talk_message_model__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/model/private-talk-message.model */ "./src/app/model/private-talk-message.model.ts");
+/* harmony import */ var src_app_model_private_talk_model__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/private-talk.model */ "./src/app/model/private-talk.model.ts");
+/* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
+/* harmony import */ var src_app_model_repository_private_talk_message_repository__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/model/repository/private-talk-message-repository */ "./src/app/model/repository/private-talk-message-repository.ts");
+/* harmony import */ var src_app_model_repository_private_talk_receiver_repository__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! src/app/model/repository/private-talk-receiver-repository */ "./src/app/model/repository/private-talk-receiver-repository.ts");
+/* harmony import */ var src_app_model_repository_private_talk_repository__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! src/app/model/repository/private-talk-repository */ "./src/app/model/repository/private-talk-repository.ts");
+/* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
+/* harmony import */ var src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! src/app/model/repository/team-repository */ "./src/app/model/repository/team-repository.ts");
+/* harmony import */ var src_app_model_services_private_talk_messages_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! src/app/model/services/private-talk-messages.service */ "./src/app/model/services/private-talk-messages.service.ts");
+/* harmony import */ var src_app_model_services_private_talks_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! src/app/model/services/private-talks.service */ "./src/app/model/services/private-talks.service.ts");
+/* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var src_app_model_services_time_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! src/app/model/services/time.service */ "./src/app/model/services/time.service.ts");
+/* harmony import */ var src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! src/app/model/signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
+/* harmony import */ var src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! src/infrastructure/page-sizes */ "./src/infrastructure/page-sizes.ts");
+/* harmony import */ var _edit_receivers_edit_receivers_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../edit-receivers/edit-receivers.component */ "./src/app/private-talk/edit-receivers/edit-receivers.component.ts");
 
 
 
@@ -12596,7 +12610,7 @@ var PrivateTalkMessagesComponent = /** @class */ (function () {
         this.privateTalkMessageSignalrService = privateTalkMessageSignalrService;
         this.psz = psz;
         this.timeService = timeService;
-        this.privateTalkMessageModel = new src_app_model_private_talk_message_model__WEBPACK_IMPORTED_MODULE_9__["PrivateTalkMessage"](0, undefined, undefined, undefined, 0);
+        this.privateTalkMessageModel = new src_app_model_private_talk_message_model__WEBPACK_IMPORTED_MODULE_7__["PrivateTalkMessage"](0, undefined, undefined, undefined, 0);
         this.privateTalkId = 0; // input is for change detection 
         this.newPrivateTalkMessagePanelOpen = false;
         this.pageNo = 1;
@@ -12605,7 +12619,7 @@ var PrivateTalkMessagesComponent = /** @class */ (function () {
         this.invalidLicensePanelOpen = false;
         this.modelSentForEdit = false;
         this.modelSubmittedForEdit = false;
-        this.privateTalkModelEdit = new src_app_model_private_talk_model__WEBPACK_IMPORTED_MODULE_10__["PrivateTalk"](null, this.xyzekiAuthService.Username, null); //Reset
+        this.privateTalkModelEdit = new src_app_model_private_talk_model__WEBPACK_IMPORTED_MODULE_8__["PrivateTalk"](null, this.xyzekiAuthService.Username, null); //Reset
         this.receiversModel = [];
         this.teamReceiversModel = [];
         this.editPrivateTalkPanelOpen = false;
@@ -12631,8 +12645,8 @@ var PrivateTalkMessagesComponent = /** @class */ (function () {
         });
         this.repository.typingSignal = undefined;
         this.focusOnInput();
-        var textSignals$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_17__["fromEvent"])(this.textAreaX.nativeElement, 'keyup')
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_18__["debounceTime"])(4000), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_18__["filter"])(function (event) { return event.target.value != ''; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_18__["map"])(function (event) { return new src_app_model_private_talk_message_model__WEBPACK_IMPORTED_MODULE_9__["PrivateTalkMessage"](_this.privateTalkId, event.target.value, _this.xyzekiAuthService.Username, new Date().toISOString(), 0); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_18__["distinctUntilKeyChanged"])('Message'));
+        var textSignals$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["fromEvent"])(this.textAreaX.nativeElement, 'keyup')
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["debounceTime"])(4000), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["filter"])(function (event) { return event.target.value != ''; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (event) { return new src_app_model_private_talk_message_model__WEBPACK_IMPORTED_MODULE_7__["PrivateTalkMessage"](_this.privateTalkId, event.target.value, _this.xyzekiAuthService.Username, new Date().toISOString(), 0); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["distinctUntilKeyChanged"])('Message'));
         this.subscriptionTextArea = textSignals$
             .subscribe(function (message) {
             _this.sendTypingSignalMessage(message);
@@ -12648,7 +12662,7 @@ var PrivateTalkMessagesComponent = /** @class */ (function () {
             _this.pageNo = 1;
             _this.repository.loadPrivateTalkMessages(_this.privateTalkId);
             //this.repository = new PrivateTalkMessageRepository(this.privateTalkId, privateTalkMessageService, privateTalkMessageSignalrService, this.psz, this.timeService)
-            Object.assign(_this.privateTalkMessageModel, new src_app_model_private_talk_message_model__WEBPACK_IMPORTED_MODULE_9__["PrivateTalkMessage"](_this.privateTalkId, '', _this.xyzekiAuthService.Username, null));
+            Object.assign(_this.privateTalkMessageModel, new src_app_model_private_talk_message_model__WEBPACK_IMPORTED_MODULE_7__["PrivateTalkMessage"](_this.privateTalkId, '', _this.xyzekiAuthService.Username, null));
             //this.privateTalkMessageModel = new PrivateTalkMessage(this.privateTalkId, '', this.xyzekiAuthService .Username, null);
         });
     };
@@ -12759,7 +12773,7 @@ var PrivateTalkMessagesComponent = /** @class */ (function () {
                 this.repository.savePrivateTalkMessage(this.privateTalkMessageModel);
                 this.modelSent = true;
                 this.modelSubmitted = false;
-                this.privateTalkMessageModel = new src_app_model_private_talk_message_model__WEBPACK_IMPORTED_MODULE_9__["PrivateTalkMessage"](this.privateTalkId, '', this.xyzekiAuthService.Username, null); // RESET
+                this.privateTalkMessageModel = new src_app_model_private_talk_message_model__WEBPACK_IMPORTED_MODULE_7__["PrivateTalkMessage"](this.privateTalkId, '', this.xyzekiAuthService.Username, null); // RESET
             }
         }
         else {
@@ -12777,7 +12791,7 @@ var PrivateTalkMessagesComponent = /** @class */ (function () {
                 this.pTalkExistingRepo.savePrivateTalk(this.privateTalkModelEdit, this.receiversModel, this.teamReceiversModel); // to-do: implement update
                 this.modelSentForEdit = true;
                 this.modelSubmittedForEdit = false;
-                this.privateTalkModelEdit = new src_app_model_private_talk_model__WEBPACK_IMPORTED_MODULE_10__["PrivateTalk"](null, this.xyzekiAuthService.Username, null); //Reset
+                this.privateTalkModelEdit = new src_app_model_private_talk_model__WEBPACK_IMPORTED_MODULE_8__["PrivateTalk"](null, this.xyzekiAuthService.Username, null); //Reset
                 this.resetReceiverModels(); // reset receivers
                 this.editPrivateTalkPanelOpen = false;
             }
@@ -12863,15 +12877,15 @@ var PrivateTalkMessagesComponent = /** @class */ (function () {
     ], PrivateTalkMessagesComponent.prototype, "scrollEl", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('messageForm'),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgForm"])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_2__["NgForm"])
     ], PrivateTalkMessagesComponent.prototype, "form", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('privateTalkEditForm'),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgForm"])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_2__["NgForm"])
     ], PrivateTalkMessagesComponent.prototype, "ptef", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_edit_receivers_edit_receivers_component__WEBPACK_IMPORTED_MODULE_14__["EditReceiversComponent"]),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _edit_receivers_edit_receivers_component__WEBPACK_IMPORTED_MODULE_14__["EditReceiversComponent"])
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_edit_receivers_edit_receivers_component__WEBPACK_IMPORTED_MODULE_21__["EditReceiversComponent"]),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _edit_receivers_edit_receivers_component__WEBPACK_IMPORTED_MODULE_21__["EditReceiversComponent"])
     ], PrivateTalkMessagesComponent.prototype, "editReceiversComp", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('textAreaX'),
@@ -12884,10 +12898,10 @@ var PrivateTalkMessagesComponent = /** @class */ (function () {
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./private-talk-messages.component.css */ "./src/app/private-talk/private-talk-messages/private-talk-messages.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_private_talk_message_repository__WEBPACK_IMPORTED_MODULE_8__["PrivateTalkMessageRepository"], src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_5__["TeamMemberRepository"], src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_16__["TeamRepository"], src_app_model_repository_private_talk_receiver_repository__WEBPACK_IMPORTED_MODULE_15__["PrivateTalkReceiverRepository"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_13__["MemberLicenseRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"], src_app_model_repository_private_talk_repository__WEBPACK_IMPORTED_MODULE_11__["PrivateTalkRepository"], src_app_model_services_private_talks_service__WEBPACK_IMPORTED_MODULE_12__["PrivateTalksService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"],
-            src_app_model_services_private_talk_messages_service__WEBPACK_IMPORTED_MODULE_7__["PrivateTalkMessagesService"],
-            src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_20__["XyzekiSignalrService"], src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_19__["PageSizes"], src_app_model_services_time_service__WEBPACK_IMPORTED_MODULE_21__["TimeService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_private_talk_message_repository__WEBPACK_IMPORTED_MODULE_10__["PrivateTalkMessageRepository"], src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_13__["TeamMemberRepository"], src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_14__["TeamRepository"], src_app_model_repository_private_talk_receiver_repository__WEBPACK_IMPORTED_MODULE_11__["PrivateTalkReceiverRepository"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_9__["MemberLicenseRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_17__["DataService"], src_app_model_repository_private_talk_repository__WEBPACK_IMPORTED_MODULE_12__["PrivateTalkRepository"], src_app_model_services_private_talks_service__WEBPACK_IMPORTED_MODULE_16__["PrivateTalksService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_6__["XyzekiAuthService"],
+            src_app_model_services_private_talk_messages_service__WEBPACK_IMPORTED_MODULE_15__["PrivateTalkMessagesService"],
+            src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_19__["XyzekiSignalrService"], src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_20__["PageSizes"], src_app_model_services_time_service__WEBPACK_IMPORTED_MODULE_18__["TimeService"]])
     ], PrivateTalkMessagesComponent);
     return PrivateTalkMessagesComponent;
 }());
@@ -13256,17 +13270,17 @@ module.exports = "<div [hidden]=\"!invalidLicensePanelOpen\"\n    style=\"border
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MyProjectsComponent", function() { return MyProjectsComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
-/* harmony import */ var src_app_model_repository_project_repository__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/repository/project-repository */ "./src/app/model/repository/project-repository.ts");
-/* harmony import */ var src_app_model_project_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/project.model */ "./src/app/model/project.model.ts");
-/* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
-/* harmony import */ var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/cdk/drag-drop */ "./node_modules/@angular/cdk/esm5/drag-drop.es5.js");
-/* harmony import */ var src_app_ui_tools_assign_autocomplete_assign_autocomplete_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/ui-tools/assign-autocomplete/assign-autocomplete.component */ "./src/app/ui-tools/assign-autocomplete/assign-autocomplete.component.ts");
-/* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
-/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
-/* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/cdk/drag-drop */ "./node_modules/@angular/cdk/esm5/drag-drop.es5.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
+/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var src_app_model_project_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/model/project.model */ "./src/app/model/project.model.ts");
+/* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
+/* harmony import */ var src_app_model_repository_project_repository__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/repository/project-repository */ "./src/app/model/repository/project-repository.ts");
+/* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
+/* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var src_app_ui_tools_assign_autocomplete_assign_autocomplete_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! src/app/ui-tools/assign-autocomplete/assign-autocomplete.component */ "./src/app/ui-tools/assign-autocomplete/assign-autocomplete.component.ts");
 
 
 
@@ -13288,7 +13302,7 @@ var MyProjectsComponent = /** @class */ (function () {
         this.dataService = dataService;
         this.xyzekiAuthService = xyzekiAuthService;
         this.colors = ['#E9F6FE', '#E3E651', '#EA6E4F', '#80C76B', '#84D3E2', '#D0E185', '#292930'];
-        this.projectModel = new src_app_model_project_model__WEBPACK_IMPORTED_MODULE_4__["Project"](null);
+        this.projectModel = new src_app_model_project_model__WEBPACK_IMPORTED_MODULE_6__["Project"](null);
         // get myProjects() {
         //   return this.repository.getMyProjects().filter(proj => this.searchFilter(proj));
         // }
@@ -13342,7 +13356,7 @@ var MyProjectsComponent = /** @class */ (function () {
             var indexPrevious = this.repository.getMyProjects().findIndex((function (val) { return val.ProjectId == item1_1.ProjectId; }));
             var item2_1 = this.repository.getMyProjects().find(function (val, index, obj) { return index == event.currentIndex; });
             var indexCurrent = this.repository.getMyProjects().findIndex((function (val) { return val.ProjectId == item2_1.ProjectId; }));
-            Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_6__["moveItemInArray"])(this.repository.getMyProjects(), indexPrevious, indexCurrent);
+            Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_1__["moveItemInArray"])(this.repository.getMyProjects(), indexPrevious, indexCurrent);
             this.repository.reOrderAndSaveP();
         }
         else {
@@ -13408,7 +13422,7 @@ var MyProjectsComponent = /** @class */ (function () {
             }
             else {
                 this.updateProjectPanelOpen = false;
-                this.projectModel = new src_app_model_project_model__WEBPACK_IMPORTED_MODULE_4__["Project"](null); // RESET MODEL
+                this.projectModel = new src_app_model_project_model__WEBPACK_IMPORTED_MODULE_6__["Project"](null); // RESET MODEL
             }
         }
         else { // if user clicked another team's edit without closing the first one.
@@ -13424,7 +13438,7 @@ var MyProjectsComponent = /** @class */ (function () {
             this.updateProjectPanelOpen = false;
         if (this.newProjectPanelOpen == false) {
             this.newProjectPanelOpen = true;
-            this.projectModel = new src_app_model_project_model__WEBPACK_IMPORTED_MODULE_4__["Project"](null); //RESET MODEL 
+            this.projectModel = new src_app_model_project_model__WEBPACK_IMPORTED_MODULE_6__["Project"](null); //RESET MODEL 
             this.focusOnInput();
         }
         else
@@ -13477,7 +13491,7 @@ var MyProjectsComponent = /** @class */ (function () {
                 this.repository.saveProject(this.projectModel);
                 this.modelSent = true;
                 this.modelSubmitted = false;
-                this.projectModel = new src_app_model_project_model__WEBPACK_IMPORTED_MODULE_4__["Project"](null); // RESET MODEL
+                this.projectModel = new src_app_model_project_model__WEBPACK_IMPORTED_MODULE_6__["Project"](null); // RESET MODEL
                 this.oldProjectId = 0;
                 this.updateProjectPanelOpen = false; // this is needed for update functinality of addProject method.
             }
@@ -13502,28 +13516,28 @@ var MyProjectsComponent = /** @class */ (function () {
         }
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"])('window:resize', ['$event']) // respond to browser resizing
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["HostListener"])('window:resize', ['$event']) // respond to browser resizing
         ,
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [Object]),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
     ], MyProjectsComponent.prototype, "onResize", null);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(src_app_ui_tools_assign_autocomplete_assign_autocomplete_component__WEBPACK_IMPORTED_MODULE_7__["AssignAutocompleteComponent"]),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", src_app_ui_tools_assign_autocomplete_assign_autocomplete_component__WEBPACK_IMPORTED_MODULE_7__["AssignAutocompleteComponent"])
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"])(src_app_ui_tools_assign_autocomplete_assign_autocomplete_component__WEBPACK_IMPORTED_MODULE_11__["AssignAutocompleteComponent"]),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", src_app_ui_tools_assign_autocomplete_assign_autocomplete_component__WEBPACK_IMPORTED_MODULE_11__["AssignAutocompleteComponent"])
     ], MyProjectsComponent.prototype, "child", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('pmDP'),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_9__["NgbDropdown"])
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"])('pmDP'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_4__["NgbDropdown"])
     ], MyProjectsComponent.prototype, "dropdown", void 0);
     MyProjectsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
             selector: 'app-my-projects',
             template: __webpack_require__(/*! ./my-projects.component.html */ "./src/app/project/projects/my-projects/my-projects.component.html"),
-            changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
+            changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./my-projects.component.css */ "./src/app/project/projects/my-projects/my-projects.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_11__["ActivatedRoute"], src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_8__["TeamMemberRepository"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_10__["MemberLicenseRepository"], src_app_model_repository_project_repository__WEBPACK_IMPORTED_MODULE_3__["ProjectRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"], src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiAuthService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_9__["TeamMemberRepository"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_7__["MemberLicenseRepository"], src_app_model_repository_project_repository__WEBPACK_IMPORTED_MODULE_8__["ProjectRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_10__["DataService"], src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_5__["XyzekiAuthService"]])
     ], MyProjectsComponent);
     return MyProjectsComponent;
 }());
@@ -13565,27 +13579,27 @@ module.exports = "<div [hidden]=\"!invalidLicensePanelOpen\"\n    style=\"border
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProjectToDosComponent", function() { return ProjectToDosComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var src_app_model_services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/services/project-to-dos.service */ "./src/app/model/services/project-to-dos.service.ts");
-/* harmony import */ var src_app_model_project_task_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/project-task.model */ "./src/app/model/project-task.model.ts");
-/* harmony import */ var src_app_model_repository_project_to_do_repository__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/repository/project-to-do-repository */ "./src/app/model/repository/project-to-do-repository.ts");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
-/* harmony import */ var src_app_model_repository_project_repository__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/repository/project-repository */ "./src/app/model/repository/project-repository.ts");
-/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
-/* harmony import */ var src_app_ui_tools_assign_autocomplete_assign_autocomplete_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! src/app/ui-tools/assign-autocomplete/assign-autocomplete.component */ "./src/app/ui-tools/assign-autocomplete/assign-autocomplete.component.ts");
-/* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
-/* harmony import */ var src_app_model_services_members_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! src/app/model/services/members.service */ "./src/app/model/services/members.service.ts");
-/* harmony import */ var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/cdk/drag-drop */ "./node_modules/@angular/cdk/esm5/drag-drop.es5.js");
-/* harmony import */ var src_app_comment_task_comments_task_comments_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! src/app/comment/task-comments/task-comments.component */ "./src/app/comment/task-comments/task-comments.component.ts");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
-/* harmony import */ var src_infrastructure_xyzeki_datetime_infra__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! src/infrastructure/xyzeki-datetime-infra */ "./src/infrastructure/xyzeki-datetime-infra.ts");
-/* harmony import */ var src_app_model_services_shared_switch_hour_data_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! src/app/model/services/shared/switch-hour-data.service */ "./src/app/model/services/shared/switch-hour-data.service.ts");
-/* harmony import */ var src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! src/app/model/signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
-/* harmony import */ var src_app_model_services_time_service__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! src/app/model/services/time.service */ "./src/app/model/services/time.service.ts");
+/* harmony import */ var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/cdk/drag-drop */ "./node_modules/@angular/cdk/esm5/drag-drop.es5.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_app_comment_task_comments_task_comments_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/comment/task-comments/task-comments.component */ "./src/app/comment/task-comments/task-comments.component.ts");
+/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var src_app_model_project_task_model__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/model/project-task.model */ "./src/app/model/project-task.model.ts");
+/* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
+/* harmony import */ var src_app_model_repository_project_repository__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! src/app/model/repository/project-repository */ "./src/app/model/repository/project-repository.ts");
+/* harmony import */ var src_app_model_repository_project_to_do_repository__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! src/app/model/repository/project-to-do-repository */ "./src/app/model/repository/project-to-do-repository.ts");
+/* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
+/* harmony import */ var src_app_model_services_members_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! src/app/model/services/members.service */ "./src/app/model/services/members.service.ts");
+/* harmony import */ var src_app_model_services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! src/app/model/services/project-to-dos.service */ "./src/app/model/services/project-to-dos.service.ts");
+/* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var src_app_model_services_shared_switch_hour_data_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! src/app/model/services/shared/switch-hour-data.service */ "./src/app/model/services/shared/switch-hour-data.service.ts");
+/* harmony import */ var src_app_model_services_time_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! src/app/model/services/time.service */ "./src/app/model/services/time.service.ts");
+/* harmony import */ var src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! src/app/model/signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
+/* harmony import */ var src_app_ui_tools_assign_autocomplete_assign_autocomplete_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! src/app/ui-tools/assign-autocomplete/assign-autocomplete.component */ "./src/app/ui-tools/assign-autocomplete/assign-autocomplete.component.ts");
+/* harmony import */ var src_infrastructure_xyzeki_datetime_infra__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! src/infrastructure/xyzeki-datetime-infra */ "./src/infrastructure/xyzeki-datetime-infra.ts");
 
 
 
@@ -13629,7 +13643,7 @@ var ProjectToDosComponent = /** @class */ (function () {
         this.projectSignalService = projectSignalService;
         this.changeDetection = changeDetection;
         this.timeService = timeService;
-        this.projectToDoModel = new src_app_model_project_task_model__WEBPACK_IMPORTED_MODULE_4__["ProjectTask"](0, undefined, undefined, undefined, undefined, undefined, undefined, false, 0, 0, false, 0, false, undefined);
+        this.projectToDoModel = new src_app_model_project_task_model__WEBPACK_IMPORTED_MODULE_9__["ProjectTask"](0, undefined, undefined, undefined, undefined, undefined, undefined, false, 0, 0, false, 0, false, undefined);
         this.searchFilter = function (pt) { return _this.searchValue ? pt.TaskTitle.includes(_this.searchValue) : pt; };
         this.taskStatus = ['Bekliyor', 'Yapılıyor', 'Test Ediliyor', 'Tamamlandı']; // max allowed length is 20 in db column
         this.arcFilter = function (pt) { if (!pt.Archived == true)
@@ -13640,9 +13654,9 @@ var ProjectToDosComponent = /** @class */ (function () {
         this.modelSubmitted = false; // That's for validation method
         this.modelSentEdit = false;
         this.modelSubmittedEdit = false; // That's for validation method
-        this.projectToDoModelEdit = new src_app_model_project_task_model__WEBPACK_IMPORTED_MODULE_4__["ProjectTask"](0, null);
+        this.projectToDoModelEdit = new src_app_model_project_task_model__WEBPACK_IMPORTED_MODULE_9__["ProjectTask"](0, null);
         this.invalidLicensePanelOpen = false;
-        this.datePipe = new _angular_common__WEBPACK_IMPORTED_MODULE_10__["DatePipe"]('tr-TR');
+        this.datePipe = new _angular_common__WEBPACK_IMPORTED_MODULE_2__["DatePipe"]('tr-TR');
         this.editProjectToDoPanelOpen = false;
         this.oldTaskId = 0;
         this.dateEditStart = null;
@@ -13706,7 +13720,7 @@ var ProjectToDosComponent = /** @class */ (function () {
             _this.projectId = Number.parseInt(_this.route.snapshot.paramMap.get('ProjectId'));
             _this.repository.loadProjectsToDosViaResolver(resolvedData.projectToDos, _this.projectId);
             _this.repository.loadProjectsToDosCommentsCountViaResolver(resolvedData.ptCommentsCount);
-            Object.assign(_this.projectToDoModel, new src_app_model_project_task_model__WEBPACK_IMPORTED_MODULE_4__["ProjectTask"](_this.projectId, null));
+            Object.assign(_this.projectToDoModel, new src_app_model_project_task_model__WEBPACK_IMPORTED_MODULE_9__["ProjectTask"](_this.projectId, null));
         });
         this.setAsToday('Deadline');
     };
@@ -13832,7 +13846,7 @@ var ProjectToDosComponent = /** @class */ (function () {
             element.className = null;
         }
         //ref https://blog.angular-university.io/angular-material-dialog/
-        var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatDialogConfig"]();
+        var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatDialogConfig"]();
         // dialogConfig.hasBackdrop = true;
         // dialogConfig.autoFocus = true;
         // dialogConfig.disableClose = true; 
@@ -13859,7 +13873,7 @@ var ProjectToDosComponent = /** @class */ (function () {
             title: title
         };
         //this.changeDetection.detach(); // for slow textinput problem in angular
-        this.dialogRef = this.dialog.open(src_app_comment_task_comments_task_comments_component__WEBPACK_IMPORTED_MODULE_15__["TaskCommentsComponent"], dialogConfig);
+        this.dialogRef = this.dialog.open(src_app_comment_task_comments_task_comments_component__WEBPACK_IMPORTED_MODULE_7__["TaskCommentsComponent"], dialogConfig);
         this.dialogRef.afterClosed().subscribe(function (result) {
             //console.log(`Dialog result: ${result}`);
             //this.changeDetection.reattach(); // for slow textinput problem in angular
@@ -13940,7 +13954,7 @@ var ProjectToDosComponent = /** @class */ (function () {
                 index++;
             }
             //2) Move first task, OK
-            Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_14__["moveItemInArray"])(this.repository.getProjectToDos(), indexPrevious, indexCurrent);
+            Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_1__["moveItemInArray"])(this.repository.getProjectToDos(), indexPrevious, indexCurrent);
             var cancelSubTaskMovement = false;
             // This is in TEST, BUT REQUIRED
             if (indexCurrent > indexPrevious) { // aşağı yönde task subtaskin içine sürüklenirse seviye farkı var ise iptal et(alt görevlerin taşınması iptal)
@@ -13954,7 +13968,7 @@ var ProjectToDosComponent = /** @class */ (function () {
                     var current_1 = indexCurrent + 1;
                     subTasks.forEach(function (subTaskVal, index, arr) {
                         var subTaskIndexPrevious = _this.repository.getProjectToDos().findIndex((function (val) { return val.TaskId == subTaskVal.TaskId; }));
-                        Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_14__["moveItemInArray"])(_this.repository.getProjectToDos(), subTaskIndexPrevious, current_1);
+                        Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_1__["moveItemInArray"])(_this.repository.getProjectToDos(), subTaskIndexPrevious, current_1);
                         current_1++;
                     });
                 }
@@ -13963,7 +13977,7 @@ var ProjectToDosComponent = /** @class */ (function () {
                     // let current = indexCurrent;
                     subTasks.forEach(function (subTaskVal, index, arr) {
                         var subTaskIndexPrevious = _this.repository.getProjectToDos().findIndex((function (val) { return val.TaskId == subTaskVal.TaskId; }));
-                        Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_14__["moveItemInArray"])(_this.repository.getProjectToDos(), subTaskIndexPrevious, current_2);
+                        Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_1__["moveItemInArray"])(_this.repository.getProjectToDos(), subTaskIndexPrevious, current_2);
                     });
                 }
             }
@@ -14164,7 +14178,7 @@ var ProjectToDosComponent = /** @class */ (function () {
             this.modelSubmittedEdit = true;
             if (projectToDoEditForm.valid) {
                 this.repository.saveProjectToDo(this.projectToDoModelEdit);
-                this.projectToDoModelEdit = new src_app_model_project_task_model__WEBPACK_IMPORTED_MODULE_4__["ProjectTask"](0, null);
+                this.projectToDoModelEdit = new src_app_model_project_task_model__WEBPACK_IMPORTED_MODULE_9__["ProjectTask"](0, null);
                 this.dateEdit = null;
                 this.dateEditStart = null;
                 this.modelSentEdit = true;
@@ -14200,7 +14214,7 @@ var ProjectToDosComponent = /** @class */ (function () {
                 this.repository.saveProjectToDo(this.projectToDoModel);
                 this.modelSent = true;
                 this.modelSubmitted = false;
-                this.projectToDoModel = new src_app_model_project_task_model__WEBPACK_IMPORTED_MODULE_4__["ProjectTask"](this.projectId, null, this.projectToDoModel.AssignedTo, null, this.projectToDoModel.Start, null, this.projectToDoModel.Deadline, false, 0, 0, this.projectToDoModel.Archived);
+                this.projectToDoModel = new src_app_model_project_task_model__WEBPACK_IMPORTED_MODULE_9__["ProjectTask"](this.projectId, null, this.projectToDoModel.AssignedTo, null, this.projectToDoModel.Start, null, this.projectToDoModel.Deadline, false, 0, 0, this.projectToDoModel.Archived);
                 this.focusOnInput();
             }
         }
@@ -14252,7 +14266,7 @@ var ProjectToDosComponent = /** @class */ (function () {
             else {
                 this.editProjectToDoPanelOpen = false;
                 // load
-                this.projectToDoModelEdit = new src_app_model_project_task_model__WEBPACK_IMPORTED_MODULE_4__["ProjectTask"](0, null);
+                this.projectToDoModelEdit = new src_app_model_project_task_model__WEBPACK_IMPORTED_MODULE_9__["ProjectTask"](0, null);
                 this.dateEdit = null;
                 this.dateEditStart = null;
                 this.timeEdit = { hour: 0, minute: 0, second: 0 };
@@ -14669,41 +14683,41 @@ var ProjectToDosComponent = /** @class */ (function () {
         this.switchHourDataService.setupStyle.next({ isOpen: true, Visibility: 'hidden', Left: left - 3.5 + 'px', Top: top + 'px' });
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"])('window:resize', ['$event']) // respond to browser resizing
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["HostListener"])('window:resize', ['$event']) // respond to browser resizing
         ,
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [Object]),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
     ], ProjectToDosComponent.prototype, "onResize", null);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(src_app_comment_task_comments_task_comments_component__WEBPACK_IMPORTED_MODULE_15__["TaskCommentsComponent"]),
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"])(src_app_comment_task_comments_task_comments_component__WEBPACK_IMPORTED_MODULE_7__["TaskCommentsComponent"]),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
     ], ProjectToDosComponent.prototype, "commentsDialog", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('editChild'),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", src_app_ui_tools_assign_autocomplete_assign_autocomplete_component__WEBPACK_IMPORTED_MODULE_11__["AssignAutocompleteComponent"])
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"])('editChild'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", src_app_ui_tools_assign_autocomplete_assign_autocomplete_component__WEBPACK_IMPORTED_MODULE_20__["AssignAutocompleteComponent"])
     ], ProjectToDosComponent.prototype, "editChild", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('projectToDoEditForm'),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_6__["NgForm"])
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"])('projectToDoEditForm'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgForm"])
     ], ProjectToDosComponent.prototype, "form", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('switchDayArea'),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"])('switchDayArea'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_3__["ElementRef"])
     ], ProjectToDosComponent.prototype, "switchDayArea", void 0);
     ProjectToDosComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
             selector: 'app-project-to-dos',
             template: __webpack_require__(/*! ./project-to-dos.component.html */ "./src/app/project/projects/project-to-dos/project-to-dos.component.html"),
-            changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
+            changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./project-to-dos.component.css */ "./src/app/project/projects/project-to-dos/project-to-dos.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_project_to_do_repository__WEBPACK_IMPORTED_MODULE_5__["ProjectToDoRepository"], src_app_model_services_shared_switch_hour_data_service__WEBPACK_IMPORTED_MODULE_19__["SwitchHourDataService"], src_infrastructure_xyzeki_datetime_infra__WEBPACK_IMPORTED_MODULE_18__["XyzekiDateTimeInfra"], src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_12__["TeamMemberRepository"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_17__["MemberLicenseRepository"], src_app_model_repository_project_repository__WEBPACK_IMPORTED_MODULE_8__["ProjectRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_7__["DataService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], src_app_model_services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_3__["ProjectToDosService"],
-            src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_20__["XyzekiSignalrService"],
-            src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_9__["XyzekiAuthService"], src_app_model_services_members_service__WEBPACK_IMPORTED_MODULE_13__["MembersService"],
-            _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatDialog"], src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_20__["XyzekiSignalrService"],
-            src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_20__["XyzekiSignalrService"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"], src_app_model_services_time_service__WEBPACK_IMPORTED_MODULE_21__["TimeService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_project_to_do_repository__WEBPACK_IMPORTED_MODULE_12__["ProjectToDoRepository"], src_app_model_services_shared_switch_hour_data_service__WEBPACK_IMPORTED_MODULE_17__["SwitchHourDataService"], src_infrastructure_xyzeki_datetime_infra__WEBPACK_IMPORTED_MODULE_21__["XyzekiDateTimeInfra"], src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_13__["TeamMemberRepository"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_10__["MemberLicenseRepository"], src_app_model_repository_project_repository__WEBPACK_IMPORTED_MODULE_11__["ProjectRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_16__["DataService"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["ActivatedRoute"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"], src_app_model_services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_15__["ProjectToDosService"],
+            src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_19__["XyzekiSignalrService"],
+            src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_8__["XyzekiAuthService"], src_app_model_services_members_service__WEBPACK_IMPORTED_MODULE_14__["MembersService"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatDialog"], src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_19__["XyzekiSignalrService"],
+            src_app_model_signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_19__["XyzekiSignalrService"], _angular_core__WEBPACK_IMPORTED_MODULE_3__["ChangeDetectorRef"], src_app_model_services_time_service__WEBPACK_IMPORTED_MODULE_18__["TimeService"]])
     ], ProjectToDosComponent);
     return ProjectToDosComponent;
 }());
@@ -14852,8 +14866,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IncomingInvitationsComponent", function() { return IncomingInvitationsComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
-/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
 /* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
 
 
@@ -14913,7 +14927,7 @@ var IncomingInvitationsComponent = /** @class */ (function () {
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./incoming-invitations.component.css */ "./src/app/team/teams/incoming-invitations/incoming-invitations.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_2__["TeamMemberRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_4__["DataService"], src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_3__["TeamMemberRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_4__["DataService"], src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiAuthService"]])
     ], IncomingInvitationsComponent);
     return IncomingInvitationsComponent;
 }());
@@ -14957,12 +14971,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var src_app_model_team_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/team.model */ "./src/app/model/team.model.ts");
-/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
 /* harmony import */ var src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/repository/team-repository */ "./src/app/model/repository/team-repository.ts");
 /* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
-/* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
-
+/* harmony import */ var src_app_model_team_model__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/model/team.model */ "./src/app/model/team.model.ts");
 
 
 
@@ -14979,7 +14992,7 @@ var MyTeamsComponent = /** @class */ (function () {
         this.dataService = dataService;
         this.router = router;
         this.xyzekiAuthService = xyzekiAuthService;
-        this.teamModel = new src_app_model_team_model__WEBPACK_IMPORTED_MODULE_3__["Team"]("");
+        this.teamModel = new src_app_model_team_model__WEBPACK_IMPORTED_MODULE_7__["Team"]("");
         //edit mechanism
         this.updateTeamPanelOpen = false;
         this.oldTeamId = 0;
@@ -15044,7 +15057,7 @@ var MyTeamsComponent = /** @class */ (function () {
             }
             else {
                 this.updateTeamPanelOpen = false;
-                this.teamModel = new src_app_model_team_model__WEBPACK_IMPORTED_MODULE_3__["Team"](""); //RESET 
+                this.teamModel = new src_app_model_team_model__WEBPACK_IMPORTED_MODULE_7__["Team"](""); //RESET 
             }
         }
         else { // if user clicked another team's edit without closing the first one.
@@ -15060,7 +15073,7 @@ var MyTeamsComponent = /** @class */ (function () {
             this.updateTeamPanelOpen = false;
         if (this.newTeamPanelOpen == false) {
             this.newTeamPanelOpen = true;
-            this.teamModel = new src_app_model_team_model__WEBPACK_IMPORTED_MODULE_3__["Team"](""); //RESET MODEL 
+            this.teamModel = new src_app_model_team_model__WEBPACK_IMPORTED_MODULE_7__["Team"](""); //RESET MODEL 
             this.focusOnInput();
         }
         else
@@ -15075,7 +15088,7 @@ var MyTeamsComponent = /** @class */ (function () {
                 this.repository.saveTeam(this.teamModel);
                 this.modelSent = true;
                 this.modelSubmitted = false;
-                this.teamModel = new src_app_model_team_model__WEBPACK_IMPORTED_MODULE_3__["Team"](""); //RESET MODEL
+                this.teamModel = new src_app_model_team_model__WEBPACK_IMPORTED_MODULE_7__["Team"](""); //RESET MODEL
                 this.oldTeamId = 0;
                 this.updateTeamPanelOpen = false; // this is needed for update functinality of addTeam method.
             }
@@ -15115,7 +15128,7 @@ var MyTeamsComponent = /** @class */ (function () {
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./my-teams.component.css */ "./src/app/team/teams/my-teams/my-teams.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_7__["MemberLicenseRepository"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_5__["TeamRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_4__["XyzekiAuthService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_4__["MemberLicenseRepository"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_5__["TeamRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"]])
     ], MyTeamsComponent);
     return MyTeamsComponent;
 }());
@@ -15159,13 +15172,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
-/* harmony import */ var src_app_model_team_member_model___WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/team-member.model. */ "./src/app/model/team-member.model..ts");
-/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
-/* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
+/* harmony import */ var src_app_model_repository_member_repository__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/repository/member-repository */ "./src/app/model/repository/member-repository.ts");
+/* harmony import */ var src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/model/repository/team-member-repository */ "./src/app/model/repository/team-member-repository.ts");
 /* harmony import */ var src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/model/repository/team-repository */ "./src/app/model/repository/team-repository.ts");
-/* harmony import */ var src_app_model_repository_member_repository__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/repository/member-repository */ "./src/app/model/repository/member-repository.ts");
-/* harmony import */ var src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/model/repository/member-license-repository */ "./src/app/model/repository/member-license-repository.ts");
+/* harmony import */ var src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var src_app_model_team_member_model___WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/model/team-member.model. */ "./src/app/model/team-member.model..ts");
 
 
 
@@ -15189,7 +15202,7 @@ var TeamMembersComponent = /** @class */ (function () {
         this.route = route;
         this.xyzekiAuthService = xyzekiAuthService;
         this.loaded = false;
-        this.teamMemberModel = new src_app_model_team_member_model___WEBPACK_IMPORTED_MODULE_4__["TeamMember"]("", 0, null);
+        this.teamMemberModel = new src_app_model_team_member_model___WEBPACK_IMPORTED_MODULE_9__["TeamMember"]("", 0, null);
         this.teamId = 0;
         this.isLimited = false;
         this.newTeamMemberPanelWROpen = false;
@@ -15217,7 +15230,7 @@ var TeamMembersComponent = /** @class */ (function () {
                 _this.isLimited = true;
             }
             _this.repository.loadTeamMembersViaResolver(resolvedData.teamMembers, _this.teamId);
-            Object.assign(_this.teamMemberModel, new src_app_model_team_member_model___WEBPACK_IMPORTED_MODULE_4__["TeamMember"]("", _this.teamId, null));
+            Object.assign(_this.teamMemberModel, new src_app_model_team_member_model___WEBPACK_IMPORTED_MODULE_9__["TeamMember"]("", _this.teamId, null));
             _this.loaded = true;
         });
         // this.route.data.subscribe(data => {
@@ -15252,7 +15265,7 @@ var TeamMembersComponent = /** @class */ (function () {
                 this.repository.saveTeamMember(this.teamMemberModel);
                 this.modelSent = true;
                 this.modelSubmitted = false;
-                this.teamMemberModel = new src_app_model_team_member_model___WEBPACK_IMPORTED_MODULE_4__["TeamMember"]("", this.teamId, null);
+                this.teamMemberModel = new src_app_model_team_member_model___WEBPACK_IMPORTED_MODULE_9__["TeamMember"]("", this.teamId, null);
                 this.focusOnInput();
             }
         }
@@ -15348,10 +15361,10 @@ var TeamMembersComponent = /** @class */ (function () {
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./team-members.component.css */ "./src/app/team/teams/team-members/team-members.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_3__["TeamMemberRepository"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_9__["MemberLicenseRepository"],
-            src_app_model_repository_member_repository__WEBPACK_IMPORTED_MODULE_8__["MemberRepository"], src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_7__["TeamRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"],
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_repository_team_member_repository__WEBPACK_IMPORTED_MODULE_6__["TeamMemberRepository"], src_app_model_repository_member_license_repository__WEBPACK_IMPORTED_MODULE_4__["MemberLicenseRepository"],
+            src_app_model_repository_member_repository__WEBPACK_IMPORTED_MODULE_5__["MemberRepository"], src_app_model_repository_team_repository__WEBPACK_IMPORTED_MODULE_7__["TeamRepository"], src_app_model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_8__["DataService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
-            src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_5__["XyzekiAuthService"]])
+            src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"]])
     ], TeamMembersComponent);
     return TeamMembersComponent;
 }());

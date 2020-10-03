@@ -12,18 +12,21 @@ import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service
 @Injectable()
 export class PrivateTalkReceiverRepository {
     constructor(private psz: PageSizes, private dataService: DataService, public signalService: XyzekiSignalrService, private receiversService: PrivateTalkReceiversService, private teamReceiversService: PrivateTalkTeamReceiversService) {
-       this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadAll(1) });
-       this.dataService.clearAllRepositoriesEvent.subscribe(() => this.clearPrivateTalkReceivers());
+        //this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadAll(1) });
+        this.dataService.clearAllRepositoriesEvent.subscribe(() => this.clearPrivateTalkReceivers());
 
     }
-    clearPrivateTalkReceivers(){
+    loadRepository(){
+        this.loadAll(1);
+    }
+    clearPrivateTalkReceivers() {
         this.privateTalkReceivers = []
         this.privateTalkTeamReceivers = []
-        this.privateTalkId=undefined
+        this.privateTalkId = undefined
     }
     loadAll(pageNo?: number, searchValue?: string) { //  private talk repo can do reloadeding when team component destroyed)
         this.receiversService.myPrivateTalkReceivers(pageNo, searchValue, this.psz.PTPageSize).subscribe(ptr => { // Page 1
-                this.privateTalkReceivers = ptr;
+            this.privateTalkReceivers = ptr;
         });
         this.teamReceiversService.myPrivateTalkTeamReceivers(pageNo, searchValue, this.psz.PTPageSize).subscribe(pttr => { // Page 1
             this.privateTalkTeamReceivers = pttr;

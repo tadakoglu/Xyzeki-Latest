@@ -8,7 +8,22 @@ import { concatMap } from 'rxjs/operators';
 import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
 import { LoginModel } from 'src/app/model/login.model';
 import { Member } from 'src/app/model/member.model';
+import { AdminRepository } from 'src/app/model/repository/admin-repository';
 import { AuthRepository } from 'src/app/model/repository/auth-repository';
+import { ContainerRepository } from 'src/app/model/repository/container-repository';
+import { FileRepository } from 'src/app/model/repository/file-repository';
+import { MemberLicenseRepository } from 'src/app/model/repository/member-license-repository';
+import { MemberRepository } from 'src/app/model/repository/member-repository';
+import { PrivateTalkMessageRepository } from 'src/app/model/repository/private-talk-message-repository';
+import { PrivateTalkReceiverRepository } from 'src/app/model/repository/private-talk-receiver-repository';
+import { PrivateTalkRepository } from 'src/app/model/repository/private-talk-repository';
+import { ProjectRepository } from 'src/app/model/repository/project-repository';
+import { ProjectToDoCommentRepository } from 'src/app/model/repository/project-to-do-comment-repository';
+import { ProjectToDoRepository } from 'src/app/model/repository/project-to-do-repository';
+import { QuickToDoCommentRepository } from 'src/app/model/repository/quick-to-do-comment-repository';
+import { QuickToDoRepository } from 'src/app/model/repository/quick-to-do-repository';
+import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
+import { TeamRepository } from 'src/app/model/repository/team-repository';
 import { ReturnModel } from 'src/app/model/return.model';
 import { MemberSettingService } from 'src/app/model/services/member-setting.service';
 import { DataService } from 'src/app/model/services/shared/data.service';
@@ -16,12 +31,14 @@ import { XyzekiSignalrService } from 'src/app/model/signalr-services/xyzeki-sign
 import { Tuple } from 'src/app/model/tuple.model';
 import { GoogleReCaptcha_LoginAction } from 'src/infrastructure/google-captcha';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [{ provide: LoginModel, useClass: LoginModel }]
+  providers: [{ provide: LoginModel, useClass: LoginModel },
+    
+
+  ]
   , changeDetection: ChangeDetectionStrategy.Default
 })
 export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {

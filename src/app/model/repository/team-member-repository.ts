@@ -49,13 +49,18 @@ export class TeamMemberRepository implements ITeamMemberRepository {
             this.deleteTeamMemberViaSignalR(teamMemberDeleted);
         });
 
-        this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadMYRelateds(); this.loadPTRelateds() });
+        //this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadMYRelateds(); this.loadPTRelateds() });
 
         this.dataService.clearAllRepositoriesEvent.subscribe(() => { this.clearTeamMembers() })
 
 
 
     }
+    loadRepository(){
+        this.loadMYRelateds();
+        this.loadPTRelateds();
+    }
+
     clearTeamMembers() {
         this.TeamId = 0
         this.teamMembers = [] // üyemizin seçmiş olduğu takım'daki takım üyeleri

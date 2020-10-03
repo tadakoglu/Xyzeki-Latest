@@ -10,14 +10,17 @@ import { DataService } from '../services/shared/data.service';
 export class AdminRepository implements IAdminRepository {
     constructor(private service: MemberLicenseService, private dataService: DataService) {
 
-        this.dataService.loadAllRepositoriesEvent.subscribe(() => this.loadAllLicences());
+        //this.dataService.loadAllRepositoriesEvent.subscribe(() => this.loadAllLicences());
         this.dataService.clearAllRepositoriesEvent.subscribe(() => this.clearAllLicences());
 
 
+
     }
-    clearAllLicences() {
-        this.allLicenses = []
+    loadRepository() {
+        this.loadAllLicences();
     }
+
+
     loadAllLicences() {
         this.service.allLicenses().subscribe((lics) => {
             this.allLicenses = lics
@@ -25,6 +28,9 @@ export class AdminRepository implements IAdminRepository {
         );
     }
 
+    clearAllLicences() {
+        this.allLicenses = []
+    }
     private allLicenses: MemberLicense[] = []
 
     getAllLicenses(): MemberLicense[] {

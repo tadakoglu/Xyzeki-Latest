@@ -90,16 +90,17 @@ export class XyzekiAuthService {
         let token = tokenAndMember.Model.Item1;
         this.SaveMember(member);
         this.SaveToken(token);
-
-        this.StartRefreshTokenTimer();
         this.LoadAllRepositories();
+        this.StartRefreshTokenTimer();
+       
     }
 
     LogOut() {
         this.RemoveMember();
         this.RemoveToken();
-        this.StopRefreshTokenTimer();
         this.ClearAllRepositories();
+        this.StopRefreshTokenTimer();
+       
     }
 
     AuthAutoIfPossible() {

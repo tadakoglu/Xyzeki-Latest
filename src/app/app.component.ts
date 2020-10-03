@@ -28,6 +28,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   constructor(public xyzekiAuthService: XyzekiAuthService, private router: Router, private switchHourDataService: SwitchHourDataService, public dataService: DataService) { // Initialize our member.
 
     this.xyzekiAuthService.AuthAutoIfPossible();
+   
     this.loading = true;
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;

@@ -9,10 +9,15 @@ import { DataService } from '../services/shared/data.service';
 @Injectable()
 export class MemberLicenseRepository implements IMemberLicenseRepository {
     constructor(private service: MemberLicenseService, private dataService: DataService) {
-        this.dataService.loadAllRepositoriesEvent.subscribe(() => this.loadLicenseRelateds());
+       //this.dataService.loadAllRepositoriesEvent.subscribe(() => this.loadLicenseRelateds());
         this.dataService.clearAllRepositoriesEvent.subscribe(() => this.clearLicenseRelateds());
 
     }
+    
+    loadRepository(){
+        this.loadLicenseRelateds());
+    }
+
     clearLicenseRelateds() {
         this.memberLicense = new MemberLicense(null, null, null, null, null, null, null, null, null, null, null, null);
 

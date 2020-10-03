@@ -87,8 +87,13 @@ export class PrivateTalkRepository implements IPrivateTalkRepository {
 
         });
 
-        this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadPTCount(); this.loadAll(1, undefined, false); });
+        //this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadPTCount(); this.loadAll(1, undefined, false); });
         this.dataService.clearAllRepositoriesEvent.subscribe(() => { this.clearPrivateTalks() })
+
+    }
+    loadRepository() {
+        this.loadAll(1, undefined, false);
+        this.loadPTCount();
     }
     clearPrivateTalks() {
         this.myPrivateTalks = []
@@ -211,7 +216,7 @@ export class PrivateTalkRepository implements IPrivateTalkRepository {
         else
             return 0;
     }
-   
+
 
 
     getMyPrivateTalks(): PrivateTalk[] {
@@ -392,7 +397,7 @@ export class PrivateTalkRepository implements IPrivateTalkRepository {
         }
 
     }
-   
+
 }
 
 // gmail benzeri bir iş konuşması sistemi : my private talk kısmı gönderilen kutusu olarak düşünülecek.
