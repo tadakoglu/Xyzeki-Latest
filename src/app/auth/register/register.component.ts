@@ -3,7 +3,7 @@ import { NgForm, FormControl } from '@angular/forms';
 import { IAuthRepository } from 'src/app/model/abstract/i-auth-repository';
 import { RegisterModel } from 'src/app/model/register.model';
 import { ErrorCodes } from 'src/infrastructure/error-codes.enum';
-import { XyzekiAuthService } from 'src/app/model/xyzeki-auth-service';
+import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthRepository } from 'src/app/model/repository/auth-repository';
 

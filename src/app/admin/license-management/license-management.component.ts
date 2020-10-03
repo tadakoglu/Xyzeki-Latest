@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AdminRepository } from 'src/app/model/repository/admin-repository';
-import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
+import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
 import { MemberLicense } from 'src/app/model/member-license.model';
 import { NgForm } from '@angular/forms';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';

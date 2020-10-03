@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IProjectRepository } from '../abstract/i-project-repository';
 import { Project } from '../project.model';
 import { ProjectsService } from '../services/projects.service';
-import { XyzekiAuthService } from  '../xyzeki-auth-service';
+import { XyzekiAuthService } from  '../auth-services/xyzeki-auth-service';
 import { PrivacyModes } from 'src/infrastructure/project-privacy-modes';
 import { ProjectOrderModel } from '../project-order.model';
 import { DataService } from '../services/shared/data.service';

@@ -2,7 +2,7 @@ import { Injectable, } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, timer, of } from 'rxjs';
-import { XyzekiAuthService } from '../xyzeki-auth-service';
+import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
 import { map, retryWhen, delayWhen, switchMap } from 'rxjs/operators';
 import { QuickTaskComment } from '../quick-task-comment.model';
 import { BackEndWebServer } from 'src/infrastructure/back-end-server';

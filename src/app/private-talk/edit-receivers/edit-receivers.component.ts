@@ -5,7 +5,7 @@ import { MatAutocompleteSelectedEvent, MatChipInputEvent, MatAutocomplete, MatAu
 import { map, startWith } from 'rxjs/operators';
 import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
 import { TeamRepository } from 'src/app/model/repository/team-repository';
-import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
+import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
 import { Team } from 'src/app/model/team.model';
 import { TeamMember } from 'src/app/model/team-member.model.';
 import { Member } from 'src/app/model/member.model';

@@ -5,7 +5,7 @@ import { Team } from 'src/app/model/team.model';
 import { NgForm } from '@angular/forms';
 import { Observable, of, Subscribable, Subscription } from 'rxjs';
 import { TeamsService } from 'src/app/model/services/teams.service';
-import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
+import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
 import { TeamRepository } from 'src/app/model/repository/team-repository';
 import { DataService } from 'src/app/model/services/shared/data.service';
 import { debounceTime } from 'rxjs/operators';

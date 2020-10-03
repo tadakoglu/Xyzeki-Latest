@@ -3,7 +3,7 @@ import { Injectable, ɵConsole } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ProjectTask } from '../project-task.model';
 import { Observable, timer, of } from 'rxjs';
-import { XyzekiAuthService } from '../xyzeki-auth-service';
+import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
 import { map, retryWhen, delayWhen, switchMap } from 'rxjs/operators';
 import { CommentCountModel } from '../comment-count.model';
 import { TaskOrderModel } from '../task-order.model';

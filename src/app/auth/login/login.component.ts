@@ -2,7 +2,7 @@ import { Component, OnInit, NgZone, OnDestroy, AfterViewInit, ChangeDetectionStr
 import { NgModel } from '@angular/forms';
 import { LoginModel } from 'src/app/model/login.model';
 import { IAuthRepository } from 'src/app/model/abstract/i-auth-repository';
-import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
+import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
 import { Router } from '@angular/router';
 import { JsonPipe } from '@angular/common';
 import { TeamRepository } from 'src/app/model/repository/team-repository';
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
       this.isLoading = true;
       this.subscription = this.recaptchaV3Service.execute(GoogleReCaptcha_LoginAction).pipe(concatMap(
         recaptchaToken => { return this.repository.authenticate(Object.assign({}, this.loginModel), recaptchaToken) })).subscribe((tokenAndMember: ReturnModel<Tuple<string, Member>>) => {
-          this.xyzekiAuthService .Auth(tokenAndMember);
+          this.xyzekiAuthService.Auth(tokenAndMember);
           this.xyzekiSignalService.startListening(tokenAndMember.Model.Item1);
 
           this.setUpMySetting();
@@ -122,13 +122,6 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
       this.dataService.switchMode = mSetting.SwitchMode;
       let element: HTMLElement = document.getElementById('appBody');
       element.className = null;
-
-      // if(this.innerWidth < 600){
-      //   element.classList.add('KlasikMavi');
-      //   return;
-      // }
-
-
 
       switch (mSetting.Theme) {
         case 'KlasikMavi':

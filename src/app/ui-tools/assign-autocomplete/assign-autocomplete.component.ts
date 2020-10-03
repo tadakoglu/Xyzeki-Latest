@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter, Input, AfterViewInit, AfterContentInit, SimpleChanges, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
 import { TeamMember } from 'src/app/model/team-member.model.';
-import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
+import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
 import { TeamRepository } from 'src/app/model/repository/team-repository';
 import { Team } from 'src/app/model/team.model';
 import { Member } from 'src/app/model/member.model';

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, HostListener } from '@angular/core';
-import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
+import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
 import { MembersService } from 'src/app/model/services/members.service';
 import { Member } from 'src/app/model/member.model';
 import { MemberSettingService } from 'src/app/model/services/member-setting.service';

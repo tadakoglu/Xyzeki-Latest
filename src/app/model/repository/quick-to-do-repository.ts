@@ -3,7 +3,7 @@ import { QuickTask } from '../quick-task.model';
 import { QuickToDosService } from '../services/quick-to-dos.service';
 import { Injectable } from '@angular/core';
 
-import { XyzekiAuthService } from  '../xyzeki-auth-service';
+import { XyzekiAuthService } from  '../auth-services/xyzeki-auth-service';
 import { CommentCountModel } from '../comment-count.model';
 import { PageSizes } from 'src/infrastructure/page-sizes';
 import { TaskOrderModel } from '../task-order.model';

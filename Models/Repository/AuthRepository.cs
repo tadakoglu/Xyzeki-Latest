@@ -128,6 +128,10 @@ namespace XYZToDo.Models.Repository
 
 
         }
+        
+        public string RefreshToken(string username){
+            return this.jwtHelpers.GenerateJWT(username);
+        }
         public async Task SendThankYouEmail(RegisterModel member)
         {
             //gather information

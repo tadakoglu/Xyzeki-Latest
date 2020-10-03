@@ -3,7 +3,7 @@ import { QuickTask } from 'src/app/model/quick-task.model';
 import { QuickToDoRepository } from 'src/app/model/repository/quick-to-do-repository';
 import { NgbDateStruct, NgbDate, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
-import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
+import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
 import { AssignAutocompleteComponent } from 'src/app/ui-tools/assign-autocomplete/assign-autocomplete.component';
 import { DatePipe } from '@angular/common';
 import { DataService } from 'src/app/model/services/shared/data.service';

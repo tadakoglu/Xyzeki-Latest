@@ -8,13 +8,11 @@ import { Member } from '../member.model';
 import { ReturnModel } from '../return.model';
 import { ErrorCodes } from 'src/infrastructure/error-codes.enum';
 import { RegisterModel } from '../register.model';
-import { XyzekiAuthService } from  '../xyzeki-auth-service';
-import { Tuple } from '../tuple.model';
 import { SecurityCodeModel } from '../security-code.model';
 import { GoogleReCaptcha_SecretKey } from 'src/infrastructure/google-captcha';
 import { CryptoHelpersService } from './crypto-helpers.service';
 import { BackEndWebServer } from 'src/infrastructure/back-end-server';
-
+import { Tuple } from '../tuple.model';
 
 
 @Injectable()
@@ -22,7 +20,7 @@ export class AuthService {
   baseURL: string;
   auth_token: string;
 
-  constructor(private http: HttpClient, public xyzekiAuthService : XyzekiAuthService , private cryptoHelpers: CryptoHelpersService) {
+  constructor(private http: HttpClient, private cryptoHelpers: CryptoHelpersService) {
     this.baseURL = BackEndWebServer + '/'
   }
   getRecaptchaUserResponse(token: string): Observable<any> { //https://developers.google.com/recaptcha/docs/verify
@@ -46,6 +44,9 @@ export class AuthService {
             return new ReturnModel<Tuple<string, Member>>(ErrorCodes.OK, response.body);
         }
       })) // Pipe will open up the observable returned by 'post' method and transform the pure object through a set of functions seperated by comma.
+  }
+  refreshToken(): Observable<any> { // call here before expiration
+    return this.http.get(`${this.baseURL}api/Auth/RefreshToken`, { responseType: 'text' });
   }
 
   register(registerModel: RegisterModel, recaptchaToken: string): Observable<ReturnModel<number | null>> {
@@ -78,7 +79,7 @@ export class AuthService {
   isSecurityCodeFoundAndValid(securityCode: string): Observable<boolean> {
     return this.http.get<boolean>(`${this.baseURL}api/Auth/IsSecurityCodeFoundAndValid/` + securityCode);
   }
-  setUpNewPassword(securityCodeModel: SecurityCodeModel, recaptchaToken: string=''): Observable<ReturnModel<null>> {
+  setUpNewPassword(securityCodeModel: SecurityCodeModel, recaptchaToken: string = ''): Observable<ReturnModel<null>> {
     //securityCodeModel.NewPassword = this.cryptoHelpers.encryptWithAES(securityCodeModel.NewPassword); // Later will be decrypt in .NET 
 
     return this.http.post(this.baseURL + "api/Auth/SetUpNewPassword", securityCodeModel, { observe: "response", params: { 'recaptchaToken': recaptchaToken }, headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).
@@ -96,6 +97,7 @@ export class AuthService {
 
   getOptions3() {
     return { headers: new HttpHeaders({ 'Content-Type': 'application/json', }), responseType: 'text' };
+
   }
 
   private handleError(error: HttpErrorResponse) {

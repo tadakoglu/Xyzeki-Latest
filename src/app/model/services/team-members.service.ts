@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { TeamMember } from '../team-member.model.';
 import { Observable, of } from 'rxjs';
 import { Member } from '../member.model';
-import { XyzekiAuthService } from '../xyzeki-auth-service';
+import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
 import { distinctUntilChanged, take, switchMap } from 'rxjs/operators';
 import { BackEndWebServer } from 'src/infrastructure/back-end-server';
 @Injectable()

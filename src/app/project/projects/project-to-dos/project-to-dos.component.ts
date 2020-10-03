@@ -8,7 +8,7 @@ import { NgForm } from '@angular/forms';
 import { DataService } from 'src/app/model/services/shared/data.service';
 import { ProjectRepository } from 'src/app/model/repository/project-repository';
 import { Project } from 'src/app/model/project.model';
-import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
+import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
 import { DatePipe } from '@angular/common';
 import { AssignAutocompleteComponent } from 'src/app/ui-tools/assign-autocomplete/assign-autocomplete.component';
 import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';

@@ -1,7 +1,7 @@
 import { IProjectToDoRepository } from '../abstract/i-project-to-do-repository';
 import { ProjectTask } from '../project-task.model';
 import { ProjectToDosService } from '../services/project-to-dos.service';
-import { XyzekiAuthService } from  '../xyzeki-auth-service';
+import { XyzekiAuthService } from  '../auth-services/xyzeki-auth-service';
 import { CommentCountModel } from '../comment-count.model';
 import { Project } from '../project.model';
 import { ProjectRepository } from './project-repository';

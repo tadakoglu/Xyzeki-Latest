@@ -20,7 +20,7 @@ import { QuickToDosService } from '../services/quick-to-dos.service';
 import { ProjectToDosService } from '../services/project-to-dos.service';
 import { ProjectsService } from '../services/projects.service';
 import { SwPush, SwUpdate } from '@angular/service-worker';
-import { XyzekiAuthData } from '../xyzeki-auth-service';
+import { XyzekiAuthData } from '../auth-services/xyzeki-auth-service';
 
 @Injectable()
 export class NotificationService {

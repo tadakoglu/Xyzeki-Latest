@@ -12,7 +12,9 @@ namespace XYZToDo.Models.Abstract
         IQueryable<Member> Members { get; }
 
         Tuple<string, Member> Login(LoginModel member); // Returns JWT Token with member data
+        string RefreshToken(string username);
         ReturnModel Register(RegisterModel member); //Return -2 if user exists error has ocurred or MemberId, -1 for db errors.
+        
 
         Task<ReturnModel> RequestForgotPasswordEmail(string email);
         bool IsSecurityCodeFoundAndValid(Guid securityCode);

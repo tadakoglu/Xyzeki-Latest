@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router'
 import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
 import { TeamMember } from 'src/app/model/team-member.model.';
 import { NgForm } from '@angular/forms';
-import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
+import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
 import { DataService } from 'src/app/model/services/shared/data.service';
 import { TeamRepository } from 'src/app/model/repository/team-repository';
 import { MemberRepository } from 'src/app/model/repository/member-repository';

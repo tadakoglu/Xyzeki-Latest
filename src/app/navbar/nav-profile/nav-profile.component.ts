@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
-import { XyzekiAuthService } from 'src/app/model/xyzeki-auth-service';
+import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
 import { Router } from '@angular/router';
 
 @Component({

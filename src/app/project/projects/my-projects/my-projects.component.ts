@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit, ChangeDetectionStrategy, HostListener } from '@angular/core';
-import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
+import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
 import { ProjectRepository } from 'src/app/model/repository/project-repository';
 import { Project } from 'src/app/model/project.model';
 import { NgForm } from '@angular/forms';

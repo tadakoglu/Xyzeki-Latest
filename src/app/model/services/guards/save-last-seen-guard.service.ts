@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { XyzekiAuthService } from  '../../xyzeki-auth-service';
+import { XyzekiAuthService } from  '../../auth-services/xyzeki-auth-service';
 import { PrivateTalkMessage } from '../../private-talk-message.model';
 
 @Injectable()

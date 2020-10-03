@@ -3,7 +3,7 @@ import { MemberLicenseRepository } from 'src/app/model/repository/member-license
 import { NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import { MemberLicense } from 'src/app/model/member-license.model';
 import { MemberLicenseSM } from 'src/app/model/member-license-sm.model';
-import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
+import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
 import { MemberLicenseService } from 'src/app/model/services/member-license.service';
 
 @Component({

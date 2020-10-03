@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/guards/auth-guard.service';
-import { XyzekiAuthData, XyzekiAuthService } from './xyzeki-auth-service';
+import {  XyzekiAuthData, XyzekiAuthService } from './auth-services/xyzeki-auth-service';
 
 import { MemberLicenseRepository } from './repository/member-license-repository';
 import { MemberLicenseService } from './services/member-license.service';
@@ -62,8 +62,8 @@ import { ContainerFilesResolverService } from './resolvers/container-files-resol
   ],
   providers: [
     XyzekiDateTimeInfra,
-    XyzekiAuthData,
     XyzekiAuthService,
+    XyzekiAuthData,
     DataService,
     SwitchHourDataService,
     PageSizes,

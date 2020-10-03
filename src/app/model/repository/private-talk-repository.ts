@@ -2,7 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { PrivateTalksService } from '../services/private-talks.service';
 import { PrivateTalk } from '../private-talk.model';
 import { IPrivateTalkRepository } from '../abstract/i-private-talk-repository';
-import { XyzekiAuthService } from  '../xyzeki-auth-service';
+import { XyzekiAuthService } from  '../auth-services/xyzeki-auth-service';
 import { PrivateTalkReceiversService } from '../services/private-talk-receivers.service';
 import { PrivateTalkReceiver } from '../private-talk-receiver.model';
 import { PrivateTalkTeamReceiver } from '../private-talk-team-receiver.model';

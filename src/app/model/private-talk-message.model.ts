@@ -1,4 +1,4 @@
-import { XyzekiAuthService } from  './xyzeki-auth-service';
+import { XyzekiAuthService } from  './auth-services/xyzeki-auth-service';
 
 export class PrivateTalkMessage
 {

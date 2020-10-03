@@ -5,7 +5,7 @@ import { TeamsService } from '../teams.service';
 import { from, of, Observable, BehaviorSubject } from 'rxjs';
 import { map, catchError, take } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { XyzekiAuthService } from  '../../xyzeki-auth-service';
+import { XyzekiAuthService } from  '../../auth-services/xyzeki-auth-service';
 
 @Injectable()
 export class TeamMembersGuardService implements CanActivate {

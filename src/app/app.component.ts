@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, HostListener, ChangeDetectionStrategy, ChangeDetectorRef, Input } from '@angular/core';
-import { XyzekiAuthService } from  './model/xyzeki-auth-service';
+import { XyzekiAuthService } from  './model/auth-services/xyzeki-auth-service';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { CustomNgbDateParserFormatter } from 'src/infrastructure/custom-NgbDate-parser-formatter';
 import { MembersService } from './model/services/members.service';

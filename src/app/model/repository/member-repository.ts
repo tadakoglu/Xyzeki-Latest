@@ -9,7 +9,7 @@ import { IMemberRepository } from '../abstract/i-member-repository';
 import { Member } from '../member.model';
 import { MembersService } from '../services/members.service';
 import { isNullOrUndefined } from 'util';
-import { XyzekiAuthService } from  '../xyzeki-auth-service';
+import { XyzekiAuthService } from  '../auth-services/xyzeki-auth-service';
 import { RegisterModel } from '../register.model';
 import { ReturnModel } from '../return.model';
 

@@ -8,7 +8,7 @@ import { AuthService } from '../services/auth.service';
 import { Team } from '../team.model';
 import { TeamsService } from '../services/teams.service';
 import { MembersService } from '../services/members.service';
-import { XyzekiAuthService } from  '../xyzeki-auth-service';
+import { XyzekiAuthService } from  '../auth-services/xyzeki-auth-service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MemberLicenseRepository } from './member-license-repository';
 import { TeamRepository } from './team-repository';

@@ -6,7 +6,7 @@ import { MemberLicense } from 'src/app/model/member-license.model';
 import { CloudFile } from 'src/app/model/azure-models/cloud-file.model';
 import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
 import { Router, ActivatedRoute } from '@angular/router';
-import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
+import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
 import { Member } from 'src/app/model/member.model';
 import { ContainerRepository } from 'src/app/model/repository/container-repository';
 import { CloudContainer } from 'src/app/model/azure-models/cloud-container.model';

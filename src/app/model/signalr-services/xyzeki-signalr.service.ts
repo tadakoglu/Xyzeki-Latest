@@ -19,7 +19,7 @@ import { PrivateTalkMessage } from '../private-talk-message.model';
 import { CloudContainer } from '../azure-models/cloud-container.model';
 import { CloudFile } from '../azure-models/cloud-file.model';
 import { NotificationService } from '../notification-services/notification.service';
-import { XyzekiAuthService } from '../xyzeki-auth-service';
+import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
 
 @Injectable()
 export class XyzekiSignalrService {

@@ -1,7 +1,7 @@
 
 import { Component, OnInit, ViewChild, OnDestroy, ElementRef, HostListener, AfterViewInit, SimpleChanges, OnChanges, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
+import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
 import { NgForm } from '@angular/forms';
 import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
 import { Member } from 'src/app/model/member.model';

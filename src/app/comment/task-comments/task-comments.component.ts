@@ -7,7 +7,7 @@ import { ProjectToDoCommentsService } from 'src/app/model/services/project-to-do
 import { QuickTaskComment } from 'src/app/model/quick-task-comment.model';
 import { ProjectTaskComment } from 'src/app/model/project-task-comment.model';
 import { NgForm } from '@angular/forms';
-import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
+import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
 import { Member } from 'src/app/model/member.model';
 import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
 import { MemberLicenseRepository } from 'src/app/model/repository/member-license-repository';

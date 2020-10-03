@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { XyzekiAuthService } from 'src/app/model/xyzeki-auth-service';
+import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
 import { Router } from '@angular/router';
 import { PrivateTalkRepository } from 'src/app/model/repository/private-talk-repository';
 

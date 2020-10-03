@@ -104,7 +104,7 @@ namespace XYZToDo.Controllers
         }
 
         [HttpPost("Authenticate")]
-        public  IActionResult Authenticate([FromBody]LoginModel loginModel, [FromQuery] string recaptchaToken) //Accepts JSON body, not x-www-form-urlencoded!
+        public IActionResult Authenticate([FromBody] LoginModel loginModel, [FromQuery] string recaptchaToken) //Accepts JSON body, not x-www-form-urlencoded!
         {
 
             // float score = await this.GetReCaptchaUserResponseScoreAsync(recaptchaToken);
@@ -132,9 +132,17 @@ namespace XYZToDo.Controllers
             return Unauthorized(); //401 Unauthorized      
         }
 
+        [HttpGet("RefreshToken")]
+        public IActionResult RefreshToken()
+        {
+            var member = User.Identity.Name;
+            string refreshToken = AuthRepository.RefreshToken(member);
+            return Ok(refreshToken);
+
+        }
 
         [HttpPost("Register")]
-        public IActionResult Register([FromBody]RegisterModel registerModel, [FromQuery] string recaptchaToken)//Accepts JSON body, not x-www-form-urlencoded!
+        public IActionResult Register([FromBody] RegisterModel registerModel, [FromQuery] string recaptchaToken)//Accepts JSON body, not x-www-form-urlencoded!
         {
             // float score = this.GetReCaptchaUserResponseScoreAsync(recaptchaToken).Result;
             // if (score < 0.5)
@@ -209,7 +217,7 @@ namespace XYZToDo.Controllers
         }
 
         [HttpPost("SetUpNewPassword")]
-        public IActionResult SetUpNewPassword([FromBody]SecurityCodeModel securityCodeModel, [FromQuery] string recaptchaToken)
+        public IActionResult SetUpNewPassword([FromBody] SecurityCodeModel securityCodeModel, [FromQuery] string recaptchaToken)
         {
             //string recaptchaToken = "test";
             // float score = this.GetReCaptchaUserResponseScoreAsync(recaptchaToken).Result;

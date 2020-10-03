@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Route, UrlSegment, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { XyzekiAuthService } from '../xyzeki-auth-service';
+import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
 import { Member } from '../member.model';
 
 import { HttpHeaders, HttpClient } from '@angular/common/http';

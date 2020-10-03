@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener, AfterViewInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { ContainerRepository } from 'src/app/model/repository/container-repository';
-import { XyzekiAuthService } from  'src/app/model/xyzeki-auth-service';
+import { XyzekiAuthService } from  'src/app/model/auth-services/xyzeki-auth-service';
 import { DataService } from 'src/app/model/services/shared/data.service';
 import { MemberLicenseRepository } from 'src/app/model/repository/member-license-repository';
 import { ActivatedRoute, Router } from '@angular/router';
