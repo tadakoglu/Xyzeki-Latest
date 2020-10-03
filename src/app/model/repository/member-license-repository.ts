@@ -15,7 +15,7 @@ export class MemberLicenseRepository implements IMemberLicenseRepository {
     }
     
     loadRepository(){
-        this.loadLicenseRelateds());
+        this.loadLicenseRelateds()
     }
 
     clearLicenseRelateds() {
