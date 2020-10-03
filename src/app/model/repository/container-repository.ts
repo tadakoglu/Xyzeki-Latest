@@ -12,8 +12,6 @@ import { CloudContainers } from '../azure-models/cloud-containers.model';
 export class ContainerRepository implements IContainerRepository {
     constructor(private service: FilesService, private signalService: XyzekiSignalrService,
         private dataService: DataService, private timeService: TimeService) {
-            
-        // this.loadBlobContainers();
 
         this.signalService.newContainerAvailable.subscribe(container => {
             this.saveContainerViaSignalR(container);
@@ -21,15 +19,23 @@ export class ContainerRepository implements IContainerRepository {
         this.signalService.deletedContainerAvailable.subscribe(containerDeleted => {
             this.deleteContainerViaSignalR(containerDeleted);
         })
-        this.dataService.loadAllRepositoriesEvent.subscribe(() => {
-            this.loadBlobContainers(false)
-        })
+        this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadBlobContainers(false) })
+        this.dataService.clearAllRepositoriesEvent.subscribe(() => this.clearBlobContainers());
+
     }
+
+
+
+
+    clearBlobContainers() {
+        this.containers = []
+        this.loaded = false
+    }
+
     public loadBlobContainers(containerToOpen = true) { // ### reload this when team component destroyed.
         this.service.showContainers().subscribe(containersEnc => {
-            this.containers.splice(0, this.containers.length);
-            this.containers.push(...containersEnc.Containers)
-            //this.containers = containersEnc.Containers
+
+            this.containers = containersEnc.Containers
 
             if (containersEnc[0] && containerToOpen)
                 this.containerToOpen.next(containersEnc[0])
@@ -38,10 +44,9 @@ export class ContainerRepository implements IContainerRepository {
         }
         );
     }
-    
+
     loadContainersViaResolver(containers: CloudContainers) {
-        this.containers.splice(0, this.containers.length);
-        this.containers.push(...containers.Containers)
+        this.containers = containers.Containers;
     }
     public loaded = false;
 

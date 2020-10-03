@@ -5,33 +5,42 @@ import { CloudFile } from '../azure-models/cloud-file.model';
 import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
 import { Injectable } from '@angular/core';
 import { CloudFiles } from '../azure-models/cloud-files.model';
+import { DataService } from '../services/shared/data.service';
 
 @Injectable()
 export class FileRepository implements IFileRepository {
 
-    constructor(private service: FilesService, private signalService: XyzekiSignalrService) {
+    constructor(private service: FilesService, private signalService: XyzekiSignalrService, private dataService: DataService) {
         this.signalService.newContainerBlobAvailable.subscribe(containerBlob => {
             this.saveContainerBlobViaSignalR(containerBlob);
         })
         this.signalService.deletedContainerBlobAvailable.subscribe(containerBlobDeleted => {
             this.deleteContainerBlobViaSignalR(containerBlobDeleted);
         })
+
+        this.dataService.clearAllRepositoriesEvent.subscribe(() => this.clearContainerFiles());
+
+    }
+    clearContainerFiles() {
+        this.files = []
+        this.containerName = undefined;
+        this.loaded = false;
+        this.uploadHandler = undefined
+        this.fileDownloadInitiated = undefined;
+        this.fileUploadInitiated = undefined;
     }
     private containerName: string
 
-    loadContainerFilesViaResolver(files: CloudFiles, containerName: string){
+    loadContainerFilesViaResolver(files: CloudFiles, containerName: string) {
         this.containerName = containerName;
-        this.files.splice(0, this.files.length);
-        this.files.push(...files.Files);
-    }
-    
-    loadAll(containerName: string) {       
-        this.containerName = containerName; 
-        this.service.showBlobs(containerName).subscribe(files => {
-            this.files.splice(0, this.files.length);
-            this.files.push(...files.Files);
+        this.files = files.Files;
 
-            //this.files = files.Files; 
+    }
+
+    loadAll(containerName: string) {
+        this.containerName = containerName;
+        this.service.showBlobs(containerName).subscribe(files => {
+            this.files = files.Files;
             this.loaded = true;
         }, error => console.error(error));
     }
@@ -39,7 +48,6 @@ export class FileRepository implements IFileRepository {
 
     public loaded = false;
     getFiles(): CloudFile[] {
-        // return this.files
         return this.files.sort((cf1, cf2) => new Date(cf2.CreatedAt).getTime() - new Date(cf1.CreatedAt).getTime())
 
     }

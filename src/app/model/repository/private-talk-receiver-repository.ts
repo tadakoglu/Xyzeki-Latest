@@ -12,23 +12,21 @@ import { concatMap } from 'rxjs/operators';
 @Injectable()
 export class PrivateTalkReceiverRepository {
     constructor(private psz: PageSizes, private dataService: DataService, public signalService: XyzekiSignalrService, private receiversService: PrivateTalkReceiversService, private teamReceiversService: PrivateTalkTeamReceiversService) {
-        // this.loadAll(1);
-
-        this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadAll(1) });
+       this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadAll(1) });
+       this.dataService.clearAllRepositoriesEvent.subscribe(() => this.clearPrivateTalkReceivers());
 
     }
-
+    clearPrivateTalkReceivers(){
+        this.privateTalkReceivers = []
+        this.privateTalkTeamReceivers = []
+        this.privateTalkId=undefined
+    }
     loadAll(pageNo?: number, searchValue?: string) { //  private talk repo can do reloadeding when team component destroyed)
         this.receiversService.myPrivateTalkReceivers(pageNo, searchValue, this.psz.PTPageSize).subscribe(ptr => { // Page 1
-            this.privateTalkReceivers.splice(0, this.privateTalkReceivers.length);
-            this.privateTalkReceivers.push(...ptr);
-            //this.privateTalkReceivers = ptr;
+                this.privateTalkReceivers = ptr;
         });
         this.teamReceiversService.myPrivateTalkTeamReceivers(pageNo, searchValue, this.psz.PTPageSize).subscribe(pttr => { // Page 1
-            this.privateTalkTeamReceivers.splice(0, this.privateTalkTeamReceivers.length);
-            this.privateTalkTeamReceivers.push(...pttr);
-            //this.privateTalkTeamReceivers = pttr;
-            //this.loading = false;
+            this.privateTalkTeamReceivers = pttr;
         });
     }
 

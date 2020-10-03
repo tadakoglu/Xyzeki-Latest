@@ -10,9 +10,18 @@ import { DataService } from '../services/shared/data.service';
 @Injectable()
 export class MemberLicenseRepository implements IMemberLicenseRepository {
     constructor(private service: MemberLicenseService, private dataService: DataService) {
-        // this.loadLicenseRelateds();
-     
         this.dataService.loadAllRepositoriesEvent.subscribe(() => this.loadLicenseRelateds());
+        this.dataService.clearAllRepositoriesEvent.subscribe(() => this.clearLicenseRelateds());
+
+    }
+    clearLicenseRelateds() {
+        this.memberLicense = new MemberLicense(null, null, null, null, null, null, null, null, null, null, null, null);
+
+        this.accessGranted = false;
+        this.primaryAccessGranted = false;
+        this.AzureSaSizeInGb = 0
+        this.AzureSaUsedSizeInBytes = 0
+
     }
     loadLicenseRelateds() {  // ### reload this when team component destroyed.
 

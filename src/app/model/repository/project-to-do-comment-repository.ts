@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ProjectToDoCommentRepository implements IProjectToDoCommentRepository {
 
-    constructor(private service: ProjectToDoCommentsService,
+    constructor(private service: ProjectToDoCommentsService, private dataService: DataService,
         private signalService: XyzekiSignalrService, private timeService: TimeService) {
         this.signalService.newProjectToDoCommentAvailable.subscribe(ptComment => {
             this.savePTCommentViaSignalR(ptComment[0]);
@@ -17,6 +17,13 @@ export class ProjectToDoCommentRepository implements IProjectToDoCommentReposito
         this.signalService.deletedProjectToDoCommentAvailable.subscribe(ptComment => {
             this.deletePTCommentViaSignalR(ptComment);
         })
+
+        this.dataService.clearAllRepositoriesEvent.subscribe(() => { this.clearPTComments() })
+
+    }
+    clearPTComments(){
+        this.taskId = undefined;
+        this.projectToDoComments =[]
     }
 
     private taskId: number
@@ -87,11 +94,6 @@ export class ProjectToDoCommentRepository implements IProjectToDoCommentReposito
         if (-1 != index)
             this.projectToDoComments.splice(index, 1);
     }
-    // public closeHubConnection() {
-    //     this.signalService.closeHubConnection();
-    // }
-    // public openHubConnection() {
-    //     this.signalService.openHubConnection();
-    // }
+   
 
 }

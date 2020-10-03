@@ -1,7 +1,7 @@
 import { IProjectToDoRepository } from '../abstract/i-project-to-do-repository';
 import { ProjectTask } from '../project-task.model';
 import { ProjectToDosService } from '../services/project-to-dos.service';
-import { XyzekiAuthService } from  '../auth-services/xyzeki-auth-service';
+import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
 import { CommentCountModel } from '../comment-count.model';
 import { Project } from '../project.model';
 import { ProjectRepository } from './project-repository';
@@ -18,11 +18,9 @@ import { Injectable } from '@angular/core';
 export class ProjectToDoRepository implements IProjectToDoRepository {
 
 
-    constructor(private service: ProjectToDosService, private signalService: XyzekiSignalrService, public xyzekiAuthService : XyzekiAuthService ,
+    constructor(private service: ProjectToDosService, private signalService: XyzekiSignalrService, public xyzekiAuthService: XyzekiAuthService,
         private commentSignalService: XyzekiSignalrService, private projectSignalService: XyzekiSignalrService,
         private projectRepository: ProjectRepository, private dataService: DataService, private timeService: TimeService) {
-
-        // this.loadAll();
 
         this.signalService.deletedProjectToDoAvailable.subscribe(projectToDo => {
             this.deleteProjectToDoViaSignalR(projectToDo);
@@ -60,33 +58,35 @@ export class ProjectToDoRepository implements IProjectToDoRepository {
         })
 
         this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadAll(); });
+        this.dataService.clearAllRepositoriesEvent.subscribe(() => { this.clearProjectToDos() })
 
     }
 
+    clearProjectToDos() {
+        this.projectToDos = [];
+        this.ptCommentsCount = [];
+        this.projectToDosAssignedToMe = []
+        this.ptAssignedCommentsCount = []
+        this.projectId = undefined;
+        this.reOrdering = false;
+    }
     loadProjectsToDosViaResolver(projectToDos: ProjectTask[], projectId: number) {
         this.projectId = projectId;
         let tempPT = Object.assign([], projectToDos.sort((pt1, pt2) => pt1.Order - pt2.Order));
-        this.projectToDos.splice(0, this.projectToDos.length);
-        this.projectToDos.push(...tempPT);
+        this.projectToDos = tempPT
     }
     loadProjectsToDosCommentsCountViaResolver(ptCommentsCount: CommentCountModel[]) {
-        this.ptCommentsCount.splice(0, this.ptCommentsCount.length);
-        this.ptCommentsCount.push(...ptCommentsCount);
+        this.ptCommentsCount = ptCommentsCount
     }
 
     loadProject(projectId: number) {
         this.projectId = projectId;
         this.service.projectToDos(projectId).subscribe(projectTodos => {
             let tempPT = Object.assign([], projectTodos.sort((pt1, pt2) => pt1.Order - pt2.Order));
-            this.projectToDos.splice(0, this.projectToDos.length);
-            this.projectToDos.push(...tempPT);
-            //this.projectToDos = projectTodos.sort((pt1, pt2) => pt1.Order - pt2.Order);
-
+            this.projectToDos = tempPT
         });
         this.service.projectToDosCommentsCount(projectId).subscribe(ptCommentsCount => {
-            this.ptCommentsCount.splice(0, this.ptCommentsCount.length);
-            this.ptCommentsCount.push(...ptCommentsCount);
-            //this.ptCommentsCount = ptCommentsCount;
+            this.ptCommentsCount = ptCommentsCount;
         })
     }
 
@@ -99,18 +99,11 @@ export class ProjectToDoRepository implements IProjectToDoRepository {
     loadAll(searchValue?: string) { // ### Reload this when team component destroyed
         this.service.projectToDosAssignedToMe(searchValue).subscribe(assignedToMe => {
             let PTA = Object.assign([], assignedToMe.sort((qt1, qt2) => qt1.Order - qt2.Order))
-
-            this.projectToDosAssignedToMe.splice(0, this.projectToDosAssignedToMe.length)
-            this.projectToDosAssignedToMe.push(...PTA);
-
-            //this.projectToDosAssignedToMe = assignedToMe.sort((qt1, qt2) => qt1.Order - qt2.Order);
+            this.projectToDosAssignedToMe = PTA
         })
 
         this.service.assignedToMePTCommentsCount(searchValue).subscribe(ptAssignedCommentsCount => {
-            this.ptAssignedCommentsCount.splice(0, this.ptAssignedCommentsCount.length);
-            this.ptAssignedCommentsCount.push(...ptAssignedCommentsCount);
-
-            //this.ptAssignedCommentsCount = ptAssignedCommentsCount;
+            this.ptAssignedCommentsCount = ptAssignedCommentsCount;
         })
     }
     private projectToDos: ProjectTask[] = []
@@ -172,9 +165,6 @@ export class ProjectToDoRepository implements IProjectToDoRepository {
                 if (pTask)
                     pTask.Order = TOM.Order;
 
-                // pTaskAss = this.projectToDosAssignedToMe.find(pt => pt.TaskId == TOM.TaskId);
-                // if (pTaskAss)
-                //     pTaskAss.Order = TOM.Order;
             })
 
             let tempPT = Object.assign([], this.projectToDos.sort((pt1, pt2) => pt1.Order - pt2.Order));
@@ -201,8 +191,8 @@ export class ProjectToDoRepository implements IProjectToDoRepository {
 
 
     filterBasedOnProject = (pt: ProjectTask) => {
-        if (this.getProjectSpecial(pt.ProjectId) && this.getProjectSpecial(pt.ProjectId).Privacy != PrivacyModes.listMode && ((this.getProjectSpecial(pt.ProjectId).Privacy == PrivacyModes.onlyOwner && this.getProjectSpecial(pt.ProjectId).Owner == this.xyzekiAuthService .Username) ||
-            (this.getProjectSpecial(pt.ProjectId).Privacy == PrivacyModes.onlyOwnerAndPM && (this.getProjectSpecial(pt.ProjectId).ProjectManager == this.xyzekiAuthService .Username || this.getProjectSpecial(pt.ProjectId).Owner == this.xyzekiAuthService .Username))
+        if (this.getProjectSpecial(pt.ProjectId) && this.getProjectSpecial(pt.ProjectId).Privacy != PrivacyModes.listMode && ((this.getProjectSpecial(pt.ProjectId).Privacy == PrivacyModes.onlyOwner && this.getProjectSpecial(pt.ProjectId).Owner == this.xyzekiAuthService.Username) ||
+            (this.getProjectSpecial(pt.ProjectId).Privacy == PrivacyModes.onlyOwnerAndPM && (this.getProjectSpecial(pt.ProjectId).ProjectManager == this.xyzekiAuthService.Username || this.getProjectSpecial(pt.ProjectId).Owner == this.xyzekiAuthService.Username))
             || (this.getProjectSpecial(pt.ProjectId).Privacy == PrivacyModes.open) || (this.getProjectSpecial(pt.ProjectId).Privacy == PrivacyModes.openOnlyTasks)))
             return pt;
     }
@@ -238,12 +228,12 @@ export class ProjectToDoRepository implements IProjectToDoRepository {
     checkOwnerOrProjectManager(taskId) {
         let pTask = this.projectToDos.find(val => val.TaskId == taskId);
 
-        let isOwner: boolean = this.getProject(pTask.ProjectId).Owner == this.xyzekiAuthService .Username;
+        let isOwner: boolean = this.getProject(pTask.ProjectId).Owner == this.xyzekiAuthService.Username;
         if (isOwner)
             return true;
 
         // proje yöneticisi izin ver
-        let isProjectManager: boolean = this.getProject(pTask.ProjectId).ProjectManager == this.xyzekiAuthService .Username;
+        let isProjectManager: boolean = this.getProject(pTask.ProjectId).ProjectManager == this.xyzekiAuthService.Username;
         if (isProjectManager)
             return true;
 
@@ -251,19 +241,19 @@ export class ProjectToDoRepository implements IProjectToDoRepository {
     }
     checkPrivilege(pTask: ProjectTask): boolean {
         // sahip ise izin ver
-        let isOwner: boolean = this.getProject(pTask.ProjectId).Owner == this.xyzekiAuthService .Username;
+        let isOwner: boolean = this.getProject(pTask.ProjectId).Owner == this.xyzekiAuthService.Username;
         if (isOwner)
             return true;
 
         // proje yöneticisi izin ver
-        let isProjectManager: boolean = this.getProject(pTask.ProjectId).ProjectManager == this.xyzekiAuthService .Username;
+        let isProjectManager: boolean = this.getProject(pTask.ProjectId).ProjectManager == this.xyzekiAuthService.Username;
         if (isProjectManager)
             return true;
 
 
         // sahip değilse ve de proje yöneticisi değilse, eğer sadece state, isCompleted,finished değişmişsse ve de ona atanmış ise izin ver.
         let pTaskOld: ProjectTask = Object.assign({}, this.projectToDos.find(val => val.TaskId == pTask.TaskId));
-        let assignedToMe: boolean = pTask.AssignedTo == this.xyzekiAuthService .Username;
+        let assignedToMe: boolean = pTask.AssignedTo == this.xyzekiAuthService.Username;
         let isNotAndOnlyStateAndCompletedChanged: boolean = !isOwner && !isProjectManager && assignedToMe && (
             pTaskOld.Archived == pTask.Archived && pTaskOld.AssignedTo == pTask.AssignedTo
             && pTaskOld.Deadline == pTask.Deadline
@@ -303,7 +293,7 @@ export class ProjectToDoRepository implements IProjectToDoRepository {
                 projectTask.TaskId = projectToDoId;
                 this.projectToDos.push(projectTask);
 
-                if (projectTask.AssignedTo == this.xyzekiAuthService .Username) // if assigned to me and not exists in assignedTo repo.
+                if (projectTask.AssignedTo == this.xyzekiAuthService.Username) // if assigned to me and not exists in assignedTo repo.
                     this.projectToDosAssignedToMe.push(projectTask);
 
                 this.ptCommentsCount.push(new CommentCountModel(0, projectToDoId))
@@ -347,7 +337,7 @@ export class ProjectToDoRepository implements IProjectToDoRepository {
         let index = this.projectToDosAssignedToMe.findIndex(val => val.TaskId == projectToDo.TaskId)
         if (-1 == index) // Assigned task is not founded on repository
         {
-            if (this.xyzekiAuthService .Username == projectToDo.AssignedTo) {
+            if (this.xyzekiAuthService.Username == projectToDo.AssignedTo) {
                 this.projectToDosAssignedToMe.push(projectToDo);
                 //comment count 
                 this.service.assignedToMePTCommentsCount().subscribe((ccm: CommentCountModel[]) => {
@@ -433,7 +423,7 @@ export class ProjectToDoRepository implements IProjectToDoRepository {
     deleteProjectToDo(taskId: number) { // to owner, to manager, to other project shareholders
         let pTask: ProjectTask = this.projectToDos.find(value => value.TaskId == taskId);
 
-        if ((this.getProject(pTask.ProjectId).Owner != this.xyzekiAuthService .Username) && (this.getProject(pTask.ProjectId).ProjectManager != this.xyzekiAuthService .Username))
+        if ((this.getProject(pTask.ProjectId).Owner != this.xyzekiAuthService.Username) && (this.getProject(pTask.ProjectId).ProjectManager != this.xyzekiAuthService.Username))
             return;
 
         if (pTask)

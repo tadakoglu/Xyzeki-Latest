@@ -24,6 +24,8 @@ export class DataService {
   saveChangesEvent: EventEmitter<[string[], number[]]> = new EventEmitter();
 
   public loadAllRepositoriesEvent: EventEmitter<void> = new EventEmitter();
+  public clearAllRepositoriesEvent: EventEmitter<void> = new EventEmitter();
+
 
   public signalConnectionSeconds: EventEmitter<number> = new EventEmitter();
   public startSignalConnection: EventEmitter<void> = new EventEmitter();

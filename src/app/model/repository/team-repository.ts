@@ -12,11 +12,14 @@ import { DataService } from '../services/shared/data.service';
 export class TeamRepository implements ITeamRepository {
     // Note: C# auto-properties return attributes with lowercase letters  !!! TS models should be start with lowercase or same, unless, Angular won't model bind!
     constructor(private service: TeamsService, private dataService: DataService) {
-        // this.loadMYRelateds();
-        // this.loadPTRelateds();
-
         this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadMYRelateds(false); this.loadPTRelateds() });
-
+        this.dataService.clearAllRepositoriesEvent.subscribe(() => { this.clearTeams() })
+    }
+    clearTeams() {
+        this.myTeams = [] // sahip olduğum takımlar
+        this.myTeamsJoined = [] // katılmış olduğum takılmlar
+        this.allTeamsPT = [] // sahip olduğum ve katılmış olduğum takımlar(ikisi bir arada)
+        this.informUser=undefined
     }
     loadMYRelateds(teamToOpen = true) { // ##load this when team comp destroyed.
         this.service.myTeams().subscribe(teams => {
@@ -43,9 +46,9 @@ export class TeamRepository implements ITeamRepository {
     loadMyTeamsViaResolver(myTeams: Team[]) {
         this.myTeams.splice(0, this.myTeams.length);
         this.myTeams.push(...myTeams);
-        
+
         if (myTeams[0])
-        this.teamToOpen.next(myTeams[0])
+            this.teamToOpen.next(myTeams[0])
     }
     private myTeams: Team[] = []
     private myTeamsJoined: Team[] = []

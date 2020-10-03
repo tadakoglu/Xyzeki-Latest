@@ -7,26 +7,33 @@ import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service
 import { TimeService } from '../services/time.service';
 import { concatMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import { DataService } from '../services/shared/data.service';
 
 // @Injectable()
 @Injectable()
 export class PrivateTalkMessageRepository implements IPrivateTalkMessageRepository {
 
     constructor(private service: PrivateTalkMessagesService,
-        private signalService: XyzekiSignalrService, private psz: PageSizes, private timeService: TimeService) {
+        private signalService: XyzekiSignalrService, private psz: PageSizes, private timeService: TimeService, private dataService: DataService) {
 
         this.newMessageSubscription = this.signalService.newPrivateTalkMessageAvailable.subscribe(message => {
             this.savePrivateTalkMessageViaSignalR(message[0], message[1]);
         });
+
+        this.dataService.clearAllRepositoriesEvent.subscribe(() => this.clearPrivateTalkMessages());
+
+    }
+    clearPrivateTalkMessages(){
+        this.privateTalkMessages=[]
+        this.privateTalkId = 0;
+        this.typingSignalMessage=undefined;
     }
     private privateTalkId: number = 0;
 
     loadPrivateTalkMessages(privateTalkId: number) {
         this.privateTalkId = privateTalkId;
         this.service.privateTalkMessages(privateTalkId, 1, this.psz.PTMPageSize).subscribe(messages => {
-            this.privateTalkMessages.splice(0, this.privateTalkMessages.length)
-            this.privateTalkMessages.push(...messages);
-            //this.privateTalkMessages = messages
+            this.privateTalkMessages = messages
         });
     }
     newMessageSubscription: Subscription;
@@ -73,10 +80,6 @@ export class PrivateTalkMessageRepository implements IPrivateTalkMessageReposito
 
         if (!isTypingSignal) { // PrivateTalkMessage
 
-            // if (this.typingSignalMessage && this.typingSignalMessage.Sender == privateTalkMessage.Sender)
-            //     this.typingSignalMessage = undefined;
-
-            // //
             let index = this.privateTalkMessages.findIndex(val => val.MessageId == privateTalkMessage.MessageId)
             if (-1 == index) // Not founded on repository
             {
@@ -124,12 +127,6 @@ export class PrivateTalkMessageRepository implements IPrivateTalkMessageReposito
     }
 
 
-    // public closeHubConnection() {
-    //     this.signalService.closeHubConnection();
-    // }
-    // public openHubConnection() {
-    //     this.signalService.openHubConnection();
-    // }
 
 
 }

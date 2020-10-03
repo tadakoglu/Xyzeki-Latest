@@ -11,16 +11,16 @@ export class AdminRepository implements IAdminRepository {
     constructor(private service: MemberLicenseService, private dataService: DataService) {
 
         this.dataService.loadAllRepositoriesEvent.subscribe(() => this.loadAllLicences());
-
+        this.dataService.clearAllRepositoriesEvent.subscribe(() => this.clearAllLicences());
 
 
     }
+    clearAllLicences() {
+        this.allLicenses = []
+    }
     loadAllLicences() {
         this.service.allLicenses().subscribe((lics) => {
-            this.allLicenses.splice(0, this.allLicenses.length);
-            this.allLicenses.push(...lics);
-
-            //this.allLicenses = lics
+            this.allLicenses = lics
         }
         );
     }

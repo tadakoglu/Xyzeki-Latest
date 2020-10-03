@@ -24,35 +24,38 @@ export class ProjectRepository implements IProjectRepository {
             this.savePOMs(POMs);
         })
         this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadProjects(); });
+        this.dataService.clearAllRepositoriesEvent.subscribe(() => { this.clearProjects() })
+
+    }
+    clearProjects(){
+        this.myProjects=[]
+        this.myProjectsAssigned=[]
+        this.loading = false
+        this.reOrdering=false;
+
     }
     loadProjects() { // ## load this when team comp destroyed.
         this.service.myProjects().subscribe(projects => {
             let tempP = Object.assign([], projects.sort((pt1, pt2) => pt1.Order - pt2.Order));
-            this.myProjects.splice(0, this.myProjects.length);
-            this.myProjects.push(...tempP);
-            //this.myProjects = projects.sort((pt1, pt2) => pt1.Order - pt2.Order);
+            this.myProjects = tempP
             this.loading = false;
         }
         );
 
         this.service.myProjectsAssigned().subscribe(projectsAssigned => {
             let tempPTA = Object.assign([], projectsAssigned.sort((pt1, pt2) => pt1.Order - pt2.Order))
-            this.myProjectsAssigned.splice(0, this.myProjectsAssigned.length);
-            this.myProjectsAssigned.push(...tempPTA)
-            //this.myProjectsAssigned = projectsAssigned.sort((pt1, pt2) => pt1.Order - pt2.Order)
+            this.myProjectsAssigned = tempPTA
 
         });
     }
 
     loadMyProjectsViaResolver(myProjects: Project[]) {
         let tempP = Object.assign([], myProjects.sort((pt1, pt2) => pt1.Order - pt2.Order));
-        this.myProjects.splice(0, this.myProjects.length);
-        this.myProjects.push(...tempP);
+        this.myProjects = tempP
     }
     loadProjectsAssignedViaResolver(projectsAssigned: Project[]) {
         let tempPTA = Object.assign([], projectsAssigned.sort((pt1, pt2) => pt1.Order - pt2.Order))
-        this.myProjectsAssigned.splice(0, this.myProjectsAssigned.length);
-        this.myProjectsAssigned.push(...tempPTA)
+        this.myProjectsAssigned = tempPTA
     }
 
     private myProjects: Project[] = []
@@ -122,13 +125,6 @@ export class ProjectRepository implements IProjectRepository {
 
     }
 
-    // getMyProjectsAssigned(): Project[] { // Privacy filtreleme işini front endde yapıyorum yoksa sorunlar çıkıyor.
-    //     return this.myProjectsAssigned.filter(p => p.Privacy != PrivacyModes.onlyOwner && (
-    //         p.Privacy == PrivacyModes.open // ve eğer içinde bulunuyorsa
-    //         || p.Privacy == PrivacyModes.listMode // ve eğer içinde bulunuyorsa
-    //         || (p.Privacy == PrivacyModes.onlyOwnerAndPM && p.ProjectManager == this.xyzekiAuthService .Username)
-    //         || (p.Privacy == PrivacyModes.openOnlyTasks && p.ProjectManager == this.xyzekiAuthService .Username)))
-    // }
     getMyProjectsAssigned(): Project[] { // Privacy filtreleme işini front endde yapıyorum yoksa sorunlar çıkıyor.
         return this.myProjectsAssigned
     }
@@ -136,19 +132,7 @@ export class ProjectRepository implements IProjectRepository {
     getMyProjectsAssignedWithoutPrivacyFilter() {
         return this.myProjectsAssigned;
     }
-    // getMyProjectsAssignedIncludingOpenOnlyTasks(): Project[] {
-    //     return this.myProjectsAssigned;
-    // }
-
-    // getNext(): number {
-    //     let projects = this.myProjects;
-    //     if (projects.length >= 1) {
-    //         let nextIndex = projects[projects.length - 1].Order + 1;
-    //         return nextIndex;
-    //     } else {
-    //         return 0;
-    //     }
-    // }
+    
     getNext(): number {
         let pts = this.myProjects
         if (pts.length >= 1) {

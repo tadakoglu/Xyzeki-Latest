@@ -8,7 +8,7 @@ import { AuthService } from '../services/auth.service';
 import { Team } from '../team.model';
 import { TeamsService } from '../services/teams.service';
 import { MembersService } from '../services/members.service';
-import { XyzekiAuthService } from  '../auth-services/xyzeki-auth-service';
+import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MemberLicenseRepository } from './member-license-repository';
 import { TeamRepository } from './team-repository';
@@ -19,10 +19,7 @@ import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service
 @Injectable()
 export class TeamMemberRepository implements ITeamMemberRepository {
 
-    constructor(private teamRepo: TeamRepository, private mLicense: MemberLicenseRepository, private service: TeamMembersService, private service2: TeamsService, private serviceMember: AuthService, private signalService: XyzekiSignalrService, private membersService: MembersService, public xyzekiAuthService : XyzekiAuthService , private permissions: MemberLicenseRepository, private dataService: DataService) {
-
-        // this.loadMYRelateds();
-        // this.loadPTRelateds();
+    constructor(private teamRepo: TeamRepository, private mLicense: MemberLicenseRepository, private service: TeamMembersService, private service2: TeamsService, private serviceMember: AuthService, private signalService: XyzekiSignalrService, private membersService: MembersService, public xyzekiAuthService: XyzekiAuthService, private permissions: MemberLicenseRepository, private dataService: DataService) {
         //incoming signals
         this.signalService.newTeamMemberJoinedAvailable.subscribe(teamMemberJ => { // add operation
             this.saveTeamMemberJoinedViaSignalR(teamMemberJ);
@@ -54,75 +51,74 @@ export class TeamMemberRepository implements ITeamMemberRepository {
 
         this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadMYRelateds(); this.loadPTRelateds() });
 
+        this.dataService.clearAllRepositoriesEvent.subscribe(() => { this.clearTeamMembers() })
 
+
+
+    }
+    clearTeamMembers() {
+        this.TeamId = 0
+        this.teamMembers = [] // üyemizin seçmiş olduğu takım'daki takım üyeleri
+
+        this.teamMembersOwned = [] // sahip olduğum takımlardaki takım üyeleri
+        this.teamMembersJoined = [] // katılmış olduğum takımlardaki takım üyeleri
+        this.teamsJoined = []; // katılmış olduğum takımlar
+        this.teamMembersOwnedAsMembers = [];  // sahip olduğum takımlardaki takım üyelerinin üyelik bilgileri(member) dizisi
+        this.teamMembersJoinedAsMembers = []; // katılmış olduğum takımlardaki takım üyelerinin üyelik bilgileri(member) dizisi
+
+        this.allTeamMembersPT = []; // sahip olduğum ve katılmış olduğum takımlardaki takım üyeleri
+        this.allTeamMembersPTAsMembers = []; // sahip olduğum ve katılmış olduğum takımlardaki takım üyelerinin üyelik bilgileri(member) dizisi; burası yukarıdakilerin düzgünce birleşimidir.
+        this.informUser = undefined;
 
     }
     loadMYRelateds() { // ##load this when team comp destroyed.
         //Start: For assign autocomplete components
         this.service.teamMembersOwned().subscribe(tmo => {
-            this.teamMembersOwned.splice(0, this.teamMembersOwned.length);
-            this.teamMembersOwned.push(...tmo);
-            //this.teamMembersOwned = tmo
+            this.teamMembersOwned = tmo
         }
         )
-        //End
 
         //Start: For invitations
         this.service.teamMembersJoined().subscribe(tmsj => {
-            this.teamMembersJoined.splice(0, this.teamMembersJoined.length);
-            this.teamMembersJoined.push(...tmsj);
-            //this.teamMembersJoined = tmsj
+            this.teamMembersJoined = tmsj
         }
         );
         this.service2.teamsJoined().subscribe(tj => {
-            this.teamsJoined.splice(0, this.teamsJoined.length);
-            this.teamsJoined.push(...tj);
-            //this.teamsJoined = tj
+            this.teamsJoined = tj
         }
         );
-        //End 
+
 
         this.service.teamMembersOwnedAsMembers().subscribe(tmoAsM => {
-            this.teamMembersOwnedAsMembers.splice(0, this.teamMembersOwnedAsMembers.length);
-            this.teamMembersOwnedAsMembers.push(...tmoAsM);
-            //this.teamMembersOwnedAsMembers = tmoAsM
+            this.teamMembersOwnedAsMembers = tmoAsM
         })
         this.service.teamMembersJoinedAsMembers().subscribe(tmjAsM => {
-            this.teamMembersJoinedAsMembers.splice(0, this.teamMembersJoinedAsMembers.length);
-            this.teamMembersJoinedAsMembers.push(...tmjAsM)
-            //this.teamMembersJoinedAsMembers = tmjAsM
+            this.teamMembersJoinedAsMembers = tmjAsM
         })
     }
     loadPTRelateds() { // ##load this when team comp destroyed. // private talk or project manager assignment box
         this.service.allTeamMembersPT().subscribe(teamMembers => {
-            this.allTeamMembersPT.splice(0, this.allTeamMembersPT.length);
-            this.allTeamMembersPT.push(...teamMembers);
-            //this.allTeamMembersPT = teamMembers
+            this.allTeamMembersPT = teamMembers
         })
 
         this.service.allTeamMembersPTAsMembers().subscribe(teamMembersAs => {
-            this.allTeamMembersPTAsMembers.splice(0, this.allTeamMembersPTAsMembers.length);
-            this.allTeamMembersPTAsMembers.push(...teamMembersAs);
-            //this.allTeamMembersPTAsMembers = teamMembersAs
+            this.allTeamMembersPTAsMembers = teamMembersAs
         })
     }
     loadTeamMembers(teamId: number) {
         //add and update here with id on signalr
         this.service.teamMembers(teamId).subscribe(members => {
-            this.teamMembers.splice(0, this.teamMembers.length);
-            this.teamMembers.push(...members);
-            //this.teamMembers = members; 
+            this.teamMembers = members;
             this.TeamId = teamId;
         });
         //Start: For my-accounts and transformation tm=> member syste
     }
-
-
-    loadTeamMembersViaResolver(teamMembers: TeamMember[],teamId:number) {
+    loadTeamMembersViaResolver(teamMembers: TeamMember[], teamId: number) {
         this.TeamId = teamId;
-        this.teamMembers.splice(0, this.teamMembers.length);
-        this.teamMembers.push(...teamMembers);
+        this.teamMembers = teamMembers;
     }
+
+
     private teamMembers: TeamMember[] = []
     public TeamId: number = 0
 
@@ -177,12 +173,12 @@ export class TeamMemberRepository implements ITeamMemberRepository {
             this.service.saveTeamMember(teamMember).subscribe((id) => {
                 teamMember.TeamMemberId = id;
 
-                if (this.xyzekiAuthService .Username == teamMember.Username)
+                if (this.xyzekiAuthService.Username == teamMember.Username)
                     teamMember.Status = true;
 
                 this.teamMembers.push(teamMember);
 
-                if (this.xyzekiAuthService .Username != teamMember.Username)
+                if (this.xyzekiAuthService.Username != teamMember.Username)
                     this.signalService.notifyNewTeamMember(teamMember, 'new');
 
                 let index: number = this.teamMembersOwnedAsMembers.findIndex(m => m.Username == teamMember.Username);
@@ -288,7 +284,7 @@ export class TeamMemberRepository implements ITeamMemberRepository {
             if (status) {
                 if (this.teamMembersJoined.length == 0 && this.permissions) {
                     this.permissions.removeMemberLicenseForJoinedTeamMember();
-                    this.xyzekiAuthService .LogOut();
+                    this.xyzekiAuthService.LogOut();
                 }
             }
 
@@ -355,12 +351,7 @@ export class TeamMemberRepository implements ITeamMemberRepository {
 
     }
 
-    // public closeHubConnection() {
-    //     this.signalService.closeHubConnection();
-    // }
-    // public openHubConnection() {
-    //     this.signalService.openHubConnection();
-    // }
+
 
 
 }
@@ -373,7 +364,7 @@ export class TeamMemberRepository implements ITeamMemberRepository {
 
     // saveTeamMember(teamMember: TeamMember) {
     //     // one-observable-feeding-into-another
-    //     this.service.saveTeamMember(teamMember).pipe(flatMap( ()=> {
+    //     this.service.saveTeamMember(teamMember).pipe(concatMap( ()=> {
     //         return this.serviceMember.getMember(teamMember.Username)
     //     })).subscribe(member=> {
     //         this.teamMembers.push(member);

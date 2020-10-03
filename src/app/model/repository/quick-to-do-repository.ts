@@ -3,7 +3,7 @@ import { QuickTask } from '../quick-task.model';
 import { QuickToDosService } from '../services/quick-to-dos.service';
 import { Injectable } from '@angular/core';
 
-import { XyzekiAuthService } from  '../auth-services/xyzeki-auth-service';
+import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
 import { CommentCountModel } from '../comment-count.model';
 import { PageSizes } from 'src/infrastructure/page-sizes';
 import { TaskOrderModel } from '../task-order.model';
@@ -17,11 +17,8 @@ import { concatMap } from 'rxjs/operators';
 export class QuickToDoRepository implements IQuickToDoRepository {
 
     constructor(private psz: PageSizes, private service: QuickToDosService,
-        public xyzekiAuthService : XyzekiAuthService , private signalService: XyzekiSignalrService,
+        public xyzekiAuthService: XyzekiAuthService, private signalService: XyzekiSignalrService,
         private commentSignalService: XyzekiSignalrService, private dataService: DataService, private timeService: TimeService) {
-
-        // this.loadAll();
-        // end of comments count
 
         this.signalService.deletedQuickToDoAvailable.subscribe(quickToDo => {
             this.deleteQuickToDoViaSignalR(quickToDo);
@@ -50,7 +47,16 @@ export class QuickToDoRepository implements IQuickToDoRepository {
         })
 
         this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadAll(); });
+        this.dataService.clearAllRepositoriesEvent.subscribe(() => { this.clearQuickToDos() })
 
+    }
+    clearQuickToDos() {
+        this.myQuickToDos = []
+        this.assignedToMe = []
+        this.qtCommentsCount = [];
+        this.pageNo = 1;
+        this.searchValue = undefined;
+        this.reOrdering = false
 
     }
     public pageNo: number = 1;
@@ -58,21 +64,15 @@ export class QuickToDoRepository implements IQuickToDoRepository {
 
     loadAll(pageNo?: number, searchValue?: string) { // ### Reload this when team component destroyed
         this.service.myQuickToDos(pageNo, searchValue, this.psz.QTPageSize).subscribe(qts => {
-            this.myQuickToDos.splice(0, this.myQuickToDos.length);
-            this.myQuickToDos.push(...qts);
-            //this.myQuickToDos = qts;
+            this.myQuickToDos = qts;
         })
         this.service.assignedToMe(searchValue).subscribe(qts => {
-            this.assignedToMe.splice(0, this.assignedToMe.length);
-            this.assignedToMe.push(...qts)
-            //this.assignedToMe = qts
+            this.assignedToMe = qts
         })
 
         //comments count
         this.service.myAndAssignedToMeQTCommentsCount(pageNo, searchValue, this.psz.QTPageSize).subscribe(qtCommentsCount => {
-            this.qtCommentsCount.splice(0, this.qtCommentsCount.length);
-            this.qtCommentsCount.push(...qtCommentsCount);
-            //this.qtCommentsCount = qtCommentsCount;
+            this.qtCommentsCount = qtCommentsCount;
         })
     }
 
@@ -80,18 +80,12 @@ export class QuickToDoRepository implements IQuickToDoRepository {
     loadMoreMyQuickToDos(pageNo?: number, searchValue?: string, pageSize?: number) {
         this.service.myQuickToDos(pageNo, searchValue, this.psz.QTPageSize).subscribe(qts => {
             this.myQuickToDos.push(...qts);
-
-            //eşsizlik ve order sıralaması
-            //  this.myQuickToDos = this.myQuickToDos.filter((value, index, self) => self.indexOf(self.find(val => val.TaskId == value.TaskId)) === index);
-
             let tempQT = Object.assign([], this.myQuickToDos.filter((value, index, self) => self.indexOf(self.find(val => val.TaskId == value.TaskId)) === index));
-            this.myQuickToDos.splice(0, this.myQuickToDos.length);
-            this.myQuickToDos.push(...tempQT);
+            this.myQuickToDos = tempQT
         });
 
         this.service.myAndAssignedToMeQTCommentsCount(pageNo, searchValue, this.psz.QTPageSize).subscribe(qtCommentsCount => {
             this.qtCommentsCount.push(...qtCommentsCount);
-            // 
         })
 
     }
@@ -205,8 +199,6 @@ export class QuickToDoRepository implements IQuickToDoRepository {
         let qts = this.myQuickToDos.filter(qt => !qt.Archived);
         if (qts.length >= 1) {
             let nextIndex = Math.max(...qts.map(qt => qt.Order)) + 1
-            //let nextIndex = qts.sort((qt1, qt2) => qt2.Order - qt1.Order).find((val, index, obj) => index == 0).Order + 1;
-            //let nextIndex = qts[qts.length - 1].Order + 1;
             return nextIndex;
         } else {
             return 0;
@@ -234,19 +226,19 @@ export class QuickToDoRepository implements IQuickToDoRepository {
                 return this.service.saveQuickTodo(quickToDo)
             })).subscribe((qtId) => {
                 quickToDo.TaskId = qtId;
-                quickToDo.Owner = this.xyzekiAuthService .Username
+                quickToDo.Owner = this.xyzekiAuthService.Username
                 if (quickToDo.Archived)
                     this.myQuickToDos.unshift(quickToDo);
                 else
                     this.myQuickToDos.push(quickToDo);
 
-                if (quickToDo.AssignedTo == this.xyzekiAuthService .Username)
+                if (quickToDo.AssignedTo == this.xyzekiAuthService.Username)
                     this.assignedToMe.push(quickToDo);
 
                 this.qtCommentsCount.push(new CommentCountModel(0, qtId))
 
                 //Signalling via SignalR
-                if (quickToDo.AssignedTo != null && quickToDo.AssignedTo != this.xyzekiAuthService .Username) // disable signalr for free members, or take information from xyzekiAuthService
+                if (quickToDo.AssignedTo != null && quickToDo.AssignedTo != this.xyzekiAuthService.Username) // disable signalr for free members, or take information from xyzekiAuthService
                     this.signalService.notifyNewQuickToDo(quickToDo, quickToDo.AssignedTo); // that doesnt send messages to this member. only newCommments send...
 
             });
@@ -271,14 +263,14 @@ export class QuickToDoRepository implements IQuickToDoRepository {
             })).subscribe(() => {
                 let index = this.myQuickToDos.findIndex(val => val.TaskId == quickToDo.TaskId);
                 let oldTodo = this.myQuickToDos.find((val, valIndex, obj) => valIndex == index)
-                
+
                 let oldAssignedTo;
                 if (oldTodo)
                     oldAssignedTo = oldTodo.AssignedTo;
                 else {
                     let oldTodo2 = this.assignedToMe.find(val => val.TaskId == quickToDo.TaskId);
-                    if(oldTodo2)
-                    oldAssignedTo = oldTodo2.AssignedTo;
+                    if (oldTodo2)
+                        oldAssignedTo = oldTodo2.AssignedTo;
                 }
 
 
@@ -289,7 +281,7 @@ export class QuickToDoRepository implements IQuickToDoRepository {
                 if (-1 != index2) // index --> assignedToMe
                     this.assignedToMe.splice(index2, 1, quickToDo);
 
-                let me = this.xyzekiAuthService .Username;
+                let me = this.xyzekiAuthService.Username;
                 let other = (assigned): boolean => { // other = null ve de ben olmayan
                     if (assigned != null && assigned != me)
                         return true;
@@ -358,7 +350,7 @@ export class QuickToDoRepository implements IQuickToDoRepository {
         let index = this.assignedToMe.findIndex(val => val.TaskId == quickToDo.TaskId)
         if (-1 == index) // Assigned task is not founded on repository
         {
-            if (this.xyzekiAuthService .Username == quickToDo.AssignedTo) {
+            if (this.xyzekiAuthService.Username == quickToDo.AssignedTo) {
                 this.assignedToMe.push(quickToDo);
 
                 //comment count 
@@ -411,14 +403,6 @@ export class QuickToDoRepository implements IQuickToDoRepository {
         }
 
     }
-    // public closeHubConnection() {
-    //     this.signalService.closeHubConnection();
-    //     this.commentSignalService.closeHubConnection();
-    // }
-    // public openHubConnection() {
-    //     this.signalService.openHubConnection();
-    //     this.commentSignalService.openHubConnection();
-    // }
 
 
 

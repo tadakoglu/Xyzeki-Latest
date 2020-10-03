@@ -2,7 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { PrivateTalksService } from '../services/private-talks.service';
 import { PrivateTalk } from '../private-talk.model';
 import { IPrivateTalkRepository } from '../abstract/i-private-talk-repository';
-import { XyzekiAuthService } from  '../auth-services/xyzeki-auth-service';
+import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
 import { PrivateTalkReceiversService } from '../services/private-talk-receivers.service';
 import { PrivateTalkReceiver } from '../private-talk-receiver.model';
 import { PrivateTalkTeamReceiver } from '../private-talk-team-receiver.model';
@@ -19,13 +19,8 @@ import { concatMap } from 'rxjs/operators';
 @Injectable()
 export class PrivateTalkRepository implements IPrivateTalkRepository {
 
-    constructor(private psz: PageSizes, private receiverRepo: PrivateTalkReceiverRepository, private dataService: DataService, private service: PrivateTalksService, public signalService: XyzekiSignalrService, public signalMessageService: XyzekiSignalrService, private serviceReceivers: PrivateTalkReceiversService, private serviceTeamReceivers: PrivateTalkTeamReceiversService, public xyzekiAuthService : XyzekiAuthService ,
+    constructor(private psz: PageSizes, private receiverRepo: PrivateTalkReceiverRepository, private dataService: DataService, private service: PrivateTalksService, public signalService: XyzekiSignalrService, public signalMessageService: XyzekiSignalrService, private serviceReceivers: PrivateTalkReceiversService, private serviceTeamReceivers: PrivateTalkTeamReceiversService, public xyzekiAuthService: XyzekiAuthService,
         private memberLicenseRepo: MemberLicenseRepository, private timeService: TimeService) {
-
-        // this.loadAll();
-
-        // this.loadPTCount();
-
 
         this.signalService.newPrivateTalkJoinedAvailable.subscribe(pTalk => {
             this.savePrivateTalkReceivedViaSignalR(pTalk);
@@ -93,7 +88,18 @@ export class PrivateTalkRepository implements IPrivateTalkRepository {
         });
 
         this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadPTCount(); this.loadAll(1, undefined, false); });
-
+        this.dataService.clearAllRepositoriesEvent.subscribe(() => { this.clearPrivateTalks() })
+    }
+    clearPrivateTalks() {
+        this.myPrivateTalks = []
+        this.privateTalksReceived = []
+        this.myPTMessagesCount = [];
+        this.receivedPTMessagesCount = [];
+        this.unreadMyPrivateTalksCount = 0
+        this.unreadReceivedPrivateTalksCount = 0
+        this.pageNo = 1;
+        this.pageNoReceived = 1;
+        this.searchValue = undefined;
     }
     loadPTCount() { // ###reload this when team component destroyed...
         this.service.unreadMyPtCount().subscribe(countMy => {
@@ -112,10 +118,7 @@ export class PrivateTalkRepository implements IPrivateTalkRepository {
 
     loadAll(pageNo?: number, searchValue?: string, privateTalkToOpen = true) { // ###reload this when team component destroyed...
         this.service.myPrivateTalks(pageNo, searchValue, this.psz.PTPageSize).subscribe(privateTalks => {
-            this.myPrivateTalks.splice(0, this.myPrivateTalks.length);
-            this.myPrivateTalks.push(...privateTalks);
-
-            //this.myPrivateTalks = privateTalks;
+            this.myPrivateTalks = privateTalks;
             if (privateTalks[0] && privateTalkToOpen)
                 this.privateTalkToOpen.next(privateTalks[0])
         });
@@ -208,18 +211,7 @@ export class PrivateTalkRepository implements IPrivateTalkRepository {
         else
             return 0;
     }
-    // PTOrderingCriterion(privateTalkId, my = true): string {
-    //     let ptMessages: MessageCountModel
-    //     if (my) {
-    //         ptMessages = this.myPTMessagesCount.find(messageCountModel => messageCountModel.PrivateTalkId == privateTalkId);
-    //     }
-    //     else {
-    //         ptMessages = this.receivedPTMessagesCount.find(messageCountModel => messageCountModel.PrivateTalkId == privateTalkId);
-    //     }
-    //     if (ptMessages)
-    //         return ptMessages.OrderingCriterion; // return orderin criterion of private talk(either last response time or pt/bt creation time)
-
-    // }
+   
 
 
     getMyPrivateTalks(): PrivateTalk[] {
@@ -340,7 +332,7 @@ export class PrivateTalkRepository implements IPrivateTalkRepository {
                 this.myPrivateTalks.push(...ptalks);
 
                 //new coming pts via signalr can cause dublicates..
-                let tempPT = Object.assign([],this.myPrivateTalks.filter((value, index, self) => self.indexOf(self.find(val => val.PrivateTalkId == value.PrivateTalkId)) === index));
+                let tempPT = Object.assign([], this.myPrivateTalks.filter((value, index, self) => self.indexOf(self.find(val => val.PrivateTalkId == value.PrivateTalkId)) === index));
                 this.myPrivateTalks.splice(0, this.myPrivateTalks.length);
                 this.myPrivateTalks.push(...tempPT);
                 //this.myPrivateTalks = this.myPrivateTalks.filter((value, index, self) => self.indexOf(self.find(val => val.PrivateTalkId == value.PrivateTalkId)) === index);
@@ -351,7 +343,7 @@ export class PrivateTalkRepository implements IPrivateTalkRepository {
             if (mPTMC) {
                 this.myPTMessagesCount.push(...mPTMC);
                 //new coming pts via signalr can cause dublicates..
-                let temp = Object.assign([],this.myPTMessagesCount.filter((value, index, self) => self.indexOf(self.find(val => val.PrivateTalkId == value.PrivateTalkId)) === index));
+                let temp = Object.assign([], this.myPTMessagesCount.filter((value, index, self) => self.indexOf(self.find(val => val.PrivateTalkId == value.PrivateTalkId)) === index));
                 this.myPTMessagesCount.splice(0, this.myPTMessagesCount.length);
                 this.myPTMessagesCount.push(...temp);
                 //this.myPTMessagesCount = this.myPTMessagesCount.filter((value, index, self) => self.indexOf(self.find(val => val.PrivateTalkId == value.PrivateTalkId)) === index);
@@ -362,14 +354,14 @@ export class PrivateTalkRepository implements IPrivateTalkRepository {
     loadMoreReceivedPrivateTalks(pageNo: number, searchValue?: string) {
         this.service.privateTalksReceived(pageNo, searchValue, this.psz.PTPageSize).subscribe(ptalks => {
             this.privateTalksReceived.push(...ptalks);
-            let temp = Object.assign([],this.privateTalksReceived.filter((value, index, self) => self.indexOf(self.find(val => val.PrivateTalkId == value.PrivateTalkId)) === index));
+            let temp = Object.assign([], this.privateTalksReceived.filter((value, index, self) => self.indexOf(self.find(val => val.PrivateTalkId == value.PrivateTalkId)) === index));
             this.privateTalksReceived.splice(0, this.privateTalksReceived.length);
             this.privateTalksReceived.push(...temp);
             //this.privateTalksReceived = this.privateTalksReceived.filter((value, index, self) => self.indexOf(self.find(val => val.PrivateTalkId == value.PrivateTalkId)) === index);
         });
         this.service.receivedPrivateTalkMessagesCount(pageNo, searchValue, this.psz.PTPageSize).subscribe(rPTMC => {
             this.receivedPTMessagesCount.push(...rPTMC);
-            let temp = Object.assign([],this.myPTMessagesCount.filter((value, index, self) => self.indexOf(self.find(val => val.PrivateTalkId == value.PrivateTalkId)) === index));
+            let temp = Object.assign([], this.myPTMessagesCount.filter((value, index, self) => self.indexOf(self.find(val => val.PrivateTalkId == value.PrivateTalkId)) === index));
             this.myPTMessagesCount.splice(0, this.myPTMessagesCount.length);
             this.myPTMessagesCount.push(...temp);
 
@@ -400,15 +392,7 @@ export class PrivateTalkRepository implements IPrivateTalkRepository {
         }
 
     }
-    // public closeHubConnection() {
-    //     this.signalService.closeHubConnection();
-    //     this.signalMessageService.closeHubConnection();
-    // }
-    // public openHubConnection() {
-    //     this.signalService.openHubConnection();
-    //     this.signalMessageService.openHubConnection();
-    // }
-
+   
 }
 
 // gmail benzeri bir iş konuşması sistemi : my private talk kısmı gönderilen kutusu olarak düşünülecek.

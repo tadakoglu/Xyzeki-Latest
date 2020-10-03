@@ -5,13 +5,14 @@ import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service
 import { TimeService } from '../services/time.service';
 import { concatMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import { DataService } from '../services/shared/data.service';
 
 @Injectable()
 export class QuickToDoCommentRepository implements IQuickToDoCommentRepository {
 
     constructor(private service: QuickToDoCommentsService,
-        private signalService: XyzekiSignalrService, private timeService: TimeService) {
-        
+        private signalService: XyzekiSignalrService, private timeService: TimeService, private dataService: DataService) {
+
 
         this.signalService.newQuickToDoCommentAvailable.subscribe(qtComment => {
             this.saveQTCommentViaSignalR(qtComment[0]);
@@ -20,18 +21,22 @@ export class QuickToDoCommentRepository implements IQuickToDoCommentRepository {
             this.deleteQTCommentViaSignalR(qtComment);
         })
 
+        this.dataService.clearAllRepositoriesEvent.subscribe(() => { this.clearQTComments() })
+
+
 
     }
 
-    
+    clearQTComments() {
+        this.quickToDoComments=[]
+        this.taskId = undefined;
+    }
+
     private taskId: number
-    loadComments(taskId){
+    loadComments(taskId) {
         this.taskId = taskId;
         this.service.quickTaskComments(taskId).subscribe(qtComments => {
-            this.quickToDoComments.splice(0, this.quickToDoComments.length);
-            this.quickToDoComments.push(...qtComments);
-
-            //this.quickToDoComments = qtComments
+            this.quickToDoComments = qtComments
         });
     }
     private quickToDoComments: QuickTaskComment[] = []
@@ -95,11 +100,6 @@ export class QuickToDoCommentRepository implements IQuickToDoCommentRepository {
             this.quickToDoComments.splice(index, 1);
     }
 
-    // public closeHubConnection() {
-    //     this.signalService.closeHubConnection();
-    // }
-    // public openHubConnection() {
-    //     this.signalService.openHubConnection();
-    // }
+   
 
 }
