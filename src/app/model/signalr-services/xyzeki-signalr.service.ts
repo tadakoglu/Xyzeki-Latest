@@ -19,23 +19,23 @@ import { PrivateTalkMessage } from '../private-talk-message.model';
 import { CloudContainer } from '../azure-models/cloud-container.model';
 import { CloudFile } from '../azure-models/cloud-file.model';
 import { NotificationService } from '../notification-services/notification.service';
-import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
+import {XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
+import { XyzekiAuthData } from '../auth-services/xyzeki-auth-data';
 
 @Injectable()
 export class XyzekiSignalrService {
 
+  baseURL = BackEndWebServer + '/'
+  builder = new HubConnectionBuilder();
   private hubConnection: HubConnection;
 
-  constructor(private dataService: DataService, private pushService: NotificationService) {
+  constructor(private dataService: DataService, private pushService: NotificationService, private xyzekiAuthData: XyzekiAuthData) {
   }
 
-  
-  async startListening(token){
-    let baseURL = BackEndWebServer + '/'
-    let builder = new HubConnectionBuilder();
-    this.hubConnection = builder.withUrl(baseURL + 'api/hubs/XyzekiNotificationHub',
+  async createHubConnection(token) {
+    this.hubConnection = this.builder.withUrl(this.baseURL + 'api/hubs/XyzekiNotificationHub',
       {
-        accessTokenFactory: () => { return token }, skipNegotiation:false
+        accessTokenFactory: () => { return token }, skipNegotiation: false
       }).build();
 
     this.hubConnection.serverTimeoutInMilliseconds = 15000;
@@ -171,6 +171,10 @@ export class XyzekiSignalrService {
     })
   }
 
+  async destroyHubConnection() {
+    this.hubConnection.stop();
+    this.hubConnection = this.builder.build();
+  }
   async startConnection() {
     if (this.hubConnection && this.hubConnection.state == HubConnectionState.Disconnected) {
       await this.hubConnection.start().then(() => {
@@ -182,13 +186,17 @@ export class XyzekiSignalrService {
         //console.error(error)      
         clearTimeout(this.timeOutId); // clearTimeout here
         this.dataService.signalConnectionSeconds.next(undefined) // clearInterval in "second" counttimer
-
         this.tryConnection();
+
       });
     }
   }
+  
   private timeOutId;
   tryConnection(seconds = 10) {
+    if (!this.xyzekiAuthData.LoggedIn)
+      return;
+
     let secondsToTryAfter = seconds;
     this.dataService.signalConnectionSeconds.next(secondsToTryAfter);
 

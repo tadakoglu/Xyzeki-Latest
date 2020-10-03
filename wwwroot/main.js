@@ -1018,8 +1018,6 @@ var LoginComponent = /** @class */ (function () {
             this.isLoading = true;
             this.subscription = this.recaptchaV3Service.execute(src_infrastructure_google_captcha__WEBPACK_IMPORTED_MODULE_11__["GoogleReCaptcha_LoginAction"]).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["concatMap"])(function (recaptchaToken) { return _this.repository.authenticate(Object.assign({}, _this.loginModel), recaptchaToken); })).subscribe(function (tokenAndMember) {
                 _this.xyzekiAuthService.Auth(tokenAndMember);
-                _this.xyzekiSignalService.startListening(tokenAndMember.Model.Item1);
-                _this.setUpMySetting();
                 _this.informUser = "Başarıyla giriş yaptınız.";
                 _this.router.navigate(['/isler']);
                 _this.modelSent = true;
@@ -1047,94 +1045,6 @@ var LoginComponent = /** @class */ (function () {
         this.xyzekiAuthService.LogOut();
     };
     LoginComponent.prototype.ngOnInit = function () { };
-    LoginComponent.prototype.setUpMySetting = function () {
-        var _this = this;
-        this.memberSettingService.mySetting().subscribe(function (mSetting) {
-            if (!mSetting)
-                return;
-            _this.dataService.switchMode = mSetting.SwitchMode;
-            var element = document.getElementById('appBody');
-            element.className = null;
-            switch (mSetting.Theme) {
-                case 'KlasikMavi':
-                    element.classList.add('KlasikMavi');
-                    break;
-                case 'KlasikKirmizi':
-                    element.classList.add('KlasikKirmizi');
-                    break;
-                case 'KlasikSari':
-                    element.classList.add('KlasikSari');
-                    break;
-                case 'KlasikMetalik':
-                    element.classList.add('KlasikMetalik');
-                    break;
-                case 'KlasikGece':
-                    element.classList.add('KlasikGece');
-                    break;
-                case 'KlasikRoyal':
-                    element.classList.add('KlasikRoyal');
-                    break;
-                case 'KlasikLimeade':
-                    element.classList.add('KlasikLimeade');
-                    break;
-                case 'KlasikBeyaz':
-                    element.classList.add('KlasikBeyaz');
-                    break;
-                case 'ArashiyamaBambulari':
-                    element.classList.add('ArashiyamaBambulari');
-                    break;
-                case 'Venedik':
-                    element.classList.add('Venedik');
-                    break;
-                case 'Peribacalari':
-                    element.classList.add('Peribacalari');
-                    break;
-                case 'Orman':
-                    element.classList.add('Orman');
-                    break;
-                case 'Yaprak':
-                    element.classList.add('Yaprak');
-                    break;
-                case 'Kedi':
-                    element.classList.add('Kedi');
-                    break;
-                case 'Deniz':
-                    element.classList.add('Deniz');
-                    break;
-                case 'Deve':
-                    element.classList.add('Deve');
-                    break;
-                case 'Pamukkale':
-                    element.classList.add('Pamukkale');
-                    break;
-                case 'Denizalti':
-                    element.classList.add('Denizalti');
-                    break;
-                case 'Brienz':
-                    element.classList.add('Brienz');
-                    break;
-                case 'Aconcagua':
-                    element.classList.add('Aconcagua');
-                    break;
-                case 'Bulutlar':
-                    element.classList.add('Bulutlar');
-                    break;
-                case 'TropicalGunisigi':
-                    element.classList.add('TropicalGunisigi');
-                    break;
-                case 'DenizAgac':
-                    element.classList.add('DenizAgac');
-                    break;
-                case 'Tarla':
-                    element.classList.add('Tarla');
-                    break;
-                case 'EmpireState':
-                    element.classList.add('EmpireState');
-                    break;
-            }
-            element.classList.add('bg-helper');
-        });
-    };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"])('window:resize', ['$event']) // respond to browser resizing
         ,
@@ -1935,12 +1845,11 @@ var ContainersComponent = /** @class */ (function () {
         this.subscription ? this.subscription.unsubscribe() : function () { };
     };
     ContainersComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this.innerWidth = window.innerWidth;
         this.innerHeight = window.innerHeight;
-        this.route.data.subscribe(function (resolvedData) {
-            _this.repository.loadContainersViaResolver(resolvedData.containers);
-        });
+        // this.route.data.subscribe((resolvedData: { containers: CloudContainers }) => {
+        //   this.repository.loadContainersViaResolver(resolvedData.containers);
+        // })
         //when first loaded, searched pt, when added new pt, open first private talk if exists.
         // this.subscription = this.repository.containerToOpen.subscribe((container) => { //if a signal comes here, it works in every condition.
         //   if (this.innerWidth > 992) {
@@ -2580,7 +2489,7 @@ var HomeModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".XyzekiWithSloganBG{\n    /* background: url(../../../assets/logo/Xyzeki-with-slogan.png) no-repeat center fixed;\n    -webkit-background-size: cover;\n    -moz-background-size: cover;\n    -o-background-size: cover;\n    background-size: cover; */\n    background-color: rgba(255, 255, 255, 0.473);\n    pointer-events: none !important;\n    width: 100%;\n \n    padding-top: 25px;\n    padding-bottom: 25px;\n  }\n  @media (max-width:600px)\n  {\n    .XyzekiWithSloganBG{\n      padding-left: 2%;\n      padding-right:  2%;\n    }   \n  }\n  @media (min-width:601px)\n  {\n    .XyzekiWithSloganBG{\n      padding-left: 15%;\n      padding-right: 15%;\n    }   \n  }\n  .footer {\n    /* position: fixed; */\n    left: 0;\n    bottom: 0;\n    width: 100%;\n    background-color: rgb(48, 48, 48);\n    color: white;\n    text-align: center;\n    padding-left: 30px;\n    padding-right: 30px;\n    padding-top: 5px;\n    padding-bottom: 5px;\n  }\n  html {\n    scroll-behavior: smooth;\n    scrollbar-face-color: #646464;\n    scrollbar-base-color: #646464;\n    scrollbar-3dlight-color: #646464;\n    scrollbar-highlight-color: #646464;\n    scrollbar-track-color: #000;\n    scrollbar-arrow-color: #000;\n    scrollbar-shadow-color: #646464;\n  }\n  ::-webkit-scrollbar {\n    width: 4px!important;\n    height: 3px!important;\n  }\n  ::-webkit-scrollbar-button {\n    background-color: #666;\n  }\n  ::-webkit-scrollbar-track {\n    background-color: #646464;\n  }\n  ::-webkit-scrollbar-track-piece {\n    background-color: #000;\n  }\n  ::-webkit-scrollbar-thumb {\n    height: 50px;\n    background-color: #666;\n    border-radius: 3px;\n  }\n  ::-webkit-scrollbar-corner {\n    background-color: #646464;\n  }\n  ::-webkit-resizer {\n    background-color: #666;\n  }\n  \n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaG9tZS9ob21lL2hvbWUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJOzs7OzZCQUl5QjtJQUN6Qiw0Q0FBNEM7SUFDNUMsK0JBQStCO0lBQy9CLFdBQVc7O0lBRVgsaUJBQWlCO0lBQ2pCLG9CQUFvQjtFQUN0QjtFQUNBOztJQUVFO01BQ0UsZ0JBQWdCO01BQ2hCLGtCQUFrQjtJQUNwQjtFQUNGO0VBQ0E7O0lBRUU7TUFDRSxpQkFBaUI7TUFDakIsa0JBQWtCO0lBQ3BCO0VBQ0Y7RUFHQTtJQUNFLHFCQUFxQjtJQUNyQixPQUFPO0lBQ1AsU0FBUztJQUNULFdBQVc7SUFDWCxpQ0FBaUM7SUFDakMsWUFBWTtJQUNaLGtCQUFrQjtJQUNsQixrQkFBa0I7SUFDbEIsbUJBQW1CO0lBQ25CLGdCQUFnQjtJQUNoQixtQkFBbUI7RUFDckI7RUFDQTtJQUNFLHVCQUF1QjtJQUN2Qiw2QkFBNkI7SUFDN0IsNkJBQTZCO0lBQzdCLGdDQUFnQztJQUNoQyxrQ0FBa0M7SUFDbEMsMkJBQTJCO0lBQzNCLDJCQUEyQjtJQUMzQiwrQkFBK0I7RUFDakM7RUFFQTtJQUNFLG9CQUFvQjtJQUNwQixxQkFBcUI7RUFDdkI7RUFDQTtJQUNFLHNCQUFzQjtFQUN4QjtFQUNBO0lBQ0UseUJBQXlCO0VBQzNCO0VBQ0E7SUFDRSxzQkFBc0I7RUFDeEI7RUFDQTtJQUNFLFlBQVk7SUFDWixzQkFBc0I7SUFDdEIsa0JBQWtCO0VBQ3BCO0VBQ0E7SUFDRSx5QkFBeUI7RUFDM0I7RUFDQTtJQUNFLHNCQUFzQjtFQUN4QiIsImZpbGUiOiJzcmMvYXBwL2hvbWUvaG9tZS9ob21lLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuWHl6ZWtpV2l0aFNsb2dhbkJHe1xuICAgIC8qIGJhY2tncm91bmQ6IHVybCguLi8uLi8uLi9hc3NldHMvbG9nby9YeXpla2ktd2l0aC1zbG9nYW4ucG5nKSBuby1yZXBlYXQgY2VudGVyIGZpeGVkO1xuICAgIC13ZWJraXQtYmFja2dyb3VuZC1zaXplOiBjb3ZlcjtcbiAgICAtbW96LWJhY2tncm91bmQtc2l6ZTogY292ZXI7XG4gICAgLW8tYmFja2dyb3VuZC1zaXplOiBjb3ZlcjtcbiAgICBiYWNrZ3JvdW5kLXNpemU6IGNvdmVyOyAqL1xuICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMjU1LCAyNTUsIDI1NSwgMC40NzMpO1xuICAgIHBvaW50ZXItZXZlbnRzOiBub25lICFpbXBvcnRhbnQ7XG4gICAgd2lkdGg6IDEwMCU7XG4gXG4gICAgcGFkZGluZy10b3A6IDI1cHg7XG4gICAgcGFkZGluZy1ib3R0b206IDI1cHg7XG4gIH1cbiAgQG1lZGlhIChtYXgtd2lkdGg6NjAwcHgpXG4gIHtcbiAgICAuWHl6ZWtpV2l0aFNsb2dhbkJHe1xuICAgICAgcGFkZGluZy1sZWZ0OiAyJTtcbiAgICAgIHBhZGRpbmctcmlnaHQ6ICAyJTtcbiAgICB9ICAgXG4gIH0gIFxuICBAbWVkaWEgKG1pbi13aWR0aDo2MDFweClcbiAge1xuICAgIC5YeXpla2lXaXRoU2xvZ2FuQkd7XG4gICAgICBwYWRkaW5nLWxlZnQ6IDE1JTtcbiAgICAgIHBhZGRpbmctcmlnaHQ6IDE1JTtcbiAgICB9ICAgXG4gIH1cblxuXG4gIC5mb290ZXIge1xuICAgIC8qIHBvc2l0aW9uOiBmaXhlZDsgKi9cbiAgICBsZWZ0OiAwO1xuICAgIGJvdHRvbTogMDtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoNDgsIDQ4LCA0OCk7XG4gICAgY29sb3I6IHdoaXRlO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBwYWRkaW5nLWxlZnQ6IDMwcHg7XG4gICAgcGFkZGluZy1yaWdodDogMzBweDtcbiAgICBwYWRkaW5nLXRvcDogNXB4O1xuICAgIHBhZGRpbmctYm90dG9tOiA1cHg7XG4gIH1cbiAgaHRtbCB7XG4gICAgc2Nyb2xsLWJlaGF2aW9yOiBzbW9vdGg7XG4gICAgc2Nyb2xsYmFyLWZhY2UtY29sb3I6ICM2NDY0NjQ7XG4gICAgc2Nyb2xsYmFyLWJhc2UtY29sb3I6ICM2NDY0NjQ7XG4gICAgc2Nyb2xsYmFyLTNkbGlnaHQtY29sb3I6ICM2NDY0NjQ7XG4gICAgc2Nyb2xsYmFyLWhpZ2hsaWdodC1jb2xvcjogIzY0NjQ2NDtcbiAgICBzY3JvbGxiYXItdHJhY2stY29sb3I6ICMwMDA7XG4gICAgc2Nyb2xsYmFyLWFycm93LWNvbG9yOiAjMDAwO1xuICAgIHNjcm9sbGJhci1zaGFkb3ctY29sb3I6ICM2NDY0NjQ7XG4gIH1cbiAgXG4gIDo6LXdlYmtpdC1zY3JvbGxiYXIge1xuICAgIHdpZHRoOiA0cHghaW1wb3J0YW50O1xuICAgIGhlaWdodDogM3B4IWltcG9ydGFudDtcbiAgfVxuICA6Oi13ZWJraXQtc2Nyb2xsYmFyLWJ1dHRvbiB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzY2NjtcbiAgfVxuICA6Oi13ZWJraXQtc2Nyb2xsYmFyLXRyYWNrIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjNjQ2NDY0O1xuICB9XG4gIDo6LXdlYmtpdC1zY3JvbGxiYXItdHJhY2stcGllY2Uge1xuICAgIGJhY2tncm91bmQtY29sb3I6ICMwMDA7XG4gIH1cbiAgOjotd2Via2l0LXNjcm9sbGJhci10aHVtYiB7XG4gICAgaGVpZ2h0OiA1MHB4O1xuICAgIGJhY2tncm91bmQtY29sb3I6ICM2NjY7XG4gICAgYm9yZGVyLXJhZGl1czogM3B4O1xuICB9XG4gIDo6LXdlYmtpdC1zY3JvbGxiYXItY29ybmVyIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjNjQ2NDY0O1xuICB9XG4gIDo6LXdlYmtpdC1yZXNpemVyIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjNjY2O1xuICB9XG4gICJdfQ== */"
+module.exports = ".XyzekiWithSloganBG{\n    /* background: url(../../../assets/logo/Xyzeki-with-slogan.png) no-repeat center fixed;\n    -webkit-background-size: cover;\n    -moz-background-size: cover;\n    -o-background-size: cover;\n    background-size: cover; */\n    background-color: rgba(255, 255, 255, 0.473);\n    pointer-events: none !important;\n    width: 100%;\n \n    padding-top: 25px;\n    padding-bottom: 25px;\n  }\n  @media (max-width:600px)\n  {\n    .XyzekiWithSloganBG{\n      padding-left: 2%;\n      padding-right:  2%;\n    }   \n  }\n  @media (min-width:601px)\n  {\n    .XyzekiWithSloganBG{\n      padding-left: 15%;\n      padding-right: 15%;\n    }   \n  }\n  .footer {\n    /* position: fixed; */\n    left: 0;\n    bottom: 0;\n    width: 100%;\n    background-color: rgb(48, 48, 48);\n    color: white;\n    text-align: center;\n    padding-left: 30px;\n    padding-right: 30px;\n    padding-top: 5px;\n    padding-bottom: 5px;\n  }\n  html {\n    scroll-behavior: smooth;\n    scrollbar-face-color: #646464;\n    scrollbar-base-color: #646464;\n    scrollbar-3dlight-color: #646464;\n    scrollbar-highlight-color: #646464;\n    scrollbar-track-color: #000;\n    scrollbar-arrow-color: #000;\n    scrollbar-shadow-color: #646464;\n  }\n  ::-webkit-scrollbar {\n    width: 4px!important;\n    height: 3px!important;\n  }\n  ::-webkit-scrollbar-button {\n    background-color: #666;\n  }\n  ::-webkit-scrollbar-track {\n    background-color: #646464;\n  }\n  ::-webkit-scrollbar-track-piece {\n    background-color: #000;\n  }\n  ::-webkit-scrollbar-thumb {\n    height: 50px;\n    background-color: #666;\n    border-radius: 3px;\n  }\n  ::-webkit-scrollbar-corner {\n    background-color: #646464;\n  }\n  ::-webkit-resizer {\n    background-color: #666;\n  }\n  .xyz-nav-btn{\n    border: 1px rgb(252, 182, 177) solid;  \n    transition: background-color 0.2s;\n    border-radius:2px!important;\n  }\n  .xyz-nav-btn:hover{\n    box-shadow: 0 5px 15px rgba(255, 251, 0, 0.08);\n    border: 1px rgb(255, 255, 255) solid;  \n    background-color: rgb(226, 226, 226);\n    border-radius: 2px!important;\n  }\n  .modernUnderlined {\n    color: #ffffff!important;\n    text-decoration: none;\n    position: relative;\n    font-weight: 150;\n    /* transition: all 0.12s ease;  */\n    font-family: \"Raleway\", Arial, sans-serif;\n    font-size: 15px;\n    padding-bottom: 5px;\n    cursor: pointer;\n    background-color: rgb(85, 76, 76);\n  \n    \n  }\n  .modernUnderlined::after {\n    content: '';\n    position: absolute;\n    height: 1px;\n    width: 100%;\n    bottom: 3px;\n    right: 0;\n    background:-webkit-gradient(linear, left top, right top, from(rgb(216, 213, 24)), \n    to(rgb(216, 213, 24)), color-stop(1, rgb(255, 251, 0)));\n    \n    opacity: 0.4;\n    transition: all 0.5s ease;\n    \n  \n  }\n  .modernUnderlined:hover::after {\n    opacity: 1;\n  \n  }\n  \n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaG9tZS9ob21lL2hvbWUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJOzs7OzZCQUl5QjtJQUN6Qiw0Q0FBNEM7SUFDNUMsK0JBQStCO0lBQy9CLFdBQVc7O0lBRVgsaUJBQWlCO0lBQ2pCLG9CQUFvQjtFQUN0QjtFQUNBOztJQUVFO01BQ0UsZ0JBQWdCO01BQ2hCLGtCQUFrQjtJQUNwQjtFQUNGO0VBQ0E7O0lBRUU7TUFDRSxpQkFBaUI7TUFDakIsa0JBQWtCO0lBQ3BCO0VBQ0Y7RUFHQTtJQUNFLHFCQUFxQjtJQUNyQixPQUFPO0lBQ1AsU0FBUztJQUNULFdBQVc7SUFDWCxpQ0FBaUM7SUFDakMsWUFBWTtJQUNaLGtCQUFrQjtJQUNsQixrQkFBa0I7SUFDbEIsbUJBQW1CO0lBQ25CLGdCQUFnQjtJQUNoQixtQkFBbUI7RUFDckI7RUFDQTtJQUNFLHVCQUF1QjtJQUN2Qiw2QkFBNkI7SUFDN0IsNkJBQTZCO0lBQzdCLGdDQUFnQztJQUNoQyxrQ0FBa0M7SUFDbEMsMkJBQTJCO0lBQzNCLDJCQUEyQjtJQUMzQiwrQkFBK0I7RUFDakM7RUFFQTtJQUNFLG9CQUFvQjtJQUNwQixxQkFBcUI7RUFDdkI7RUFDQTtJQUNFLHNCQUFzQjtFQUN4QjtFQUNBO0lBQ0UseUJBQXlCO0VBQzNCO0VBQ0E7SUFDRSxzQkFBc0I7RUFDeEI7RUFDQTtJQUNFLFlBQVk7SUFDWixzQkFBc0I7SUFDdEIsa0JBQWtCO0VBQ3BCO0VBQ0E7SUFDRSx5QkFBeUI7RUFDM0I7RUFDQTtJQUNFLHNCQUFzQjtFQUN4QjtFQU1BO0lBQ0Usb0NBQW9DO0lBQ3BDLGlDQUFpQztJQUNqQywyQkFBMkI7RUFDN0I7RUFDQTtJQUNFLDhDQUE4QztJQUM5QyxvQ0FBb0M7SUFDcEMsb0NBQW9DO0lBQ3BDLDRCQUE0QjtFQUM5QjtFQUdBO0lBQ0Usd0JBQXdCO0lBQ3hCLHFCQUFxQjtJQUNyQixrQkFBa0I7SUFDbEIsZ0JBQWdCO0lBQ2hCLGlDQUFpQztJQUNqQyx5Q0FBeUM7SUFDekMsZUFBZTtJQUNmLG1CQUFtQjtJQUNuQixlQUFlO0lBQ2YsaUNBQWlDOzs7RUFHbkM7RUFFQTtJQUNFLFdBQVc7SUFDWCxrQkFBa0I7SUFDbEIsV0FBVztJQUNYLFdBQVc7SUFDWCxXQUFXO0lBQ1gsUUFBUTtJQUNSOzJEQUN1RDs7SUFFdkQsWUFBWTtJQUNaLHlCQUF5Qjs7O0VBRzNCO0VBRUE7SUFDRSxVQUFVOztFQUVaIiwiZmlsZSI6InNyYy9hcHAvaG9tZS9ob21lL2hvbWUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5YeXpla2lXaXRoU2xvZ2FuQkd7XG4gICAgLyogYmFja2dyb3VuZDogdXJsKC4uLy4uLy4uL2Fzc2V0cy9sb2dvL1h5emVraS13aXRoLXNsb2dhbi5wbmcpIG5vLXJlcGVhdCBjZW50ZXIgZml4ZWQ7XG4gICAgLXdlYmtpdC1iYWNrZ3JvdW5kLXNpemU6IGNvdmVyO1xuICAgIC1tb3otYmFja2dyb3VuZC1zaXplOiBjb3ZlcjtcbiAgICAtby1iYWNrZ3JvdW5kLXNpemU6IGNvdmVyO1xuICAgIGJhY2tncm91bmQtc2l6ZTogY292ZXI7ICovXG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgyNTUsIDI1NSwgMjU1LCAwLjQ3Myk7XG4gICAgcG9pbnRlci1ldmVudHM6IG5vbmUgIWltcG9ydGFudDtcbiAgICB3aWR0aDogMTAwJTtcbiBcbiAgICBwYWRkaW5nLXRvcDogMjVweDtcbiAgICBwYWRkaW5nLWJvdHRvbTogMjVweDtcbiAgfVxuICBAbWVkaWEgKG1heC13aWR0aDo2MDBweClcbiAge1xuICAgIC5YeXpla2lXaXRoU2xvZ2FuQkd7XG4gICAgICBwYWRkaW5nLWxlZnQ6IDIlO1xuICAgICAgcGFkZGluZy1yaWdodDogIDIlO1xuICAgIH0gICBcbiAgfSAgXG4gIEBtZWRpYSAobWluLXdpZHRoOjYwMXB4KVxuICB7XG4gICAgLlh5emVraVdpdGhTbG9nYW5CR3tcbiAgICAgIHBhZGRpbmctbGVmdDogMTUlO1xuICAgICAgcGFkZGluZy1yaWdodDogMTUlO1xuICAgIH0gICBcbiAgfVxuXG5cbiAgLmZvb3RlciB7XG4gICAgLyogcG9zaXRpb246IGZpeGVkOyAqL1xuICAgIGxlZnQ6IDA7XG4gICAgYm90dG9tOiAwO1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGJhY2tncm91bmQtY29sb3I6IHJnYig0OCwgNDgsIDQ4KTtcbiAgICBjb2xvcjogd2hpdGU7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIHBhZGRpbmctbGVmdDogMzBweDtcbiAgICBwYWRkaW5nLXJpZ2h0OiAzMHB4O1xuICAgIHBhZGRpbmctdG9wOiA1cHg7XG4gICAgcGFkZGluZy1ib3R0b206IDVweDtcbiAgfVxuICBodG1sIHtcbiAgICBzY3JvbGwtYmVoYXZpb3I6IHNtb290aDtcbiAgICBzY3JvbGxiYXItZmFjZS1jb2xvcjogIzY0NjQ2NDtcbiAgICBzY3JvbGxiYXItYmFzZS1jb2xvcjogIzY0NjQ2NDtcbiAgICBzY3JvbGxiYXItM2RsaWdodC1jb2xvcjogIzY0NjQ2NDtcbiAgICBzY3JvbGxiYXItaGlnaGxpZ2h0LWNvbG9yOiAjNjQ2NDY0O1xuICAgIHNjcm9sbGJhci10cmFjay1jb2xvcjogIzAwMDtcbiAgICBzY3JvbGxiYXItYXJyb3ctY29sb3I6ICMwMDA7XG4gICAgc2Nyb2xsYmFyLXNoYWRvdy1jb2xvcjogIzY0NjQ2NDtcbiAgfVxuICBcbiAgOjotd2Via2l0LXNjcm9sbGJhciB7XG4gICAgd2lkdGg6IDRweCFpbXBvcnRhbnQ7XG4gICAgaGVpZ2h0OiAzcHghaW1wb3J0YW50O1xuICB9XG4gIDo6LXdlYmtpdC1zY3JvbGxiYXItYnV0dG9uIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjNjY2O1xuICB9XG4gIDo6LXdlYmtpdC1zY3JvbGxiYXItdHJhY2sge1xuICAgIGJhY2tncm91bmQtY29sb3I6ICM2NDY0NjQ7XG4gIH1cbiAgOjotd2Via2l0LXNjcm9sbGJhci10cmFjay1waWVjZSB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzAwMDtcbiAgfVxuICA6Oi13ZWJraXQtc2Nyb2xsYmFyLXRodW1iIHtcbiAgICBoZWlnaHQ6IDUwcHg7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzY2NjtcbiAgICBib3JkZXItcmFkaXVzOiAzcHg7XG4gIH1cbiAgOjotd2Via2l0LXNjcm9sbGJhci1jb3JuZXIge1xuICAgIGJhY2tncm91bmQtY29sb3I6ICM2NDY0NjQ7XG4gIH1cbiAgOjotd2Via2l0LXJlc2l6ZXIge1xuICAgIGJhY2tncm91bmQtY29sb3I6ICM2NjY7XG4gIH1cbiAgXG5cblxuXG5cbiAgLnh5ei1uYXYtYnRue1xuICAgIGJvcmRlcjogMXB4IHJnYigyNTIsIDE4MiwgMTc3KSBzb2xpZDsgIFxuICAgIHRyYW5zaXRpb246IGJhY2tncm91bmQtY29sb3IgMC4ycztcbiAgICBib3JkZXItcmFkaXVzOjJweCFpbXBvcnRhbnQ7XG4gIH1cbiAgLnh5ei1uYXYtYnRuOmhvdmVye1xuICAgIGJveC1zaGFkb3c6IDAgNXB4IDE1cHggcmdiYSgyNTUsIDI1MSwgMCwgMC4wOCk7XG4gICAgYm9yZGVyOiAxcHggcmdiKDI1NSwgMjU1LCAyNTUpIHNvbGlkOyAgXG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDIyNiwgMjI2LCAyMjYpO1xuICAgIGJvcmRlci1yYWRpdXM6IDJweCFpbXBvcnRhbnQ7XG4gIH1cbiAgXG4gIFxuICAubW9kZXJuVW5kZXJsaW5lZCB7XG4gICAgY29sb3I6ICNmZmZmZmYhaW1wb3J0YW50O1xuICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgZm9udC13ZWlnaHQ6IDE1MDtcbiAgICAvKiB0cmFuc2l0aW9uOiBhbGwgMC4xMnMgZWFzZTsgICovXG4gICAgZm9udC1mYW1pbHk6IFwiUmFsZXdheVwiLCBBcmlhbCwgc2Fucy1zZXJpZjtcbiAgICBmb250LXNpemU6IDE1cHg7XG4gICAgcGFkZGluZy1ib3R0b206IDVweDtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDg1LCA3NiwgNzYpO1xuICBcbiAgICBcbiAgfVxuICBcbiAgLm1vZGVyblVuZGVybGluZWQ6OmFmdGVyIHtcbiAgICBjb250ZW50OiAnJztcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgaGVpZ2h0OiAxcHg7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgYm90dG9tOiAzcHg7XG4gICAgcmlnaHQ6IDA7XG4gICAgYmFja2dyb3VuZDotd2Via2l0LWdyYWRpZW50KGxpbmVhciwgbGVmdCB0b3AsIHJpZ2h0IHRvcCwgZnJvbShyZ2IoMjE2LCAyMTMsIDI0KSksIFxuICAgIHRvKHJnYigyMTYsIDIxMywgMjQpKSwgY29sb3Itc3RvcCgxLCByZ2IoMjU1LCAyNTEsIDApKSk7XG4gICAgXG4gICAgb3BhY2l0eTogMC40O1xuICAgIHRyYW5zaXRpb246IGFsbCAwLjVzIGVhc2U7XG4gICAgXG4gIFxuICB9XG4gIFxuICAubW9kZXJuVW5kZXJsaW5lZDpob3Zlcjo6YWZ0ZXIge1xuICAgIG9wYWNpdHk6IDE7XG4gIFxuICB9XG4gICJdfQ== */"
 
 /***/ }),
 
@@ -2591,7 +2500,7 @@ module.exports = ".XyzekiWithSloganBG{\n    /* background: url(../../../assets/l
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\n<!-- <div class=\"w-100\">\n    <div class=\"float-left\">\n        <img style=\"width: 170px;\" src=\"../../../assets/google-play-icon.svg\" />\n    </div>\n    <div class=\"float-right\">\n        <app-navbar></app-navbar>\n    </div>\n</div> -->\n\n<img class=\"XyzekiWithSloganBG\" src=\"../../../assets/logo/Xyzeki-with-slogan.png\" />\n\n<div  class=\"w-100 text-center\">\n    <h5>\n        <a href=\"https://xyzeki.blob.core.windows.net/apps/XyzekiApp.apk\"><img style=\"height: 50px; opacity: 0.99; cursor: pointer; margin-right: 10px; padding: 1px;\" src=\"../../../assets/google-play-icon.svg\" /></a>\n        <img style=\"height: 50px; opacity: 0.99; cursor: pointer; padding: 2px;\" src=\"../../../assets/pwa-app.svg\" />\n    </h5>\n</div>\n<div class=\"footer w-100\">\n    <h5>Özellikler</h5>\n    <p>Davetiye sistemi ile hızlı ekip kurulumu;\n        Tarih ve saat destekli hızlı yapılacak iş oluşturma, atama ve yönetimi;\n        Sürükle bırak ile pratik iş zamanlama, erteleme ve sıralama;\n        Günlük iş filtreleme;\n        Hafta yönetimi ajandası;\n        250'ye kadar liste/proje oluşturma;\n        Proje ve listelerinize alt görev/iş/liste öğesi oluşturma;\n        Proje ve liste başı 50 kişi'ye kadar iş personeli veya liste alıcısı tanımlama;\n        İş konuşmaları ile grup veya birebir mesajlaşma;\n        Email ile günlük çalışanlara işveren görev planlaması bildirimleri;\n        Email ile günlük işverene raporlama;\n        Arşivleme ve arşiv arama sistemleri;\n        Özel temalar;\n        İş için yorumlar/notlar ve renk seçenekleri;\n        Liste paylaşımı, proje yöneticisi yetkilendirme ve takip sistemleri;\n        Kurumsal lisans sistemi;\n        Özel dosya paylaşım bulutu;\n        Ekibinizi birbiri ile senkronize tutan gerçek zamanlı sinyalleme\n        ağları;\n        Atandığınız yeni görev, yeni okunmamış mesajlarınız vb. için cihazlarınıza bildirim gönderim\n        servisi\n    </p>\n\n    <h5>Neden Xyzeki®?</h5>\n    <p>\n        Xyzeki ile işlerinizi en hızlı şekilde organize edip titizlikle hayata geçirirsiniz. Böylece içiniz rahat olur.\n        Tüm işlerinizi tek bir yerden hızlı, etkin ve de eksiksiz bir şekilde yönetebilmenizi, takip edebilmenizi\n        sağlamak, sizin ve ekibinizin üretkenliğini\n        arttırmak için tasarlanmıştır.\n        \n    </p>\n\n    <h5>Teknoloji</h5>\n    <p>\n        Xyzeki şu an dünyada mevcut bulunan en son ve alanında en iyi teknojilerle geliştirilmiş olup, harika bir\n        kullanıcı arayüzüne sahiptir. Google reCAPTCHA 3. nesil güvenlik teknolojilerini içerir.\n        Şifrelerinizi dünya standardı algoritmalarla tekrar şifreleyerek oldukça güvenli bir şekilde\n        saklar. Bu şekilde Xyzeki yöneticileri bile şifrelerinizi görememektedir. Ayrıca Xyzeki bulut teknolojilerini\n        kullanmaktadır.\n    </p>\n    <h5>Fiyatlandırma</h5>\n    <p>\n        Xyzeki ekipler için aylık sadece 19.90 TL/Kişi (KDV'siz) oranında ve yıllık olarak faturalandırılır.\n        Örneğin 25 kişilik bir ekibiniz var ise, 12 Ay X 19.90 TL/Kişi X 25 Kişi = 5970 TL KDV'siz, %18 KDV ile\n        birlikte toplam 7044 TL olarak her yıl faturalandırılırsınız.\n    </p>\n\n\n    <h5>İletişim</h5>\n    <p>\n        bilgi@xyzeki.com<br>\n        <!-- 0850'li numaramız da yakında hizmetinizdedir. -->\n    </p>\n\n\n   \n    <h6 class=\"text-right\">© 2020 Xyzeki</h6>\n\n\n</div>"
+module.exports = "<nav class=\"container-fluid bg-dark sticky-top\" >\n\n    <div class=\"float-right rounded-0\" style=\" border-top-left-radius:0!important; border-top-right-radius:0!important;\" role=\"group\">              \n            <a [routerLink]=\"[ 'giris' ]\" class=\"btn modernUnderlined\" style=\"border-radius: 2px;\">Oturum Aç <img\n                    src=\"../../../assets/arrow-2.png\"\n                    style=\"width: 16px;object-fit: cover; cursor: pointer; \" /></a>\n           \n            <a class=\"btn btn-dark  btn-sm border-0 rounded-0\" style=\"border-top-left-radius:0!important; border-top-right-radius:0!important;\" [routerLink]=\"[ 'kayit-ol' ]\">Üye Olun</a>\n    </div>\n\n    \n</nav>\n\n<img class=\"XyzekiWithSloganBG\" src=\"../../../assets/logo/Xyzeki-with-slogan.png\" />\n\n<div  class=\"w-100 text-center\">\n    <h5>\n        <a href=\"https://xyzeki.blob.core.windows.net/apps/XyzekiApp.apk\"><img style=\"height: 50px; opacity: 0.99; cursor: pointer; margin-right: 10px; padding: 1px;\" src=\"../../../assets/google-play-icon.svg\" /></a>\n        <img style=\"height: 50px; opacity: 0.99; cursor: pointer; padding: 2px;\" src=\"../../../assets/pwa-app.svg\" />\n    </h5>\n</div>\n<div class=\"footer w-100\">\n    <h5>Özellikler</h5>\n    <p>Davetiye sistemi ile hızlı ekip kurulumu;\n        Tarih ve saat destekli hızlı yapılacak iş oluşturma, atama ve yönetimi;\n        Sürükle bırak ile pratik iş zamanlama, erteleme ve sıralama;\n        Günlük iş filtreleme;\n        Hafta yönetimi ajandası;\n        250'ye kadar liste/proje oluşturma;\n        Proje ve listelerinize alt görev/iş/liste öğesi oluşturma;\n        Proje ve liste başı 50 kişi'ye kadar iş personeli veya liste alıcısı tanımlama;\n        İş konuşmaları ile grup veya birebir mesajlaşma;\n        Email ile günlük çalışanlara işveren görev planlaması bildirimleri;\n        Email ile günlük işverene raporlama;\n        Arşivleme ve arşiv arama sistemleri;\n        Özel temalar;\n        İş için yorumlar/notlar ve renk seçenekleri;\n        Liste paylaşımı, proje yöneticisi yetkilendirme ve takip sistemleri;\n        Kurumsal lisans sistemi;\n        Özel dosya paylaşım bulutu;\n        Ekibinizi birbiri ile senkronize tutan gerçek zamanlı sinyalleme\n        ağları;\n        Atandığınız yeni görev, yeni okunmamış mesajlarınız vb. için cihazlarınıza bildirim gönderim\n        servisi\n    </p>\n\n    <h5>Neden Xyzeki®?</h5>\n    <p>\n        Xyzeki ile işlerinizi en hızlı şekilde organize edip titizlikle hayata geçirirsiniz. Böylece içiniz rahat olur.\n        Tüm işlerinizi tek bir yerden hızlı, etkin ve de eksiksiz bir şekilde yönetebilmenizi, takip edebilmenizi\n        sağlamak, sizin ve ekibinizin üretkenliğini\n        arttırmak için tasarlanmıştır.\n        \n    </p>\n\n    <h5>Teknoloji</h5>\n    <p>\n        Xyzeki şu an dünyada mevcut bulunan en son ve alanında en iyi teknojilerle geliştirilmiş olup, harika bir\n        kullanıcı arayüzüne sahiptir. Google reCAPTCHA 3. nesil güvenlik teknolojilerini içerir.\n        Şifrelerinizi dünya standardı algoritmalarla tekrar şifreleyerek oldukça güvenli bir şekilde\n        saklar. Bu şekilde Xyzeki yöneticileri bile şifrelerinizi görememektedir. Ayrıca Xyzeki bulut teknolojilerini\n        kullanmaktadır.\n    </p>\n    <h5>Fiyatlandırma</h5>\n    <p>\n        Xyzeki ekipler için aylık sadece 19.90 TL/Kişi (KDV'siz) oranında ve yıllık olarak faturalandırılır.\n        Örneğin 25 kişilik bir ekibiniz var ise, 12 Ay X 19.90 TL/Kişi X 25 Kişi = 5970 TL KDV'siz, %18 KDV ile\n        birlikte toplam 7044 TL olarak her yıl faturalandırılırsınız.\n    </p>\n\n\n    <h5>İletişim</h5>\n    <p>\n        bilgi@xyzeki.com<br>\n        <!-- 0850'li numaramız da yakında hizmetinizdedir. -->\n    </p>\n\n\n   \n    <h6 class=\"text-right\">© 2020 Xyzeki</h6>\n\n\n</div>"
 
 /***/ }),
 
@@ -4786,24 +4695,19 @@ var SettingsComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/model/auth-services/xyzeki-auth-service.ts":
-/*!************************************************************!*\
-  !*** ./src/app/model/auth-services/xyzeki-auth-service.ts ***!
-  \************************************************************/
-/*! exports provided: XyzekiAuthData, XyzekiAuthService */
+/***/ "./src/app/model/auth-services/xyzeki-auth-data.ts":
+/*!*********************************************************!*\
+  !*** ./src/app/model/auth-services/xyzeki-auth-data.ts ***!
+  \*********************************************************/
+/*! exports provided: XyzekiAuthData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "XyzekiAuthData", function() { return XyzekiAuthData; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "XyzekiAuthService", function() { return XyzekiAuthService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @auth0/angular-jwt */ "./node_modules/@auth0/angular-jwt/index.js");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/auth.service */ "./src/app/model/services/auth.service.ts");
-/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
-
-
 
 
 
@@ -4835,6 +4739,26 @@ var XyzekiAuthData = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(XyzekiAuthData.prototype, "IsTokenExpired", {
+        //Get more user information
+        get: function () {
+            return jwtHelper.isTokenExpired(this.Token);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(XyzekiAuthData.prototype, "LoggedIn", {
+        get: function () {
+            if (this.Token && !this.IsTokenExpired) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     XyzekiAuthData = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
@@ -4842,10 +4766,41 @@ var XyzekiAuthData = /** @class */ (function () {
     return XyzekiAuthData;
 }());
 
+
+
+/***/ }),
+
+/***/ "./src/app/model/auth-services/xyzeki-auth-service.ts":
+/*!************************************************************!*\
+  !*** ./src/app/model/auth-services/xyzeki-auth-service.ts ***!
+  \************************************************************/
+/*! exports provided: XyzekiAuthService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "XyzekiAuthService", function() { return XyzekiAuthService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @auth0/angular-jwt */ "./node_modules/@auth0/angular-jwt/index.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/auth.service */ "./src/app/model/services/auth.service.ts");
+/* harmony import */ var _services_member_setting_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/member-setting.service */ "./src/app/model/services/member-setting.service.ts");
+/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
+
+
+
+
+
+
+
+var jwtHelper = new _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_2__["JwtHelperService"]();
 var XyzekiAuthService = /** @class */ (function () {
-    function XyzekiAuthService(authService, dataService) {
+    function XyzekiAuthService(authService, dataService, memberSettingService, xyzekiSignalService) {
         this.authService = authService;
         this.dataService = dataService;
+        this.memberSettingService = memberSettingService;
+        this.xyzekiSignalService = xyzekiSignalService;
     }
     Object.defineProperty(XyzekiAuthService.prototype, "Member", {
         //Get user information
@@ -4916,13 +4871,16 @@ var XyzekiAuthService = /** @class */ (function () {
         var token = tokenAndMember.Model.Item1;
         this.SaveMember(member);
         this.SaveToken(token);
+        this.LoadMemberSettings();
         this.LoadAllRepositories();
+        this.StartSignalR(token);
         this.StartRefreshTokenTimer();
     };
     XyzekiAuthService.prototype.LogOut = function () {
         this.RemoveMember();
         this.RemoveToken();
         this.ClearAllRepositories();
+        this.StopSignalR();
         this.StopRefreshTokenTimer();
     };
     XyzekiAuthService.prototype.AuthAutoIfPossible = function () {
@@ -4952,9 +4910,106 @@ var XyzekiAuthService = /** @class */ (function () {
     XyzekiAuthService.prototype.StopRefreshTokenTimer = function () {
         clearTimeout(this.refreshTokenTimeout);
     };
+    XyzekiAuthService.prototype.StartSignalR = function (token) {
+        this.xyzekiSignalService.createHubConnection(token);
+    };
+    XyzekiAuthService.prototype.StopSignalR = function () {
+        this.xyzekiSignalService.destroyHubConnection();
+    };
+    XyzekiAuthService.prototype.LoadMemberSettings = function () {
+        var _this = this;
+        this.memberSettingService.mySetting().subscribe(function (mSetting) {
+            if (!mSetting)
+                return;
+            _this.dataService.switchMode = mSetting.SwitchMode;
+            var element = document.getElementById('appBody');
+            element.className = null;
+            //#region  themes
+            switch (mSetting.Theme) {
+                case 'KlasikMavi':
+                    element.classList.add('KlasikMavi');
+                    break;
+                case 'KlasikKirmizi':
+                    element.classList.add('KlasikKirmizi');
+                    break;
+                case 'KlasikSari':
+                    element.classList.add('KlasikSari');
+                    break;
+                case 'KlasikMetalik':
+                    element.classList.add('KlasikMetalik');
+                    break;
+                case 'KlasikGece':
+                    element.classList.add('KlasikGece');
+                    break;
+                case 'KlasikRoyal':
+                    element.classList.add('KlasikRoyal');
+                    break;
+                case 'KlasikLimeade':
+                    element.classList.add('KlasikLimeade');
+                    break;
+                case 'KlasikBeyaz':
+                    element.classList.add('KlasikBeyaz');
+                    break;
+                case 'ArashiyamaBambulari':
+                    element.classList.add('ArashiyamaBambulari');
+                    break;
+                case 'Venedik':
+                    element.classList.add('Venedik');
+                    break;
+                case 'Peribacalari':
+                    element.classList.add('Peribacalari');
+                    break;
+                case 'Orman':
+                    element.classList.add('Orman');
+                    break;
+                case 'Yaprak':
+                    element.classList.add('Yaprak');
+                    break;
+                case 'Kedi':
+                    element.classList.add('Kedi');
+                    break;
+                case 'Deniz':
+                    element.classList.add('Deniz');
+                    break;
+                case 'Deve':
+                    element.classList.add('Deve');
+                    break;
+                case 'Pamukkale':
+                    element.classList.add('Pamukkale');
+                    break;
+                case 'Denizalti':
+                    element.classList.add('Denizalti');
+                    break;
+                case 'Brienz':
+                    element.classList.add('Brienz');
+                    break;
+                case 'Aconcagua':
+                    element.classList.add('Aconcagua');
+                    break;
+                case 'Bulutlar':
+                    element.classList.add('Bulutlar');
+                    break;
+                case 'TropicalGunisigi':
+                    element.classList.add('TropicalGunisigi');
+                    break;
+                case 'DenizAgac':
+                    element.classList.add('DenizAgac');
+                    break;
+                case 'Tarla':
+                    element.classList.add('Tarla');
+                    break;
+                case 'EmpireState':
+                    element.classList.add('EmpireState');
+                    break;
+            }
+            //#endregion themes
+            element.classList.add('bg-helper');
+        });
+    };
     XyzekiAuthService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_4__["DataService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"],
+            _services_member_setting_service__WEBPACK_IMPORTED_MODULE_4__["MemberSettingService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_6__["XyzekiSignalrService"]])
     ], XyzekiAuthService);
     return XyzekiAuthService;
 }());
@@ -5279,6 +5334,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _resolvers_project_to_dos_resolver_service__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./resolvers/project-to-dos-resolver.service */ "./src/app/model/resolvers/project-to-dos-resolver.service.ts");
 /* harmony import */ var _resolvers_containers_resolver_service__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./resolvers/containers-resolver.service */ "./src/app/model/resolvers/containers-resolver.service.ts");
 /* harmony import */ var _resolvers_container_files_resolver_service__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./resolvers/container-files-resolver.service */ "./src/app/model/resolvers/container-files-resolver.service.ts");
+/* harmony import */ var _auth_services_xyzeki_auth_data__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./auth-services/xyzeki-auth-data */ "./src/app/model/auth-services/xyzeki-auth-data.ts");
+
 
 
 
@@ -5344,7 +5401,7 @@ var ModelModule = /** @class */ (function () {
             providers: [
                 src_infrastructure_xyzeki_datetime_infra__WEBPACK_IMPORTED_MODULE_34__["XyzekiDateTimeInfra"],
                 _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_5__["XyzekiAuthService"],
-                _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_5__["XyzekiAuthData"],
+                _auth_services_xyzeki_auth_data__WEBPACK_IMPORTED_MODULE_53__["XyzekiAuthData"],
                 _services_shared_data_service__WEBPACK_IMPORTED_MODULE_16__["DataService"],
                 _services_shared_switch_hour_data_service__WEBPACK_IMPORTED_MODULE_35__["SwitchHourDataService"],
                 src_infrastructure_page_sizes__WEBPACK_IMPORTED_MODULE_36__["PageSizes"],
@@ -5415,18 +5472,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NotificationService", function() { return NotificationService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! util */ "./node_modules/util/util.js");
-/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
-/* harmony import */ var _project_task_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../project-task.model */ "./src/app/model/project-task.model.ts");
-/* harmony import */ var _services_teams_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/teams.service */ "./src/app/model/services/teams.service.ts");
-/* harmony import */ var _services_private_talks_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/private-talks.service */ "./src/app/model/services/private-talks.service.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var _services_quick_to_dos_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../services/quick-to-dos.service */ "./src/app/model/services/quick-to-dos.service.ts");
+/* harmony import */ var _angular_service_worker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/service-worker */ "./node_modules/@angular/service-worker/fesm5/service-worker.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! util */ "./node_modules/util/util.js");
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _auth_services_xyzeki_auth_data__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../auth-services/xyzeki-auth-data */ "./src/app/model/auth-services/xyzeki-auth-data.ts");
+/* harmony import */ var _project_task_model__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../project-task.model */ "./src/app/model/project-task.model.ts");
+/* harmony import */ var _services_private_talks_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../services/private-talks.service */ "./src/app/model/services/private-talks.service.ts");
 /* harmony import */ var _services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../services/project-to-dos.service */ "./src/app/model/services/project-to-dos.service.ts");
 /* harmony import */ var _services_projects_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../services/projects.service */ "./src/app/model/services/projects.service.ts");
-/* harmony import */ var _angular_service_worker__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/service-worker */ "./node_modules/@angular/service-worker/fesm5/service-worker.js");
-/* harmony import */ var _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var _services_quick_to_dos_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../services/quick-to-dos.service */ "./src/app/model/services/quick-to-dos.service.ts");
+/* harmony import */ var _services_teams_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../services/teams.service */ "./src/app/model/services/teams.service.ts");
 
 
 
@@ -5453,7 +5510,7 @@ var NotificationService = /** @class */ (function () {
         this.projectService = projectService;
         this.openXyzeki = function () {
             // event.preventDefault(); // prevent the browser from focusing the Notification's tab
-            window.open(src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_3__["BackEndWebServer"], '_self');
+            window.open(src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_4__["BackEndWebServer"], '_self');
         };
         this.innerWidth = window.innerWidth;
         this.innerHeight = window.innerHeight;
@@ -5526,12 +5583,12 @@ var NotificationService = /** @class */ (function () {
             return;
         if (!this.swPush.isEnabled)
             return;
-        if (Object(util__WEBPACK_IMPORTED_MODULE_2__["isNullOrUndefined"])(quickTask.AssignedTo) || quickTask.AssignedTo == quickTask.Owner) { // find better solution later.
+        if (Object(util__WEBPACK_IMPORTED_MODULE_5__["isNullOrUndefined"])(quickTask.AssignedTo) || quickTask.AssignedTo == quickTask.Owner) { // find better solution later.
             return;
         }
         var titleX = "1 Yeni Göreviniz Var";
         if (quickTask.Owner == this.xyzekiAuthData.Username) {
-            if (Object(util__WEBPACK_IMPORTED_MODULE_2__["isNullOrUndefined"])(quickTask.Status)) {
+            if (Object(util__WEBPACK_IMPORTED_MODULE_5__["isNullOrUndefined"])(quickTask.Status)) {
                 quickTask.Status = 'Bekliyor';
             }
             titleX = "Verdi\u011Finiz G\u00F6rev " + quickTask.Status;
@@ -5643,8 +5700,8 @@ var NotificationService = /** @class */ (function () {
             return;
         if (!this.swPush.isEnabled)
             return;
-        var projectTask = new _project_task_model__WEBPACK_IMPORTED_MODULE_4__["ProjectTask"](0, null);
-        this.projectToDoService.projectToDo(projectTaskComment.TaskId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["concatMap"])(function (projectToDo) {
+        var projectTask = new _project_task_model__WEBPACK_IMPORTED_MODULE_7__["ProjectTask"](0, null);
+        this.projectToDoService.projectToDo(projectTaskComment.TaskId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["concatMap"])(function (projectToDo) {
             projectTask = projectToDo;
             return _this.projectService.findProject(projectToDo.ProjectId);
         })).subscribe(function (project) {
@@ -5709,8 +5766,8 @@ var NotificationService = /** @class */ (function () {
     NotificationService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Optional"])()), tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](2, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Optional"])()),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_12__["XyzekiAuthData"], _angular_service_worker__WEBPACK_IMPORTED_MODULE_11__["SwUpdate"], _angular_service_worker__WEBPACK_IMPORTED_MODULE_11__["SwPush"],
-            _services_teams_service__WEBPACK_IMPORTED_MODULE_5__["TeamsService"], _services_private_talks_service__WEBPACK_IMPORTED_MODULE_6__["PrivateTalksService"], _services_quick_to_dos_service__WEBPACK_IMPORTED_MODULE_8__["QuickToDosService"], _services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_9__["ProjectToDosService"], _services_projects_service__WEBPACK_IMPORTED_MODULE_10__["ProjectsService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_auth_services_xyzeki_auth_data__WEBPACK_IMPORTED_MODULE_6__["XyzekiAuthData"], _angular_service_worker__WEBPACK_IMPORTED_MODULE_2__["SwUpdate"], _angular_service_worker__WEBPACK_IMPORTED_MODULE_2__["SwPush"],
+            _services_teams_service__WEBPACK_IMPORTED_MODULE_12__["TeamsService"], _services_private_talks_service__WEBPACK_IMPORTED_MODULE_8__["PrivateTalksService"], _services_quick_to_dos_service__WEBPACK_IMPORTED_MODULE_11__["QuickToDosService"], _services_project_to_dos_service__WEBPACK_IMPORTED_MODULE_9__["ProjectToDosService"], _services_projects_service__WEBPACK_IMPORTED_MODULE_10__["ProjectsService"]])
     ], NotificationService);
     return NotificationService;
 }());
@@ -6065,16 +6122,19 @@ var AdminRepository = /** @class */ (function () {
         this.allLicenses = [];
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { return _this.loadAllLicences(); });
         this.dataService.clearAllRepositoriesEvent.subscribe(function () { return _this.clearAllLicences(); });
-        this.loadAllLicences();
+        this.loadRepository();
     }
-    AdminRepository.prototype.clearAllLicences = function () {
-        this.allLicenses = [];
+    AdminRepository.prototype.loadRepository = function () {
+        this.loadAllLicences();
     };
     AdminRepository.prototype.loadAllLicences = function () {
         var _this = this;
         this.service.allLicenses().subscribe(function (lics) {
             _this.allLicenses = lics;
         });
+    };
+    AdminRepository.prototype.clearAllLicences = function () {
+        this.allLicenses = [];
     };
     AdminRepository.prototype.getAllLicenses = function () {
         return this.allLicenses;
@@ -6195,12 +6255,13 @@ var ContainerRepository = /** @class */ (function () {
         this.signalService.deletedContainerAvailable.subscribe(function (containerDeleted) {
             _this.deleteContainerViaSignalR(containerDeleted);
         });
-        this.dataService.loadAllRepositoriesEvent.subscribe(function () {
-            _this.loadBlobContainers(false);
-        });
+        this.dataService.loadAllRepositoriesEvent.subscribe(function () { _this.loadBlobContainers(false); });
         this.dataService.clearAllRepositoriesEvent.subscribe(function () { return _this.clearBlobContainers(); });
-        this.loadBlobContainers();
+        this.loadRepository();
     }
+    ContainerRepository.prototype.loadRepository = function () {
+        this.loadBlobContainers(false);
+    };
     ContainerRepository.prototype.clearBlobContainers = function () {
         this.containers = [];
         this.loaded = false;
@@ -6507,8 +6568,11 @@ var MemberLicenseRepository = /** @class */ (function () {
         this.memberLicense = new _member_license_model__WEBPACK_IMPORTED_MODULE_3__["MemberLicense"](null, null, null, null, null, null, null, null, null, null, null, null);
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { return _this.loadLicenseRelateds(); });
         this.dataService.clearAllRepositoriesEvent.subscribe(function () { return _this.clearLicenseRelateds(); });
-        this.loadLicenseRelateds();
+        this.loadRepository();
     }
+    MemberLicenseRepository.prototype.loadRepository = function () {
+        this.loadLicenseRelateds();
+    };
     MemberLicenseRepository.prototype.clearLicenseRelateds = function () {
         this.memberLicense = new _member_license_model__WEBPACK_IMPORTED_MODULE_3__["MemberLicense"](null, null, null, null, null, null, null, null, null, null, null, null);
         this.accessGranted = false;
@@ -6786,8 +6850,11 @@ var PrivateTalkReceiverRepository = /** @class */ (function () {
         this.privateTalkTeamReceivers = [];
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { _this.loadAll(1); });
         this.dataService.clearAllRepositoriesEvent.subscribe(function () { return _this.clearPrivateTalkReceivers(); });
-        this.loadAll();
+        this.loadRepository();
     }
+    PrivateTalkReceiverRepository.prototype.loadRepository = function () {
+        this.loadAll(1);
+    };
     PrivateTalkReceiverRepository.prototype.clearPrivateTalkReceivers = function () {
         this.privateTalkReceivers = [];
         this.privateTalkTeamReceivers = [];
@@ -7001,9 +7068,12 @@ var PrivateTalkRepository = /** @class */ (function () {
         });
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { _this.loadPTCount(); _this.loadAll(1, undefined, false); });
         this.dataService.clearAllRepositoriesEvent.subscribe(function () { _this.clearPrivateTalks(); });
-        this.loadPTCount();
-        this.loadAll(1, undefined, false);
+        this.loadRepository();
     }
+    PrivateTalkRepository.prototype.loadRepository = function () {
+        this.loadAll(1, undefined, false);
+        this.loadPTCount();
+    };
     PrivateTalkRepository.prototype.clearPrivateTalks = function () {
         this.myPrivateTalks = [];
         this.privateTalksReceived = [];
@@ -7316,8 +7386,11 @@ var ProjectRepository = /** @class */ (function () {
         });
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { _this.loadProjects(); });
         this.dataService.clearAllRepositoriesEvent.subscribe(function () { _this.clearProjects(); });
-        this.loadProjects();
+        this.loadRepository();
     }
+    ProjectRepository.prototype.loadRepository = function () {
+        this.loadProjects(); // my and assigned at once
+    };
     ProjectRepository.prototype.clearProjects = function () {
         this.myProjects = [];
         this.myProjectsAssigned = [];
@@ -7692,7 +7765,11 @@ var ProjectToDoRepository = /** @class */ (function () {
         });
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { _this.loadAll(); });
         this.dataService.clearAllRepositoriesEvent.subscribe(function () { _this.clearProjectToDos(); });
+        this.loadRepository();
     }
+    ProjectToDoRepository.prototype.loadRepository = function () {
+        this.loadAll();
+    };
     ProjectToDoRepository.prototype.clearProjectToDos = function () {
         this.projectToDos = [];
         this.ptCommentsCount = [];
@@ -8211,8 +8288,11 @@ var QuickToDoRepository = /** @class */ (function () {
         });
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { _this.loadAll(); });
         this.dataService.clearAllRepositoriesEvent.subscribe(function () { _this.clearQuickToDos(); });
-        this.loadAll();
+        this.loadRepository();
     }
+    QuickToDoRepository.prototype.loadRepository = function () {
+        this.loadAll();
+    };
     QuickToDoRepository.prototype.clearQuickToDos = function () {
         this.myQuickToDos = [];
         this.assignedToMe = [];
@@ -8623,9 +8703,12 @@ var TeamMemberRepository = /** @class */ (function () {
         });
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { _this.loadMYRelateds(); _this.loadPTRelateds(); });
         this.dataService.clearAllRepositoriesEvent.subscribe(function () { _this.clearTeamMembers(); });
+        this.loadRepository();
+    }
+    TeamMemberRepository.prototype.loadRepository = function () {
         this.loadMYRelateds();
         this.loadPTRelateds();
-    }
+    };
     TeamMemberRepository.prototype.clearTeamMembers = function () {
         this.TeamId = 0;
         this.teamMembers = []; // üyemizin seçmiş olduğu takım'daki takım üyeleri
@@ -8908,8 +8991,12 @@ var TeamRepository = /** @class */ (function () {
         this.teamToOpen = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.dataService.loadAllRepositoriesEvent.subscribe(function () { _this.loadMYRelateds(false); _this.loadPTRelateds(); });
         this.dataService.clearAllRepositoriesEvent.subscribe(function () { _this.clearTeams(); });
-        this.loadMYRelateds();
+        this.loadRepository();
     }
+    TeamRepository.prototype.loadRepository = function () {
+        this.loadMYRelateds();
+        this.loadPTRelateds();
+    };
     TeamRepository.prototype.clearTeams = function () {
         this.myTeams = []; // sahip olduğum takımlar
         this.myTeamsJoined = []; // katılmış olduğum takılmlar
@@ -10672,6 +10759,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/infrastructure/back-end-server */ "./src/infrastructure/back-end-server.ts");
 /* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
 /* harmony import */ var _notification_services_notification_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../notification-services/notification.service */ "./src/app/model/notification-services/notification.service.ts");
+/* harmony import */ var _auth_services_xyzeki_auth_data__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../auth-services/xyzeki-auth-data */ "./src/app/model/auth-services/xyzeki-auth-data.ts");
+
 
 
 
@@ -10680,9 +10769,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var XyzekiSignalrService = /** @class */ (function () {
-    function XyzekiSignalrService(dataService, pushService) {
+    function XyzekiSignalrService(dataService, pushService, xyzekiAuthData) {
         this.dataService = dataService;
         this.pushService = pushService;
+        this.xyzekiAuthData = xyzekiAuthData;
+        this.baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_4__["BackEndWebServer"] + '/';
+        this.builder = new _aspnet_signalr__WEBPACK_IMPORTED_MODULE_2__["HubConnectionBuilder"]();
         // TeamMember Area
         this.newTeamMemberAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
         this.newTeamMemberJoinedAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
@@ -10716,16 +10808,13 @@ var XyzekiSignalrService = /** @class */ (function () {
         this.newProjectToDoCommentAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
         this.deletedProjectToDoCommentAvailable = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
     }
-    XyzekiSignalrService.prototype.startListening = function (token) {
+    XyzekiSignalrService.prototype.createHubConnection = function (token) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var baseURL, builder;
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        baseURL = src_infrastructure_back_end_server__WEBPACK_IMPORTED_MODULE_4__["BackEndWebServer"] + '/';
-                        builder = new _aspnet_signalr__WEBPACK_IMPORTED_MODULE_2__["HubConnectionBuilder"]();
-                        this.hubConnection = builder.withUrl(baseURL + 'api/hubs/XyzekiNotificationHub', {
+                        this.hubConnection = this.builder.withUrl(this.baseURL + 'api/hubs/XyzekiNotificationHub', {
                             accessTokenFactory: function () { return token; }, skipNegotiation: false
                         }).build();
                         this.hubConnection.serverTimeoutInMilliseconds = 15000;
@@ -11030,6 +11119,15 @@ var XyzekiSignalrService = /** @class */ (function () {
             });
         });
     };
+    XyzekiSignalrService.prototype.destroyHubConnection = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                this.hubConnection.stop();
+                this.hubConnection = this.builder.build();
+                return [2 /*return*/];
+            });
+        });
+    };
     XyzekiSignalrService.prototype.startConnection = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var _this = this;
@@ -11058,6 +11156,8 @@ var XyzekiSignalrService = /** @class */ (function () {
     XyzekiSignalrService.prototype.tryConnection = function (seconds) {
         var _this = this;
         if (seconds === void 0) { seconds = 10; }
+        if (!this.xyzekiAuthData.LoggedIn)
+            return;
         var secondsToTryAfter = seconds;
         this.dataService.signalConnectionSeconds.next(secondsToTryAfter);
         this.timeOutId = setTimeout(function () { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
@@ -11415,7 +11515,7 @@ var XyzekiSignalrService = /** @class */ (function () {
     };
     XyzekiSignalrService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"], _notification_services_notification_service__WEBPACK_IMPORTED_MODULE_6__["NotificationService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_shared_data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"], _notification_services_notification_service__WEBPACK_IMPORTED_MODULE_6__["NotificationService"], _auth_services_xyzeki_auth_data__WEBPACK_IMPORTED_MODULE_7__["XyzekiAuthData"]])
     ], XyzekiSignalrService);
     return XyzekiSignalrService;
 }());
@@ -11659,6 +11759,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
+/* harmony import */ var _angular_material_icon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/material/icon */ "./node_modules/@angular/material/esm5/icon.es5.js");
+
 
 
 
@@ -11676,7 +11778,7 @@ var NavbarModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             declarations: [_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_5__["NavbarComponent"], _navbar_secondary_navbar_secondary_component__WEBPACK_IMPORTED_MODULE_4__["NavbarSecondaryComponent"], _nav_profile_nav_profile_component__WEBPACK_IMPORTED_MODULE_3__["NavProfileComponent"]],
             imports: [
-                _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormsModule"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_9__["NgbModule"], _angular_router__WEBPACK_IMPORTED_MODULE_8__["RouterModule"]
+                _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormsModule"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_9__["NgbModule"], _angular_router__WEBPACK_IMPORTED_MODULE_8__["RouterModule"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_10__["MatIconModule"]
             ],
             exports: [_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_5__["NavbarComponent"], _navbar_secondary_navbar_secondary_component__WEBPACK_IMPORTED_MODULE_4__["NavbarSecondaryComponent"], _nav_profile_nav_profile_component__WEBPACK_IMPORTED_MODULE_3__["NavProfileComponent"]],
             providers: [_model_services_guards_auth_guard_service__WEBPACK_IMPORTED_MODULE_6__["AuthGuardService"]]
@@ -11696,7 +11798,7 @@ var NavbarModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".xyz-nav-btn{\n  border: 1px rgb(252, 182, 177) solid;  \n  transition: background-color 0.2s;\n  border-radius:2px!important;\n}\n.xyz-nav-btn:hover{\n  box-shadow: 0 5px 15px rgba(255, 251, 0, 0.08);\n  border: 1px rgb(255, 255, 255) solid;  \n  background-color: rgb(226, 226, 226);\n  border-radius: 2px!important;\n}\n.toggleClose .dropdown-toggle::after\n{\n  display:none;      \n}\n/*mobile*/\n@media (min-width: 200px) and (max-width: 768px ) {\n  #navbarPC {\n    display:none;\n  }\n  #navbarTablet {\n    display:none;\n  }\n  /* .dropdown-toggle::after {\n    display:none;\n  } */\n}\n/*tablet*/\n@media (min-width: 769px) and (max-width: 992px) {\n  #navbarPC {\n    display:none;\n  }\n  #navbarMobile {\n    display:none;\n  }\n}\n/*pc*/\n@media (min-width: 993px) {\n  #navbarMobile {\n    display:none;\n  }\n  #navbarTablet {\n    display:none;\n  }\n \n}\n.arrow-down {\n  width: 0; \n  height: 0; \n  border-left: 5px solid transparent;\n  border-right: 5px solid transparent;\n  float: right;\n  border-top: 5px solid rgb(48, 48, 48);\n}\n.unreadCountTitle{\n  background: rgb(255, 255, 255);\n  border-radius: 15%;\n  padding: 5px;\n  font-weight: 550;\n}\n.unreadCountTitleM{\n\n  border-radius: 15%;\n  padding: 5px;\n  font-weight: 550;\n}\n.modernUnderlined {\n  color: #ffffff!important;\n  text-decoration: none;\n  position: relative;\n  font-weight: 150;\n  /* transition: all 0.12s ease;  */\n  font-family: \"Raleway\", Arial, sans-serif;\n  font-size: 15px;\n  padding-bottom: 5px;\n  cursor: pointer;\n  background-color: rgb(85, 76, 76);\n\n  \n}\n.modernUnderlined::after {\n  content: '';\n  position: absolute;\n  height: 1px;\n  width: 100%;\n  bottom: 3px;\n  right: 0;\n  background:-webkit-gradient(linear, left top, right top, from(rgb(216, 213, 24)), \n  to(rgb(216, 213, 24)), color-stop(1, rgb(255, 251, 0)));\n  \n  opacity: 0.4;\n  transition: all 0.5s ease;\n  \n\n}\n.modernUnderlined:hover::after {\n  opacity: 1;\n\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbmF2YmFyL25hdmJhci9uYXZiYXIuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLG9DQUFvQztFQUNwQyxpQ0FBaUM7RUFDakMsMkJBQTJCO0FBQzdCO0FBQ0E7RUFDRSw4Q0FBOEM7RUFDOUMsb0NBQW9DO0VBQ3BDLG9DQUFvQztFQUNwQyw0QkFBNEI7QUFDOUI7QUFDQTs7RUFFRSxZQUFZO0FBQ2Q7QUFDQSxTQUFTO0FBQ1Q7RUFDRTtJQUNFLFlBQVk7RUFDZDtFQUNBO0lBQ0UsWUFBWTtFQUNkO0VBQ0E7O0tBRUc7QUFDTDtBQUNBLFNBQVM7QUFDVDtFQUNFO0lBQ0UsWUFBWTtFQUNkO0VBQ0E7SUFDRSxZQUFZO0VBQ2Q7QUFDRjtBQUVBLEtBQUs7QUFDTDtFQUNFO0lBQ0UsWUFBWTtFQUNkO0VBQ0E7SUFDRSxZQUFZO0VBQ2Q7O0FBRUY7QUFDQTtFQUNFLFFBQVE7RUFDUixTQUFTO0VBQ1Qsa0NBQWtDO0VBQ2xDLG1DQUFtQztFQUNuQyxZQUFZO0VBQ1oscUNBQXFDO0FBQ3ZDO0FBQ0E7RUFDRSw4QkFBOEI7RUFDOUIsa0JBQWtCO0VBQ2xCLFlBQVk7RUFDWixnQkFBZ0I7QUFDbEI7QUFDQTs7RUFFRSxrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLGdCQUFnQjtBQUNsQjtBQU1BO0VBQ0Usd0JBQXdCO0VBQ3hCLHFCQUFxQjtFQUNyQixrQkFBa0I7RUFDbEIsZ0JBQWdCO0VBQ2hCLGlDQUFpQztFQUNqQyx5Q0FBeUM7RUFDekMsZUFBZTtFQUNmLG1CQUFtQjtFQUNuQixlQUFlO0VBQ2YsaUNBQWlDOzs7QUFHbkM7QUFFQTtFQUNFLFdBQVc7RUFDWCxrQkFBa0I7RUFDbEIsV0FBVztFQUNYLFdBQVc7RUFDWCxXQUFXO0VBQ1gsUUFBUTtFQUNSO3lEQUN1RDs7RUFFdkQsWUFBWTtFQUNaLHlCQUF5Qjs7O0FBRzNCO0FBRUE7RUFDRSxVQUFVOztBQUVaIiwiZmlsZSI6InNyYy9hcHAvbmF2YmFyL25hdmJhci9uYXZiYXIuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi54eXotbmF2LWJ0bntcbiAgYm9yZGVyOiAxcHggcmdiKDI1MiwgMTgyLCAxNzcpIHNvbGlkOyAgXG4gIHRyYW5zaXRpb246IGJhY2tncm91bmQtY29sb3IgMC4ycztcbiAgYm9yZGVyLXJhZGl1czoycHghaW1wb3J0YW50O1xufVxuLnh5ei1uYXYtYnRuOmhvdmVye1xuICBib3gtc2hhZG93OiAwIDVweCAxNXB4IHJnYmEoMjU1LCAyNTEsIDAsIDAuMDgpO1xuICBib3JkZXI6IDFweCByZ2IoMjU1LCAyNTUsIDI1NSkgc29saWQ7ICBcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDIyNiwgMjI2LCAyMjYpO1xuICBib3JkZXItcmFkaXVzOiAycHghaW1wb3J0YW50O1xufVxuLnRvZ2dsZUNsb3NlIC5kcm9wZG93bi10b2dnbGU6OmFmdGVyXG57XG4gIGRpc3BsYXk6bm9uZTsgICAgICBcbn1cbi8qbW9iaWxlKi9cbkBtZWRpYSAobWluLXdpZHRoOiAyMDBweCkgYW5kIChtYXgtd2lkdGg6IDc2OHB4ICkge1xuICAjbmF2YmFyUEMge1xuICAgIGRpc3BsYXk6bm9uZTtcbiAgfVxuICAjbmF2YmFyVGFibGV0IHtcbiAgICBkaXNwbGF5Om5vbmU7XG4gIH1cbiAgLyogLmRyb3Bkb3duLXRvZ2dsZTo6YWZ0ZXIge1xuICAgIGRpc3BsYXk6bm9uZTtcbiAgfSAqL1xufVxuLyp0YWJsZXQqL1xuQG1lZGlhIChtaW4td2lkdGg6IDc2OXB4KSBhbmQgKG1heC13aWR0aDogOTkycHgpIHtcbiAgI25hdmJhclBDIHtcbiAgICBkaXNwbGF5Om5vbmU7XG4gIH1cbiAgI25hdmJhck1vYmlsZSB7XG4gICAgZGlzcGxheTpub25lO1xuICB9XG59XG5cbi8qcGMqL1xuQG1lZGlhIChtaW4td2lkdGg6IDk5M3B4KSB7XG4gICNuYXZiYXJNb2JpbGUge1xuICAgIGRpc3BsYXk6bm9uZTtcbiAgfVxuICAjbmF2YmFyVGFibGV0IHtcbiAgICBkaXNwbGF5Om5vbmU7XG4gIH1cbiBcbn1cbi5hcnJvdy1kb3duIHtcbiAgd2lkdGg6IDA7IFxuICBoZWlnaHQ6IDA7IFxuICBib3JkZXItbGVmdDogNXB4IHNvbGlkIHRyYW5zcGFyZW50O1xuICBib3JkZXItcmlnaHQ6IDVweCBzb2xpZCB0cmFuc3BhcmVudDtcbiAgZmxvYXQ6IHJpZ2h0O1xuICBib3JkZXItdG9wOiA1cHggc29saWQgcmdiKDQ4LCA0OCwgNDgpO1xufSBcbi51bnJlYWRDb3VudFRpdGxle1xuICBiYWNrZ3JvdW5kOiByZ2IoMjU1LCAyNTUsIDI1NSk7XG4gIGJvcmRlci1yYWRpdXM6IDE1JTtcbiAgcGFkZGluZzogNXB4O1xuICBmb250LXdlaWdodDogNTUwO1xufVxuLnVucmVhZENvdW50VGl0bGVNe1xuXG4gIGJvcmRlci1yYWRpdXM6IDE1JTtcbiAgcGFkZGluZzogNXB4O1xuICBmb250LXdlaWdodDogNTUwO1xufVxuXG5cblxuXG5cbi5tb2Rlcm5VbmRlcmxpbmVkIHtcbiAgY29sb3I6ICNmZmZmZmYhaW1wb3J0YW50O1xuICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgZm9udC13ZWlnaHQ6IDE1MDtcbiAgLyogdHJhbnNpdGlvbjogYWxsIDAuMTJzIGVhc2U7ICAqL1xuICBmb250LWZhbWlseTogXCJSYWxld2F5XCIsIEFyaWFsLCBzYW5zLXNlcmlmO1xuICBmb250LXNpemU6IDE1cHg7XG4gIHBhZGRpbmctYm90dG9tOiA1cHg7XG4gIGN1cnNvcjogcG9pbnRlcjtcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDg1LCA3NiwgNzYpO1xuXG4gIFxufVxuXG4ubW9kZXJuVW5kZXJsaW5lZDo6YWZ0ZXIge1xuICBjb250ZW50OiAnJztcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBoZWlnaHQ6IDFweDtcbiAgd2lkdGg6IDEwMCU7XG4gIGJvdHRvbTogM3B4O1xuICByaWdodDogMDtcbiAgYmFja2dyb3VuZDotd2Via2l0LWdyYWRpZW50KGxpbmVhciwgbGVmdCB0b3AsIHJpZ2h0IHRvcCwgZnJvbShyZ2IoMjE2LCAyMTMsIDI0KSksIFxuICB0byhyZ2IoMjE2LCAyMTMsIDI0KSksIGNvbG9yLXN0b3AoMSwgcmdiKDI1NSwgMjUxLCAwKSkpO1xuICBcbiAgb3BhY2l0eTogMC40O1xuICB0cmFuc2l0aW9uOiBhbGwgMC41cyBlYXNlO1xuICBcblxufVxuXG4ubW9kZXJuVW5kZXJsaW5lZDpob3Zlcjo6YWZ0ZXIge1xuICBvcGFjaXR5OiAxO1xuXG59XG4iXX0= */"
+module.exports = ".xyz-nav-btn{\n  border: 1px rgb(252, 182, 177) solid;  \n  transition: background-color 0.2s;\n  border-radius:2px!important;\n  display:flex;\n \n  align-items: center;\n}\n.xyz-nav-btn:hover{\n  box-shadow: 0 5px 15px rgba(255, 251, 0, 0.08);\n  border: 1px rgb(255, 255, 255) solid;  \n  background-color: rgb(226, 226, 226);\n  border-radius: 2px!important;\n}\n.toggleClose .dropdown-toggle::after\n{\n  display:none;      \n}\n/*mobile*/\n@media (min-width: 200px) and (max-width: 768px ) {\n  #navbarPC {\n    display:none;\n  }\n  #navbarTablet {\n    display:none;\n  }\n  /* .dropdown-toggle::after {\n    display:none;\n  } */\n}\n/*tablet*/\n@media (min-width: 769px) and (max-width: 992px) {\n  #navbarPC {\n    display:none;\n  }\n  #navbarMobile {\n    display:none;\n  }\n}\n/*pc*/\n@media (min-width: 993px) {\n  #navbarMobile {\n    display:none;\n  }\n  #navbarTablet {\n    display:none;\n  }\n \n}\n.arrow-down {\n  width: 0; \n  height: 0; \n  border-left: 5px solid transparent;\n  border-right: 5px solid transparent;\n  float: right;\n  border-top: 5px solid rgb(48, 48, 48);\n}\n.unreadCountTitle{\n  background: rgb(255, 255, 255);\n  border-radius: 15%;\n  padding: 5px;\n  font-weight: 550;\n}\n.unreadCountTitleM{\n\n  border-radius: 15%;\n  padding: 5px;\n  font-weight: 550;\n}\n.modernUnderlined {\n  color: #ffffff!important;\n  text-decoration: none;\n  position: relative;\n  font-weight: 150;\n  /* transition: all 0.12s ease;  */\n  font-family: \"Raleway\", Arial, sans-serif;\n  font-size: 15px;\n  padding-bottom: 5px;\n  cursor: pointer;\n  background-color: rgb(85, 76, 76);\n\n  \n}\n.modernUnderlined::after {\n  content: '';\n  position: absolute;\n  height: 1px;\n  width: 100%;\n  bottom: 3px;\n  right: 0;\n  background:-webkit-gradient(linear, left top, right top, from(rgb(216, 213, 24)), \n  to(rgb(216, 213, 24)), color-stop(1, rgb(255, 251, 0)));\n  \n  opacity: 0.4;\n  transition: all 0.5s ease;\n  \n\n}\n.modernUnderlined:hover::after {\n  opacity: 1;\n\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbmF2YmFyL25hdmJhci9uYXZiYXIuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLG9DQUFvQztFQUNwQyxpQ0FBaUM7RUFDakMsMkJBQTJCO0VBQzNCLFlBQVk7O0VBRVosbUJBQW1CO0FBQ3JCO0FBQ0E7RUFDRSw4Q0FBOEM7RUFDOUMsb0NBQW9DO0VBQ3BDLG9DQUFvQztFQUNwQyw0QkFBNEI7QUFDOUI7QUFDQTs7RUFFRSxZQUFZO0FBQ2Q7QUFDQSxTQUFTO0FBQ1Q7RUFDRTtJQUNFLFlBQVk7RUFDZDtFQUNBO0lBQ0UsWUFBWTtFQUNkO0VBQ0E7O0tBRUc7QUFDTDtBQUNBLFNBQVM7QUFDVDtFQUNFO0lBQ0UsWUFBWTtFQUNkO0VBQ0E7SUFDRSxZQUFZO0VBQ2Q7QUFDRjtBQUVBLEtBQUs7QUFDTDtFQUNFO0lBQ0UsWUFBWTtFQUNkO0VBQ0E7SUFDRSxZQUFZO0VBQ2Q7O0FBRUY7QUFDQTtFQUNFLFFBQVE7RUFDUixTQUFTO0VBQ1Qsa0NBQWtDO0VBQ2xDLG1DQUFtQztFQUNuQyxZQUFZO0VBQ1oscUNBQXFDO0FBQ3ZDO0FBQ0E7RUFDRSw4QkFBOEI7RUFDOUIsa0JBQWtCO0VBQ2xCLFlBQVk7RUFDWixnQkFBZ0I7QUFDbEI7QUFDQTs7RUFFRSxrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLGdCQUFnQjtBQUNsQjtBQU1BO0VBQ0Usd0JBQXdCO0VBQ3hCLHFCQUFxQjtFQUNyQixrQkFBa0I7RUFDbEIsZ0JBQWdCO0VBQ2hCLGlDQUFpQztFQUNqQyx5Q0FBeUM7RUFDekMsZUFBZTtFQUNmLG1CQUFtQjtFQUNuQixlQUFlO0VBQ2YsaUNBQWlDOzs7QUFHbkM7QUFFQTtFQUNFLFdBQVc7RUFDWCxrQkFBa0I7RUFDbEIsV0FBVztFQUNYLFdBQVc7RUFDWCxXQUFXO0VBQ1gsUUFBUTtFQUNSO3lEQUN1RDs7RUFFdkQsWUFBWTtFQUNaLHlCQUF5Qjs7O0FBRzNCO0FBRUE7RUFDRSxVQUFVOztBQUVaIiwiZmlsZSI6InNyYy9hcHAvbmF2YmFyL25hdmJhci9uYXZiYXIuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi54eXotbmF2LWJ0bntcbiAgYm9yZGVyOiAxcHggcmdiKDI1MiwgMTgyLCAxNzcpIHNvbGlkOyAgXG4gIHRyYW5zaXRpb246IGJhY2tncm91bmQtY29sb3IgMC4ycztcbiAgYm9yZGVyLXJhZGl1czoycHghaW1wb3J0YW50O1xuICBkaXNwbGF5OmZsZXg7XG4gXG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG59XG4ueHl6LW5hdi1idG46aG92ZXJ7XG4gIGJveC1zaGFkb3c6IDAgNXB4IDE1cHggcmdiYSgyNTUsIDI1MSwgMCwgMC4wOCk7XG4gIGJvcmRlcjogMXB4IHJnYigyNTUsIDI1NSwgMjU1KSBzb2xpZDsgIFxuICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjI2LCAyMjYsIDIyNik7XG4gIGJvcmRlci1yYWRpdXM6IDJweCFpbXBvcnRhbnQ7XG59XG4udG9nZ2xlQ2xvc2UgLmRyb3Bkb3duLXRvZ2dsZTo6YWZ0ZXJcbntcbiAgZGlzcGxheTpub25lOyAgICAgIFxufVxuLyptb2JpbGUqL1xuQG1lZGlhIChtaW4td2lkdGg6IDIwMHB4KSBhbmQgKG1heC13aWR0aDogNzY4cHggKSB7XG4gICNuYXZiYXJQQyB7XG4gICAgZGlzcGxheTpub25lO1xuICB9XG4gICNuYXZiYXJUYWJsZXQge1xuICAgIGRpc3BsYXk6bm9uZTtcbiAgfVxuICAvKiAuZHJvcGRvd24tdG9nZ2xlOjphZnRlciB7XG4gICAgZGlzcGxheTpub25lO1xuICB9ICovXG59XG4vKnRhYmxldCovXG5AbWVkaWEgKG1pbi13aWR0aDogNzY5cHgpIGFuZCAobWF4LXdpZHRoOiA5OTJweCkge1xuICAjbmF2YmFyUEMge1xuICAgIGRpc3BsYXk6bm9uZTtcbiAgfVxuICAjbmF2YmFyTW9iaWxlIHtcbiAgICBkaXNwbGF5Om5vbmU7XG4gIH1cbn1cblxuLypwYyovXG5AbWVkaWEgKG1pbi13aWR0aDogOTkzcHgpIHtcbiAgI25hdmJhck1vYmlsZSB7XG4gICAgZGlzcGxheTpub25lO1xuICB9XG4gICNuYXZiYXJUYWJsZXQge1xuICAgIGRpc3BsYXk6bm9uZTtcbiAgfVxuIFxufVxuLmFycm93LWRvd24ge1xuICB3aWR0aDogMDsgXG4gIGhlaWdodDogMDsgXG4gIGJvcmRlci1sZWZ0OiA1cHggc29saWQgdHJhbnNwYXJlbnQ7XG4gIGJvcmRlci1yaWdodDogNXB4IHNvbGlkIHRyYW5zcGFyZW50O1xuICBmbG9hdDogcmlnaHQ7XG4gIGJvcmRlci10b3A6IDVweCBzb2xpZCByZ2IoNDgsIDQ4LCA0OCk7XG59IFxuLnVucmVhZENvdW50VGl0bGV7XG4gIGJhY2tncm91bmQ6IHJnYigyNTUsIDI1NSwgMjU1KTtcbiAgYm9yZGVyLXJhZGl1czogMTUlO1xuICBwYWRkaW5nOiA1cHg7XG4gIGZvbnQtd2VpZ2h0OiA1NTA7XG59XG4udW5yZWFkQ291bnRUaXRsZU17XG5cbiAgYm9yZGVyLXJhZGl1czogMTUlO1xuICBwYWRkaW5nOiA1cHg7XG4gIGZvbnQtd2VpZ2h0OiA1NTA7XG59XG5cblxuXG5cblxuLm1vZGVyblVuZGVybGluZWQge1xuICBjb2xvcjogI2ZmZmZmZiFpbXBvcnRhbnQ7XG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xuICBmb250LXdlaWdodDogMTUwO1xuICAvKiB0cmFuc2l0aW9uOiBhbGwgMC4xMnMgZWFzZTsgICovXG4gIGZvbnQtZmFtaWx5OiBcIlJhbGV3YXlcIiwgQXJpYWwsIHNhbnMtc2VyaWY7XG4gIGZvbnQtc2l6ZTogMTVweDtcbiAgcGFkZGluZy1ib3R0b206IDVweDtcbiAgY3Vyc29yOiBwb2ludGVyO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoODUsIDc2LCA3Nik7XG5cbiAgXG59XG5cbi5tb2Rlcm5VbmRlcmxpbmVkOjphZnRlciB7XG4gIGNvbnRlbnQ6ICcnO1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGhlaWdodDogMXB4O1xuICB3aWR0aDogMTAwJTtcbiAgYm90dG9tOiAzcHg7XG4gIHJpZ2h0OiAwO1xuICBiYWNrZ3JvdW5kOi13ZWJraXQtZ3JhZGllbnQobGluZWFyLCBsZWZ0IHRvcCwgcmlnaHQgdG9wLCBmcm9tKHJnYigyMTYsIDIxMywgMjQpKSwgXG4gIHRvKHJnYigyMTYsIDIxMywgMjQpKSwgY29sb3Itc3RvcCgxLCByZ2IoMjU1LCAyNTEsIDApKSk7XG4gIFxuICBvcGFjaXR5OiAwLjQ7XG4gIHRyYW5zaXRpb246IGFsbCAwLjVzIGVhc2U7XG4gIFxuXG59XG5cbi5tb2Rlcm5VbmRlcmxpbmVkOmhvdmVyOjphZnRlciB7XG4gIG9wYWNpdHk6IDE7XG5cbn1cbiJdfQ== */"
 
 /***/ }),
 
@@ -11707,7 +11809,7 @@ module.exports = ".xyz-nav-btn{\n  border: 1px rgb(252, 182, 177) solid;  \n  tr
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav id=\"navbarPC\" class=\"container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0\"\n        style=\"height:3rem!important\" *ngIf=\"xyzekiAuthService?.LoggedIn\">\n        <a class=\"navbar-brand\" [routerLink]=\"[ '/isler' ]\">\n                <img src=\"../../../assets/logo.svg\" style=\"height: 25px; font-family: Arial, Helvetica, sans-serif \">\n                Xyzeki\n        </a>\n\n        <a class=\"btn btn-light rounded-0 border-0 xyz-nav-btn \" [routerLink]=\"[ '/is-konusmalari' ]\">İş Konuşmaları <span\n                        ngbTooltip=\"{{getUnreadTotalPTCount}} okunmamış iş konuşması bulunmaktadır.\"\n                        tooltipClass=\"tooltipSpecial\" class=\"unreadCountTitle\">{{getUnreadTotalPTCount}}</span></a>\n        <a class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\" [routerLink]=\"[ '/projeler' ]\">Projeler</a>\n        <a class=\"btn btn-light rounded-0 border-0 xyz-nav-btn \" [routerLink]=\"[ '/takimlar' ]\">Ekipler</a>\n        <button class=\"btn btn-light rounded-0 border-0 xyz-nav-btn \" [routerLink]=\"[ '/dosyalar' ]\">Dosyalar</button>\n        <div class=\"float-right\">\n                <app-nav-profile></app-nav-profile>\n        </div>\n</nav>\n\n\n<nav id=\"navbarMobile\" class=\"container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0 \"\n        style=\"height:3rem!important\" *ngIf=\"xyzekiAuthService?.LoggedIn\">\n        <a class=\"navbar-brand\" [routerLink]=\"[ '/isler' ]\">\n                <img src=\"../../../assets/logo.svg\" style=\"height: 25px; font-family: Arial, Helvetica, sans-serif \">\n                Xyzeki\n        </a>\n\n        <div class=\"toggleClose\">\n                <div ngbDropdown class=\"d-inline-block\">\n                        <button class=\"btn btn-light rounded-0 border-0 mr-1  xyz-nav-btn rounded-0 mb-0 mt-0  ml-0 mr-0 pb-1 pt-1 pl-1 pr-1  \"\n                                id=\"dropdownMemberOptions\" ngbDropdownToggle><svg width=\"24\" height=\"24\" class=\"mb-1\"\n                                        xmlns=\"http://www.w3.org/2000/svg\" fill-rule=\"evenodd\" clip-rule=\"evenodd\">\n                                        <path d=\"M24 18v1h-24v-1h24zm0-6v1h-24v-1h24zm0-6v1h-24v-1h24z\"\n                                                fill=\"#1040e2\" />\n                                        <path d=\"M24 19h-24v-1h24v1zm0-6h-24v-1h24v1zm0-6h-24v-1h24v1z\" /></svg><span\n                                        class=\"text-uppercase\"> Menü</span></button>\n                        <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\" class=\"rounded-0\">\n\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/is-konusmalari' ]\">İş Konuşmaları <span\n                                                class=\"unreadCountTitleM\">{{getUnreadTotalPTCount}}</span></button>\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/takimlar' ]\">Ekipler</button>\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/projeler' ]\">Projeler</button>\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/dosyalar' ]\">Dosyalar</button>\n                        </div>\n                </div>\n\n        </div>\n\n\n\n\n        <div class=\"float-right\">\n                <app-nav-profile></app-nav-profile>\n        </div>\n</nav>\n\n<nav id=\"navbarTablet\" class=\"container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0\"\n        style=\"height:3rem!important\" *ngIf=\"xyzekiAuthService?.LoggedIn\">\n        <a class=\"navbar-brand\" [routerLink]=\"[ '/isler' ]\">\n                <img src=\"../../../assets/logo.svg\" style=\"height: 25px; font-family: Arial, Helvetica, sans-serif \">\n                Xyzeki\n        </a>\n        <button class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\" [routerLink]=\"[ '/is-konusmalari' ]\">İş Konuşmaları\n                <span class=\"unreadCountTitle\">{{getUnreadTotalPTCount}}</span></button>\n        <button class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\" [routerLink]=\"[ '/projeler']\">Projeler</button>\n\n        <div>\n                <div ngbDropdown class=\"d-inline-block\">\n                        <button class=\"btn btn-light rounded-0 border-0 mr-1  xyz-nav-btn rounded-0 mb-0 mt-0  ml-0 mr-0 pb-1 pt-1 pl-1 pr-1  \"\n                                id=\"dropdownMemberOptions\" ngbDropdownToggle>...</button>\n                        <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\" class=\"rounded-0\">\n\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/takimlar' ]\">Ekipler</button>\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/dosyalar' ]\">Dosyalar</button>\n\n\n                        </div>\n                </div>\n\n        </div>\n\n\n\n\n        <div class=\"float-right\">\n                <app-nav-profile></app-nav-profile>\n        </div>\n</nav>\n\n<nav class=\"container-fluid bg-dark sticky-top\" *ngIf=\"!xyzekiAuthService?.LoggedIn\">\n\n        <div class=\"float-right rounded-0\" style=\" border-top-left-radius:0!important; border-top-right-radius:0!important;\" role=\"group\">              \n                <a [routerLink]=\"[ 'giris' ]\" class=\"btn modernUnderlined\" style=\"border-radius: 2px;\">Oturum Aç <img\n                        src=\"../../../assets/arrow-2.png\"\n                        style=\"width: 16px;object-fit: cover; cursor: pointer; \" /></a>\n               \n                <a class=\"btn btn-dark  btn-sm border-0 rounded-0\" style=\"border-top-left-radius:0!important; border-top-right-radius:0!important;\" [routerLink]=\"[ 'kayit-ol' ]\">Üye Olun</a>\n        </div>\n\n        \n</nav>"
+module.exports = "<nav id=\"navbarPC\" class=\"container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0\"\n        style=\"height:3rem!important\" *ngIf=\"xyzekiAuthService?.LoggedIn\">\n        <a class=\"navbar-brand\" [routerLink]=\"[ '/isler' ]\">\n                <img src=\"../../../assets/logo.svg\" style=\"height: 25px; font-family: Arial, Helvetica, sans-serif \">\n                Xyzeki\n        </a>\n\n        <a class=\"btn btn-light rounded-0 border-0 xyz-nav-btn \" [routerLink]=\"[ '/is-konusmalari' ]\">\n                <mat-icon style=\"margin-right: 5px;\">people</mat-icon>İş Konuşmaları <span style=\"margin-left: 5px;\"\n                        ngbTooltip=\"{{getUnreadTotalPTCount}} okunmamış iş konuşması bulunmaktadır.\"\n                        tooltipClass=\"tooltipSpecial\" class=\"unreadCountTitle\">{{getUnreadTotalPTCount}}</span></a>\n        <a class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\" [routerLink]=\"[ '/projeler' ]\">Projeler</a>\n        <a class=\"btn btn-light rounded-0 border-0 xyz-nav-btn \" [routerLink]=\"[ '/takimlar' ]\">Ekipler</a>\n        <button class=\"btn btn-light rounded-0 border-0 xyz-nav-btn \" [routerLink]=\"[ '/dosyalar' ]\">Dosyalar</button>\n        <div class=\"float-right\">\n                <app-nav-profile></app-nav-profile>\n        </div>\n</nav>\n\n\n<nav id=\"navbarMobile\" class=\"container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0 \"\n        style=\"height:3rem!important\" *ngIf=\"xyzekiAuthService?.LoggedIn\">\n        <a class=\"navbar-brand\" [routerLink]=\"[ '/isler' ]\">\n                <img src=\"../../../assets/logo.svg\" style=\"height: 25px; font-family: Arial, Helvetica, sans-serif \">\n                Xyzeki\n        </a>\n\n        <div class=\"toggleClose\">\n                <div ngbDropdown class=\"d-inline-block\">\n                        <button class=\"btn btn-light rounded-0 border-0 mr-1  xyz-nav-btn rounded-0 mb-0 mt-0  ml-0 mr-0 pb-1 pt-1 pl-1 pr-1  \"\n                                id=\"dropdownMemberOptions\" ngbDropdownToggle><svg width=\"24\" height=\"24\" class=\"mb-1\"\n                                        xmlns=\"http://www.w3.org/2000/svg\" fill-rule=\"evenodd\" clip-rule=\"evenodd\">\n                                        <path d=\"M24 18v1h-24v-1h24zm0-6v1h-24v-1h24zm0-6v1h-24v-1h24z\"\n                                                fill=\"#1040e2\" />\n                                        <path d=\"M24 19h-24v-1h24v1zm0-6h-24v-1h24v1zm0-6h-24v-1h24v1z\" /></svg><span\n                                        class=\"text-uppercase\"> Menü</span></button>\n                        <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\" class=\"rounded-0\">\n\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/is-konusmalari' ]\">İş Konuşmaları <span\n                                                class=\"unreadCountTitleM\">{{getUnreadTotalPTCount}}</span></button>\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/takimlar' ]\">Ekipler</button>\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/projeler' ]\">Projeler</button>\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/dosyalar' ]\">Dosyalar</button>\n                        </div>\n                </div>\n\n        </div>\n\n\n\n\n        <div class=\"float-right\">\n                <app-nav-profile></app-nav-profile>\n        </div>\n</nav>\n\n<nav id=\"navbarTablet\" class=\"container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0\"\n        style=\"height:3rem!important\" *ngIf=\"xyzekiAuthService?.LoggedIn\">\n        <a class=\"navbar-brand\" [routerLink]=\"[ '/isler' ]\">\n                <img src=\"../../../assets/logo.svg\" style=\"height: 25px; font-family: Arial, Helvetica, sans-serif \">\n                Xyzeki\n        </a>\n        <button class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\" [routerLink]=\"[ '/is-konusmalari' ]\">İş Konuşmaları\n                <span class=\"unreadCountTitle\">{{getUnreadTotalPTCount}}</span></button>\n        <button class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\" [routerLink]=\"[ '/projeler']\">Projeler</button>\n\n        <div>\n                <div ngbDropdown class=\"d-inline-block\">\n                        <button class=\"btn btn-light rounded-0 border-0 mr-1  xyz-nav-btn rounded-0 mb-0 mt-0  ml-0 mr-0 pb-1 pt-1 pl-1 pr-1  \"\n                                id=\"dropdownMemberOptions\" ngbDropdownToggle>...</button>\n                        <div ngbDropdownMenu aria-labelledby=\"dropdownMemberOptions\" class=\"rounded-0\">\n\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/takimlar' ]\">Ekipler</button>\n                                <button ngbDropdownItem class=\"btn btn-light rounded-0 border-0 xyz-nav-btn\"\n                                        [routerLink]=\"[ '/dosyalar' ]\">Dosyalar</button>\n\n\n                        </div>\n                </div>\n\n        </div>\n\n\n\n\n        <div class=\"float-right\">\n                <app-nav-profile></app-nav-profile>\n        </div>\n</nav>\n"
 
 /***/ }),
 
@@ -12184,7 +12286,7 @@ module.exports = ".circleBtnSquareSearchBar{ \n  transition: background-color 0.
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div [hidden]=\"!invalidLicensePanelOpen\"\n  style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\n z-index: 10000; background-color: rgb(243, 242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\n  <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\" style=\"font-size:15px\">Özür\n    dileriz;\n    fakat herhangi bir\n    kurumsal, bireysel\n    veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>\n</div>\n<nav class=\"container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0 xyz-card-dark\"\n  style=\"height:3rem!important\">\n\n  <div class=\"float-left \">\n    <a class=\"btn btn-light rounded-0 border-0 xyz-nav-btn \" [routerLink]=\"[ '/isler' ]\">Geri</a>\n    <a ngbTooltip=\"Yeni iş konuşması oluşturun\" tooltipClass=\"tooltipSpecial\" placement=\"bottom\"\n      *ngIf=\"!newPrivateTalkPanelOpen\" (click)=\"togglePrivateTalkPanel();\"\n      class=\"btn btn-dark border-0 text-white rounded-0 ml-1 \" style=\"cursor:pointer !important;\">Yeni +</a>\n    <div class=\"circleBtnSquareSearchBar pl-1\">\n      <span class=\"disable-select\">\n        <mat-search-bar  (onOpen)=\"this.searchBarOpen=true\" (onClose)=\"this.searchBarOpen=false\"\n          [searchText]=\"'Xyzeki İş Konuşması Arama'\" [isDarkMode]=\"true\"></mat-search-bar>\n      </span>\n    </div>\n  </div>\n\n  <!-- <a *ngIf=\"this.innerWidth <= 500 || !this.searchBarOpen \" class=\"navbar-brand\" [routerLink]=\"[ '/isler' ]\">\n    <img src=\"../../../assets/logo.svg\"\n      style=\"height: 25px; font-family: Arial, Helvetica, sans-serif; font-size: 18px\">\n  </a> -->\n\n\n  <a class=\"navbar-brand\" [routerLink]=\"[ '/isler' ]\">\n    <img style=\"height: 25px; width:auto;padding-bottom: 3px;\" src=\"../../../assets/logo.svg\">\n    <ng-container *ngIf=\"this.innerWidth > 763\">&nbsp;İş Konuşmaları <span\n        class=\"unreadCountTitle\">{{getUnreadTotalPTCount}}</span></ng-container>\n  </a>\n\n  <div class=\"float-right\">\n    <app-nav-profile [hidden]=\"this.innerWidth <= 763 && this.searchBarOpen\"></app-nav-profile>\n  </div>\n\n</nav>\n\n<div *ngIf=\"newPrivateTalkPanelOpen\" class=\"container-fluid pt-2 pb-2 pl-2 pr-2\"\n  style=\"background-color: rgb(250, 253, 255); width: 100% !important\">\n\n  <form class=\"w-100\" #privateTalkForm=\"ngForm\" (ngSubmit)=\"addPrivateTalk(privateTalkForm)\" novalidate>\n    <div class=\"input-group w-100 p-0 m-0\">\n      <input id=\"inputToFocusBT\" type=\"text\" name=\"thread\" [(ngModel)]=\"privateTalkModel.Thread\" #thread=\"ngModel\"\n        required class=\"form-control w-100\" placeholder=\"İş konuşması konunuz nedir?\" />\n    </div>\n    <div class=\"input-group w-100 mt-1\">\n      <div class=\"input-group-prepend\">\n        <app-assign-autocomplete (receiverEventForPTalk)=\"onReceiverEventForPTalk($event,0)\" [privateTalkMode]=\"true\">\n        </app-assign-autocomplete>\n      </div>\n\n      <div class=\"input-group-append\" *ngIf=\"receiversModel[0] || teamReceiversModel[0]\">\n        <app-assign-autocomplete (receiverEventForPTalk)=\"onReceiverEventForPTalk($event,1)\" [privateTalkMode]=\"true\"\n          [extraPrivateTalkMode]=\"true\">\n        </app-assign-autocomplete>\n      </div>\n\n      <div class=\"input-group-append \" *ngIf=\"receiversModel[1] || teamReceiversModel[1]\">\n        <app-assign-autocomplete (receiverEventForPTalk)=\"onReceiverEventForPTalk($event,2)\" [privateTalkMode]=\"true\"\n          [extraPrivateTalkMode]=\"true\">\n        </app-assign-autocomplete>\n      </div>\n\n      <div class=\"input-group-append\" *ngIf=\"receiversModel[2] || teamReceiversModel[2]\">\n        <app-assign-autocomplete (receiverEventForPTalk)=\"onReceiverEventForPTalk($event,3)\" [privateTalkMode]=\"true\"\n          [extraPrivateTalkMode]=\"true\">\n        </app-assign-autocomplete>\n      </div>\n\n      <div class=\"input-group-append\" *ngIf=\"receiversModel[3] || teamReceiversModel[3]\">\n        <app-assign-autocomplete (receiverEventForPTalk)=\"onReceiverEventForPTalk($event,4)\" [privateTalkMode]=\"true\"\n          [extraPrivateTalkMode]=\"true\">\n        </app-assign-autocomplete>\n      </div>\n\n      <div class=\"input-group-append linedButton\">\n        <button type=\"submit\" class=\"btn rounded-0  btn-dark  text-uppercase text-white \">Başlat</button>\n        <a (click)=\"togglePrivateTalkPanel()\" class=\"btn rounded-0  btn-light  text-uppercase \" style=\"cursor:pointer !important; \n                          overflow: hidden;\n                          perspective: 1px; \">X</a>\n      </div>\n    </div>\n  </form>\n\n</div>\n<div class=\"container-fluid bg-white\">\n  <div class=\"row pt-2 pb-2\">\n    <div #bTalksPanel class=\"col-xs-4 col-lg-4\">\n      <div class=\"row w-100 pl-2 pr-2 mb-1 d-flex\">\n        <span class=\"lead\">İş Konuşmaları</span><br>\n      </div>\n      <div class=\"row w-100 pl-2 pr-2 mb-1 d-flex\">\n        <a style=\"border-top-left-radius: 3px;; border-bottom-left-radius: 3px;; margin-right: 0px;\"\n          (click)=\"switchTab(true)\" [ngClass]=\"{'squareBtnSelected': tabMy}\" class=\"squareBtn\">Size\n          Ait <span class=\"unreadCount\">{{getUnreadMyPTCount}}</span></a>\n        <a style=\"border-top-right-radius: 3px;; border-bottom-right-radius: 3px;\" (click)=\"switchTab(false)\"\n          [ngClass]=\"{'squareBtnSelected': !tabMy}\" class=\"squareBtn\">Dahil\n          Edildiğiniz <span class=\"unreadCount\">{{getUnreadReceivedPTCount}}</span></a>\n      </div>\n\n      <div *ngIf=\"tabMy\" #scrollMe infiniteScroll [infiniteScrollDistance]=\"2\" [infiniteScrollUpDistance]=\"1.5\"\n        [scrollWindow]=\"false\" [infiniteScrollThrottle]=\"100\" (scrolled)=\"onScrollDown()\"\n        class=\"row xyz-card-big pl-2 pr-2 mb-1 \"\n        [ngStyle]=\"{'height.px': (innerWidth>=577) ? innerHeight-142: innerHeight-62}\">\n        <ul>\n\n          <span *ngIf=\"myPrivateTalks_Ongoing?.length==0 && !searchBarOpen\" class=\"mt-1\">Henüz bir\n            iş konuşması kanalınız bulunmuyor.</span>\n          <span *ngIf=\"myPrivateTalks_Ongoing?.length==0 && searchBarOpen\">\n            Üzgünüz, aradığınız kriterlerde size ait bir iş konuşması kanalı bulamadık.\n          </span>\n          <li *ngFor=\"let pTalk of myPrivateTalks_Ongoing\"\n            [ngClass]=\"{'unreadMessage': getMyPTMessagesForCount(pTalk?.PrivateTalkId)?.MessagesCount > 0 }\" style=\" \n            overflow: hidden;\n            perspective: 1px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; float:left;  \">\n            <div [class.buton-secili]=\"privateTalkId == pTalk?.PrivateTalkId\"\n              (click)=\"onSelectTopic(pTalk?.PrivateTalkId)\" class=\"btn btn-light rounded-0 border-0  w-100\"\n              style=\"cursor:pointer !important; justify-content: left; justify-items: left\">\n              <!-- getReceivers(pTalk?.PrivateTalkId)-->\n              <!-- getTeamReceivers(pTalk?.PrivateTalkId)-->\n              <div class=\"xyz-ul\">\n                <ul appLiAnimate>\n                  <!-- TEAM RECEIVERS-->\n\n                  <li *ngFor=\"let pttr of getTeamReceivers(pTalk?.PrivateTalkId); index as i\">\n                    <div style=\"display: inline-block\">\n                      <img src=\"../../../assets/logo.svg\" style=\"background-color: white\" class=\"avatarim\">\n                    </div>\n                    <div style=\"display: inline-block\">\n                      <span style=\"color: rgb(134, 134, 134); padding: 0; margin:0\">&nbsp;\n                        {{ getTeamPT(pttr?.TeamId)?.TeamName}}\n                      </span>\n\n                    </div>\n                  </li>\n\n                  <li *ngFor=\"let ptr of getReceivers(pTalk?.PrivateTalkId); index as i\">\n                    <div style=\"display: inline-block\">\n                      <img *ngIf=\"getMember(ptr?.Receiver)?.Avatar\" [src]=\"getMember(ptr?.Receiver)?.Avatar\"\n                        alt=\"Avatar\" class=\"avatarim\">\n                    </div>\n                    <div style=\"display: inline-block\">\n                      <span style=\"color: rgb(134, 134, 134); padding: 0; margin:0\">&nbsp;\n                        {{getMember(ptr?.Receiver)?.Name}}\n                        {{getMember(ptr?.Receiver)?.Surname}}</span>\n                    </div>\n                  </li>\n\n\n                </ul>\n              </div>\n              <!-- <app-receivers [outgoing]=\"true\" [privateTalkId]=\"pTalk?.PrivateTalkId\"></app-receivers> -->\n              <div class=\"clear-fix\"></div>\n              <span *ngIf=\"pTalk?.PrivateTalkId\" class=\"w-100 float-left text-left\"\n                style=\"font-family: Arial, Helvetica, sans-serif; font-size: 14px\">#<b>{{pTalk?.Thread}}</b>\n                {{getMyPTMessagesForCount(pTalk?.PrivateTalkId)?.MessagesCount ? getMyPTMessagesForCount(pTalk?.PrivateTalkId)?.MessagesCount + ' Okunmamış' : ''  }}\n                <small class=\"text-muted float-right \">{{ pTalk?.DateTimeCreated | humanizer}},\n                  {{pTalk?.DateTimeCreated | date: 'hh:mm:ss aa' }}</small>\n              </span>\n            </div>\n          </li>\n\n\n        </ul>\n      </div>\n\n      <div *ngIf=\"!tabMy\" #scrollMeReceived infiniteScroll [infiniteScrollDistance]=\"2\" [infiniteScrollUpDistance]=\"1.5\"\n        [scrollWindow]=\"false\" [infiniteScrollThrottle]=\"100\" (scrolled)=\"onScrollDownForReceived()\"\n        class=\"row xyz-card-big pl-2 pr-2 mb-1 \"\n        [ngStyle]=\"{'height.px': (innerWidth>=577) ? innerHeight-146: innerHeight-30}\">\n        <ul>\n          <span *ngIf=\"myPrivateTalks_Incoming?.length== 0 && !searchBarOpen\" class=\"mt-1\">Henüz bir\n            iş konuşması kanalı oluşturulmamış.</span>\n          <span *ngIf=\"myPrivateTalks_Incoming?.length== 0 && searchBarOpen\">\n            Üzgünüz, aradığınız kriterlerde bir iş konuşması kanalı bulamadık.\n          </span>\n          <li *ngFor=\"let pTalk of myPrivateTalks_Incoming\"\n            [ngClass]=\"{'unreadMessageReceived': getReceivedPTMessagesForCount(pTalk?.PrivateTalkId)?.MessagesCount > 0 }\"\n            style=\"\n            overflow: hidden;\n            perspective: 1px; border-top-left-radius: 2px; border-bottom-left-radius: 2px; border-left: 1px solid #3f3f3f\">\n            <a [class.buton-secili]=\"privateTalkId == pTalk?.PrivateTalkId\"\n              (click)=\"onSelectTopic(pTalk?.PrivateTalkId)\" class=\"btn btn-light rounded-0 border-0 w-100\"\n              style=\"cursor:pointer !important; \">\n\n              <app-receivers [incoming]=\"true\" [sender]=\"pTalk?.Sender\" [privateTalkId]=\"pTalk?.PrivateTalkId\">\n                <img src=\"../../../assets/loading.gif\" style=\"height: 1.3rem; width:auto\">\n              </app-receivers>\n              <div class=\"clear-fix\"></div>\n              <span *ngIf=\"pTalk?.PrivateTalkId\" class=\"w-100 float-left text-left\"\n                style=\"font-family: Arial, Helvetica, sans-serif; font-size: 14px\">#<b>{{pTalk?.Thread}}</b>\n                {{getReceivedPTMessagesForCount(pTalk?.PrivateTalkId)?.MessagesCount ? getReceivedPTMessagesForCount(pTalk?.PrivateTalkId)?.MessagesCount + ' Okunmamış' : ''  }}\n                <small class=\"text-muted float-right \">{{ pTalk?.DateTimeCreated | humanizer}},\n                  {{pTalk?.DateTimeCreated | date: 'hh:mm:ss aa' }}</small>\n              </span>\n            </a>\n          </li>\n\n\n        </ul>\n      </div>\n\n    </div>\n    <div class=\"col-8 responsiveBT\">\n      <router-outlet></router-outlet>\n    </div>\n  </div>\n</div>"
+module.exports = "<div [hidden]=\"!invalidLicensePanelOpen\"\r\n  style=\"border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;\r\n z-index: 10000; background-color: rgb(243, 242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px\">\r\n  <img src=\"../assets/logo.svg\" class=\"d-inline-block\"><span class=\"d-inline-block\" style=\"font-size:15px\">Özür\r\n    dileriz;\r\n    fakat herhangi bir\r\n    kurumsal, bireysel\r\n    veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>\r\n</div>\r\n<nav class=\"container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0 xyz-card-dark\"\r\n  style=\"height:3rem!important\">\r\n\r\n  <div class=\"float-left \">\r\n    <a class=\"btn btn-light rounded-0 border-0 xyz-nav-btn \" [routerLink]=\"[ '/isler' ]\">Geri</a>\r\n    <a ngbTooltip=\"Yeni iş konuşması oluşturun\" tooltipClass=\"tooltipSpecial\" placement=\"bottom\"\r\n      *ngIf=\"!newPrivateTalkPanelOpen\" (click)=\"togglePrivateTalkPanel();\"\r\n      class=\"btn btn-dark border-0 text-white rounded-0 ml-1 \" style=\"cursor:pointer !important;\">Yeni +</a>\r\n    <div class=\"circleBtnSquareSearchBar pl-1\">\r\n      <span class=\"disable-select\">\r\n        <mat-search-bar  (onOpen)=\"this.searchBarOpen=true\" (onClose)=\"this.searchBarOpen=false\"\r\n          [searchText]=\"'Xyzeki İş Konuşması Arama'\" [isDarkMode]=\"true\"></mat-search-bar>\r\n      </span>\r\n    </div>\r\n  </div>\r\n\r\n  <!-- <a *ngIf=\"this.innerWidth <= 500 || !this.searchBarOpen \" class=\"navbar-brand\" [routerLink]=\"[ '/isler' ]\">\r\n    <img src=\"../../../assets/logo.svg\"\r\n      style=\"height: 25px; font-family: Arial, Helvetica, sans-serif; font-size: 18px\">\r\n  </a> -->\r\n\r\n\r\n  <a class=\"navbar-brand\" [routerLink]=\"[ '/isler' ]\">\r\n    <img style=\"height: 25px; width:auto;padding-bottom: 3px;\" src=\"../../../assets/logo.svg\">\r\n    <ng-container *ngIf=\"this.innerWidth > 763\">&nbsp;İş Konuşmaları <span\r\n        class=\"unreadCountTitle\">{{getUnreadTotalPTCount}}</span></ng-container>\r\n  </a>\r\n\r\n  <div class=\"float-right\">\r\n    <app-nav-profile [hidden]=\"this.innerWidth <= 763 && this.searchBarOpen\"></app-nav-profile>\r\n  </div>\r\n\r\n</nav>\r\n\r\n<div *ngIf=\"newPrivateTalkPanelOpen\" class=\"container-fluid pt-2 pb-2 pl-2 pr-2\"\r\n  style=\"background-color: rgb(250, 253, 255); width: 100% !important\">\r\n\r\n  <form class=\"w-100\" #privateTalkForm=\"ngForm\" (ngSubmit)=\"addPrivateTalk(privateTalkForm)\" novalidate>\r\n    <div class=\"input-group w-100 p-0 m-0\">\r\n      <input id=\"inputToFocusBT\" type=\"text\" name=\"thread\" [(ngModel)]=\"privateTalkModel.Thread\" #thread=\"ngModel\"\r\n        required class=\"form-control w-100\" placeholder=\"İş konuşması konunuz nedir?\" />\r\n    </div>\r\n    <div class=\"input-group w-100 mt-1\">\r\n      <div class=\"input-group-prepend\">\r\n        <app-assign-autocomplete (receiverEventForPTalk)=\"onReceiverEventForPTalk($event,0)\" [privateTalkMode]=\"true\">\r\n        </app-assign-autocomplete>\r\n      </div>\r\n\r\n      <div class=\"input-group-append\" *ngIf=\"receiversModel[0] || teamReceiversModel[0]\">\r\n        <app-assign-autocomplete (receiverEventForPTalk)=\"onReceiverEventForPTalk($event,1)\" [privateTalkMode]=\"true\"\r\n          [extraPrivateTalkMode]=\"true\">\r\n        </app-assign-autocomplete>\r\n      </div>\r\n\r\n      <div class=\"input-group-append \" *ngIf=\"receiversModel[1] || teamReceiversModel[1]\">\r\n        <app-assign-autocomplete (receiverEventForPTalk)=\"onReceiverEventForPTalk($event,2)\" [privateTalkMode]=\"true\"\r\n          [extraPrivateTalkMode]=\"true\">\r\n        </app-assign-autocomplete>\r\n      </div>\r\n\r\n      <div class=\"input-group-append\" *ngIf=\"receiversModel[2] || teamReceiversModel[2]\">\r\n        <app-assign-autocomplete (receiverEventForPTalk)=\"onReceiverEventForPTalk($event,3)\" [privateTalkMode]=\"true\"\r\n          [extraPrivateTalkMode]=\"true\">\r\n        </app-assign-autocomplete>\r\n      </div>\r\n\r\n      <div class=\"input-group-append\" *ngIf=\"receiversModel[3] || teamReceiversModel[3]\">\r\n        <app-assign-autocomplete (receiverEventForPTalk)=\"onReceiverEventForPTalk($event,4)\" [privateTalkMode]=\"true\"\r\n          [extraPrivateTalkMode]=\"true\">\r\n        </app-assign-autocomplete>\r\n      </div>\r\n\r\n      <div class=\"input-group-append linedButton\">\r\n        <button type=\"submit\" class=\"btn rounded-0  btn-dark  text-uppercase text-white \">Başlat</button>\r\n        <a (click)=\"togglePrivateTalkPanel()\" class=\"btn rounded-0  btn-light  text-uppercase \" style=\"cursor:pointer !important; \r\n                          overflow: hidden;\r\n                          perspective: 1px; \">X</a>\r\n      </div>\r\n    </div>\r\n  </form>\r\n\r\n</div>\r\n<div class=\"container-fluid bg-white\">\r\n  <div class=\"row pt-2 pb-2\">\r\n    <div #bTalksPanel class=\"col-xs-4 col-lg-4\">\r\n      <div class=\"row w-100 pl-2 pr-2 mb-1 d-flex\">\r\n        <span class=\"lead\">İş Konuşmaları</span><br>\r\n      </div>\r\n      <div class=\"row w-100 pl-2 pr-2 mb-1 d-flex\">\r\n        <a style=\"border-top-left-radius: 3px;; border-bottom-left-radius: 3px;; margin-right: 0px;\"\r\n          (click)=\"switchTab(true)\" [ngClass]=\"{'squareBtnSelected': tabMy}\" class=\"squareBtn\">Size\r\n          Ait <span class=\"unreadCount\">{{getUnreadMyPTCount}}</span></a>\r\n        <a style=\"border-top-right-radius: 3px;; border-bottom-right-radius: 3px;\" (click)=\"switchTab(false)\"\r\n          [ngClass]=\"{'squareBtnSelected': !tabMy}\" class=\"squareBtn\">Dahil\r\n          Edildiğiniz <span class=\"unreadCount\">{{getUnreadReceivedPTCount}}</span></a>\r\n      </div>\r\n\r\n      <div *ngIf=\"tabMy\" #scrollMe infiniteScroll [infiniteScrollDistance]=\"2\" [infiniteScrollUpDistance]=\"1.5\"\r\n        [scrollWindow]=\"false\" [infiniteScrollThrottle]=\"100\" (scrolled)=\"onScrollDown()\"\r\n        class=\"row xyz-card-big pl-2 pr-2 mb-1 \"\r\n        [ngStyle]=\"{'height.px': (innerWidth>=577) ? innerHeight-142: innerHeight-62}\">\r\n        <ul>\r\n\r\n          <span *ngIf=\"myPrivateTalks_Ongoing?.length==0 && !searchBarOpen\" class=\"mt-1\">Henüz bir\r\n            iş konuşması kanalınız bulunmuyor.</span>\r\n          <span *ngIf=\"myPrivateTalks_Ongoing?.length==0 && searchBarOpen\">\r\n            Üzgünüz, aradığınız kriterlerde size ait bir iş konuşması kanalı bulamadık.\r\n          </span>\r\n          <li *ngFor=\"let pTalk of myPrivateTalks_Ongoing\"\r\n            [ngClass]=\"{'unreadMessage': getMyPTMessagesForCount(pTalk?.PrivateTalkId)?.MessagesCount > 0 }\" style=\" \r\n            overflow: hidden;\r\n            perspective: 1px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; float:left;  \">\r\n            <div [class.buton-secili]=\"privateTalkId == pTalk?.PrivateTalkId\"\r\n              (click)=\"onSelectTopic(pTalk?.PrivateTalkId)\" class=\"btn btn-light rounded-0 border-0  w-100\"\r\n              style=\"cursor:pointer !important; justify-content: left; justify-items: left\">\r\n              <!-- getReceivers(pTalk?.PrivateTalkId)-->\r\n              <!-- getTeamReceivers(pTalk?.PrivateTalkId)-->\r\n              <div class=\"xyz-ul\">\r\n                <ul appLiAnimate>\r\n                  <!-- TEAM RECEIVERS-->\r\n\r\n                  <li *ngFor=\"let pttr of getTeamReceivers(pTalk?.PrivateTalkId); index as i\">\r\n                    <div style=\"display: inline-block\">\r\n                      <img src=\"../../../assets/logo.svg\" style=\"background-color: white\" class=\"avatarim\">\r\n                    </div>\r\n                    <div style=\"display: inline-block\">\r\n                      <span style=\"color: rgb(134, 134, 134); padding: 0; margin:0\">&nbsp;\r\n                        {{ getTeamPT(pttr?.TeamId)?.TeamName}}\r\n                      </span>\r\n\r\n                    </div>\r\n                  </li>\r\n\r\n                  <li *ngFor=\"let ptr of getReceivers(pTalk?.PrivateTalkId); index as i\">\r\n                    <div style=\"display: inline-block\">\r\n                      <img *ngIf=\"getMember(ptr?.Receiver)?.Avatar\" [src]=\"getMember(ptr?.Receiver)?.Avatar\"\r\n                        alt=\"Avatar\" class=\"avatarim\">\r\n                    </div>\r\n                    <div style=\"display: inline-block\">\r\n                      <span style=\"color: rgb(134, 134, 134); padding: 0; margin:0\">&nbsp;\r\n                        {{getMember(ptr?.Receiver)?.Name}}\r\n                        {{getMember(ptr?.Receiver)?.Surname}}</span>\r\n                    </div>\r\n                  </li>\r\n\r\n\r\n                </ul>\r\n              </div>\r\n              <!-- <app-receivers [outgoing]=\"true\" [privateTalkId]=\"pTalk?.PrivateTalkId\"></app-receivers> -->\r\n              <div class=\"clear-fix\"></div>\r\n              <span *ngIf=\"pTalk?.PrivateTalkId\" class=\"w-100 float-left text-left\"\r\n                style=\"font-family: Arial, Helvetica, sans-serif; font-size: 14px\">#<b>{{pTalk?.Thread}}</b>\r\n                {{getMyPTMessagesForCount(pTalk?.PrivateTalkId)?.MessagesCount ? getMyPTMessagesForCount(pTalk?.PrivateTalkId)?.MessagesCount + ' Okunmamış' : ''  }}\r\n                <small class=\"text-muted float-right \">{{ pTalk?.DateTimeCreated | humanizer}},\r\n                  {{pTalk?.DateTimeCreated | date: 'hh:mm:ss aa' }}</small>\r\n              </span>\r\n            </div>\r\n          </li>\r\n\r\n\r\n        </ul>\r\n      </div>\r\n\r\n      <div *ngIf=\"!tabMy\" #scrollMeReceived infiniteScroll [infiniteScrollDistance]=\"2\" [infiniteScrollUpDistance]=\"1.5\"\r\n        [scrollWindow]=\"false\" [infiniteScrollThrottle]=\"100\" (scrolled)=\"onScrollDownForReceived()\"\r\n        class=\"row xyz-card-big pl-2 pr-2 mb-1 \"\r\n        [ngStyle]=\"{'height.px': (innerWidth>=577) ? innerHeight-146: innerHeight-30}\">\r\n        <ul>\r\n          <span *ngIf=\"myPrivateTalks_Incoming?.length== 0 && !searchBarOpen\" class=\"mt-1\">Henüz bir\r\n            iş konuşması kanalı oluşturulmamış.</span>\r\n          <span *ngIf=\"myPrivateTalks_Incoming?.length== 0 && searchBarOpen\">\r\n            Üzgünüz, aradığınız kriterlerde bir iş konuşması kanalı bulamadık.\r\n          </span>\r\n          <li *ngFor=\"let pTalk of myPrivateTalks_Incoming\"\r\n            [ngClass]=\"{'unreadMessageReceived': getReceivedPTMessagesForCount(pTalk?.PrivateTalkId)?.MessagesCount > 0 }\"\r\n            style=\"\r\n            overflow: hidden;\r\n            perspective: 1px; border-top-left-radius: 2px; border-bottom-left-radius: 2px; border-left: 1px solid #3f3f3f\">\r\n            <a [class.buton-secili]=\"privateTalkId == pTalk?.PrivateTalkId\"\r\n              (click)=\"onSelectTopic(pTalk?.PrivateTalkId)\" class=\"btn btn-light rounded-0 border-0 w-100\"\r\n              style=\"cursor:pointer !important; \">\r\n\r\n              <app-receivers [incoming]=\"true\" [sender]=\"pTalk?.Sender\" [privateTalkId]=\"pTalk?.PrivateTalkId\">\r\n                <img src=\"../../../assets/loading.gif\" style=\"height: 1.3rem; width:auto\">\r\n              </app-receivers>\r\n              <div class=\"clear-fix\"></div>\r\n              <span *ngIf=\"pTalk?.PrivateTalkId\" class=\"w-100 float-left text-left\"\r\n                style=\"font-family: Arial, Helvetica, sans-serif; font-size: 14px\">#<b>{{pTalk?.Thread}}</b>\r\n                {{getReceivedPTMessagesForCount(pTalk?.PrivateTalkId)?.MessagesCount ? getReceivedPTMessagesForCount(pTalk?.PrivateTalkId)?.MessagesCount + ' Okunmamış' : ''  }}\r\n                <small class=\"text-muted float-right \">{{ pTalk?.DateTimeCreated | humanizer}},\r\n                  {{pTalk?.DateTimeCreated | date: 'hh:mm:ss aa' }}</small>\r\n              </span>\r\n            </a>\r\n          </li>\r\n\r\n\r\n        </ul>\r\n      </div>\r\n\r\n    </div>\r\n    <div class=\"col-8 responsiveBT\">\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -13331,11 +13433,10 @@ var MyProjectsComponent = /** @class */ (function () {
         this.searchSubscription ? this.searchSubscription.unsubscribe() : function () { };
     };
     MyProjectsComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.route.data.subscribe(function (resolvedData) {
-            _this.repository.loadMyProjectsViaResolver(resolvedData.myProjects);
-            _this.repository.loadProjectsAssignedViaResolver(resolvedData.projectsAssigned);
-        });
+        // this.route.data.subscribe((resolvedData: { myProjects: Project[], projectsAssigned: Project[] }) => {
+        //   this.repository.loadMyProjectsViaResolver(resolvedData.myProjects);
+        //   this.repository.loadProjectsAssignedViaResolver(resolvedData.projectsAssigned);
+        // })
     };
     MyProjectsComponent.prototype.getMember = function (username) {
         var member = this.repositoryTM.getTeamMembersOwnedAsMembers().find(function (m) { return m.Username == username; });
@@ -15009,9 +15110,9 @@ var MyTeamsComponent = /** @class */ (function () {
         var _this = this;
         this.innerWidth = window.innerWidth;
         this.innerHeight = window.innerHeight;
-        this.route.data.subscribe(function (resolvedData) {
-            _this.repository.loadMyTeamsViaResolver(resolvedData.myTeams);
-        });
+        // this.route.data.subscribe((resolvedData: { myTeams: Team[] }) => {
+        //   this.repository.loadMyTeamsViaResolver(resolvedData.myTeams);
+        // })
         this.subscription = this.repository.teamToOpen.subscribe(function (team) {
             if (_this.innerWidth > 992) {
                 _this.selectedTeamId = team.TeamId;
@@ -15216,13 +15317,6 @@ var TeamMembersComponent = /** @class */ (function () {
             this.subscriptionForDel.unsubscribe();
     };
     TeamMembersComponent.prototype.ngOnInit = function () {
-        //this.repository.openHubConnection();
-        // this.route.paramMap.subscribe(params => {
-        //   this.teamId = Number.parseInt(params.get('TeamId'));
-        //   this.repository.loadTeamMembers(this.teamId);
-        //   Object.assign(this.teamMemberModel, new TeamMember("", this.teamId, null))
-        //   // this.teamMemberModel = new TeamMember("", this.teamId, null);
-        // })
         var _this = this;
         this.route.data.subscribe(function (resolvedData) {
             _this.teamId = Number.parseInt(_this.route.snapshot.paramMap.get('TeamId'));

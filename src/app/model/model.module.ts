@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/guards/auth-guard.service';
-import {  XyzekiAuthData, XyzekiAuthService } from './auth-services/xyzeki-auth-service';
+import {  XyzekiAuthService } from './auth-services/xyzeki-auth-service';
 
 import { MemberLicenseRepository } from './repository/member-license-repository';
 import { MemberLicenseService } from './services/member-license.service';
@@ -53,6 +53,7 @@ import { ProjectsAssignedResolverService } from './resolvers/projects-assigned-r
 import { ProjectToDosResolverService } from './resolvers/project-to-dos-resolver.service';
 import { ContainersResolverService } from './resolvers/containers-resolver.service';
 import { ContainerFilesResolverService } from './resolvers/container-files-resolver.service';
+import { XyzekiAuthData } from './auth-services/xyzeki-auth-data';
 
 
 @NgModule({

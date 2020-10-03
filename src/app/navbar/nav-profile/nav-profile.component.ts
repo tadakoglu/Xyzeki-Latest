@@ -14,8 +14,8 @@ export class NavProfileComponent implements OnInit {
 
   ngOnInit() {
   }
-  logOut(){
-    this.xyzekiAuthService.LogOut();
+  deAuth(){
+    this.xyzekiAuthService.DeAuth();
     this.router.navigate(['/'])
   }
   @Input() isLocked=false;

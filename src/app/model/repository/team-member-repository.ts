@@ -289,7 +289,7 @@ export class TeamMemberRepository implements ITeamMemberRepository {
             if (status) {
                 if (this.teamMembersJoined.length == 0 && this.permissions) {
                     this.permissions.removeMemberLicenseForJoinedTeamMember();
-                    this.xyzekiAuthService.LogOut();
+                    this.xyzekiAuthService.DeAuth();
                 }
             }
 

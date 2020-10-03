@@ -4,7 +4,7 @@
                         id="dropdownMemberOptions" ngbDropdownToggle><img *ngIf="xyzekiAuthService?.Member" [src]="xyzekiAuthService?.Member?.Avatar" alt="Avatar"
                                 class="md-avatar size-1-5 rounded-circle border-0"> {{xyzekiAuthService?.Member?.Name}}</button>
                 <div ngbDropdownMenu aria-labelledby="dropdownMemberOptions" class="rounded-0 dp-menu" style="z-index: 10000!important">
-                        <button ngbDropdownItem class="btn btn-outline-danger" (click)="logOut()">Oturumu
+                        <button ngbDropdownItem class="btn btn-outline-danger" (click)="deAuth()">Oturumu
                                 Kapat</button>
                         <button ngbDropdownItem [routerLink]="[ '/hesap' ]">Hesap</button>
                         <button ngbDropdownItem [routerLink]="[ '/ayarlar' ]">Ayarlar</button>

@@ -1,26 +1,22 @@
-import { Injectable, HostListener, Optional } from '@angular/core';
-import { isNullOrUndefined } from 'util';
-import { QuickTask } from '../quick-task.model';
-import { PrivateTalkMessage } from '../private-talk-message.model';
-import { PrivateTalk } from '../private-talk.model';
-import { Project } from '../project.model';
-import { CloudFile } from '../azure-models/cloud-file.model';
-import { CloudContainer } from '../azure-models/cloud-container.model';
+import { HostListener, Injectable, Optional } from '@angular/core';
+import { SwPush, SwUpdate } from '@angular/service-worker';
+import { concatMap } from 'rxjs/operators';
 import { BackEndWebServer } from 'src/infrastructure/back-end-server';
+import { isNullOrUndefined } from 'util';
+import { XyzekiAuthData } from '../auth-services/xyzeki-auth-data';
+import { CloudFile } from '../azure-models/cloud-file.model';
+import { PrivateTalkMessage } from '../private-talk-message.model';
 import { ProjectTaskComment } from '../project-task-comment.model';
 import { ProjectTask } from '../project-task.model';
+import { Project } from '../project.model';
 import { QuickTaskComment } from '../quick-task-comment.model';
-import { TeamMember } from '../team-member.model.';
-import { TeamsService } from '../services/teams.service';
+import { QuickTask } from '../quick-task.model';
 import { PrivateTalksService } from '../services/private-talks.service';
-import { QuickToDoCommentsService } from '../services/quick-to-do-comments.service';
-import { ProjectToDoCommentsService } from '../services/project-to-do-comments.service';
-import { combineLatest, concatMap, switchMap } from 'rxjs/operators';
-import { QuickToDosService } from '../services/quick-to-dos.service';
 import { ProjectToDosService } from '../services/project-to-dos.service';
 import { ProjectsService } from '../services/projects.service';
-import { SwPush, SwUpdate } from '@angular/service-worker';
-import { XyzekiAuthData } from '../auth-services/xyzeki-auth-service';
+import { QuickToDosService } from '../services/quick-to-dos.service';
+import { TeamsService } from '../services/teams.service';
+import { TeamMember } from '../team-member.model.';
 
 @Injectable()
 export class NotificationService {

@@ -80,16 +80,12 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
   modelSent: boolean = false;
   modelSubmitted: boolean = false;
   authenticate(loginForm: NgModel) {
-
     this.modelSubmitted = true;
     if (loginForm.valid) {
       this.isLoading = true;
       this.subscription = this.recaptchaV3Service.execute(GoogleReCaptcha_LoginAction).pipe(concatMap(
         recaptchaToken => { return this.repository.authenticate(Object.assign({}, this.loginModel), recaptchaToken) })).subscribe((tokenAndMember: ReturnModel<Tuple<string, Member>>) => {
           this.xyzekiAuthService.Auth(tokenAndMember);
-          this.xyzekiSignalService.startListening(tokenAndMember.Model.Item1);
-
-          this.setUpMySetting();
           this.informUser = "Başarıyla giriş yaptınız."
           this.router.navigate(['/isler'])
           this.modelSent = true;
@@ -120,104 +116,13 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
     }
   }
-  logOut() {
-    this.xyzekiAuthService.LogOut();
-  }
+  
   informUser: string;
   ngOnInit() { }
 
 
 
   subscription: Subscription;
-  setUpMySetting() {
-    this.memberSettingService.mySetting().subscribe(mSetting => {
-      if (!mSetting)
-        return;
-      this.dataService.switchMode = mSetting.SwitchMode;
-      let element: HTMLElement = document.getElementById('appBody');
-      element.className = null;
-
-      switch (mSetting.Theme) {
-        case 'KlasikMavi':
-          element.classList.add('KlasikMavi');
-          break;
-        case 'KlasikKirmizi':
-          element.classList.add('KlasikKirmizi');
-          break;
-        case 'KlasikSari':
-          element.classList.add('KlasikSari');
-          break;
-        case 'KlasikMetalik':
-          element.classList.add('KlasikMetalik');
-          break;
-        case 'KlasikGece':
-          element.classList.add('KlasikGece');
-          break;
-        case 'KlasikRoyal':
-          element.classList.add('KlasikRoyal');
-          break;
-        case 'KlasikLimeade':
-          element.classList.add('KlasikLimeade');
-          break;
-        case 'KlasikBeyaz':
-          element.classList.add('KlasikBeyaz');
-          break;
-        case 'ArashiyamaBambulari':
-          element.classList.add('ArashiyamaBambulari');
-          break;
-        case 'Venedik':
-          element.classList.add('Venedik');
-          break;
-        case 'Peribacalari':
-          element.classList.add('Peribacalari');
-          break;
-        case 'Orman':
-          element.classList.add('Orman');
-          break;
-        case 'Yaprak':
-          element.classList.add('Yaprak');
-          break;
-        case 'Kedi':
-          element.classList.add('Kedi');
-          break;
-        case 'Deniz':
-          element.classList.add('Deniz');
-          break;
-        case 'Deve':
-          element.classList.add('Deve');
-          break;
-        case 'Pamukkale':
-          element.classList.add('Pamukkale');
-          break;
-        case 'Denizalti':
-          element.classList.add('Denizalti');
-          break;
-        case 'Brienz':
-          element.classList.add('Brienz');
-          break;
-        case 'Aconcagua':
-          element.classList.add('Aconcagua');
-          break;
-        case 'Bulutlar':
-          element.classList.add('Bulutlar');
-          break;
-        case 'TropicalGunisigi':
-          element.classList.add('TropicalGunisigi');
-          break;
-        case 'DenizAgac':
-          element.classList.add('DenizAgac');
-          break;
-        case 'Tarla':
-          element.classList.add('Tarla');
-          break;
-        case 'EmpireState':
-          element.classList.add('EmpireState');
-          break;
-
-      }
-      element.classList.add('bg-helper');
-    })
-
-  }
+ 
 
 }
