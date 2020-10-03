@@ -21,7 +21,8 @@ export class ContainerRepository implements IContainerRepository {
         })
         //this.dataService.loadAllRepositoriesEvent.subscribe(() => {  this.loadBlobContainers(false) })
         this.dataService.clearAllRepositoriesEvent.subscribe(() => this.clearBlobContainers());
-
+        
+        this.loadRepository();
     }
 
     loadRepository(){

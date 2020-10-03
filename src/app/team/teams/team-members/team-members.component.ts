@@ -24,15 +24,7 @@ export class TeamMembersComponent implements OnInit, OnDestroy {
   }
   public loaded=false;
   ngOnInit(): void {
-    //this.repository.openHubConnection();
-    // this.route.paramMap.subscribe(params => {
-    //   this.teamId = Number.parseInt(params.get('TeamId'));
-    //   this.repository.loadTeamMembers(this.teamId);
-    //   Object.assign(this.teamMemberModel, new TeamMember("", this.teamId, null))
-    //   // this.teamMemberModel = new TeamMember("", this.teamId, null);
-    // })
-
-
+   
     this.route.data.subscribe((resolvedData: { teamMembers: TeamMember[], kind: string }) => {
       this.teamId = Number.parseInt(this.route.snapshot.paramMap.get('TeamId'))
 

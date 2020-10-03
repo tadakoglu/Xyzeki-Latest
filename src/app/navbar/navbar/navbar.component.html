@@ -91,16 +91,3 @@
                 <app-nav-profile></app-nav-profile>
         </div>
 </nav>
-
-<nav class="container-fluid bg-dark sticky-top" *ngIf="!xyzekiAuthService?.LoggedIn">
-
-        <div class="float-right rounded-0" style=" border-top-left-radius:0!important; border-top-right-radius:0!important;" role="group">              
-                <a [routerLink]="[ 'giris' ]" class="btn modernUnderlined" style="border-radius: 2px;">Oturum Aç <img
-                        src="../../../assets/arrow-2.png"
-                        style="width: 16px;object-fit: cover; cursor: pointer; " /></a>
-               
-                <a class="btn btn-dark  btn-sm border-0 rounded-0" style="border-top-left-radius:0!important; border-top-right-radius:0!important;" [routerLink]="[ 'kayit-ol' ]">Üye Olun</a>
-        </div>
-
-        
-</nav>

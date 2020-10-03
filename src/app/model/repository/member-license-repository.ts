@@ -12,6 +12,8 @@ export class MemberLicenseRepository implements IMemberLicenseRepository {
        //this.dataService.loadAllRepositoriesEvent.subscribe(() => this.loadLicenseRelateds());
         this.dataService.clearAllRepositoriesEvent.subscribe(() => this.clearLicenseRelateds());
 
+        
+        this.loadRepository();
     }
     
     loadRepository(){

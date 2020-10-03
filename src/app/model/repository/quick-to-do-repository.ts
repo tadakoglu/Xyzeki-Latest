@@ -49,6 +49,7 @@ export class QuickToDoRepository implements IQuickToDoRepository {
         //this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadAll(); });
         this.dataService.clearAllRepositoriesEvent.subscribe(() => { this.clearQuickToDos() })
 
+        this.loadRepository();
     }
     loadRepository(){
         this.loadAll();

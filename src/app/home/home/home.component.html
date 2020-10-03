@@ -1,13 +1,15 @@
-<app-navbar></app-navbar>
-<!-- <div class="w-100">
-    <div class="float-left">
-        <img style="width: 170px;" src="../../../assets/google-play-icon.svg" />
-    </div>
-    <div class="float-right">
-        <app-navbar></app-navbar>
-    </div>
-</div> -->
+<nav class="container-fluid bg-dark sticky-top" >
 
+    <div class="float-right rounded-0" style=" border-top-left-radius:0!important; border-top-right-radius:0!important;" role="group">              
+            <a [routerLink]="[ 'giris' ]" class="btn modernUnderlined" style="border-radius: 2px;">Oturum Aç <img
+                    src="../../../assets/arrow-2.png"
+                    style="width: 16px;object-fit: cover; cursor: pointer; " /></a>
+           
+            <a class="btn btn-dark  btn-sm border-0 rounded-0" style="border-top-left-radius:0!important; border-top-right-radius:0!important;" [routerLink]="[ 'kayit-ol' ]">Üye Olun</a>
+    </div>
+
+    
+</nav>
 <img class="XyzekiWithSloganBG" src="../../../assets/logo/Xyzeki-with-slogan.png" />
 
 <div  class="w-100 text-center">

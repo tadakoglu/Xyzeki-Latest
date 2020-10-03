@@ -23,6 +23,8 @@ export class ProjectRepository implements IProjectRepository {
         //this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadProjects(); });
         this.dataService.clearAllRepositoriesEvent.subscribe(() => { this.clearProjects() })
 
+        
+        this.loadRepository();
 
     }
     

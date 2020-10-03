@@ -12,7 +12,7 @@ export class TeamRepository implements ITeamRepository {
     constructor(private service: TeamsService, private dataService: DataService) {
         //this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadMYRelateds(false); this.loadPTRelateds() });
         this.dataService.clearAllRepositoriesEvent.subscribe(() => { this.clearTeams() })
-
+        this.loadRepository();
     }
     loadRepository(){
         this.loadMYRelateds();

@@ -53,7 +53,7 @@ export class TeamMemberRepository implements ITeamMemberRepository {
 
         this.dataService.clearAllRepositoriesEvent.subscribe(() => { this.clearTeamMembers() })
 
-
+        this.loadRepository();
 
     }
     loadRepository(){

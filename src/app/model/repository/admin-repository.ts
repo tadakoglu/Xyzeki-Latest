@@ -13,7 +13,8 @@ export class AdminRepository implements IAdminRepository {
         //this.dataService.loadAllRepositoriesEvent.subscribe(() => this.loadAllLicences());
         this.dataService.clearAllRepositoriesEvent.subscribe(() => this.clearAllLicences());
 
-
+        
+        this.loadRepository();
 
     }
     loadRepository() {

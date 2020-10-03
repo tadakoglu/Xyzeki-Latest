@@ -14,7 +14,7 @@ export class PrivateTalkReceiverRepository {
     constructor(private psz: PageSizes, private dataService: DataService, public signalService: XyzekiSignalrService, private receiversService: PrivateTalkReceiversService, private teamReceiversService: PrivateTalkTeamReceiversService) {
         //this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadAll(1) });
         this.dataService.clearAllRepositoriesEvent.subscribe(() => this.clearPrivateTalkReceivers());
-
+        this.loadRepository();
     }
     loadRepository(){
         this.loadAll(1);
