@@ -16,7 +16,8 @@ export class XyzekiAuthData {
     }
     get Username(): string {
         let member: Member = JSON.parse(localStorage.getItem("Xyzeki_Member")) as Member
-        return member.Username;
+        let username:string = member ? member.Username : undefined
+        return username
     }
     get Token(): string {
         let token = localStorage.getItem("Xyzeki_JWTToken");

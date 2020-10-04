@@ -19,7 +19,7 @@ import { PrivateTalkMessage } from '../private-talk-message.model';
 import { CloudContainer } from '../azure-models/cloud-container.model';
 import { CloudFile } from '../azure-models/cloud-file.model';
 import { NotificationService } from '../notification-services/notification.service';
-import {XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
+import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
 import { XyzekiAuthData } from '../auth-services/xyzeki-auth-data';
 
 @Injectable()
@@ -27,7 +27,7 @@ export class XyzekiSignalrService {
 
   baseURL = BackEndWebServer + '/'
   builder = new HubConnectionBuilder();
-  private hubConnection: HubConnection;
+  private hubConnection: HubConnection
 
   constructor(private dataService: DataService, private pushService: NotificationService, private xyzekiAuthData: XyzekiAuthData) {
   }
@@ -172,8 +172,11 @@ export class XyzekiSignalrService {
   }
 
   async destroyHubConnection() {
-    this.hubConnection.stop();
-    this.hubConnection = this.builder.build();
+    if (this.hubConnection) {
+      this.hubConnection.stop();
+      this.hubConnection = this.builder.build();
+    }
+
   }
   async startConnection() {
     if (this.hubConnection && this.hubConnection.state == HubConnectionState.Disconnected) {
@@ -191,7 +194,7 @@ export class XyzekiSignalrService {
       });
     }
   }
-  
+
   private timeOutId;
   tryConnection(seconds = 10) {
     if (!this.xyzekiAuthData.LoggedIn)

@@ -21,14 +21,21 @@ export class XyzekiAuthService {
         this.OtherBrowserWindowsOrTabsEventListener();
     }
 
-
     OtherBrowserWindowsOrTabsEventListener() {
         let storageEventSubscription = fromEvent(window, 'storage').pipe(
             filter((event: any) => event.key == 'Xyzeki_JWTToken'),
         ).subscribe(() => {
-            if (!this.LoggedIn) { // If user logged out in other windows/tabs, also log out other open tabs/windows.
-                this.DeAuth();
+            if (!document.hasFocus()) { //Only events from other tabs/windows(excluding this one)
+                if (!this.LoggedIn) { // If user logged out in other windows/tabs, also log out other open tabs/windows.
+                    this.DeAuth();
+                }
+                else {
+                    this.AuthMinimal();
+                    this.NavigateToHome();
+                }
             }
+
+
         })
 
     }
@@ -81,7 +88,8 @@ export class XyzekiAuthService {
     }
     get Username(): string {
         let member: Member = JSON.parse(localStorage.getItem("Xyzeki_Member")) as Member
-        return member.Username;
+        let username: string = member ? member.Username : undefined
+        return username
     }
     get LoggedIn(): boolean {
         if (this.Token && !this.IsTokenExpired) {
@@ -102,12 +110,13 @@ export class XyzekiAuthService {
     Auth(tokenAndMember: ReturnModel<Tuple<string, Member>>) {
         let member = tokenAndMember.Model.Item2;
         let token = tokenAndMember.Model.Item1;
-        this.SaveMember(member);
-        this.SaveToken(token);
-        this.LoadMemberSettings();
-        this.LoadAllRepositories();
-        this.StartSignalR(token);
-        this.StartRefreshTokenTimer();
+        this.SaveMember(member); // only in 1 windows
+        this.SaveToken(token); // only in 1 windows
+
+        this.LoadMemberSettings(); // in all windows
+        this.LoadAllRepositories(); // in all windows
+        this.StartSignalR(token); // in all windows
+        this.StartRefreshTokenTimer(); // only in 1 windows
 
     }
 
@@ -121,23 +130,19 @@ export class XyzekiAuthService {
         this.NavigateToLogin();
 
     }
-    NavigateToLogin() {
-        this.router.navigate(['/giris'])
+
+    AuthMinimal() { //For AuthAutoIfPossible
+        this.LoadMemberSettings();
+        this.LoadAllRepositories();
+        this.StartSignalR(this.Token);
     }
+
     AuthAutoIfPossible() {
         if (this.Member && this.Token && !this.IsTokenExpired) {
-            let memberTokenData = new Tuple<string, Member>()
-            memberTokenData.Item1 = this.Token;
-            memberTokenData.Item2 = this.Member;
-
-            let authModel = new ReturnModel<any>(ErrorCodes.OK, memberTokenData)
-            this.Auth(authModel)
+            this.AuthMinimal();
         }
         else {
-            //remove member and token and redirect to login page
-            this.RemoveMember();
-            this.RemoveToken();
-            this.router.navigate(['/giris'])
+            this.DeAuth();
         }
     }
 
@@ -145,7 +150,6 @@ export class XyzekiAuthService {
     private refreshTokenTimeout;
     private StartRefreshTokenTimer() {
         if (!this.LoggedIn) {
-            this.StopRefreshTokenTimer()
             return;
         }
         // parse json object from base64 encoded jwt token
@@ -270,6 +274,13 @@ export class XyzekiAuthService {
             //#endregion themes
             element.classList.add('bg-helper');
         })
+    }
+
+    NavigateToLogin() {
+        this.router.navigate(['/giris'])
+    }
+    NavigateToHome() {
+        this.router.navigate(['/isler'])
     }
 }
 
