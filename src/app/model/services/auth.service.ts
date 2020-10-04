@@ -45,9 +45,24 @@ export class AuthService {
         }
       })) // Pipe will open up the observable returned by 'post' method and transform the pure object through a set of functions seperated by comma.
   }
-  refreshToken(): Observable<any> { // call here before expiration
+  refreshToken(): Observable<any> {
     return this.http.get(`${this.baseURL}api/Auth/RefreshToken`, { responseType: 'text' });
   }
+
+  SetSessionString(key: string, value: string): Observable<any> {
+    return this.http.post(`${this.baseURL}api/Auth/SetSessionString?key=${key}`, value);
+  }
+  SetSessionObject(key: string, value: object): Observable<any> {
+    return this.http.post(`${this.baseURL}api/Auth/SetSessionObject?key=${key}`, value);
+  }
+
+  GetSessionString(key: string): Observable<string> {
+    return this.http.get(`${this.baseURL}api/Auth/GetSessionString?key=${key}`, { responseType: 'text' });
+  }
+  GetSessionObject(key: string): Observable<object> {
+    return this.http.get<object>(`${this.baseURL}api/Auth/GetSessionObject?key=${key}`);
+  }
+
 
   register(registerModel: RegisterModel, recaptchaToken: string): Observable<ReturnModel<number | null>> {
     //registerModel.Password = this.cryptoHelpers.encryptWithAES(registerModel.Password); // Later will be decrypt in .NET 

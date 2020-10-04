@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { take } from 'rxjs/operators';
+import { ErrorCodes } from 'src/infrastructure/error-codes.enum';
 import { Member } from '../member.model';
 import { ReturnModel } from '../return.model';
 import { AuthService } from '../services/auth.service';
@@ -24,12 +26,10 @@ export class XyzekiAuthService {
         let token = localStorage.getItem("Xyzeki_JWTToken");
         return token;
     }
-
-    //Save user information
-    SaveMember(member) {
+    SaveMember(member: Member) {
         localStorage.setItem("Xyzeki_Member", JSON.stringify(member)); // Persistance
     }
-    SaveToken(token) {
+    SaveToken(token: string) {
         localStorage.setItem("Xyzeki_JWTToken", token); // Persistance
     }
 
@@ -41,6 +41,24 @@ export class XyzekiAuthService {
     }
 
 
+    async GetMemberFromSession() {
+        let member: object = await this.authService.GetSessionObject("Xyzeki_Member").pipe(take(1)).toPromise()
+        return <Member>member;
+    }
+    async GetTokenFromSession() {
+        let token: string = await this.authService.GetSessionString("Xyzeki_JWTToken").pipe(take(1)).toPromise()
+        console.log('No issues, I will wait until promise is resolved..');
+        return token;
+    }
+    //Save user information
+    async SaveMemberToSession(member: Member) {
+        await this.authService.SetSessionObject("Xyzeki_Member", member).pipe(take(1)).toPromise()
+    }
+    async SaveTokenToSession(token: string) {
+        await this.authService.SetSessionString("Xyzeki_JWTToken", token).pipe(take(1)).toPromise()
+
+    }
+    
 
     //Get more user information
     get IsTokenExpired(): boolean {
@@ -88,15 +106,15 @@ export class XyzekiAuthService {
     }
 
     AuthAutoIfPossible() {
-        // if (this.Member && this.Token && !this.IsTokenExpired) {
-        //     let memberTokenData = new Tuple<string, Member>()
-        //     memberTokenData.Item1 = this.Token;
-        //     memberTokenData.Item2 = this.Member;
+        if (this.Member && this.Token && !this.IsTokenExpired) {
+            let memberTokenData = new Tuple<string, Member>()
+            memberTokenData.Item1 = this.Token;
+            memberTokenData.Item2 = this.Member;
 
-        //     let authModel = new ReturnModel<any>(ErrorCodes.OK, memberTokenData)
-        //     this.Auth(authModel)
+            let authModel = new ReturnModel<any>(ErrorCodes.OK, memberTokenData)
+            this.Auth(authModel)
 
-        // }
+        }
     }
 
 

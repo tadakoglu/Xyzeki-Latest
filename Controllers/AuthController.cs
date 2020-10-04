@@ -141,6 +141,60 @@ namespace XYZToDo.Controllers
 
         }
 
+
+        public IActionResult SetSessionString(string key, [FromBody] string value)
+        {
+            HttpContext.Session.SetString(key, value);
+            return Ok();
+        }
+         public IActionResult SetSessionObject(string key, [FromBody]  object value)
+        {
+            HttpContext.Session.SetJson(key, value);
+            return Ok();
+        }
+        public IActionResult GetSessionString(string key)
+        {
+
+            if (HttpContext.Session != null)
+            {
+                string value = HttpContext.Session.GetString(key);
+                if (string.IsNullOrEmpty(value))
+                {
+                    return NotFound(); // session exists but key is not found.
+                }
+                else
+                {
+                    return Ok(value); // Success
+                }
+            }
+            else
+            {
+                return BadRequest(); // session does not exist anymore.
+            }
+
+        }
+        public IActionResult GetSessionObject(string key)
+        {
+
+            if (HttpContext.Session != null)
+            {
+                object value = HttpContext.Session.GetJson<object>(key);
+                if (value == null)
+                {
+                    return NotFound(); // session exists but key is not found.
+                }
+                else
+                {
+                    return Ok(value); // Success
+                }
+            }
+            else
+            {
+                return BadRequest(); // session does not exist anymore.
+            }
+
+        }
+
         [HttpPost("Register")]
         public IActionResult Register([FromBody] RegisterModel registerModel, [FromQuery] string recaptchaToken)//Accepts JSON body, not x-www-form-urlencoded!
         {

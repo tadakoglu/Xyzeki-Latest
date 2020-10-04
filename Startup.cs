@@ -48,6 +48,9 @@ namespace XYZToDo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromDays(365); 
+            });
             services.AddDbContext<XYZToDoSQLDbContext>();// Register to DI (configuration is in db context)
             services.AddMvc().AddJsonOptions(options =>
             {
@@ -184,6 +187,7 @@ namespace XYZToDo
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseSession();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

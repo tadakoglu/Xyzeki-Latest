@@ -119,7 +119,6 @@
                     cdkDrag [cdkDragData]="projectToDo" *ngFor="let projectToDo  of projectToDos(); index as i"
                     class="draggable trOptimization" [ngClass]="{'hideSubTask': !isProjectTaskShown(projectToDo)}">
 
-
                     <td style="width:5%;" cdkDragHandle>
 
                         <div [ngStyle]="{'padding-left': projectToDo.Zindex > 0 ? ' 10px' : '0'}">
@@ -209,7 +208,7 @@
 
 
                     </td>
-                    <td style="width:10%" cdkDragHandle *ngIf="projectToDoModelEdit?.TaskId != projectToDo?.TaskId">
+                    <td style="width:10%" cdkDragHandle>
                         <a *ngIf="projectToDo?.TaskId && getProject(projectId)?.Privacy != 1"
                             class="modernUnderlined ml-2 w-100"
                             (click)="setStatus(projectToDo?.TaskId);$event.stopPropagation();"
