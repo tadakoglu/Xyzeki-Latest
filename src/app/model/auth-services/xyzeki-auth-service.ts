@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { take } from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
+import { filter, take, tap } from 'rxjs/operators';
 import { ErrorCodes } from 'src/infrastructure/error-codes.enum';
 import { Member } from '../member.model';
 import { ReturnModel } from '../return.model';
@@ -16,8 +17,21 @@ const jwtHelper = new JwtHelperService();
 @Injectable()
 export class XyzekiAuthService {
     constructor(public authService: AuthService, private dataService: DataService,
-        private memberSettingService: MemberSettingService, private xyzekiSignalService: XyzekiSignalrService, private router: Router) { }
+        private memberSettingService: MemberSettingService, private xyzekiSignalService: XyzekiSignalrService, private router: Router) {
+        this.OtherBrowserWindowsOrTabsEventListener();
+    }
 
+
+    OtherBrowserWindowsOrTabsEventListener() {
+        let storageEventSubscription = fromEvent(window, 'storage').pipe(
+            filter((event: any) => event.key == 'Xyzeki_JWTToken'),
+        ).subscribe(() => {
+            if (!this.LoggedIn) { // If user logged out in other windows/tabs, also log out other open tabs/windows.
+                this.DeAuth();
+            }
+        })
+
+    }
     //Get user information
     get Member(): Member {
         let member: Member = JSON.parse(localStorage.getItem("Xyzeki_Member")) as Member
@@ -59,7 +73,7 @@ export class XyzekiAuthService {
         await this.authService.SetSessionString("Xyzeki_JWTToken", token).pipe(take(1)).toPromise()
 
     }
-    
+
 
     //Get more user information
     get IsTokenExpired(): boolean {
@@ -75,6 +89,7 @@ export class XyzekiAuthService {
         }
         else {
             return false;
+
         }
     }
 
@@ -103,9 +118,12 @@ export class XyzekiAuthService {
         this.ClearAllRepositories();
         this.StopSignalR();
         this.StopRefreshTokenTimer();
+        this.NavigateToLogin();
 
     }
-
+    NavigateToLogin() {
+        this.router.navigate(['/giris'])
+    }
     AuthAutoIfPossible() {
         if (this.Member && this.Token && !this.IsTokenExpired) {
             let memberTokenData = new Tuple<string, Member>()
@@ -115,7 +133,7 @@ export class XyzekiAuthService {
             let authModel = new ReturnModel<any>(ErrorCodes.OK, memberTokenData)
             this.Auth(authModel)
         }
-        else{
+        else {
             //remove member and token and redirect to login page
             this.RemoveMember();
             this.RemoveToken();
@@ -126,6 +144,10 @@ export class XyzekiAuthService {
 
     private refreshTokenTimeout;
     private StartRefreshTokenTimer() {
+        if (!this.LoggedIn) {
+            this.StopRefreshTokenTimer()
+            return;
+        }
         // parse json object from base64 encoded jwt token
         const jwtPayloadJSON = JSON.parse(atob(this.Token.split('.')[1])); // decode payload of JWT from base64 and parse to jwt json object structure
         console.log('token' + jwtPayloadJSON.exp)

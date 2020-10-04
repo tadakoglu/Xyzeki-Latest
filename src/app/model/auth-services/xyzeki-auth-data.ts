@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Member } from '../member.model';
 
@@ -6,7 +7,8 @@ const jwtHelper = new JwtHelperService();
 
 @Injectable()
 export class XyzekiAuthData {
-    constructor() { }
+    constructor(private router: Router) { }
+
 
     get Member(): Member {
         let member: Member = JSON.parse(localStorage.getItem("Xyzeki_Member")) as Member

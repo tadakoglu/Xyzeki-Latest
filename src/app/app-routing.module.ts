@@ -33,13 +33,14 @@ import { ProjectToDosCommentsCountResolverService } from './model/resolvers/proj
 import { ContainersResolverService } from './model/resolvers/containers-resolver.service';
 import { ContainerFilesResolverService } from './model/resolvers/container-files-resolver.service';
 import { AboutComponent } from './member/about/about.component';
+import { AlreadyLoggedInGuardService } from './model/services/guards/already-logged-in-guard.service';
 
 //#todo protect routes with guards(block login and register for authenticated user)
 export const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent }, // #todo: Develop a 'Is Logged in' mechanism in HomeComponent, and if the member were Logged In, redirect to his/her projects.
   { path: 'isler', pathMatch: 'full', component: MyToDosComponent, canActivate: [AuthGuardService] },
-  { path: 'giris', component: LoginComponent }, // /login 
-  { path: 'kayit-ol', component: RegisterComponent, data: { kind: 'register' }, }, // /register
+  { path: 'giris', component: LoginComponent, canActivate: [AlreadyLoggedInGuardService] }, // /login 
+  { path: 'kayit-ol', component: RegisterComponent, canActivate: [AlreadyLoggedInGuardService], data: { kind: 'register' }, }, // /register
 
   { path: 'sifremi-unuttum', component: IForgotPasswordComponent },
   { path: 'sifre-degistir/guvenlik-kodu/:SecurityCode', component: ChangePasswordComponent },

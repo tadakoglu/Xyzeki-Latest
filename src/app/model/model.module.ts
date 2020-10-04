@@ -54,6 +54,7 @@ import { ProjectToDosResolverService } from './resolvers/project-to-dos-resolver
 import { ContainersResolverService } from './resolvers/containers-resolver.service';
 import { ContainerFilesResolverService } from './resolvers/container-files-resolver.service';
 import { XyzekiAuthData } from './auth-services/xyzeki-auth-data';
+import { AlreadyLoggedInGuardService } from './services/guards/already-logged-in-guard.service';
 
 
 @NgModule({
@@ -75,6 +76,7 @@ import { XyzekiAuthData } from './auth-services/xyzeki-auth-data';
 
     { provide: AuthService, useClass: AuthService },// This module's components/services and its tree of child components/services receive new AuthService "instance"
     { provide: AuthGuardService, useClass: AuthGuardService },
+    { provide: AlreadyLoggedInGuardService, useClass: AlreadyLoggedInGuardService },    
     { provide: AuthGuardAdminService, useClass: AuthGuardAdminService },
     { provide: MemberLicenseService, useClass: MemberLicenseService },
     { provide: MembersService, useClass: MembersService },
