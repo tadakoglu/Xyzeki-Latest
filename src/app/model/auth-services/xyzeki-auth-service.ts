@@ -110,13 +110,14 @@ export class XyzekiAuthService {
     Auth(tokenAndMember: ReturnModel<Tuple<string, Member>>) {
         let member = tokenAndMember.Model.Item2;
         let token = tokenAndMember.Model.Item1;
-        this.SaveMember(member); // only in 1 windows
-        this.SaveToken(token); // only in 1 windows
+        this.SaveMember(member); // only once
+        this.SaveToken(token); // only once
 
-        this.LoadMemberSettings(); // in all windows
-        this.LoadAllRepositories(); // in all windows
-        this.StartSignalR(token); // in all windows
-        this.StartRefreshTokenTimer(); // only in 1 windows
+        this.LoadMemberSettings(); // every time
+        this.LoadAllRepositories(); // every time
+        this.StartSignalR(token); // every time
+        
+        this.StartRefreshTokenTimer();// only once
 
     }
 
