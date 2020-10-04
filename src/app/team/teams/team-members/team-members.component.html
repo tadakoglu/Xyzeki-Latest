@@ -96,13 +96,13 @@
                                                         class="float-left">
                                                         <button *ngIf="teamMember?.TeamMemberId != undefined"
                                                                 (click)="deleteTeamMember(teamMember?.TeamMemberId)"
-                                                                class="btn btn-light" type="button">Ekipdendan
+                                                                class="btn btn-light" type="button">Ekipten
                                                                 çıkar</button>
                                                 </div>
                                                 <div *ngIf="isLimited && teamMember?.Username == xyzekiAuthService?.Username && teamMember?.TeamMemberId"
                                                         class="float-left">
                                                         <button (click)="deleteTeamMember(teamMember?.TeamMemberId,true)"
-                                                                class="btn btn-light" type="button">Ekipdendan
+                                                                class="btn btn-light" type="button">Ekipten
                                                                 ayrıl</button>
                                                 </div>
 

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { take } from 'rxjs/operators';
 import { ErrorCodes } from 'src/infrastructure/error-codes.enum';
@@ -15,7 +16,7 @@ const jwtHelper = new JwtHelperService();
 @Injectable()
 export class XyzekiAuthService {
     constructor(public authService: AuthService, private dataService: DataService,
-        private memberSettingService: MemberSettingService, private xyzekiSignalService: XyzekiSignalrService) { }
+        private memberSettingService: MemberSettingService, private xyzekiSignalService: XyzekiSignalrService, private router: Router) { }
 
     //Get user information
     get Member(): Member {
@@ -113,7 +114,12 @@ export class XyzekiAuthService {
 
             let authModel = new ReturnModel<any>(ErrorCodes.OK, memberTokenData)
             this.Auth(authModel)
-
+        }
+        else{
+            //remove member and token and redirect to login page
+            this.RemoveMember();
+            this.RemoveToken();
+            this.router.navigate(['/giris'])
         }
     }
 

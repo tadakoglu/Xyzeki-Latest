@@ -50,7 +50,7 @@ export class AuthService {
   }
 
   SetSessionString(key: string, value: string): Observable<any> {
-    return this.http.post(`${this.baseURL}api/Auth/SetSessionString?key=${key}`, value);
+    return this.http.post(`${this.baseURL}api/Auth/SetSessionString?key=${key}`, value, this.getOptions1());
   }
   SetSessionObject(key: string, value: object): Observable<any> {
     return this.http.post(`${this.baseURL}api/Auth/SetSessionObject?key=${key}`, value);
@@ -114,7 +114,10 @@ export class AuthService {
     return { headers: new HttpHeaders({ 'Content-Type': 'application/json', }), responseType: 'text' };
 
   }
+  getOptions1(): object {
+    return { headers: new HttpHeaders({ 'Content-Type': 'application/json', }), responseType: 'text' };
 
+  }
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

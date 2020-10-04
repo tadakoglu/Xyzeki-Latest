@@ -9,6 +9,7 @@ import { DataService } from './model/services/shared/data.service';
 import { isNullOrUndefined } from 'util';
 import { SwPush, ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from 'src/environments/environment';
+import { AuthService } from './model/services/auth.service';
 
 
 export const customNgbPFProvider = () => { return new CustomNgbDateParserFormatter(); };
@@ -25,7 +26,7 @@ export const customNgbPFProvider = () => { return new CustomNgbDateParserFormatt
 })
 
 export class AppComponent implements OnInit, AfterViewInit {
-  constructor(public xyzekiAuthService: XyzekiAuthService, private router: Router, private switchHourDataService: SwitchHourDataService, public dataService: DataService) { // Initialize our member.
+  constructor(private auth:AuthService, public xyzekiAuthService: XyzekiAuthService, private router: Router, private switchHourDataService: SwitchHourDataService, public dataService: DataService) { // Initialize our member.
 
     this.xyzekiAuthService.AuthAutoIfPossible();
    
@@ -53,6 +54,13 @@ export class AppComponent implements OnInit, AfterViewInit {
   //   }
   // }
   ngOnInit(): void {
+    // this.auth.SetSessionString('token', '123').subscribe(()=>{
+    //   console.log("token anahtarlı 123 değeri oturumlara yazıldı")
+    // });
+    // this.auth.GetSessionString('token').subscribe((val)=>{
+    //   console.log(val + ' için ' + val + " değeri oturumlardan alındı")
+    // });
+
     //this.setUpDefaultTheme();
     this.switchHourDataService.setupStyle.subscribe((c: { Left, Top, Visibility, isOpen }) => {
       this.switchHourStyle.Left = c.Left

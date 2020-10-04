@@ -208,9 +208,9 @@
 
 
                     </td>
-                    <td style="width:10%" cdkDragHandle>
+                    <td style="width:10%" cdkDragHandle  *ngIf="projectToDoModelEdit?.TaskId != projectToDo?.TaskId">
                         <a *ngIf="projectToDo?.TaskId && getProject(projectId)?.Privacy != 1"
-                            class="modernUnderlined ml-2 w-100"
+                            class="modernUnderlined"
                             (click)="setStatus(projectToDo?.TaskId);$event.stopPropagation();"
                             style="cursor: pointer; font-size: 13px">{{(projectToDo?.Status ? projectToDo?.Status  : 'Bekliyor')}}</a>
                     </td>

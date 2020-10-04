@@ -141,17 +141,19 @@ namespace XYZToDo.Controllers
 
         }
 
-
+        [HttpPost("SetSessionString")]
         public IActionResult SetSessionString(string key, [FromBody] string value)
         {
             HttpContext.Session.SetString(key, value);
             return Ok();
         }
-         public IActionResult SetSessionObject(string key, [FromBody]  object value)
+        [HttpPost("SetSessionObject")]
+        public IActionResult SetSessionObject(string key, [FromBody] object value)
         {
             HttpContext.Session.SetJson(key, value);
             return Ok();
         }
+        [HttpGet("GetSessionString")]
         public IActionResult GetSessionString(string key)
         {
 
@@ -173,6 +175,7 @@ namespace XYZToDo.Controllers
             }
 
         }
+        [HttpGet("GetSessionObject")]
         public IActionResult GetSessionObject(string key)
         {
 
