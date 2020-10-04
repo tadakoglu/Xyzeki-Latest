@@ -132,11 +132,14 @@ namespace XYZToDo.Controllers
             return Unauthorized(); //401 Unauthorized      
         }
 
+
         [HttpGet("RefreshToken")]
+        [Authorize]
         public IActionResult RefreshToken()
         {
             var member = User.Identity.Name;
             string refreshToken = AuthRepository.RefreshToken(member);
+            //Console.WriteLine(refreshToken);
             return Ok(refreshToken);
 
         }
