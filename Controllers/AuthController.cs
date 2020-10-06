@@ -201,6 +201,29 @@ namespace XYZToDo.Controllers
 
         }
 
+
+        [HttpDelete("DeleteSessionObject")]
+        public IActionResult DeleteSessionObject(string key)
+        {
+
+            if (HttpContext.Session != null)
+            {
+                try
+                {
+                    HttpContext.Session.Remove(key);
+
+                }
+                catch { };
+                return Ok();
+            }
+            else
+            {
+                return BadRequest(); // session does not exist anymore.
+            }
+
+        }
+
+
         [HttpPost("Register")]
         public IActionResult Register([FromBody] RegisterModel registerModel, [FromQuery] string recaptchaToken)//Accepts JSON body, not x-www-form-urlencoded!
         {

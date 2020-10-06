@@ -62,7 +62,9 @@ export class AuthService {
   GetSessionObject(key: string): Observable<object> {
     return this.http.get<object>(`${this.baseURL}api/Auth/GetSessionObject?key=${key}`);
   }
-
+  DeleteSessionObject(key: string): Observable<void> {
+    return this.http.delete<void>(`${this.baseURL}api/Auth/DeleteSessionObject?key=${key}`);
+  }
 
   register(registerModel: RegisterModel, recaptchaToken: string): Observable<ReturnModel<number | null>> {
     //registerModel.Password = this.cryptoHelpers.encryptWithAES(registerModel.Password); // Later will be decrypt in .NET 
