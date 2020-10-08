@@ -125,6 +125,9 @@ namespace XYZToDo.Controllers
 
             if (JWTandMember != null)
             {
+                HttpContext.Session.SetString("Xyzeki_JWTToken", JWTandMember.Item1);
+                HttpContext.Session.SetJson("Xyzeki_Member", JWTandMember.Item2);
+
                 JWTandMember.Item2.CryptoPassword = null;
                 JWTandMember.Item2.CryptoSalt = null;
                 return Ok((JWTandMember.Item1, JWTandMember.Item2));//200 OK, Send JWT with member profile to our member.           
@@ -139,6 +142,7 @@ namespace XYZToDo.Controllers
         {
             var member = User.Identity.Name;
             string refreshToken = AuthRepository.RefreshToken(member);
+            HttpContext.Session.SetString("Xyzeki_JWTToken", refreshToken);
             //Console.WriteLine(refreshToken);
             return Ok(refreshToken);
 
