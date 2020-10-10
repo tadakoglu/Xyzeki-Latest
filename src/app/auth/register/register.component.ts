@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { Subscription } from 'rxjs';
+import { XyzekiAuthHelpersService } from 'src/app/model/auth-services/xyzeki-auth-helpers-service';
 import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
 import { Member } from 'src/app/model/member.model';
 import { RegisterModel } from 'src/app/model/register.model';
@@ -56,8 +57,8 @@ export class RegisterComponent implements AfterViewInit, OnDestroy {
   private subscription3: Subscription;
   private subscription4: Subscription;
   private subscription5: Subscription;
-  constructor(private route: ActivatedRoute, private router: Router, private repository: AuthRepository,
-    public registerModel: RegisterModel, public xyzekiAuthService: XyzekiAuthService, private membersService: MembersService, private recaptchaV3Service: ReCaptchaV3Service) {
+  constructor(private xyzekiAuthService: XyzekiAuthService, private route: ActivatedRoute, private router: Router, private repository: AuthRepository,
+    public registerModel: RegisterModel, public xyzekiAuthHelpersService: XyzekiAuthHelpersService, private membersService: MembersService, private recaptchaV3Service: ReCaptchaV3Service) {
     this.route.data.subscribe(data => {
       if (data.kind === 'update') {
         this.isUpdateMode = true;
@@ -215,7 +216,7 @@ export class RegisterComponent implements AfterViewInit, OnDestroy {
 
           let member: Member = new Member(null, null, null, null, null, null, null, 0, 0);
           Object.assign(member, this.registerModel);
-          this.xyzekiAuthService.SaveMember(member);
+          this.xyzekiAuthHelpersService.SaveMember(member);
         }
         else if (r.ErrorCode == ErrorCodes.MemberAlreadyExistsError) {
           setTimeout(() => {

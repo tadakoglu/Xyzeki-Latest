@@ -52,8 +52,8 @@ import { ProjectsAssignedResolverService } from './resolvers/projects-assigned-r
 import { ProjectToDosResolverService } from './resolvers/project-to-dos-resolver.service';
 import { ContainersResolverService } from './resolvers/containers-resolver.service';
 import { ContainerFilesResolverService } from './resolvers/container-files-resolver.service';
-import { XyzekiAuthData } from './auth-services/xyzeki-auth-data';
 import { AlreadyLoggedInGuardService } from './services/guards/already-logged-in-guard.service';
+import { XyzekiAuthHelpersService } from './auth-services/xyzeki-auth-helpers-service';
 
 
 @NgModule({
@@ -64,7 +64,7 @@ import { AlreadyLoggedInGuardService } from './services/guards/already-logged-in
   providers: [
     XyzekiDateTimeInfra,
     XyzekiAuthService,
-    XyzekiAuthData,
+    XyzekiAuthHelpersService,
     DataService,
     SwitchHourDataService,
     PageSizes,

@@ -20,7 +20,6 @@ import { CloudContainer } from '../azure-models/cloud-container.model';
 import { CloudFile } from '../azure-models/cloud-file.model';
 import { NotificationService } from '../notification-services/notification.service';
 import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
-import { XyzekiAuthData } from '../auth-services/xyzeki-auth-data';
 
 @Injectable()
 export class XyzekiSignalrService {
@@ -29,7 +28,7 @@ export class XyzekiSignalrService {
   builder = new HubConnectionBuilder();
   private hubConnection: HubConnection
 
-  constructor(private dataService: DataService, private pushService: NotificationService, private xyzekiAuthData: XyzekiAuthData) {
+  constructor(private dataService: DataService, private pushService: NotificationService, private xyzekiAuthService: XyzekiAuthService) {
   }
 
   async createHubConnection(token) {
@@ -197,7 +196,7 @@ export class XyzekiSignalrService {
 
   private timeOutId;
   tryConnection(seconds = 10) {
-    if (!this.xyzekiAuthData.LoggedIn)
+    if (!this.xyzekiAuthService.LoggedIn)
       return;
 
     let secondsToTryAfter = seconds;

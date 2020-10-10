@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { Subscription } from 'rxjs';
 import { concatMap } from 'rxjs/operators';
+import { XyzekiAuthHelpersService } from 'src/app/model/auth-services/xyzeki-auth-helpers-service';
 import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
 import { LoginModel } from 'src/app/model/login.model';
 import { Member } from 'src/app/model/member.model';
@@ -67,7 +68,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   constructor(private recaptchaV3Service: ReCaptchaV3Service, private router: Router, private repository: AuthRepository,
-    public loginModel: LoginModel, public xyzekiAuthService: XyzekiAuthService, public xyzekiSignalService: XyzekiSignalrService, private memberSettingService: MemberSettingService, private dataService: DataService) {
+    public loginModel: LoginModel, public xyzekiAuthHelpersService: XyzekiAuthHelpersService, public xyzekiSignalService: XyzekiSignalrService, private memberSettingService: MemberSettingService, private dataService: DataService) {
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
   }
@@ -85,7 +86,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
       this.isLoading = true;
       this.subscription = this.recaptchaV3Service.execute(GoogleReCaptcha_LoginAction).pipe(concatMap(
         recaptchaToken => { return this.repository.authenticate(Object.assign({}, this.loginModel), recaptchaToken) })).subscribe((tokenAndMember: ReturnModel<Tuple<string, Member>>) => {
-          this.xyzekiAuthService.Auth(tokenAndMember);
+          this.xyzekiAuthHelpersService.Auth(tokenAndMember);
           this.informUser = "Başarıyla giriş yaptınız."
           this.router.navigate(['/isler'])
           this.modelSent = true;

@@ -11,6 +11,7 @@ import { SwPush, ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './model/services/auth.service';
 import { CryptoHelpers } from 'src/infrastructure/cryptoHelpers';
+import { XyzekiAuthHelpersService } from './model/auth-services/xyzeki-auth-helpers-service';
 
 
 export const customNgbPFProvider = () => { return new CustomNgbDateParserFormatter(); };
@@ -27,18 +28,20 @@ export const customNgbPFProvider = () => { return new CustomNgbDateParserFormatt
 })
 
 export class AppComponent implements OnInit, AfterViewInit {
-  constructor(private auth:AuthService, public xyzekiAuthService: XyzekiAuthService, private router: Router, private switchHourDataService: SwitchHourDataService, public dataService: DataService) { // Initialize our member.
+  constructor(private auth:AuthService, public xyzekiAuthHelpersService: XyzekiAuthHelpersService, private router: Router, private switchHourDataService: SwitchHourDataService, public dataService: DataService) { // Initialize our member.
 
-    this.xyzekiAuthService.AuthAutoIfPossible();
+
    
     this.loading = true;
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
 
-
-    // let cryptoHelpers = new CryptoHelpers();
-    // console.log('şifrelendi' + cryptoHelpers.Encrypt("tayfun22933434934340403040343"))
-    // console.log('çözüldü' + cryptoHelpers.Decrypt('tayfun22933434934340403040343'))
+    // this.xyzekiAuthHelpersService.AuthAutoIfPossible();
+    // let cryptoHelpers = new CryptoHelpers(); 
+    // let cip = cryptoHelpers.encrypt('tayfuntest2343435353^++gg**')
+    // console.log('şifrelendi : ' + cip)
+    // console.log('***')
+    // console.log('çözüldü:' + cryptoHelpers.decrypt(cip))
   }
 
 

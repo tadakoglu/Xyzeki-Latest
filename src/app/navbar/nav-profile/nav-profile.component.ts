@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
 import { Router } from '@angular/router';
+import { XyzekiAuthHelpersService } from 'src/app/model/auth-services/xyzeki-auth-helpers-service';
 
 @Component({
   selector: 'app-nav-profile',
@@ -10,12 +11,12 @@ import { Router } from '@angular/router';
 })
 export class NavProfileComponent implements OnInit {
 
-  constructor(private router: Router, public xyzekiAuthService: XyzekiAuthService) { }
+  constructor(private router: Router, public xyzekiAuthHelpersService: XyzekiAuthHelpersService) { }
 
   ngOnInit() {
   }
   deAuth(){
-    this.xyzekiAuthService.DeAuth();
+    this.xyzekiAuthHelpersService.DeAuth();
     this.router.navigate(['/'])
   }
   @Input() isLocked=false;

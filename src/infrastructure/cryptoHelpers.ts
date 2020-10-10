@@ -1,27 +1,18 @@
+var CryptoTS = require("crypto-ts");
+
 export class CryptoHelpers {
+        constructor() { }
 
-    private cryptoPass = '-%?3*fj02'
+        private jf9p3hg4n9: string = 'J*+FAL!'
 
-    Encrypt(textToEn: string): string { 
-        var crypto = require('crypto');
+        encrypt(textToEn: string): string {
+                return CryptoTS.AES.encrypt(textToEn, this.jf9p3hg4n9);
+        }
 
-        var mykey = crypto.createCipher('aes-128-cbc', this.cryptoPass);
-        var mystr = mykey.update(textToEn, 'utf8', 'hex')
-        mystr += mykey.final('hex');
-
-        return mystr;
-    }
-
-
-
-    Decrypt(textToDe: string):string {
-        var crypto = require('crypto');
-
-        var mykey = crypto.createDecipher('aes-128-cbc', this.cryptoPass);
-        var mystr = mykey.update(textToDe, 'hex', 'utf8')
-        mystr += mykey.final('utf8');
-        
-        return mystr;
-    }
-   
+        decrypt(textToDe: string): string {
+                var bytes = CryptoTS.AES.decrypt(textToDe.toString(), this.jf9p3hg4n9);
+                return bytes.toString(CryptoTS.enc.Utf8);
+        }
 }
+
+

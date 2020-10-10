@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ITeamMemberRepository } from '../abstract/i-team-member-repository';
+import { XyzekiAuthHelpersService } from '../auth-services/xyzeki-auth-helpers-service';
 import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
 import { Member } from '../member.model';
 import { AuthService } from '../services/auth.service';
@@ -19,7 +20,7 @@ import { TeamRepository } from './team-repository';
 @Injectable()
 export class TeamMemberRepository implements ITeamMemberRepository {
 
-    constructor(private teamRepo: TeamRepository, private mLicense: MemberLicenseRepository, private service: TeamMembersService, private service2: TeamsService, private serviceMember: AuthService, private signalService: XyzekiSignalrService, private membersService: MembersService, public xyzekiAuthService: XyzekiAuthService, private permissions: MemberLicenseRepository, private dataService: DataService) {
+    constructor(private xyzekiAuthService: XyzekiAuthService, private teamRepo: TeamRepository, private mLicense: MemberLicenseRepository, private service: TeamMembersService, private service2: TeamsService, private serviceMember: AuthService, private signalService: XyzekiSignalrService, private membersService: MembersService, public xyzekiAuthHelpersService: XyzekiAuthHelpersService, private permissions: MemberLicenseRepository, private dataService: DataService) {
         //incoming signals
         this.signalService.newTeamMemberJoinedAvailable.subscribe(teamMemberJ => { // add operation
             this.saveTeamMemberJoinedViaSignalR(teamMemberJ);
@@ -289,7 +290,7 @@ export class TeamMemberRepository implements ITeamMemberRepository {
             if (status) {
                 if (this.teamMembersJoined.length == 0 && this.permissions) {
                     this.permissions.removeMemberLicenseForJoinedTeamMember();
-                    this.xyzekiAuthService.DeAuth();
+                    this.xyzekiAuthHelpersService.DeAuth();
                 }
             }
 

@@ -3,7 +3,7 @@ import { SwPush, SwUpdate } from '@angular/service-worker';
 import { concatMap } from 'rxjs/operators';
 import { BackEndWebServer } from 'src/infrastructure/back-end-server';
 import { isNullOrUndefined } from 'util';
-import { XyzekiAuthData } from '../auth-services/xyzeki-auth-data';
+import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
 import { CloudFile } from '../azure-models/cloud-file.model';
 import { PrivateTalkMessage } from '../private-talk-message.model';
 import { ProjectTaskComment } from '../project-task-comment.model';
@@ -29,7 +29,7 @@ export class NotificationService {
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
   }
-  constructor(public xyzekiAuthData: XyzekiAuthData, @Optional() private swUpdate: SwUpdate, @Optional() private swPush: SwPush,
+  constructor(public xyzekiAuthService: XyzekiAuthService, @Optional() private swUpdate: SwUpdate, @Optional() private swPush: SwPush,
   private teamService: TeamsService, private privateTalkService: PrivateTalksService, private quickToDoService: QuickToDosService, private projectToDoService: ProjectToDosService, private projectService: ProjectsService) {
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
@@ -123,7 +123,7 @@ export class NotificationService {
 
 
     let titleX = "1 Yeni Göreviniz Var";
-    if (quickTask.Owner == this.xyzekiAuthData.Username) {
+    if (quickTask.Owner == this.xyzekiAuthService.Username) {
       if (isNullOrUndefined(quickTask.Status)) {
         quickTask.Status = 'Bekliyor';
       }
@@ -194,7 +194,7 @@ export class NotificationService {
     if (!this.swPush.isEnabled)
       return;
 
-    if (project.Owner == this.xyzekiAuthData.Username) { // only single way signal
+    if (project.Owner == this.xyzekiAuthService.Username) { // only single way signal
       return;
     }
 
@@ -255,7 +255,7 @@ export class NotificationService {
 
   //Yorumlar 
   pushNotifyNewPTComment(projectTaskComment: ProjectTaskComment) {
-    if (projectTaskComment.Sender == this.xyzekiAuthData.Username) // it sends itself too
+    if (projectTaskComment.Sender == this.xyzekiAuthService.Username) // it sends itself too
       return;
 
     if (!this.isNotificationGranted)
@@ -295,7 +295,7 @@ export class NotificationService {
 
   // #todo
   pushNotifyNewQTComment(quickTaskComment: QuickTaskComment) {
-    if (quickTaskComment.Sender == this.xyzekiAuthData.Username)  // it sends itself too
+    if (quickTaskComment.Sender == this.xyzekiAuthService.Username)  // it sends itself too
       return;
 
     if (!this.isNotificationGranted)

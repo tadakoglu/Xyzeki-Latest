@@ -1,269 +1,40 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { fromEvent, Subscription } from 'rxjs';
-import { filter, take, tap } from 'rxjs/operators';
-import { ErrorCodes } from 'src/infrastructure/error-codes.enum';
 import { Member } from '../member.model';
-import { ReturnModel } from '../return.model';
 import { AuthService } from '../services/auth.service';
-import { MemberSettingService } from '../services/member-setting.service';
-import { DataService } from '../services/shared/data.service';
-import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
-import { Tuple } from '../tuple.model';
+
 
 const jwtHelper = new JwtHelperService();
 
 @Injectable()
 export class XyzekiAuthService {
-    constructor(public authService: AuthService, private dataService: DataService,
-        private memberSettingService: MemberSettingService, private xyzekiSignalService: XyzekiSignalrService, private router: Router) {
-            this.SetupOtherBrowserWindowsOrTabsEventListener();
-        }
+    constructor() { }
 
-    storageEventSubscription:Subscription
-    SetupOtherBrowserWindowsOrTabsEventListener() {
-        this.storageEventSubscription = fromEvent(window, 'storage').pipe(
-            filter((event: any) => event.key == 'Xyzeki_JWTToken'),
-        ).subscribe(() => {
-            if (!document.hasFocus()) { //Only events from other tabs/windows(excluding this one)
-                if (!this.LoggedIn) { // If user logged out in other windows/tabs, also log out other open tabs/windows.
-                    this.DeAuth();
-                }
-                else {
-                    this.AuthMinimal();
-                    this.NavigateToHome();
-                }
-            }
-
-
-        })
-
-    }
-    //Get user information
+    member: Member
+    token: string
     get Member(): Member {
-        let member: Member = JSON.parse(localStorage.getItem("Xyzeki_Member")) as Member
-        return member;
+        return this.member;
+    }
+    set SetMember(val) {
+        this.member = val;
     }
     get Token(): string {
-        let token = localStorage.getItem("Xyzeki_JWTToken");
-        return token;
+        return this.token;
     }
-    SaveMember(member: Member) {
-        localStorage.setItem("Xyzeki_Member", JSON.stringify(member)); // Persistance
+    set SetToken(val) {
+        this.token = val
     }
-    SaveToken(token: string) {
-        localStorage.setItem("Xyzeki_JWTToken", token); // Persistance
-    }
-
-    RemoveMember() {
-        localStorage.removeItem("Xyzeki_Member")
-    }
-    RemoveToken() {
-        localStorage.removeItem("Xyzeki_JWTToken")
-    }
-
-    //Get more user information
     get IsTokenExpired(): boolean {
-        return jwtHelper.isTokenExpired(this.Token)
+        return jwtHelper.isTokenExpired(this.token)
     }
     get Username(): string {
-        let member: Member = JSON.parse(localStorage.getItem("Xyzeki_Member")) as Member
-        let username: string = member ? member.Username : undefined
-        return username
+        return this.member ? this.member.Username : undefined
     }
     get LoggedIn(): boolean {
-        if (this.Token && !this.IsTokenExpired) {
-            return true;
-        }
-        else {
-            return false;
-
-        }
-    }
-
-    LoadAllRepositories() {
-        this.dataService.loadAllRepositoriesEvent.next();
-    }
-    ClearAllRepositories() {
-        this.dataService.clearAllRepositoriesEvent.next();
-    }
-    Auth(tokenAndMember: ReturnModel<Tuple<string, Member>>) {
-        let member = tokenAndMember.Model.Item2;
-        let token = tokenAndMember.Model.Item1;
-        this.SaveMember(member); // only once
-        this.SaveToken(token); // only once
-
-        this.LoadMemberSettings(); // every time
-        this.LoadAllRepositories(); // every time
-        this.StartSignalR(token); // every time
-        
-        this.StartRefreshTokenTimer();// only once
-
-    }
-
-    DeAuth() {
-        this.RemoveMember();
-        this.RemoveToken();
-        this.ClearMemberSettings();
-        this.ClearAllRepositories();
-        this.StopSignalR();
-        this.StopRefreshTokenTimer();
-        this.NavigateToLogin();
-
-    }
-
-    AuthMinimal() { //For AuthAutoIfPossible
-        this.LoadMemberSettings();
-        this.LoadAllRepositories();
-        this.StartSignalR(this.Token);
-    }
-
-    AuthAutoIfPossible() {
-        if (this.Member && this.Token && !this.IsTokenExpired) {
-            this.AuthMinimal();
-        }
-        else {
-            this.DeAuth();
-        }
+        return (this.token && !jwtHelper.isTokenExpired(this.token)) ? true : false
     }
 
 
-    private refreshTokenTimeout;
-    private StartRefreshTokenTimer() {
-        if (!this.LoggedIn) {
-            return;
-        }
-        // parse json object from base64 encoded jwt token
-        const jwtPayloadJSON = JSON.parse(atob(this.Token.split('.')[1])); // decode payload of JWT from base64 and parse to jwt json object structure
-        console.log('token' + jwtPayloadJSON.exp)
-        // set a timeout to refresh the token a minute before it expires
-        const expires = new Date(jwtPayloadJSON.exp * 1000); // exp means expiration property in jwt json
-        const timeout = expires.getTime() - Date.now() - (60 * 1000);
-        console.log('timeout' + timeout)
-        this.refreshTokenTimeout = setTimeout(() => this.authService.refreshToken().subscribe((newToken) => {
-            this.SaveToken(newToken);
-            this.StartRefreshTokenTimer();
-            console.log('timeout' + timeout)
-
-        }), timeout);
-    }
-    private StopRefreshTokenTimer() {
-        clearTimeout(this.refreshTokenTimeout);
-    }
-
-    StartSignalR(token) {
-        this.xyzekiSignalService.createHubConnection(token);
-    }
-    StopSignalR() {
-        this.xyzekiSignalService.destroyHubConnection();
-    }
-
-
-    ClearMemberSettings() {
-        this.dataService.switchMode = 0
-        let element: HTMLElement = document.getElementById('appBody');
-        element.className = null;
-    }
-    LoadMemberSettings() {
-        this.memberSettingService.mySetting().subscribe(mSetting => {
-            if (!mSetting)
-                return;
-
-            this.dataService.switchMode = mSetting.SwitchMode;
-            let element: HTMLElement = document.getElementById('appBody');
-            element.className = null;
-
-            //#region  themes
-            switch (mSetting.Theme) {
-                case 'KlasikMavi':
-                    element.classList.add('KlasikMavi');
-                    break;
-                case 'KlasikKirmizi':
-                    element.classList.add('KlasikKirmizi');
-                    break;
-                case 'KlasikSari':
-                    element.classList.add('KlasikSari');
-                    break;
-                case 'KlasikMetalik':
-                    element.classList.add('KlasikMetalik');
-                    break;
-                case 'KlasikGece':
-                    element.classList.add('KlasikGece');
-                    break;
-                case 'KlasikRoyal':
-                    element.classList.add('KlasikRoyal');
-                    break;
-                case 'KlasikLimeade':
-                    element.classList.add('KlasikLimeade');
-                    break;
-                case 'KlasikBeyaz':
-                    element.classList.add('KlasikBeyaz');
-                    break;
-                case 'ArashiyamaBambulari':
-                    element.classList.add('ArashiyamaBambulari');
-                    break;
-                case 'Venedik':
-                    element.classList.add('Venedik');
-                    break;
-                case 'Peribacalari':
-                    element.classList.add('Peribacalari');
-                    break;
-                case 'Orman':
-                    element.classList.add('Orman');
-                    break;
-                case 'Yaprak':
-                    element.classList.add('Yaprak');
-                    break;
-                case 'Kedi':
-                    element.classList.add('Kedi');
-                    break;
-                case 'Deniz':
-                    element.classList.add('Deniz');
-                    break;
-                case 'Deve':
-                    element.classList.add('Deve');
-                    break;
-                case 'Pamukkale':
-                    element.classList.add('Pamukkale');
-                    break;
-                case 'Denizalti':
-                    element.classList.add('Denizalti');
-                    break;
-                case 'Brienz':
-                    element.classList.add('Brienz');
-                    break;
-                case 'Aconcagua':
-                    element.classList.add('Aconcagua');
-                    break;
-                case 'Bulutlar':
-                    element.classList.add('Bulutlar');
-                    break;
-                case 'TropicalGunisigi':
-                    element.classList.add('TropicalGunisigi');
-                    break;
-                case 'DenizAgac':
-                    element.classList.add('DenizAgac');
-                    break;
-                case 'Tarla':
-                    element.classList.add('Tarla');
-                    break;
-                case 'EmpireState':
-                    element.classList.add('EmpireState');
-                    break;
-
-            }
-            //#endregion themes
-            element.classList.add('bg-helper');
-        })
-    }
-
-    NavigateToLogin() {
-        this.router.navigate(['/giris'])
-    }
-    NavigateToHome() {
-        this.router.navigate(['/isler'])
-    }
 }
 
 
