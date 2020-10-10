@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { fromEvent } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import { filter, take, tap } from 'rxjs/operators';
 import { ErrorCodes } from 'src/infrastructure/error-codes.enum';
 import { Member } from '../member.model';
@@ -18,11 +18,11 @@ const jwtHelper = new JwtHelperService();
 export class XyzekiAuthService {
     constructor(public authService: AuthService, private dataService: DataService,
         private memberSettingService: MemberSettingService, private xyzekiSignalService: XyzekiSignalrService, private router: Router) {
-        this.OtherBrowserWindowsOrTabsEventListener();
     }
 
-    OtherBrowserWindowsOrTabsEventListener() {
-        let storageEventSubscription = fromEvent(window, 'storage').pipe(
+    storageEventSubscription:Subscription
+    SetupOtherBrowserWindowsOrTabsEventListener() {
+        this.storageEventSubscription = fromEvent(window, 'storage').pipe(
             filter((event: any) => event.key == 'Xyzeki_JWTToken'),
         ).subscribe(() => {
             if (!document.hasFocus()) { //Only events from other tabs/windows(excluding this one)
@@ -61,26 +61,6 @@ export class XyzekiAuthService {
     RemoveToken() {
         localStorage.removeItem("Xyzeki_JWTToken")
     }
-
-
-    async GetMemberFromSession() {
-        let member: object = await this.authService.GetSessionObject("Xyzeki_Member").pipe(take(1)).toPromise()
-        return <Member>member;
-    }
-    async GetTokenFromSession() {
-        let token: string = await this.authService.GetSessionString("Xyzeki_JWTToken").pipe(take(1)).toPromise()
-        console.log('No issues, I will wait until promise is resolved..');
-        return token;
-    }
-    //Save user information
-    async SaveMemberToSession(member: Member) {
-        await this.authService.SetSessionObject("Xyzeki_Member", member).pipe(take(1)).toPromise()
-    }
-    async SaveTokenToSession(token: string) {
-        await this.authService.SetSessionString("Xyzeki_JWTToken", token).pipe(take(1)).toPromise()
-
-    }
-
 
     //Get more user information
     get IsTokenExpired(): boolean {
