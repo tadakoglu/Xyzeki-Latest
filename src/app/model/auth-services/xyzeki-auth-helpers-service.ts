@@ -23,25 +23,26 @@ export class XyzekiAuthHelpersService {
     constructor(public authService: AuthService, public xyzekiAuthService: XyzekiAuthService, private dataService: DataService,
         private memberSettingService: MemberSettingService, private xyzekiSignalService: XyzekiSignalrService, private router: Router) {
 
+        this.SetupOtherBrowserWindowsOrTabsEventListener();
     }
 
     storageEventSubscription: Subscription
     SetupOtherBrowserWindowsOrTabsEventListener() {
-        // this.storageEventSubscription = fromEvent(window, 'storage').pipe(
-        //     filter((event: any) => event.key == 'Xyzeki_JWTToken'),
-        // ).subscribe(() => {
-        //     if (!document.hasFocus()) { //Only events from other tabs/windows(excluding this one)
-        //         if (!this.xyzekiAuthService.LoggedIn) { // If user logged out in other windows/tabs, also log out other open tabs/windows.
-        //             this.DeAuth();
-        //         }
-        //         else {
-        //             this.AuthMinimal();
-        //             this.NavigateToHome();
-        //         }
-        //     }
+        this.storageEventSubscription = fromEvent(window, 'storage').pipe(
+            filter((event: any) => event.key == 'Xyzeki_JWTToken'),
+        ).subscribe(() => {
+            if (!document.hasFocus()) { //Only events from other tabs/windows(excluding this one)
+                if (!this.xyzekiAuthService.LoggedIn) { // If user logged out in other windows/tabs, also log out other open tabs/windows.
+                    this.DeAuth();
+                }
+                else {
+                    this.AuthMinimal();
+                    this.NavigateToHome();
+                }
+            }
 
 
-        // })
+        })
 
     }
 
@@ -99,36 +100,9 @@ export class XyzekiAuthHelpersService {
     }
 
     AuthAutoIfPossible() {
-        try {
-            let member = localStorage.getItem("Xyzeki_Member")
-            let token = localStorage.getItem("Xyzeki_JWTToken")
-
-            console.log('**********************')
-            console.log(member)
-            console.log('**********************')
-            console.log(token)
-
-            member = cryptoHelper.decrypt(member)
-            token = cryptoHelper.decrypt(token)
-
-
-            console.log('**********************')
-            console.log(member)
-            console.log('**********************')
-            console.log(token)
-
-            if (token && !jwtHelper.isTokenExpired(token)) {
-                this.SaveMember(JSON.parse(member) as Member);
-                this.SaveToken(token)
-                this.AuthMinimal()
-
-            }
-
-
-        } catch (error) {
-            console.log('hata oluştu' + error)
+        if (this.xyzekiAuthService.LoggedIn) {
+            this.AuthMinimal()
         }
-
     }
 
 

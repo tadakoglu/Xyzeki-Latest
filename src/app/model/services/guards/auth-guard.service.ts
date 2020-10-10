@@ -13,20 +13,12 @@ export class AuthGuardService implements CanActivate {
   }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 
-
     if (this.xyzekiAuthService.LoggedIn) {
       return true;
     }
     else {
-      //Check local storage in case it is a initial load
-      if (this.xyzekiAuthService.ValidTokenFoundInLocalStorage) {
-        return true
-      }
-      else {
-        this.router.navigateByUrl('/giris');
-        return false;
-      }
-
+      this.router.navigateByUrl('/giris');
+      return false;
     }
   }
 }
