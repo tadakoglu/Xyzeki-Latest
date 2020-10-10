@@ -11,7 +11,7 @@ import { XyzekiAuthHelpersService } from 'src/app/model/auth-services/xyzeki-aut
 })
 export class NavProfileComponent implements OnInit {
 
-  constructor(private router: Router, public xyzekiAuthHelpersService: XyzekiAuthHelpersService) { }
+  constructor(public xyzekiAuthService: XyzekiAuthService, private router: Router, public xyzekiAuthHelpersService: XyzekiAuthHelpersService) { }
 
   ngOnInit() {
   }

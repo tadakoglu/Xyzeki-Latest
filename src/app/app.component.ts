@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, HostListener, ChangeDetectionStrategy, ChangeDetectorRef, Input } from '@angular/core';
-import { XyzekiAuthService } from  './model/auth-services/xyzeki-auth-service';
+import { XyzekiAuthService } from './model/auth-services/xyzeki-auth-service';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { CustomNgbDateParserFormatter } from 'src/infrastructure/custom-NgbDate-parser-formatter';
 import { MembersService } from './model/services/members.service';
@@ -28,15 +28,15 @@ export const customNgbPFProvider = () => { return new CustomNgbDateParserFormatt
 })
 
 export class AppComponent implements OnInit, AfterViewInit {
-  constructor(private auth:AuthService, public xyzekiAuthHelpersService: XyzekiAuthHelpersService, private router: Router, private switchHourDataService: SwitchHourDataService, public dataService: DataService) { // Initialize our member.
+  constructor(public xyzekiAuthService: XyzekiAuthService, public xyzekiAuthHelpersService: XyzekiAuthHelpersService, private router: Router, private switchHourDataService: SwitchHourDataService, public dataService: DataService) { // Initialize our member.
 
-
-   
     this.loading = true;
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
 
-    // this.xyzekiAuthHelpersService.AuthAutoIfPossible();
+    this.xyzekiAuthHelpersService.AuthAutoIfPossible(); // If a valid token found in local storage, load it and authenticate automatically.
+
+
     // let cryptoHelpers = new CryptoHelpers(); 
     // let cip = cryptoHelpers.encrypt('tayfuntest2343435353^++gg**')
     // console.log('şifrelendi : ' + cip)
@@ -110,7 +110,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     // if (this.isCustomerSubdomain()) {
     //   this.router.navigate(['/giris'])
     // }
-    
+
     this.router.events.subscribe((event) => {
       switch (true) {
         case event instanceof NavigationStart: {
@@ -122,11 +122,11 @@ export class AppComponent implements OnInit, AfterViewInit {
         case event instanceof NavigationCancel:
         case event instanceof NavigationError: {
           this.loading = false;
-          
+
           // setTimeout(() => {
           //   this.loading = false;
           //   this.cdr.detectChanges
-         
+
           // }, 200);
 
           break;

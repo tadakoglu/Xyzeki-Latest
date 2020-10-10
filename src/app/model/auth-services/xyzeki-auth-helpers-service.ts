@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
+import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { fromEvent, Subscription } from 'rxjs';
 import { filter, take, tap } from 'rxjs/operators';
+import { CryptoHelpers } from 'src/infrastructure/cryptoHelpers';
 import { ErrorCodes } from 'src/infrastructure/error-codes.enum';
+import { isNullOrUndefined } from 'util';
 import { Member } from '../member.model';
 import { ReturnModel } from '../return.model';
 import { AuthService } from '../services/auth.service';
@@ -14,32 +16,32 @@ import { Tuple } from '../tuple.model';
 import { XyzekiAuthService } from './xyzeki-auth-service';
 
 const jwtHelper = new JwtHelperService();
+const cryptoHelper = new CryptoHelpers();
 
 @Injectable()
 export class XyzekiAuthHelpersService {
     constructor(public authService: AuthService, public xyzekiAuthService: XyzekiAuthService, private dataService: DataService,
         private memberSettingService: MemberSettingService, private xyzekiSignalService: XyzekiSignalrService, private router: Router) {
-        this.AuthAutoIfPossible(); // If a valid token found in local storage, load it and authenticate automatically.
 
     }
 
     storageEventSubscription: Subscription
     SetupOtherBrowserWindowsOrTabsEventListener() {
-        this.storageEventSubscription = fromEvent(window, 'storage').pipe(
-            filter((event: any) => event.key == 'Xyzeki_JWTToken'),
-        ).subscribe(() => {
-            if (!document.hasFocus()) { //Only events from other tabs/windows(excluding this one)
-                if (!this.xyzekiAuthService.LoggedIn) { // If user logged out in other windows/tabs, also log out other open tabs/windows.
-                    this.DeAuth();
-                }
-                else {
-                    this.AuthMinimal();
-                    this.NavigateToHome();
-                }
-            }
+        // this.storageEventSubscription = fromEvent(window, 'storage').pipe(
+        //     filter((event: any) => event.key == 'Xyzeki_JWTToken'),
+        // ).subscribe(() => {
+        //     if (!document.hasFocus()) { //Only events from other tabs/windows(excluding this one)
+        //         if (!this.xyzekiAuthService.LoggedIn) { // If user logged out in other windows/tabs, also log out other open tabs/windows.
+        //             this.DeAuth();
+        //         }
+        //         else {
+        //             this.AuthMinimal();
+        //             this.NavigateToHome();
+        //         }
+        //     }
 
 
-        })
+        // })
 
     }
 
@@ -51,17 +53,16 @@ export class XyzekiAuthHelpersService {
     }
 
     SaveMember(member: Member) {
-        this.xyzekiAuthService.SetMember = member
+        this.xyzekiAuthService.SetMember(member);
     }
     SaveToken(token: string) {
-        this.xyzekiAuthService.SetToken = token;
+        this.xyzekiAuthService.SetToken(token);
     }
-
     RemoveMember() {
-        this.xyzekiAuthService.SetMember = undefined
+        this.xyzekiAuthService.removeMember();
     }
     RemoveToken() {
-        this.xyzekiAuthService.SetToken = undefined;
+        this.xyzekiAuthService.removeToken();
     }
     Auth(tokenAndMember: ReturnModel<Tuple<string, Member>>) {
         let member = tokenAndMember.Model.Item2;
@@ -75,7 +76,16 @@ export class XyzekiAuthHelpersService {
 
         this.StartRefreshTokenTimer();// only once
 
+
     }
+    AuthMinimal() {
+        this.LoadMemberSettings();
+        this.LoadAllRepositories();
+        this.StartSignalR(this.xyzekiAuthService.Token);
+        //this.StartRefreshTokenTimer();// starts only once
+
+    }
+
 
     DeAuth() {
         this.RemoveMember();
@@ -89,30 +99,44 @@ export class XyzekiAuthHelpersService {
     }
 
     AuthAutoIfPossible() {
-        let memberInStorage: Member = JSON.parse(localStorage.getItem("Xyzeki_Member")) as Member
-        let tokenInStorage = localStorage.getItem("Xyzeki_JWTToken");
+        try {
+            let member = localStorage.getItem("Xyzeki_Member")
+            let token = localStorage.getItem("Xyzeki_JWTToken")
 
-        if (memberInStorage && tokenInStorage && !jwtHelper.isTokenExpired(tokenInStorage)) {
-            this.SaveMember(memberInStorage);
-            this.SaveToken(tokenInStorage);
-            this.AuthMinimal()
-        }
-        else {
-            this.DeAuth();
+            console.log('**********************')
+            console.log(member)
+            console.log('**********************')
+            console.log(token)
+
+            member = cryptoHelper.decrypt(member)
+            token = cryptoHelper.decrypt(token)
+
+
+            console.log('**********************')
+            console.log(member)
+            console.log('**********************')
+            console.log(token)
+
+            if (token && !jwtHelper.isTokenExpired(token)) {
+                this.SaveMember(JSON.parse(member) as Member);
+                this.SaveToken(token)
+                this.AuthMinimal()
+
+            }
+
+
+        } catch (error) {
+            console.log('hata oluştu' + error)
         }
 
     }
 
-    AuthMinimal() {
-        this.LoadMemberSettings();
-        this.LoadAllRepositories();
-        this.StartSignalR(this.xyzekiAuthService.Token);
-    }
 
 
     private refreshTokenTimeout;
     private StartRefreshTokenTimer() {
         if (!this.xyzekiAuthService.LoggedIn) {
+            this.StopRefreshTokenTimer();
             return;
         }
         // parse json object from base64 encoded jwt token
@@ -131,7 +155,9 @@ export class XyzekiAuthHelpersService {
     }
     private StopRefreshTokenTimer() {
         clearTimeout(this.refreshTokenTimeout);
+        localStorage.remove('Xyzeki_Timer')
     }
+
 
     StartSignalR(token) {
         this.xyzekiSignalService.createHubConnection(token);
