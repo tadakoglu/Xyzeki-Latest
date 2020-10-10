@@ -10,6 +10,7 @@ import { isNullOrUndefined } from 'util';
 import { SwPush, ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './model/services/auth.service';
+import { CryptoHelpers } from 'src/infrastructure/cryptoHelpers';
 
 
 export const customNgbPFProvider = () => { return new CustomNgbDateParserFormatter(); };
@@ -33,7 +34,14 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.loading = true;
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
+
+
+    // let cryptoHelpers = new CryptoHelpers();
+    // console.log('şifrelendi' + cryptoHelpers.Encrypt("tayfun22933434934340403040343"))
+    // console.log('çözüldü' + cryptoHelpers.Decrypt('tayfun22933434934340403040343'))
   }
+
+
   title = 'Xyzeki İş Yönetimi Çözümleri';
   public innerWidth: any;
   public innerHeight: any;

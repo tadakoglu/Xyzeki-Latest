@@ -37,7 +37,6 @@ import { ContainerRepository } from './repository/container-repository';
 import { XyzekiDateTimeInfra } from 'src/infrastructure/xyzeki-datetime-infra';
 import { SwitchHourDataService } from './services/shared/switch-hour-data.service';
 import { PageSizes } from 'src/infrastructure/page-sizes';
-import { CryptoHelpersService } from './services/crypto-helpers.service';
 import { XyzekiSignalrService } from './signalr-services/xyzeki-signalr.service';
 import { NotificationService } from './notification-services/notification.service';
 import { TimeService } from './services/time.service';
@@ -69,7 +68,6 @@ import { AlreadyLoggedInGuardService } from './services/guards/already-logged-in
     DataService,
     SwitchHourDataService,
     PageSizes,
-    CryptoHelpersService,
     XyzekiSignalrService,
     NotificationService,
     TimeService,

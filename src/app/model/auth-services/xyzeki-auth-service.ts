@@ -18,7 +18,8 @@ const jwtHelper = new JwtHelperService();
 export class XyzekiAuthService {
     constructor(public authService: AuthService, private dataService: DataService,
         private memberSettingService: MemberSettingService, private xyzekiSignalService: XyzekiSignalrService, private router: Router) {
-    }
+            this.SetupOtherBrowserWindowsOrTabsEventListener();
+        }
 
     storageEventSubscription:Subscription
     SetupOtherBrowserWindowsOrTabsEventListener() {

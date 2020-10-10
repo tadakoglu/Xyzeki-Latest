@@ -10,7 +10,6 @@ import { ErrorCodes } from 'src/infrastructure/error-codes.enum';
 import { RegisterModel } from '../register.model';
 import { SecurityCodeModel } from '../security-code.model';
 import { GoogleReCaptcha_SecretKey } from 'src/infrastructure/google-captcha';
-import { CryptoHelpersService } from './crypto-helpers.service';
 import { BackEndWebServer } from 'src/infrastructure/back-end-server';
 import { Tuple } from '../tuple.model';
 
@@ -20,7 +19,7 @@ export class AuthService {
   baseURL: string;
   auth_token: string;
 
-  constructor(private http: HttpClient, private cryptoHelpers: CryptoHelpersService) {
+  constructor(private http: HttpClient) {
     this.baseURL = BackEndWebServer + '/'
   }
   getRecaptchaUserResponse(token: string): Observable<any> { //https://developers.google.com/recaptcha/docs/verify

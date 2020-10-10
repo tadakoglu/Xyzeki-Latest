@@ -9,7 +9,6 @@ import { switchMap, map } from 'rxjs/operators';
 import { RegisterModel } from '../register.model';
 import { ReturnModel } from '../return.model';
 import { ErrorCodes } from 'src/infrastructure/error-codes.enum';
-import { CryptoHelpersService } from './crypto-helpers.service';
 import { BackEndWebServer } from 'src/infrastructure/back-end-server';
 
 @Injectable()
