@@ -83,14 +83,21 @@ export class XyzekiAuthService {
         this.tokenCache = val;
     }
 
+    get DefaultToken():boolean{
+        return (this.defaultTokenCache && !jwtHelper.isTokenExpired(this.defaultTokenCache)) ? true: false
+    }
+    defaultTokenCache:string
+    set SetDefaultTokenCache(val){
+        this.defaultTokenCache = val
+    }
     SetMember(val) {
         this.SetMemberCache = val
         localStorage.setItem("Xyzeki_Member", cryptoHelper.encrypt(JSON.stringify(val))); // Persistance
     }
     SetToken(val) {
+        this.SetDefaultTokenCache = val;
         this.SetTokenCache = val // reset cache
         localStorage.setItem("Xyzeki_JWTToken", cryptoHelper.encrypt(val)); // Persistance
-
     }
 
     removeMember() {
@@ -98,6 +105,7 @@ export class XyzekiAuthService {
         localStorage.removeItem("Xyzeki_Member"); // Persistance
     }
     removeToken() {
+        this.SetDefaultTokenCache=undefined;
         this.tokenCache=undefined
         localStorage.removeItem("Xyzeki_JWTToken"); // Persistance
 

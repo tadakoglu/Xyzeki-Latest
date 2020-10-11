@@ -32,30 +32,17 @@ export class XyzekiAuthHelpersService {
         this.storageLoginEventSubscription = fromEvent(window, 'storage').pipe(
             filter((event: any) => event.key == 'Xyzeki_Auth_Event'),
         ).subscribe(() => {
-
-            if (document.hasFocus())
-                return;
-
-            if (!this.xyzekiAuthService.LoggedIn) {
-                return;
+            if (!this.xyzekiAuthService.DefaultToken) {
+                this.AuthMinimal();
+                this.NavigateToHome();
             }
-
-            console.log('Xyzeki_Auth_Event ateşlendi')
-            this.AuthMinimal();
-            this.NavigateToHome();
-
-
         })
+
         this.storageLogoutEventSubscription = fromEvent(window, 'storage').pipe(
             filter((event: any) => event.key == 'Xyzeki_DeAuth_Event'),
         ).subscribe(() => {
-            if (document.hasFocus())
-                return;
-
-            console.log('Xyzeki_DeAuth_Event ateşlendi')
-
-            this.DeAuth();
-
+            console.log('deauth ateşlendi')
+            this.DeAuth(false);
         })
 
     }
@@ -90,7 +77,7 @@ export class XyzekiAuthHelpersService {
         this.LoadAllRepositories(); // every time
         this.StartSignalR(token); // every time
 
-      
+
         this.StartRefreshTokenTimer();// only once
 
         // First auth event trigger for other tabs/pages       
@@ -98,96 +85,35 @@ export class XyzekiAuthHelpersService {
 
 
     }
-    SetUpRandomAuthEventForLocalStorage(type: 'Xyzeki_Auth_Event' | 'Xyzeki_DeAuth_Event') {
-        let randomId: number = this.RandomNumber()
-        let authEvent = localStorage.getItem(type)
-        if (isNullOrUndefined(authEvent)) {
-            localStorage.setItem(type, randomId.toString())
-        }
-        else {
-            while (authEvent == randomId.toString()) {
-                randomId = this.RandomNumber();
-            }
-            localStorage.setItem(type, randomId.toString())
-        }
-    }
-    RandomNumber(base = 10):number {
-        return Math.floor(Math.random() * base)
-    }
+
+
+    // tabID, isTimerOn
+    // tabId  isTimerOn
+
+    // #1 false
+    // #2 true
+
     AuthMinimal() {
         this.LoadMemberSettings();
         this.LoadAllRepositories();
         this.StartSignalR(this.xyzekiAuthService.Token);
-
-        //this.SaveAuthId();
-
-   
-
+        this.StartRefreshTokenTimer();
 
     }
-    
-    
-    IsAuthIdExists(): boolean {
-        let authIdsArr = localStorage.getItem('Xyzeki_Auth_Counter')
-        if (!isNullOrUndefined(authIdsArr) && authIdsArr.length > 0) {
-            return true;
-        }
-        else {
-            return false;
-        }
-
-    }
-    SaveAuthId() {
-        let authIdsArr = localStorage.getItem('Xyzeki_Auth_Counter')
-        if (isNullOrUndefined(authIdsArr)) {
-            let authIds = [];
-
-            let randomId: number = this.RandomNumber();
-            authIds.push(randomId);
-            localStorage.setItem('Xyzeki_Auth_Counter', JSON.stringify(authIds))
-            this.xyzekiAuthService.SetAuthId = randomId
-        }
-        else {
-            let authIds = JSON.parse(authIdsArr)
-
-            let randomId: number = this.RandomNumber();
-            while (authIds.findIndex(id => id == randomId) != -1) {
-                randomId = this.RandomNumber();
-            }
-            authIds.push(randomId);
-            localStorage.setItem('Xyzeki_Auth_Counter', JSON.stringify(authIds))
-            this.xyzekiAuthService.SetAuthId = randomId
 
 
-        }
 
-    }
-    ClearAuthId() {
-
-        let authIdsArr = localStorage.getItem('Xyzeki_Auth_Counter')
-        if (!isNullOrUndefined(authIdsArr)) {
-            let authIds = JSON.parse(authIdsArr)
-            let index = authIds.findIndex(id => id == this.xyzekiAuthService.AuthId)
-            if (index != -1) {
-                authIds.splice(index, 1)
-                localStorage.setItem('Xyzeki_Auth_Counter', JSON.stringify(authIds))
-                this.xyzekiAuthService.SetAuthId = undefined
-
-            }
-
-        }
-    }
-
-    DeAuth() {
+    DeAuth(val = true) {
         this.RemoveMember();
         this.RemoveToken();
         this.ClearMemberSettings();
         this.ClearAllRepositories();
         this.StopSignalR();
-      
+
         this.StopRefreshTokenTimer();
 
-        this.SetUpRandomAuthEventForLocalStorage('Xyzeki_DeAuth_Event');
+        if (val)
+            this.SetUpRandomAuthEventForLocalStorage('Xyzeki_DeAuth_Event');
 
 
         this.NavigateToLogin();
@@ -338,6 +264,95 @@ export class XyzekiAuthHelpersService {
     }
     NavigateToHome() {
         this.router.navigate(['/isler'])
+    }
+
+
+    SetUpRandomAuthEventForLocalStorage(type: 'Xyzeki_Auth_Event' | 'Xyzeki_DeAuth_Event') {
+        let authEvent = localStorage.getItem(type)
+        if (isNullOrUndefined(authEvent)) {
+            localStorage.setItem(type, '0')
+        }
+        else {
+            if (authEvent == '1') {
+                localStorage.setItem(type, '0')
+            }
+            else {
+                localStorage.setItem(type, '1')
+            }
+        }
+    }
+    RandomNumber(base = 10): number {
+        return Math.floor(Math.random() * base)
+    }
+
+    IsAuthIdExists(): boolean {
+        let authIdsArr = localStorage.getItem('Xyzeki_Auth_Counter')
+        if (!isNullOrUndefined(authIdsArr) && authIdsArr.length > 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+    SaveAuthId() {
+        let authIdsArr = localStorage.getItem('Xyzeki_Auth_Counter')
+        if (isNullOrUndefined(authIdsArr)) {
+            let authIds = [];
+
+            let randomId: number = this.RandomNumber();
+            authIds.push(randomId);
+            localStorage.setItem('Xyzeki_Auth_Counter', JSON.stringify(authIds))
+            this.xyzekiAuthService.SetAuthId = randomId
+        }
+        else {
+            let authIds = JSON.parse(authIdsArr)
+
+            let randomId: number = this.RandomNumber();
+            while (authIds.findIndex(id => id == randomId) != -1) {
+                randomId = this.RandomNumber();
+            }
+            authIds.push(randomId);
+            localStorage.setItem('Xyzeki_Auth_Counter', JSON.stringify(authIds))
+            this.xyzekiAuthService.SetAuthId = randomId
+
+
+        }
+
+    }
+    ClearAuthId() {
+
+        let authIdsArr = localStorage.getItem('Xyzeki_Auth_Counter')
+        if (!isNullOrUndefined(authIdsArr)) {
+            let authIds = JSON.parse(authIdsArr)
+            let index = authIds.findIndex(id => id == this.xyzekiAuthService.AuthId)
+            if (index != -1) {
+                authIds.splice(index, 1)
+                localStorage.setItem('Xyzeki_Auth_Counter', JSON.stringify(authIds))
+                this.xyzekiAuthService.SetAuthId = undefined
+
+            }
+
+        }
+    }
+
+    SetTimerToLocalStorage(val: 'OFF' | 'ON') {
+        localStorage.setItem('Xyzeki_Timer', val)
+    }
+    IsTimerOn(): boolean {
+        let val = localStorage.getItem('Xyzeki_Timer')
+        if (isNullOrUndefined(val)) {
+            return false;
+        }
+        else {
+            if (val == 'ON') {
+                return true
+            }
+            else {
+                return false
+            }
+        }
+
     }
 }
 
