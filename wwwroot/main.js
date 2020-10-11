@@ -358,7 +358,7 @@ module.exports = "\n.switchHourArea {\n    z-index: 999; \n    position: absolut
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--<app-login></app-login>\r\n<app-register></app-register>\r\n<app-teams></app-teams>\r\n<app-projects></app-projects>\r\n<p> Hello, this is AppComponent</p>-->\r\n\r\n\r\n<!-- <h1>\r\n  Welcome to {{ title }}! Service worker is <u *ngIf=\"!swPush.isEnabled\">not</u> enabled.\r\n</h1>\r\nWelcome to {{title}}! to Bienvenue à {{title}}!. -->\r\n\r\n<div [hidden]=\"!secondsLeft\" class=\"centered pt-1 pb-1 pl-3 pr-3 sticky-top \"\r\n  style=\"border-radius: 3px; position: absolute; opacity: 1; z-index: 10000; border-bottom: 1px solid rgb(229, 233, 236); background-color: rgba(238, 237, 237, 0.959);\">\r\n  <img src=\"../assets/logo.svg\">\r\n  <span class=\"ml-1\" style=\"font-size:15px\">Hay aksi... <b>Bağlı değilsiniz.</b> {{secondsLeft}} sn içinde\r\n    bağlanıyor…</span>\r\n  <!-- <a (click)=\"startConnectionNow()\" style=\"cursor:pointer\"\r\n    class=\"btn btn-light btn-sm border-0 ml-1 mr-2 rounded-pill\"><span class=\"specialUnderlined\">Şimdi dene</span></a> -->\r\n\r\n  <button (click)=\"startConnectionNow()\" class=\"btn btn-light btn-sm border-0 ml-1 mr-2 rounded-pill\">\r\n    <span class=\"specialUnderlined\">Şimdi dene</span>\r\n  </button>\r\n</div>\r\n\r\n\r\n\r\n\r\n<div [hidden]=\"!loading\" style=\" position: absolute;  top: 25%; padding-left: 35%; padding-right:35%;  z-index: 10000;\">\r\n  <img src=\"../assets/rolling.png\" style=\"opacity: 0.9\">\r\n  <img src=\"../assets/logo.svg\" style=\"height: 3rem; width: auto\">\r\n</div>\r\n\r\n<div class=\"container\" cdkDropListGroup>\r\n  <div class=\"row justify-content-center\">\r\n    <!-- col-xl-11 col-lg-12 col-md-12 col-sm-12 col-12 -->\r\n    <div class=\"col-xl-12 col-lg-11 col-md-12 col-sm-12 col-12\">\r\n      <!-- >1200PX(xl), >992PX(lg), >768PX(md), >576PX(sm) >-->\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n\r\n    <div #switchHourArea *ngIf=\"this.innerWidth > 500 && this?.xyzekiAuthService?.LoggedIn\"\r\n      [hidden]=\"!switchHourStyle.isOpen\" class=\"switchHourArea\"\r\n      [ngStyle]=\"{'left': switchHourStyle?.Left, 'top': switchHourStyle?.Top, 'visibility': switchHourStyle?.Visibility}\">\r\n      <app-switch-hour></app-switch-hour>\r\n    </div>\r\n\r\n\r\n\r\n  </div>\r\n</div>"
+module.exports = "<!--<app-login></app-login>\r\n<app-register></app-register>\r\n<app-teams></app-teams>\r\n<app-projects></app-projects>\r\n<p> Hello, this is AppComponent</p>-->\r\n\r\n\r\n<!-- <h1>\r\n  Welcome to {{ title }}! Service worker is <u *ngIf=\"!swPush.isEnabled\">not</u> enabled.\r\n</h1>\r\nWelcome to {{title}}! to Bienvenue à {{title}}!. -->\r\n\r\n<div [hidden]=\"!secondsLeft\" class=\"centered pt-1 pb-1 pl-3 pr-3 sticky-top \"\r\n  style=\"border-radius: 3px; position: absolute; opacity: 1; z-index: 10000; border-bottom: 1px solid rgb(229, 233, 236); background-color: rgba(238, 237, 237, 0.959);\">\r\n  <img src=\"../assets/logo.svg\">\r\n  <span class=\"ml-1\" style=\"font-size:15px\">Hay aksi... <b>Bağlı değilsiniz.</b> {{secondsLeft}} sn içinde\r\n    bağlanıyor…</span>\r\n  <!-- <a (click)=\"startConnectionNow()\" style=\"cursor:pointer\"\r\n    class=\"btn btn-light btn-sm border-0 ml-1 mr-2 rounded-pill\"><span class=\"specialUnderlined\">Şimdi dene</span></a> -->\r\n\r\n  <button (click)=\"startConnectionNow()\" class=\"btn btn-light btn-sm border-0 ml-1 mr-2 rounded-pill\">\r\n    <span class=\"specialUnderlined\">Şimdi dene</span>\r\n  </button>\r\n</div>\r\n\r\n\r\n\r\n\r\n<div [hidden]=\"!loading\" style=\" position: absolute;  top: 25%; padding-left: 35%; padding-right:35%;  z-index: 10000;\">\r\n  <img src=\"../assets/rolling.png\" style=\"opacity: 0.9\">\r\n  <img src=\"../assets/logo.svg\" style=\"height: 3rem; width: auto\">\r\n</div>\r\n\r\n<div class=\"container\" cdkDropListGroup>\r\n  <div class=\"row justify-content-center\">\r\n    <!-- col-xl-11 col-lg-12 col-md-12 col-sm-12 col-12 -->\r\n    <div class=\"col-xl-12 col-lg-11 col-md-12 col-sm-12 col-12\">\r\n      <!-- >1200PX(xl), >992PX(lg), >768PX(md), >576PX(sm) >-->\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n\r\n    <div #switchHourArea *ngIf=\"this.xyzekiAuthService?.LoggedIn\"\r\n      [hidden]=\"!switchHourStyle.isOpen\" class=\"switchHourArea\"\r\n      [ngStyle]=\"{'left': switchHourStyle?.Left, 'top': switchHourStyle?.Top, 'visibility': switchHourStyle?.Visibility}\">\r\n      <app-switch-hour></app-switch-hour>\r\n    </div>\r\n\r\n\r\n\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -375,14 +375,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
-/* harmony import */ var src_infrastructure_custom_NgbDate_parser_formatter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/custom-NgbDate-parser-formatter */ "./src/infrastructure/custom-NgbDate-parser-formatter.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _model_services_shared_switch_hour_data_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./model/services/shared/switch-hour-data.service */ "./src/app/model/services/shared/switch-hour-data.service.ts");
-/* harmony import */ var _model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
-/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! util */ "./node_modules/util/util.js");
-/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _model_services_auth_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./model/services/auth.service */ "./src/app/model/services/auth.service.ts");
+/* harmony import */ var _model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
+/* harmony import */ var src_infrastructure_custom_NgbDate_parser_formatter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/infrastructure/custom-NgbDate-parser-formatter */ "./src/infrastructure/custom-NgbDate-parser-formatter.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _model_services_shared_switch_hour_data_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./model/services/shared/switch-hour-data.service */ "./src/app/model/services/shared/switch-hour-data.service.ts");
+/* harmony import */ var _model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./model/services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! util */ "./node_modules/util/util.js");
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _model_auth_services_xyzeki_auth_helpers_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./model/auth-services/xyzeki-auth-helpers-service */ "./src/app/model/auth-services/xyzeki-auth-helpers-service.ts");
 
 
@@ -394,10 +394,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var customNgbPFProvider = function () { return new src_infrastructure_custom_NgbDate_parser_formatter__WEBPACK_IMPORTED_MODULE_3__["CustomNgbDateParserFormatter"](); };
+var customNgbPFProvider = function () { return new src_infrastructure_custom_NgbDate_parser_formatter__WEBPACK_IMPORTED_MODULE_4__["CustomNgbDateParserFormatter"](); };
 var AppComponent = /** @class */ (function () {
-    function AppComponent(auth, xyzekiAuthHelpersService, router, switchHourDataService, dataService) {
-        this.auth = auth;
+    function AppComponent(xyzekiAuthService, xyzekiAuthHelpersService, router, switchHourDataService, dataService) {
+        this.xyzekiAuthService = xyzekiAuthService;
         this.xyzekiAuthHelpersService = xyzekiAuthHelpersService;
         this.router = router;
         this.switchHourDataService = switchHourDataService;
@@ -408,7 +408,7 @@ var AppComponent = /** @class */ (function () {
         this.loading = true;
         this.innerWidth = window.innerWidth;
         this.innerHeight = window.innerHeight;
-        // this.xyzekiAuthHelpersService.AuthAutoIfPossible();
+        this.xyzekiAuthHelpersService.AuthAutoIfPossible(); // If a valid token found in local storage, load it and authenticate automatically.
         // let cryptoHelpers = new CryptoHelpers(); 
         // let cip = cryptoHelpers.encrypt('tayfuntest2343435353^++gg**')
         // console.log('şifrelendi : ' + cip)
@@ -446,7 +446,7 @@ var AppComponent = /** @class */ (function () {
         this.dataService.signalConnectionSeconds.subscribe(function (seconds) {
             _this.secondsLeft = seconds;
             clearInterval(_this.intervalId); // Always restart
-            if (Object(util__WEBPACK_IMPORTED_MODULE_7__["isNullOrUndefined"])(seconds)) {
+            if (Object(util__WEBPACK_IMPORTED_MODULE_8__["isNullOrUndefined"])(seconds)) {
                 return;
             }
             _this.intervalId = setInterval(function () {
@@ -466,13 +466,13 @@ var AppComponent = /** @class */ (function () {
         var _this = this;
         this.router.events.subscribe(function (event) {
             switch (true) {
-                case event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_4__["NavigationStart"]: {
+                case event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_5__["NavigationStart"]: {
                     _this.loading = true;
                     break;
                 }
-                case event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_4__["NavigationEnd"]:
-                case event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_4__["NavigationCancel"]:
-                case event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_4__["NavigationError"]: {
+                case event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_5__["NavigationEnd"]:
+                case event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_5__["NavigationCancel"]:
+                case event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_5__["NavigationError"]: {
                     _this.loading = false;
                     // setTimeout(() => {
                     //   this.loading = false;
@@ -503,12 +503,12 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             providers: [{
-                    provide: _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbDateParserFormatter"],
+                    provide: _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbDateParserFormatter"],
                     useFactory: customNgbPFProvider
                 }],
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_model_services_auth_service__WEBPACK_IMPORTED_MODULE_8__["AuthService"], _model_auth_services_xyzeki_auth_helpers_service__WEBPACK_IMPORTED_MODULE_9__["XyzekiAuthHelpersService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _model_services_shared_switch_hour_data_service__WEBPACK_IMPORTED_MODULE_5__["SwitchHourDataService"], _model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiAuthService"], _model_auth_services_xyzeki_auth_helpers_service__WEBPACK_IMPORTED_MODULE_9__["XyzekiAuthHelpersService"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"], _model_services_shared_switch_hour_data_service__WEBPACK_IMPORTED_MODULE_6__["SwitchHourDataService"], _model_services_shared_data_service__WEBPACK_IMPORTED_MODULE_7__["DataService"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -4727,11 +4727,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @auth0/angular-jwt */ "./node_modules/@auth0/angular-jwt/index.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/auth.service */ "./src/app/model/services/auth.service.ts");
-/* harmony import */ var _services_member_setting_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../services/member-setting.service */ "./src/app/model/services/member-setting.service.ts");
-/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
-/* harmony import */ var _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
-/* harmony import */ var _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var src_infrastructure_cryptoHelpers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/infrastructure/cryptoHelpers */ "./src/infrastructure/cryptoHelpers.ts");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../services/auth.service */ "./src/app/model/services/auth.service.ts");
+/* harmony import */ var _services_member_setting_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../services/member-setting.service */ "./src/app/model/services/member-setting.service.ts");
+/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
+/* harmony import */ var _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+
 
 
 
@@ -4744,6 +4746,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var jwtHelper = new _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_3__["JwtHelperService"]();
+var cryptoHelper = new src_infrastructure_cryptoHelpers__WEBPACK_IMPORTED_MODULE_6__["CryptoHelpers"]();
 var XyzekiAuthHelpersService = /** @class */ (function () {
     function XyzekiAuthHelpersService(authService, xyzekiAuthService, dataService, memberSettingService, xyzekiSignalService, router) {
         this.authService = authService;
@@ -4752,19 +4755,19 @@ var XyzekiAuthHelpersService = /** @class */ (function () {
         this.memberSettingService = memberSettingService;
         this.xyzekiSignalService = xyzekiSignalService;
         this.router = router;
-        this.AuthAutoIfPossible(); // If a valid token found in local storage, load it and authenticate automatically.
+        this.SetupOtherBrowserWindowsOrTabsEventListener();
     }
     XyzekiAuthHelpersService.prototype.SetupOtherBrowserWindowsOrTabsEventListener = function () {
         var _this = this;
-        this.storageEventSubscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["fromEvent"])(window, 'storage').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["filter"])(function (event) { return event.key == 'Xyzeki_JWTToken'; })).subscribe(function () {
-            if (!document.hasFocus()) { //Only events from other tabs/windows(excluding this one)
-                if (!_this.xyzekiAuthService.LoggedIn) { // If user logged out in other windows/tabs, also log out other open tabs/windows.
-                    _this.DeAuth();
-                }
-                else {
-                    _this.AuthMinimal();
-                    _this.NavigateToHome();
-                }
+        this.storageLoginEventSubscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["fromEvent"])(window, 'storage').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["filter"])(function (event) { return event.key == 'Xyzeki_Auth_Event'; })).subscribe(function () {
+            if (!document.hasFocus()) {
+                _this.AuthMinimal();
+                _this.NavigateToHome();
+            }
+        });
+        this.storageLogoutEventSubscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["fromEvent"])(window, 'storage').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["filter"])(function (event) { return event.key == 'Xyzeki_DeAuth_Event'; })).subscribe(function () {
+            if (!document.hasFocus()) {
+                _this.DeAuth();
             }
         });
     };
@@ -4781,10 +4784,10 @@ var XyzekiAuthHelpersService = /** @class */ (function () {
         this.xyzekiAuthService.SetToken(token);
     };
     XyzekiAuthHelpersService.prototype.RemoveMember = function () {
-        this.xyzekiAuthService.SetMember(undefined);
+        this.xyzekiAuthService.removeMember();
     };
     XyzekiAuthHelpersService.prototype.RemoveToken = function () {
-        this.xyzekiAuthService.SetToken(undefined);
+        this.xyzekiAuthService.removeToken();
     };
     XyzekiAuthHelpersService.prototype.Auth = function (tokenAndMember) {
         var member = tokenAndMember.Model.Item2;
@@ -4795,6 +4798,14 @@ var XyzekiAuthHelpersService = /** @class */ (function () {
         this.LoadAllRepositories(); // every time
         this.StartSignalR(token); // every time
         this.StartRefreshTokenTimer(); // only once
+        // First auth event trigger for other tabs/pages
+        localStorage.setItem('Xyzeki_Auth_Event', 'A');
+    };
+    XyzekiAuthHelpersService.prototype.AuthMinimal = function () {
+        this.LoadMemberSettings();
+        this.LoadAllRepositories();
+        this.StartSignalR(this.xyzekiAuthService.Token);
+        //this.StartRefreshTokenTimer();// starts only once
     };
     XyzekiAuthHelpersService.prototype.DeAuth = function () {
         this.RemoveMember();
@@ -4804,27 +4815,17 @@ var XyzekiAuthHelpersService = /** @class */ (function () {
         this.StopSignalR();
         this.StopRefreshTokenTimer();
         this.NavigateToLogin();
+        localStorage.setItem('Xyzeki_DeAuth_Event', 'A');
     };
     XyzekiAuthHelpersService.prototype.AuthAutoIfPossible = function () {
-        var memberInStorage = JSON.parse(localStorage.getItem("Xyzeki_Member"));
-        var tokenInStorage = localStorage.getItem("Xyzeki_JWTToken");
-        if (memberInStorage && tokenInStorage && !jwtHelper.isTokenExpired(tokenInStorage)) {
-            this.SaveMember(memberInStorage);
-            this.SaveToken(tokenInStorage);
+        if (this.xyzekiAuthService.LoggedIn) {
             this.AuthMinimal();
         }
-        else {
-            this.DeAuth();
-        }
-    };
-    XyzekiAuthHelpersService.prototype.AuthMinimal = function () {
-        this.LoadMemberSettings();
-        this.LoadAllRepositories();
-        this.StartSignalR(this.xyzekiAuthService.Token);
     };
     XyzekiAuthHelpersService.prototype.StartRefreshTokenTimer = function () {
         var _this = this;
         if (!this.xyzekiAuthService.LoggedIn) {
+            this.StopRefreshTokenTimer();
             return;
         }
         // parse json object from base64 encoded jwt token
@@ -4835,7 +4836,9 @@ var XyzekiAuthHelpersService = /** @class */ (function () {
         var timeout = expires.getTime() - Date.now() - (60 * 1000);
         console.log('timeout' + timeout);
         this.refreshTokenTimeout = setTimeout(function () { return _this.authService.refreshToken().subscribe(function (newToken) {
-            _this.SaveToken(newToken);
+            if (_this.xyzekiAuthService.LoggedIn) {
+                _this.SaveToken(newToken);
+            }
             _this.StartRefreshTokenTimer();
             console.log('timeout' + timeout);
         }); }, timeout);
@@ -4954,8 +4957,8 @@ var XyzekiAuthHelpersService = /** @class */ (function () {
     };
     XyzekiAuthHelpersService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_6__["AuthService"], _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_10__["XyzekiAuthService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_8__["DataService"],
-            _services_member_setting_service__WEBPACK_IMPORTED_MODULE_7__["MemberSettingService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_9__["XyzekiSignalrService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_7__["AuthService"], _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_11__["XyzekiAuthService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_9__["DataService"],
+            _services_member_setting_service__WEBPACK_IMPORTED_MODULE_8__["MemberSettingService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_10__["XyzekiSignalrService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], XyzekiAuthHelpersService);
     return XyzekiAuthHelpersService;
 }());
@@ -5000,62 +5003,122 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @auth0/angular-jwt */ "./node_modules/@auth0/angular-jwt/index.js");
+/* harmony import */ var src_infrastructure_cryptoHelpers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/cryptoHelpers */ "./src/infrastructure/cryptoHelpers.ts");
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! util */ "./node_modules/util/util.js");
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_4__);
+
+
 
 
 
 var jwtHelper = new _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_2__["JwtHelperService"]();
+var cryptoHelper = new src_infrastructure_cryptoHelpers__WEBPACK_IMPORTED_MODULE_3__["CryptoHelpers"]();
 var XyzekiAuthService = /** @class */ (function () {
     function XyzekiAuthService() {
     }
     Object.defineProperty(XyzekiAuthService.prototype, "Member", {
         get: function () {
-            return this.member;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(XyzekiAuthService.prototype, "SetMember", {
-        set: function (val) {
-            this.member = val;
+            if (this.memberCache) {
+                return this.memberCache;
+            }
+            var memberA = localStorage.getItem("Xyzeki_Member");
+            if (Object(util__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(memberA)) {
+                return undefined;
+            }
+            var memberAA = cryptoHelper.decrypt(memberA);
+            var memberAAA = JSON.parse(memberAA);
+            this.memberCache = memberAAA;
+            return memberAAA;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(XyzekiAuthService.prototype, "Token", {
         get: function () {
-            return this.token;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(XyzekiAuthService.prototype, "SetToken", {
-        set: function (val) {
-            this.token = val;
+            if (this.tokenCache) {
+                return this.tokenCache;
+            }
+            var tokenA = localStorage.getItem("Xyzeki_JWTToken");
+            if (Object(util__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(tokenA)) {
+                return undefined;
+            }
+            var tokenAA = cryptoHelper.decrypt(tokenA);
+            this.tokenCache = tokenAA;
+            return tokenAA;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(XyzekiAuthService.prototype, "IsTokenExpired", {
         get: function () {
-            return jwtHelper.isTokenExpired(this.token);
+            if (!Object(util__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(this.Token)) {
+                return jwtHelper.isTokenExpired(this.Token);
+            }
+            else {
+                return false;
+            }
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(XyzekiAuthService.prototype, "Username", {
         get: function () {
-            return this.member ? this.member.Username : undefined;
+            var memberA = this.Member;
+            if (!Object(util__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(memberA)) {
+                return memberA.Username;
+            }
+            else {
+                return undefined;
+            }
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(XyzekiAuthService.prototype, "LoggedIn", {
         get: function () {
-            return (this.token && !jwtHelper.isTokenExpired(this.token)) ? true : false;
+            return (this.Token && !jwtHelper.isTokenExpired(this.Token)) ? true : false;
         },
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(XyzekiAuthService.prototype, "SetMemberCache", {
+        set: function (val) {
+            this.memberCache = val;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(XyzekiAuthService.prototype, "SetTokenCache", {
+        set: function (val) {
+            this.tokenCache = val;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    XyzekiAuthService.prototype.SetMember = function (val) {
+        this.SetMemberCache = val;
+        localStorage.setItem("Xyzeki_Member", cryptoHelper.encrypt(JSON.stringify(val))); // Persistance
+    };
+    XyzekiAuthService.prototype.SetToken = function (val) {
+        this.SetTokenCache = val; // reset cache
+        localStorage.setItem("Xyzeki_JWTToken", cryptoHelper.encrypt(val)); // Persistance
+    };
+    XyzekiAuthService.prototype.removeMember = function () {
+        this.memberCache = undefined;
+        localStorage.removeItem("Xyzeki_Member"); // Persistance
+    };
+    XyzekiAuthService.prototype.removeToken = function () {
+        this.tokenCache = undefined;
+        localStorage.removeItem("Xyzeki_JWTToken"); // Persistance
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
+    ], XyzekiAuthService.prototype, "memberCache", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
+    ], XyzekiAuthService.prototype, "tokenCache", void 0);
     XyzekiAuthService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
@@ -9829,15 +9892,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var _auth_services_xyzeki_auth_helpers_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../auth-services/xyzeki-auth-helpers-service */ "./src/app/model/auth-services/xyzeki-auth-helpers-service.ts");
+/* harmony import */ var _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+
 
 
 
 
 var AuthGuardService = /** @class */ (function () {
-    function AuthGuardService(router, xyzekiAuthService) {
+    function AuthGuardService(router, xyzekiAuthService, xyzekiAuthHelpersService) {
         this.router = router;
         this.xyzekiAuthService = xyzekiAuthService;
+        this.xyzekiAuthHelpersService = xyzekiAuthHelpersService;
     }
     AuthGuardService.prototype.canActivate = function (route, state) {
         if (this.xyzekiAuthService.LoggedIn) {
@@ -9850,7 +9916,7 @@ var AuthGuardService = /** @class */ (function () {
     };
     AuthGuardService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_4__["XyzekiAuthService"], _auth_services_xyzeki_auth_helpers_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthHelpersService"]])
     ], AuthGuardService);
     return AuthGuardService;
 }());
@@ -11729,14 +11795,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NavProfileComponent", function() { return NavProfileComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var src_app_model_auth_services_xyzeki_auth_helpers_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-helpers-service */ "./src/app/model/auth-services/xyzeki-auth-helpers-service.ts");
+/* harmony import */ var src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_app_model_auth_services_xyzeki_auth_helpers_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/auth-services/xyzeki-auth-helpers-service */ "./src/app/model/auth-services/xyzeki-auth-helpers-service.ts");
+
 
 
 
 
 var NavProfileComponent = /** @class */ (function () {
-    function NavProfileComponent(router, xyzekiAuthHelpersService) {
+    function NavProfileComponent(xyzekiAuthService, router, xyzekiAuthHelpersService) {
+        this.xyzekiAuthService = xyzekiAuthService;
         this.router = router;
         this.xyzekiAuthHelpersService = xyzekiAuthHelpersService;
         this.isLocked = false;
@@ -11758,7 +11827,7 @@ var NavProfileComponent = /** @class */ (function () {
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].Default,
             styles: [__webpack_require__(/*! ./nav-profile.component.css */ "./src/app/navbar/nav-profile/nav-profile.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], src_app_model_auth_services_xyzeki_auth_helpers_service__WEBPACK_IMPORTED_MODULE_3__["XyzekiAuthHelpersService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_model_auth_services_xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_2__["XyzekiAuthService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], src_app_model_auth_services_xyzeki_auth_helpers_service__WEBPACK_IMPORTED_MODULE_4__["XyzekiAuthHelpersService"]])
     ], NavProfileComponent);
     return NavProfileComponent;
 }());
@@ -16851,6 +16920,35 @@ var BackEndWebServer = "http://localhost:5000";
 
 /***/ }),
 
+/***/ "./src/infrastructure/cryptoHelpers.ts":
+/*!*********************************************!*\
+  !*** ./src/infrastructure/cryptoHelpers.ts ***!
+  \*********************************************/
+/*! exports provided: CryptoHelpers */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CryptoHelpers", function() { return CryptoHelpers; });
+var CryptoTS = __webpack_require__(/*! crypto-ts */ "./node_modules/crypto-ts/esm5/crypto-ts.js");
+var CryptoHelpers = /** @class */ (function () {
+    function CryptoHelpers() {
+        this.jf9p3hg4n9 = 'J*+FAL!';
+    }
+    CryptoHelpers.prototype.encrypt = function (textToEn) {
+        return CryptoTS.AES.encrypt(textToEn, this.jf9p3hg4n9);
+    };
+    CryptoHelpers.prototype.decrypt = function (textToDe) {
+        var bytes = CryptoTS.AES.decrypt(textToDe.toString(), this.jf9p3hg4n9);
+        return bytes.toString(CryptoTS.enc.Utf8);
+    };
+    return CryptoHelpers;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/infrastructure/custom-NgbDate-parser-formatter.ts":
 /*!***************************************************************!*\
   !*** ./src/infrastructure/custom-NgbDate-parser-formatter.ts ***!
@@ -17434,11 +17532,11 @@ var SortByDateTimePipe = /** @class */ (function () {
     SortByDateTimePipe.prototype.transform = function (value, propertyName, sortType) {
         if (sortType === void 0) { sortType = "asc"; }
         var sortedValues;
-        // if (value == null)
-        //   return;
-        // if (value.Length == 1) {
-        //   return;
-        // }
+        if (value == null)
+            return;
+        if (value.Length == 1) {
+            return;
+        }
         if (sortType == "asc") {
             var sortFuncAsc = function (a, b) { return new Date(a[propertyName]).getTime() - new Date(b[propertyName]).getTime(); };
             sortedValues = value.sort(sortFuncAsc);

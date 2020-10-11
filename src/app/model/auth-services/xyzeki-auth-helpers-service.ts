@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { fromEvent, Subscription } from 'rxjs';
-import { filter, take, tap } from 'rxjs/operators';
+import { filter, first, take, tap } from 'rxjs/operators';
 import { CryptoHelpers } from 'src/infrastructure/cryptoHelpers';
 import { ErrorCodes } from 'src/infrastructure/error-codes.enum';
 import { isNullOrUndefined } from 'util';
@@ -26,24 +26,33 @@ export class XyzekiAuthHelpersService {
         this.SetupOtherBrowserWindowsOrTabsEventListener();
     }
 
-    storageEventSubscription: Subscription
+    storageLoginEventSubscription: Subscription
+    storageLogoutEventSubscription: Subscription
     SetupOtherBrowserWindowsOrTabsEventListener() {
-        this.storageEventSubscription = fromEvent(window, 'storage').pipe(
-            filter((event: any) => event.key == 'Xyzeki_JWTToken'),
+        this.storageLoginEventSubscription = fromEvent(window, 'storage').pipe(
+            filter((event: any) => event.key == 'Xyzeki_Auth_Event'),
         ).subscribe(() => {
-            if (!document.hasFocus()) { //Only events from other tabs/windows(excluding this one)
-                if (!this.xyzekiAuthService.LoggedIn) { // If user logged out in other windows/tabs, also log out other open tabs/windows.
-                    this.DeAuth();
-                }
-                else {
-                    this.AuthMinimal();
-                    this.NavigateToHome();
-                }
-            }
 
+            if(document.hasFocus())
+            return;
+
+            console.log('Xyzeki_Auth_Event ateşlendi')
+            this.AuthMinimal();
+            this.NavigateToHome();
 
         })
+        this.storageLogoutEventSubscription = fromEvent(window, 'storage').pipe(
+            filter((event: any) => event.key == 'Xyzeki_DeAuth_Event'),
+        ).subscribe(() => {
+            if(document.hasFocus())
+            return;
 
+            console.log('Xyzeki_DeAuth_Event ateşlendi')
+
+            this.DeAuth();
+
+        })
+        
     }
 
     LoadAllRepositories() {
@@ -66,6 +75,7 @@ export class XyzekiAuthHelpersService {
         this.xyzekiAuthService.removeToken();
     }
     Auth(tokenAndMember: ReturnModel<Tuple<string, Member>>) {
+
         let member = tokenAndMember.Model.Item2;
         let token = tokenAndMember.Model.Item1;
         this.SaveMember(member); // only once
@@ -76,6 +86,10 @@ export class XyzekiAuthHelpersService {
         this.StartSignalR(token); // every time
 
         this.StartRefreshTokenTimer();// only once
+
+        // First auth event trigger for other tabs/pages
+        let r = Math.random().toString()
+        localStorage.setItem('Xyzeki_Auth_Event', r )
 
 
     }
@@ -95,13 +109,17 @@ export class XyzekiAuthHelpersService {
         this.ClearAllRepositories();
         this.StopSignalR();
         this.StopRefreshTokenTimer();
+        let r = Math.random().toString()
+        localStorage.setItem('Xyzeki_DeAuth_Event', r)
         this.NavigateToLogin();
+
 
     }
 
     AuthAutoIfPossible() {
         if (this.xyzekiAuthService.LoggedIn) {
             this.AuthMinimal()
+
         }
     }
 
@@ -121,7 +139,10 @@ export class XyzekiAuthHelpersService {
         const timeout = expires.getTime() - Date.now() - (60 * 1000);
         console.log('timeout' + timeout)
         this.refreshTokenTimeout = setTimeout(() => this.authService.refreshToken().subscribe((newToken) => {
-            this.SaveToken(newToken);
+            if (this.xyzekiAuthService.LoggedIn) {
+                this.SaveToken(newToken);
+            }
+
             this.StartRefreshTokenTimer();
             console.log('timeout' + timeout)
 
@@ -129,7 +150,6 @@ export class XyzekiAuthHelpersService {
     }
     private StopRefreshTokenTimer() {
         clearTimeout(this.refreshTokenTimeout);
-        localStorage.remove('Xyzeki_Timer')
     }
 
 

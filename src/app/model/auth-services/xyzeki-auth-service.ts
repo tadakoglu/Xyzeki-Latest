@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CryptoHelpers } from 'src/infrastructure/cryptoHelpers';
 import { isNullOrUndefined } from 'util';
@@ -14,22 +14,34 @@ export class XyzekiAuthService {
 
 
 
-
+    @Input()
+    memberCache
     get Member(): Member {
+        if (this.memberCache) {
+            return this.memberCache
+        }
         let memberA = localStorage.getItem("Xyzeki_Member")
         if (isNullOrUndefined(memberA)) {
             return undefined;
         }
         let memberAA = cryptoHelper.decrypt(memberA)
         let memberAAA = JSON.parse(memberAA);
+        this.memberCache = memberAAA;
+
         return memberAAA as Member
     }
+    @Input()
+    tokenCache
     get Token(): string {
+        if (this.tokenCache) {
+            return this.tokenCache
+        }
         let tokenA = localStorage.getItem("Xyzeki_JWTToken")
         if (isNullOrUndefined(tokenA)) {
             return undefined
         }
         let tokenAA = cryptoHelper.decrypt(tokenA)
+        this.tokenCache = tokenAA;
         return tokenAA;
     }
 
@@ -43,10 +55,10 @@ export class XyzekiAuthService {
     }
     get Username(): string {
         let memberA = this.Member;
-        if(!isNullOrUndefined(memberA)){
+        if (!isNullOrUndefined(memberA)) {
             return memberA.Username
         }
-        else{
+        else {
             return undefined
         }
     }
@@ -54,19 +66,29 @@ export class XyzekiAuthService {
         return (this.Token && !jwtHelper.isTokenExpired(this.Token)) ? true : false
     }
 
+    set SetMemberCache(val) {
+        this.memberCache = val;
+    }
+    set SetTokenCache(val) {
+        this.tokenCache = val;
+    }
 
     SetMember(val) {
+        this.SetMemberCache = val
         localStorage.setItem("Xyzeki_Member", cryptoHelper.encrypt(JSON.stringify(val))); // Persistance
     }
     SetToken(val) {
+        this.SetTokenCache = val // reset cache
         localStorage.setItem("Xyzeki_JWTToken", cryptoHelper.encrypt(val)); // Persistance
 
     }
 
     removeMember() {
+        this.memberCache=undefined
         localStorage.removeItem("Xyzeki_Member"); // Persistance
     }
     removeToken() {
+        this.tokenCache=undefined
         localStorage.removeItem("Xyzeki_JWTToken"); // Persistance
 
     }
