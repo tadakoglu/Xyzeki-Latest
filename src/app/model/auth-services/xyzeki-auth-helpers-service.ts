@@ -33,26 +33,31 @@ export class XyzekiAuthHelpersService {
             filter((event: any) => event.key == 'Xyzeki_Auth_Event'),
         ).subscribe(() => {
 
-            if(document.hasFocus())
-            return;
+            if (document.hasFocus())
+                return;
+
+            if (!this.xyzekiAuthService.LoggedIn) {
+                return;
+            }
 
             console.log('Xyzeki_Auth_Event ateşlendi')
             this.AuthMinimal();
             this.NavigateToHome();
 
+
         })
         this.storageLogoutEventSubscription = fromEvent(window, 'storage').pipe(
             filter((event: any) => event.key == 'Xyzeki_DeAuth_Event'),
         ).subscribe(() => {
-            if(document.hasFocus())
-            return;
+            if (document.hasFocus())
+                return;
 
             console.log('Xyzeki_DeAuth_Event ateşlendi')
 
             this.DeAuth();
 
         })
-        
+
     }
 
     LoadAllRepositories() {
@@ -85,22 +90,93 @@ export class XyzekiAuthHelpersService {
         this.LoadAllRepositories(); // every time
         this.StartSignalR(token); // every time
 
+      
         this.StartRefreshTokenTimer();// only once
 
-        // First auth event trigger for other tabs/pages
-        let r = Math.random().toString()
-        localStorage.setItem('Xyzeki_Auth_Event', r )
+        // First auth event trigger for other tabs/pages       
+        this.SetUpRandomAuthEventForLocalStorage('Xyzeki_Auth_Event');
 
 
+    }
+    SetUpRandomAuthEventForLocalStorage(type: 'Xyzeki_Auth_Event' | 'Xyzeki_DeAuth_Event') {
+        let randomId: number = this.RandomNumber()
+        let authEvent = localStorage.getItem(type)
+        if (isNullOrUndefined(authEvent)) {
+            localStorage.setItem(type, randomId.toString())
+        }
+        else {
+            while (authEvent == randomId.toString()) {
+                randomId = this.RandomNumber();
+            }
+            localStorage.setItem(type, randomId.toString())
+        }
+    }
+    RandomNumber(base = 10):number {
+        return Math.floor(Math.random() * base)
     }
     AuthMinimal() {
         this.LoadMemberSettings();
         this.LoadAllRepositories();
         this.StartSignalR(this.xyzekiAuthService.Token);
-        //this.StartRefreshTokenTimer();// starts only once
+
+        //this.SaveAuthId();
+
+   
+
 
     }
+    
+    
+    IsAuthIdExists(): boolean {
+        let authIdsArr = localStorage.getItem('Xyzeki_Auth_Counter')
+        if (!isNullOrUndefined(authIdsArr) && authIdsArr.length > 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
 
+    }
+    SaveAuthId() {
+        let authIdsArr = localStorage.getItem('Xyzeki_Auth_Counter')
+        if (isNullOrUndefined(authIdsArr)) {
+            let authIds = [];
+
+            let randomId: number = this.RandomNumber();
+            authIds.push(randomId);
+            localStorage.setItem('Xyzeki_Auth_Counter', JSON.stringify(authIds))
+            this.xyzekiAuthService.SetAuthId = randomId
+        }
+        else {
+            let authIds = JSON.parse(authIdsArr)
+
+            let randomId: number = this.RandomNumber();
+            while (authIds.findIndex(id => id == randomId) != -1) {
+                randomId = this.RandomNumber();
+            }
+            authIds.push(randomId);
+            localStorage.setItem('Xyzeki_Auth_Counter', JSON.stringify(authIds))
+            this.xyzekiAuthService.SetAuthId = randomId
+
+
+        }
+
+    }
+    ClearAuthId() {
+
+        let authIdsArr = localStorage.getItem('Xyzeki_Auth_Counter')
+        if (!isNullOrUndefined(authIdsArr)) {
+            let authIds = JSON.parse(authIdsArr)
+            let index = authIds.findIndex(id => id == this.xyzekiAuthService.AuthId)
+            if (index != -1) {
+                authIds.splice(index, 1)
+                localStorage.setItem('Xyzeki_Auth_Counter', JSON.stringify(authIds))
+                this.xyzekiAuthService.SetAuthId = undefined
+
+            }
+
+        }
+    }
 
     DeAuth() {
         this.RemoveMember();
@@ -108,9 +184,12 @@ export class XyzekiAuthHelpersService {
         this.ClearMemberSettings();
         this.ClearAllRepositories();
         this.StopSignalR();
+      
         this.StopRefreshTokenTimer();
-        let r = Math.random().toString()
-        localStorage.setItem('Xyzeki_DeAuth_Event', r)
+
+        this.SetUpRandomAuthEventForLocalStorage('Xyzeki_DeAuth_Event');
+
+
         this.NavigateToLogin();
 
 
@@ -127,10 +206,6 @@ export class XyzekiAuthHelpersService {
 
     private refreshTokenTimeout;
     private StartRefreshTokenTimer() {
-        if (!this.xyzekiAuthService.LoggedIn) {
-            this.StopRefreshTokenTimer();
-            return;
-        }
         // parse json object from base64 encoded jwt token
         const jwtPayloadJSON = JSON.parse(atob(this.xyzekiAuthService.Token.split('.')[1])); // decode payload of JWT from base64 and parse to jwt json object structure
         console.log('token' + jwtPayloadJSON.exp)
@@ -139,10 +214,7 @@ export class XyzekiAuthHelpersService {
         const timeout = expires.getTime() - Date.now() - (60 * 1000);
         console.log('timeout' + timeout)
         this.refreshTokenTimeout = setTimeout(() => this.authService.refreshToken().subscribe((newToken) => {
-            if (this.xyzekiAuthService.LoggedIn) {
-                this.SaveToken(newToken);
-            }
-
+            this.SaveToken(newToken);
             this.StartRefreshTokenTimer();
             console.log('timeout' + timeout)
 

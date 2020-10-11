@@ -12,7 +12,17 @@ const cryptoHelper = new CryptoHelpers();
 export class XyzekiAuthService {
     constructor() { }
 
+    authId=undefined
 
+    get AuthId(){
+        return this.authId;
+    }
+    set SetAuthId(id){
+        this.authId = id;
+    }
+    RemoveAuth(){
+        this.authId= undefined;
+    }
 
     @Input()
     memberCache

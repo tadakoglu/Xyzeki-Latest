@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, HostListener, ChangeDetectionStrategy, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, HostListener, ChangeDetectionStrategy, ChangeDetectorRef, Input, OnDestroy } from '@angular/core';
 import { XyzekiAuthService } from './model/auth-services/xyzeki-auth-service';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { CustomNgbDateParserFormatter } from 'src/infrastructure/custom-NgbDate-parser-formatter';
@@ -27,7 +27,7 @@ export const customNgbPFProvider = () => { return new CustomNgbDateParserFormatt
   }]
 })
 
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(public xyzekiAuthService: XyzekiAuthService, public xyzekiAuthHelpersService: XyzekiAuthHelpersService, private router: Router, private switchHourDataService: SwitchHourDataService, public dataService: DataService) { // Initialize our member.
 
     this.loading = true;
@@ -35,13 +35,10 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.innerHeight = window.innerHeight;
 
     this.xyzekiAuthHelpersService.AuthAutoIfPossible(); // If a valid token found in local storage, load it and authenticate automatically.
-
-
-    // let cryptoHelpers = new CryptoHelpers(); 
-    // let cip = cryptoHelpers.encrypt('tayfuntest2343435353^++gg**')
-    // console.log('şifrelendi : ' + cip)
-    // console.log('***')
-    // console.log('çözüldü:' + cryptoHelpers.decrypt(cip))
+   
+  }
+  ngOnDestroy(): void {
+    
   }
 
 
