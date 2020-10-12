@@ -409,12 +409,9 @@ var AppComponent = /** @class */ (function () {
         this.innerWidth = window.innerWidth;
         this.innerHeight = window.innerHeight;
         this.xyzekiAuthHelpersService.AuthAutoIfPossible(); // If a valid token found in local storage, load it and authenticate automatically.
-        // let cryptoHelpers = new CryptoHelpers(); 
-        // let cip = cryptoHelpers.encrypt('tayfuntest2343435353^++gg**')
-        // console.log('şifrelendi : ' + cip)
-        // console.log('***')
-        // console.log('çözüldü:' + cryptoHelpers.decrypt(cip))
     }
+    AppComponent.prototype.ngOnDestroy = function () {
+    };
     AppComponent.prototype.onResize = function (event) {
         this.innerWidth = window.innerWidth;
         this.innerHeight = window.innerHeight;
@@ -4728,11 +4725,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var src_infrastructure_cryptoHelpers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/infrastructure/cryptoHelpers */ "./src/infrastructure/cryptoHelpers.ts");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../services/auth.service */ "./src/app/model/services/auth.service.ts");
-/* harmony import */ var _services_member_setting_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../services/member-setting.service */ "./src/app/model/services/member-setting.service.ts");
-/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
-/* harmony import */ var _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
-/* harmony import */ var _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! util */ "./node_modules/util/util.js");
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../services/auth.service */ "./src/app/model/services/auth.service.ts");
+/* harmony import */ var _services_member_setting_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../services/member-setting.service */ "./src/app/model/services/member-setting.service.ts");
+/* harmony import */ var _services_shared_data_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../services/shared/data.service */ "./src/app/model/services/shared/data.service.ts");
+/* harmony import */ var _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../signalr-services/xyzeki-signalr.service */ "./src/app/model/signalr-services/xyzeki-signalr.service.ts");
+/* harmony import */ var _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./xyzeki-auth-service */ "./src/app/model/auth-services/xyzeki-auth-service.ts");
+
 
 
 
@@ -4760,15 +4760,14 @@ var XyzekiAuthHelpersService = /** @class */ (function () {
     XyzekiAuthHelpersService.prototype.SetupOtherBrowserWindowsOrTabsEventListener = function () {
         var _this = this;
         this.storageLoginEventSubscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["fromEvent"])(window, 'storage').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["filter"])(function (event) { return event.key == 'Xyzeki_Auth_Event'; })).subscribe(function () {
-            if (!document.hasFocus()) {
+            if (!_this.xyzekiAuthService.DefaultToken) {
                 _this.AuthMinimal();
                 _this.NavigateToHome();
             }
         });
         this.storageLogoutEventSubscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["fromEvent"])(window, 'storage').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["filter"])(function (event) { return event.key == 'Xyzeki_DeAuth_Event'; })).subscribe(function () {
-            if (!document.hasFocus()) {
-                _this.DeAuth();
-            }
+            console.log('deauth ateşlendi');
+            _this.DeAuth(false);
         });
     };
     XyzekiAuthHelpersService.prototype.LoadAllRepositories = function () {
@@ -4797,25 +4796,36 @@ var XyzekiAuthHelpersService = /** @class */ (function () {
         this.LoadMemberSettings(); // every time
         this.LoadAllRepositories(); // every time
         this.StartSignalR(token); // every time
-        this.StartRefreshTokenTimer(); // only once
-        // First auth event trigger for other tabs/pages
-        localStorage.setItem('Xyzeki_Auth_Event', 'A');
+        this.SaveAuthId();
+        if (this.TimerCanStart())
+            this.StartRefreshTokenTimer(); // only once
+        // First auth event trigger for other tabs/pages       
+        this.SetUpRandomAuthEventForLocalStorage('Xyzeki_Auth_Event');
     };
+    // tabID, isTimerOn
+    // tabId  isTimerOn
+    // #1 false
+    // #2 true
     XyzekiAuthHelpersService.prototype.AuthMinimal = function () {
         this.LoadMemberSettings();
         this.LoadAllRepositories();
         this.StartSignalR(this.xyzekiAuthService.Token);
-        //this.StartRefreshTokenTimer();// starts only once
+        this.SaveAuthId();
+        if (this.TimerCanStart())
+            this.StartRefreshTokenTimer();
     };
-    XyzekiAuthHelpersService.prototype.DeAuth = function () {
+    XyzekiAuthHelpersService.prototype.DeAuth = function (val) {
+        if (val === void 0) { val = true; }
         this.RemoveMember();
         this.RemoveToken();
         this.ClearMemberSettings();
         this.ClearAllRepositories();
         this.StopSignalR();
         this.StopRefreshTokenTimer();
+        if (val)
+            this.SetUpRandomAuthEventForLocalStorage('Xyzeki_DeAuth_Event');
+        this.ClearAuthId();
         this.NavigateToLogin();
-        localStorage.setItem('Xyzeki_DeAuth_Event', 'A');
     };
     XyzekiAuthHelpersService.prototype.AuthAutoIfPossible = function () {
         if (this.xyzekiAuthService.LoggedIn) {
@@ -4824,10 +4834,6 @@ var XyzekiAuthHelpersService = /** @class */ (function () {
     };
     XyzekiAuthHelpersService.prototype.StartRefreshTokenTimer = function () {
         var _this = this;
-        if (!this.xyzekiAuthService.LoggedIn) {
-            this.StopRefreshTokenTimer();
-            return;
-        }
         // parse json object from base64 encoded jwt token
         var jwtPayloadJSON = JSON.parse(atob(this.xyzekiAuthService.Token.split('.')[1])); // decode payload of JWT from base64 and parse to jwt json object structure
         console.log('token' + jwtPayloadJSON.exp);
@@ -4836,9 +4842,7 @@ var XyzekiAuthHelpersService = /** @class */ (function () {
         var timeout = expires.getTime() - Date.now() - (60 * 1000);
         console.log('timeout' + timeout);
         this.refreshTokenTimeout = setTimeout(function () { return _this.authService.refreshToken().subscribe(function (newToken) {
-            if (_this.xyzekiAuthService.LoggedIn) {
-                _this.SaveToken(newToken);
-            }
+            _this.SaveToken(newToken);
             _this.StartRefreshTokenTimer();
             console.log('timeout' + timeout);
         }); }, timeout);
@@ -4955,10 +4959,91 @@ var XyzekiAuthHelpersService = /** @class */ (function () {
     XyzekiAuthHelpersService.prototype.NavigateToHome = function () {
         this.router.navigate(['/isler']);
     };
+    XyzekiAuthHelpersService.prototype.SetUpRandomAuthEventForLocalStorage = function (type) {
+        var authEvent = localStorage.getItem(type);
+        if (Object(util__WEBPACK_IMPORTED_MODULE_7__["isNullOrUndefined"])(authEvent)) {
+            localStorage.setItem(type, '0');
+        }
+        else {
+            if (authEvent == '1') {
+                localStorage.setItem(type, '0');
+            }
+            else {
+                localStorage.setItem(type, '1');
+            }
+        }
+    };
+    XyzekiAuthHelpersService.prototype.RandomNumber = function (base) {
+        if (base === void 0) { base = 10; }
+        return Math.floor(Math.random() * base);
+    };
+    XyzekiAuthHelpersService.prototype.TimerCanStart = function () {
+        var authIdsArr = localStorage.getItem('Xyzeki_Auth_Counter');
+        var authIds = JSON.parse(authIdsArr);
+        if (Object(util__WEBPACK_IMPORTED_MODULE_7__["isNullOrUndefined"])(authIdsArr)) { // nothing in ids.
+            return false;
+        }
+        if (authIds.length > 0 && authIds.find(function (val, index, arr) { return index == 1; }) == this.xyzekiAuthService.AuthId) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    XyzekiAuthHelpersService.prototype.SaveAuthId = function () {
+        var authIdsArr = localStorage.getItem('Xyzeki_Auth_Counter');
+        if (Object(util__WEBPACK_IMPORTED_MODULE_7__["isNullOrUndefined"])(authIdsArr)) {
+            var authIds = [];
+            var randomId = this.RandomNumber();
+            authIds.push(randomId);
+            sessionStorage.setItem('Xyzeki_Auth_Counter', JSON.stringify(authIds));
+            this.xyzekiAuthService.SetAuthId = randomId;
+        }
+        else {
+            var authIds = JSON.parse(authIdsArr);
+            var randomId_1 = this.RandomNumber();
+            while (authIds.findIndex(function (id) { return id == randomId_1; }) != -1) {
+                randomId_1 = this.RandomNumber();
+            }
+            authIds.push(randomId_1);
+            sessionStorage.setItem('Xyzeki_Auth_Counter', JSON.stringify(authIds)); // session store clean itself after tab/browser close
+            this.xyzekiAuthService.SetAuthId = randomId_1;
+        }
+    };
+    XyzekiAuthHelpersService.prototype.ClearAuthId = function () {
+        var _this = this;
+        var authIdsArr = sessionStorage.getItem('Xyzeki_Auth_Counter');
+        if (!Object(util__WEBPACK_IMPORTED_MODULE_7__["isNullOrUndefined"])(authIdsArr)) {
+            var authIds = JSON.parse(authIdsArr);
+            var index = authIds.findIndex(function (id) { return id == _this.xyzekiAuthService.AuthId; });
+            if (index != -1) {
+                authIds.splice(index, 1);
+                sessionStorage.setItem('Xyzeki_Auth_Counter', JSON.stringify(authIds));
+                this.xyzekiAuthService.SetAuthId = undefined;
+            }
+        }
+    };
+    XyzekiAuthHelpersService.prototype.SetTimerToLocalStorage = function (val) {
+        localStorage.setItem('Xyzeki_Timer', val);
+    };
+    XyzekiAuthHelpersService.prototype.IsTimerOn = function () {
+        var val = localStorage.getItem('Xyzeki_Timer');
+        if (Object(util__WEBPACK_IMPORTED_MODULE_7__["isNullOrUndefined"])(val)) {
+            return false;
+        }
+        else {
+            if (val == 'ON') {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    };
     XyzekiAuthHelpersService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_7__["AuthService"], _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_11__["XyzekiAuthService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_9__["DataService"],
-            _services_member_setting_service__WEBPACK_IMPORTED_MODULE_8__["MemberSettingService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_10__["XyzekiSignalrService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_8__["AuthService"], _xyzeki_auth_service__WEBPACK_IMPORTED_MODULE_12__["XyzekiAuthService"], _services_shared_data_service__WEBPACK_IMPORTED_MODULE_10__["DataService"],
+            _services_member_setting_service__WEBPACK_IMPORTED_MODULE_9__["MemberSettingService"], _signalr_services_xyzeki_signalr_service__WEBPACK_IMPORTED_MODULE_11__["XyzekiSignalrService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], XyzekiAuthHelpersService);
     return XyzekiAuthHelpersService;
 }());
@@ -5015,7 +5100,25 @@ var jwtHelper = new _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_2__["JwtHelperSe
 var cryptoHelper = new src_infrastructure_cryptoHelpers__WEBPACK_IMPORTED_MODULE_3__["CryptoHelpers"]();
 var XyzekiAuthService = /** @class */ (function () {
     function XyzekiAuthService() {
+        this.authId = undefined;
     }
+    Object.defineProperty(XyzekiAuthService.prototype, "AuthId", {
+        get: function () {
+            return this.authId;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(XyzekiAuthService.prototype, "SetAuthId", {
+        set: function (id) {
+            this.authId = id;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    XyzekiAuthService.prototype.RemoveAuth = function () {
+        this.authId = undefined;
+    };
     Object.defineProperty(XyzekiAuthService.prototype, "Member", {
         get: function () {
             if (this.memberCache) {
@@ -5095,11 +5198,26 @@ var XyzekiAuthService = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(XyzekiAuthService.prototype, "DefaultToken", {
+        get: function () {
+            return (this.defaultTokenCache && !jwtHelper.isTokenExpired(this.defaultTokenCache)) ? true : false;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(XyzekiAuthService.prototype, "SetDefaultTokenCache", {
+        set: function (val) {
+            this.defaultTokenCache = val;
+        },
+        enumerable: true,
+        configurable: true
+    });
     XyzekiAuthService.prototype.SetMember = function (val) {
         this.SetMemberCache = val;
         localStorage.setItem("Xyzeki_Member", cryptoHelper.encrypt(JSON.stringify(val))); // Persistance
     };
     XyzekiAuthService.prototype.SetToken = function (val) {
+        this.SetDefaultTokenCache = val;
         this.SetTokenCache = val; // reset cache
         localStorage.setItem("Xyzeki_JWTToken", cryptoHelper.encrypt(val)); // Persistance
     };
@@ -5108,6 +5226,7 @@ var XyzekiAuthService = /** @class */ (function () {
         localStorage.removeItem("Xyzeki_Member"); // Persistance
     };
     XyzekiAuthService.prototype.removeToken = function () {
+        this.SetDefaultTokenCache = undefined;
         this.tokenCache = undefined;
         localStorage.removeItem("Xyzeki_JWTToken"); // Persistance
     };
@@ -6830,7 +6949,13 @@ var PrivateTalkMessageRepository = /** @class */ (function () {
         var _this = this;
         this.privateTalkId = privateTalkId;
         this.service.privateTalkMessages(privateTalkId, 1, this.psz.PTMPageSize).subscribe(function (messages) {
-            _this.privateTalkMessages = messages;
+            console.log(messages);
+            if (messages == null) {
+                _this.privateTalkMessages = [];
+            }
+            else {
+                _this.privateTalkMessages = messages;
+            }
         });
     };
     PrivateTalkMessageRepository.prototype.getPrivateTalkMessages = function () {

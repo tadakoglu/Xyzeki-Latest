@@ -27,7 +27,7 @@ export const customNgbPFProvider = () => { return new CustomNgbDateParserFormatt
   }]
 })
 
-export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AppComponent implements OnInit, AfterViewInit {
   constructor(public xyzekiAuthService: XyzekiAuthService, public xyzekiAuthHelpersService: XyzekiAuthHelpersService, private router: Router, private switchHourDataService: SwitchHourDataService, public dataService: DataService) { // Initialize our member.
 
     this.loading = true;
@@ -37,8 +37,13 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     this.xyzekiAuthHelpersService.AuthAutoIfPossible(); // If a valid token found in local storage, load it and authenticate automatically.
    
   }
-  ngOnDestroy(): void {
-    
+
+
+  @HostListener('window:unload')
+  private onUnload(): void { //ngondestroy doesnt work for localstorage
+    // localStorage.setItem('ngondestroy', 'başarılı')
+    // console.log(localStorage.getItem('ngondestroy'))
+    this.xyzekiAuthHelpersService.ClearAuthId();
   }
 
 

@@ -4,6 +4,7 @@ export class CryptoHelpers {
         constructor() { }
 
         private jf9p3hg4n9: string = 'J*+FAL!'
+       
 
         encrypt(textToEn: string): string {
                 return CryptoTS.AES.encrypt(textToEn, this.jf9p3hg4n9);

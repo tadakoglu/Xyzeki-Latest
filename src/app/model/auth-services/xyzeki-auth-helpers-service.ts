@@ -35,6 +35,7 @@ export class XyzekiAuthHelpersService {
             if (!this.xyzekiAuthService.DefaultToken) {
                 this.AuthMinimal();
                 this.NavigateToHome();
+
             }
         })
 
@@ -84,21 +85,21 @@ export class XyzekiAuthHelpersService {
         this.SetUpRandomAuthEventForLocalStorage('Xyzeki_Auth_Event');
 
 
+
     }
 
 
-    // tabID, isTimerOn
-    // tabId  isTimerOn
 
-    // #1 false
-    // #2 true
 
     AuthMinimal() {
         this.LoadMemberSettings();
         this.LoadAllRepositories();
         this.StartSignalR(this.xyzekiAuthService.Token);
-        this.StartRefreshTokenTimer();
 
+
+
+
+        this.StartRefreshTokenTimer();
     }
 
 
@@ -112,12 +113,16 @@ export class XyzekiAuthHelpersService {
 
         this.StopRefreshTokenTimer();
 
-        if (val)
+        if (val) {
+
             this.SetUpRandomAuthEventForLocalStorage('Xyzeki_DeAuth_Event');
+
+        }
+
+
 
 
         this.NavigateToLogin();
-
 
     }
 
@@ -132,6 +137,7 @@ export class XyzekiAuthHelpersService {
 
     private refreshTokenTimeout;
     private StartRefreshTokenTimer() {
+
         // parse json object from base64 encoded jwt token
         const jwtPayloadJSON = JSON.parse(atob(this.xyzekiAuthService.Token.split('.')[1])); // decode payload of JWT from base64 and parse to jwt json object structure
         console.log('token' + jwtPayloadJSON.exp)
@@ -139,6 +145,7 @@ export class XyzekiAuthHelpersService {
         const expires = new Date(jwtPayloadJSON.exp * 1000); // exp means expiration property in jwt json
         const timeout = expires.getTime() - Date.now() - (60 * 1000);
         console.log('timeout' + timeout)
+        
         this.refreshTokenTimeout = setTimeout(() => this.authService.refreshToken().subscribe((newToken) => {
             this.SaveToken(newToken);
             this.StartRefreshTokenTimer();
@@ -285,17 +292,23 @@ export class XyzekiAuthHelpersService {
         return Math.floor(Math.random() * base)
     }
 
-    IsAuthIdExists(): boolean {
+    TimerCanStart(): boolean { // only allow tab or page that is 1th one in authids array.
         let authIdsArr = localStorage.getItem('Xyzeki_Auth_Counter')
-        if (!isNullOrUndefined(authIdsArr) && authIdsArr.length > 0) {
-            return true;
-        }
-        else {
+
+
+        if (isNullOrUndefined(authIdsArr)) {
             return false;
         }
+        let authIds = JSON.parse(authIdsArr)
+        if (authIds.length == 1) {
+            return true;
+        }
+
+        return false;
+
 
     }
-    SaveAuthId() {
+    SaveAuthId() { // diğer tablar storage even üzerinden ateşlendiğinde iki saveauthid lock sorunu yaşıyor ikiside birbirinin üzerine yazıyor. get ile çektikleri yerler farklı.
         let authIdsArr = localStorage.getItem('Xyzeki_Auth_Counter')
         if (isNullOrUndefined(authIdsArr)) {
             let authIds = [];
@@ -313,12 +326,15 @@ export class XyzekiAuthHelpersService {
                 randomId = this.RandomNumber();
             }
             authIds.push(randomId);
-            localStorage.setItem('Xyzeki_Auth_Counter', JSON.stringify(authIds))
+            localStorage.setItem('Xyzeki_Auth_Counter', JSON.stringify(authIds)) // session store clean itself after tab/browser close
             this.xyzekiAuthService.SetAuthId = randomId
 
 
         }
 
+    }
+    ClearAuthIdAll() {
+        localStorage.removeItem('Xyzeki_Auth_Counter')
     }
     ClearAuthId() {
 
@@ -336,24 +352,8 @@ export class XyzekiAuthHelpersService {
         }
     }
 
-    SetTimerToLocalStorage(val: 'OFF' | 'ON') {
-        localStorage.setItem('Xyzeki_Timer', val)
-    }
-    IsTimerOn(): boolean {
-        let val = localStorage.getItem('Xyzeki_Timer')
-        if (isNullOrUndefined(val)) {
-            return false;
-        }
-        else {
-            if (val == 'ON') {
-                return true
-            }
-            else {
-                return false
-            }
-        }
 
-    }
+
 }
 
 

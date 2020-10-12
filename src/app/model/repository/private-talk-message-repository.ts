@@ -33,7 +33,14 @@ export class PrivateTalkMessageRepository implements IPrivateTalkMessageReposito
     loadPrivateTalkMessages(privateTalkId: number) {
         this.privateTalkId = privateTalkId;
         this.service.privateTalkMessages(privateTalkId, 1, this.psz.PTMPageSize).subscribe(messages => {
-            this.privateTalkMessages = messages
+            console.log(messages)
+            if(messages == null){
+                this.privateTalkMessages = [];
+            }
+            else{
+                this.privateTalkMessages = messages
+
+            }
         });
     }
     newMessageSubscription: Subscription;
