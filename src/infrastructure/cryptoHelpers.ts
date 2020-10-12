@@ -3,7 +3,7 @@ var CryptoTS = require("crypto-ts");
 export class CryptoHelpers {
         constructor() { }
 
-        private jf9p3hg4n9: string = 'J*+FAL!'
+        private jf9p3hg4n9: string = 'J*+FAL!%54?6g'
        
 
         encrypt(textToEn: string): string {

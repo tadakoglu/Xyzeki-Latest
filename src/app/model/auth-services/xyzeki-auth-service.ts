@@ -30,7 +30,7 @@ export class XyzekiAuthService {
         if (this.memberCache) {
             return this.memberCache
         }
-        let memberA = localStorage.getItem("Xyzeki_Member")
+        let memberA = localStorage.getItem("fjljf9o5p8f200")
         if (isNullOrUndefined(memberA)) {
             return undefined;
         }
@@ -46,7 +46,7 @@ export class XyzekiAuthService {
         if (this.tokenCache) {
             return this.tokenCache
         }
-        let tokenA = localStorage.getItem("Xyzeki_JWTToken")
+        let tokenA = localStorage.getItem("laj9p3jjapn4lgp+")
         if (isNullOrUndefined(tokenA)) {
             return undefined
         }
@@ -92,27 +92,26 @@ export class XyzekiAuthService {
     }
     SetMember(val) {
         this.SetMemberCache = val
-        localStorage.setItem("Xyzeki_Member", cryptoHelper.encrypt(JSON.stringify(val))); // Persistance
+        localStorage.setItem("fjljf9o5p8f200", cryptoHelper.encrypt(JSON.stringify(val))); // Persistance
     }
     SetToken(val) {
         this.SetDefaultTokenCache = val;
         this.SetTokenCache = val // reset cache
-        localStorage.setItem("Xyzeki_JWTToken", cryptoHelper.encrypt(val)); // Persistance
+        localStorage.setItem("laj9p3jjapn4lgp+", cryptoHelper.encrypt(val)); // Persistance
     }
 
     removeMember() {
         this.memberCache=undefined
-        localStorage.removeItem("Xyzeki_Member"); // Persistance
+        localStorage.removeItem("fjljf9o5p8f200"); // Persistance
     }
     removeToken() {
         this.SetDefaultTokenCache=undefined;
         this.tokenCache=undefined
-        localStorage.removeItem("Xyzeki_JWTToken"); // Persistance
+        localStorage.removeItem("laj9p3jjapn4lgp+"); // Persistance
 
     }
 
-
-
+    
 }
 
 

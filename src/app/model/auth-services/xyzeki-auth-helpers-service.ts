@@ -30,7 +30,7 @@ export class XyzekiAuthHelpersService {
     storageLogoutEventSubscription: Subscription
     SetupOtherBrowserWindowsOrTabsEventListener() {
         this.storageLoginEventSubscription = fromEvent(window, 'storage').pipe(
-            filter((event: any) => event.key == 'Xyzeki_Auth_Event'),
+            filter((event: any) => event.key == '2j0fj40aş4'),
         ).subscribe(() => {
             if (!this.xyzekiAuthService.DefaultToken) {
                 this.AuthMinimal();
@@ -40,7 +40,7 @@ export class XyzekiAuthHelpersService {
         })
 
         this.storageLogoutEventSubscription = fromEvent(window, 'storage').pipe(
-            filter((event: any) => event.key == 'Xyzeki_DeAuth_Event'),
+            filter((event: any) => event.key == 'j95jpj84l444'),
         ).subscribe(() => {
             console.log('deauth ateşlendi')
             this.DeAuth(false);
@@ -82,7 +82,7 @@ export class XyzekiAuthHelpersService {
         this.StartRefreshTokenTimer();// only once
 
         // First auth event trigger for other tabs/pages       
-        this.SetUpRandomAuthEventForLocalStorage('Xyzeki_Auth_Event');
+        this.SetUpRandomAuthEventForLocalStorage('2j0fj40aş4');
 
 
 
@@ -107,6 +107,7 @@ export class XyzekiAuthHelpersService {
     DeAuth(val = true) {
         this.RemoveMember();
         this.RemoveToken();
+        this.RemoveOthers();
         this.ClearMemberSettings();
         this.ClearAllRepositories();
         this.StopSignalR();
@@ -115,13 +116,13 @@ export class XyzekiAuthHelpersService {
 
         if (val) {
 
-            this.SetUpRandomAuthEventForLocalStorage('Xyzeki_DeAuth_Event');
+            this.SetUpRandomAuthEventForLocalStorage('j95jpj84l444');
 
         }
 
 
 
-
+        // this.ClearLocalStorage();
         this.NavigateToLogin();
 
     }
@@ -132,7 +133,10 @@ export class XyzekiAuthHelpersService {
 
         }
     }
-
+    RemoveOthers(){
+        localStorage.removeItem('2j0fj40aş4')
+        localStorage.removeItem('j95jpj84l444')
+    }
 
 
     private refreshTokenTimeout;
@@ -274,7 +278,7 @@ export class XyzekiAuthHelpersService {
     }
 
 
-    SetUpRandomAuthEventForLocalStorage(type: 'Xyzeki_Auth_Event' | 'Xyzeki_DeAuth_Event') {
+    SetUpRandomAuthEventForLocalStorage(type: '2j0fj40aş4' | 'j95jpj84l444') {
         let authEvent = localStorage.getItem(type)
         if (isNullOrUndefined(authEvent)) {
             localStorage.setItem(type, '0')
@@ -352,7 +356,13 @@ export class XyzekiAuthHelpersService {
         }
     }
 
-
+    ClearLocalStorage(){
+        localStorage.removeItem('laj9p3jjapn4lgp')
+        localStorage.removeItem('fjljf9o5p8f200')
+        localStorage.removeItem('2j0fj40aş4')
+        localStorage.removeItem('j95jpj84l444')        
+    
+    }
 
 }
 
@@ -365,23 +375,23 @@ export class XyzekiAuthHelpersService {
 
 //local storage fonksiyonları
 // get Member(): Member {
-//     let member: Member = JSON.parse(localStorage.getItem("Xyzeki_Member")) as Member
+//     let member: Member = JSON.parse(localStorage.getItem("fjljf9o5p8f200")) as Member
 //     return member;
 // }
 // get Token(): string {
-//     let token = localStorage.getItem("Xyzeki_JWTToken");
+//     let token = localStorage.getItem("laj9p3jjapn4lgp+");
 //     return token;
 // }
 // SaveMember(member: Member) {
-//     localStorage.setItem("Xyzeki_Member", JSON.stringify(member)); // Persistance
+//     localStorage.setItem("fjljf9o5p8f200", JSON.stringify(member)); // Persistance
 // }
 // SaveToken(token: string) {
-//     localStorage.setItem("Xyzeki_JWTToken", token); // Persistance
+//     localStorage.setItem("laj9p3jjapn4lgp+", token); // Persistance
 // }
 
 // RemoveMember() {
-//     localStorage.removeItem("Xyzeki_Member")
+//     localStorage.removeItem("fjljf9o5p8f200")
 // }
 // RemoveToken() {
-//     localStorage.removeItem("Xyzeki_JWTToken")
+//     localStorage.removeItem("laj9p3jjapn4lgp+")
 // }
