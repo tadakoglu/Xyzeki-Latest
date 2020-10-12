@@ -39,12 +39,12 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
 
-  @HostListener('window:unload')
-  private onUnload(): void { //ngondestroy doesnt work for localstorage
-    // localStorage.setItem('ngondestroy', 'başarılı')
-    // console.log(localStorage.getItem('ngondestroy'))
-    this.xyzekiAuthHelpersService.ClearAuthId();
-  }
+  // @HostListener('window:unload')
+  // private onUnload(): void { //ngondestroy doesnt work for localstorage
+  //   // localStorage.setItem('ngondestroy', 'başarılı')
+  //   // console.log(localStorage.getItem('ngondestroy'))
+  //   // this.xyzekiAuthHelpersService.ClearAuthId();
+  // }
 
 
   title = 'Xyzeki İş Yönetimi Çözümleri';
