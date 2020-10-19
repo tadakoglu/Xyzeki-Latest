@@ -13,7 +13,9 @@ export class Member {
                 public CryptoSalt: string,
 
                 public CellCountry?: number,
-                public Cell?: number,              
+                public Cell?: number, 
+                public RefreshToken?: string,
+                public RefreshTokenExpiryTime?: string
                 
                 ) { }
 

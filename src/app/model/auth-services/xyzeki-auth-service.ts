@@ -12,16 +12,16 @@ const cryptoHelper = new CryptoHelpers();
 export class XyzekiAuthService {
     constructor() { }
 
-    authId=undefined
+    authId = undefined
 
-    get AuthId(){
+    get AuthId() {
         return this.authId;
     }
-    set SetAuthId(id){
+    set SetAuthId(id) {
         this.authId = id;
     }
-    RemoveAuth(){
-        this.authId= undefined;
+    RemoveAuth() {
+        this.authId = undefined;
     }
 
     @Input()
@@ -54,6 +54,20 @@ export class XyzekiAuthService {
         this.tokenCache = tokenAA;
         return tokenAA;
     }
+    @Input()
+    refrehTokenCache
+    get RefreshToken():string{
+        if (this.refrehTokenCache) {
+            return this.refrehTokenCache
+        }
+        let tokenR = localStorage.getItem("lhf4h9p342xx3gg+")
+        if (isNullOrUndefined(tokenR)) {
+            return undefined
+        }
+        let tokenRR = cryptoHelper.decrypt(tokenR)
+        this.refrehTokenCache = tokenRR;
+        return tokenRR;
+    }
 
     get IsTokenExpired(): boolean {
         if (!isNullOrUndefined(this.Token)) {
@@ -83,11 +97,11 @@ export class XyzekiAuthService {
         this.tokenCache = val;
     }
 
-    get DefaultToken():boolean{
-        return (this.defaultTokenCache && !jwtHelper.isTokenExpired(this.defaultTokenCache)) ? true: false
+    get DefaultToken(): boolean {
+        return (this.defaultTokenCache && !jwtHelper.isTokenExpired(this.defaultTokenCache)) ? true : false
     }
-    defaultTokenCache:string
-    set SetDefaultTokenCache(val){
+    defaultTokenCache: string
+    set SetDefaultTokenCache(val) {
         this.defaultTokenCache = val
     }
     SetMember(val) {
@@ -99,19 +113,41 @@ export class XyzekiAuthService {
         this.SetTokenCache = val // reset cache
         localStorage.setItem("laj9p3jjapn4lgp+", cryptoHelper.encrypt(val)); // Persistance
     }
+    SetRefreshToken(val){
+        this.SetDefaultTokenCache = val;
+        this.SetTokenCache = val // reset cache
+        localStorage.setItem("lhf4h9p342xx3gg", cryptoHelper.encrypt(val)); // Persistance
+    }
 
     removeMember() {
-        this.memberCache=undefined
+        this.memberCache = undefined
         localStorage.removeItem("fjljf9o5p8f200"); // Persistance
     }
     removeToken() {
-        this.SetDefaultTokenCache=undefined;
-        this.tokenCache=undefined
+        this.SetDefaultTokenCache = undefined;
+        this.tokenCache = undefined
         localStorage.removeItem("laj9p3jjapn4lgp+"); // Persistance
 
     }
 
-    
+    isAccessTokenExpired():boolean {
+        if (!isNullOrUndefined(this.Token)) {
+            return jwtHelper.isTokenExpired(this.Token)
+        }
+        else {
+            return false;
+        }
+    }
+    isRefreshTokenExpired():boolean {
+        if (!isNullOrUndefined(this.RefreshToken)) {
+            return jwtHelper.isTokenExpired(this.RefreshToken)
+        }
+        else {
+            return false;
+        }
+    }
+
+
 }
 
 
