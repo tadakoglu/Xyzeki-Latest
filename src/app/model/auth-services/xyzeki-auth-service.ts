@@ -12,140 +12,67 @@ const cryptoHelper = new CryptoHelpers();
 export class XyzekiAuthService {
     constructor() { }
 
-    authId = undefined
-
-    get AuthId() {
-        return this.authId;
-    }
-    set SetAuthId(id) {
-        this.authId = id;
-    }
-    RemoveAuth() {
-        this.authId = undefined;
-    }
-
-    @Input()
-    memberCache
     get Member(): Member {
-        if (this.memberCache) {
-            return this.memberCache
-        }
-        let memberA = localStorage.getItem("fjljf9o5p8f200")
-        if (isNullOrUndefined(memberA)) {
+        let member = localStorage.getItem("Xyzeki-Member")
+        if (isNullOrUndefined(member)) {
             return undefined;
         }
-        let memberAA = cryptoHelper.decrypt(memberA)
-        let memberAAA = JSON.parse(memberAA);
-        this.memberCache = memberAAA;
-
-        return memberAAA as Member
+        return JSON.parse(member) as Member
     }
-    @Input()
-    tokenCache
-    get Token(): string {
-        if (this.tokenCache) {
-            return this.tokenCache
-        }
-        let tokenA = localStorage.getItem("laj9p3jjapn4lgp+")
-        if (isNullOrUndefined(tokenA)) {
+    get AccessToken(): string {
+        let accessToken = localStorage.getItem("Xyzeki-Access-Token")
+        if (isNullOrUndefined(accessToken)) {
             return undefined
         }
-        let tokenAA = cryptoHelper.decrypt(tokenA)
-        this.tokenCache = tokenAA;
-        return tokenAA;
+        return accessToken;
     }
-    @Input()
-    refrehTokenCache
-    get RefreshToken():string{
-        if (this.refrehTokenCache) {
-            return this.refrehTokenCache
-        }
-        let tokenR = localStorage.getItem("lhf4h9p342xx3gg+")
-        if (isNullOrUndefined(tokenR)) {
+    get RefreshToken(): string {
+        let refreshToken = localStorage.getItem("Xyzeki-Refresh-Token")
+        if (isNullOrUndefined(refreshToken)) {
             return undefined
         }
-        let tokenRR = cryptoHelper.decrypt(tokenR)
-        this.refrehTokenCache = tokenRR;
-        return tokenRR;
+        return refreshToken;
     }
-
-    get IsTokenExpired(): boolean {
-        if (!isNullOrUndefined(this.Token)) {
-            return jwtHelper.isTokenExpired(this.Token)
-        }
-        else {
-            return false;
-        }
-    }
-    get Username(): string {
-        let memberA = this.Member;
-        if (!isNullOrUndefined(memberA)) {
-            return memberA.Username
-        }
-        else {
+    get RefreshTokenExpiryTime(): string {
+        let expiryTime = localStorage.getItem("Xyzeki-Refresh-Token-Expiry"); // Persistance
+        if (isNullOrUndefined(expiryTime)) {
             return undefined
         }
+        return expiryTime;
     }
     get LoggedIn(): boolean {
-        return (this.Token && !jwtHelper.isTokenExpired(this.Token)) ? true : false
+        return (this.AccessToken && !jwtHelper.isTokenExpired(this.AccessToken)) ? true : false
     }
 
-    set SetMemberCache(val) {
-        this.memberCache = val;
+    get IsAccessTokenExpired(): boolean {
+        return (this.AccessToken && !jwtHelper.isTokenExpired(this.AccessToken)) ? true : false
     }
-    set SetTokenCache(val) {
-        this.tokenCache = val;
-    }
+    get IsRefreshTokenExpired():boolean{
+        let today = new Date(); // this is local dependant.
+        let refreshToken = new Date(this.RefreshTokenExpiryTime);
 
-    get DefaultToken(): boolean {
-        return (this.defaultTokenCache && !jwtHelper.isTokenExpired(this.defaultTokenCache)) ? true : false
-    }
-    defaultTokenCache: string
-    set SetDefaultTokenCache(val) {
-        this.defaultTokenCache = val
-    }
-    SetMember(val) {
-        this.SetMemberCache = val
-        localStorage.setItem("fjljf9o5p8f200", cryptoHelper.encrypt(JSON.stringify(val))); // Persistance
-    }
-    SetToken(val) {
-        this.SetDefaultTokenCache = val;
-        this.SetTokenCache = val // reset cache
-        localStorage.setItem("laj9p3jjapn4lgp+", cryptoHelper.encrypt(val)); // Persistance
-    }
-    SetRefreshToken(val){
-        this.SetDefaultTokenCache = val;
-        this.SetTokenCache = val // reset cache
-        localStorage.setItem("lhf4h9p342xx3gg", cryptoHelper.encrypt(val)); // Persistance
-    }
-
-    removeMember() {
-        this.memberCache = undefined
-        localStorage.removeItem("fjljf9o5p8f200"); // Persistance
-    }
-    removeToken() {
-        this.SetDefaultTokenCache = undefined;
-        this.tokenCache = undefined
-        localStorage.removeItem("laj9p3jjapn4lgp+"); // Persistance
-
-    }
-
-    isAccessTokenExpired():boolean {
-        if (!isNullOrUndefined(this.Token)) {
-            return jwtHelper.isTokenExpired(this.Token)
-        }
-        else {
+        if(refreshToken.getTime() - today.getTime() > 0 ){
             return false;
         }
+        else{
+            return true;
+        }
+       
     }
-    isRefreshTokenExpired():boolean {
-        if (!isNullOrUndefined(this.RefreshToken)) {
-            return jwtHelper.isTokenExpired(this.RefreshToken)
+
+
+    //#region Other Helpers
+    get Username(): string {
+        let member = this.Member;
+        if (!isNullOrUndefined(member)) {
+            return member.Username
         }
         else {
-            return false;
+            return undefined
         }
     }
+    //#endregion Other Helpers
+
 
 
 }

@@ -29,6 +29,7 @@ import { ReturnModel } from 'src/app/model/return.model';
 import { MemberSettingService } from 'src/app/model/services/member-setting.service';
 import { DataService } from 'src/app/model/services/shared/data.service';
 import { XyzekiSignalrService } from 'src/app/model/signalr-services/xyzeki-signalr.service';
+import { TokenMemberModel } from 'src/app/model/token-member.model';
 import { Tuple } from 'src/app/model/tuple.model';
 import { GoogleReCaptcha_LoginAction } from 'src/infrastructure/google-captcha';
 
@@ -85,8 +86,9 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
     if (loginForm.valid) {
       this.isLoading = true;
       this.subscription = this.recaptchaV3Service.execute(GoogleReCaptcha_LoginAction).pipe(concatMap(
-        recaptchaToken => { return this.repository.authenticate(Object.assign({}, this.loginModel), recaptchaToken) })).subscribe((tokenAndMember: ReturnModel<Tuple<string, Member>>) => {
-          this.xyzekiAuthHelpersService.Auth(tokenAndMember);
+        recaptchaToken => { return this.repository.authenticate(Object.assign({}, this.loginModel), recaptchaToken) })).subscribe((response) => {
+          let tokenMemberModel:TokenMemberModel = response.body;
+          this.xyzekiAuthHelpersService.Auth(tokenMemberModel);
           this.informUser = "Başarıyla giriş yaptınız."
           this.router.navigate(['/isler'])
           this.modelSent = true;

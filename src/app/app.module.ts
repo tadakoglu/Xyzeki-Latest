@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { TeamModule } from './team/team.module';
 import { HomeModule } from './home/home.module';
 import { ProjectModule } from './project/project.module';
-import { RouterModule } from '@angular/router';
 import { ModelModule } from './model/model.module'; // Inject repositories(with services)
 import { registerLocaleData } from '@angular/common';
 import localeTr from '@angular/common/locales/tr';
@@ -19,10 +18,11 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { isNullOrUndefined } from 'util';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { CustomInterceptor } from 'src/infrastructure/interceptor';
-import { TokenInterceptor } from './model/interceptors/token-inceptor';
+import { XyzekiRefreshTokenInterceptor } from './model/interceptors/xyzeki-refresh-token-interceptor';
+
+
+
 registerLocaleData(localeTr);
 
 @NgModule({
@@ -41,7 +41,7 @@ registerLocaleData(localeTr);
     { provide: LOCALE_ID, useValue: 'tr-TR' },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
+      useClass: XyzekiRefreshTokenInterceptor,
       multi: true
     }
   ],

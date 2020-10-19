@@ -4,14 +4,16 @@ import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { switchMap, take, filter } from 'rxjs/operators';
 import { XyzekiAuthHelpersService } from '../auth-services/xyzeki-auth-helpers-service';
 import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
+import { AuthService } from '../services/auth.service';
+import { TokenMemberModel } from '../token-member.model';
 
 
 @Injectable()
-export class TokenInterceptor implements HttpInterceptor {
+export class XyzekiRefreshTokenInterceptor implements HttpInterceptor {
     private refreshTokenInProgress = false;
     private refreshTokenSubject: Subject<any> = new BehaviorSubject<any>(null);
 
-    constructor(public authService: AuthService, public xyzekiAuthService: XyzekiAuthService) { }
+    constructor(public xyzekiAuthHelpersService: XyzekiAuthHelpersService, public xyzekiAuthService: XyzekiAuthService, public authService: AuthService) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         if (request.url.indexOf('refresh') !== -1) { // refresh token isteklerine bir şey iliştirmeden(token vb.) aynen ilet.
@@ -27,8 +29,8 @@ export class TokenInterceptor implements HttpInterceptor {
         }
         //...(şifremi unuttum vb. eklenecek)
 
-        const accessExpired = this.xyzekiAuthService.isAccessTokenExpired();
-        const refreshExpired = this.xyzekiAuthService.isRefreshTokenExpired();
+        const accessExpired = this.xyzekiAuthService.IsAccessTokenExpired
+        const refreshExpired = this.xyzekiAuthService.IsRefreshTokenExpired
 
         if (accessExpired && refreshExpired) { // normal token ve refresh token her ikisininn süresi bittiyse herhangi bir şey yapma aynen ilet
             return next.handle(request);        // ya da log out olup observable error fırlatılabilir.
@@ -37,12 +39,21 @@ export class TokenInterceptor implements HttpInterceptor {
             if (!this.refreshTokenInProgress) {
                 this.refreshTokenInProgress = true;
                 this.refreshTokenSubject.next(null);
-                return this.authService.requestAccessToken().pipe(
+
+                let tmmOld = new TokenMemberModel();
+                tmmOld.AccessToken = this.xyzekiAuthService.AccessToken;
+                tmmOld.RefreshToken = this.xyzekiAuthService.RefreshToken;
+
+                // send old tokens, get new ones.
+                return this.authService.refreshToken(tmmOld).pipe(
                     switchMap((authResponse) => {
-                        this.authService.saveToken(AuthService.TOKEN_NAME, authResponse.accessToken);
-                        this.authService.saveToken(AuthService.REFRESH_TOKEN_NAME, authResponse.refreshToken);
+
+                        this.xyzekiAuthHelpersService.SaveAccessToken(authResponse.AccessToken);
+                        this.xyzekiAuthHelpersService.SaveRefreshToken(authResponse.RefreshToken, authResponse.RefreshTokenExpiryTime);
+
+
                         this.refreshTokenInProgress = false;
-                        this.refreshTokenSubject.next(authResponse.accessToken);
+                        this.refreshTokenSubject.next(authResponse.AccessToken); // InjectToken method will gain access token from LS when here sends 'ready' signal.
                         return next.handle(this.injectToken(request));
                     }),
                 );
@@ -50,7 +61,7 @@ export class TokenInterceptor implements HttpInterceptor {
                 return this.refreshTokenSubject.pipe(
                     filter(result => result !== null),
                     take(1),
-                    switchMap((accessToken) => {
+                    switchMap((accessToken) => { // Inject token will already get accessToken from LS
                         return next.handle(this.injectToken(request))
                     })
                 );
@@ -63,7 +74,7 @@ export class TokenInterceptor implements HttpInterceptor {
     }
 
     injectToken(request: HttpRequest<any>) {
-        const token = this.xyzekiAuthService.Token
+        const token = this.xyzekiAuthService.AccessToken
         return request.clone({
             setHeaders: {
                 Authorization: `Bearer ${token}`

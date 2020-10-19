@@ -7,16 +7,22 @@ import { RegisterModel } from '../register.model';
 import { ReturnModel } from '../return.model';
 import { SecurityCodeModel } from '../security-code.model';
 import { AuthService } from '../services/auth.service';
-import { Tuple } from '../tuple.model';
+import { TokenMemberModel } from '../token-member.model';
+import {  HttpResponse } from '@angular/common/http';
 
 @Injectable()
 export class AuthRepository implements IAuthRepository {
-    //My-Notes
-    //BehaviorSubject also includes latest emitted value, can be reach by getValue()
-    constructor(private service: AuthService) { }
 
-    authenticate(loginModel: LoginModel, recaptchaToken: string): Observable<ReturnModel<Tuple<string, Member>>> {
+    constructor(private service: AuthService) { }
+   
+    authenticate(loginModel: LoginModel, recaptchaToken: string): Observable<HttpResponse<TokenMemberModel>> {
         return this.service.authenticate(loginModel, recaptchaToken);
+    }
+    refreshToken(tokenMemberModel: TokenMemberModel): Observable<TokenMemberModel> {
+        return this.service.refreshToken(tokenMemberModel);
+    }
+    revoke(): Observable<void> {
+        return this.service.revoke();
     }
 
     register(registerModel: RegisterModel, recaptchaToken: string): Observable<ReturnModel<number>> {

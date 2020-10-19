@@ -43,6 +43,8 @@ namespace XYZToDo.Models
         public string Avatar { get; set; }
         public string CryptoPassword { get; set; }
         public string CryptoSalt { get; set; }
+        public string RefreshToken { get; set; }
+        public DateTimeOffset? RefreshTokenExpiryTime { get; set; }
 
         public MemberLicense MemberLicense { get; set; }
         public MemberSetting MemberSetting { get; set; }

@@ -14,7 +14,7 @@ namespace XYZToDo.Models
         public string AssignedTo { get; set; }
         public string Owner { get; set; }
         public string TaskTitle { get; set; }
-        public DateTimeOffset? Start { get; set; } 
+        public DateTimeOffset? Start { get; set; }
         public DateTimeOffset? Date { get; set; }
         public string Completedby { get; set; }
         public DateTimeOffset? Finish { get; set; }

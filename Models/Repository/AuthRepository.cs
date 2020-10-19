@@ -9,6 +9,8 @@ using XYZToDo.Models.Abstract;
 using XYZToDo.Models.DatabasePersistanceLayer;
 using XYZToDo.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
+using System.Security.Claims;
 
 namespace XYZToDo.Models.Repository
 {
@@ -31,7 +33,7 @@ namespace XYZToDo.Models.Repository
         public IConfiguration Configuration { get; set; }
         public IQueryable<Member> Members => context.Member;
 
-        public Tuple<string, Member> Login(LoginModel loginModel) //Returns JWT token with member or null for any errors, note:  If user enters the password correct then generate JiWT, otherwise return null.
+        public TokenMemberModel Login(LoginModel loginModel) //Returns JWT token with member or null for any errors, note:  If user enters the password correct then generate JiWT, otherwise return null.
         {
             if (loginModel == null)
                 return null;
@@ -45,8 +47,25 @@ namespace XYZToDo.Models.Repository
                 string CryptoPasswordToCheck = cryptoHelpers.EncryptWithPBKDF2(LoginPassword, CryptoSalt);
                 if (CryptoPassword == CryptoPasswordToCheck)
                 {
-                    //return jwtHelpers.GenerateJWT(loginModel.Username); // Send a valid JWT to our member
-                    return new Tuple<string, Member>(jwtHelpers.GenerateJWT(loginModel.Username), member);
+
+                    string accessToken = jwtHelpers.GenerateJWT(loginModel.Username);
+                    string refreshToken = jwtHelpers.GenerateRefreshToken();
+
+                    member.RefreshToken = refreshToken;
+
+                    DateTimeOffset? expiryDate = DateTimeOffset.Now.AddMinutes(double.Parse(Configuration["JWT:RefreshTokenExpireTimeInMinutes"]));
+                    member.RefreshTokenExpiryTime = expiryDate;
+
+
+                    context.SaveChanges();
+
+                    return new TokenMemberModel
+                    {
+                        AccessToken = accessToken,
+                        RefreshToken = refreshToken,
+                        RefreshTokenExpiryTime = expiryDate
+                    };
+
                 }
 
 
@@ -54,7 +73,67 @@ namespace XYZToDo.Models.Repository
             return null;
         }
 
+        public ReturnModel Refresh(TokenMemberModel tokenMemberModel)
+        {
+            string accessToken = tokenMemberModel.AccessToken;
+            string refreshToken = tokenMemberModel.RefreshToken;
 
+            try
+            {
+                ClaimsPrincipal principal = jwtHelpers.GetPrincipalFromExpiredToken(accessToken);
+                string username = principal.Identity.Name; //this is mapped to the Name claim by default
+                Member member = context.Member.SingleOrDefault(m => m.Username == username);
+
+                if (member == null || member.RefreshToken != refreshToken || member.RefreshTokenExpiryTime <= DateTimeOffset.Now)
+                {
+                    return new ReturnModel { ErrorCode = ErrorCodes.Forbidden };
+                }
+
+                string newAccessToken = jwtHelpers.GenerateJWT(username);
+                string newRefreshToken = jwtHelpers.GenerateRefreshToken();
+
+                member.RefreshToken = newRefreshToken;
+
+                DateTimeOffset? expiryDate = DateTimeOffset.Now.AddMinutes(double.Parse(Configuration["JWT:RefreshTokenExpireTimeInMinutes"]));
+                member.RefreshTokenExpiryTime = expiryDate;
+
+                context.SaveChanges();
+
+                TokenMemberModel tmm = new TokenMemberModel
+                {
+                    AccessToken = newAccessToken,
+                    RefreshToken = newRefreshToken,
+                    RefreshTokenExpiryTime = expiryDate
+                };
+                return new ReturnModel { Model = tmm, ErrorCode = ErrorCodes.OK };
+
+            }
+            catch (Exception)
+            {
+                return new ReturnModel { ErrorCode = ErrorCodes.DatabaseError };
+            }
+
+
+        }
+        public ReturnModel LogOut(string username)
+        {
+            try
+            {
+                Member member = this.context.Member.SingleOrDefault(m => m.Username == username);
+                if (member != null)
+                {
+                    member.RefreshToken = null;
+                    context.Entry(member).State = EntityState.Modified;
+                    context.SaveChanges();
+                }
+                else
+                {
+                    new ReturnModel { ErrorCode = ErrorCodes.ItemNotFoundError };
+                }
+            }
+            catch { return new ReturnModel { ErrorCode = ErrorCodes.DatabaseError }; }
+            return new ReturnModel { ErrorCode = ErrorCodes.OK };
+        }
         public ReturnModel Register(RegisterModel registerModel) //Return -2 if user already exists error has ocurred or MemberId, -1 for db errors.
         {
             Member member = Members.Where(m => m.Username == registerModel.Username || m.Email == registerModel.Email).FirstOrDefault();
@@ -128,10 +207,8 @@ namespace XYZToDo.Models.Repository
 
 
         }
-        
-        public string RefreshToken(string username){
-            return this.jwtHelpers.GenerateJWT(username);
-        }
+
+
         public async Task SendThankYouEmail(RegisterModel member)
         {
             //gather information

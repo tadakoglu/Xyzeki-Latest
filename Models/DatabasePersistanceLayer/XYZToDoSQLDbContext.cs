@@ -1,8 +1,8 @@
-﻿using XYZToDo.Infrastructure;
+﻿using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
-
-
+using XYZToDo.Infrastructure;
 
 namespace XYZToDo.Models.DatabasePersistanceLayer
 {
@@ -314,6 +314,8 @@ namespace XYZToDo.Models.DatabasePersistanceLayer
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(25);
+
+                entity.Property(e => e.RefreshTokenExpiryTime).HasColumnType("datetimeoffset(0)");
 
                 entity.Property(e => e.Surname)
                     .IsRequired()

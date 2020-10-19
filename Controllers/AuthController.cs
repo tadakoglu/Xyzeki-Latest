@@ -59,6 +59,81 @@ namespace XYZToDo.Controllers
             this.cryptoHelpers = cryptoHelpers;
         }
 
+        [HttpPost("Authenticate")]
+        public IActionResult Authenticate([FromBody] LoginModel loginModel, [FromQuery] string recaptchaToken) //Accepts JSON body, not x-www-form-urlencoded!
+        {
+
+            // float score = await this.GetReCaptchaUserResponseScoreAsync(recaptchaToken);
+            // if (score < 0.5)
+            //     return new StatusCodeResult(StatusCodes.Status503ServiceUnavailable);  // 503 Service Unavailable DB Error.
+
+            // try
+            // {
+            //     //loginModel.Password = this.cryptoHelpers.DecryptWithAES(loginModel.Password);
+
+            // }
+            // catch (System.Exception)
+            // {
+            //     return new StatusCodeResult(StatusCodes.Status503ServiceUnavailable);
+            // }
+
+            TokenMemberModel tokenMemberModel = AuthRepository.Login(loginModel);
+
+            if (tokenMemberModel != null)
+            {
+                //no need this values in client side
+                tokenMemberModel.Member.CryptoPassword = null;
+                tokenMemberModel.Member.CryptoSalt = null;
+
+                return Ok(tokenMemberModel);//200 OK, Send JWT with member profile to our member.           
+            }
+            return Unauthorized(); //401 Unauthorized      
+        }
+
+        [HttpPost]
+        [Route("Refresh")]
+        public IActionResult Refresh(TokenMemberModel tokenMemberModel)
+        {
+            if (tokenMemberModel is null)
+            {
+                return BadRequest("Invalid client request");
+            }
+            ReturnModel r = this.AuthRepository.Refresh(tokenMemberModel);
+            if (r.ErrorCode == ErrorCodes.OK)
+            {
+                TokenMemberModel tmm = r.Model as TokenMemberModel;
+                return Ok(tmm);
+            }
+            else
+            {
+                return new StatusCodeResult(StatusCodes.Status503ServiceUnavailable);
+            }
+
+        }
+
+
+        [HttpPost, Authorize]
+        [Route("Revoke")]
+        public IActionResult Revoke()
+        {
+            ReturnModel r = this.AuthRepository.LogOut(User.Identity.Name);
+            if (r.ErrorCode == ErrorCodes.OK)
+            {
+                return Ok();
+            }
+            else if (r.ErrorCode == ErrorCodes.ItemNotFoundError)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return new StatusCodeResult(StatusCodes.Status503ServiceUnavailable);
+            }
+
+
+        }
+
+
         [HttpGet("GetUnixTimestamp")]
         public IActionResult GetUnixTimestamp() // api/Auth/GetUnixTimestamp
         {
@@ -103,50 +178,6 @@ namespace XYZToDo.Controllers
 
         }
 
-        [HttpPost("Authenticate")]
-        public IActionResult Authenticate([FromBody] LoginModel loginModel, [FromQuery] string recaptchaToken) //Accepts JSON body, not x-www-form-urlencoded!
-        {
-
-            // float score = await this.GetReCaptchaUserResponseScoreAsync(recaptchaToken);
-            // if (score < 0.5)
-            //     return new StatusCodeResult(StatusCodes.Status503ServiceUnavailable);  // 503 Service Unavailable DB Error.
-
-            try
-            {
-                //loginModel.Password = this.cryptoHelpers.DecryptWithAES(loginModel.Password);
-
-            }
-            catch (System.Exception)
-            {
-                return new StatusCodeResult(StatusCodes.Status503ServiceUnavailable);
-            }
-
-            Tuple<string, Member> JWTandMember = AuthRepository.Login(loginModel);
-
-            if (JWTandMember != null)
-            {
-                HttpContext.Session.SetString("Xyzeki_JWTToken", JWTandMember.Item1);
-                HttpContext.Session.SetJson("Xyzeki_Member", JWTandMember.Item2);
-
-                JWTandMember.Item2.CryptoPassword = null;
-                JWTandMember.Item2.CryptoSalt = null;
-                return Ok((JWTandMember.Item1, JWTandMember.Item2));//200 OK, Send JWT with member profile to our member.           
-            }
-            return Unauthorized(); //401 Unauthorized      
-        }
-
-
-        [HttpGet("RefreshToken")]
-        [Authorize]
-        public IActionResult RefreshToken()
-        {
-            var member = User.Identity.Name;
-            string refreshToken = AuthRepository.RefreshToken(member);
-            HttpContext.Session.SetString("Xyzeki_JWTToken", refreshToken);
-            //Console.WriteLine(refreshToken);
-            return Ok(refreshToken);
-
-        }
 
         [HttpPost("SetSessionString")]
         public IActionResult SetSessionString(string key, [FromBody] string value)

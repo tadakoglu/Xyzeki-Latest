@@ -11,13 +11,16 @@ namespace XYZToDo.Models.Abstract
         //Method arguments are models when we send a full model to API method. Otherwise, just the ID is enough, e.g in Delete method
         IQueryable<Member> Members { get; }
 
-        Tuple<string, Member> Login(LoginModel member); // Returns JWT Token with member data
-        string RefreshToken(string username);
+        TokenMemberModel Login(LoginModel member); // Returns JWT Token with member data
+        
+        ReturnModel Refresh(TokenMemberModel tokenMemberModel);
+        ReturnModel LogOut(string username);
         ReturnModel Register(RegisterModel member); //Return -2 if user exists error has ocurred or MemberId, -1 for db errors.
         
 
         Task<ReturnModel> RequestForgotPasswordEmail(string email);
         bool IsSecurityCodeFoundAndValid(Guid securityCode);
         ReturnModel SetUpNewPassword(Guid securityCode, string newPassword);
+        
     }
 }

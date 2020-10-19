@@ -4,7 +4,7 @@ export class CryptoHelpers {
         constructor() { }
 
         private jf9p3hg4n9: string = 'J*+FAL!%54?6g'
-       
+
 
         encrypt(textToEn: string): string {
                 return CryptoTS.AES.encrypt(textToEn, this.jf9p3hg4n9);
@@ -14,6 +14,10 @@ export class CryptoHelpers {
                 var bytes = CryptoTS.AES.decrypt(textToDe.toString(), this.jf9p3hg4n9);
                 return bytes.toString(CryptoTS.enc.Utf8);
         }
+        randomNumber(base = 10): number {
+                return Math.floor(Math.random() * base)
+        }
+
 }
 
 

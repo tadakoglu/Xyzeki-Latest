@@ -12,6 +12,7 @@ import { SecurityCodeModel } from '../security-code.model';
 import { GoogleReCaptcha_SecretKey } from 'src/infrastructure/google-captcha';
 import { BackEndWebServer } from 'src/infrastructure/back-end-server';
 import { Tuple } from '../tuple.model';
+import { TokenMemberModel } from '../token-member.model';
 
 
 @Injectable()
@@ -33,19 +34,19 @@ export class AuthService {
   //   "error-codes": [...]        // optional
   // }
 
-  authenticate(loginModel: LoginModel, recaptchaToken): Observable<ReturnModel<Tuple<string, Member>>> { // get token with member data
+  authenticate(loginModel: LoginModel, recaptchaToken): Observable<HttpResponse<TokenMemberModel>> { // get token with member data
     //loginModel.Password = this.cryptoHelpers.encryptWithAES(loginModel.Password); // Later will be decrypt in .NET 
-    return this.http.post<Tuple<string, Member>>(this.baseURL + "api/Auth/Authenticate", loginModel,
-      { observe: "response", headers: new HttpHeaders({ 'Content-Type': 'application/json' }), params: { 'recaptchaToken': recaptchaToken } }).
-      pipe(map(response => {
-        switch (response.status) {
-          case 200:
-            return new ReturnModel<Tuple<string, Member>>(ErrorCodes.OK, response.body);
-        }
-      })) // Pipe will open up the observable returned by 'post' method and transform the pure object through a set of functions seperated by comma.
+    return this.http.post<TokenMemberModel>(this.baseURL + "api/Auth/Authenticate", loginModel,
+      { observe: "response", headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+       params: { 'recaptchaToken': recaptchaToken } })
+    // Pipe will open up the observable returned by 'post' method and transform the pure object through a set of functions seperated by comma.
   }
-  refreshToken(): Observable<any> {
-    return this.http.get(`${this.baseURL}api/Auth/RefreshToken`, { responseType: 'text' });
+  refreshToken(tokenMemberModel:TokenMemberModel): Observable<TokenMemberModel> { // send old, get new
+    return this.http.post<TokenMemberModel>(`${this.baseURL}api/Auth/Refresh`,tokenMemberModel);
+  }
+
+  revoke() :Observable<void>{
+    return this.http.post<void>(`${this.baseURL}api/Auth/Revoke`,null);
   }
 
   SetSessionString(key: string, value: string): Observable<any> {
