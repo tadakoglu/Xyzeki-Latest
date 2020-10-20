@@ -82,17 +82,16 @@ namespace XYZToDo.Controllers
             if (tokenMemberModel != null)
             {
                 //no need this values in client side
-                tokenMemberModel.Member.CryptoPassword = null;
-                tokenMemberModel.Member.CryptoSalt = null;
+                // tokenMemberModel.Member.CryptoPassword = null;
+                // tokenMemberModel.Member.CryptoSalt = null;
 
                 return Ok(tokenMemberModel);//200 OK, Send JWT with member profile to our member.           
             }
             return Unauthorized(); //401 Unauthorized      
         }
 
-        [HttpPost]
-        [Route("Refresh")]
-        public IActionResult Refresh(TokenMemberModel tokenMemberModel)
+        [HttpPost("Refresh")]
+        public IActionResult Refresh([FromBody]TokenMemberModel tokenMemberModel)
         {
             if (tokenMemberModel is null)
             {

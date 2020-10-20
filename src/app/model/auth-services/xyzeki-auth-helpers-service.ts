@@ -32,7 +32,7 @@ export class XyzekiAuthHelpersService {
         let accessToken = tmm.AccessToken;
         let refreshToken = tmm.RefreshToken
         let refreshTokenExpiryTime = tmm.RefreshTokenExpiryTime
-        
+
         this.SaveMember(member); // only once
         this.SaveAccessToken(accessToken); // only once
         this.SaveRefreshToken(refreshToken, refreshTokenExpiryTime)
@@ -72,7 +72,7 @@ export class XyzekiAuthHelpersService {
     }
 
     AuthAutoIfPossible() {
-        if (this.xyzekiAuthService.LoggedIn) {
+        if (!this.xyzekiAuthService.IsAccessTokenExpired || !this.xyzekiAuthService.IsRefreshTokenExpired) {
             this.LoadMemberSettings();
             this.LoadAllRepositories();
             this.StartSignalR(this.xyzekiAuthService.AccessToken);
@@ -121,7 +121,7 @@ export class XyzekiAuthHelpersService {
     //#region  Auth Helpers
 
     SaveMember(member: Member) {
-        localStorage.setItem("Xyzeki-Member", cryptoHelper.encrypt(JSON.stringify(member))); // Persistance
+        localStorage.setItem("Xyzeki-Member", JSON.stringify(member)); // Persistance
 
     }
     SaveAccessToken(access: string) {

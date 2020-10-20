@@ -12,8 +12,7 @@ export class AuthGuardService implements CanActivate {
 
   }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-
-    if (this.xyzekiAuthService.LoggedIn) {
+    if (!this.xyzekiAuthService.IsAccessTokenExpired || !this.xyzekiAuthService.IsRefreshTokenExpired) {
       return true;
     }
     else {

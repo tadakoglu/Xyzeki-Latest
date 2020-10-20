@@ -58,9 +58,10 @@ namespace XYZToDo.Models.Repository
 
 
                     context.SaveChanges();
-
+                    
                     return new TokenMemberModel
                     {
+                        Member=member,
                         AccessToken = accessToken,
                         RefreshToken = refreshToken,
                         RefreshTokenExpiryTime = expiryDate
@@ -101,6 +102,7 @@ namespace XYZToDo.Models.Repository
 
                 TokenMemberModel tmm = new TokenMemberModel
                 {
+                    Member = member,
                     AccessToken = newAccessToken,
                     RefreshToken = newRefreshToken,
                     RefreshTokenExpiryTime = expiryDate

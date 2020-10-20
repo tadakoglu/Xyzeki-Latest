@@ -173,7 +173,7 @@ export class XyzekiSignalrService {
   async destroyHubConnection() {
     if (this.hubConnection) {
       this.hubConnection.stop();
-      this.hubConnection = this.builder.build();
+      //
     }
 
   }

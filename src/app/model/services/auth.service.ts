@@ -37,16 +37,19 @@ export class AuthService {
   authenticate(loginModel: LoginModel, recaptchaToken): Observable<HttpResponse<TokenMemberModel>> { // get token with member data
     //loginModel.Password = this.cryptoHelpers.encryptWithAES(loginModel.Password); // Later will be decrypt in .NET 
     return this.http.post<TokenMemberModel>(this.baseURL + "api/Auth/Authenticate", loginModel,
-      { observe: "response", headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-       params: { 'recaptchaToken': recaptchaToken } })
+      {
+        observe: "response", headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+        params: { 'recaptchaToken': recaptchaToken }
+      })
     // Pipe will open up the observable returned by 'post' method and transform the pure object through a set of functions seperated by comma.
   }
-  refreshToken(tokenMemberModel:TokenMemberModel): Observable<TokenMemberModel> { // send old, get new
-    return this.http.post<TokenMemberModel>(`${this.baseURL}api/Auth/Refresh`,tokenMemberModel);
+  refreshToken(tokenMemberModel: TokenMemberModel): Observable<TokenMemberModel> { // send old, get new
+    console.log('giden token member model' + JSON.stringify(tokenMemberModel))
+    return this.http.post<TokenMemberModel>(`${this.baseURL}api/Auth/Refresh`, tokenMemberModel);
   }
 
-  revoke() :Observable<void>{
-    return this.http.post<void>(`${this.baseURL}api/Auth/Revoke`,null);
+  revoke(): Observable<void> {
+    return this.http.post<void>(`${this.baseURL}api/Auth/Revoke`, null);
   }
 
   SetSessionString(key: string, value: string): Observable<any> {

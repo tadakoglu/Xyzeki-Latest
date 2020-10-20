@@ -3,6 +3,8 @@ import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-servi
 import { Router } from '@angular/router';
 import { XyzekiAuthHelpersService } from 'src/app/model/auth-services/xyzeki-auth-helpers-service';
 import { AuthService } from 'src/app/model/services/auth.service';
+import { catchError } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-nav-profile',
@@ -20,8 +22,11 @@ export class NavProfileComponent implements OnInit {
     this.authService.revoke().subscribe(() => {
       this.xyzekiAuthHelpersService.DeAuth();
       this.router.navigate(['/'])
-    }
-   
+    }, catchError((err) => { // in case access token & and refresh token both expired and user cannot call backend revoke and delete local member& token files.
+      this.xyzekiAuthHelpersService.DeAuth();
+      return EMPTY;
+    }))
+
   }
   @Input() isLocked = false;
 

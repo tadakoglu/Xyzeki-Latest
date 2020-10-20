@@ -133,7 +133,7 @@
     *ngIf="myQuickToDos.length != 0 && (this.dataService?.switchMode == 0 || this.dataService?.switchMode == 1 || dayDateStr == 'ArsivKutusu')"
     class="card-footer bg-white p-2" style="background-color:rgb(255, 255, 255) !important; ">
 
-    <table *ngIf="xyzekiAuthService?.LoggedIn" class="table table-hover table-sm ">
+    <table class="table table-hover table-sm ">
       <thead>
       </thead>
       <tbody style=" height: 100%; 
@@ -502,7 +502,7 @@
   <div class="card-body bg-white p-2 " *ngIf="assignedToMeUnComplete?.length != 0"
     style="max-height: 500px; overflow-y: scroll; overflow-y : auto; overflow-x:hidden;">
 
-    <table *ngIf="xyzekiAuthService?.LoggedIn" class="table table-hover table-sm gizliHeader2">
+    <table  class="table table-hover table-sm gizliHeader2">
       <thead>
         <th scope="col"></th>
         <th scope="col">Görev</th>

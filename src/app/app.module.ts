@@ -20,6 +20,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { XyzekiRefreshTokenInterceptor } from './model/interceptors/xyzeki-refresh-token-interceptor';
+import { TokenInterceptor } from './model/interceptors/token-inceptor';
 
 
 

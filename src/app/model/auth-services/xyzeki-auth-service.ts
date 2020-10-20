@@ -41,23 +41,23 @@ export class XyzekiAuthService {
         return expiryTime;
     }
     get LoggedIn(): boolean {
-        return (this.AccessToken && !jwtHelper.isTokenExpired(this.AccessToken)) ? true : false
+        return this.AccessToken ? true : false
     }
 
     get IsAccessTokenExpired(): boolean {
-        return (this.AccessToken && !jwtHelper.isTokenExpired(this.AccessToken)) ? true : false
+        return (this.AccessToken && !jwtHelper.isTokenExpired(this.AccessToken)) ? false : true
     }
-    get IsRefreshTokenExpired():boolean{
+    get IsRefreshTokenExpired(): boolean {
         let today = new Date(); // this is local dependant.
         let refreshToken = new Date(this.RefreshTokenExpiryTime);
 
-        if(refreshToken.getTime() - today.getTime() > 0 ){
+        if (refreshToken.getTime() - today.getTime() > 0) {
             return false;
         }
-        else{
+        else {
             return true;
         }
-       
+
     }
 
 

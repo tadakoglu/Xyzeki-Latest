@@ -88,6 +88,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
       this.subscription = this.recaptchaV3Service.execute(GoogleReCaptcha_LoginAction).pipe(concatMap(
         recaptchaToken => { return this.repository.authenticate(Object.assign({}, this.loginModel), recaptchaToken) })).subscribe((response) => {
           let tokenMemberModel:TokenMemberModel = response.body;
+          console.log(JSON.stringify(tokenMemberModel.Member) + 'üye')
           this.xyzekiAuthHelpersService.Auth(tokenMemberModel);
           this.informUser = "Başarıyla giriş yaptınız."
           this.router.navigate(['/isler'])
