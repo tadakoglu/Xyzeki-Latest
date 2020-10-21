@@ -29,6 +29,7 @@ export class DataService {
   public startSignalConnection: EventEmitter<void> = new EventEmitter();
 
 
+  public refreshTokenSubject: Subject<any> = new BehaviorSubject<any>(null);
 
   constructor() { }
 

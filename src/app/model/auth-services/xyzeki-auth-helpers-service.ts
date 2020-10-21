@@ -46,8 +46,6 @@ export class XyzekiAuthHelpersService {
         // First auth event trigger for other tabs/pages       
         this.FireTabEvent('Xyzeki-Auth-Event');
 
-
-
     }
 
     DeAuth() {
@@ -60,8 +58,6 @@ export class XyzekiAuthHelpersService {
         this.StopSignalR();
 
         this.FireTabEvent('Xyzeki-DeAuth-Event');
-
-        // this.ClearLocalStorage();
         this.NavigateToLogin();
 
     }

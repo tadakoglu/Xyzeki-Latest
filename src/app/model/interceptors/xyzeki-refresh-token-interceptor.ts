@@ -7,19 +7,22 @@ import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
 import { AuthService } from '../services/auth.service';
 import { TokenMemberModel } from '../token-member.model';
 import { Router } from '@angular/router';
+import { DataService } from '../services/shared/data.service';
 
 
 @Injectable()
 export class XyzekiRefreshTokenInterceptor implements HttpInterceptor {
     private refreshTokenInProgress = false;
-    private refreshTokenSubject: Subject<any> = new BehaviorSubject<any>(null);
+    //private refreshTokenSubject: Subject<any> = new BehaviorSubject<any>(null);
+    private refreshTokenSubject: Subject<any> = this.dataService.refreshTokenSubject;
 
-    constructor(public router: Router, public xyzekiAuthHelpersService: XyzekiAuthHelpersService, public xyzekiAuthService: XyzekiAuthService, public authService: AuthService) { }
+    constructor(private dataService: DataService, public router: Router, public xyzekiAuthHelpersService: XyzekiAuthHelpersService, public xyzekiAuthService: XyzekiAuthService, public authService: AuthService) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         if (request.url.indexOf('api/Auth/Refresh') !== -1) { // refresh token isteklerine bir şey iliştirmeden(token vb.) aynen ilet.
             return next.handle(request);
         }
+
         // else if (request.url.indexOf('api/Auth/Authenticate') !== -1) // login isteklerine bir şey iliştirmeden(token vb.) aynen ilet
         // {
         //     console.log("interceptor logine girdi")

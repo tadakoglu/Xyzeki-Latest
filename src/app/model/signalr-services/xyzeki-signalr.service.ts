@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HubConnection, HubConnectionBuilder, HubConnectionState, HttpTransportType, LogLevel, IHttpConnectionOptions } from '@aspnet/signalr';
 
-import { BehaviorSubject, ReplaySubject, interval } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, interval, Subject } from 'rxjs';
 import { QuickTaskComment } from '../quick-task-comment.model';
 import { ProjectTaskComment } from '../project-task-comment.model';
 import { BackEndWebServer } from 'src/infrastructure/back-end-server';
@@ -20,6 +20,8 @@ import { CloudContainer } from '../azure-models/cloud-container.model';
 import { CloudFile } from '../azure-models/cloud-file.model';
 import { NotificationService } from '../notification-services/notification.service';
 import { XyzekiAuthService } from '../auth-services/xyzeki-auth-service';
+import { TokenMemberModel } from '../token-member.model';
+import { filter, switchMap, take } from 'rxjs/operators';
 
 @Injectable()
 export class XyzekiSignalrService {
@@ -30,8 +32,30 @@ export class XyzekiSignalrService {
 
   constructor(private dataService: DataService, private pushService: NotificationService, private xyzekiAuthService: XyzekiAuthService) {
   }
+  private refreshTokenSubject: Subject<any> = this.dataService.refreshTokenSubject;
 
-  async createHubConnection(token) {
+  createHubConnection(token) {
+    const accessExpired = this.xyzekiAuthService.IsAccessTokenExpired
+    const refreshExpired = this.xyzekiAuthService.IsRefreshTokenExpired
+
+    if (accessExpired && refreshExpired) { // do nothing.
+      return;
+    }
+    if (accessExpired && !refreshExpired) {  // wait till token is set
+      this.refreshTokenSubject.pipe(
+        filter(result => result !== null),
+        take(1)
+      ).subscribe(newAccessToken => {
+        this.createHubConnectionAct(newAccessToken);
+      })
+    }
+    if (!accessExpired) { // do now.
+      this.createHubConnectionAct(token);
+    }
+  }
+
+  async createHubConnectionAct(token) {
+
     this.hubConnection = this.builder.withUrl(this.baseURL + 'api/hubs/XyzekiNotificationHub',
       {
         accessTokenFactory: () => { return token }, skipNegotiation: false
