@@ -196,7 +196,7 @@ export class XyzekiSignalrService {
 
   private timeOutId;
   tryConnection(seconds = 10) {
-    if (!this.xyzekiAuthService.LoggedIn)
+    if (this.xyzekiAuthService.IsAccessTokenExpired && this.xyzekiAuthService.IsRefreshTokenExpired)
       return;
 
     let secondsToTryAfter = seconds;

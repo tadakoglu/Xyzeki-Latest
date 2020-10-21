@@ -40,9 +40,7 @@ export class XyzekiAuthService {
         }
         return expiryTime;
     }
-    get LoggedIn(): boolean {
-        return this.AccessToken ? true : false
-    }
+    
 
     get IsAccessTokenExpired(): boolean {
         return (this.AccessToken && !jwtHelper.isTokenExpired(this.AccessToken)) ? false : true

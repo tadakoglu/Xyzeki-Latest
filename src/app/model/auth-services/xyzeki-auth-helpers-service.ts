@@ -26,8 +26,10 @@ export class XyzekiAuthHelpersService {
     }
     public subs: Subscription[] = []
 
-    Auth(tmm: TokenMemberModel) {
+    LoggedIn=false
 
+    Auth(tmm: TokenMemberModel) {
+        this.LoggedIn=true;
         let member = tmm.Member;
         let accessToken = tmm.AccessToken;
         let refreshToken = tmm.RefreshToken
@@ -48,7 +50,8 @@ export class XyzekiAuthHelpersService {
 
     }
 
-    DeAuth(val = true) {
+    DeAuth() {
+        this.LoggedIn=false
         this.RemoveMember();
         this.RemoveAccessToken();
         this.RemoveRefreshToken();
@@ -56,15 +59,7 @@ export class XyzekiAuthHelpersService {
         this.ClearAllRepositories();
         this.StopSignalR();
 
-
-
-        if (val) {
-
-            this.FireTabEvent('Xyzeki-DeAuth-Event');
-
-        }
-
-
+        this.FireTabEvent('Xyzeki-DeAuth-Event');
 
         // this.ClearLocalStorage();
         this.NavigateToLogin();
@@ -73,6 +68,7 @@ export class XyzekiAuthHelpersService {
 
     AuthAutoIfPossible() {
         if (!this.xyzekiAuthService.IsAccessTokenExpired || !this.xyzekiAuthService.IsRefreshTokenExpired) {
+            this.LoggedIn=true;
             this.LoadMemberSettings();
             this.LoadAllRepositories();
             this.StartSignalR(this.xyzekiAuthService.AccessToken);
@@ -83,6 +79,7 @@ export class XyzekiAuthHelpersService {
     //#region Browser Helpers
 
     FireTabEvent(type: 'Xyzeki-Auth-Event' | 'Xyzeki-DeAuth-Event') {
+        //localStorage.setItem(type, this.tabId)
         let authEvent = localStorage.getItem(type)
         if (isNullOrUndefined(authEvent)) {
             localStorage.setItem(type, '0')
@@ -97,23 +94,34 @@ export class XyzekiAuthHelpersService {
         }
     }
 
+    public tabId: string = cryptoHelper.RandomGuid();
+
     StartTabEventListener() {
-        // this.subs.push(fromEvent(window, 'storage').pipe(
-        //     filter((event: any) => event.key == 'Xyzeki-Auth-Event'),
-        // ).subscribe(() => {
-        //     if (!this.xyzekiAuthService.AccessToken) {
-        //         this.AuthMinimal();
-        //         this.NavigateToHome();
+        this.subs.push(fromEvent(window, 'storage').pipe(
+            filter((event: any) => event.key == 'Xyzeki-Auth-Event'),
+        ).subscribe((event) => {
+            console.log('yeni değer' + event.newValue)
+            console.log('tabi d', this.tabId)
 
-        //     }
-        // }))
+            if(!this.LoggedIn){
+                this.AuthAutoIfPossible();
+                this.NavigateToHome();
+            }
 
-        // this.subs.push(fromEvent(window, 'storage').pipe(
-        //     filter((event: any) => event.key == 'Xyzeki-DeAuth-Event'),
-        // ).subscribe(() => {
-        //     console.log('deauth ateşlendi')
-        //     this.DeAuth(false);
-        // }))
+           
+        }))
+
+        this.subs.push(fromEvent(window, 'storage').pipe(
+            filter((event: any) => event.key == 'Xyzeki-DeAuth-Event'),
+        ).subscribe((event) => {
+
+            if(this.LoggedIn){
+                this.DeAuth();
+            }
+
+          
+
+        }))
 
     }
     //#endregion Browser Helpers
