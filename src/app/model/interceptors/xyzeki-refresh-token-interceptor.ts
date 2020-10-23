@@ -68,6 +68,10 @@ export class XyzekiRefreshTokenInterceptor implements HttpInterceptor {
                         this.refreshTokenSubject.next(authResponse.AccessToken); // InjectToken method will gain access token from LS when here sends 'ready' signal.
                         return next.handle(this.injectToken(request));
                     }), catchError((err) => {
+                        this.xyzekiAuthHelpersService.RemoveMember();
+                        this.xyzekiAuthHelpersService.RemoveAccessToken();
+                        this.xyzekiAuthHelpersService.RemoveRefreshToken();
+                        
                         this.router.navigate(['/giris']);  // if refresh doesnt work then there is a problem, then log out
                         return EMPTY
                     }),

@@ -54,6 +54,7 @@ import { ContainersResolverService } from './resolvers/containers-resolver.servi
 import { ContainerFilesResolverService } from './resolvers/container-files-resolver.service';
 import { AlreadyLoggedInGuardService } from './services/guards/already-logged-in-guard.service';
 import { XyzekiAuthHelpersService } from './auth-services/xyzeki-auth-helpers-service';
+import { LoadToMemoryService } from './services/guards/load-to-memory.service';
 
 
 @NgModule({
@@ -71,6 +72,8 @@ import { XyzekiAuthHelpersService } from './auth-services/xyzeki-auth-helpers-se
     XyzekiSignalrService,
     NotificationService,
     TimeService,
+    
+    { provide: LoadToMemoryService, useClass: LoadToMemoryService },// This module's components/services and its tree of child components/services receive new AuthService "instance"
 
     { provide: AuthService, useClass: AuthService },// This module's components/services and its tree of child components/services receive new AuthService "instance"
     { provide: AuthGuardService, useClass: AuthGuardService },

@@ -46,6 +46,9 @@ export class XyzekiSignalrService {
         filter(result => result !== null),
         take(1)
       ).subscribe(newAccessToken => {
+        if (this.hubConnection && this.hubConnection.state == HubConnectionState.Connected) {
+          this.hubConnection.stop();
+        }
         this.createHubConnectionAct(newAccessToken);
       })
     }

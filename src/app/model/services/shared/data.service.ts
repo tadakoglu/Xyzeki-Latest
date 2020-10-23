@@ -5,6 +5,7 @@ import { BehaviorSubject, Subject, ReplaySubject, Observable } from 'rxjs';
 @Injectable()
 export class DataService {
 
+  public loadCredidentalsToMemoryTry=0
   public removeTeamMemberEvent: EventEmitter<number> = new EventEmitter();
 
   public newSwitchDayEvent: Subject<string> = new ReplaySubject<string>(1);

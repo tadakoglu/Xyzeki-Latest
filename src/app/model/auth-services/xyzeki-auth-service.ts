@@ -12,56 +12,78 @@ const cryptoHelper = new CryptoHelpers();
 export class XyzekiAuthService {
     constructor() { }
 
-    get Member(): Member {
-        let member = localStorage.getItem("Xyzeki-Member")
+    private readonly XYZEKI_MEMBER = '+10x0x00000011';
+    private readonly XYZEKI_ACCESS_TOKEN = '-11x0x11001011';
+    private readonly XYZEKI_REFRESH_TOKEN = '-00X10X0000011';
+    private readonly XYZEKI_REFRESH_TOKEN_EXPIRY = '-01X1100X11101100'
+    private readonly XYZEKI_AUTH_EVENT = '-000001x0101010'
+    private readonly XYZEKI_DEAUTH_EVENT = '-0110001x0101010'
+    
+    get MemberLC(): Member {
+        let member = localStorage.getItem(this.XYZEKI_MEMBER)
         if (isNullOrUndefined(member)) {
             return undefined;
         }
-        return JSON.parse(member) as Member
+        let memberDecrypted = cryptoHelper.decrypt(member)
+        return JSON.parse(memberDecrypted) as Member
     }
-    get AccessToken(): string {
-        let accessToken = localStorage.getItem("Xyzeki-Access-Token")
+    get AccessTokenLC(): string {
+        let accessToken = localStorage.getItem(this.XYZEKI_ACCESS_TOKEN)
         if (isNullOrUndefined(accessToken)) {
             return undefined
         }
-        return accessToken;
+        let accessTokenDecrypted = cryptoHelper.decrypt(accessToken)
+        return accessTokenDecrypted;
     }
-    get RefreshToken(): string {
-        let refreshToken = localStorage.getItem("Xyzeki-Refresh-Token")
+    get RefreshTokenLC(): string {
+        let refreshToken = localStorage.getItem(this.XYZEKI_REFRESH_TOKEN)
         if (isNullOrUndefined(refreshToken)) {
             return undefined
         }
-        return refreshToken;
+        let refreshTokenDecrypted = cryptoHelper.decrypt(refreshToken)
+        return refreshTokenDecrypted;
     }
-    get RefreshTokenExpiryTime(): string {
-        let expiryTime = localStorage.getItem("Xyzeki-Refresh-Token-Expiry"); // Persistance
+    get RefreshTokenExpiryTimeLC(): string {
+        let expiryTime = localStorage.getItem(this.XYZEKI_REFRESH_TOKEN_EXPIRY); // Persistance
         if (isNullOrUndefined(expiryTime)) {
             return undefined
         }
-        return expiryTime;
+        let expiryTimeDecrypted = cryptoHelper.decrypt(expiryTime)
+        return expiryTimeDecrypted;
     }
 
 
-    get IsAccessTokenExpired(): boolean {
-        return (this.AccessToken && !jwtHelper.isTokenExpired(this.AccessToken)) ? false : true
-    }
-    get IsRefreshTokenExpired(): boolean {
-        let today = new Date(); // this is local dependant.
-        let refreshToken = new Date(this.RefreshTokenExpiryTime);
-
-        if (refreshToken.getTime() - today.getTime() > 0) {
+    get IsAccessTokenExpiredLC(): boolean {
+        try {
+            return (this.AccessTokenLC && !jwtHelper.isTokenExpired(this.AccessTokenLC)) ? false : true
+        } catch (error) {
             return false;
         }
-        else {
-            return true;
+
+    }
+    get IsRefreshTokenExpiredLC(): boolean {
+        try {
+            let today = new Date(); // this is local dependant.
+            let refreshToken = new Date(this.RefreshTokenExpiryTimeLC);
+
+            if (refreshToken.getTime() - today.getTime() > 0) {
+                return false;
+            }
+            else {
+                return true;
+            }
         }
+        catch (error) {
+            return false;
+        }
+
 
     }
 
 
     //#region Other Helpers
-    get Username(): string {
-        let member = this.Member;
+    get UsernameLC(): string {
+        let member = this.MemberLC;
         if (!isNullOrUndefined(member)) {
             return member.Username
         }
@@ -72,7 +94,75 @@ export class XyzekiAuthService {
     //#endregion Other Helpers
 
 
+    //#region  Memory Versions
+    memberMemory
+    accessTokenMemory
+    refreshTokenMemory
+    refreshTokenExpiryTimeMemory
 
+    get Member() {
+        return this.memberMemory;
+    }
+    get AccessToken() {
+        return this.accessTokenMemory;
+    }
+    get RefreshToken() {
+        return this.refreshTokenMemory;
+    }
+    get RefreshTokenExpiryTime() {
+        return this.refreshTokenExpiryTimeMemory;
+    }
+    get IsAccessTokenExpired() {
+        try {
+            return (this.AccessToken && !jwtHelper.isTokenExpired(this.AccessToken)) ? false : true
+        } catch (error) {
+            return true;
+        }
+    }
+    get IsRefreshTokenExpired(): boolean {
+        try {
+            let today = new Date(); // this is local dependant.
+            let refreshToken = new Date(this.RefreshTokenExpiryTime);
+
+            if (refreshToken.getTime() - today.getTime() > 0) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        catch (error) {
+            return true;
+        }
+
+
+    }
+    get Username() {
+        let member = this.Member;
+        if (!isNullOrUndefined(member)) {
+            return member.Username
+        }
+        else {
+            return undefined
+        }
+    }
+
+
+    set SetMember(val) {
+        this.memberMemory = val
+    }
+    set SetAccessToken(val) {
+        this.accessTokenMemory = val
+    }
+    set SetRefreshToken(val) {
+        this.refreshTokenMemory = val
+    }
+    set SetRefreshTokenExpiryTime(val) {
+        this.refreshTokenExpiryTimeMemory = val
+    }
+    //#endregion Memory Versions
+
+    
 }
 
 

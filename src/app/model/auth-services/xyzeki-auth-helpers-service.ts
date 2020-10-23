@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Injectable } from '@angular/core';
+import { ChangeDetectorRef, Injectable, ɵbypassSanitizationTrustResourceUrl } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { fromEvent, Subscription } from 'rxjs';
@@ -22,14 +22,25 @@ const cryptoHelper = new CryptoHelpers();
 export class XyzekiAuthHelpersService {
     constructor(public authService: AuthService, public xyzekiAuthService: XyzekiAuthService, private dataService: DataService,
         private memberSettingService: MemberSettingService, private xyzekiSignalService: XyzekiSignalrService, private router: Router) {
+
+        this.StartTokenChangeListener();
         this.StartTabEventListener();
     }
+
+    private readonly XYZEKI_MEMBER = '+10x0x00000011';
+    private readonly XYZEKI_ACCESS_TOKEN = '-11x0x11001011';
+    private readonly XYZEKI_REFRESH_TOKEN = '-00X10X0000011';
+    private readonly XYZEKI_REFRESH_TOKEN_EXPIRY = '-01X1100X11101100'
+    private readonly XYZEKI_AUTH_EVENT = '-000001x0101010'
+    private readonly XYZEKI_DEAUTH_EVENT = '-0110001x0101010'
+
+
     public subs: Subscription[] = []
 
-    LoggedIn=false
+    LoggedIn = false
 
     Auth(tmm: TokenMemberModel) {
-        this.LoggedIn=true;
+        this.LoggedIn = true;
         let member = tmm.Member;
         let accessToken = tmm.AccessToken;
         let refreshToken = tmm.RefreshToken
@@ -44,12 +55,12 @@ export class XyzekiAuthHelpersService {
         this.StartSignalR(accessToken); // every time
 
         // First auth event trigger for other tabs/pages       
-        this.FireTabEvent('Xyzeki-Auth-Event');
+        this.FireTabEvent(this.XYZEKI_AUTH_EVENT);
 
     }
 
-    DeAuth() {
-        this.LoggedIn=false
+    DeAuth(triggerTabEvent = true) {
+        this.LoggedIn = false
         this.RemoveMember();
         this.RemoveAccessToken();
         this.RemoveRefreshToken();
@@ -57,24 +68,31 @@ export class XyzekiAuthHelpersService {
         this.ClearAllRepositories();
         this.StopSignalR();
 
-        this.FireTabEvent('Xyzeki-DeAuth-Event');
+        if (triggerTabEvent) {
+            this.FireTabEvent(this.XYZEKI_DEAUTH_EVENT);
+        }
         this.NavigateToLogin();
 
     }
 
     AuthAutoIfPossible() {
         if (!this.xyzekiAuthService.IsAccessTokenExpired || !this.xyzekiAuthService.IsRefreshTokenExpired) {
-            this.LoggedIn=true;
+            this.LoggedIn = true;
             this.LoadMemberSettings();
             this.LoadAllRepositories();
             this.StartSignalR(this.xyzekiAuthService.AccessToken);
         }
     }
 
-
+    LoadCredidentalsToMemory() {
+        this.xyzekiAuthService.SetMember = this.xyzekiAuthService.MemberLC
+        this.xyzekiAuthService.SetAccessToken = this.xyzekiAuthService.AccessTokenLC
+        this.xyzekiAuthService.SetRefreshToken = this.xyzekiAuthService.RefreshTokenLC
+        this.xyzekiAuthService.SetRefreshTokenExpiryTime = this.xyzekiAuthService.RefreshTokenExpiryTimeLC
+    }
     //#region Browser Helpers
 
-    FireTabEvent(type: 'Xyzeki-Auth-Event' | 'Xyzeki-DeAuth-Event') {
+    FireTabEvent(type) { // XYZEKI_AUTH_EVENT | XYZEKI_DEAUTH_EVENT
         //localStorage.setItem(type, this.tabId)
         let authEvent = localStorage.getItem(type)
         if (isNullOrUndefined(authEvent)) {
@@ -92,30 +110,39 @@ export class XyzekiAuthHelpersService {
 
     public tabId: string = cryptoHelper.RandomGuid();
 
+    StartTokenChangeListener() {
+        // this will be triggered by savetoken etc methods.
+        this.subs.push(fromEvent(window, 'storage').pipe(
+            filter((event: any) => event.key == this.XYZEKI_REFRESH_TOKEN), // we use refresh because it's latest, if we load with access_token, then refresh token change wont be updated in this tab:)
+        ).subscribe((event) => {
+            this.LoadCredidentalsToMemory();// refresh "tokens in memory" (load from LC to memory again) when change happens from another tab
+        }))
+
+    }
     StartTabEventListener() {
         this.subs.push(fromEvent(window, 'storage').pipe(
-            filter((event: any) => event.key == 'Xyzeki-Auth-Event'),
+            filter((event: any) => event.key == this.XYZEKI_AUTH_EVENT),
         ).subscribe((event) => {
             console.log('yeni değer' + event.newValue)
             console.log('tabi d', this.tabId)
 
-            if(!this.LoggedIn){
+            if (!this.LoggedIn) {
                 this.AuthAutoIfPossible();
                 this.NavigateToHome();
             }
 
-           
+
         }))
 
         this.subs.push(fromEvent(window, 'storage').pipe(
-            filter((event: any) => event.key == 'Xyzeki-DeAuth-Event'),
+            filter((event: any) => event.key == this.XYZEKI_DEAUTH_EVENT),
         ).subscribe((event) => {
 
-            if(this.LoggedIn){
-                this.DeAuth();
+            if (this.LoggedIn) {
+                this.DeAuth(false);
             }
 
-          
+
 
         }))
 
@@ -125,15 +152,24 @@ export class XyzekiAuthHelpersService {
     //#region  Auth Helpers
 
     SaveMember(member: Member) {
-        localStorage.setItem("Xyzeki-Member", JSON.stringify(member)); // Persistance
-
+        //localStorage.setItem(this.XYZEKI_MEMBER, JSON.stringify(member)); // Persistance
+        localStorage.setItem(this.XYZEKI_MEMBER, cryptoHelper.encrypt(JSON.stringify(member))); // Persistance
+        this.xyzekiAuthService.SetMember = member;
     }
     SaveAccessToken(access: string) {
-        localStorage.setItem("Xyzeki-Access-Token", access); // Persistance
+        //localStorage.setItem(this.XYZEKI_ACCESS_TOKEN, access); // Persistance
+        localStorage.setItem(this.XYZEKI_ACCESS_TOKEN, cryptoHelper.encrypt(access)); // Persistance
+        this.xyzekiAuthService.SetAccessToken = access;
     }
     SaveRefreshToken(refresh: string, refreshExpiryTime) {
-        localStorage.setItem("Xyzeki-Refresh-Token", refresh); // Persistance
-        localStorage.setItem("Xyzeki-Refresh-Token-Expiry", refreshExpiryTime); // Persistance
+        // localStorage.setItem(this.XYZEKI_REFRESH_TOKEN, refresh); // Persistance
+        // localStorage.setItem(this.XYZEKI_REFRESH_TOKEN_EXPIRY, refreshExpiryTime); // Persistance
+
+        localStorage.setItem(this.XYZEKI_REFRESH_TOKEN, cryptoHelper.encrypt(refresh)); // Persistance
+        localStorage.setItem(this.XYZEKI_REFRESH_TOKEN_EXPIRY, cryptoHelper.encrypt(refreshExpiryTime)); // Persistance
+
+        this.xyzekiAuthService.SetRefreshToken = refresh;
+        this.xyzekiAuthService.SetRefreshTokenExpiryTime = refreshExpiryTime;
     }
     LoadAllRepositories() {
         this.dataService.loadAllRepositoriesEvent.next();
@@ -243,14 +279,18 @@ export class XyzekiAuthHelpersService {
     //#region DeAuth Helpers
 
     RemoveMember() {
-        localStorage.removeItem("Xyzeki-Member"); // Persistance
+        localStorage.removeItem(this.XYZEKI_MEMBER); // Persistance
+        this.xyzekiAuthService.SetMember = undefined;
     }
     RemoveAccessToken() {
-        localStorage.removeItem("Xyzeki-Access-Token"); // Persistance
+        localStorage.removeItem(this.XYZEKI_ACCESS_TOKEN); // Persistance
+        this.xyzekiAuthService.SetAccessToken = undefined;
     }
     RemoveRefreshToken() {
-        localStorage.removeItem("Xyzeki-Refresh-Token"); // Persistance
-        localStorage.removeItem("Xyzeki-Refresh-Token-Expiry"); // Persistance
+        localStorage.removeItem(this.XYZEKI_REFRESH_TOKEN); // Persistance
+        localStorage.removeItem(this.XYZEKI_REFRESH_TOKEN_EXPIRY); // Persistance
+        this.xyzekiAuthService.SetRefreshToken = undefined;
+        this.xyzekiAuthService.SetRefreshTokenExpiryTime = undefined;
 
     }
     ClearAllRepositories() {

@@ -81,12 +81,50 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading = false;
   modelSent: boolean = false;
   modelSubmitted: boolean = false;
-  authenticate(loginForm: NgModel) {
+  authenticate2(loginForm: NgModel) {
     this.modelSubmitted = true;
     if (loginForm.valid) {
       this.isLoading = true;
       this.subscription = this.recaptchaV3Service.execute(GoogleReCaptcha_LoginAction).pipe(concatMap(
         recaptchaToken => { return this.repository.authenticate(Object.assign({}, this.loginModel), recaptchaToken) })).subscribe((response) => {
+          let tokenMemberModel:TokenMemberModel = response.body;
+          console.log(JSON.stringify(tokenMemberModel.Member) + 'üye')
+          this.xyzekiAuthHelpersService.Auth(tokenMemberModel);
+          this.informUser = "Başarıyla giriş yaptınız."
+          this.router.navigate(['/isler'])
+          this.modelSent = true;
+          this.modelSubmitted = false;
+          this.isLoading = false;
+
+        }, (error: HttpErrorResponse) => {
+          switch (error.status) {
+            case 401:
+              this.informUser = "Girdiğiniz bilgiler yanlıştır, lütfen tekrar deneyiniz."
+              break;
+            case 503: ; case 0:
+              this.informUser = "Servis şu anda ulaşılabilir değildir."
+              break;
+
+          }
+          this.isLoading = false;
+        }
+        ).add(() => {
+          this.modelSent = true;
+          this.modelSubmitted = false;
+          this.isLoading = false;
+        })
+
+
+
+
+
+    }
+  }
+  authenticate(loginForm: NgModel) {
+    this.modelSubmitted = true;
+    if (loginForm.valid) {
+      this.isLoading = true;
+      this.repository.authenticate(Object.assign({}, this.loginModel),'').subscribe((response) => {
           let tokenMemberModel:TokenMemberModel = response.body;
           console.log(JSON.stringify(tokenMemberModel.Member) + 'üye')
           this.xyzekiAuthHelpersService.Auth(tokenMemberModel);
