@@ -1,11 +1,17 @@
 <nav class="container-fluid bg-dark sticky-top" >
 
     <div class="float-right rounded-0" style=" border-top-left-radius:0!important; border-top-right-radius:0!important;" role="group">              
-            <a [routerLink]="[ 'giris' ]" class="btn modernUnderlined" style="border-radius: 2px;">Oturum Aç <img
+            <a [routerLink]="[ 'giris' ]" class="btn modernUnderlined" style="border-radius: 2px;">
+                
+        <ng-container *ngIf="xyzekiAuthService.IsAccessTokenExpired && xyzekiAuthService.IsRefreshTokenExpired;else profile">
+                    Oturum Aç</ng-container>
+
+        <ng-template #profile>{{xyzekiAuthService.Member.Name }}</ng-template>
+                <img
                     src="../../../assets/arrow-2.png"
                     style="width: 16px;object-fit: cover; cursor: pointer; " /></a>
            
-            <a class="btn btn-dark  btn-sm border-0 rounded-0" style="border-top-left-radius:0!important; border-top-right-radius:0!important;" [routerLink]="[ 'kayit-ol' ]">Üye Olun</a>
+            <a *ngIf="xyzekiAuthService.IsAccessTokenExpired && xyzekiAuthService.IsRefreshTokenExpired" class="btn btn-dark  btn-sm border-0 rounded-0" style="border-top-left-radius:0!important; border-top-right-radius:0!important;" [routerLink]="[ 'kayit-ol' ]">Üye Olun</a>
     </div>
 
     
@@ -15,7 +21,9 @@
 
 <div  class="w-100 text-center">
     <h5>
-        <a href="https://xyzeki.blob.core.windows.net/apps/XyzekiApp.apk"><img style="height: 50px; opacity: 0.99; cursor: pointer; margin-right: 10px; padding: 1px;" src="../../../assets/google-play-icon.svg" /></a>
+        <a href="https://xyzeki.blob.core.windows.net/apps/XyzekiApp.apk">
+            <img style="height: 50px; opacity: 0.99; cursor: pointer; margin-right: 10px; padding: 1px;" 
+            src="../../../assets/google-play-icon.svg" /></a>
         <img style="height: 50px; opacity: 0.99; cursor: pointer; padding: 2px;" src="../../../assets/pwa-app.svg" />
     </h5>
 </div>

@@ -44,7 +44,6 @@ export class AuthService {
     // Pipe will open up the observable returned by 'post' method and transform the pure object through a set of functions seperated by comma.
   }
   refreshToken(tokenMemberModel: TokenMemberModel): Observable<TokenMemberModel> { // send old, get new
-    console.log('giden token member model' + JSON.stringify(tokenMemberModel))
     return this.http.post<TokenMemberModel>(`${this.baseURL}api/Auth/Refresh`, tokenMemberModel);
   }
 

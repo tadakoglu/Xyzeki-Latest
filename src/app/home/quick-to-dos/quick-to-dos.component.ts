@@ -44,7 +44,10 @@ export class QuickToDosComponent implements AfterViewInit, OnDestroy, OnInit {
     this.innerHeight = window.innerHeight;
   }
 
-
+  get getTextAreaRowCount()
+  {
+    return Math.round(this.quickToDoModelEdit.TaskTitle.length * 5 / (this.innerWidth * 1/2)) + 1
+  }
 
   ngAfterViewInit(): void {
     this.switchDaySubscription = this.dataService.newSwitchDayEvent.subscribe(dayDateStr => {

@@ -11,14 +11,14 @@
 <nav [ngStyle]="{'pointer-events': this?.repository?.reOrdering ? 'none':'unset'}" class="container-fluid xyz-card-dark"
     style=" position: sticky;
     top: 0;
-    z-index: 1;">
+    z-index: 1000;">
     <a class="btn btn-dark text-white rounded-0" [routerLink]="[ '/projeler' ]">Geri</a>
     <button class="btn btn-dark text-white rounded-0 float-right" disabled
         *ngIf="projectId && this.innerWidth<=400">{{(getProject(projectId)?.ProjectName).substr(0,20)}}..</button>
     <button class="btn btn-dark text-white rounded-0 float-right" disabled
         *ngIf="projectId && this.innerWidth>400">{{getProject(projectId)?.ProjectName}}</button>
     <div *ngIf="projectId && this.xyzekiAuthService ?.Username == getProject(projectId)?.Owner" class="float-right">
-        <div ngbDropdown placement="bottom" class="d-inline-block">
+        <div ngbDropdown placement="bottom" class="d-inline-block" >
             <a class="xyz-card-dark-btn rounded-0 border-0 mr-2" id="dropdownMemberOptions" ngbDropdownToggle>
                 <img class="gear" src="../../../../assets/gear.svg" style="height: 25px; width: 25px">
             </a>
@@ -98,7 +98,7 @@
     </div>
     <div class="row pl-1 pr-1" style=" position: sticky;
     top: 50px;
-    z-index: 1; background-color: black; padding-top:0px; padding-bottom:0px">
+    z-index: 1; background-color: rgb(189, 189, 189); padding-top:0px; padding-bottom:0px">
 
         <div #switchDayArea class="w-100" style="z-index: 999">
 
@@ -364,10 +364,10 @@
                         <form #projectToDoEditForm="ngForm" (ngSubmit)="editProjectToDo(projectToDoEditForm)"
                             novalidate>
                             <div class="input-group w-100 others">
-                                <textarea (keydown)="onKeydownEvent($event)" id="textForFocus" autofocus
+                                <textarea  (keydown)="onKeydownEvent($event)" id="textForFocus" autofocus
                                     name="projectToDoEdit" #projectToDoEdit="ngModel"
                                     [(ngModel)]="projectToDoModelEdit.TaskTitle" required class="xyz-textarea border-0"
-                                    placeholder="Görevi tanımlar mısınız?" rows="2"> </textarea>
+                                    placeholder="Görevi tanımlar mısınız?" [rows]="getTextAreaRowCount"> </textarea>
 
                                 <ng-template #footerEditStart>
                                     <div class="myCal general"

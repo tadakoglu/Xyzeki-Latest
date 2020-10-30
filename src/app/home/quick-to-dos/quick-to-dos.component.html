@@ -332,7 +332,7 @@
               <div class="input-group w-100 others">
                 <textarea (keydown)="onKeydownEvent($event)" id="textForFocusEdit" autofocus name="quickTaskEdit"
                   #quickTaskEdit="ngModel" [(ngModel)]="quickToDoModelEdit.TaskTitle" required
-                  class="xyz-textarea border-0" placeholder="Görevi tanımlar mısınız?" rows="2"> </textarea>
+                  class="xyz-textarea border-0" placeholder="Görevi tanımlar mısınız?" [rows]="getTextAreaRowCount"> </textarea>
 
                 <!-- Start of Start Date-->
                 <ng-template #footerEditStart>

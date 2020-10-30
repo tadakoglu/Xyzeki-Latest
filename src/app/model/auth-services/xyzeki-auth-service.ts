@@ -100,7 +100,7 @@ export class XyzekiAuthService {
     refreshTokenMemory
     refreshTokenExpiryTimeMemory
 
-    get Member() {
+    get Member():Member {
         return this.memberMemory;
     }
     get AccessToken() {

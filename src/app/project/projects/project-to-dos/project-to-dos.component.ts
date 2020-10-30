@@ -1268,6 +1268,9 @@ export class ProjectToDosComponent implements OnInit, OnDestroy, AfterViewInit {
     this.switchHourDataService.setupStyle.next({ isOpen: true, Visibility: 'hidden', Left: left - 3.5 + 'px', Top: top + 'px' })
   }
 
-
+  get getTextAreaRowCount()
+  {
+    return Math.round(this.projectToDoModelEdit.TaskTitle.length * 5 / (this.innerWidth * 1/2)) + 1
+  }
 
 }

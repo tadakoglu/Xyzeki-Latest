@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener, ChangeDetectionStrategy } from '@angular/core';
+import { XyzekiAuthService } from 'src/app/model/auth-services/xyzeki-auth-service';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class HomeComponent implements OnInit {
     this.innerHeight = window.innerHeight;
   }
 
-  constructor() { }
+  constructor(public xyzekiAuthService: XyzekiAuthService) { }
 
   @HostListener('window:resize', ['$event']) // respond to browser resizing
   onResize(event) {
