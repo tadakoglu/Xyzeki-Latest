@@ -12,13 +12,30 @@
     <img src="../assets/logo.svg" class="d-inline-block"><span class="d-inline-block"
         style="font-size:15px">{{getError()}}, Xyzeki 403</span>
 </div>
-<nav class="container-fluid xyz-card-dark">
-    <a class="btn btn-dark text-white rounded-0" [routerLink]="[ '/isler' ]"> Geri</a>
-    <button class="btn btn-dark text-white rounded-0 float-right" disabled>Ekipler</button>
-    <a [routerLink]="[ 'gelen-takim-davetiyeleri']" class="btn btn-dark rounded-0 text-white float-right mr-1">
-        Davetiyeler<img style="height:18px; object-fit: cover" class="pl-1 pb-0  "
-            src="../../../../assets/closed-envelope.svg"></a>
+<nav class="container-fluid xyz-card-dark ">
+
+    <!-- <a class="btn btn-dark text-white rounded-0" [routerLink]="[ '/isler' ]"> Geri</a> -->
+    <a *ngIf="!newTeamPanelOpen" (click)="toggleTeamPanel()" ngbTooltip="Yeni proje veya liste oluşturun" tooltipClass="tooltipSpecial" 
+        class="btn btn-dark rounded-0 text-white ml-1" style="cursor: pointer">Yeni +</a>
+
+        <a [routerLink]="[ '/takimlar/gelen-takim-davetiyeleri']"  ngbTooltip="Yeni proje veya liste oluşturun" tooltipClass="tooltipSpecial" 
+        class="btn btn-secondary rounded-0 text-white ml-1" style="cursor: pointer">Davetiyeler
+    
+        <img style="height:18px; object-fit: cover" class="pl-1 pb-1   "
+        src="../../../../assets/closed-envelope.svg"></a>
+
+
+
+    <div class="circleBtnSquareSearchBar pl-1">
+        <span class="disable-select">
+            <mat-search-bar (onOpen)="this.searchBarOpen=true" (onClose)="this.searchBarOpen=false"
+                [searchText]="'Xyzeki Proje Arama'"></mat-search-bar>
+        </span>
+    </div>
+
 </nav>
+
+
 <div class="container-fluid pt-4 pb-4 bg-white">
     <div class="row">
         <div class="col-xs-6 col-lg-6 col-12">
@@ -95,8 +112,12 @@
                     </p>
                 </div>
                 <div class="row">
-                    <a *ngIf="!newTeamPanelOpen" (click)="toggleTeamPanel()" class="btn btn-dark rounded-0 text-white"
+                    <!-- <a *ngIf="!newTeamPanelOpen" (click)="toggleTeamPanel()" class="btn btn-dark rounded-0 text-white mr-1"
                         style="cursor:pointer">Yeni Ekip Oluştur</a>
+                        <a [routerLink]="[ '/takimlar/gelen-takim-davetiyeleri']" class="btn btn-secondary rounded-0 text-white float-right mr-1">
+                            Davetiyeler<img style="height:18px; object-fit: cover" class="pl-1 pb-1   "
+                                src="../../../../assets/closed-envelope.svg"></a> -->
+
                 </div>
                 <form class="row" *ngIf="newTeamPanelOpen" #teamForm="ngForm" (ngSubmit)="addTeam(teamForm)" novalidate>
                     <div class="input-group">

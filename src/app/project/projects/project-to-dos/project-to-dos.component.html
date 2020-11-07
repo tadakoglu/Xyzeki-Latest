@@ -8,17 +8,20 @@
         veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>
 </div>
 
-<nav [ngStyle]="{'pointer-events': this?.repository?.reOrdering ? 'none':'unset'}" class="container-fluid xyz-card-dark"
+<nav [ngStyle]="{'pointer-events': this?.repository?.reOrdering ? 'none':'unset'}" class="container-fluid xyz-card-dark justify-content-between"
     style=" position: sticky;
     top: 0;
     z-index: 1000;">
     <a class="btn btn-dark text-white rounded-0" [routerLink]="[ '/projeler' ]">Geri</a>
-    <button class="btn btn-dark text-white rounded-0 float-right" disabled
-        *ngIf="projectId && this.innerWidth<=400">{{(getProject(projectId)?.ProjectName).substr(0,20)}}..</button>
-    <button class="btn btn-dark text-white rounded-0 float-right" disabled
-        *ngIf="projectId && this.innerWidth>400">{{getProject(projectId)?.ProjectName}}</button>
-    <div *ngIf="projectId && this.xyzekiAuthService ?.Username == getProject(projectId)?.Owner" class="float-right">
-        <div ngbDropdown placement="bottom" class="d-inline-block" >
+    <div class="butonsArea btn btn-dark text-white rounded-0">
+
+        <span  
+        *ngIf="projectId && this.innerWidth<=400">{{(getProject(projectId)?.ProjectName).substr(0,20)}}..</span>
+    <span *ngIf="projectId && this.innerWidth>400">{{getProject(projectId)?.ProjectName}}</span>
+
+
+    <div *ngIf="projectId && this.xyzekiAuthService ?.Username == getProject(projectId)?.Owner" class="">
+        <div ngbDropdown placement="bottom" class="d-inline-block ml-3" >
             <a class="xyz-card-dark-btn rounded-0 border-0 mr-2" id="dropdownMemberOptions" ngbDropdownToggle>
                 <img class="gear" src="../../../../assets/gear.svg" style="height: 25px; width: 25px">
             </a>
@@ -88,6 +91,8 @@
         </div>
 
     </div>
+    </div>
+  
 </nav>
 <div class="container-fluid  pt-2 pb-3 bg-white"
     [ngStyle]="{'padding': this.innerWidth <= 600 ? '3px!important': '30px', 'pointer-events':this?.repository?.reOrdering ? 'none':'unset'}">

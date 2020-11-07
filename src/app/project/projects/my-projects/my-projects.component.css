@@ -1,29 +1,34 @@
-.circleBtnSquareSearchBar{ 
-  transition: background-color 0.3s;
-  border-radius: 2px;
-  height:3rem;
-  text-align: center;
-  /* display: table-cell; */
+
+
+.md-avatar.size-0 {
   vertical-align: middle;
-  padding:0px;
-  display: inline-block;
-  line-height: 3rem;
-  margin-right: 2px;
-  margin-bottom: 5px;
+  width: 30px;
+  height: 30px;
 }
-.disable-select {
-  user-select: none; /* supported by Chrome and Opera */
- -webkit-user-select: none; /* Safari */
- -khtml-user-select: none; /* Konqueror HTML */
- -moz-user-select: none; /* Firefox */
- -ms-user-select: none; /* Internet Explorer/Edge */
-}
-.xyz-card-dark {
-    background: #222;
-    color: #fff;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, .08)
+
+
+.md-avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
   }
-  
+  .md-avatar.size-1 {
+    width: 40px;
+    height: 40px;
+  }
+  .md-avatar.size-2 {
+    width: 70px;
+    height: 70px;
+  }
+  .md-avatar.size-3 {
+    width: 90px;
+    height: 90px;
+  }
+  .md-avatar.size-4 {
+    width: 110px;
+    height: 110px;
+  }
+
   .draggable {
     cursor: pointer;
     /* cursor: move; 
@@ -150,3 +155,32 @@
 .tooltipSpecial .arrow::before {
   border-top-color: rgb(160, 164, 187);
 } */
+
+
+
+
+
+.donut{
+  
+ height: 100px;
+  width:100px;
+}
+.donut:hover .donut-segment{
+  stroke-width: 7;
+
+}
+.donut-segment:hover {
+  stroke-width: 7;
+}
+
+.donut-segment {
+  transition: all 0.3s;  
+}
+
+.filter-grey{
+  filter: invert(97%) sepia(0%) saturate(0%) hue-rotate(239deg) brightness(88%) contrast(89%);
+  transition: filter 0.5s;
+}
+.filter-grey:hover{
+  filter: invert(36%) sepia(8%) saturate(221%) hue-rotate(315deg) brightness(93%) contrast(90%);
+}

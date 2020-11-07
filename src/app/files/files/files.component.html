@@ -7,17 +7,6 @@
     kurumsal, bireysel
     veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>
 </div>
-<nav *ngIf="innerWidth < 992" class="container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0"
-  style="height:3rem!important">
-
-  <a class="btn btn-light rounded-0 border-0 xyz-nav-btn " [routerLink]="[ '/dosyalar' ]">Geri</a>
-  <a class="navbar-brand" [routerLink]="[ '/isler' ]">
-    <img src="../../../assets/logo.svg" style="height: 25px; font-family: Arial, Helvetica, sans-serif "> Xyzeki
-  </a>
-  <div class="float-right">
-    <app-nav-profile></app-nav-profile>
-  </div>
-</nav>
 
 <div #scrollMe infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollUpDistance]="1.5" [scrollWindow]="false"
   [infiniteScrollThrottle]="100" (scrolled)="onScrollDown()"

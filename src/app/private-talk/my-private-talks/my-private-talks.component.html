@@ -7,37 +7,18 @@
     kurumsal, bireysel
     veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>
 </div>
-<nav class="container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0 xyz-card-dark"
-  style="height:3rem!important">
+<nav class="container-fluid xyz-card-dark ">
 
-  <div class="float-left ">
-    <a class="btn btn-light rounded-0 border-0 xyz-nav-btn " [routerLink]="[ '/isler' ]">Geri</a>
+
     <a ngbTooltip="Yeni iş konuşması oluşturun" tooltipClass="tooltipSpecial" placement="bottom"
       *ngIf="!newPrivateTalkPanelOpen" (click)="togglePrivateTalkPanel();"
-      class="btn btn-dark border-0 text-white rounded-0 ml-1 " style="cursor:pointer !important;">Yeni +</a>
+      class="btn btn-dark  text-white rounded-0 ml-1 " style="cursor:pointer !important;">Yeni +</a>
     <div class="circleBtnSquareSearchBar pl-1">
       <span class="disable-select">
         <mat-search-bar  (onOpen)="this.searchBarOpen=true" (onClose)="this.searchBarOpen=false"
           [searchText]="'Xyzeki İş Konuşması Arama'" [isDarkMode]="true"></mat-search-bar>
       </span>
     </div>
-  </div>
-
-  <!-- <a *ngIf="this.innerWidth <= 500 || !this.searchBarOpen " class="navbar-brand" [routerLink]="[ '/isler' ]">
-    <img src="../../../assets/logo.svg"
-      style="height: 25px; font-family: Arial, Helvetica, sans-serif; font-size: 18px">
-  </a> -->
-
-
-  <a class="navbar-brand" [routerLink]="[ '/isler' ]">
-    <img style="height: 25px; width:auto;padding-bottom: 3px;" src="../../../assets/logo.svg">
-    <ng-container *ngIf="this.innerWidth > 763">&nbsp;İş Konuşmaları <span
-        class="unreadCountTitle">{{getUnreadTotalPTCount}}</span></ng-container>
-  </a>
-
-  <div class="float-right">
-    <app-nav-profile [hidden]="this.innerWidth <= 763 && this.searchBarOpen"></app-nav-profile>
-  </div>
 
 </nav>
 
@@ -107,7 +88,7 @@
       <div *ngIf="tabMy" #scrollMe infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollUpDistance]="1.5"
         [scrollWindow]="false" [infiniteScrollThrottle]="100" (scrolled)="onScrollDown()"
         class="row xyz-card-big pl-2 pr-2 mb-1 "
-        [ngStyle]="{'height.px': (innerWidth>=577) ? innerHeight-142: innerHeight-62}">
+        [ngStyle]="{'height.px': (innerWidth>=577) ? innerHeight-210: innerHeight-72}">
         <ul>
 
           <span *ngIf="myPrivateTalks_Ongoing?.length==0 && !searchBarOpen" class="mt-1">Henüz bir
@@ -119,7 +100,7 @@
             [ngClass]="{'unreadMessage': getMyPTMessagesForCount(pTalk?.PrivateTalkId)?.MessagesCount > 0 }" style=" 
             overflow: hidden;
             perspective: 1px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; float:left;  ">
-            <div [class.buton-secili]="privateTalkId == pTalk?.PrivateTalkId"
+            <div [class.active]="privateTalkId == pTalk?.PrivateTalkId"
               (click)="onSelectTopic(pTalk?.PrivateTalkId)" class="btn btn-light rounded-0 border-0  w-100"
               style="cursor:pointer !important; justify-content: left; justify-items: left">
               <!-- getReceivers(pTalk?.PrivateTalkId)-->
@@ -184,8 +165,9 @@
             [ngClass]="{'unreadMessageReceived': getReceivedPTMessagesForCount(pTalk?.PrivateTalkId)?.MessagesCount > 0 }"
             style="
             overflow: hidden;
-            perspective: 1px; border-top-left-radius: 2px; border-bottom-left-radius: 2px; border-left: 1px solid #3f3f3f">
-            <a [class.buton-secili]="privateTalkId == pTalk?.PrivateTalkId"
+            perspective: 1px; border-top-left-radius: 2px;
+             border-bottom-left-radius: 2px; border-left: 1px solid #3f3f3f">
+            <a [class.active]="privateTalkId == pTalk?.PrivateTalkId"
               (click)="onSelectTopic(pTalk?.PrivateTalkId)" class="btn btn-light rounded-0 border-0 w-100"
               style="cursor:pointer !important; ">
 

@@ -9,11 +9,9 @@
 </div>
 
 
-<nav class="container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0 xyz-card-dark"
-  style="height:3rem">
+<nav class="container-fluid xyz-card-dark">
   <div>
-    <a class="btn btn-light rounded-0 border-0 xyz-nav-btn " [routerLink]="[ '/isler' ]">Geri</a>
-
+ 
     <a *ngIf="this?.mLicenseRepository?.getPrimaryAccessGranted() && !newContainerPanelOpen"
       ngbTooltip="Yeni dosya konteynırı oluşturun" tooltipClass="tooltipSpecial" placement="bottom"
       (click)="toggleContainerPanel();" class="btn btn-dark border-0 text-white rounded-0 ml-1 "
@@ -31,16 +29,9 @@
 
 
 
-  <a class="navbar-brand" [routerLink]="[ '/isler' ]">
-    <img style="height: 25px; width:auto;padding-bottom: 3px;" src="../../../assets/logo.svg">
-    <ng-container *ngIf="this.innerWidth > 763">&nbsp;Dosyalar</ng-container>
-  </a>
+ 
 
-  <div class="float-right">
-
-    <app-nav-profile [hidden]="this.searchBarOpen && this.innerWidth <= 763"></app-nav-profile>
-
-  </div>
+ 
 </nav>
 
 

@@ -5,6 +5,8 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import "~@ctrl/ngx-emoji-mart/picker";
 
+
+
 @media (max-width: 600px) {
  * {
     -webkit-user-select: none;
@@ -443,11 +445,39 @@ body{
   border-top:0px #fff solid !important;
   border-bottom: 0px #fff solid !important
 }
-.xyz-card-dark {
-    background: #222;
-    color: #fff;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, .08)
-  }
+
+
+  .xyz-card-dark {
+    background: rgba(228, 221, 221, 0.808);
+      /* background: #222; */
+      color: #fff;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
+  
+      height: 50px;
+      display: flex;
+      align-items:center
+    }
+    
+    .circleBtnSquareSearchBar{ 
+      transition: background-color 0.3s;
+      border-radius: 2px;
+      height:3rem;
+      text-align: center;
+      /* display: table-cell; */
+      vertical-align: middle;
+      padding:0px;
+      display: inline-block;
+      line-height: 3rem;
+      margin-right: 2px;
+      margin-bottom: 5px;
+    }
+    .disable-select {
+      user-select: none; /* supported by Chrome and Opera */
+     -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+     -moz-user-select: none; /* Firefox */
+     -ms-user-select: none; /* Internet Explorer/Edge */
+    }
  
 
   @media (min-width: 577px) {

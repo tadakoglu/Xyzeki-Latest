@@ -9,10 +9,10 @@
 </div>
 <nav class="container-fluid xyz-card-dark ">
 
-    <a class="btn btn-dark text-white rounded-0" [routerLink]="[ '/isler' ]"> Geri</a>
+    <!-- <a class="btn btn-dark text-white rounded-0" [routerLink]="[ '/isler' ]"> Geri</a> -->
     <a ngbTooltip="Yeni proje veya liste oluşturun" tooltipClass="tooltipSpecial" *ngIf="!newProjectPanelOpen"
         (click)="toggleProjectPanel()" class="btn btn-dark rounded-0 text-white ml-1" style="cursor: pointer">Yeni +</a>
-    <button class="btn btn-dark text-white rounded-0 float-right" disabled>Projeler/Listeler</button>
+    <!-- <button class="btn btn-dark text-white rounded-0 float-right" disabled>Projeler/Listeler</button> -->
     <div class="circleBtnSquareSearchBar pl-1">
         <span class="disable-select">
             <mat-search-bar (onOpen)="this.searchBarOpen=true" (onClose)="this.searchBarOpen=false"
@@ -33,7 +33,7 @@
                         <td [routerLink]="[ projectA?.ProjectId, 'yapilacaklar']" [fragment]="'shared'"
                             [ngClass]="{'router-link-active': true}" style="font-size: 15px;float:left;  width: 100%;">
                             {{projectA?.ProjectName}}</td>
-
+                          
                         <td cdkDragHandle *ngIf="projectModel?.ProjectId != projectA?.ProjectId"
                             style="max-width: 80px; min-width: 80px">
                             <div ngbTooltip="Size içeriği düzenleme yetkisi verildi." placement="bottom"
@@ -57,6 +57,7 @@
                             </div>
 
                         </td>
+                       
                         <td>
                             <img ngbTooltip="Sizinle paylaşılıyor." placement="bottom" tooltipClass="tooltipSpecial"
                                 class="m-1 float-right" style="height: 38px; width:auto"
@@ -66,6 +67,33 @@
                             <div *ngIf="projectA" class="btn m-1 float-right"
                                 [ngStyle]="{'background-color': (projectA?.Color) ? projectA?.Color : '#E9F6FE', 'border-radius':'2px'}">
                                 &nbsp;</div>
+                        </td>
+                        <td >
+                           
+                          
+                            <svg  viewBox="0 0 42 42" class="donut">
+                                <circle class="donut-hole" cx="21" cy="21" r="16" fill="#fff">
+                                </circle>
+                                <circle class="donut-ring" cx="21" cy="21" r="16" fill="blue" stroke="#d2d3d4" stroke-width="5"></circle>
+                      
+                                <circle class="donut-segment" cx="21" cy="21" r="16" fill="#FEFEFE" stroke="#E3E651" stroke-width="5"
+                                  stroke-dasharray="0.9" stroke-dashoffset="25">
+                                </circle>
+                      
+                                <circle class="donut-segment" cx="21" cy="21" r="16" fill="#FEFEFE" stroke="#E3E651" stroke-width="5"
+                                  [attr.stroke-dasharray]="1 + ', ' + 2" stroke-dashoffset="25">
+                                  <title  class="lead w-100 text-center">
+                                    Projenizin %20'si tamamlandı.
+                                  </title>
+                                </circle>
+                      
+                                <text x="50%" y="50%" text-anchor="middle" fill="black" font-size="8px" font-family="Arial"
+                                  dy=".3em">%{{20 | number: '1.1-1'}}</text>
+                              </svg>
+                      
+
+
+                              
                         </td>
 
                     </tr>
@@ -112,6 +140,7 @@
                             style="font-size: 15px; width: 100%; float:left; ">
                             {{project?.ProjectName}}
                         </td>
+                     
                         <td cdkDragHandle *ngIf="projectModel?.ProjectId != project?.ProjectId"
                             style="max-width: 80px;min-width: 80px; float:right">
                             <div class="wrapOrNot float-right mr-1 draggable"
@@ -180,7 +209,33 @@
                             </div>
 
                         </td>
+                        <td  *ngIf="projectModel?.ProjectId != project?.ProjectId">
+                           
+                          
+                            <svg width="100px" height="100px" viewBox="0 0 42 42" class="donut">
+                                <circle class="donut-hole" cx="21" cy="21" r="16" fill="#fff">
+                                </circle>
+                                <circle class="donut-ring" cx="21" cy="21" r="16" fill="blue" stroke="#d2d3d4" stroke-width="5"></circle>
+                      
+                                <circle class="donut-segment" cx="21" cy="21" r="16" fill="#FEFEFE" stroke="#E3E651" stroke-width="5"
+                                  stroke-dasharray="0.9" stroke-dashoffset="25">
+                                </circle>
+                      
+                                <circle class="donut-segment" cx="21" cy="21" r="16" fill="#FEFEFE" stroke="#E3E651" stroke-width="5"
+                                  [attr.stroke-dasharray]="1 + ', ' + 2" stroke-dashoffset="25">
+                                  <title  class="lead w-100 text-center">
+                                    Projenizin %20'si tamamlandı.
+                                  </title>
+                                </circle>
+                      
+                                <text x="50%" y="50%" text-anchor="middle" fill="black" font-size="8px" font-family="Arial"
+                                  dy=".3em">%{{20 | number: '1.1-1'}}</text>
+                              </svg>
+                      
 
+
+                              
+                        </td>
 
                         <td cdkDragHandleDisabled
                             *ngIf="updateProjectPanelOpen &&  projectModel.ProjectId== project?.ProjectId" colspan="3"

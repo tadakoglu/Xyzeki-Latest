@@ -21,6 +21,8 @@ import { environment } from '../environments/environment';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { XyzekiRefreshTokenInterceptor } from './model/interceptors/xyzeki-refresh-token-interceptor';
 import { TokenInterceptor } from './model/interceptors/token-inceptor';
+import { NavbarModule } from './navbar/navbar.module';
+import { MatIconModule } from '@angular/material';
 
 
 
@@ -34,8 +36,10 @@ registerLocaleData(localeTr);
     BrowserModule, /*includes CommonModule*/
     BrowserAnimationsModule,
     AppRoutingModule,
-    ModelModule, UiToolsModule, AuthModule, MemberModule, HomeModule, TeamModule, ProjectModule, PrivateTalkModule, FilesModule,
+    ModelModule, UiToolsModule, AuthModule, MemberModule, HomeModule, 
+    TeamModule, ProjectModule, PrivateTalkModule, FilesModule,
     AdminModule, DragDropModule,
+    NavbarModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [

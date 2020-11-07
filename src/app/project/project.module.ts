@@ -14,6 +14,7 @@ import { CommentModule } from '../comment/comment.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ProjectToDosComponent } from './projects/project-to-dos/project-to-dos.component';
 import { MatIconModule } from '@angular/material/icon'
+import { NavbarModule } from '../navbar/navbar.module';
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import { MatIconModule } from '@angular/material/icon'
   imports: [
     CommonModule, FormsModule, NgbModule,
     UiToolsModule, PipesModule, DragDropModule, CommentModule, MatCheckboxModule, MatIconModule,
-    RouterModule
+    RouterModule, NavbarModule
   ],
   exports: [ProjectsComponent],
   providers: []

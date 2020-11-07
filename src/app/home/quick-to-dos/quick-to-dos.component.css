@@ -109,11 +109,14 @@
       width: 110px;
       height: 110px;
     }
-    .xyz-card-dark {
-      background: #222;
-      color: #fff;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, .08)
-    }
+  
+      
+      .xyz-card-dark-normal {
+     
+        background: #222;
+          color: #fff;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, .08)
+        }
    
     .corners-new{
       -webkit-border-bottom-right-radius: 0;

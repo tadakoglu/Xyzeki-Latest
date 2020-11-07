@@ -7,24 +7,15 @@
     kurumsal, bireysel
     veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>
 </div>
-<nav *ngIf="innerWidth < 992" class="container-fluid navbar shadow-sm sticky-top navbar-light bg-light pb-0 pt-0"
-  style="height:3rem!important">
 
-  <a class="btn btn-light rounded-0 border-0 xyz-nav-btn " [routerLink]="[ '/is-konusmalari' ]">Geri</a>
-  <a class="navbar-brand" [routerLink]="[ '/isler' ]">
-    <img src="../../../assets/logo.svg" style="height: 25px; font-family: Arial, Helvetica, sans-serif "> Xyzeki
-  </a>
-  <div class="float-right">
-    <app-nav-profile></app-nav-profile>
-  </div>
-</nav>
 
 <div *ngIf="!editPrivateTalkPanelOpen">
   <div #scrollMe [scrollTop]="scrollMe.scrollHeight " infiniteScroll [infiniteScrollDistance]="2"
     [infiniteScrollUpDistance]="1.5" [scrollWindow]="false" [infiniteScrollThrottle]="100" (scrolled)="onScrollDown()"
-    (scrolledUp)="onScrollUp()" [ngStyle]="{'height.px': (innerWidth>=577) ? innerHeight-167: innerHeight-103}"
+    (scrolledUp)="onScrollUp()" [ngStyle]="{'height.px': (innerWidth>=577) ? innerHeight-220: innerHeight-135}"
     class="container-fluid xyz-card-big xyz-card-default bg-light">
-    <div show-dir *ngIf="privateTalkId!=undefined && privateTalkId!=0" class="sticky-top pl-2 pr-1 xyz-card-primary pt-1 bg-dark"
+    <div  *ngIf="privateTalkId!=undefined && privateTalkId!=0" 
+    class="sticky-top pl-2 pr-1 xyz-card-primary pt-1 bg-dark showDiv rounded"
       style="z-index: 100!important">
       <div style="display: inline-block" *ngIf="privateTalk()?.Sender == xyzekiAuthService?.Username && this.privateTalkId"
         class="text-white ">
@@ -95,7 +86,8 @@
         </app-receivers>
         <div class="clear-fix"></div>
         <span class="w-100 text-left"
-          style="font-family: Arial, Helvetica, sans-serif; font-size: 14px">#<b>{{privateTalk()?.Thread}}</b></span>
+          style="font-family: Arial, Helvetica, sans-serif; font-size: 14px">#<b>{{privateTalk()?.Thread}}</b>
+        </span>
       </div>
       <div class="clearfix"></div>
 
@@ -226,6 +218,8 @@
         <button class="btn btn-dark text-white rounded-0 close float-right "
           style="border: 0px solid #fefefe !important; cursor: pointer; padding-bottom: 5px;"
           (click)="toggleEditPrivateTalkPanel()"><span class="text-white">&times;</span></button>
+
+
       </div>
       <div class="row pl-3 pr-3">
         <form class="w-100 " #privateTalkEditForm="ngForm" (ngSubmit)="editPrivateTalk(privateTalkEditForm)" novalidate>

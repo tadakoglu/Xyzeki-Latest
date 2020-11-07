@@ -174,8 +174,12 @@
                         </p>
                 </div>
                 <div name="forTMWR-part3" class="row bg-light pl-1 pr-1">
+                        
+           
+
                         <a *ngIf="!newTeamMemberPanelWROpen" (click)="toggleTeamMemberWRPanel()"
                                 class="btn btn-dark rounded-0 text-white" style="cursor:pointer">Yeni Davetiye</a>
+
                 </div>
                 <form name="forTMWR-part4" class="row bg-light pl-1 pr-1" *ngIf="newTeamMemberPanelWROpen"
                         #teamMemberForm="ngForm" (ngSubmit)="addTeamMemberWR(teamMemberForm)" novalidate>
