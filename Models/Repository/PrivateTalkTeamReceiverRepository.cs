@@ -21,7 +21,7 @@ namespace XYZToDo.Models.Repository
 
         public IQueryable<PrivateTalk> PrivateTalks => context.PrivateTalk;
 
-        public PrivateTalkTeamReceiver[] GetMyPrivateTalkTeamReceivers(string sender, int pageNo, string searchValue, int pageSize = 50) // Returns null or objects,  giden kutusu
+        public PrivateTalkTeamReceiver[] GetMyPrivateTalkTeamReceivers(string sender, string searchValue) // Returns null or objects,  giden kutusu
         {
             var context2 = new XYZToDo.Models.DatabasePersistanceLayer.XYZToDoSQLDbContext();
 
@@ -31,7 +31,8 @@ namespace XYZToDo.Models.Repository
             {
                 ptr = PrivateTalks.Where(bt => bt.Sender == sender)
                 .OrderByDescending(pt => pt.DateTimeCreated).
-                 Where(bt => searchValue == "undefined" || (bt.Thread.Contains(searchValue) || bt.Sender.Contains(searchValue))).Skip((pageNo - 1) * pageSize).Take(pageSize).SelectMany(pt => pt.PrivateTalkTeamReceiver).ToArray();
+                 Where(bt => string.IsNullOrEmpty(searchValue)|| (bt.Thread.Contains(searchValue) || bt.Sender.Contains(searchValue)))
+                 .SelectMany(pt => pt.PrivateTalkTeamReceiver).ToArray();
 
                 context2.Dispose();
             }
@@ -41,12 +42,7 @@ namespace XYZToDo.Models.Repository
             return ptr;
         }
 
-        // DateTimeOffset PTOrderingCriterion(long privateTalkId, string thisMember, XYZToDoSQLDbContext context)
-        // {
-        //     PrivateTalk pTalk = context.PrivateTalk.Where(pt => pt.PrivateTalkId == privateTalkId).FirstOrDefault();
-        //     DateTimeOffset orderingCriterion = (context.PrivateTalkMessage.Where(ptm => ptm.PrivateTalkId == privateTalkId && ptm.Sender != thisMember).OrderByDescending(ptm => ptm.DateTimeSent)?.FirstOrDefault()?.DateTimeSent ?? pTalk.DateTimeCreated) ?? new DateTimeOffset(DateTime.MinValue, TimeSpan.Zero);
-        //     return orderingCriterion;
-        // }
+      
 
 
         public PrivateTalkTeamReceiver[] GetPrivateTalkTeamReceivers(long privateTalkId)  // Returns null or objects

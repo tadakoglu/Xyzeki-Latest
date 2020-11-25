@@ -7,6 +7,8 @@
     kurumsal, bireysel
     veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>
 </div>
+
+<app-navbar></app-navbar>
 <nav class="container-fluid xyz-card-dark ">
 
 
@@ -81,14 +83,12 @@
           (click)="switchTab(true)" [ngClass]="{'squareBtnSelected': tabMy}" class="squareBtn">Size
           Ait <span class="unreadCount">{{getUnreadMyPTCount}}</span></a>
         <a style="border-top-right-radius: 3px;; border-bottom-right-radius: 3px;" (click)="switchTab(false)"
-          [ngClass]="{'squareBtnSelected': !tabMy}" class="squareBtn">Dahil
-          Edildiğiniz <span class="unreadCount">{{getUnreadReceivedPTCount}}</span></a>
+          [ngClass]="{'squareBtnSelected': !tabMy}" class="squareBtn">Dahil Olduğunuz <span class="unreadCount">{{getUnreadReceivedPTCount}}</span></a>
       </div>
 
-      <div *ngIf="tabMy" #scrollMe infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollUpDistance]="1.5"
-        [scrollWindow]="false" [infiniteScrollThrottle]="100" (scrolled)="onScrollDown()"
+      <div *ngIf="tabMy" 
         class="row xyz-card-big pl-2 pr-2 mb-1 "
-        [ngStyle]="{'height.px': (innerWidth>=577) ? innerHeight-210: innerHeight-72}">
+        [ngStyle]="{'height.px': (innerWidth>=577) ? innerHeight-190: innerHeight-60}">
         <ul>
 
           <span *ngIf="myPrivateTalks_Ongoing?.length==0 && !searchBarOpen" class="mt-1">Henüz bir
@@ -111,7 +111,7 @@
 
                   <li *ngFor="let pttr of getTeamReceivers(pTalk?.PrivateTalkId); index as i">
                     <div style="display: inline-block">
-                      <img src="../../../assets/logo.svg" style="background-color: white" class="avatarim">
+                      <img src="../../../assets/logo.svg" style="background-color: white" class="avatarimMini">
                     </div>
                     <div style="display: inline-block">
                       <span style="color: rgb(134, 134, 134); padding: 0; margin:0">&nbsp;
@@ -124,7 +124,7 @@
                   <li *ngFor="let ptr of getReceivers(pTalk?.PrivateTalkId); index as i">
                     <div style="display: inline-block">
                       <img *ngIf="getMember(ptr?.Receiver)?.Avatar" [src]="getMember(ptr?.Receiver)?.Avatar"
-                        alt="Avatar" class="avatarim">
+                        alt="Avatar" class="avatarimMini">
                     </div>
                     <div style="display: inline-block">
                       <span style="color: rgb(134, 134, 134); padding: 0; margin:0">&nbsp;
@@ -151,10 +151,9 @@
         </ul>
       </div>
 
-      <div *ngIf="!tabMy" #scrollMeReceived infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollUpDistance]="1.5"
-        [scrollWindow]="false" [infiniteScrollThrottle]="100" (scrolled)="onScrollDownForReceived()"
+      <div *ngIf="!tabMy" 
         class="row xyz-card-big pl-2 pr-2 mb-1 "
-        [ngStyle]="{'height.px': (innerWidth>=577) ? innerHeight-146: innerHeight-30}">
+        [ngStyle]="{'height.px': (innerWidth>=577) ? innerHeight-190: innerHeight-60}">
         <ul>
           <span *ngIf="myPrivateTalks_Incoming?.length== 0 && !searchBarOpen" class="mt-1">Henüz bir
             iş konuşması kanalı oluşturulmamış.</span>
@@ -171,8 +170,8 @@
               (click)="onSelectTopic(pTalk?.PrivateTalkId)" class="btn btn-light rounded-0 border-0 w-100"
               style="cursor:pointer !important; ">
 
-              <app-receivers [incoming]="true" [sender]="pTalk?.Sender" [privateTalkId]="pTalk?.PrivateTalkId">
-                <img src="../../../assets/loading.gif" style="height: 1.3rem; width:auto">
+              <app-receivers [incoming]="true"  [sender]="pTalk?.Sender" [privateTalkId]="pTalk?.PrivateTalkId">
+                <img src="../../../assets/loading.gif" style="height: 1.3rem; width:auto;">
               </app-receivers>
               <div class="clear-fix"></div>
               <span *ngIf="pTalk?.PrivateTalkId" class="w-100 float-left text-left"

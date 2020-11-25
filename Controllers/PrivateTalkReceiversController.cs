@@ -23,35 +23,20 @@ namespace XYZToDo.Controllers
             this.IPrivateTalkReceiverRepository = iPrivateTalkReceiverRepository;
         }
 
-        [HttpGet("PrivateTalk/MyAll/Page/{pageNo}/Search/{searchValue}/PageSize/{pageSize}")] // GET PrivateTalkReceivers/PrivateTalk/MyAll/Page/2
-        public IActionResult GetMyPrivateTalkReceivers(int pageNo = 1,string searchValue = "undefined", int pageSize = 50) //Accepts from route parameters not JSON. You don't have to speficy [FromRoute], but you can..
+        [HttpGet("PrivateTalk/MyAll/Search/{searchValue?}")] // GET PrivateTalkReceivers/PrivateTalk/MyAll/Page/2
+        public IActionResult GetMyPrivateTalkReceivers(string searchValue) //Accepts from route parameters not JSON. You don't have to speficy [FromRoute], but you can..
         {
             var member = User.Identity.Name; // For security. From Claim(ClaimTypes.Name, Username) in JWT
             if (member == null)
                 return Unauthorized();
 
-            PrivateTalkReceiver[] privateTalkReceivers = IPrivateTalkReceiverRepository.GetMyPrivateTalkReceivers(member, pageNo,searchValue,pageSize);
+            PrivateTalkReceiver[] privateTalkReceivers = IPrivateTalkReceiverRepository.GetMyPrivateTalkReceivers(member,searchValue);
             if (privateTalkReceivers != null)
             {
                 return Ok(privateTalkReceivers);
             }
             return NoContent();  // 404 resource not found, Microsoft docs use NotFound for this kind of behavior.     
         }
-
-        //  [HttpGet("PrivateTalk/ReceivedAll/Page/{pageNo}")] // GET PrivateTalkReceivers/PrivateTalk/ReceivedAll/Page/1
-        // public IActionResult GetReceivedPrivateTalkReceivers(int pageNo = 1) //Accepts from route parameters not JSON. You don't have to speficy [FromRoute], but you can..
-        // {
-        //     var member = User.Identity.Name; // For security. From Claim(ClaimTypes.Name, Username) in JWT
-        //     if (member == null)
-        //         return Unauthorized();
-
-        //     PrivateTalkTeamReceiver[] privateTalkReceivers = IPrivateTalkReceiverRepository.GetReceivedPrivateTalkReceivers(member, pageNo);
-        //     if (privateTalkReceivers != null)
-        //     {
-        //         return Ok(privateTalkReceivers);
-        //     }
-        //     return NoContent();  // 404 resource not found, Microsoft docs use NotFound for this kind of behavior.     
-        // }
 
 
         [HttpGet("PrivateTalk/{privateTalkId}")] // GET PrivateTalkReceivers/PrivateTalk/2

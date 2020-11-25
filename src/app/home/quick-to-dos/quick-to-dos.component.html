@@ -7,7 +7,7 @@
     veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>
 </div>
 
-<div class="card bg-info  corners-new-quick" style="margin-bottom: 2px">
+<div class="card bg-info  corners-new-quick" >
   <div class="card-body xyz-card-dark-normal pl-1 pt-0 pb-1 pr-1" style="z-index: 1.2; border-top-color: black; ">
     <form #quickToDoForm="ngForm" (ngSubmit)="saveQuickToDo(quickToDoForm)" novalidate>
       <div class="input-group w-100 general">
@@ -130,8 +130,26 @@
 
   </div>
   <div
-    *ngIf="myQuickToDos.length != 0 && (this.dataService?.switchMode == 0 || this.dataService?.switchMode == 1 || dayDateStr == 'ArsivKutusu')"
+    *ngIf="(this.dataService?.switchMode == 0 || this.dataService?.switchMode == 1 || dayDateStr == 'ArsivKutusu')"
     class="card-footer bg-white p-2" style="background-color:rgb(255, 255, 255) !important; ">
+
+  <ng-container *ngIf="myQuickToDos.length==0">
+
+    <p class="mt-3 ml-3" *ngIf="dayDateStr == 'Gecikmiş'">
+      Şu an için henüz başlangıcı geçmiş ve hala başlamamış veya teslim tarihi geçmiş verdiğiniz bir görev bulamadık.
+    </p>
+    <p class="mt-3 ml-3" *ngIf="dayDateStr == 'Tümü'">
+      Şu an için verdiğiniz bir görev bulunmamaktadır.
+    </p>
+    <p class="mt-3 ml-3" *ngIf="dayDateStr == 'Gün'">
+      Şu an için bu güne ait verdiğiniz bir görev bulamadık.
+    </p>
+
+
+  </ng-container>
+  
+   
+
 
     <table class="table table-hover table-sm ">
       <thead>
@@ -479,23 +497,23 @@
 </div>
 
 
-<div class="card corners-new border-bottom-0"
+<div class="card corners-new mt-2 "
   *ngIf="dayDateStr != 'ArsivKutusu' && (this.dataService?.switchMode != 1)">
-  <div class="card-header text-white pl-2 pr-2 pb-2"
+  <div class="card-header text-white pl-2 pr-2 pb-2 rounded-0 border-0"
     style="background-color:rgb(179, 179, 179) !important; padding-top: 13px">
-    <span class="font-weight-bolder" style="text-shadow: 1px 1px 2px cadetblue;">Ekip Gelen Kutusu
+    <span class="font-weight-bolder" style="text-shadow: 1px 1px 2px cadetblue;">Gelen İşler
     </span>
     <!-- <button class="close" [routerLink]="[ '/isler' ]"><span class="text-light">&times;</span></button> -->
   </div>
-  <div class="card-body  bg-white " *ngIf="assignedToMeUnComplete?.length == 0">
+  <div class="card-body  bg-white pb-3 " *ngIf="assignedToMeUnComplete?.length == 0">
     <p *ngIf="dayDateStr == 'Gecikmiş'">
-      Şu an için henüz başlangıcı geçmiş ve hala başlamamış veya teslim tarihi geçmiş bir görev bulamadık.
+      Şu an için henüz başlangıcı geçmiş ve hala başlamamış veya teslim tarihi geçmiş atandığınız bir görev bulamadık.
     </p>
     <p *ngIf="dayDateStr == 'Tümü'">
-      Şu an için bir göreviniz bulunmamaktadır.
+      Şu an için atandığınız bir görev bulunmamaktadır.
     </p>
     <p *ngIf="dayDateStr == 'Gün'">
-      Şu an için bu güne ait bir görev bulamadık.
+      Şu an için bu güne ait atandığınız bir görev bulamadık.
     </p>
   </div>
 
@@ -503,11 +521,7 @@
     style="max-height: 500px; overflow-y: scroll; overflow-y : auto; overflow-x:hidden;">
 
     <table  class="table table-hover table-sm gizliHeader2">
-      <thead>
-        <th scope="col"></th>
-        <th scope="col">Görev</th>
-
-      </thead>
+      
       <tbody class="shadowedTr">
 
         <tr style="margin-bottom: 4px" class="exclude" role="button" *ngFor="let quickToDo  of assignedToMeUnComplete"

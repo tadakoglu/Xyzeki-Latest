@@ -19,20 +19,17 @@ namespace XYZToDo.Models.Repository
 
         public IQueryable<PrivateTalkReceiver> PrivateTalkReceivers => context.PrivateTalkReceiver;
         public IQueryable<PrivateTalk> PrivateTalks => context.PrivateTalk;
-        // DateTimeOffset PTOrderingCriterion(long privateTalkId, string thisMember, XYZToDoSQLDbContext context)
-        // {
-        //     PrivateTalk pTalk = context.PrivateTalk.Where(pt => pt.PrivateTalkId == privateTalkId).FirstOrDefault();
-        //     DateTimeOffset orderingCriterion = (context.PrivateTalkMessage.Where(ptm => ptm.PrivateTalkId == privateTalkId && ptm.Sender != thisMember).OrderByDescending(ptm => ptm.DateTimeSent)?.FirstOrDefault()?.DateTimeSent ?? pTalk.DateTimeCreated) ?? new DateTimeOffset(DateTime.MinValue, TimeSpan.Zero);
-        //     return orderingCriterion;
-        // }
+    
 
-        public PrivateTalkReceiver[] GetMyPrivateTalkReceivers(string sender, int pageNo, string searchValue, int pageSize = 50) // Returns null or objects,  giden kutusu
+        public PrivateTalkReceiver[] GetMyPrivateTalkReceivers(string sender,string searchValue) // Returns null or objects,  giden kutusu
         {
 
 
             PrivateTalkReceiver[] ptr = PrivateTalks.Where(bt => bt.Sender == sender)
                   .OrderByDescending(pt => pt.DateTimeCreated).
-                 Where(bt => searchValue == "undefined" || (bt.Thread.Contains(searchValue) || bt.Sender.Contains(searchValue))).Skip((pageNo - 1) * pageSize).Take(pageSize).SelectMany(pt => pt.PrivateTalkReceiver).ToArray();
+                 Where(bt => string.IsNullOrEmpty(searchValue) || (bt.Thread.Contains(searchValue) || bt.Sender.Contains(searchValue)))
+                 
+                 .SelectMany(pt => pt.PrivateTalkReceiver).ToArray();
 
 
             return ptr;

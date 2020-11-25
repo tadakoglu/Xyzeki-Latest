@@ -9,13 +9,16 @@ namespace XYZToDo.Models.Abstract
         IQueryable<PrivateTalk> PrivateTalks { get; } //PrivateTalks query api
 
         //Viewing methods  will return NULL there is/are not such object/objects otherwise object/objects
-        PrivateTalk[] MyPrivateTalks(string sender, int pageNo, string searchValue, int pageSize); // PrivateTalks owned
-        PrivateTalk[] PrivateTalksReceived(string receiver, int pageNo, string searchValue, int pageSize); // PrivateTalks I Have Joined in
+
+        PrivateTalkContainerModel MyPrivateTalksNew(string sender, string searchValue);
+        PrivateTalkContainerModel PrivateTalksReceivedNew(string sender, string searchValue);
+        PrivateTalk[] MyPrivateTalks(string sender, string searchValue); // PrivateTalks owned
+        PrivateTalk[] PrivateTalksReceived(string receiver, string searchValue); // PrivateTalks I Have Joined in
 
         bool isMyPrivateTalkGuard(long privateTalkId, string thisMember);
         bool isPrivateTalkJoinedGuard(long privateTalkId, string thisMember);
-        MessageCountModel[] GetMyPrivateTalkMessagesCount(string sender, int pageNo, string searchValue, int pageSize);
-        MessageCountModel[] GetReceivedPrivateTalkMessagesCount(string receiver, int pageNo, string searchValue, int pageSize);
+        MessageCountModel[] GetMyPrivateTalkMessagesCount(string sender, string searchValue);
+        MessageCountModel[] GetReceivedPrivateTalkMessagesCount(string receiver, string searchValue);
 
         int GetUnreadMyPrivateTalksCount(string thisMember);
 

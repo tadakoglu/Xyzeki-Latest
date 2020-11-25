@@ -14,8 +14,8 @@ export class PrivateTalkTeamReceiversService {
         this.baseURL = BackEndWebServer + '/'
     }
 
-    myPrivateTalkTeamReceivers(pageNo: number = 1, searchValue?: string, pageSize?: number): Observable<PrivateTalkTeamReceiver[]> {
-        return this.http.get<PrivateTalkTeamReceiver[]>(this.baseURL + `api/PrivateTalkTeamReceivers/PrivateTalk/MyAll/Page/${pageNo}/Search/${searchValue}/PageSize/${pageSize}`)
+    myPrivateTalkTeamReceivers(searchValue?): Observable<PrivateTalkTeamReceiver[]> {
+        return this.http.get<PrivateTalkTeamReceiver[]>(this.baseURL + `api/PrivateTalkTeamReceivers/PrivateTalk/MyAll/Search/${searchValue ? searchValue : ''}`)
     }
     privateTalkTeamReceivers(privateTalkId: number): Observable<PrivateTalkTeamReceiver[]> {
         return this.http.get<PrivateTalkTeamReceiver[]>(this.baseURL + `api/PrivateTalkTeamReceivers/PrivateTalk/${privateTalkId}`)

@@ -22,14 +22,14 @@ namespace XYZToDo.Controllers
         {
             this.IPrivateTalkTeamReceiverRepository = iPrivateTalkTeamReceiverRepository;
         }
-        [HttpGet("PrivateTalk/MyAll/Page/{pageNo}/Search/{searchValue}/PageSize/{pageSize}")] // GET PrivateTalkTeamReceivers/PrivateTalk/MyAll/Page/1
-        public IActionResult GetMyPrivateTalkTeamReceivers(int pageNo = 1,string searchValue = "undefined", int pageSize=50) //Accepts from route parameters not JSON. You don't have to speficy [FromRoute], but you can..
+        [HttpGet("PrivateTalk/MyAll/Search/{searchValue?}")] // GET PrivateTalkTeamReceivers/PrivateTalk/MyAll/Page/1
+        public IActionResult GetMyPrivateTalkTeamReceivers(string searchValue) //Accepts from route parameters not JSON. You don't have to speficy [FromRoute], but you can..
         {
             var member = User.Identity.Name; // For security. From Claim(ClaimTypes.Name, Username) in JWT
             if (member == null)
                 return Unauthorized();
 
-            PrivateTalkTeamReceiver[] privateTalkteamReceivers = IPrivateTalkTeamReceiverRepository.GetMyPrivateTalkTeamReceivers(member, pageNo,searchValue,pageSize);
+            PrivateTalkTeamReceiver[] privateTalkteamReceivers = IPrivateTalkTeamReceiverRepository.GetMyPrivateTalkTeamReceivers(member,searchValue);
             if (privateTalkteamReceivers != null)
             {
                 return Ok(privateTalkteamReceivers);

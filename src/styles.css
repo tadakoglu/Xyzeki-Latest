@@ -132,6 +132,15 @@
   opacity: 1 !important;
 }
 
+.tooltipSpecial .tooltip-inner {
+  background-color: rgb(224, 224, 224);
+  color: rgb(59, 59, 59);
+  /* font-size: 125%; */
+}
+.tooltipSpecial .arrow::before {
+  border-top-color: rgb(160, 164, 187);
+}
+
 /* .tooltipSpecialX .arrow::before {
   
 } */

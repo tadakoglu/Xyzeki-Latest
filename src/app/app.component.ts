@@ -113,6 +113,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     //   this.router.navigate(['/giris'])
     // }
 
+    
+
     this.router.events.subscribe((event) => {
       switch (true) {
         case event instanceof NavigationStart: {

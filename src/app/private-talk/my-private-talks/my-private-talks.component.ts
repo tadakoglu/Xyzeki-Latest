@@ -29,8 +29,7 @@ import { isNullOrUndefined } from 'util';
   changeDetection: ChangeDetectionStrategy.Default})
 export class MyPrivateTalksComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
-    this.searchSubscription ? this.searchSubscription.unsubscribe() : () => { };
-    this.subscription ? this.subscription.unsubscribe() : () => { };
+    
   }
   private searchSubscription: Subscription;
   private subscription: Subscription;
@@ -45,32 +44,32 @@ export class MyPrivateTalksComponent implements OnInit, AfterViewInit, OnDestroy
     this.innerHeight = window.innerHeight;
 
 
-    this.subscription = this.repository.privateTalkToOpen.subscribe((pt) => { //if a signal comes here, it works in every condition.
-      if (this.innerWidth > 992) {
-        this.privateTalkId = pt.PrivateTalkId
-        this.router.navigate(['is-konusmalari', pt.PrivateTalkId])
-      }
-    });
+    // this.subscription = this.repository.privateTalkToOpen.subscribe((pt) => { //if a signal comes here, it works in every condition.
+    //   if (this.innerWidth > 992) {
+    //     this.privateTalkId = pt.PrivateTalkId
+    //     this.router.navigate(['is-konusmalari', pt.PrivateTalkId])
+    //   }
+    // });
 
-    // when second and more loads 
-    if (this.firstPrivateTalkAvailable()) {
-      if (this.innerWidth > 992) {
-        if (this.route.children) {
-          let child = this.route.children.find((val, index, obj) => index == 0)
-          if (!isNullOrUndefined(child)) {
-            child.paramMap.subscribe(params => {
-              if (!isNullOrUndefined(params)) {
-                this.privateTalkId = Number.parseInt(params.get('PrivateTalkId'))
-              }
-            })
-          } else {
-            this.privateTalkId = this.firstPrivateTalkAvailable().PrivateTalkId
-            this.router.navigate(['is-konusmalari', this.firstPrivateTalkAvailable().PrivateTalkId])
-          }
-        }
+    // // when second and more loads 
+    // if (this.firstPrivateTalkAvailable()) {
+    //   if (this.innerWidth > 992) {
+    //     if (this.route.children) {
+    //       let child = this.route.children.find((val, index, obj) => index == 0)
+    //       if (!isNullOrUndefined(child)) {
+    //         child.paramMap.subscribe(params => {
+    //           if (!isNullOrUndefined(params)) {
+    //             this.privateTalkId = Number.parseInt(params.get('PrivateTalkId'))
+    //           }
+    //         })
+    //       } else {
+    //         this.privateTalkId = this.firstPrivateTalkAvailable().PrivateTalkId
+    //         this.router.navigate(['is-konusmalari', this.firstPrivateTalkAvailable().PrivateTalkId])
+    //       }
+    //     }
 
-      }
-    }
+    //   }
+    // }
 
 
 
@@ -84,11 +83,11 @@ export class MyPrivateTalksComponent implements OnInit, AfterViewInit, OnDestroy
     return this.repository.getMyPrivateTalks().find((val, index, arr) => index == 0);
   }
 
-  constructor(private repositoryTM: TeamMemberRepository, private dataService: DataService, private permissions: MemberLicenseRepository, private teamRepository: TeamRepository, private receiverRepo: PrivateTalkReceiverRepository, private route: ActivatedRoute, private router: Router, private repository: PrivateTalkRepository,
-    public xyzekiAuthService : XyzekiAuthService ,
-    private teamMembersService: TeamMembersService, private teamsService: TeamsService,
-    private membersService: AuthService,
-    private teamMembersSignalrService: XyzekiSignalrService, private memberServ: MembersService) {
+  constructor(private repositoryTM: TeamMemberRepository, private dataService: DataService, 
+    private permissions: MemberLicenseRepository, private teamRepository: TeamRepository, 
+    private receiverRepo: PrivateTalkReceiverRepository, private route: ActivatedRoute, 
+    private router: Router, private repository: PrivateTalkRepository,
+    public xyzekiAuthService : XyzekiAuthService ) {
     this.resetReceiverModels();
   }
 
@@ -103,9 +102,6 @@ export class MyPrivateTalksComponent implements OnInit, AfterViewInit, OnDestroy
     return this.repository.getUnreadTotalPTCount();
   }
 
-  // public getOrderingCriterion(privateTalkId, my = true) {
-  //   return this.repository.PTOrderingCriterion(privateTalkId, my)
-  // }
 
   public privateTalkModel = new PrivateTalk(null, this.xyzekiAuthService .Username, null); //Reset
 
@@ -146,28 +142,14 @@ export class MyPrivateTalksComponent implements OnInit, AfterViewInit, OnDestroy
     this.tabMy = value;
   }
   deepSearchPT(searchValue) { // connect to 'input' event with fromEvent observable
-    this.repository.pageNo = 1;
-    this.repository.pageNoReceived = 1;
     this.repository.searchValue = searchValue;
-    this.repository.loadAll(this.repository.pageNo, this.repository.searchValue);
+    this.repository.loadAll(this.repository.searchValue);
     // this.privateTalkId = 0;
     
   }
 
 
 
-
-  onScrollDown() {
-    this.repository.pageNo = this.repository.pageNo + 1;
-    this.repository.loadMoreMyPrivateTalks(this.repository.pageNo, this.repository.searchValue);
-    this.receiverRepo.loadMoreReceivers(this.repository.pageNo, this.repository.searchValue);
-  }
-
-
-  onScrollDownForReceived() {
-    this.repository.pageNoReceived = this.repository.pageNoReceived + 1;
-    this.repository.loadMoreReceivedPrivateTalks(this.repository.pageNoReceived, this.repository.searchValue);
-  }
 
   newPrivateTalkPanelOpen: boolean = false;
   togglePrivateTalkPanel() {
@@ -185,7 +167,10 @@ export class MyPrivateTalksComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   saveLastSeen() { // In case our member changes private talk id route param
-    this.repository.signalService.notifyPrivateTalkLastSeen(this.oldPrivateTalkId);
+    if(this.oldPrivateTalkId != 0){
+      this.repository.signalService.notifyPrivateTalkLastSeen(this.oldPrivateTalkId);
+
+    }
   }
 
   public privateTalkId: number = 0
@@ -286,12 +271,7 @@ export class MyPrivateTalksComponent implements OnInit, AfterViewInit, OnDestroy
   public innerWidth: any;
   public innerHeight: any;
 
-  // getNavigationExtras() {
-  //   if (!this.tabMy)
-  //     return { fragment: 'shared' };
-  //   else
-  //     return {}
-  // }
+
   @HostListener('window:resize', ['$event']) // respond to browser resizing
   onResize(event) {
     this.innerWidth = window.innerWidth;

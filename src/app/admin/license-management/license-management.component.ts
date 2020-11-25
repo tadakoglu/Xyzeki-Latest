@@ -13,7 +13,7 @@ import { AdminRepository } from 'src/app/model/repository/admin-repository';
 })
 export class LicenseManagementComponent {
 
-  constructor(private repository: AdminRepository, public xyzekiAuthService : XyzekiAuthService ) { }
+  constructor(private repository: AdminRepository, public xyzekiAuthService: XyzekiAuthService) { }
 
   get allLicenses(): MemberLicense[] {
     return this.repository.getAllLicenses();
@@ -22,17 +22,16 @@ export class LicenseManagementComponent {
   modelSent: boolean = false;
   modelSubmitted: boolean = false; // That's for validation method
 
-  public licenseModel: MemberLicense = new MemberLicense(null, null, null, null, null, null, null, null, null, null, null,null);
+  public licenseModel: MemberLicense = new MemberLicense(null, null, null, null, null, null, null, null, null, null, null, null);
   addLicense(licenseForm: NgForm) {
     this.modelSubmitted = true;
     if (licenseForm.valid) {
       this.repository.newLicense(this.licenseModel);
       this.modelSent = true;
       this.modelSubmitted = false;
-      this.licenseModel = new MemberLicense(null, null, null, null, null, null, null, null, null, null, null, null);
     }
   }
-  deleteLicense(licenseId){
+  deleteLicense(licenseId) {
     this.repository.deleteLicense(licenseId);
   }
 
@@ -40,6 +39,8 @@ export class LicenseManagementComponent {
   toggleNewLicensePanel() {
     if (this.newLicensePanelOpen == false) {
       this.newLicensePanelOpen = true;
+      this.licenseModel = new MemberLicense(null, null, null, null, null, null, null, null, null, null, null, null);
+
     }
     else {
       this.newLicensePanelOpen = false;

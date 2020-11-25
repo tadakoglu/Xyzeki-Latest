@@ -12,6 +12,7 @@
     <img src="../assets/logo.svg" class="d-inline-block"><span class="d-inline-block"
         style="font-size:15px">{{getError()}}, Xyzeki 403</span>
 </div>
+<app-navbar></app-navbar>
 <nav class="container-fluid xyz-card-dark">
     <a class="btn btn-dark text-white rounded-0" [routerLink]="[ '/takimlar' ]"> Geri</a>
    
@@ -77,10 +78,10 @@
                                 <!-- <td>{{teamMember?.TeamId}} {{getTeam(teamMember?.TeamId)}}</td> -->
                                 <!-- <td>{{teamMember?.Owner}}{{xyzekiAuthService?.Username == teamMember?.Owner ? '(Siz)': ''}}</td> -->
                                 <td >
-                                    <div class="float-right">
+                                    <!-- <div class="float-right">
                                         <a class="btn btn-light rounded-0"
                                             [routerLink]="[teamMember.TeamId, 'takim-uyeleri']">Ekip Arkadaşlarınız</a>
-                                    </div>
+                                    </div> -->
                                 </td>
                             </tr>
                         </tbody>

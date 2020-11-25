@@ -253,7 +253,7 @@ input:focus{
   text-align: left;
 }
 .animateLi li{
-  animation: kaydirFromRightToLeft 2s both linear; 
+  animation: kaydirFromRightToLeft 5s both linear; 
   -webkit-animation-iteration-count: 1;
   -moz-animation-iteration-count: 1;
   -o-animation-iteration-count: 1;    
@@ -282,6 +282,11 @@ input:focus{
   .avatarim{
     width: 45px;
     height: 45px;
+    border-radius: 10%;
+  }
+  .avatarimMini{
+    width: 20px;
+    height: 20px;
     border-radius: 10%;
   }
   .xyz-card-default {
@@ -320,6 +325,8 @@ input:focus{
     -webkit-transition: box-shadow .1s ease-in-out;
     transition: box-shadow .1s ease-in-out;
     z-index: 1;
+
+    
   }
   .karsiTaraf .xyz-card:after,
   .ben .xyz-card:after {

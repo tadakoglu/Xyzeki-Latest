@@ -24,7 +24,11 @@
   height: 40px;
   border-radius: 50%;
 }
-
+.avatarimMini{
+  width: 20px;
+  height: 20px;
+  border-radius: 10%;
+}
 input{
 
     border-top: 0px;
@@ -314,7 +318,7 @@ box-shadow:0 0px 0 0 rgb(243, 226, 70);
   text-align: left;
 }
 .animateLi li{
-  animation: kaydirFromRightToLeft 2s both linear; 
+  animation: kaydirFromRightToLeft 5s both linear; 
   -webkit-animation-iteration-count: 1;
   -moz-animation-iteration-count: 1;
   -o-animation-iteration-count: 1;    

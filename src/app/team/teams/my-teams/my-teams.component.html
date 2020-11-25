@@ -6,19 +6,23 @@
         fakat herhangi bir
         kurumsal geçerli lisans bulamadık.</span>
 </div>
+
 <div [hidden]="!getError()" style="border-bottom: 1px solid #CED4DA; position: absolute;  top: 0; left:0; right: 0;
  z-index: 10000; background-color: rgb(243,
   242, 242); padding-left: 10px; padding-right: 10px; width: 100%; padding-bottom: 5px; padding-top:5px">
     <img src="../assets/logo.svg" class="d-inline-block"><span class="d-inline-block"
         style="font-size:15px">{{getError()}}, Xyzeki 403</span>
 </div>
+<app-navbar></app-navbar>
 <nav class="container-fluid xyz-card-dark ">
 
     <!-- <a class="btn btn-dark text-white rounded-0" [routerLink]="[ '/isler' ]"> Geri</a> -->
-    <a *ngIf="!newTeamPanelOpen" (click)="toggleTeamPanel()" ngbTooltip="Yeni proje veya liste oluşturun" tooltipClass="tooltipSpecial" 
+    <a *ngIf="!newTeamPanelOpen" (click)="toggleTeamPanel()"
+     ngbTooltip="Yeni ekip oluşturun" tooltipClass="tooltipSpecial" placement="bottom"
         class="btn btn-dark rounded-0 text-white ml-1" style="cursor: pointer">Yeni +</a>
 
-        <a [routerLink]="[ '/takimlar/gelen-takim-davetiyeleri']"  ngbTooltip="Yeni proje veya liste oluşturun" tooltipClass="tooltipSpecial" 
+        <a [routerLink]="[ '/takimlar/gelen-takim-davetiyeleri']"  
+        ngbTooltip="Gelen davetiyeleriniz burada görüntülenir" tooltipClass="tooltipSpecial" placement="bottom"
         class="btn btn-secondary rounded-0 text-white ml-1" style="cursor: pointer">Davetiyeler
     
         <img style="height:18px; object-fit: cover" class="pl-1 pb-1   "
@@ -26,12 +30,12 @@
 
 
 
-    <div class="circleBtnSquareSearchBar pl-1">
+    <!-- <div class="circleBtnSquareSearchBar pl-1">
         <span class="disable-select">
             <mat-search-bar (onOpen)="this.searchBarOpen=true" (onClose)="this.searchBarOpen=false"
                 [searchText]="'Xyzeki Proje Arama'"></mat-search-bar>
         </span>
-    </div>
+    </div> -->
 
 </nav>
 

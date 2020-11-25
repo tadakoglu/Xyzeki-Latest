@@ -4,14 +4,25 @@
                 <img src="../../../assets/logo.svg" style="height: 25px; font-family: Arial, Helvetica, sans-serif ">
                 Xyzeki
         </a>
+        <a class="btn btn-light rounded-0 border-0 xyz-nav-btn" [routerLink]="[ '/isler' ]" 
+        routerLinkActive="active"> <img src="../../../assets/homeOffice50.png" 
+        style="height: 25px; width:auto; margin-right:5px;">
+        İşler </a>
 
         <a class="btn btn-light rounded-0 border-0 xyz-nav-btn " [routerLink]="[ '/is-konusmalari' ]" routerLinkActive="active">
-         <img src="../../../assets/people.png" style="height: 25px; width:auto; margin-right:5px;">       İş Konuşmaları <span style="margin-left: 5px;"
-                        ngbTooltip="{{getUnreadTotalPTCount}} okunmamış iş konuşması bulunmaktadır."
-                        tooltipClass="tooltipSpecial" class="unreadCountTitle">{{getUnreadTotalPTCount}}</span></a>
-        <a class="btn btn-light rounded-0 border-0 xyz-nav-btn" [routerLink]="[ '/projeler' ]" routerLinkActive="active">Projeler</a>
-        <a class="btn btn-light rounded-0 border-0 xyz-nav-btn " [routerLink]="[ '/takimlar' ]" routerLinkActive="active">Ekipler</a>
-        <button class="btn btn-light rounded-0 border-0 xyz-nav-btn " [routerLink]="[ '/dosyalar' ]">Dosyalar</button>
+                <span style="margin-right: 5px;"
+                ngbTooltip="{{getUnreadTotalPTCount}} okunmamış iş konuşması bulunmaktadır."
+                tooltipClass="tooltipSpecial" class="unreadCountTitle">{{getUnreadTotalPTCount}}</span>İş Konuşmaları </a>
+        <a class="btn btn-light rounded-0 border-0 xyz-nav-btn" [routerLink]="[ '/projeler' ]" routerLinkActive="active">
+                
+                Projeler</a>
+        <a class="btn btn-light rounded-0 border-0 xyz-nav-btn " [routerLink]="[ '/takimlar' ]" routerLinkActive="active">
+                
+                
+                Ekipler</a>
+        <button class="btn btn-light rounded-0 border-0 xyz-nav-btn " [routerLink]="[ '/dosyalar' ]" routerLinkActive="active">
+               
+                Dosyalar</button>
         <div class="float-right">
                 <app-nav-profile></app-nav-profile>
         </div>
@@ -33,9 +44,10 @@
                                         <path d="M24 18v1h-24v-1h24zm0-6v1h-24v-1h24zm0-6v1h-24v-1h24z"
                                                 fill="#1040e2" />
                                         <path d="M24 19h-24v-1h24v1zm0-6h-24v-1h24v1zm0-6h-24v-1h24v1z" /></svg><span
-                                        class="text-uppercase"> Menü</span></button>
+                                        class="text-uppercase ml-1 mb-1"> Menü</span></button>
                         <div ngbDropdownMenu aria-labelledby="dropdownMemberOptions" class="rounded-0">
-
+                                <button ngbDropdownItem class="btn btn-light rounded-0 border-0 xyz-nav-btn"
+                                [routerLink]="[ '/isler' ]"  routerLinkActive="active">İşler</button>
                                 <button ngbDropdownItem class="btn btn-light rounded-0 border-0 xyz-nav-btn"
                                         [routerLink]="[ '/is-konusmalari' ]" routerLinkActive="active">İş Konuşmaları <span
                                                 class="unreadCountTitleM">{{getUnreadTotalPTCount}}</span></button>
@@ -64,20 +76,25 @@
                 <img src="../../../assets/logo.svg" style="height: 25px; font-family: Arial, Helvetica, sans-serif ">
                 Xyzeki
         </a>
-        <button class="btn btn-light rounded-0 border-0 xyz-nav-btn" [routerLink]="[ '/is-konusmalari' ]">İş Konuşmaları
+        <button class="btn btn-light rounded-0 border-0 xyz-nav-btn" [routerLink]="[ '/isler']" routerLinkActive="active">
+                <img src="../../../assets/homeOffice50.png" 
+        style="height: 25px; width:auto; margin-right:5px;">İşler</button>
+
+
+        <button class="btn btn-light rounded-0 border-0 xyz-nav-btn" [routerLink]="[ '/is-konusmalari' ]" routerLinkActive="active">İş Konuşmaları
                 <span class="unreadCountTitle">{{getUnreadTotalPTCount}}</span></button>
-        <button class="btn btn-light rounded-0 border-0 xyz-nav-btn" [routerLink]="[ '/projeler']">Projeler</button>
 
         <div>
                 <div ngbDropdown class="d-inline-block">
                         <button class="btn btn-light rounded-0 border-0 mr-1  xyz-nav-btn rounded-0 mb-0 mt-0  ml-0 mr-0 pb-1 pt-1 pl-1 pr-1  "
                                 id="dropdownMemberOptions" ngbDropdownToggle>...</button>
                         <div ngbDropdownMenu aria-labelledby="dropdownMemberOptions" class="rounded-0">
-
                                 <button ngbDropdownItem class="btn btn-light rounded-0 border-0 xyz-nav-btn"
-                                        [routerLink]="[ '/takimlar' ]">Ekipler</button>
+                                [routerLink]="[ '/projeler' ]" routerLinkActive="active">Projeler</button>
                                 <button ngbDropdownItem class="btn btn-light rounded-0 border-0 xyz-nav-btn"
-                                        [routerLink]="[ '/dosyalar' ]">Dosyalar</button>
+                                        [routerLink]="[ '/takimlar' ] "  routerLinkActive="active">Ekipler</button>
+                                <button ngbDropdownItem class="btn btn-light rounded-0 border-0 xyz-nav-btn"
+                                        [routerLink]="[ '/dosyalar' ]"  routerLinkActive="active">Dosyalar</button>
 
 
                         </div>

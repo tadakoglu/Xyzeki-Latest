@@ -34,9 +34,7 @@ export class TeamMemberRepository implements ITeamMemberRepository {
                 }
             })
             this.service.teamMembersJoinedAsMembers().subscribe(tmjAsM => {
-                this.teamMembersJoinedAsMembers.splice(0, this.teamMembersJoinedAsMembers.length);
-                this.teamMembersJoinedAsMembers.push(...tmjAsM);
-                //this.teamMembersJoinedAsMembers = tmjAsM
+              this.teamMembersJoinedAsMembers = tmjAsM
             })
         });
 

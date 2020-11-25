@@ -10,7 +10,7 @@ import { Team } from '../team.model';
 export class TeamRepository implements ITeamRepository {
     // Note: C# auto-properties return attributes with lowercase letters  !!! TS models should be start with lowercase or same, unless, Angular won't model bind!
     constructor(private service: TeamsService, private dataService: DataService) {
-        this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadMYRelateds(false); this.loadPTRelateds() });
+        this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadMYRelateds(); this.loadPTRelateds() });
         this.dataService.clearAllRepositoriesEvent.subscribe(() => { this.clearTeams() })
         this.loadRepository();
     }
@@ -24,34 +24,27 @@ export class TeamRepository implements ITeamRepository {
         this.allTeamsPT = [] // sahip olduğum ve katılmış olduğum takımlar(ikisi bir arada)
         this.informUser = undefined
     }
-    loadMYRelateds(teamToOpen = true) { // ##load this when team comp destroyed.
+    loadMYRelateds() { // ##load this when team comp destroyed.
         this.service.myTeams().subscribe(teams => {
-            this.myTeams.splice(0, this.myTeams.length);
-            this.myTeams.push(...teams);
-            //this.myTeams = teams;
+       this.myTeams = teams;
 
-            if (teams[0] && teamToOpen)
-                this.teamToOpen.next(teams[0])
         })
         this.service.teamsJoined().subscribe(teamsJoined => {
-            this.myTeamsJoined.splice(0, this.myTeamsJoined.length);
-            this.myTeamsJoined.push(...teamsJoined);
-            //this.myTeamsJoined = teamsJoined
+    
+            this.myTeamsJoined = teamsJoined
         })
     }
     loadPTRelateds() { // ##load this when team comp destroyed.
         this.service.allTeamsPT().subscribe(teams => {
-            this.allTeamsPT.splice(0, this.allTeamsPT.length);
-            this.allTeamsPT.push(...teams);
-            //this.allTeamsPT = teams;
+           
+            this.allTeamsPT = teams;
         })
     }
     loadMyTeamsViaResolver(myTeams: Team[]) {
-        this.myTeams.splice(0, this.myTeams.length);
-        this.myTeams.push(...myTeams);
+      
+        this.myTeams = myTeams;
 
-        if (myTeams[0])
-            this.teamToOpen.next(myTeams[0])
+     
     }
     private myTeams: Team[] = []
     private myTeamsJoined: Team[] = []

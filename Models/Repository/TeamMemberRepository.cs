@@ -262,7 +262,6 @@ namespace XYZToDo.Models.Repository
 
 
 
-
                 foreach (var p in context.Set<PrivateTalkReceiver>().Where(ptr => ptr.PrivateTalk.Owner != tMember.Username && ptr.Receiver == tMember.Username))
                 {
                     context.Entry(p).State = EntityState.Deleted;

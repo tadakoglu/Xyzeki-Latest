@@ -18,9 +18,13 @@ li{
   float: left; 
   white-space: nowrap; 
   text-align: left;
+
+  display: flex;
+  height: 25px;
+ 
 }
 .animateLi li{
-  animation: kaydirFromRightToLeft 2s both linear; 
+  animation: kaydirFromRightToLeft 5s both linear; 
   -webkit-animation-iteration-count: 1;
   -moz-animation-iteration-count: 1;
   -o-animation-iteration-count: 1;    
@@ -28,7 +32,11 @@ li{
   transform: translate(0, 0);
 }
 
-
+.avatarimMini{
+  width: 20px;
+  height: 20px;
+  border-radius: 10%;
+}
 
   @keyframes kaydirFromRightToLeft {
  

@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Xyzeki 
+  <title>Xyzeki
   </title>
   <!-- Misyonumuz tüm işlerinizi tek bir yerden yönetmenizi mümkün kılmak ve işlerinizin tamamlandığından emin olmanızı sağlamaktır. -->
   <base href="/">
@@ -58,6 +58,7 @@
     /* .body{
       margin:0
     } */
+   
 
   </style>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -70,9 +71,18 @@
   <!-- for google search https://support.google.com/webmasters/answer/9290858?hl=tr-->
 </head>
 
-<body id="appBody" class="bg-helper" >
+<body id="appBody" class="bg-helper">
 
-  <app-root></app-root>
+
+
+  <app-root>
+    <div #firstLoadingArea 
+      style="display: flex; align-items: center; position: absolute;  top: 25%; padding-left: 35%; padding-right:35%;  z-index: 10000;">
+      <img src="../assets/rolling.png" style="opacity: 0.9">
+      <img src="../assets/logo.svg" style="height: 3rem; width: auto">
+      <span style="font-weight: 500; font-size: 18px; margin-left: 10px; ">Xyzeki yükleniyor...</span>
+    </div>
+  </app-root>
   <noscript>Please enable JavaScript to continue using this application.</noscript>
 
 </body>

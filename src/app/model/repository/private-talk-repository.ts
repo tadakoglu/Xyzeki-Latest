@@ -87,13 +87,13 @@ export class PrivateTalkRepository implements IPrivateTalkRepository {
 
         });
 
-        this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadPTCount(); this.loadAll(1, undefined, false); });
-        this.dataService.clearAllRepositoriesEvent.subscribe(() => { this.clearPrivateTalks() })
+        this.dataService.loadAllRepositoriesEvent.subscribe(() => {  this.loadAll(); });
+        this.dataService.clearAllRepositoriesEvent.subscribe(() => { this.clearPrivateTalks(); this.receiverRepo.clearPrivateTalkReceivers(); })
         this.loadRepository();
     }
     loadRepository() {
-        this.loadAll(1, undefined, false);
-        this.loadPTCount();
+        this.loadAll();
+        // this.loadPTCount();
     }
     clearPrivateTalks() {
         this.myPrivateTalks = []
@@ -102,52 +102,59 @@ export class PrivateTalkRepository implements IPrivateTalkRepository {
         this.receivedPTMessagesCount = [];
         this.unreadMyPrivateTalksCount = 0
         this.unreadReceivedPrivateTalksCount = 0
-        this.pageNo = 1;
-        this.pageNoReceived = 1;
+
         this.searchValue = undefined;
     }
-    loadPTCount() { // ###reload this when team component destroyed...
-        this.service.unreadMyPtCount().subscribe(countMy => {
-            this.unreadMyPrivateTalksCount = countMy
-        }
-        );
-        this.service.unreadReceivedPtCount().subscribe(countReceived => {
-            this.unreadReceivedPrivateTalksCount = countReceived
-        }
-        );
-    }
-    public pageNo: number = 1;
+    // loadPTCount() { // ###reload this when team component destroyed...
+    //     this.service.unreadMyPtCount().subscribe(countMy => {
+    //         this.unreadMyPrivateTalksCount = countMy
+    //     }
+    //     );
+    //     this.service.unreadReceivedPtCount().subscribe(countReceived => {
+    //         this.unreadReceivedPrivateTalksCount = countReceived
+    //     }
+    //     );
+    // }
+    public searchValue: string
 
-    public pageNoReceived: number = 1;
-    public searchValue: string;
+    loadAll(searchValue?: string) { // ###reload this when team component destroyed...
+        // this.service.myPrivateTalks(searchValue).subscribe(privateTalks => {
+        //     this.myPrivateTalks = privateTalks;
 
-    loadAll(pageNo?: number, searchValue?: string, privateTalkToOpen = true) { // ###reload this when team component destroyed...
-        this.service.myPrivateTalks(pageNo, searchValue, this.psz.PTPageSize).subscribe(privateTalks => {
-            this.myPrivateTalks = privateTalks;
-            if (privateTalks[0] && privateTalkToOpen)
-                this.privateTalkToOpen.next(privateTalks[0])
-        });
+        // });
 
-        this.receiverRepo.loadAll(pageNo, searchValue);
+        // this.service.privateTalksReceived(searchValue).subscribe(bTalksReceived => {
 
-        this.service.privateTalksReceived(pageNo, searchValue, this.psz.PTPageSize).subscribe(bTalksReceived => {
-            this.privateTalksReceived.splice(0, this.privateTalksReceived.length);
-            this.privateTalksReceived.push(...bTalksReceived)
-            //this.privateTalksReceived = bTalksReceived;
-        })
+        //     this.privateTalksReceived = bTalksReceived;
+        // })
+
+        // this.receiverRepo.loadAll(searchValue);
 
         //comments count
-        this.service.myPrivateTalkMessagesCount(pageNo, searchValue, this.psz.PTPageSize).subscribe(ptMessagesCount => {
-            this.myPTMessagesCount.splice(0, this.myPTMessagesCount.length);
-            this.myPTMessagesCount.push(...ptMessagesCount);
-            //this.myPTMessagesCount = ptMessagesCount;
-        })
-        this.service.receivedPrivateTalkMessagesCount(pageNo, searchValue, this.psz.PTPageSize).subscribe(ptMessagesCount => {
-            this.receivedPTMessagesCount.splice(0, this.receivedPTMessagesCount.length);
-            this.receivedPTMessagesCount.push(...ptMessagesCount);
-            //this.receivedPTMessagesCount = ptMessagesCount;
-        })
+        // this.service.myPrivateTalkMessagesCount(searchValue).subscribe(ptMessagesCount => {
+
+        //     this.myPTMessagesCount = ptMessagesCount;
+        // })
+        // this.service.receivedPrivateTalkMessagesCount(searchValue).subscribe(ptMessagesCount => {
+
+        //     this.receivedPTMessagesCount = ptMessagesCount;
+        // })
+
+
         // end of comments count
+
+        this.service.myPrivateTalksNew(searchValue).subscribe(container => {
+            this.myPrivateTalks = container.pTalks;
+            this.myPTMessagesCount = container.messageCounts;
+            this.receiverRepo.loadReceivers(container.ptrs, container.pttrs);
+            this.unreadMyPrivateTalksCount = container.totalUnReadCount
+        })
+
+        this.service.privateTalksReceivedNew(searchValue).subscribe(container => {
+            this.privateTalksReceived = container.pTalks;
+            this.receivedPTMessagesCount = container.messageCounts;
+            this.unreadReceivedPrivateTalksCount = container.totalUnReadCount
+        })
     }
 
     public privateTalkToOpen = new EventEmitter<PrivateTalk>();
@@ -331,48 +338,7 @@ export class PrivateTalkRepository implements IPrivateTalkRepository {
         return this.service.findPrivateTalk(privateTalkId);
     }
 
-    loadMoreMyPrivateTalks(pageNo: number, searchValue?: string) {
-        this.service.myPrivateTalks(pageNo, searchValue, this.psz.PTPageSize).subscribe(ptalks => {
-            if (ptalks) {
-                this.myPrivateTalks.push(...ptalks);
 
-                //new coming pts via signalr can cause dublicates..
-                let tempPT = Object.assign([], this.myPrivateTalks.filter((value, index, self) => self.indexOf(self.find(val => val.PrivateTalkId == value.PrivateTalkId)) === index));
-                this.myPrivateTalks.splice(0, this.myPrivateTalks.length);
-                this.myPrivateTalks.push(...tempPT);
-                //this.myPrivateTalks = this.myPrivateTalks.filter((value, index, self) => self.indexOf(self.find(val => val.PrivateTalkId == value.PrivateTalkId)) === index);
-            }
-        });
-
-        this.service.myPrivateTalkMessagesCount(pageNo, searchValue, this.psz.PTPageSize).subscribe(mPTMC => {
-            if (mPTMC) {
-                this.myPTMessagesCount.push(...mPTMC);
-                //new coming pts via signalr can cause dublicates..
-                let temp = Object.assign([], this.myPTMessagesCount.filter((value, index, self) => self.indexOf(self.find(val => val.PrivateTalkId == value.PrivateTalkId)) === index));
-                this.myPTMessagesCount.splice(0, this.myPTMessagesCount.length);
-                this.myPTMessagesCount.push(...temp);
-                //this.myPTMessagesCount = this.myPTMessagesCount.filter((value, index, self) => self.indexOf(self.find(val => val.PrivateTalkId == value.PrivateTalkId)) === index);
-            }
-        })
-
-    }
-    loadMoreReceivedPrivateTalks(pageNo: number, searchValue?: string) {
-        this.service.privateTalksReceived(pageNo, searchValue, this.psz.PTPageSize).subscribe(ptalks => {
-            this.privateTalksReceived.push(...ptalks);
-            let temp = Object.assign([], this.privateTalksReceived.filter((value, index, self) => self.indexOf(self.find(val => val.PrivateTalkId == value.PrivateTalkId)) === index));
-            this.privateTalksReceived.splice(0, this.privateTalksReceived.length);
-            this.privateTalksReceived.push(...temp);
-            //this.privateTalksReceived = this.privateTalksReceived.filter((value, index, self) => self.indexOf(self.find(val => val.PrivateTalkId == value.PrivateTalkId)) === index);
-        });
-        this.service.receivedPrivateTalkMessagesCount(pageNo, searchValue, this.psz.PTPageSize).subscribe(rPTMC => {
-            this.receivedPTMessagesCount.push(...rPTMC);
-            let temp = Object.assign([], this.myPTMessagesCount.filter((value, index, self) => self.indexOf(self.find(val => val.PrivateTalkId == value.PrivateTalkId)) === index));
-            this.myPTMessagesCount.splice(0, this.myPTMessagesCount.length);
-            this.myPTMessagesCount.push(...temp);
-
-            //this.myPTMessagesCount = this.myPTMessagesCount.filter((value, index, self) => self.indexOf(self.find(val => val.PrivateTalkId == value.PrivateTalkId)) === index);
-        })
-    }
 
     resetUnreadCounter(privateTalkId: number) { // check private talk as READ.
         let ptMessages: MessageCountModel = this.myPTMessagesCount.find(messageCountModel => messageCountModel.PrivateTalkId == privateTalkId);

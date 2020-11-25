@@ -49,16 +49,10 @@ export class ReceiversComponent implements OnInit, AfterViewInit, OnDestroy, OnC
   }
   loadAllReceivers() {
     this.subscription = this.receiversService.privateTalkReceivers(this.getPrivateTalkId).subscribe(ptr => {
-      this.privateTalkReceivers.splice(0, this.privateTalkReceivers.length);
-      this.privateTalkReceivers.push(...ptr);
-
-      //this.privateTalkReceivers = ptr;
+     this.privateTalkReceivers = ptr;
     });
     this.subscription2 = this.teamReceiversService.privateTalkTeamReceivers(this.getPrivateTalkId).subscribe(pttr => {
-      this.privateTalkTeamReceivers.splice(0, this.privateTalkTeamReceivers.length);
-      this.privateTalkTeamReceivers.push(...pttr);
-
-      //this.privateTalkTeamReceivers = pttr;
+      this.privateTalkTeamReceivers = pttr;
       this.loading = false;
     });
 

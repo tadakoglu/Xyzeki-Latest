@@ -26,27 +26,131 @@ namespace XYZToDo.Models.Repository
         public IQueryable<PrivateTalkTeamReceiver> PrivateTalkTeamReceivers => context.PrivateTalkTeamReceiver;
         public IQueryable<PrivateTalkMessage> PrivateTalkMessages => context.PrivateTalkMessage;
 
-
-
-
-        // public PrivateTalk[] MyPrivateTalks(string sender, int pageNo, string searchValue,int pageSize=50) // Returns null or objects,  giden kutusu
-        // {
-        //     var context2 = new XYZToDo.Models.DatabasePersistanceLayer.XYZToDoSQLDbContext();
-
-        //     //int pageSize = 12;
-        //     PrivateTalk[] pTalks = PrivateTalks.Where(bt => bt.Sender == sender)
-        //     .OrderByDescending(pt => PTOrderingCriterion(pt.PrivateTalkId, sender, context2)).
-        //     Where(bt => searchValue == "undefined" || (bt.Thread.Contains(searchValue) || bt.Sender.Contains(searchValue))).Skip((pageNo - 1) * pageSize).Take(pageSize).ToArray();
-
-        //     context2.Dispose();
-        //     return pTalks;
-        // }
-        public PrivateTalk[] MyPrivateTalks(string sender, int pageNo, string searchValue, int pageSize = 50) // Returns null or objects,  giden kutusu
+        public PrivateTalk[] MyPrivateTalks(string sender, string searchValue) // Returns null or objects,  giden kutusu
         {
             PrivateTalk[] pTalks = PrivateTalks.Where(bt => bt.Sender == sender)
-            .OrderByDescending(pt => pt.DateTimeCreated).Where(bt => searchValue == "undefined" || (bt.Thread.Contains(searchValue) || bt.Sender.Contains(searchValue))).Skip((pageNo - 1) * pageSize).Take(pageSize).ToArray();
+            .OrderByDescending(pt => pt.DateTimeCreated).Where(bt => string.IsNullOrEmpty(searchValue) ||
+            (bt.Thread.Contains(searchValue) || bt.Sender.Contains(searchValue))).ToArray();
             return pTalks;
         }
+
+        public PrivateTalkContainerModel MyPrivateTalksNew(string sender, string searchValue) // Returns null or objects,  giden kutusu
+        {
+            PrivateTalkContainerModel container = new PrivateTalkContainerModel();
+
+
+            ///1
+            IQueryable<PrivateTalk> pTalks = PrivateTalks.Where(bt => bt.Sender == sender)
+                        .OrderByDescending(pt => pt.DateTimeCreated).Where(bt => string.IsNullOrEmpty(searchValue) ||
+                        (bt.Thread.Contains(searchValue) || bt.Sender.Contains(searchValue)));
+
+
+            container.pTalks = pTalks.ToArray();
+
+            /// 2
+
+            long[] privateTalks = pTalks.Select(pt => pt.PrivateTalkId).ToArray();
+
+            if (privateTalks != null)
+            {
+                IList<MessageCountModel> messagesCount = new List<MessageCountModel>();
+                foreach (long privateTalkId in privateTalks)
+                {
+
+                    DateTimeOffset lastSeen = (this.PrivateTalkLastSeen.Where(pt => pt.PrivateTalkId == privateTalkId && pt.Visitor == sender).FirstOrDefault()?.LastSeen) ?? new DateTimeOffset(DateTime.MinValue, TimeSpan.Zero);
+                    int messageCount = this.PrivateTalkMessages.Where(ptm => ptm.PrivateTalkId == privateTalkId && ptm.Sender != sender && ptm.DateTimeSent > lastSeen).
+                    Select(qt => qt.MessageId).Count(); //messages belongs to others.
+
+
+                    // DateTimeOffset orderingCriterion = PTOrderingCriterion(privateTalkId, sender, context2);
+
+                    messagesCount.Add(new MessageCountModel { PrivateTalkId = privateTalkId, MessagesCount = messageCount, OrderingCriterion = DateTimeOffset.MinValue });
+                }
+
+                container.messageCounts = messagesCount.ToArray();
+                container.totalUnReadCount = container.messageCounts.Where(mc => mc.MessagesCount > 0).ToArray().Length;
+            }
+            else
+            {
+                container.messageCounts = null;
+                container.totalUnReadCount = 0;
+            }
+
+            ///3
+
+            PrivateTalkReceiver[] ptrs = pTalks.SelectMany(pt => pt.PrivateTalkReceiver).ToArray();
+            container.ptrs = ptrs;
+
+            ///4
+
+
+            PrivateTalkTeamReceiver[] pttrs = pTalks.SelectMany(pt => pt.PrivateTalkTeamReceiver).ToArray();
+            container.pttrs = pttrs;
+
+
+
+
+
+            //final
+            return container;
+        }
+
+        public PrivateTalkContainerModel PrivateTalksReceivedNew(string receiver, string searchValue)
+        {
+            PrivateTalkContainerModel container = new PrivateTalkContainerModel();
+
+            //1
+            PrivateTalk[] ptrs = PrivateTalkReceivers.Where(ptr => ptr.Receiver == receiver).
+             Select(ptr => ptr.PrivateTalk).ToArray();
+
+            PrivateTalk[] ptrs2 = context.TeamMember.Where(tm => tm.Username == receiver && tm.Status == true).
+            SelectMany(tm => tm.Team.PrivateTalkTeamReceiver).
+            Select(rec => rec.PrivateTalk).Where(pt => pt.Sender != receiver).ToArray(); //İçinde bulunduğum takımların, takım alıcıları. 2 takımında bulunuyorum, private talk id 2, 3 takımında bulunuyoorum private talk 5, buradan private talkları getirelim.
+
+            PrivateTalk[] result = ptrs.Concat(ptrs2)?.GroupBy(pt => pt.PrivateTalkId).Select(x => x.First())
+                .OrderByDescending(pt => pt.DateTimeCreated)
+
+                .Where(bt => string.IsNullOrEmpty(searchValue) || bt.Thread.Contains(searchValue) || bt.Sender.Contains(searchValue))
+               .ToArray();
+
+
+            container.pTalks = result;
+
+            //2
+
+            long[] privateTalks = result?.Select(pt => pt.PrivateTalkId)?.ToArray();
+            if (privateTalks != null)
+            {
+                IList<MessageCountModel> messagesCount = new List<MessageCountModel>();
+                foreach (long privateTalkId in privateTalks)
+                {
+
+                    DateTimeOffset lastSeen = (this.PrivateTalkLastSeen.Where(pt => pt.PrivateTalkId == privateTalkId && pt.Visitor == receiver).FirstOrDefault()?.LastSeen) ?? new DateTimeOffset(DateTime.MinValue, TimeSpan.Zero);
+                    int messageCount = this.PrivateTalkMessages.Where(ptm => ptm.PrivateTalkId == privateTalkId && ptm.Sender != receiver && ptm.DateTimeSent > lastSeen).
+                    Select(qt => qt.MessageId).Count(); //messages belongs to others.
+
+
+                    messagesCount.Add(new MessageCountModel { PrivateTalkId = privateTalkId, MessagesCount = messageCount, OrderingCriterion = DateTimeOffset.MinValue });
+                }
+                container.messageCounts = messagesCount.ToArray();
+
+                container.totalUnReadCount = container.messageCounts.Where(mc => mc.MessagesCount > 0).ToArray().Length;
+            }
+            else
+            {
+
+                container.messageCounts = null;
+                container.totalUnReadCount = 0;
+            }
+
+
+
+
+            //final
+            return container;
+        }
+
+
         public bool isMyPrivateTalkGuard(long privateTalkId, string thisMember)
         {
             PrivateTalk privateTalk = PrivateTalks.Where(p => p.PrivateTalkId == privateTalkId).FirstOrDefault();
@@ -60,46 +164,25 @@ namespace XYZToDo.Models.Repository
 
 
 
-        // DateTimeOffset PTOrderingCriterion(long privateTalkId, string thisMember, XYZToDoSQLDbContext context)
-        // {
-        //     PrivateTalk pTalk = context.PrivateTalk.Where(pt => pt.PrivateTalkId == privateTalkId).FirstOrDefault();
-        //     DateTimeOffset orderingCriterion = (context.PrivateTalkMessage.Where(ptm => ptm.PrivateTalkId == privateTalkId && ptm.Sender != thisMember).OrderByDescending(ptm => ptm.DateTimeSent)?.FirstOrDefault()?.DateTimeSent ?? pTalk?.DateTimeCreated) ?? new DateTimeOffset(DateTime.MinValue, TimeSpan.Zero);
-        //     return orderingCriterion;
-        // }
 
-        public PrivateTalk[] PrivateTalksReceived(string receiver, int pageNo, string searchValue, int pageSize = 50) // gelen kutusu
+        public PrivateTalk[] PrivateTalksReceived(string receiver, string searchValue) // gelen kutusu
         {
-            PrivateTalk[] ptrs = PrivateTalkReceivers.Where(ptr => ptr.Receiver == receiver).Select(ptr => ptr.PrivateTalk).ToArray();
-            PrivateTalk[] ptrs2 = context.TeamMember.Where(tm => tm.Username == receiver && tm.Status == true).SelectMany(tm => tm.Team.PrivateTalkTeamReceiver).Select(rec => rec.PrivateTalk).Where(pt => pt.Sender != receiver).ToArray(); //İçinde bulunduğum takımların, takım alıcıları. 2 takımında bulunuyorum, private talk id 2, 3 takımında bulunuyoorum private talk 5, buradan private talkları getirelim.
+            PrivateTalk[] ptrs = PrivateTalkReceivers.Where(ptr => ptr.Receiver == receiver).
+            Select(ptr => ptr.PrivateTalk).ToArray();
+            PrivateTalk[] ptrs2 = context.TeamMember.
+            Where(tm => tm.Username == receiver && tm.Status == true).
+            SelectMany(tm => tm.Team.PrivateTalkTeamReceiver).
+            Select(rec => rec.PrivateTalk).Where(pt => pt.Sender != receiver).ToArray(); //İçinde bulunduğum takımların, takım alıcıları. 2 takımında bulunuyorum, private talk id 2, 3 takımında bulunuyoorum private talk 5, buradan private talkları getirelim.
 
             PrivateTalk[] result = ptrs.Concat(ptrs2)?.GroupBy(pt => pt.PrivateTalkId).Select(x => x.First())
-                .OrderByDescending(pt => pt.DateTimeCreated).Where(bt => searchValue == "undefined" || (bt.Thread.Contains(searchValue) || bt.Sender.Contains(searchValue))).Skip((pageNo - 1) * pageSize).Take(pageSize).ToArray();
+                .OrderByDescending(pt => pt.DateTimeCreated)
+
+                .Where(bt => string.IsNullOrEmpty(searchValue) || bt.Thread.Contains(searchValue) || bt.Sender.Contains(searchValue))
+               .ToArray();
             return result;
         }
 
-        //for unique, GroupBy(ptr => ptr.PrivateTalkId).Select(group => group.First())
-        // public PrivateTalk[] PrivateTalksReceived(string receiver, int pageNo, string searchValue,int pageSize=50) // gelen kutusu
-        // {
-        //     var context2 = new XYZToDo.Models.DatabasePersistanceLayer.XYZToDoSQLDbContext();
 
-        //     //int pageSize = 12;
-        //     PrivateTalk[] ptrs = PrivateTalkReceivers.Where(ptr => ptr.Receiver == receiver).Select(ptr => ptr.PrivateTalk).ToArray();
-
-        //     PrivateTalk[] ptrs2 = context.TeamMember.Where(tm => tm.Username == receiver && tm.Status == true).SelectMany(tm => tm.Team.PrivateTalkTeamReceiver).Select(rec => rec.PrivateTalk).Where(pt => pt.Sender != receiver).ToArray(); //İçinde bulunduğum takımların, takım alıcıları. 2 takımında bulunuyorum, private talk id 2, 3 takımında bulunuyoorum private talk 5, buradan private talkları getirelim.
-        //     PrivateTalk[] pTalks = null;
-        //     try
-        //     {
-        //         pTalks = ptrs.Concat(ptrs2)?.GroupBy(pt => pt.PrivateTalkId).Select(x => x.First())
-        //         .OrderByDescending(pt => PTOrderingCriterion(pt.PrivateTalkId, receiver, context2)).
-        //         Where(bt => searchValue == "undefined" || (bt.Thread.Contains(searchValue) || bt.Sender.Contains(searchValue))).Skip((pageNo - 1) * pageSize).Take(pageSize).ToArray();
-        //     }
-
-        //     catch (System.Exception)
-        //     {
-        //     }
-        //     context2.Dispose();
-        //     return pTalks;
-        // }
         public bool isPrivateTalkJoinedGuard(long privateTalkId, string thisMember)
         {
             PrivateTalk pTalk = PrivateTalkReceivers.Where(ptr => ptr.Receiver == thisMember).Select(ptr => ptr.PrivateTalk).Where(pt => pt.PrivateTalkId == privateTalkId).FirstOrDefault();
@@ -114,11 +197,13 @@ namespace XYZToDo.Models.Repository
 
             return false;
         }
-        public MessageCountModel[] GetMyPrivateTalkMessagesCount(string sender, int pageNo, string searchValue, int pageSize = 50)
+        public MessageCountModel[] GetMyPrivateTalkMessagesCount(string sender, string searchValue)
         {
             long[] privateTalks = PrivateTalks.Where(bt => bt.Sender == sender)
                  .OrderByDescending(pt => pt.DateTimeCreated).
-                Where(bt => searchValue == "undefined" || (bt.Thread.Contains(searchValue) || bt.Sender.Contains(searchValue))).Skip((pageNo - 1) * pageSize).Take(pageSize).Select(pt => pt.PrivateTalkId).ToArray();
+                Where(bt => string.IsNullOrEmpty(searchValue) || (bt.Thread.Contains(searchValue) || bt.Sender.Contains(searchValue)))
+
+                .Select(pt => pt.PrivateTalkId).ToArray();
 
 
             if (privateTalks != null)
@@ -145,7 +230,7 @@ namespace XYZToDo.Models.Repository
 
         }
 
-        public MessageCountModel[] GetReceivedPrivateTalkMessagesCount(string receiver, int pageNo, string searchValue, int pageSize = 50)
+        public MessageCountModel[] GetReceivedPrivateTalkMessagesCount(string receiver, string searchValue)
         {
 
             PrivateTalk[] ptrs = PrivateTalkReceivers.Where(ptr => ptr.Receiver == receiver).Select(ptr => ptr.PrivateTalk).ToArray();
@@ -154,8 +239,8 @@ namespace XYZToDo.Models.Repository
 
             long[] privateTalks = privateTalks = ptrs.Concat(ptrs2)?.GroupBy(pt => pt.PrivateTalkId)?.Select(x => x.First())?
                .OrderByDescending(pt => pt.DateTimeCreated)?
-               .Where(bt => searchValue == "undefined" || (bt.Thread.Contains(searchValue) || bt.Sender.Contains(searchValue)))?
-               .Skip((pageNo - 1) * pageSize)?.Take(pageSize)?.Select(pt => pt.PrivateTalkId)?.ToArray();
+               .Where(bt => string.IsNullOrEmpty(searchValue) || (bt.Thread.Contains(searchValue) || bt.Sender.Contains(searchValue)))?
+               .Select(pt => pt.PrivateTalkId)?.ToArray();
 
             if (privateTalks != null)
             {
@@ -292,7 +377,7 @@ namespace XYZToDo.Models.Repository
                 pTalk = new PrivateTalk { PrivateTalkId = pTalk.PrivateTalkId, Owner = pTalk.Owner, Sender = pTalk.Sender, Thread = pTalk.Thread, DateTimeCreated = pTalk.DateTimeCreated };
 
                 bool my = pTalk.Sender == thisMember;
-                MessageCountModel mcm = new MessageCountModel { PrivateTalkId = privateTalkId, MessagesCount = messageCount, OrderingCriterion = DateTimeOffset.MinValue};
+                MessageCountModel mcm = new MessageCountModel { PrivateTalkId = privateTalkId, MessagesCount = messageCount, OrderingCriterion = DateTimeOffset.MinValue };
 
                 PrivateTalkReceiver[] ptr = PrivateTalkReceivers.Where(pt => pt.PrivateTalkId == privateTalkId)?.ToArray();
                 PrivateTalkTeamReceiver[] pttr = PrivateTalkTeamReceivers.Where(pt => pt.PrivateTalkId == privateTalkId)?.ToArray();

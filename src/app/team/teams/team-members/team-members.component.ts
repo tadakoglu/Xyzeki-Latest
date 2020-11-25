@@ -28,9 +28,9 @@ export class TeamMembersComponent implements OnInit, OnDestroy {
     this.route.data.subscribe((resolvedData: { teamMembers: TeamMember[], kind: string }) => {
       this.teamId = Number.parseInt(this.route.snapshot.paramMap.get('TeamId'))
 
-      if (resolvedData.kind == 'limited') {
-        this.isLimited = true;
-      }
+      // if (resolvedData.kind == 'limited') {
+      //   this.isLimited = true;
+      // }
 
       this.repository.loadTeamMembersViaResolver(resolvedData.teamMembers, this.teamId);
       Object.assign(this.teamMemberModel, new TeamMember("", this.teamId, null))
@@ -103,9 +103,7 @@ export class TeamMembersComponent implements OnInit, OnDestroy {
     }
   }
   invalidLicensePanelOpen: boolean = false;
-  // public getMember(username): Member {
-  //   return this.repository.getTeamMembersOwnedAsMembers().find(m => m.Username == username);
-  // }
+
   public getMemberJoined(username): Member {
     return this.repository.getTeamMembersJoinedAsMembers().find(m => m.Username == username);
   }

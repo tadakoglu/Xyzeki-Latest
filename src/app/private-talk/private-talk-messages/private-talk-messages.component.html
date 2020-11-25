@@ -12,7 +12,7 @@
 <div *ngIf="!editPrivateTalkPanelOpen">
   <div #scrollMe [scrollTop]="scrollMe.scrollHeight " infiniteScroll [infiniteScrollDistance]="2"
     [infiniteScrollUpDistance]="1.5" [scrollWindow]="false" [infiniteScrollThrottle]="100" (scrolled)="onScrollDown()"
-    (scrolledUp)="onScrollUp()" [ngStyle]="{'height.px': (innerWidth>=577) ? innerHeight-220: innerHeight-135}"
+    (scrolledUp)="onScrollUp()" [ngStyle]="{'height.px': (innerWidth>=577) ? innerHeight-180: innerHeight-50}"
     class="container-fluid xyz-card-big xyz-card-default bg-light">
     <div  *ngIf="privateTalkId!=undefined && privateTalkId!=0" 
     class="sticky-top pl-2 pr-1 xyz-card-primary pt-1 bg-dark showDiv rounded"
@@ -29,7 +29,7 @@
 
             <li *ngFor="let pttr of getTeamReceivers(privateTalk()?.PrivateTalkId); index as i">
               <div style="display: inline-block">
-                <img src="../../../assets/logo.svg" style="background-color: white" class="avatarim">
+                <img src="../../../assets/logo.svg" style="background-color: white" class="avatarimMini">
               </div>
               <div style="display: inline-block">
                 <span style="color: rgb(255, 254, 254); padding: 0; margin:0">&nbsp;
@@ -42,7 +42,7 @@
             <li *ngFor="let ptr of getReceivers(privateTalk()?.PrivateTalkId); index as i">
               <div style="display: inline-block">
                 <img *ngIf="getMember(ptr?.Receiver)?.Avatar" [src]="getMember(ptr?.Receiver)?.Avatar" alt="Avatar"
-                  class="avatarim">
+                  class="avatarimMini">
               </div>
               <div style="display: inline-block">
                 <span style="color: rgb(255, 254, 254); padding: 0; margin:0">&nbsp;
@@ -204,7 +204,7 @@
 
           <!-- <emoji-mart  [set]="'emojione'" title="Emoji seçiniz" (emojiClick)="addEmoji($event)"></emoji-mart> -->
         </div>
-        <button type="submit" class="btn btn-light btn-send text-uppercase text-white">Gönder</button>
+        <!-- <button type="submit" class="btn btn-light btn-send text-uppercase text-white">Gönder</button> -->
       </form>
     </div>
   </div>

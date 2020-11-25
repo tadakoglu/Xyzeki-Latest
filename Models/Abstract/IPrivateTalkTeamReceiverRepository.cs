@@ -9,7 +9,7 @@ namespace XYZToDo.Models.Abstract
         IQueryable<PrivateTalkTeamReceiver> PrivateTalkTeamReceivers { get; }
 
         //Viewing methods  will return NULL there is/are not such object/objects otherwise object/objects 
-        PrivateTalkTeamReceiver[] GetMyPrivateTalkTeamReceivers(string sender, int pageNo, string searchValue, int pageSize);
+        PrivateTalkTeamReceiver[] GetMyPrivateTalkTeamReceivers(string sender, string searchValue);
 
         PrivateTalkTeamReceiver[] GetPrivateTalkTeamReceivers(long privateTalkId);
         PrivateTalkTeamReceiver GetPrivateTalkTeamReceiver(long privateTalkTeamReceiverId); // Returns null or object

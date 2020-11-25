@@ -30,16 +30,7 @@ export class MyTeamsComponent implements OnInit, OnDestroy {
     //   this.repository.loadMyTeamsViaResolver(resolvedData.myTeams);
     // })
 
-    this.subscription = this.repository.teamToOpen.subscribe((team) => { //if a signal comes here, it works in every condition.
-      if (this.innerWidth > 992) {
-        this.selectedTeamId = team.TeamId
-        this.router.navigate(['takimlar', team.TeamId, 'takim-uyeleri'])
-      }
-    });
-    if (this.firstTeamAvailable() && this.innerWidth > 992) {
-      this.selectedTeamId = this.firstTeamAvailable().TeamId
-      this.router.navigate(['takimlar', this.firstTeamAvailable().TeamId, 'takim-uyeleri'])
-    }
+   
   }
   public innerWidth: any;
   public innerHeight: any;
@@ -50,9 +41,7 @@ export class MyTeamsComponent implements OnInit, OnDestroy {
     this.innerHeight = window.innerHeight;
   }
 
-  private firstTeamAvailable(): Team {
-    return this.repository.getMyTeams().find((val, index, arr) => index == 0);
-  }
+
   constructor(private permissions: MemberLicenseRepository, private route: ActivatedRoute, private repository: TeamRepository, private dataService: DataService, private router: Router, public xyzekiAuthService : XyzekiAuthService ) {
   }
   public getError(): string {
@@ -65,9 +54,6 @@ export class MyTeamsComponent implements OnInit, OnDestroy {
     return this.repository.getMyTeams();
   }
   
-  // get myTeams() {
-  //   return this.repository.getMyTeams();
-  // }
 
   focusOnInput() {
     setTimeout(() => {

@@ -27,12 +27,12 @@ export class XyzekiAuthHelpersService {
         this.StartTabEventListener();
     }
 
-    private readonly XYZEKI_MEMBER = '+10x0x00000011';
-    private readonly XYZEKI_ACCESS_TOKEN = '-11x0x11001011';
-    private readonly XYZEKI_REFRESH_TOKEN = '-00X10X0000011';
-    private readonly XYZEKI_REFRESH_TOKEN_EXPIRY = '-01X1100X11101100'
-    private readonly XYZEKI_AUTH_EVENT = '-000001x0101010'
-    private readonly XYZEKI_DEAUTH_EVENT = '-0110001x0101010'
+    private readonly XYZEKI_MEMBER = '+12x';
+    private readonly XYZEKI_ACCESS_TOKEN = '-f1';
+    private readonly XYZEKI_REFRESH_TOKEN = '-f44';
+    private readonly XYZEKI_REFRESH_TOKEN_EXPIRY = 'ff'
+    private readonly XYZEKI_AUTH_EVENT = '-a'
+    private readonly XYZEKI_DEAUTH_EVENT = '-b'
 
 
     public subs: Subscription[] = []

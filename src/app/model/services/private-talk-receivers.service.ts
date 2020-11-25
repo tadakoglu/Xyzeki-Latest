@@ -13,8 +13,8 @@ export class PrivateTalkReceiversService {
     constructor(private http: HttpClient) {
         this.baseURL = BackEndWebServer + '/'
     }
-    myPrivateTalkReceivers(pageNo: number = 1, searchValue?: string, pageSize?: number): Observable<PrivateTalkReceiver[]> {
-        return this.http.get<PrivateTalkReceiver[]>(this.baseURL + `api/PrivateTalkReceivers/PrivateTalk/MyAll/Page/${pageNo}/Search/${searchValue}/PageSize/${pageSize}`)
+    myPrivateTalkReceivers(searchValue?): Observable<PrivateTalkReceiver[]> {
+        return this.http.get<PrivateTalkReceiver[]>(this.baseURL + `api/PrivateTalkReceivers/PrivateTalk/MyAll/Search/${searchValue ? searchValue : ''}`)
     }
     privateTalkReceivers(privateTalkId: number): Observable<PrivateTalkReceiver[]> {
         return this.http.get<PrivateTalkReceiver[]>(this.baseURL + `api/PrivateTalkReceivers/PrivateTalk/${privateTalkId}`)

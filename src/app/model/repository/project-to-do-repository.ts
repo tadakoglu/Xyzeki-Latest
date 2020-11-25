@@ -57,16 +57,16 @@ export class ProjectToDoRepository implements IProjectToDoRepository {
             }
         })
 
-        this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadAll(); });
+        //this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadAll(); });
         this.dataService.clearAllRepositoriesEvent.subscribe(() => { this.clearProjectToDos() })
 
         
-        this.loadRepository();
+        // this.loadRepository();
     }
 
-    loadRepository() {
-        this.loadAll();
-      }
+    // loadRepository() {
+    //     this.loadAll();
+    //   }
 
     clearProjectToDos() {
         this.projectToDos = [];
@@ -98,20 +98,20 @@ export class ProjectToDoRepository implements IProjectToDoRepository {
 
     private projectId: number
 
-    deepSearch(searchValue?: string) {
-        this.loadAll(searchValue)
-    }
+    // deepSearch(searchValue?: string) {
+    //     this.loadAll(searchValue)
+    // }
 
-    loadAll(searchValue?: string) { // ### Reload this when team component destroyed
-        this.service.projectToDosAssignedToMe(searchValue).subscribe(assignedToMe => {
-            let PTA = Object.assign([], assignedToMe.sort((qt1, qt2) => qt1.Order - qt2.Order))
-            this.projectToDosAssignedToMe = PTA
-        })
+    // loadAll(searchValue?: string) { // ### Reload this when team component destroyed
+    //     this.service.projectToDosAssignedToMe(searchValue).subscribe(assignedToMe => {
+    //         let PTA = Object.assign([], assignedToMe.sort((qt1, qt2) => qt1.Order - qt2.Order))
+    //         this.projectToDosAssignedToMe = PTA
+    //     })
 
-        this.service.assignedToMePTCommentsCount(searchValue).subscribe(ptAssignedCommentsCount => {
-            this.ptAssignedCommentsCount = ptAssignedCommentsCount;
-        })
-    }
+    //     this.service.assignedToMePTCommentsCount(searchValue).subscribe(ptAssignedCommentsCount => {
+    //         this.ptAssignedCommentsCount = ptAssignedCommentsCount;
+    //     })
+    // }
     private projectToDos: ProjectTask[] = []
     private projectToDosAssignedToMe: ProjectTask[] = []
 

@@ -85,16 +85,47 @@ namespace XYZToDo.Controllers
                 return Unauthorized();
             PrivateTalkInsideOut ptio = IPrivateTalkRepository.GetNewUnreadPrivateTalk(privateTalkId, member);
             return Ok(ptio);
+
         }
 
-        [HttpGet("MyPrivateTalks/Page/{pageNo}/Search/{searchValue}/PageSize/{pageSize}")] // GET PrivateTalks/MyPrivateTalks/Page/{pageNo}        
-        public IActionResult MyPrivateTalks(int pageNo = 1, string searchValue = "undefined", int pageSize=50)
+
+        [HttpGet("MyPrivateTalksNew/Search/{searchValue?}")] // GET PrivateTalks/MyPrivateTalks/Page/{pageNo}        
+        public IActionResult MyPrivateTalksNew(string searchValue)
         {
             var member = User.Identity.Name; // For security. From Claim(ClaimTypes.Name, Username) in JWT
             if (member == null)
                 return Unauthorized();
 
-            PrivateTalk[] myPrivateTalks = IPrivateTalkRepository.MyPrivateTalks(member, pageNo, searchValue,pageSize);
+            PrivateTalkContainerModel container = IPrivateTalkRepository.MyPrivateTalksNew(member, searchValue);
+            if (container != null)
+            {
+                return Ok(container); // 200 OK
+            }
+            return NoContent();  // 404 resource not found, Microsoft docs use NotFound for this kind of behavior.
+        }
+        [HttpGet("ReceivedNew/Search/{searchValue?}")] // GET PrivateTalks/Received/Page/{pageNo}        
+        public IActionResult PrivateTalksReceivedNew(string searchValue) // You will be able to see the Private talks of the owners of the teams that you joined...
+        {
+            var member = User.Identity.Name; // For security. From Claim(ClaimTypes.Name, Username) in JWT
+            if (member == null)
+                return Unauthorized();
+
+            PrivateTalkContainerModel container = IPrivateTalkRepository.PrivateTalksReceivedNew(member, searchValue);
+            if (container != null)
+            {
+                return Ok(container); // 200 OK
+            }
+            return NoContent();  // 404 resource not found, Microsoft docs use NotFound for this kind of behavior.
+        }
+
+        [HttpGet("MyPrivateTalks/Search/{searchValue?}")] // GET PrivateTalks/MyPrivateTalks/Page/{pageNo}        
+        public IActionResult MyPrivateTalks(string searchValue)
+        {
+            var member = User.Identity.Name; // For security. From Claim(ClaimTypes.Name, Username) in JWT
+            if (member == null)
+                return Unauthorized();
+
+            PrivateTalk[] myPrivateTalks = IPrivateTalkRepository.MyPrivateTalks(member, searchValue);
             if (myPrivateTalks != null)
             {
                 return Ok(myPrivateTalks); // 200 OK
@@ -102,14 +133,14 @@ namespace XYZToDo.Controllers
             return NoContent();  // 404 resource not found, Microsoft docs use NotFound for this kind of behavior.
         }
 
-        [HttpGet("Received/Page/{pageNo}/Search/{searchValue}/PageSize/{pageSize}")] // GET PrivateTalks/Received/Page/{pageNo}        
-        public IActionResult PrivateTalksReceived(int pageNo = 1, string searchValue = "undefined", int pageSize=50) // You will be able to see the Private talks of the owners of the teams that you joined...
+        [HttpGet("Received/Search/{searchValue?}")] // GET PrivateTalks/Received/Page/{pageNo}        
+        public IActionResult PrivateTalksReceived(string searchValue) // You will be able to see the Private talks of the owners of the teams that you joined...
         {
             var member = User.Identity.Name; // For security. From Claim(ClaimTypes.Name, Username) in JWT
             if (member == null)
                 return Unauthorized();
 
-            PrivateTalk[] myPrivateTalks = IPrivateTalkRepository.PrivateTalksReceived(member, pageNo, searchValue, pageSize);
+            PrivateTalk[] myPrivateTalks = IPrivateTalkRepository.PrivateTalksReceived(member, searchValue);
             if (myPrivateTalks != null)
             {
                 return Ok(myPrivateTalks); // 200 OK
@@ -118,22 +149,22 @@ namespace XYZToDo.Controllers
         }
 
 
-        [HttpGet("My/MessagesCount/Page/{pageNo}/Search/{searchValue}/PageSize/{pageSize}")] // GET api/PrivateTalks/My/Page/2/MessagesCount
-        public IActionResult GetMyPrivateTalkMessagesCount(int pageNo = 1, string searchValue = "undefined", int pageSize=50) //Accepts from route parameters not JSON. You don't have to speficy [FromRoute], but you can..
+        [HttpGet("My/MessagesCount/Search/{searchValue?}")] // GET api/PrivateTalks/My/Page/2/MessagesCount
+        public IActionResult GetMyPrivateTalkMessagesCount(string searchValue) //Accepts from route parameters not JSON. You don't have to speficy [FromRoute], but you can..
         {
             var member = User.Identity.Name; // For security. From Claim(ClaimTypes.Name, Username) in JWT
-            MessageCountModel[] ptmCount = this.IPrivateTalkRepository.GetMyPrivateTalkMessagesCount(member, pageNo, searchValue,pageSize);
+            MessageCountModel[] ptmCount = this.IPrivateTalkRepository.GetMyPrivateTalkMessagesCount(member, searchValue);
             if (ptmCount != null)
                 return Ok(ptmCount);
             else
                 return NoContent();
         }
 
-        [HttpGet("Received/MessagesCount/Page/{pageNo}/Search/{searchValue}/PageSize/{pageSize}")] // GET api/PrivateTalks/Received/Page/2/MessagesCount
-        public IActionResult GetReceivedPrivateTalkMessagesCount(int pageNo = 1, string searchValue = "undefined", int pageSize=50) //Accepts from route parameters not JSON. You don't have to speficy [FromRoute], but you can..
+        [HttpGet("Received/MessagesCount/Search/{searchValue?}")] // GET api/PrivateTalks/Received/Page/2/MessagesCount
+        public IActionResult GetReceivedPrivateTalkMessagesCount(string searchValue) //Accepts from route parameters not JSON. You don't have to speficy [FromRoute], but you can..
         {
             var member = User.Identity.Name; // For security. From Claim(ClaimTypes.Name, Username) in JWT
-            MessageCountModel[] ptmCount = this.IPrivateTalkRepository.GetReceivedPrivateTalkMessagesCount(member, pageNo, searchValue,pageSize);
+            MessageCountModel[] ptmCount = this.IPrivateTalkRepository.GetReceivedPrivateTalkMessagesCount(member, searchValue);
             if (ptmCount != null)
                 return Ok(ptmCount);
             else
@@ -141,7 +172,7 @@ namespace XYZToDo.Controllers
         }
 
         [HttpPost("PrivateTalkLastSeen")] // POST /PrivateTalks/PrivateTalkLastSeen + JSON Object
-        public IActionResult NewPrivateTalkLastSeen([FromBody]PrivateTalkLastSeen privateTalkLastSeen) //Accepts JSON body, not x-www-form-urlencoded!
+        public IActionResult NewPrivateTalkLastSeen([FromBody] PrivateTalkLastSeen privateTalkLastSeen) //Accepts JSON body, not x-www-form-urlencoded!
         {
             if (privateTalkLastSeen == null)
                 return BadRequest(); // 400 Bad Request
@@ -171,7 +202,7 @@ namespace XYZToDo.Controllers
         }
 
         [HttpPost()] // POST /PrivateTalks + JSON Object
-        public IActionResult NewPrivateTalk([FromBody]PrivateTalk privateTalk) //Accepts JSON body, not x-www-form-urlencoded!
+        public IActionResult NewPrivateTalk([FromBody] PrivateTalk privateTalk) //Accepts JSON body, not x-www-form-urlencoded!
         {
             if (privateTalk == null)
                 return BadRequest(); // 400 Bad Request
@@ -191,7 +222,7 @@ namespace XYZToDo.Controllers
         }
 
         [HttpPut("{privateTalkId}")] // PUT PrivateTalks/3 + JSON Object
-        public IActionResult UpdatePrivateTalk([FromRoute]long privateTalkId, [FromBody]PrivateTalk privateTalk)
+        public IActionResult UpdatePrivateTalk([FromRoute] long privateTalkId, [FromBody] PrivateTalk privateTalk)
         {
 
             if (privateTalk == null || privateTalk.Sender != User.Identity.Name || privateTalkId != privateTalk.PrivateTalkId)
@@ -212,7 +243,7 @@ namespace XYZToDo.Controllers
         }
 
         [HttpDelete("{privateTalkId}")] // DELETE PrivateTalks/1
-        public IActionResult DeletePrivateTalk([FromRoute]long privateTalkId) //[FromRoute] is optional, it already accepts from route parameters not JSON.
+        public IActionResult DeletePrivateTalk([FromRoute] long privateTalkId) //[FromRoute] is optional, it already accepts from route parameters not JSON.
         {
             PrivateTalk privateTalk = IPrivateTalkRepository.DeletePrivateTalk(privateTalkId);
             if (privateTalk != null)
