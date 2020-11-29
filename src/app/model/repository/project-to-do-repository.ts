@@ -127,7 +127,8 @@ export class ProjectToDoRepository implements IProjectToDoRepository {
             let pTasks: ProjectTask[] = []
             this.projectToDos.forEach(pt => {
                 let TOM: TaskOrderModel = new TaskOrderModel(order, pt.TaskId);
-                let pTask: ProjectTask = Object.assign({}, pt); pTask.Order = order;
+                let pTask: ProjectTask = Object.assign({}, pt); 
+                pTask.Order = order;
 
                 TOMs.push(TOM);
                 pTasks.push(pTask);
@@ -173,10 +174,10 @@ export class ProjectToDoRepository implements IProjectToDoRepository {
 
             })
 
-            let tempPT = Object.assign([], this.projectToDos.sort((pt1, pt2) => pt1.Order - pt2.Order));
-            this.projectToDos.splice(0, this.projectToDos.length);
-            this.projectToDos.push(...tempPT);
-            //this.projectToDos = this.projectToDos.sort((pt1, pt2) => pt1.Order - pt2.Order);
+            // let tempPT = Object.assign([], this.projectToDos.sort((pt1, pt2) => pt1.Order - pt2.Order));
+            // this.projectToDos.splice(0, this.projectToDos.length);
+            // this.projectToDos.push(...tempPT);
+            this.projectToDos = this.projectToDos.sort((pt1, pt2) => pt1.Order - pt2.Order);
 
             this.reOrdering = false;
 

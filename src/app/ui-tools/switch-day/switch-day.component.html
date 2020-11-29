@@ -50,7 +50,7 @@
     </li>
 
 
-    <li (click)="selectDay(null,'ArsivKutusu')" style="float:right">
+    <li *ngIf="!projectTodoRepository" (click)="selectDay(null,'ArsivKutusu')" style="float:right">
       <div cdkDropList id="ArsivKutusu" (cdkDropListDropped)="drop($event)" class="circleBtnSquareArc"
         [ngClass]="selectedDayName == 'ArsivKutusu' ? 'circleBtnSquareArcSelected ' : ''">
         <span><img style="height:28px; " class="pl-0 mr-1 " src="../../../assets/arc.svg">Arşiv</span>

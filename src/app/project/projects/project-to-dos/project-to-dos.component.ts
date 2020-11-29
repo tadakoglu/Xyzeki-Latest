@@ -161,6 +161,7 @@ export class ProjectToDosComponent implements OnInit, OnDestroy, AfterViewInit {
 
   increaseTaskIndent(pTask: ProjectTask) {
     let pt: ProjectTask = Object.assign({}, pTask);
+
     pt.Zindex++;
 
     if (pt.Zindex > 1) {
@@ -193,54 +194,69 @@ export class ProjectToDosComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
 
-  isProjectTaskShown(pt: ProjectTask): boolean {
-    if (this.dayDateStr != 'Tümü') {
-      return true
-    }
-    let copyPt = Object.assign({}, pt);
-    if (copyPt.Zindex == 0) {
-      return true;
-    }
+  isProjectTaskShown(copyPt: ProjectTask): boolean {
+
     let previousIndex = this.repository.getProjectToDos().findIndex((val => val.TaskId == copyPt.TaskId)) - 1;
-    // if(previousIndex < 0){
-    //   return true;
-    // }
 
     while (0 <= previousIndex) {
       let upperTask: ProjectTask = this.repository.getProjectToDos()[previousIndex];
 
-      if (upperTask.Zindex > copyPt.Zindex)
+      if (upperTask.Zindex == copyPt.Zindex) { // üstteki görev ve üst ne de alt görev ise(aynı seviye)
+        if (copyPt.Zindex == 0) { // üstteki görevde bu görevde en büyük babalardır. bu görevi göster.
         return true;
-
-      if (upperTask.Zindex < copyPt.Zindex)
-        break;
-
+        }
+        else {   // üstteki görevde bu görevde alt görevlerdir bu görevin varsa babasını bul, babası göster diyorsa göster
       previousIndex--;
     }
+      }
+      else if (upperTask.Zindex > copyPt.Zindex) // bir üstteki görev alt görev ise; bu baba görevdir: göster
+      {
+        return true;
+      }
+      else // if (upperTask.Zindex < copyPt.Zindex) // bir üstteki görev üst görev ise;   bu alt görevdir ve babası bulunmuştur, babası göster diyorsa göster
+      {
+        break;
+      }
+    }
+
+    // tüm üst taraf tarandı sonuç olarak oluşan previousIndex değerinde bir baba var mı yok mu bakalım.
 
     let father: ProjectTask = this.repository.getProjectToDos()[previousIndex]
-    if (!father) // no father
+    if (!father) // bu görevin babası yok, bu görevi göster.
+    {
       return true;
-
-    if (father.ShowSubTasks)
+    }
+    else {
+      if (father.ShowSubTasks)  // bu görevin babası var, babası göster diyorsa bu görevi göster
+      {
       return true;
-    else
+      }
+      else {
       return false;
+
+      }
   }
 
 
-  isSubTaskFounded(pt: ProjectTask): boolean {
-    let copyPt = Object.assign({}, pt);
+  } // optimize
+
+
+  isSubTaskFounded(copyPt: ProjectTask): boolean {
     if (copyPt.Zindex == 1) {
       return false;
     }
+    else {
     let nextIndex = this.repository.getProjectToDos().findIndex((val => val.TaskId == copyPt.TaskId)) + 1
-    let subTask = Object.assign({}, this.repository.getProjectToDos()[nextIndex]);
-    if (subTask && subTask.Zindex > copyPt.Zindex)
+      let subTask = this.repository.getProjectToDos()[nextIndex]
+      if (subTask && subTask.Zindex > copyPt.Zindex) {
       return true;
-    else
+      }
+      else {
       return false;
   }
+
+    }
+  }  // optimize
 
   @ViewChild(TaskCommentsComponent) commentsDialog;
   dialogRef: MatDialogRef<TaskCommentsComponent>
@@ -1268,9 +1284,8 @@ export class ProjectToDosComponent implements OnInit, OnDestroy, AfterViewInit {
     this.switchHourDataService.setupStyle.next({ isOpen: true, Visibility: 'hidden', Left: left - 3.5 + 'px', Top: top + 'px' })
   }
 
-  get getTextAreaRowCount()
-  {
-    return Math.round(this.projectToDoModelEdit.TaskTitle.length * 5 / (this.innerWidth * 1/2)) + 1
+  get getTextAreaRowCount() {
+    return Math.round(this.projectToDoModelEdit.TaskTitle.length * 5 / (this.innerWidth * 1 / 2)) + 1
   }
 
 }
