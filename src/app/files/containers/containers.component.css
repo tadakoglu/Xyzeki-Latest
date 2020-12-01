@@ -183,7 +183,7 @@
           filter: invert(36%) sepia(8%) saturate(221%) hue-rotate(315deg) brightness(93%) contrast(90%);
         }
         /* drop down*/
-    
+/*     
     
         html {
           scroll-behavior: smooth;
@@ -220,7 +220,7 @@
         ::-webkit-resizer {
           background-color: #666;
         }
-    
+     */
        
         .xyz-card-dark-btn {
           background: rgb(51, 51, 51);

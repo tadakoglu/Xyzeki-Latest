@@ -475,7 +475,7 @@ input:focus{
   .tooltipSpecial .arrow::before {
     border-top-color: rgb(160, 164, 187);
   }
-  
+/*   
   html {
     scroll-behavior: smooth;
     scrollbar-face-color: #646464;
@@ -510,7 +510,7 @@ input:focus{
   }
   ::-webkit-resizer {
     background-color: #666;
-  }
+  } */
   @media (max-width:992PX)
   {
     .responsiveBTPadding{

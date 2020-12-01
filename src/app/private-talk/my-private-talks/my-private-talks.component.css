@@ -150,7 +150,7 @@ input{
       }
       /* drop down*/
   
-  
+/*   
       html {
         scroll-behavior: smooth;
         scrollbar-face-color: #646464;
@@ -185,7 +185,7 @@ input{
       }
       ::-webkit-resizer {
         background-color: #666;
-      }
+      } */
   
       .xyz-card-dark {
         background: rgba(228, 221, 221, 0.808);

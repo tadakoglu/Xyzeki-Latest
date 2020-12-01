@@ -70,10 +70,10 @@
     line-height: 1.33;
     border-radius: 35px;
   }
-  ::-webkit-scrollbar {
+  /* ::-webkit-scrollbar {
     width: 5px;
     height: 3px;
-  }
+  } */
 
 
   
