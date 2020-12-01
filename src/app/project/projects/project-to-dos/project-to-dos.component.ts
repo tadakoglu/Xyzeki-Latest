@@ -203,11 +203,11 @@ export class ProjectToDosComponent implements OnInit, OnDestroy, AfterViewInit {
 
       if (upperTask.Zindex == copyPt.Zindex) { // üstteki görev ve üst ne de alt görev ise(aynı seviye)
         if (copyPt.Zindex == 0) { // üstteki görevde bu görevde en büyük babalardır. bu görevi göster.
-        return true;
+          return true;
         }
         else {   // üstteki görevde bu görevde alt görevlerdir bu görevin varsa babasını bul, babası göster diyorsa göster
-      previousIndex--;
-    }
+          previousIndex--;
+        }
       }
       else if (upperTask.Zindex > copyPt.Zindex) // bir üstteki görev alt görev ise; bu baba görevdir: göster
       {
@@ -229,13 +229,13 @@ export class ProjectToDosComponent implements OnInit, OnDestroy, AfterViewInit {
     else {
       if (father.ShowSubTasks)  // bu görevin babası var, babası göster diyorsa bu görevi göster
       {
-      return true;
+        return true;
       }
       else {
-      return false;
+        return false;
 
       }
-  }
+    }
 
 
   } // optimize
@@ -246,14 +246,14 @@ export class ProjectToDosComponent implements OnInit, OnDestroy, AfterViewInit {
       return false;
     }
     else {
-    let nextIndex = this.repository.getProjectToDos().findIndex((val => val.TaskId == copyPt.TaskId)) + 1
+      let nextIndex = this.repository.getProjectToDos().findIndex((val => val.TaskId == copyPt.TaskId)) + 1
       let subTask = this.repository.getProjectToDos()[nextIndex]
       if (subTask && subTask.Zindex > copyPt.Zindex) {
-      return true;
+        return true;
       }
       else {
-      return false;
-  }
+        return false;
+      }
 
     }
   }  // optimize
@@ -350,8 +350,91 @@ export class ProjectToDosComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   private arcFilter: any = (pt) => { if (!pt.Archived == true) return pt }; // closed at first.
 
-
+  /* araştırma sonuçları */
+  // 1 - yukarı yönde sürükle bırak yapıldığında çocukların lokasyonu babasının yeni lokasyonunun +1'inden başlar(alt görevlerle ilişkili bir boşalma olmuyor)
+  // 2-  aşağı yönde sürükle bırak yapıldığında çocukların lokasyonu babasının yeni lokasyonu ile her seferinde aynı oluyor(alt görevlerden dolayı boşalma oluşuyor ve şelale gibi boşalan yer doluyor)
+  // 3-  son olarak aşağı yönde sürükle bırak yapıldığında taşınan yerdeki baba çocuklarını gizlediyse, "babanın" yeni lokasyonu yanlış hesaplanıyor(angular tarafında) bu sebeple babanın lokasyonu tekrar hesaplandı ve her çocuk babanın +1'ine  yerleştirildi
+  /* bu algoritma 100% test edilmiştir ve testleri geçmiştir */
   drop(event: CdkDragDrop<ProjectTask[]>) {
+    let item1: ProjectTask = this.projectToDos().find((val, index, obj) => index == event.previousIndex)
+    let indexPrevious = this.repository.getProjectToDos().findIndex((val => val.TaskId == item1.TaskId))
+
+    let item2: ProjectTask = this.projectToDos().find((val, index, obj) => index == event.currentIndex)
+    let indexCurrent = this.repository.getProjectToDos().findIndex((val => val.TaskId == item2.TaskId))
+
+    let direction = indexCurrent - indexPrevious
+
+    if (indexPrevious == indexCurrent) {
+      return;
+    }
+
+
+
+    // taşınan görevin çocuklarını getir
+    let subTasks: ProjectTask[] = []
+    let index = indexPrevious + 1;
+    while (index < this.repository.getProjectToDos().length) {
+      let subTaskElement = Object.assign({}, this.repository.getProjectToDos()[index]);
+      if (subTaskElement.Zindex > item1.Zindex) {
+        subTasks.push(subTaskElement);
+        index++;
+      }
+      else {
+        break;
+      }
+
+
+
+    }
+
+    //aşağı yönde sürükle bırak yapılırsa baba görev çocuklarını gizlediyse(showSubTasks) indexCurrent'i tekrar hesapla, diğer türlü sorun oluşuyor(angular babanın yeni lokasyonunu yanlış hesaplıyor )
+    //yukarı yönde sürükle bırak yapılırsa baba görevler gizli de olsa hiçbir sorun oluşmuyor, burada sadece aşağı yönde bir sorun var.
+    if (direction > 0 /*aşağı yönde*/ && !item2.ShowSubTasks) {
+      // taşınan yerdeki görevin en alttaki subtaskini bul
+      let targetSubtasks: ProjectTask[] = []
+      let indexTarget = indexCurrent + 1;
+      while (indexTarget < this.repository.getProjectToDos().length) {
+        let subTaskElementOfTarget = Object.assign({}, this.repository.getProjectToDos()[indexTarget]);
+        if (subTaskElementOfTarget.Zindex > item2.Zindex) {
+          targetSubtasks.push(subTaskElementOfTarget);
+          indexTarget++;
+        }
+        else {
+          break;
+        }
+      }
+      if (targetSubtasks.length > 0) {
+        let deepestSubTask = targetSubtasks[targetSubtasks.length - 1]
+        indexCurrent = this.repository.getProjectToDos().findIndex((val => val.TaskId == deepestSubTask.TaskId))
+        //change wrong indexCurrent to true one when direction is to the below.
+      }
+
+    }
+
+    //görevi sürükle bırak
+    moveItemInArray(this.repository.getProjectToDos(), indexPrevious, indexCurrent);
+
+
+
+    //çocuk görevleri babasının altına taşı
+    //araştırma sonucu: aşağı yönde hareket ederken subTask'in yerleşeceği pozisyon +1 OLMUYOR ancak yukarı yönde sürükle bırak yapılırsa +1'den başlıyor.
+
+    let fatherTaskNewIndex = this.repository.getProjectToDos().findIndex(val => val.TaskId == item1.TaskId)/* recalculate after  moveItemInArray*/
+    let subTaskStartPosition = (direction < 0 /*yukarı yönde*/) ? fatherTaskNewIndex + 1 : fatherTaskNewIndex
+
+    subTasks.forEach((st, index, arr) => {
+      let subTaskIndexPrevious = this.repository.getProjectToDos().findIndex((val => val.TaskId == st.TaskId))
+      moveItemInArray(this.repository.getProjectToDos(), subTaskIndexPrevious, subTaskStartPosition);
+
+      if (direction < 0/*yukarı yönde*/) { /* araştırma sonucu: aşağı yönde subtask bir şelale şeklinde akıyor yukarı kayma oluyor buradan index ilginç bir şekilde artmıyor.*/
+        subTaskStartPosition++;
+      }
+    })
+
+    this.repository.reOrderAndSavePT(this.projectId);
+
+  }
+  dropOldButPerfect(event: CdkDragDrop<ProjectTask[]>) {
     if (this.permissions.getAccessGranted()) {
 
       let item1: ProjectTask = this.projectToDos().find((val, index, obj) => index == event.previousIndex);
@@ -1264,7 +1347,7 @@ export class ProjectToDosComponent implements OnInit, OnDestroy, AfterViewInit {
     return [left, top]
   }
 
- 
+
 
   oldProjectToDoShowSubTasksStatus
 
@@ -1286,6 +1369,11 @@ export class ProjectToDosComponent implements OnInit, OnDestroy, AfterViewInit {
 
   get getTextAreaRowCount() {
     return Math.round(this.projectToDoModelEdit.TaskTitle.length * 5 / (this.innerWidth * 1 / 2)) + 1
+  }
+
+  //drag ekranın dibindeyse aşağıya kaydır azcık.
+  scrollToBottomAlittle() {
+    window.scrollTo(0, document.documentElement.scrollHeight + 200)
   }
 
 }
