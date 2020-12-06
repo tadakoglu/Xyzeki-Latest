@@ -32,7 +32,7 @@ namespace XYZToDo.Models.Repository
             ProjectTask[] allWithout = all.Where(pt =>
             {
                 int nextIndex = (int)pt.Order + 1;
-                ProjectTask nextPT = all.Where(pt2 => pt.Order == nextIndex).FirstOrDefault();
+                ProjectTask nextPT = all.Where(pt2 => pt2.Order == nextIndex).FirstOrDefault();
                 if (pt.Zindex == 0 && nextIndex <= all.Length - 1 && nextPT?.Zindex == 1)
                 {
                     return true;

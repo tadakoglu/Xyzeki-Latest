@@ -52,5 +52,6 @@ export class CompletionRateComponent implements OnInit, OnChanges {
   get getDenominator(): number {
     return 100 - parseInt(this.completionRate.toFixed());
   }
+  
 
 }
