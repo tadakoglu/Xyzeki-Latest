@@ -32,6 +32,11 @@ export class ProjectsService {
   myProjectsAssigned(): Observable<Project[]> {
     return this.http.get<Project[]>(this.baseURL + "api/Projects/MyProjects/Assigned")
   }
+  getProjectCompletionRate(projectId: number){
+    return this.http.get<number>(this.baseURL + `api/Projects/ProjectCompletionRate/${projectId}`)
+
+  }
+
   findProject(projectId: number): Observable<Project> {
     return this.http.get<Project>(this.baseURL + "api/Projects/" + projectId)
   }

@@ -1,0 +1,27 @@
+
+
+
+.donut{
+  
+    height: 100px;
+     width:100px;
+   }
+   .donut:hover .donut-segment{
+     stroke-width: 7;
+   
+   }
+   .donut-segment:hover {
+     stroke-width: 7;
+   }
+   
+   .donut-segment {
+     transition: all 0.3s;  
+   }
+   
+   .filter-grey{
+     filter: invert(97%) sepia(0%) saturate(0%) hue-rotate(239deg) brightness(88%) contrast(89%);
+     transition: filter 0.5s;
+   }
+   .filter-grey:hover{
+     filter: invert(36%) sepia(8%) saturate(221%) hue-rotate(315deg) brightness(93%) contrast(90%);
+   }

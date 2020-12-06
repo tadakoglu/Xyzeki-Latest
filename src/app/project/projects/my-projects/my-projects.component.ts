@@ -38,12 +38,14 @@ export class MyProjectsComponent implements OnDestroy, OnInit, AfterViewInit {
 
   }
 
-  constructor(private route: ActivatedRoute, private repositoryTM: TeamMemberRepository, private permissions: MemberLicenseRepository, public repository: ProjectRepository, private dataService: DataService, public xyzekiAuthService: XyzekiAuthService) 
+  constructor(private route: ActivatedRoute, private repositoryTM: TeamMemberRepository, private permissions: MemberLicenseRepository, 
+    public repository: ProjectRepository, private dataService: DataService, public xyzekiAuthService: XyzekiAuthService) 
   {
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
 
   }
+  
 
   public getMember(username): Member {
     let member: Member = this.repositoryTM.getTeamMembersOwnedAsMembers().find(m => m.Username == username);

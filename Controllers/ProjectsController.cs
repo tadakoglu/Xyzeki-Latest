@@ -57,6 +57,14 @@ namespace XYZToDo.Controllers
             return NoContent(); // 404 resource not found, Microsoft docs use NotFound for this kind of behavior.
         }
 
+        [HttpGet("ProjectCompletionRate/{ProjectId}")] // GET Projects/ProjectCompletionRate/2   
+        public IActionResult GetProjectCompletionRate(long ProjectId)
+        {
+            var member = User.Identity.Name; // For security. From Claim(ClaimTypes.Name, Username) in JWT
+            return Ok(IProjectRepository.GetProjectCompletionRate(ProjectId));
+        }
+
+
         [HttpGet("{projectId}/isShareholder")] // GET Projects/5343/isShareholder // Am I Shareholder ?? 
         public IActionResult isShareholder(long projectId)
         {
@@ -101,7 +109,7 @@ namespace XYZToDo.Controllers
         }
 
         [HttpPost("POMs")] // POST /Projects/POMs + JSON Object
-        public IActionResult SaveAllPOMs([FromBody]ProjectOrderModel[] POMs) //Accepts JSON body, not x-www-form-urlencoded!
+        public IActionResult SaveAllPOMs([FromBody] ProjectOrderModel[] POMs) //Accepts JSON body, not x-www-form-urlencoded!
         {
             ReturnModel result = IProjectRepository.SaveAllPOMs(POMs);
             if (result.ErrorCode == ErrorCodes.OK)
@@ -113,7 +121,7 @@ namespace XYZToDo.Controllers
         }
 
         [HttpPost()] // POST /Projects + JSON Object
-        public IActionResult NewProject([FromBody]Project project) //Accepts JSON body, not x-www-form-urlencoded!
+        public IActionResult NewProject([FromBody] Project project) //Accepts JSON body, not x-www-form-urlencoded!
         {
             ReturnModel newProject = IProjectRepository.NewProject(project);
             if (newProject.ErrorCode == ErrorCodes.OK)
@@ -124,7 +132,7 @@ namespace XYZToDo.Controllers
 
         }
         [HttpPut("{ProjectId}")] // PUT Projects/3 + JSON Object
-        public IActionResult UpdateProject([FromRoute]long ProjectId, [FromBody]Project project)
+        public IActionResult UpdateProject([FromRoute] long ProjectId, [FromBody] Project project)
         {
             if (project == null || ProjectId != project.ProjectId)
             {
@@ -143,7 +151,7 @@ namespace XYZToDo.Controllers
 
         }
         [HttpDelete("{projectId}")] // DELETE Projects/1
-        public IActionResult DeleteProject([FromRoute]long projectId) //[FromRoute] is optional, it already accepts from route parameters but don't accepts JSON.
+        public IActionResult DeleteProject([FromRoute] long projectId) //[FromRoute] is optional, it already accepts from route parameters but don't accepts JSON.
         {
             Project project = IProjectRepository.DeleteProject(projectId);
             if (project != null)

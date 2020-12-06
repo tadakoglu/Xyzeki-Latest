@@ -11,14 +11,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule, MatInputModule, MatRippleModule } from '@angular/material';
 import { MatSearchBarComponent } from './mat-search-bar/mat-search-bar.component';
 import { SwitchHourComponent } from './switch-hour/switch-hour.component';
+import { CompletionRateComponent } from './completion-rate/completion-rate.component';
 
 @NgModule({
-  declarations: [AssignAutocompleteComponent, SwitchDayComponent, MatSearchBarComponent, SwitchHourComponent],
+  declarations: [CompletionRateComponent, AssignAutocompleteComponent, SwitchDayComponent, MatSearchBarComponent, SwitchHourComponent],
   imports: [
     CommonModule, FormsModule, NgbModule, DragDropModule,
     MatIconModule, MatInputModule, MatRippleModule, ReactiveFormsModule,
     RouterModule,
   ],
-  exports: [AssignAutocompleteComponent, SwitchDayComponent, MatSearchBarComponent, SwitchHourComponent]
+  exports: [CompletionRateComponent, AssignAutocompleteComponent, SwitchDayComponent, MatSearchBarComponent, SwitchHourComponent]
 })
 export class UiToolsModule { }

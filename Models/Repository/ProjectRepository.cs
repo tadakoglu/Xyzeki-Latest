@@ -20,7 +20,69 @@ namespace XYZToDo.Models.Repository
         public IQueryable<Project> Projects => context.Project;
         public Project[] GetProjects(string username) // Returns null or objects
         {
-            return context.Project.Where(p => p.Owner == username)?.ToArray();
+            return context.Project.Where(p => p.Owner == username).ToArray();
+        }
+
+        //1 = çocuğu olmayan baba görevleri bul( çocuğu olmayan tüm zindex=0'lar)
+        //2 = çocuğu olan baba görevlerin çocuklarını bul(ya da tüm zindex=1 lerin bulunması anlamına geliyor.)
+        public float GetProjectCompletionRate(long projectId)
+        {
+            //tamamından çocuğu olan baba görevleri çıkar
+            ProjectTask[] all = context.ProjectTask.Where(pt => pt.ProjectId == projectId).ToArray();
+            ProjectTask[] allWithout = all.Where(pt =>
+            {
+                int nextIndex = (int)pt.Order + 1;
+                ProjectTask nextPT = all.Where(pt2 => pt.Order == nextIndex).FirstOrDefault();
+                if (pt.Zindex == 0 && nextIndex <= all.Length - 1 && nextPT?.Zindex == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }).ToArray();
+
+            ProjectTask[] result = all.Except(allWithout).ToArray();
+
+            int resultInt = result.Select(pt =>
+            {
+                 if (pt.Deadline.HasValue && pt.Start.HasValue)
+                 {
+                    //  int diff = (pt.Deadline - pt.Start).Value.Minutes;
+                    //  return diff > 0 ? diff : 0;
+                     int diff = (int)pt.Deadline.Value.Subtract(pt.Start.Value).TotalMinutes;
+                     return diff > 0 ? diff : 0;
+                 }
+                 else
+                 {
+                     return 0;
+                 }
+            }).Sum();
+
+            ProjectTask[] resultCompleted = result.Where(pt => pt.IsCompleted == true).ToArray();
+
+            int resultCompletedInt = resultCompleted.Select(pt =>
+             {
+                
+                 if (pt.Deadline.HasValue && pt.Start.HasValue)
+                 {
+                    //  int diff = (pt.Deadline - pt.Start).Value.Minutes;
+                    //  return diff > 0 ? diff : 0;
+                     int diff = (int)pt.Deadline.Value.Subtract(pt.Start.Value).TotalMinutes;
+                     return diff > 0 ? diff : 0;
+                 }
+                 else
+                 {
+                     return 0;
+                 }
+             }).Sum();
+
+            float completionRate = resultInt == 0 ? 0 : (100 * resultCompletedInt / resultInt);
+
+            return completionRate;
+
+          
         }
         public bool isMyProjectGuard(long projectId, string thisMember)
         {

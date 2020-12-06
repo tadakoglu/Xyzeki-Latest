@@ -11,6 +11,7 @@ namespace XYZToDo.Models.Abstract
         /*Project Operations */
         //Viewing methods  will return NULL there is/are not such object/objects otherwise object/objects
         Project[] GetProjects(string username); // Projects where(owner=>owner==username)
+        float GetProjectCompletionRate(long projectId);
         Project[] GetProjectsAssigned(string username);
 
         bool isProjectAssignedGuard(long projectId, string thisMember);
@@ -26,6 +27,7 @@ namespace XYZToDo.Models.Abstract
         Project DeleteProject(long projectId);  //Return null if error has occurred, otherwise Project(deleted)
 
         ReturnModel SaveAllPOMs(ProjectOrderModel[] POMs);  // Return -1 if error has occured, otherwise TaskID
+
 
         /*Project Operations End*/
 

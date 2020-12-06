@@ -27,6 +27,9 @@ export class ProjectRepository implements IProjectRepository {
         this.loadRepository();
 
     }
+    geProjectCompletionRate(projectId){
+        return this.service.getProjectCompletionRate(projectId)
+    }
     
     loadRepository() {
       this.loadProjects(); // my and assigned at once
