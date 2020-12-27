@@ -18,7 +18,7 @@ export class XyzekiRefreshTokenInterceptor implements HttpInterceptor {
 
     constructor(private dataService: DataService, public router: Router, public xyzekiAuthHelpersService: XyzekiAuthHelpersService, public xyzekiAuthService: XyzekiAuthService, public authService: AuthService) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
+        
         if (request.url.indexOf('api/Auth/Refresh') !== -1) { // refresh token isteklerine bir şey iliştirmeden(token vb.) aynen ilet.
             return next.handle(request);
         }
@@ -71,7 +71,7 @@ export class XyzekiRefreshTokenInterceptor implements HttpInterceptor {
                         this.xyzekiAuthHelpersService.RemoveMember();
                         this.xyzekiAuthHelpersService.RemoveAccessToken();
                         this.xyzekiAuthHelpersService.RemoveRefreshToken();
-                        
+
                         this.router.navigate(['/giris']);  // if refresh doesnt work then there is a problem, then log out
                         return EMPTY
                     }),
@@ -100,6 +100,8 @@ export class XyzekiRefreshTokenInterceptor implements HttpInterceptor {
             }
         });
     }
+
+    
 
 }
 

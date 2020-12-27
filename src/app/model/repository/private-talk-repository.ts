@@ -11,7 +11,7 @@ import { PrivateTalkReceiversService } from '../services/private-talk-receivers.
 import { PrivateTalkTeamReceiversService } from '../services/private-talk-team-receivers.service';
 import { PrivateTalksService } from '../services/private-talks.service';
 import { DataService } from '../services/shared/data.service';
-import { TimeService } from '../services/time.service';
+
 import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
 import { MemberLicenseRepository } from './member-license-repository';
 import { PrivateTalkReceiverRepository } from './private-talk-receiver-repository';
@@ -20,7 +20,8 @@ import { PrivateTalkReceiverRepository } from './private-talk-receiver-repositor
 export class PrivateTalkRepository implements IPrivateTalkRepository {
 
     constructor(private psz: PageSizes, private receiverRepo: PrivateTalkReceiverRepository, private dataService: DataService, private service: PrivateTalksService, public signalService: XyzekiSignalrService, public signalMessageService: XyzekiSignalrService, private serviceReceivers: PrivateTalkReceiversService, private serviceTeamReceivers: PrivateTalkTeamReceiversService, public xyzekiAuthService: XyzekiAuthService,
-        private memberLicenseRepo: MemberLicenseRepository, private timeService: TimeService) {
+        private memberLicenseRepo: MemberLicenseRepository 
+        ) {
 
         this.signalService.newPrivateTalkJoinedAvailable.subscribe(pTalk => {
             this.savePrivateTalkReceivedViaSignalR(pTalk);
@@ -252,10 +253,8 @@ export class PrivateTalkRepository implements IPrivateTalkRepository {
     savePrivateTalk(privateTalk: PrivateTalk, receiversModel: string[], teamReceiversModel: number[]) {
         privateTalk.Owner = this.memberLicenseRepo.getMemberLicense().Username;
         if (privateTalk.PrivateTalkId == 0 || privateTalk.PrivateTalkId == null) {
-            this.timeService.getNow().pipe(concatMap((now) => {
-                privateTalk.DateTimeCreated = now;
-                return this.service.savePrivateTalk(privateTalk)
-            })).subscribe((privateTalkId) => {
+            privateTalk.DateTimeCreated = new Date().toISOString();
+            this.service.savePrivateTalk(privateTalk).subscribe((privateTalkId) => {
                 privateTalk.PrivateTalkId = privateTalkId;
 
                 let receivers: PrivateTalkReceiver[];

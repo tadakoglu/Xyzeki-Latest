@@ -26,10 +26,11 @@ import { isNullOrUndefined } from 'util';
   selector: 'app-my-private-talks',
   templateUrl: './my-private-talks.component.html',
   styleUrls: ['./my-private-talks.component.css'],
-  changeDetection: ChangeDetectionStrategy.Default})
+  changeDetection: ChangeDetectionStrategy.Default
+})
 export class MyPrivateTalksComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
-    
+
   }
   private searchSubscription: Subscription;
   private subscription: Subscription;
@@ -42,39 +43,6 @@ export class MyPrivateTalksComponent implements OnInit, AfterViewInit, OnDestroy
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
-
-
-    // this.subscription = this.repository.privateTalkToOpen.subscribe((pt) => { //if a signal comes here, it works in every condition.
-    //   if (this.innerWidth > 992) {
-    //     this.privateTalkId = pt.PrivateTalkId
-    //     this.router.navigate(['is-konusmalari', pt.PrivateTalkId])
-    //   }
-    // });
-
-    // // when second and more loads 
-    // if (this.firstPrivateTalkAvailable()) {
-    //   if (this.innerWidth > 992) {
-    //     if (this.route.children) {
-    //       let child = this.route.children.find((val, index, obj) => index == 0)
-    //       if (!isNullOrUndefined(child)) {
-    //         child.paramMap.subscribe(params => {
-    //           if (!isNullOrUndefined(params)) {
-    //             this.privateTalkId = Number.parseInt(params.get('PrivateTalkId'))
-    //           }
-    //         })
-    //       } else {
-    //         this.privateTalkId = this.firstPrivateTalkAvailable().PrivateTalkId
-    //         this.router.navigate(['is-konusmalari', this.firstPrivateTalkAvailable().PrivateTalkId])
-    //       }
-    //     }
-
-    //   }
-    // }
-
-
-
-
-    // this.deepSearchPT(undefined);
     this.resetReceiverModels();
   }
 
@@ -83,11 +51,11 @@ export class MyPrivateTalksComponent implements OnInit, AfterViewInit, OnDestroy
     return this.repository.getMyPrivateTalks().find((val, index, arr) => index == 0);
   }
 
-  constructor(private repositoryTM: TeamMemberRepository, private dataService: DataService, 
-    private permissions: MemberLicenseRepository, private teamRepository: TeamRepository, 
-    private receiverRepo: PrivateTalkReceiverRepository, private route: ActivatedRoute, 
+  constructor(private repositoryTM: TeamMemberRepository, private dataService: DataService,
+    private permissions: MemberLicenseRepository, private teamRepository: TeamRepository,
+    private receiverRepo: PrivateTalkReceiverRepository, private route: ActivatedRoute,
     private router: Router, private repository: PrivateTalkRepository,
-    public xyzekiAuthService : XyzekiAuthService ) {
+    public xyzekiAuthService: XyzekiAuthService) {
     this.resetReceiverModels();
   }
 
@@ -103,7 +71,7 @@ export class MyPrivateTalksComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
 
-  public privateTalkModel = new PrivateTalk(null, this.xyzekiAuthService .Username, null); //Reset
+  public privateTalkModel = new PrivateTalk(null, this.xyzekiAuthService.Username, null); //Reset
 
   get myPrivateTalks_Ongoing(): PrivateTalk[] {
     return this.repository.getMyPrivateTalks();
@@ -111,6 +79,14 @@ export class MyPrivateTalksComponent implements OnInit, AfterViewInit, OnDestroy
   get myPrivateTalks_Incoming(): PrivateTalk[] {
     return this.repository.getPrivateTalksReceived()
   }
+
+  get primaryAccessGranted() {
+    return this.permissions.getPrimaryAccessGranted();    
+  }
+  get accessGranted() {
+    return this.permissions.getAccessGranted();    
+  }
+
 
 
   public getMyPTMessagesForCount(privateTalkId): MessageCountModel {
@@ -145,7 +121,7 @@ export class MyPrivateTalksComponent implements OnInit, AfterViewInit, OnDestroy
     this.repository.searchValue = searchValue;
     this.repository.loadAll(this.repository.searchValue);
     // this.privateTalkId = 0;
-    
+
   }
 
 
@@ -167,7 +143,7 @@ export class MyPrivateTalksComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   saveLastSeen() { // In case our member changes private talk id route param
-    if(this.oldPrivateTalkId != 0){
+    if (this.oldPrivateTalkId != 0) {
       this.repository.signalService.notifyPrivateTalkLastSeen(this.oldPrivateTalkId);
 
     }
@@ -178,13 +154,9 @@ export class MyPrivateTalksComponent implements OnInit, AfterViewInit, OnDestroy
   onSelectTopic(privateTalkId) {
     this.oldPrivateTalkId = this.privateTalkId;
     this.privateTalkId = privateTalkId;
-    if (innerWidth >= 992) { // defined in responsiveBT in my private talks css
-      this.router.navigate(['is-konusmalari', privateTalkId,])
-      this.saveLastSeen();
-    }
-    else {
-      this.router.navigate(['is-konusmalari/m', privateTalkId])
-    }
+    this.router.navigate(['is-konusmalari', privateTalkId, 'sohbet'])
+    this.saveLastSeen();
+
     if (this.newPrivateTalkPanelOpen)
       this.togglePrivateTalkPanel();
 
@@ -239,7 +211,7 @@ export class MyPrivateTalksComponent implements OnInit, AfterViewInit, OnDestroy
         this.modelSent = true;
         this.modelSubmitted = false;
 
-        this.privateTalkModel = new PrivateTalk(null, this.xyzekiAuthService .Username, null); //Reset
+        this.privateTalkModel = new PrivateTalk(null, this.xyzekiAuthService.Username, null); //Reset
         this.resetReceiverModels();
         this.togglePrivateTalkPanel();
       }
@@ -277,16 +249,6 @@ export class MyPrivateTalksComponent implements OnInit, AfterViewInit, OnDestroy
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
 
-
-
-    if (this.innerWidth < 992) {
-      if (this.privateTalkId != 0)
-        this.router.navigate(['/is-konusmalari/m', this.privateTalkId]);
-    }
-    if (this.innerWidth >= 992) {
-      if (this.privateTalkId != 0)
-        this.router.navigate(['/is-konusmalari', this.privateTalkId]);
-    }
 
 
   }

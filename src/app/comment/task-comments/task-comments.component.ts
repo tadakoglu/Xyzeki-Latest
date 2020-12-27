@@ -12,7 +12,6 @@ import { QuickToDoCommentRepository } from 'src/app/model/repository/quick-to-do
 import { TeamMemberRepository } from 'src/app/model/repository/team-member-repository';
 import { ProjectToDoCommentsService } from 'src/app/model/services/project-to-do-comments.service';
 import { QuickToDoCommentsService } from 'src/app/model/services/quick-to-do-comments.service';
-import { TimeService } from 'src/app/model/services/time.service';
 import { XyzekiSignalrService } from 'src/app/model/signalr-services/xyzeki-signalr.service';
 
 
@@ -85,7 +84,8 @@ export class TaskCommentsComponent implements AfterViewInit {
 
   constructor(public qtCommentRepository: QuickToDoCommentRepository, public ptCommentRepository: ProjectToDoCommentRepository, private repositoryTM: TeamMemberRepository, private permissions: MemberLicenseRepository, private dialogRef: MatDialogRef<TaskCommentsComponent>, @Inject(MAT_DIALOG_DATA) data: DialogData,
     private qtCommentsService: QuickToDoCommentsService, private ptCommentsService: ProjectToDoCommentsService,
-    public xyzekiAuthService: XyzekiAuthService, private commentSignalService: XyzekiSignalrService, private timeService: TimeService
+    public xyzekiAuthService: XyzekiAuthService, private commentSignalService: XyzekiSignalrService
+    
   ) {
     this.taskId = data.taskId;
     this.kind = data.kind;

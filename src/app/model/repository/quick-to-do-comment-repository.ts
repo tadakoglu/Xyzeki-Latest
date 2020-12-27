@@ -4,14 +4,13 @@ import { IQuickToDoCommentRepository } from '../abstract/i-quick-to-do-comment-r
 import { QuickTaskComment } from '../quick-task-comment.model';
 import { QuickToDoCommentsService } from '../services/quick-to-do-comments.service';
 import { DataService } from '../services/shared/data.service';
-import { TimeService } from '../services/time.service';
 import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
 
 @Injectable()
 export class QuickToDoCommentRepository implements IQuickToDoCommentRepository {
 
     constructor(private service: QuickToDoCommentsService,
-        private signalService: XyzekiSignalrService, private timeService: TimeService, private dataService: DataService) {
+        private signalService: XyzekiSignalrService, private dataService: DataService) {
 
 
         this.signalService.newQuickToDoCommentAvailable.subscribe(qtComment => {
@@ -50,10 +49,8 @@ export class QuickToDoCommentRepository implements IQuickToDoCommentRepository {
     //sinyalleme metoduna 'project', 'quick' değerlerini ekle uzaktan mesajı bu şekilde gönder.
     saveQuickToDoComment(quickToDoComment: QuickTaskComment) {
         if (quickToDoComment.MessageId == 0 || quickToDoComment.MessageId == null) {
-            this.timeService.getNow().pipe(concatMap((now) => {
-                quickToDoComment.DateTimeSent = now;
-                return this.service.saveQuickTaskComment(quickToDoComment)
-            })).subscribe(messageId => {
+            quickToDoComment.DateTimeSent = new Date().toISOString();
+            this.service.saveQuickTaskComment(quickToDoComment).subscribe(messageId => {
                 quickToDoComment.MessageId = messageId;
                 this.quickToDoComments.push(quickToDoComment);
                 //Signalling via SignalR                

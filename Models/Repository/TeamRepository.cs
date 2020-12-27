@@ -32,7 +32,7 @@ namespace XYZToDo.Models.Repository
             else
             return false;
         }
-        public Team[] TeamsJoined(string username) // Returns null or objects
+        public Team[] TeamsJoined(string username) // Returns null or objects - HERE WE RETURN ALSO THOSE WITH STATUS TRUE/FALSE/NULL
         {
             return context.TeamMember.Where(tm => tm.Username == username && tm.Team.Owner != username)?.Select(tm => tm.Team)?.ToArray();
         }

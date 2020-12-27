@@ -5,13 +5,14 @@ import { IProjectToDoCommentRepository } from '../abstract/i-project-to-do-comme
 import { ProjectTaskComment } from '../project-task-comment.model';
 import { ProjectToDoCommentsService } from '../services/project-to-do-comments.service';
 import { DataService } from '../services/shared/data.service';
-import { TimeService } from '../services/time.service';
+
 
 @Injectable()
 export class ProjectToDoCommentRepository implements IProjectToDoCommentRepository {
 
-    constructor(private service: ProjectToDoCommentsService, private dataService: DataService,
-        private signalService: XyzekiSignalrService, private timeService: TimeService) {
+    constructor(private service: ProjectToDoCommentsService,
+         private dataService: DataService,
+        private signalService: XyzekiSignalrService) {
         this.signalService.newProjectToDoCommentAvailable.subscribe(ptComment => {
             this.savePTCommentViaSignalR(ptComment[0]);
         })
@@ -31,9 +32,7 @@ export class ProjectToDoCommentRepository implements IProjectToDoCommentReposito
     loadComments(taskId: number) {
         this.taskId = taskId;
         this.service.projectTaskComments(taskId).subscribe(ptComments => {
-            this.projectToDoComments.splice(0, this.projectToDoComments.length);
-            this.projectToDoComments.push(...ptComments);
-            //this.projectToDoComments = ptComments
+            this.projectToDoComments = ptComments
         });
     }
 
@@ -45,10 +44,8 @@ export class ProjectToDoCommentRepository implements IProjectToDoCommentReposito
 
     saveProjectToDoComment(projectToDoComment: ProjectTaskComment) {
         if (projectToDoComment.MessageId == 0 || projectToDoComment.MessageId == null) {
-            this.timeService.getNow().pipe(concatMap((now) => {
-                projectToDoComment.DateTimeSent = now;
-                return this.service.saveProjectTaskComment(projectToDoComment)
-            })).subscribe(messageId => {
+            projectToDoComment.DateTimeSent = new Date().toISOString();
+            this.service.saveProjectTaskComment(projectToDoComment).subscribe(messageId => {
                 projectToDoComment.MessageId = messageId;
                 this.projectToDoComments.push(projectToDoComment);
                 //Signalling via SignalR                

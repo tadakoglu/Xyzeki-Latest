@@ -17,18 +17,19 @@ import { EditReceiversComponent } from './edit-receivers/edit-receivers.componen
 
 import { MatChipsModule, MatFormFieldModule, MatIconModule, MatAutocompleteModule } from '@angular/material';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { PrivateTalksComponent } from './private-talks/private-talks.component';
 
 
 
 @NgModule({
-  declarations: [LiAnimateDirective, MyPrivateTalksComponent, PrivateTalkMessagesComponent, 
-    ReceiversComponent, EditReceiversComponent, ShowDirective],
+  declarations: [LiAnimateDirective, MyPrivateTalksComponent, PrivateTalkMessagesComponent,
+    ReceiversComponent, EditReceiversComponent, ShowDirective, PrivateTalksComponent],
   imports: [
     CommonModule, FormsModule, NgbModule, NavbarModule, InfiniteScrollModule, PipesModule, UiToolsModule,
     MatChipsModule, MatFormFieldModule, MatIconModule, MatAutocompleteModule, ReactiveFormsModule, PickerModule,
     RouterModule
   ],
-  exports: [MyPrivateTalksComponent, PrivateTalkMessagesComponent, EditReceiversComponent],
+  exports: [PrivateTalksComponent, MyPrivateTalksComponent, PrivateTalkMessagesComponent, EditReceiversComponent],
 
 })
 export class PrivateTalkModule { }

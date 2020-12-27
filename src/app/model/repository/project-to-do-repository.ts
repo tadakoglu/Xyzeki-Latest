@@ -9,7 +9,6 @@ import { ProjectTask } from '../project-task.model';
 import { Project } from '../project.model';
 import { ProjectToDosService } from '../services/project-to-dos.service';
 import { DataService } from '../services/shared/data.service';
-import { TimeService } from '../services/time.service';
 import { TaskOrderModel } from '../task-order.model';
 import { ProjectRepository } from './project-repository';
 
@@ -20,7 +19,8 @@ export class ProjectToDoRepository implements IProjectToDoRepository {
 
     constructor(private service: ProjectToDosService, private signalService: XyzekiSignalrService, public xyzekiAuthService: XyzekiAuthService,
         private commentSignalService: XyzekiSignalrService, private projectSignalService: XyzekiSignalrService,
-        private projectRepository: ProjectRepository, private dataService: DataService, private timeService: TimeService) {
+        private projectRepository: ProjectRepository, private dataService: DataService,
+    ) {
 
         this.signalService.deletedProjectToDoAvailable.subscribe(projectToDo => {
             this.deleteProjectToDoViaSignalR(projectToDo);
@@ -60,7 +60,7 @@ export class ProjectToDoRepository implements IProjectToDoRepository {
         //this.dataService.loadAllRepositoriesEvent.subscribe(() => { this.loadAll(); });
         this.dataService.clearAllRepositoriesEvent.subscribe(() => { this.clearProjectToDos() })
 
-        
+
         // this.loadRepository();
     }
 
@@ -127,7 +127,7 @@ export class ProjectToDoRepository implements IProjectToDoRepository {
             let pTasks: ProjectTask[] = []
             this.projectToDos.forEach(pt => {
                 let TOM: TaskOrderModel = new TaskOrderModel(order, pt.TaskId);
-                let pTask: ProjectTask = Object.assign({}, pt); 
+                let pTask: ProjectTask = Object.assign({}, pt);
                 pTask.Order = order;
 
                 TOMs.push(TOM);
@@ -286,16 +286,14 @@ export class ProjectToDoRepository implements IProjectToDoRepository {
         if (projectTask.TaskId == 0 || projectTask.TaskId == null) {
             projectTask.Order = this.getNext();
 
-            this.timeService.getNow().pipe(concatMap(now => {
-                if (finish === 0) {
-                    projectTask.Finish = null;
-                }
-                else if (finish === 1) {
-                    projectTask.Finish = now;
-                }
+            if (finish === 0) {
+                projectTask.Finish = null;
+            }
+            else if (finish === 1) {
+                projectTask.Finish = new Date().toISOString();
+            }
 
-                return this.service.saveProjectToDo(projectTask)
-            })).subscribe(projectToDoId => {
+            this.service.saveProjectToDo(projectTask).subscribe(projectToDoId => {
 
                 projectTask.TaskId = projectToDoId;
                 this.projectToDos.push(projectTask);
@@ -312,16 +310,13 @@ export class ProjectToDoRepository implements IProjectToDoRepository {
 
         }
         else {
-            this.timeService.getNow().pipe(concatMap(now => {
-                if (finish === 0) {
-                    projectTask.Finish = null;
-                }
-                else if (finish === 1) {
-                    projectTask.Finish = now;
-                }
-
-                return this.service.updateProjectToDo(projectTask)
-            })).subscribe(() => {
+            if (finish === 0) {
+                projectTask.Finish = null;
+            }
+            else if (finish === 1) {
+                projectTask.Finish = new Date().toISOString();
+            }
+            this.service.updateProjectToDo(projectTask).subscribe(() => {
 
                 let index = this.projectToDos.findIndex(value => value.TaskId == projectTask.TaskId)
                 if (index != -1)

@@ -16,6 +16,6 @@ export abstract class ITeamMemberRepository { // Include only public members her
     abstract saveTeamMember(teamMember: TeamMember) // For add and update
     abstract deleteTeamMember(teamMemberId: number)
 
-    abstract removeTMJFromRepo(teamMemberId: number) // for leaving the the tmJoined
+    //abstract removeTMJFromRepo(teamMemberId: number) // for leaving the the tmJoined
     // save or delete methods doesn't return anything.
 }

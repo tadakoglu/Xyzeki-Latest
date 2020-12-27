@@ -311,11 +311,7 @@ input:focus{
     color: rgb(0, 0, 0);
     box-shadow: 0 5px 15px rgba(0, 0, 0, .08)
   }
-  .xyz-card-dark {
-    background: #222;
-    color: #fff;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, .08)
-  }
+ 
   .xyz-card-footer {
     border-top: 2px solid #e5e5e5;
     padding-top: 10px;

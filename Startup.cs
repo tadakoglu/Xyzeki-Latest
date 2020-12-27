@@ -194,6 +194,8 @@ namespace XYZToDo
             }
             app.UseCors("EnableCORS"); // If we use front-end and back-end web servers with different ports on same ip, then we yet have to enable cors to allow front-end to access back-end
 
+
+            app.UseMiddleware<TimeControlMiddleware>(); // check if front-end time and server time is same for controling time
             // app.UseHsts();
             // app.UseHttpsRedirection();//Redirect HTTP to HTTPS, This won't redirect unless we speficy a HTTPS port,  This is in Microsoft.AspNetCore.HttpsPolicy namespace.
             app.UseMiddleware<WebSocketsMiddleware>(); //Middleware should be before UseAuthentication() ref, //https://medium.com/@tarik.nzl/asp-net-core-and-signalr-authentication-with-the-javascript-client-d46c15584daf

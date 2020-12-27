@@ -20,7 +20,6 @@ import { MembersService } from 'src/app/model/services/members.service';
 import { ProjectToDosService } from 'src/app/model/services/project-to-dos.service';
 import { DataService } from 'src/app/model/services/shared/data.service';
 import { SwitchHourDataService } from 'src/app/model/services/shared/switch-hour-data.service';
-import { TimeService } from 'src/app/model/services/time.service';
 import { XyzekiSignalrService } from 'src/app/model/signalr-services/xyzeki-signalr.service';
 import { AssignAutocompleteComponent } from 'src/app/ui-tools/assign-autocomplete/assign-autocomplete.component';
 import { XyzekiDateTimeInfra } from 'src/infrastructure/xyzeki-datetime-infra';
@@ -104,7 +103,7 @@ export class ProjectToDosComponent implements OnInit, OnDestroy, AfterViewInit {
     private projectToDoSignalrService: XyzekiSignalrService,
     public xyzekiAuthService: XyzekiAuthService, private memberServ: MembersService,
     private dialog: MatDialog, private commentSignalService: XyzekiSignalrService,
-    private projectSignalService: XyzekiSignalrService, private changeDetection: ChangeDetectorRef, private timeService: TimeService) {
+    private projectSignalService: XyzekiSignalrService, private changeDetection: ChangeDetectorRef) {
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
     //this.toggleProjectToDoPanel();

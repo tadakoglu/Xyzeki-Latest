@@ -21,11 +21,11 @@ namespace XYZToDo.Models.Repository
 
 
         // NOTE: burası status true olmayanları da mutlaka içermeli sinyal altyapısı ona göre hazırlandı.
-        public TeamMember[] GetTeamMembers(long teamId)  // Returns null or objects
+        public TeamMember[] GetTeamMembers(long teamId)  // Returns null or objects // KENDİ TAKIMIMIN TAKIM ÜYELERİ BÖLÜMÜ
         {
             return TeamMembers.Where(tm => tm.TeamId == teamId)?.ToArray();
         }
-        public TeamMember[] GetTeamMembers(string username) // Returns null or objects
+        public TeamMember[] GetTeamMembers(string username) // Returns null or objects - DAVETIYELER BÖLÜMÜ
         {
             //Kendi takımlarımı katıldığım takımlarda gösterme
             //Kendi takımlarımıdaki takım üyeliğimi gelen davetiyelerim repolarına gönderme
@@ -58,16 +58,6 @@ namespace XYZToDo.Models.Repository
             return allEmployees;
         }
 
-
-        //  public Member[] GetAllAsMembersJoined(string username) // Returns null or objects
-        // {  
-        //     // katıldığım takımların sahiplerinin tüm takımlarındaki kişileri getir.
-        //     //burası katıldığım tüm takımlardakini hesaplıyor(katılmadığın takımlar var), tüm şirket olarak hesapla.
-        //     IQueryable<Member> teamOwners = context.TeamMember.Where(tm => tm.Username == username && tm.Team.Owner!=username)?.Select(tm => tm.Team.OwnerNavigation);
-
-        //     Member[] allEmployees = teamOwners.SelectMany(m=> m.Team).SelectMany(t => t.TeamMember).Where(tm => tm.Username!=username).Select(t => t.UsernameNavigation).ToArray();
-        //     return allEmployees;
-        // }
 
         public TeamMember[] TeamMembersPT(string username)
         { // assign autocomplete pt
@@ -166,9 +156,9 @@ namespace XYZToDo.Models.Repository
                     return true;
                 else // cevap kabul et ise.
                 {
-                    Team isTeamOwner = context.Team.Where(t => t.Owner == thisMember).FirstOrDefault();
+                    Team isTeamOwner = context.Team.Where(t => t.Owner == thisMember).FirstOrDefault(); //herhangi bir takımın sahibi mi
 
-                    // şu an bulunduğu takım
+                    // başkasına ait bulunduğu bir takım
                     Team now = context.TeamMember.Where(tm => tm.Username == thisMember && tm.Status == true && tm.Team.Owner != thisMember).Select(tm => tm.Team).FirstOrDefault();
 
                     if (now == null) // birinin takımında yok ise
@@ -226,7 +216,7 @@ namespace XYZToDo.Models.Repository
                 //kişi silindiği takımın sahibinin başka bir takımında yer alıyor mu?
                 TeamMember inOtherTeams = context.Team.Where(t => t.Owner == tMember.Team.Owner && t.TeamId != tMember.TeamId).
                 SelectMany(t => t.TeamMember).Where(tm => tm.Username == tMember.Username && tm.Status == true).FirstOrDefault();
-                if (inOtherTeams != null)
+                if (inOtherTeams != null) // diğer takımlarda kişi hala mevcut, verileri bu durumda silinmez.
                 {
                     return; // Hiçbir şey yapma.
                 }
@@ -237,7 +227,7 @@ namespace XYZToDo.Models.Repository
                     p.Sender = null;
                     context.Entry(p).State = EntityState.Modified;
                 }
-                foreach (var p in context.Set<QuickTask>().Where(qt => qt.Owner != tMember.Username && qt.AssignedTo == tMember.Username))
+                foreach (var p in context.Set<QuickTask>().Where(qt => qt.Owner != tMember.Username && (qt.AssignedTo == tMember.Username || qt.Completedby == tMember.Username)))
                 {
                     p.AssignedTo = null;
                     p.Completedby = null;

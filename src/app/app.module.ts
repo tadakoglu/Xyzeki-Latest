@@ -23,6 +23,7 @@ import { XyzekiRefreshTokenInterceptor } from './model/interceptors/xyzeki-refre
 import { TokenInterceptor } from './model/interceptors/token-inceptor';
 import { NavbarModule } from './navbar/navbar.module';
 import { MatIconModule } from '@angular/material';
+import { XyzekiTimeInterceptor } from './model/interceptors/xyzeki-time-interceptor';
 
 
 
@@ -48,6 +49,11 @@ registerLocaleData(localeTr);
       provide: HTTP_INTERCEPTORS,
       useClass: XyzekiRefreshTokenInterceptor,
       multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: XyzekiTimeInterceptor,
+      multi: true      
     }
   ],
   bootstrap: [AppComponent],

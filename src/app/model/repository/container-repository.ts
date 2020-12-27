@@ -5,13 +5,12 @@ import { CloudContainer } from '../azure-models/cloud-container.model';
 import { CloudContainers } from '../azure-models/cloud-containers.model';
 import { FilesService } from '../services/files.service';
 import { DataService } from '../services/shared/data.service';
-import { TimeService } from '../services/time.service';
 import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
 
 @Injectable()
 export class ContainerRepository implements IContainerRepository {
     constructor(private service: FilesService, private signalService: XyzekiSignalrService,
-        private dataService: DataService, private timeService: TimeService) {
+        private dataService: DataService) {
 
         this.signalService.newContainerAvailable.subscribe(container => {
             this.saveContainerViaSignalR(container);
@@ -63,10 +62,8 @@ export class ContainerRepository implements IContainerRepository {
     }
 
     saveContainer(container: CloudContainer) {
-        this.timeService.getNow().pipe(concatMap((now) => {
-            container.CreatedAt = now;
-            return this.service.createContainer(container.ContainerName);
-        })).subscribe(result => {
+        container.CreatedAt = new Date().toISOString();
+        this.service.createContainer(container.ContainerName).subscribe(result => {
             if (result != null) {
                 this.containers.unshift(result);
                 // send container with signalr to receivers

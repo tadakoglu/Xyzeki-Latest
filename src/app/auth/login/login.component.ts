@@ -38,7 +38,7 @@ import { GoogleReCaptcha_LoginAction } from 'src/infrastructure/google-captcha';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   providers: [{ provide: LoginModel, useClass: LoginModel },
-    
+
 
   ]
   , changeDetection: ChangeDetectionStrategy.Default
@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
       this.isLoading = true;
       this.subscription = this.recaptchaV3Service.execute(GoogleReCaptcha_LoginAction).pipe(concatMap(
         recaptchaToken => { return this.repository.authenticate(Object.assign({}, this.loginModel), recaptchaToken) })).subscribe((response) => {
-          let tokenMemberModel:TokenMemberModel = response.body;
+          let tokenMemberModel: TokenMemberModel = response.body;
           console.log(JSON.stringify(tokenMemberModel.Member) + 'üye')
           this.xyzekiAuthHelpersService.Auth(tokenMemberModel);
           this.informUser = "Başarıyla giriş yaptınız."
@@ -101,9 +101,16 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
             case 401:
               this.informUser = "Girdiğiniz bilgiler yanlıştır, lütfen tekrar deneyiniz."
               break;
+
+            case 406:
+              this.informUser = "Lütfen cihazınızın zamanını güncelleyip tekrar deneyiniz."
+              break;
+
             case 503: ; case 0:
               this.informUser = "Servis şu anda ulaşılabilir değildir."
               break;
+
+
 
           }
           this.isLoading = false;
@@ -124,33 +131,36 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
     this.modelSubmitted = true;
     if (loginForm.valid) {
       this.isLoading = true;
-      this.repository.authenticate(Object.assign({}, this.loginModel),'').subscribe((response) => {
-          let tokenMemberModel:TokenMemberModel = response.body;
-          console.log(JSON.stringify(tokenMemberModel.Member) + 'üye')
-          this.xyzekiAuthHelpersService.Auth(tokenMemberModel);
-          this.informUser = "Başarıyla giriş yaptınız."
-          this.router.navigate(['/isler'])
-          this.modelSent = true;
-          this.modelSubmitted = false;
-          this.isLoading = false;
+      this.repository.authenticate(Object.assign({}, this.loginModel), '').subscribe((response) => {
+        let tokenMemberModel: TokenMemberModel = response.body;
+        console.log(JSON.stringify(tokenMemberModel.Member) + 'üye')
+        this.xyzekiAuthHelpersService.Auth(tokenMemberModel);
+        this.informUser = "Başarıyla giriş yaptınız."
+        this.router.navigate(['/isler'])
+        this.modelSent = true;
+        this.modelSubmitted = false;
+        this.isLoading = false;
 
-        }, (error: HttpErrorResponse) => {
-          switch (error.status) {
-            case 401:
-              this.informUser = "Girdiğiniz bilgiler yanlıştır, lütfen tekrar deneyiniz."
-              break;
-            case 503: ; case 0:
-              this.informUser = "Servis şu anda ulaşılabilir değildir."
-              break;
+      }, (error: HttpErrorResponse) => {
+        switch (error.status) {
+          case 401:
+            this.informUser = "Girdiğiniz bilgiler yanlıştır, lütfen tekrar deneyiniz."
+            break;
+          case 406:
+            this.informUser = "Lütfen cihazınızın zamanını güncelleyip tekrar deneyiniz."
+            break;
+          case 503: ; case 0:
+            this.informUser = "Servis şu anda ulaşılabilir değildir."
+            break;
 
-          }
-          this.isLoading = false;
         }
-        ).add(() => {
-          this.modelSent = true;
-          this.modelSubmitted = false;
-          this.isLoading = false;
-        })
+        this.isLoading = false;
+      }
+      ).add(() => {
+        this.modelSent = true;
+        this.modelSubmitted = false;
+        this.isLoading = false;
+      })
 
 
 
@@ -158,13 +168,13 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
     }
   }
-  
+
   informUser: string;
   ngOnInit() { }
 
 
 
   subscription: Subscription;
- 
+
 
 }

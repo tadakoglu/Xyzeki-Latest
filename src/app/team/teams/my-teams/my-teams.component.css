@@ -77,6 +77,10 @@ input:focus{
     .buton-secili{
       background-color: rgb(209, 214, 241)
     }
+    tr:focus{
+      outline:none;
+    }
+
 
     
     

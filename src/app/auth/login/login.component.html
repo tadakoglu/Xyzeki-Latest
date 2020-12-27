@@ -2,9 +2,10 @@
   <div class="row justify-content-center">
 
     <div class="card mt-3 mb-3" style="border-radius: 3px;">
-      <div class="card-header xyz-card-dark text-light" style="border-radius: 3px;">
+      <div class="card-header  text-light" style="border-radius: 3px; background-color: black;">
         <span class="font-weight-bolder">Oturum Açın</span>
-        <button class="close" [routerLink]="[ '/' ]"><span class="text-light">&times;</span></button>
+        
+        <button class="close pull-right" [routerLink]="[ '/' ]"><span class="text-light">&times;</span></button>
       </div>
       <div *ngIf="modelSent" class="card-body">
         <div class="card-text">

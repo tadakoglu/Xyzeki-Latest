@@ -6,7 +6,6 @@ import { IPrivateTalkMessageRepository } from '../abstract/i-private-talk-messag
 import { PrivateTalkMessage } from '../private-talk-message.model';
 import { PrivateTalkMessagesService } from '../services/private-talk-messages.service';
 import { DataService } from '../services/shared/data.service';
-import { TimeService } from '../services/time.service';
 import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
 
 // @Injectable()
@@ -14,7 +13,8 @@ import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service
 export class PrivateTalkMessageRepository implements IPrivateTalkMessageRepository {
 
     constructor(private service: PrivateTalkMessagesService,
-        private signalService: XyzekiSignalrService, private psz: PageSizes, private timeService: TimeService, private dataService: DataService) {
+        private signalService: XyzekiSignalrService, 
+        private psz: PageSizes,  private dataService: DataService) {
 
         this.newMessageSubscription = this.signalService.newPrivateTalkMessageAvailable.subscribe(message => {
             this.savePrivateTalkMessageViaSignalR(message[0], message[1]);
@@ -53,15 +53,16 @@ export class PrivateTalkMessageRepository implements IPrivateTalkMessageReposito
 
     savePrivateTalkMessage(privateTalkMessage: PrivateTalkMessage) {
         if (privateTalkMessage.MessageId == 0 || privateTalkMessage.MessageId == null) {
-            this.timeService.getNow().pipe(concatMap((now) => {
-                privateTalkMessage.DateTimeSent = now;
-                return this.service.savePrivateTalkMessage(privateTalkMessage);
-            })).subscribe(messageId => {
+
+            privateTalkMessage.DateTimeSent = new Date().toISOString();
+            this.service.savePrivateTalkMessage(privateTalkMessage).subscribe(messageId => {
                 privateTalkMessage.MessageId = messageId;
                 this.privateTalkMessages.push(privateTalkMessage);
                 //Signalling via SignalR                
                 this.signalService.notifyNewPrivateTalkMessage(privateTalkMessage);
             })
+
+           
 
         }
         else {

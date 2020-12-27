@@ -14,7 +14,6 @@ import { RegisterComponent } from './auth/register/register.component';
 import { IncomingInvitationsComponent } from './team/teams/incoming-invitations/incoming-invitations.component';
 import { SettingsComponent } from './member/settings/settings.component';
 import { MyPrivateTalksComponent } from './private-talk/my-private-talks/my-private-talks.component';
-import { PrivateTalkMessagesComponent } from './private-talk/private-talk-messages/private-talk-messages.component';
 import { SaveLastSeenGuardService } from './model/services/guards/save-last-seen-guard.service';
 import { LicenseManagementComponent } from './admin/license-management/license-management.component';
 import { AuthGuardAdminService } from './model/services/guards/auth-guard-admin.service';
@@ -35,6 +34,8 @@ import { ContainerFilesResolverService } from './model/resolvers/container-files
 import { AboutComponent } from './member/about/about.component';
 import { AlreadyLoggedInGuardService } from './model/services/guards/already-logged-in-guard.service';
 import { LoadToMemoryService } from './model/services/guards/load-to-memory.service';
+import { PrivateTalksComponent } from './private-talk/private-talks/private-talks.component';
+import { PrivateTalkMessagesComponent } from './private-talk/private-talk-messages/private-talk-messages.component';
 
 //#todo protect routes with guards(block login and register for authenticated user)
 export const routes: Routes = [
@@ -65,15 +66,14 @@ export const routes: Routes = [
   {
     path: 'projeler', component: ProjectsComponent, canActivate: [AuthGuardService], children: [ //projects, that is enough to export in feature modules
       { path: '', pathMatch: 'prefix', component: MyProjectsComponent, resolve: { myProjects: MyProjectsResolverService, projectsAssigned: ProjectsAssignedResolverService } },
-      { path: ':ProjectId/yapilacaklar', component: ProjectToDosComponent, resolve: { projectToDos: ProjectToDosResolverService, ptCommentsCount: ProjectToDosCommentsCountResolverService }, pathMatch: 'full' },
+      { path: ':ProjectId/yapilacaklar', pathMatch: 'full',  component: ProjectToDosComponent, resolve: { projectToDos: ProjectToDosResolverService, ptCommentsCount: ProjectToDosCommentsCountResolverService }},
     ]
   },
   {
-    path: 'is-konusmalari', component: MyPrivateTalksComponent, canActivate: [AuthGuardService],
-    children: [{ path: ':PrivateTalkId', component: PrivateTalkMessagesComponent, pathMatch: 'full', canActivate: [AuthGuardService], canDeactivate: [SaveLastSeenGuardService] }]
-  },
-  {
-    path: 'is-konusmalari/m/:PrivateTalkId', component: PrivateTalkMessagesComponent, canActivate: [AuthGuardService]
+    path: 'is-konusmalari', component: PrivateTalksComponent, canActivate: [AuthGuardService], children: [
+      { path: '', pathMatch: 'prefix', component: MyPrivateTalksComponent},
+      { path: ':PrivateTalkId/sohbet', pathMatch: 'full', component: PrivateTalkMessagesComponent, canActivate: [AuthGuardService] },
+    ]
   },
   {
     path: 'dosyalar/istatistikler', component: FilesStatisticsComponent, canActivate: [AuthGuardService]

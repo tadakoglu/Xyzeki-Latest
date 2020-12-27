@@ -38,15 +38,6 @@ export class AppComponent implements OnInit, AfterViewInit {
    
   }
 
-
-  // @HostListener('window:unload')
-  // private onUnload(): void { //ngondestroy doesnt work for localstorage
-  //   // localStorage.setItem('ngondestroy', 'başarılı')
-  //   // console.log(localStorage.getItem('ngondestroy'))
-  //   // this.xyzekiAuthHelpersService.ClearAuthId();
-  // }
-
-
   title = 'Xyzeki İş Yönetimi Çözümleri';
   public innerWidth: any;
   public innerHeight: any;
@@ -57,24 +48,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.innerHeight = window.innerHeight;
   }
 
-  // isCustomerSubdomain(): boolean { // this is an general solution
-  //   const domain = window.location.hostname;
-  //   if (domain.indexOf('.') < 0 || domain.split('.')[0] === 'www') { // add here your special xyzeki subdomains(except customers)
-  //     return false;
-  //   } else {
-  //     return true;
-  //     //domain.split('.')[0];
-  //   }
-  // }
   ngOnInit(): void {
-    // this.auth.SetSessionString('token', '123').subscribe(()=>{
-    //   console.log("token anahtarlı 123 değeri oturumlara yazıldı")
-    // });
-    // this.auth.GetSessionString('token').subscribe((val)=>{
-    //   console.log(val + ' için ' + val + " değeri oturumlardan alındı")
-    // });
 
-    //this.setUpDefaultTheme();
     this.switchHourDataService.setupStyle.subscribe((c: { Left, Top, Visibility, isOpen }) => {
       this.switchHourStyle.Left = c.Left
       this.switchHourStyle.Top = c.Top
@@ -109,11 +84,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   @Input()
   loading = true;
   ngAfterViewInit() {
-    // if (this.isCustomerSubdomain()) {
-    //   this.router.navigate(['/giris'])
-    // }
-
-    
 
     this.router.events.subscribe((event) => {
       switch (true) {
@@ -127,11 +97,6 @@ export class AppComponent implements OnInit, AfterViewInit {
         case event instanceof NavigationError: {
           this.loading = false;
 
-          // setTimeout(() => {
-          //   this.loading = false;
-          //   this.cdr.detectChanges
-
-          // }, 200);
 
           break;
         }
@@ -142,70 +107,27 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
 
 
+    // this.testFonk();
+
+
   }
-
-  // setUpDefaultTheme() {
-  //   //let myArray = ["ArashiyamaBambulari", "Venedik", "Peribacalari", "Orman", "Yaprak", "Kedi", "Deniz", "Denizalti", "Brienz", "Bulutlar", "TropicalGunisigi", "DenizAgac", "Bulutlar", "Tarla"];
-  //   // let myArray = ['Bulutlar']
-  //   // let randomItem = myArray[Math.floor(Math.random() * myArray.length)];
-
-  //   // let element: HTMLElement = document.getElementById('appBody');
-  //   // element.className = null;
-  //   // element.classList.add(randomItem);
+  // testFonk(){
+  //   var brands = [];
+  //   getLikedBrands(1).then(res => {
+  //     brands = res as []
+  //   })
   // }
-  //   case 'ArashiyamaBambulari':
-  //   element.classList.add('ArashiyamaBambulari');
-  //   break;
-  // case 'Venedik':
-  //   element.classList.add('Venedik');
-  //   break;
-  // case 'Peribacalari':
-  //   element.classList.add('Peribacalari');
-  //   break;
-
-  // case 'Orman':
-  //   element.classList.add('Orman');
-  //   break;
-  // case 'Yaprak':
-  //   element.classList.add('Yaprak');
-  //   break;
-  // case 'Kedi':
-  //   element.classList.add('Kedi');
-  //   break;
-  // case 'Deniz':
-  //   element.classList.add('Deniz');
-  //   break;
-  // case 'Deve':
-  //   element.classList.add('Deve');
-  //   break;
-  // case 'Pamukkale':
-  //   element.classList.add('Pamukkale');
-  //   break;
-  // case 'Denizalti':
-  //   element.classList.add('Denizalti');
-  //   break;
-  // case 'Brienz':
-  //   element.classList.add('Brienz');
-  //   break;
-  // case 'Aconcagua':
-  //   element.classList.add('Aconcagua');
-  //   break;
-  // case 'Bulutlar':
-  //   element.classList.add('Bulutlar');
-  //   break;
-  // case 'TropicalGunisigi':
-  //   element.classList.add('TropicalGunisigi');
-  //   break;
-  // case 'DenizAgac':
-  //   element.classList.add('DenizAgac');
-  //   break;
-  // case 'Tarla':
-  //   element.classList.add('Tarla');
-  //   break;
-
-
-
-
-
 
 }
+
+
+// function getLikedBrands(userID) {
+//   const promise = new Promise((resolve, reject) => {
+//     resolve(['x markası', 'y markası']);
+//   });
+//   return promise;
+// }
+
+
+
+

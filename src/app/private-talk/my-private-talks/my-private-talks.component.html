@@ -8,9 +8,8 @@
     veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>
 </div>
 
-<app-navbar></app-navbar>
-<nav class="container-fluid xyz-card-dark ">
 
+<nav class="container-fluid xyz-card-dark " *ngIf="primaryAccessGranted">
 
     <a ngbTooltip="Yeni iş konuşması oluşturun" tooltipClass="tooltipSpecial" placement="bottom"
       *ngIf="!newPrivateTalkPanelOpen" (click)="togglePrivateTalkPanel();"
@@ -72,25 +71,15 @@
   </form>
 
 </div>
-<div class="container-fluid bg-white">
+<div class="container-fluid bg-white" >
   <div class="row pt-2 pb-2">
-    <div #bTalksPanel class="col-xs-4 col-lg-4">
-      <div class="row w-100 pl-2 pr-2 mb-1 d-flex">
-        <span class="lead">İş Konuşmaları</span><br>
-      </div>
-      <div class="row w-100 pl-2 pr-2 mb-1 d-flex">
-        <a style="border-top-left-radius: 3px;; border-bottom-left-radius: 3px;; margin-right: 0px;"
-          (click)="switchTab(true)" [ngClass]="{'squareBtnSelected': tabMy}" class="squareBtn">Size
-          Ait <span class="unreadCount">{{getUnreadMyPTCount}}</span></a>
-        <a style="border-top-right-radius: 3px;; border-bottom-right-radius: 3px;" (click)="switchTab(false)"
-          [ngClass]="{'squareBtnSelected': !tabMy}" class="squareBtn">Dahil Olduğunuz <span class="unreadCount">{{getUnreadReceivedPTCount}}</span></a>
-      </div>
+    <div  #bTalksPanel class="col-12" >
+     
+      
 
-      <div *ngIf="tabMy" 
-        class="row xyz-card-big pl-2 pr-2 mb-1 "
-        [ngStyle]="{'height.px': (innerWidth>=577) ? innerHeight-190: innerHeight-60}">
+      <div *ngIf="primaryAccessGranted" 
+        class="row xyz-card-big pl-2 pr-2 mb-1 " >
         <ul>
-
           <span *ngIf="myPrivateTalks_Ongoing?.length==0 && !searchBarOpen" class="mt-1">Henüz bir
             iş konuşması kanalınız bulunmuyor.</span>
           <span *ngIf="myPrivateTalks_Ongoing?.length==0 && searchBarOpen">
@@ -151,9 +140,8 @@
         </ul>
       </div>
 
-      <div *ngIf="!tabMy" 
-        class="row xyz-card-big pl-2 pr-2 mb-1 "
-        [ngStyle]="{'height.px': (innerWidth>=577) ? innerHeight-190: innerHeight-60}">
+      <div *ngIf="accessGranted" 
+        class="row xyz-card-big pl-2 pr-2 mb-1 " >
         <ul>
           <span *ngIf="myPrivateTalks_Incoming?.length== 0 && !searchBarOpen" class="mt-1">Henüz bir
             iş konuşması kanalı oluşturulmamış.</span>
@@ -188,8 +176,6 @@
       </div>
 
     </div>
-    <div class="col-8 responsiveBT">
-      <router-outlet></router-outlet>
-    </div>
+    
   </div>
 </div>

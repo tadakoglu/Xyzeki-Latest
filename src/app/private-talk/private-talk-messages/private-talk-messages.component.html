@@ -7,13 +7,19 @@
     kurumsal, bireysel
     veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>
 </div>
+<nav  class="container-fluid xyz-card-dark justify-content-between"
+    style=" position: sticky;
+    top: 0;
+    z-index: 1000;">
+    <a class="btn btn-dark text-white rounded-0" [routerLink]="[ '/is-konusmalari' ]">Geri</a>
+</nav>
 
 
 <div *ngIf="!editPrivateTalkPanelOpen">
   <div #scrollMe [scrollTop]="scrollMe.scrollHeight " infiniteScroll [infiniteScrollDistance]="2"
     [infiniteScrollUpDistance]="1.5" [scrollWindow]="false" [infiniteScrollThrottle]="100" (scrolled)="onScrollDown()"
-    (scrolledUp)="onScrollUp()" [ngStyle]="{'height.px': (innerWidth>=577) ? innerHeight-180: innerHeight-50}"
-    class="container-fluid xyz-card-big xyz-card-default bg-light">
+    (scrolledUp)="onScrollUp()"
+    class="container-fluid xyz-card-big xyz-card-default bg-light"  [ngStyle]="{'height.px': innerHeight-200}">
     <div  *ngIf="privateTalkId!=undefined && privateTalkId!=0" 
     class="sticky-top pl-2 pr-1 xyz-card-primary pt-1 bg-dark showDiv rounded"
       style="z-index: 100!important">
@@ -55,7 +61,7 @@
           </ul>
         </div>
 
-        <div class="clear-fix" *ngIf="innerWidth < 992"></div>
+      
         <div class="w-100 text-left" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px">
           #<b>{{privateTalk()?.Thread}} </b>
           <div *ngIf="privateTalk()?.Sender == xyzekiAuthService?.Username && privateTalk()?.PrivateTalkId"
@@ -195,22 +201,14 @@
           </div>
         </div>
 
-        <div>
-          <!-- <emoji-mart [backgroundImageFn]="backgroundImage" (emojiClick)="addEmoji($event)"></emoji-mart> -->
-          <!-- <emoji-mart (emojiClick)="addEmoji($event)" [backgroundImageFn]="backgroundImageFn" [set]="sheet === '' ? null : sheet" [isNative]="sheet === ''"></emoji-mart> -->
-
-
-          <!-- [isNative]="true"  -->
-
-          <!-- <emoji-mart  [set]="'emojione'" title="Emoji seçiniz" (emojiClick)="addEmoji($event)"></emoji-mart> -->
-        </div>
-        <!-- <button type="submit" class="btn btn-light btn-send text-uppercase text-white">Gönder</button> -->
+     
+        <button type="submit" class="btn btn-light btn-send text-uppercase text-white">Gönder</button> 
       </form>
     </div>
   </div>
 </div>
 <div *ngIf="editPrivateTalkPanelOpen">
-  <div [ngStyle]="{'height.px': (innerWidth>=577) ? innerHeight-80: innerHeight-20}"
+  <div [ngStyle]="{'height.px': innerHeight-125}"
     class="container-fluid xyz-card-big xyz-card-default" style="background-color: #fdfdfd">
     <div class="col">
       <div class="row pl-2 pr-1 xyz-card-primary bg-dark">

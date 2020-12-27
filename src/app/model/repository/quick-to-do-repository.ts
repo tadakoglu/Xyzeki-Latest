@@ -7,7 +7,6 @@ import { CommentCountModel } from '../comment-count.model';
 import { QuickTask } from '../quick-task.model';
 import { QuickToDosService } from '../services/quick-to-dos.service';
 import { DataService } from '../services/shared/data.service';
-import { TimeService } from '../services/time.service';
 import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
 import { TaskOrderModel } from '../task-order.model';
 
@@ -18,7 +17,9 @@ export class QuickToDoRepository implements IQuickToDoRepository {
 
     constructor(private psz: PageSizes, private service: QuickToDosService,
         public xyzekiAuthService: XyzekiAuthService, private signalService: XyzekiSignalrService,
-        private commentSignalService: XyzekiSignalrService, private dataService: DataService, private timeService: TimeService) {
+        private commentSignalService: XyzekiSignalrService,
+         private dataService: DataService, 
+         ) {
 
         this.signalService.deletedQuickToDoAvailable.subscribe(quickToDo => {
             this.deleteQuickToDoViaSignalR(quickToDo);
@@ -213,22 +214,22 @@ export class QuickToDoRepository implements IQuickToDoRepository {
             if (!quickToDo.Archived) {
                 quickToDo.Order = this.getNext();
             }
-            this.timeService.getNow().pipe(concatMap(now => {
-                if (finish === 0) {
-                    quickToDo.Finish = null;
-                }
-                else if (finish === 1) {
-                    quickToDo.Finish = now;
-                }
 
-                if (archievedDate === 0) {
-                    quickToDo.ArchivedDate = null;
-                }
-                else if (archievedDate === 1) {
-                    quickToDo.ArchivedDate = now;
-                }
-                return this.service.saveQuickTodo(quickToDo)
-            })).subscribe((qtId) => {
+            if (finish === 0) {
+                quickToDo.Finish = null;
+            }
+            else if (finish === 1) {
+                quickToDo.Finish = new Date().toISOString();
+            }
+
+            if (archievedDate === 0) {
+                quickToDo.ArchivedDate = null;
+            }
+            else if (archievedDate === 1) {
+                quickToDo.ArchivedDate = new Date().toISOString();
+            }
+
+            this.service.saveQuickTodo(quickToDo).subscribe((qtId) => {
                 quickToDo.TaskId = qtId;
                 quickToDo.Owner = this.xyzekiAuthService.Username
                 if (quickToDo.Archived)
@@ -248,23 +249,21 @@ export class QuickToDoRepository implements IQuickToDoRepository {
             });
 
         } else {
-            this.timeService.getNow().pipe(concatMap(now => {
-                if (finish === 0) {
-                    quickToDo.Finish = null;
-                }
-                else if (finish === 1) {
-                    quickToDo.Finish = now;
-                }
+            if (finish === 0) {
+                quickToDo.Finish = null;
+            }
+            else if (finish === 1) {
+                quickToDo.Finish = new Date().toISOString();
+            }
 
-                if (archievedDate === 0) {
-                    quickToDo.ArchivedDate = null;
-                }
-                else if (archievedDate === 1) {
-                    quickToDo.ArchivedDate = now;
-                }
+            if (archievedDate === 0) {
+                quickToDo.ArchivedDate = null;
+            }
+            else if (archievedDate === 1) {
+                quickToDo.ArchivedDate =new Date().toISOString();
+            }
 
-                return this.service.updateQuickTodo(quickToDo)
-            })).subscribe(() => {
+            this.service.updateQuickTodo(quickToDo).subscribe(() => {
                 let index = this.myQuickToDos.findIndex(val => val.TaskId == quickToDo.TaskId);
                 let oldTodo = this.myQuickToDos.find((val, valIndex, obj) => valIndex == index)
 

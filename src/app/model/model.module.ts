@@ -39,7 +39,6 @@ import { SwitchHourDataService } from './services/shared/switch-hour-data.servic
 import { PageSizes } from 'src/infrastructure/page-sizes';
 import { XyzekiSignalrService } from './signalr-services/xyzeki-signalr.service';
 import { NotificationService } from './notification-services/notification.service';
-import { TimeService } from './services/time.service';
 import { FileRepository } from './repository/file-repository';
 import { ProjectToDoRepository } from './repository/project-to-do-repository';
 import { PrivateTalkMessageRepository } from './repository/private-talk-message-repository';
@@ -71,7 +70,7 @@ import { LoadToMemoryService } from './services/guards/load-to-memory.service';
     PageSizes,
     XyzekiSignalrService,
     NotificationService,
-    TimeService,
+
     
     { provide: LoadToMemoryService, useClass: LoadToMemoryService },// This module's components/services and its tree of child components/services receive new AuthService "instance"
 

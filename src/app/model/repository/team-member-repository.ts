@@ -21,27 +21,14 @@ import { TeamRepository } from './team-repository';
 export class TeamMemberRepository implements ITeamMemberRepository {
 
     constructor(private xyzekiAuthService: XyzekiAuthService, private teamRepo: TeamRepository, private mLicense: MemberLicenseRepository, private service: TeamMembersService, private service2: TeamsService, private serviceMember: AuthService, private signalService: XyzekiSignalrService, private membersService: MembersService, public xyzekiAuthHelpersService: XyzekiAuthHelpersService, private permissions: MemberLicenseRepository, private dataService: DataService) {
-        //incoming signals
-        this.signalService.newTeamMemberJoinedAvailable.subscribe(teamMemberJ => { // add operation
-            this.saveTeamMemberJoinedViaSignalR(teamMemberJ);
-            let teamId = teamMemberJ.TeamId;
-            this.service2.findTeam(teamId).subscribe(team => {
-                let index: number = this.teamsJoined.findIndex(val => val.TeamId == teamId);
-                if (-1 == index)
-                    this.teamsJoined.push(team);
-                else {
-                    this.teamsJoined.splice(index, 1, team);
-                }
-            })
-            this.service.teamMembersJoinedAsMembers().subscribe(tmjAsM => {
-              this.teamMembersJoinedAsMembers = tmjAsM
-            })
+
+        this.signalService.newTeamMemberJoinedAvailable.subscribe(teamMemberJ => { // teamMember add operation happened
+            this.saveTeamMemberJoinedViaSignalR(teamMemberJ); // davetiyelerimdeki işlemleri yap
         });
 
-        this.signalService.newTeamMemberAvailable.subscribe(teamMember => { // update operation
-            this.saveTeamMemberViaSignalR(teamMember);
-            this.saveTeamMemberOwnedViaSignalR(teamMember);
-            this.saveTeamMemberJoinedViaSignalR(teamMember); // for update operation
+        this.signalService.newTeamMemberAvailable.subscribe(teamMember => { // teamMember update operation happened
+            this.saveTeamMemberViaSignalR(teamMember);  // takım üyelerindeki işlemleri yap
+            this.saveTeamMemberJoinedViaSignalR(teamMember);  // davetiyelerimdeki işlemleri yap
         });
 
         this.signalService.deletedTeamMemberAvailable.subscribe(teamMemberDeleted => {
@@ -55,7 +42,7 @@ export class TeamMemberRepository implements ITeamMemberRepository {
         this.loadRepository();
 
     }
-    loadRepository(){
+    loadRepository() {
         this.loadMYRelateds();
         this.loadPTRelateds();
     }
@@ -81,24 +68,34 @@ export class TeamMemberRepository implements ITeamMemberRepository {
             this.teamMembersOwned = tmo
         }
         )
+        this.service.teamMembersOwnedAsMembers().subscribe(tmoAsM => {
+            this.teamMembersOwnedAsMembers = tmoAsM
+        })
+
 
         //Start: For invitations
         this.service.teamMembersJoined().subscribe(tmsj => {
             this.teamMembersJoined = tmsj
         }
         );
+        this.service.teamMembersJoinedAsMembers().subscribe(tmjAsM => {
+            this.teamMembersJoinedAsMembers = tmjAsM
+        })
+
+
+
+
+
+
+
         this.service2.teamsJoined().subscribe(tj => {
             this.teamsJoined = tj
         }
         );
 
 
-        this.service.teamMembersOwnedAsMembers().subscribe(tmoAsM => {
-            this.teamMembersOwnedAsMembers = tmoAsM
-        })
-        this.service.teamMembersJoinedAsMembers().subscribe(tmjAsM => {
-            this.teamMembersJoinedAsMembers = tmjAsM
-        })
+
+
     }
     loadPTRelateds() { // ##load this when team comp destroyed. // private talk or project manager assignment box
         this.service.allTeamMembersPT().subscribe(teamMembers => {
@@ -122,20 +119,34 @@ export class TeamMemberRepository implements ITeamMemberRepository {
         this.teamMembers = teamMembers;
     }
 
-
-    private teamMembers: TeamMember[] = []
     public TeamId: number = 0
 
-    private teamMembersOwned: TeamMember[] = []
 
+    /* takım üyeleri */
+    private teamMembers: TeamMember[] = []
+
+
+    /* davetiyelerim */
+    private teamsJoined: Team[] = [];
     private teamMembersJoined: TeamMember[] = []
-    private teamsJoined: Team[] = []; // accompanying to teamMembersJoined
-
-    private teamMembersOwnedAsMembers: Member[] = [];
     private teamMembersJoinedAsMembers: Member[] = [];
 
+
+
+
+    /* kullanıcı atayıcı komponent */ 
+    /* sahip olduğum tüm takımlardaki tüm takım üyeleri */
+    private teamMembersOwned: TeamMember[] = []
+    private teamMembersOwnedAsMembers: Member[] = [];
+    /* sahip olduğum tüm takımlardaki tüm takım üyeleri son */
+
+
+    /* kullanıcı atayıcı komponent */
+    /* sahip olduğum veya katıldığım tüm takımlardaki tüm takım üyeleri */
     private allTeamMembersPT: TeamMember[] = [];
     private allTeamMembersPTAsMembers: Member[] = [];
+    /* sahip olduğum veya katıldığım tüm takımlardaki takım üyeleri son */
+
 
     getTeamMembers(): TeamMember[] {
         return this.teamMembers;
@@ -277,16 +288,17 @@ export class TeamMemberRepository implements ITeamMemberRepository {
         let status = teamMemberDeleted.Status;
 
         let index: number = this.teamMembers.findIndex(val => val.TeamMemberId == teamMemberDeleted.TeamMemberId); // for team' teamMembers page.
-        if (-1 != index)
+        if (-1 != index){
             this.teamMembers.splice(index, 1);
+        }
 
         let index2: number = this.teamMembersJoined.findIndex(val => val.TeamMemberId == teamMemberDeleted.TeamMemberId);//for invitations page
         if (-1 != index2) {
 
             this.teamMembersJoined.splice(index2, 1);
 
-            if (status) {
-                if (this.teamMembersJoined.length == 0 && this.permissions) {
+            if (status) { 
+                if (this.teamMembersJoined.length == 0) {//&& this.permissions
                     this.permissions.removeMemberLicenseForJoinedTeamMember();
                     this.xyzekiAuthHelpersService.DeAuth();
                 }
@@ -304,35 +316,7 @@ export class TeamMemberRepository implements ITeamMemberRepository {
     }
 
 
-    removeTMJFromRepo(teamMemberId: number) {
-        let index: number = this.teamMembersJoined.findIndex(value => value.TeamMemberId == teamMemberId);
-        if (-1 != index) {
-            this.teamMembersJoined.splice(index, 1)
-            if (this.teamMembersJoined.length == 0 && this.permissions) {
-                this.permissions.removeMemberLicenseForJoinedTeamMember();
-
-            }
-
-        }
-    }
-    saveTeamMemberJoinedViaSignalR(teamMemberJ: TeamMember) {
-        let isMyTeam: boolean = this.teamRepo.getMyTeams().find(t => t.TeamId == teamMemberJ.TeamId) != undefined
-        if (isMyTeam)
-            return;
-
-        let index = this.teamMembersJoined.findIndex(val => val.TeamMemberId == teamMemberJ.TeamMemberId)
-        if (-1 == index) //if they come to that team.
-        {
-            this.teamMembersJoined.push(teamMemberJ); // we checked that teamMemberJ's assigned property is same with this member in angular signalr service.
-        }
-        else {
-            this.teamMembersJoined.splice(index, 1, teamMemberJ); //change appearance     
-        }
-
-
-    }
-
-    saveTeamMemberViaSignalR(teamMember: TeamMember) { // for update
+    saveTeamMemberViaSignalR(teamMember: TeamMember) { // takım üyelerindeki işlemleri yap
 
         if (teamMember.TeamId == this.TeamId) {
             let index = this.teamMembers.findIndex(val => val.TeamMemberId == teamMember.TeamMemberId)
@@ -347,13 +331,34 @@ export class TeamMemberRepository implements ITeamMemberRepository {
         }
     }
 
-    saveTeamMemberOwnedViaSignalR(teamMemberO: TeamMember) { // for update
+    saveTeamMemberJoinedViaSignalR(teamMemberJ: TeamMember) {  // davetiyelerimdeki işlemleri yap
+        let isMyTeam: boolean = this.teamRepo.getMyTeams().find(t => t.TeamId == teamMemberJ.TeamId) != undefined
+        if (isMyTeam)
+            return;
 
-        let index = this.teamMembersOwned.findIndex(val => val.TeamMemberId == teamMemberO.TeamMemberId)
-        if (-1 != index) //if exists.
-            this.teamMembersOwned.splice(index, 1, teamMemberO); //change appearance     
+        let index = this.teamMembersJoined.findIndex(val => val.TeamMemberId == teamMemberJ.TeamMemberId)
+        if (-1 == index) //if they come to that team.
+        {
+            this.teamMembersJoined.push(teamMemberJ); // we checked that teamMemberJ's assigned property is same with this member in angular signalr service.
+        }
+        else {
+            this.teamMembersJoined.splice(index, 1, teamMemberJ); //change appearance     
+        }
+
+
+        let teamId = teamMemberJ.TeamId;
+        let index3: number = this.teamsJoined.findIndex(val => val.TeamId == teamId);
+        if (-1 == index3) {
+            this.service2.findTeam(teamId).subscribe(team => { this.teamsJoined.push(team); })
+        }
+        else {
+            this.service2.findTeam(teamId).subscribe(team => { this.teamsJoined.splice(index3, 1, team); })
+        }
+
+
 
     }
+
 
 
 

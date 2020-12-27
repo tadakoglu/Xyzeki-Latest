@@ -20,7 +20,6 @@ import { TeamRepository } from 'src/app/model/repository/team-repository';
 import { PrivateTalkMessagesService } from 'src/app/model/services/private-talk-messages.service';
 import { PrivateTalksService } from 'src/app/model/services/private-talks.service';
 import { DataService } from 'src/app/model/services/shared/data.service';
-import { TimeService } from 'src/app/model/services/time.service';
 import { XyzekiSignalrService } from 'src/app/model/signalr-services/xyzeki-signalr.service';
 import { Team } from 'src/app/model/team.model';
 import { PageSizes } from 'src/infrastructure/page-sizes';
@@ -120,7 +119,9 @@ export class PrivateTalkMessagesComponent implements OnInit, AfterViewInit, OnDe
   constructor(private repository: PrivateTalkMessageRepository, private repositoryTM: TeamMemberRepository, private teamRepository: TeamRepository, private receiverRepo: PrivateTalkReceiverRepository, private permissions: MemberLicenseRepository, private dataService: DataService, private pTalkExistingRepo: PrivateTalkRepository, private pTalkService: PrivateTalksService,
     private router: Router, private route: ActivatedRoute, public xyzekiAuthService: XyzekiAuthService,
     private privateTalkMessageService: PrivateTalkMessagesService,
-    private privateTalkMessageSignalrService: XyzekiSignalrService, private psz: PageSizes, private timeService: TimeService) {
+    private privateTalkMessageSignalrService: XyzekiSignalrService,
+     private psz: PageSizes,
+     ) {
 
     
     // this.fastTypingTextareaSubscription = this.fastTypingTextarea.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(event => {
@@ -149,14 +150,6 @@ export class PrivateTalkMessagesComponent implements OnInit, AfterViewInit, OnDe
   onResize(event) {
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
-
-
-    if (this.innerWidth < 992) {
-      this.router.navigate(['/is-konusmalari/m', this.privateTalkId]);
-    }
-    if (this.innerWidth >= 992) {
-      this.router.navigate(['/is-konusmalari', this.privateTalkId]);
-    }
   }
 
 
