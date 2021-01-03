@@ -252,24 +252,24 @@ namespace XYZToDo.Models.Repository
 
 
 
-                foreach (var p in context.Set<PrivateTalkReceiver>().Where(ptr => ptr.PrivateTalk.Owner != tMember.Username && ptr.Receiver == tMember.Username))
+                foreach (var p in context.Set<PrivateTalkReceiver>().Where(ptr => ptr.Receiver == tMember.Username))
                 {
                     context.Entry(p).State = EntityState.Deleted;
                 }
-                foreach (var p in context.Set<PrivateTalkLastSeen>().Where(ptls => ptls.PrivateTalk.Owner != tMember.Username && ptls.Visitor == tMember.Username))
+                foreach (var p in context.Set<PrivateTalkLastSeen>().Where(ptls => ptls.Visitor == tMember.Username))
                 {
                     context.Entry(p).State = EntityState.Deleted;
                 }
-                foreach (var p in context.Set<PrivateTalkMessage>().Where(ptm => ptm.PrivateTalk.Owner != tMember.Username && ptm.Sender == tMember.Username))
+                foreach (var p in context.Set<PrivateTalkMessage>().Where(ptm => ptm.Sender == tMember.Username))
                 {
                     p.Sender = null;
                     context.Entry(p).State = EntityState.Modified;
                 }
-                foreach (var p in context.Set<PrivateTalk>().Where(pt => pt.Owner != tMember.Username && pt.Sender == tMember.Username))
-                {
-                    p.Sender = null;
-                    context.Entry(p).State = EntityState.Modified;
-                }
+                // foreach (var p in context.Set<PrivateTalk>().Where(pt => pt.Sender == tMember.Username))
+                // {
+                //     p.Sender = null;
+                //     context.Entry(p).State = EntityState.Modified;
+                // }
 
             }
             catch

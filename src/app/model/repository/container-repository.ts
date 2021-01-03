@@ -3,13 +3,13 @@ import { concatMap } from 'rxjs/operators';
 import { IContainerRepository } from '../abstract/i-container-repository';
 import { CloudContainer } from '../azure-models/cloud-container.model';
 import { CloudContainers } from '../azure-models/cloud-containers.model';
-import { FilesService } from '../services/files.service';
+import { ContainersService } from '../services/containers.service';
 import { DataService } from '../services/shared/data.service';
 import { XyzekiSignalrService } from '../signalr-services/xyzeki-signalr.service';
 
 @Injectable()
 export class ContainerRepository implements IContainerRepository {
-    constructor(private service: FilesService, private signalService: XyzekiSignalrService,
+    constructor(private service: ContainersService, private signalService: XyzekiSignalrService,
         private dataService: DataService) {
 
         this.signalService.newContainerAvailable.subscribe(container => {
@@ -18,14 +18,14 @@ export class ContainerRepository implements IContainerRepository {
         this.signalService.deletedContainerAvailable.subscribe(containerDeleted => {
             this.deleteContainerViaSignalR(containerDeleted);
         })
-        this.dataService.loadAllRepositoriesEvent.subscribe(() => {  this.loadBlobContainers(false) })
+        this.dataService.loadAllRepositoriesEvent.subscribe(() => {  this.loadBlobContainers() })
         this.dataService.clearAllRepositoriesEvent.subscribe(() => this.clearBlobContainers());
         
         this.loadRepository();
     }
 
     loadRepository(){
-        this.loadBlobContainers(false);
+        this.loadBlobContainers();
     }
 
 
@@ -35,27 +35,46 @@ export class ContainerRepository implements IContainerRepository {
         this.loaded = false
     }
 
-    public loadBlobContainers(containerToOpen = true) { // ### reload this when team component destroyed.
-        this.service.showContainers().subscribe(containersEnc => {
-
-            this.containers = containersEnc.Containers
-
-            if (containersEnc[0] && containerToOpen)
-                this.containerToOpen.next(containersEnc[0])
-
-            this.loaded = true;
-        }
-        );
+    public loadBlobContainers() { // ### reload this when team component destroyed.
+        // this.service.showContainers().subscribe(containersEnc => {
+        //     this.containers = containersEnc.Containers
+        //     this.loaded = true;
+        // }
+        // );
     }
 
     loadContainersViaResolver(containers: CloudContainers) {
-        this.containers = containers.Containers;
+        //this.containers = containers.Containers;
     }
     public loaded = false;
 
     public containerToOpen = new EventEmitter<CloudContainer>();
-    private containers: CloudContainer[] = []
+    // private containers: CloudContainer[] = []
 
+
+    private containers: CloudContainer[] = [
+        new CloudContainer("tayfun tayfun tayfun tayfun 1", "URI", "tadakoglu", "1993-07-07"),
+        new CloudContainer("osman 2", "URI", "tayada10", "1993-07-07"),
+        new CloudContainer("semra semra  3", "URI", "tayada10", "1993-07-07"),
+        new CloudContainer("ramazan semra ffdfd 4", "URI", "tadakoglu", "1993-07-07"),
+        new CloudContainer("semra semra fdfdfdfd 5 ", "URI", "tayada10", "1993-07-07"),
+        new CloudContainer("ramazan semra 6", "URI", "tadakoglu", "1993-07-07"),
+        new CloudContainer("semra semra dfdfd 7 ", "URI", "tayada10", "1993-07-07"),
+        new CloudContainer("ramazan sefddfmra 8", "URI", "tadakoglu", "1993-07-07"),
+        new CloudContainer("ramazan semra 9", "URI", "tadakoglu", "1993-07-07"),
+        new CloudContainer("semra semra dfdfd 10 ", "URI", "tayada10", "1993-07-07"),
+        new CloudContainer("ramazan sefddfmra 11", "URI", "tadakoglu", "1993-07-07"),
+        new CloudContainer("ramazan semra 12", "URI", "tadakoglu", "1993-07-07"),
+        new CloudContainer("semra semra dfdfd 13", "URI", "tayada10", "1993-07-07"),
+        new CloudContainer("ramazan sefddfmra 14", "URI", "tadakoglu", "1993-07-07"),
+        new CloudContainer("ramazan semra 15", "URI", "tadakoglu", "1993-07-07"),
+        new CloudContainer("semra semra dfdfd 16", "URI", "tayada10", "1993-07-07"),
+        new CloudContainer("ramazan sefddfmra 17", "URI", "tadakoglu", "1993-07-07"),
+        new CloudContainer("ramazan semra 18", "URI", "tadakoglu", "1993-07-07"),
+        new CloudContainer("semra semra dfdfd 19 ", "URI", "tayada10", "1993-07-07"),
+        new CloudContainer("ramazan sefddfmra 20", "URI", "tadakoglu", "1993-07-07"),
+
+    ]
 
     getContainers(): CloudContainer[] {
         return this.containers
@@ -69,7 +88,7 @@ export class ContainerRepository implements IContainerRepository {
                 // send container with signalr to receivers
                 this.signalService.notifyNewContainer(container);
 
-                this.containerToOpen.next(result)
+                // this.containerToOpen.next(result)
             }
 
         })
@@ -121,25 +140,25 @@ export class ContainerRepository implements IContainerRepository {
 
 
 // private containers: CloudContainer[] = [
-    //     new CloudContainer("tayfun tayfun tayfun tayfun 1", "URI", "tadakoglu", "1993-07-07"),
-    //     new CloudContainer("osman 2", "URI", "tayada10", "1993-07-07"),
-    //     new CloudContainer("semra semra  3", "URI", "tayada10", "1993-07-07"),
-    //     new CloudContainer("ramazan semra ffdfd 4", "URI", "tadakoglu", "1993-07-07"),
-    //     new CloudContainer("semra semra fdfdfdfd 5 ", "URI", "tayada10", "1993-07-07"),
-    //     new CloudContainer("ramazan semra 6", "URI", "tadakoglu", "1993-07-07"),
-    //     new CloudContainer("semra semra dfdfd 7 ", "URI", "tayada10", "1993-07-07"),
-    //     new CloudContainer("ramazan sefddfmra 8", "URI", "tadakoglu", "1993-07-07"),
-    //     new CloudContainer("ramazan semra 9", "URI", "tadakoglu", "1993-07-07"),
-    //     new CloudContainer("semra semra dfdfd 10 ", "URI", "tayada10", "1993-07-07"),
-    //     new CloudContainer("ramazan sefddfmra 11", "URI", "tadakoglu", "1993-07-07"),
-    //     new CloudContainer("ramazan semra 12", "URI", "tadakoglu", "1993-07-07"),
-    //     new CloudContainer("semra semra dfdfd 13", "URI", "tayada10", "1993-07-07"),
-    //     new CloudContainer("ramazan sefddfmra 14", "URI", "tadakoglu", "1993-07-07"),
-    //     new CloudContainer("ramazan semra 15", "URI", "tadakoglu", "1993-07-07"),
-    //     new CloudContainer("semra semra dfdfd 16", "URI", "tayada10", "1993-07-07"),
-    //     new CloudContainer("ramazan sefddfmra 17", "URI", "tadakoglu", "1993-07-07"),
-    //     new CloudContainer("ramazan semra 18", "URI", "tadakoglu", "1993-07-07"),
-    //     new CloudContainer("semra semra dfdfd 19 ", "URI", "tayada10", "1993-07-07"),
-    //     new CloudContainer("ramazan sefddfmra 20", "URI", "tadakoglu", "1993-07-07"),
+//         new CloudContainer("tayfun tayfun tayfun tayfun 1", "URI", "tadakoglu", "1993-07-07"),
+//         new CloudContainer("osman 2", "URI", "tayada10", "1993-07-07"),
+//         new CloudContainer("semra semra  3", "URI", "tayada10", "1993-07-07"),
+//         new CloudContainer("ramazan semra ffdfd 4", "URI", "tadakoglu", "1993-07-07"),
+//         new CloudContainer("semra semra fdfdfdfd 5 ", "URI", "tayada10", "1993-07-07"),
+//         new CloudContainer("ramazan semra 6", "URI", "tadakoglu", "1993-07-07"),
+//         new CloudContainer("semra semra dfdfd 7 ", "URI", "tayada10", "1993-07-07"),
+//         new CloudContainer("ramazan sefddfmra 8", "URI", "tadakoglu", "1993-07-07"),
+//         new CloudContainer("ramazan semra 9", "URI", "tadakoglu", "1993-07-07"),
+//         new CloudContainer("semra semra dfdfd 10 ", "URI", "tayada10", "1993-07-07"),
+//         new CloudContainer("ramazan sefddfmra 11", "URI", "tadakoglu", "1993-07-07"),
+//         new CloudContainer("ramazan semra 12", "URI", "tadakoglu", "1993-07-07"),
+//         new CloudContainer("semra semra dfdfd 13", "URI", "tayada10", "1993-07-07"),
+//         new CloudContainer("ramazan sefddfmra 14", "URI", "tadakoglu", "1993-07-07"),
+//         new CloudContainer("ramazan semra 15", "URI", "tadakoglu", "1993-07-07"),
+//         new CloudContainer("semra semra dfdfd 16", "URI", "tayada10", "1993-07-07"),
+//         new CloudContainer("ramazan sefddfmra 17", "URI", "tadakoglu", "1993-07-07"),
+//         new CloudContainer("ramazan semra 18", "URI", "tadakoglu", "1993-07-07"),
+//         new CloudContainer("semra semra dfdfd 19 ", "URI", "tayada10", "1993-07-07"),
+//         new CloudContainer("ramazan sefddfmra 20", "URI", "tadakoglu", "1993-07-07"),
 
-    // ]
+//     ]

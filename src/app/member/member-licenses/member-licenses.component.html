@@ -11,31 +11,8 @@
                 <div class="card-body">
                     <div class="container-fluid">
                         <div class="col">
-                            <div>
-                                <h5>Lisans Doğrulama</h5>
-                                <p>Ekibinizle iş paylaşımı yapabilmek için bir lisansınızın olması gerekir.
-                                </p>
-                            </div>
-                            <div>
-                                <!-- <form #licenseForm="ngForm" novalidate>
-                                    <div class="input-group ">
-                                        <div class="input-group-prepend">
-                                            <button disabled class="btn btn-dark rounded-0  " style="  padding-left:4px !important;
-                                            padding-right:4px !important;">&nbsp;</button>
-                                        </div>
-                                        <input type="text" name="license" #license="ngModel"
-                                            [(ngModel)]="memberLicenseModel.LicenseId" required class="form-control"
-                                            placeholder="813f966c-94c2-4589-x80a..." />
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-secondary rounded-0" style="  padding-left:4px !important;
-                                                padding-right:4px !important;">Onayla</button>
-                                        </div>
-                                    </div>
-                                </form> -->
-                            </div>
-
-                            <div class="mt-2">
-                                <table *ngIf="myLicense?.LicenseId" class="table table-responsive table-hover  pl-1 pr-1 ">
+                            <div class="mt-2 w-100">
+                                <table *ngIf="myLicense?.LicenseId" class="table table-hover  pl-1 pr-1 ">
                                     <tbody>
                                         <tr>
                                             <td>{{(myLicense?.LicenseId).substr(0,10)}}...</td>
@@ -54,38 +31,10 @@
                                 </table>
                                 <div *ngIf="!myLicense?.LicenseId">
                                     <p>Şu anda bir yazılım lisansınız bulunmamaktadır. </p>
-                                    <p>Harika iş paylaşımı özelliklerimizden faydalanmak için bir lisans satın almanızı
-                                        öneriririz.</p>
+                                    
                                 </div>
                             </div>
-                            <div>
-                                <h5>Lisans Satın Al</h5>
-                                <p>KDV'siz lisans ücreti hesaplamak için aşağıdaki bilgileri doldurunuz. (19.90 TL/Kişi/Ay) </p>
-                                <div class="form-group calc">
-                                    <!-- <label for="employees">Sizinle birlikte toplam çalışan sayınız nedir?</label> -->
-                                    <input #employeeNumber [(ngModel)]="totalEmployee" required type="number"
-                                        class="form-control w-100" id="employees" max="50" min="3"
-                                        placeholder="Sizinle birlikte toplam çalışan sayınız nedir?">
-
-                                </div>
-                                <div class="form-group calc">
-                                    <!-- <label for="months">Kaç aylık lisans istiyorsunuz?</label> -->
-                                    <input #monthNumber [(ngModel)]="totalMonths" required type="number"
-                                        class="form-control w-100" id="months" min="12"
-                                        placeholder="Kaç aylık lisans istiyorsunuz? (En az 12)">
-
-
-                                </div>
-                                <p>Xyzeki Uygulaması Lisans Bedeli =
-                                    {{ (totalEmployee * totalMonths * 19.90) ?  (totalEmployee * totalMonths * 19.90) : '0' }}
-                                    TL </p>
-                                <p>KDV = {{(totalEmployee * totalMonths * 19.90 * 18 / 100) ?  (totalEmployee * totalMonths * 19.90  * 18 / 100) : '0'}}TL</p>
-                                <p>Toplam Ücret = {{((totalEmployee * totalMonths * 19.90) + (totalEmployee * totalMonths * 19.90 * 18 / 100)) ? ((totalEmployee * totalMonths * 19.90) + (totalEmployee * totalMonths * 19.90 * 18 / 100)) : '0'}}TL</p>
-                                <hr>
-                                <p>Lütfen kurumsal satın alım için irtibata geçiniz.</p>
-                                <!-- <p><b>bilgi@xyzeki.com</b></p> -->
-
-                            </div>
+                          
                         </div>
 
                     </div>

@@ -18,11 +18,10 @@ namespace XYZToDo.Models
             ConnectionTeamMember = new HashSet<ConnectionTeamMember>();
             ConnectionXyzeki = new HashSet<ConnectionXyzeki>();
             ForgotPassword = new HashSet<ForgotPassword>();
+            PrivateTalk = new HashSet<PrivateTalk>();
             PrivateTalkLastSeen = new HashSet<PrivateTalkLastSeen>();
             PrivateTalkMessage = new HashSet<PrivateTalkMessage>();
-            PrivateTalkOwnerNavigation = new HashSet<PrivateTalk>();
             PrivateTalkReceiver = new HashSet<PrivateTalkReceiver>();
-            PrivateTalkSenderNavigation = new HashSet<PrivateTalk>();
             ProjectOwnerNavigation = new HashSet<Project>();
             ProjectProjectManagerNavigation = new HashSet<Project>();
             ProjectTask = new HashSet<ProjectTask>();
@@ -59,11 +58,10 @@ namespace XYZToDo.Models
         public ICollection<ConnectionTeamMember> ConnectionTeamMember { get; set; }
         public ICollection<ConnectionXyzeki> ConnectionXyzeki { get; set; }
         public ICollection<ForgotPassword> ForgotPassword { get; set; }
+        public ICollection<PrivateTalk> PrivateTalk { get; set; }
         public ICollection<PrivateTalkLastSeen> PrivateTalkLastSeen { get; set; }
         public ICollection<PrivateTalkMessage> PrivateTalkMessage { get; set; }
-        public ICollection<PrivateTalk> PrivateTalkOwnerNavigation { get; set; }
         public ICollection<PrivateTalkReceiver> PrivateTalkReceiver { get; set; }
-        public ICollection<PrivateTalk> PrivateTalkSenderNavigation { get; set; }
         public ICollection<Project> ProjectOwnerNavigation { get; set; }
         public ICollection<Project> ProjectProjectManagerNavigation { get; set; }
         public ICollection<ProjectTask> ProjectTask { get; set; }

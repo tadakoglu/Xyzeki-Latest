@@ -374,7 +374,7 @@ namespace XYZToDo.Models.Repository
             if (messageCount > 0)
             {
                 PrivateTalk pTalk = this.PrivateTalks.Where(pt => pt.PrivateTalkId == privateTalkId).FirstOrDefault();
-                pTalk = new PrivateTalk { PrivateTalkId = pTalk.PrivateTalkId, Owner = pTalk.Owner, Sender = pTalk.Sender, Thread = pTalk.Thread, DateTimeCreated = pTalk.DateTimeCreated };
+                pTalk = new PrivateTalk { PrivateTalkId = pTalk.PrivateTalkId, Sender = pTalk.Sender, Thread = pTalk.Thread, DateTimeCreated = pTalk.DateTimeCreated };
 
                 bool my = pTalk.Sender == thisMember;
                 MessageCountModel mcm = new MessageCountModel { PrivateTalkId = privateTalkId, MessagesCount = messageCount, OrderingCriterion = DateTimeOffset.MinValue };

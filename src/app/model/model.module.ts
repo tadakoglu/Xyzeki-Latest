@@ -31,15 +31,13 @@ import { PrivateTalkTeamReceiversService } from './services/private-talk-team-re
 import { PrivateTalkReceiverRepository } from './repository/private-talk-receiver-repository';
 import { AuthGuardAdminService } from './services/guards/auth-guard-admin.service';
 import { AdminRepository } from './repository/admin-repository';
-import { FilesService } from './services/files.service';
 import { ContainerRepository } from './repository/container-repository';
-
 import { XyzekiDateTimeInfra } from 'src/infrastructure/xyzeki-datetime-infra';
 import { SwitchHourDataService } from './services/shared/switch-hour-data.service';
 import { PageSizes } from 'src/infrastructure/page-sizes';
 import { XyzekiSignalrService } from './signalr-services/xyzeki-signalr.service';
 import { NotificationService } from './notification-services/notification.service';
-import { FileRepository } from './repository/file-repository';
+import { BlobRepository } from './repository/blob-repository';
 import { ProjectToDoRepository } from './repository/project-to-do-repository';
 import { PrivateTalkMessageRepository } from './repository/private-talk-message-repository';
 import { QuickToDoCommentRepository } from './repository/quick-to-do-comment-repository';
@@ -50,10 +48,12 @@ import { MyProjectsResolverService } from './resolvers/my-projects-resolver.serv
 import { ProjectsAssignedResolverService } from './resolvers/projects-assigned-resolver.service';
 import { ProjectToDosResolverService } from './resolvers/project-to-dos-resolver.service';
 import { ContainersResolverService } from './resolvers/containers-resolver.service';
-import { ContainerFilesResolverService } from './resolvers/container-files-resolver.service';
 import { AlreadyLoggedInGuardService } from './services/guards/already-logged-in-guard.service';
 import { XyzekiAuthHelpersService } from './auth-services/xyzeki-auth-helpers-service';
 import { LoadToMemoryService } from './services/guards/load-to-memory.service';
+import { BlobsResolverService } from './resolvers/blobs-resolver.service';
+import { ContainersService } from './services/containers.service';
+import { BlobsService } from './services/blobs.service';
 
 
 @NgModule({
@@ -94,7 +94,9 @@ import { LoadToMemoryService } from './services/guards/load-to-memory.service';
     { provide: PrivateTalkTeamReceiversService, useClass: PrivateTalkTeamReceiversService },
     { provide: PrivateTalkMessagesService, useClass: PrivateTalkMessagesService },
 
-    { provide: FilesService, useClass: FilesService },
+    { provide: ContainersService, useClass: ContainersService },
+    { provide: BlobsService, useClass: BlobsService },
+
 
     MyTeamsResolverService,
     TeamMemberResolverService,
@@ -102,7 +104,7 @@ import { LoadToMemoryService } from './services/guards/load-to-memory.service';
     ProjectsAssignedResolverService,
     ProjectToDosResolverService,
     ContainersResolverService,
-    ContainerFilesResolverService,
+    BlobsResolverService,
 
     AuthRepository,
     MemberLicenseRepository,
@@ -119,7 +121,7 @@ import { LoadToMemoryService } from './services/guards/load-to-memory.service';
     PrivateTalkReceiverRepository,
     AdminRepository,
     ContainerRepository,
-    FileRepository,
+    BlobRepository,
 
 
   ]

@@ -8,18 +8,27 @@
     veya katıldığınız takımların sahiplerine ait geçerli bir lisans bulamadık.</span>
 </div>
 
+<div class="container-fluid bg-white" [hidden]="accessGranted">
+  <div class="row pt-2 pb-2">
+    <div class="col-12">
+      <span>
+        Üzgünüz, geçerli bir lisans bulunamadığı için bu bölümü görüntüleyemiyoruz.
+      </span>
+    </div>
+  </div>
+</div>
 
 <nav class="container-fluid xyz-card-dark " *ngIf="primaryAccessGranted">
 
-    <a ngbTooltip="Yeni iş konuşması oluşturun" tooltipClass="tooltipSpecial" placement="bottom"
-      *ngIf="!newPrivateTalkPanelOpen" (click)="togglePrivateTalkPanel();"
-      class="btn btn-dark  text-white rounded-0 ml-1 " style="cursor:pointer !important;">Yeni +</a>
-    <div class="circleBtnSquareSearchBar pl-1">
-      <span class="disable-select">
-        <mat-search-bar  (onOpen)="this.searchBarOpen=true" (onClose)="this.searchBarOpen=false"
-          [searchText]="'Xyzeki İş Konuşması Arama'" [isDarkMode]="true"></mat-search-bar>
-      </span>
-    </div>
+  <a ngbTooltip="Yeni iş konuşması oluşturun" tooltipClass="tooltipSpecial" placement="bottom"
+    *ngIf="!newPrivateTalkPanelOpen" (click)="togglePrivateTalkPanel();"
+    class="btn btn-dark  text-white rounded-0 ml-1 " style="cursor:pointer !important;">Yeni +</a>
+  <div class="circleBtnSquareSearchBar pl-1">
+    <span class="disable-select">
+      <mat-search-bar (onOpen)="this.searchBarOpen=true" (onClose)="this.searchBarOpen=false"
+        [searchText]="'Xyzeki İş Konuşması Arama'" [isDarkMode]="true"></mat-search-bar>
+    </span>
+  </div>
 
 </nav>
 
@@ -71,14 +80,13 @@
   </form>
 
 </div>
-<div class="container-fluid bg-white" >
+<div class="container-fluid bg-white">
   <div class="row pt-2 pb-2">
-    <div  #bTalksPanel class="col-12" >
-     
-      
+    <div #bTalksPanel class="col-12">
 
-      <div *ngIf="primaryAccessGranted" 
-        class="row xyz-card-big pl-2 pr-2 mb-1 " >
+
+
+      <div *ngIf="primaryAccessGranted" class="row xyz-card-big pl-2 pr-2 mb-1 ">
         <ul>
           <span *ngIf="myPrivateTalks_Ongoing?.length==0 && !searchBarOpen" class="mt-1">Henüz bir
             iş konuşması kanalınız bulunmuyor.</span>
@@ -89,8 +97,8 @@
             [ngClass]="{'unreadMessage': getMyPTMessagesForCount(pTalk?.PrivateTalkId)?.MessagesCount > 0 }" style=" 
             overflow: hidden;
             perspective: 1px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; float:left;  ">
-            <div [class.active]="privateTalkId == pTalk?.PrivateTalkId"
-              (click)="onSelectTopic(pTalk?.PrivateTalkId)" class="btn btn-light rounded-0 border-0  w-100"
+            <div [class.active]="privateTalkId == pTalk?.PrivateTalkId" (click)="onSelectTopic(pTalk?.PrivateTalkId)"
+              class="btn btn-light rounded-0 border-0  w-100"
               style="cursor:pointer !important; justify-content: left; justify-items: left">
               <!-- getReceivers(pTalk?.PrivateTalkId)-->
               <!-- getTeamReceivers(pTalk?.PrivateTalkId)-->
@@ -129,7 +137,8 @@
               <div class="clear-fix"></div>
               <span *ngIf="pTalk?.PrivateTalkId" class="w-100 float-left text-left"
                 style="font-family: Arial, Helvetica, sans-serif; font-size: 14px">#<b>{{pTalk?.Thread}}</b>
-                {{getMyPTMessagesForCount(pTalk?.PrivateTalkId)?.MessagesCount ? getMyPTMessagesForCount(pTalk?.PrivateTalkId)?.MessagesCount + ' Okunmamış' : ''  }}
+                {{getMyPTMessagesForCount(pTalk?.PrivateTalkId)?.MessagesCount ?
+                getMyPTMessagesForCount(pTalk?.PrivateTalkId)?.MessagesCount + ' Okunmamış' : '' }}
                 <small class="text-muted float-right ">{{ pTalk?.DateTimeCreated | humanizer}},
                   {{pTalk?.DateTimeCreated | date: 'hh:mm:ss aa' }}</small>
               </span>
@@ -140,8 +149,7 @@
         </ul>
       </div>
 
-      <div *ngIf="accessGranted" 
-        class="row xyz-card-big pl-2 pr-2 mb-1 " >
+      <div *ngIf="accessGranted" class="row xyz-card-big pl-2 pr-2 mb-1 ">
         <ul>
           <span *ngIf="myPrivateTalks_Incoming?.length== 0 && !searchBarOpen" class="mt-1">Henüz bir
             iş konuşması kanalı oluşturulmamış.</span>
@@ -154,17 +162,17 @@
             overflow: hidden;
             perspective: 1px; border-top-left-radius: 2px;
              border-bottom-left-radius: 2px; border-left: 1px solid #3f3f3f">
-            <a [class.active]="privateTalkId == pTalk?.PrivateTalkId"
-              (click)="onSelectTopic(pTalk?.PrivateTalkId)" class="btn btn-light rounded-0 border-0 w-100"
-              style="cursor:pointer !important; ">
+            <a [class.active]="privateTalkId == pTalk?.PrivateTalkId" (click)="onSelectTopic(pTalk?.PrivateTalkId)"
+              class="btn btn-light rounded-0 border-0 w-100" style="cursor:pointer !important; ">
 
-              <app-receivers [incoming]="true"  [sender]="pTalk?.Sender" [privateTalkId]="pTalk?.PrivateTalkId">
+              <app-receivers [incoming]="true" [sender]="pTalk?.Sender" [privateTalkId]="pTalk?.PrivateTalkId">
                 <img src="../../../assets/loading.gif" style="height: 1.3rem; width:auto;">
               </app-receivers>
               <div class="clear-fix"></div>
               <span *ngIf="pTalk?.PrivateTalkId" class="w-100 float-left text-left"
                 style="font-family: Arial, Helvetica, sans-serif; font-size: 14px">#<b>{{pTalk?.Thread}}</b>
-                {{getReceivedPTMessagesForCount(pTalk?.PrivateTalkId)?.MessagesCount ? getReceivedPTMessagesForCount(pTalk?.PrivateTalkId)?.MessagesCount + ' Okunmamış' : ''  }}
+                {{getReceivedPTMessagesForCount(pTalk?.PrivateTalkId)?.MessagesCount ?
+                getReceivedPTMessagesForCount(pTalk?.PrivateTalkId)?.MessagesCount + ' Okunmamış' : '' }}
                 <small class="text-muted float-right ">{{ pTalk?.DateTimeCreated | humanizer}},
                   {{pTalk?.DateTimeCreated | date: 'hh:mm:ss aa' }}</small>
               </span>
@@ -176,6 +184,6 @@
       </div>
 
     </div>
-    
+
   </div>
 </div>

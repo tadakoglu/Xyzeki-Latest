@@ -411,23 +411,14 @@ namespace XYZToDo.Models.DatabasePersistanceLayer
 
             modelBuilder.Entity<PrivateTalk>(entity =>
             {
-                entity.Property(e => e.Owner)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
                 entity.Property(e => e.Sender).HasMaxLength(20);
 
                 entity.Property(e => e.Thread).IsRequired();
 
-                entity.HasOne(d => d.OwnerNavigation)
-                    .WithMany(p => p.PrivateTalkOwnerNavigation)
-                    .HasForeignKey(d => d.Owner)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PrivateTalk_Member");
-
                 entity.HasOne(d => d.SenderNavigation)
-                    .WithMany(p => p.PrivateTalkSenderNavigation)
-                    .HasForeignKey(d => d.Sender);
+                    .WithMany(p => p.PrivateTalk)
+                    .HasForeignKey(d => d.Sender)
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<PrivateTalkLastSeen>(entity =>

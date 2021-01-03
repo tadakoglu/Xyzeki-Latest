@@ -251,7 +251,6 @@ export class PrivateTalkRepository implements IPrivateTalkRepository {
     }
 
     savePrivateTalk(privateTalk: PrivateTalk, receiversModel: string[], teamReceiversModel: number[]) {
-        privateTalk.Owner = this.memberLicenseRepo.getMemberLicense().Username;
         if (privateTalk.PrivateTalkId == 0 || privateTalk.PrivateTalkId == null) {
             privateTalk.DateTimeCreated = new Date().toISOString();
             this.service.savePrivateTalk(privateTalk).subscribe((privateTalkId) => {

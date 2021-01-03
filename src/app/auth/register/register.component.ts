@@ -262,7 +262,7 @@ export class RegisterComponent implements AfterViewInit, OnDestroy {
         this.passwordRepeatUpdate = this.enteredPassword;
       }
       else {
-        this.accessInfo = "Üzgünüz, şifrenizi yanlış girdiniz. Hatırlamıyorsanız bize email gönderebilir veya bizi arayabilirsiniz."
+        this.accessInfo = "Üzgünüz, şifrenizi yanlış girdiniz. Eğer şifrenizi unuttuysanız şifremi unuttum bölümünden şifrenizi yenilemelisiniz. Ayrıca Xyzeki'den yardım talebinde bulunabilirsiniz."
         setTimeout(() => {
           this.accessInfo = null;
         }, 3000);
